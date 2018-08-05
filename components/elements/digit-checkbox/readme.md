@@ -5,7 +5,7 @@ Checkboxes should be used when multiple alternatives can be selected. If only on
 Note that DigitCheckbox is uncontrolled, meaning you have to manage the state from DigitCheckbox. If you are using a DigitForm, then you don't have to worry about state.
 
 ```js
-import DigitCheckbox from "react-digit-components";
+import { DigitCheckbox } from "react-digit-components";
 ```
 
 ```js

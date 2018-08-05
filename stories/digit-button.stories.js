@@ -7,7 +7,7 @@ import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
 import { DigitButton } from "../components";
-import DigitButtonReadme from "../components/digit-button/readme.md";
+import DigitButtonReadme from "../components/elements/digit-button/readme.md";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -17,7 +17,7 @@ const styleLabel = "style";
 const styleOptions = ["raised", "outline", "flat"];
 const styleDefaultValue = "flat";
 
-const DigitButtonStory = storiesOf("Buttons", module);
+const DigitButtonStory = storiesOf("Elements", module);
 
 DigitButtonStory.addDecorator(withKnobs);
 

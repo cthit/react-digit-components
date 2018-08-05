@@ -1,13 +1,13 @@
 {
   "name": "@cthit/react-digit-components",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A collection of components that digIT uses in their websites. Uses libraries like material-ui, formik and yup.",
   "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build": "webpack"
+    "build": "webpack --display-error-details"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "babel-core": "^6.21.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.26.0",

@@ -9,13 +9,13 @@ import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
 import { DigitCheckbox } from "../components";
-import DigitCheckboxReadme from "../components/digit-checkbox/readme.md";
+import DigitCheckboxReadme from "../components/elements/digit-checkbox/readme.md";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
 const colorDefaultValue = "none";
 
-const DigitCheckboxStory = storiesOf("DigitCheckbox", module);
+const DigitCheckboxStory = storiesOf("Elements", module);
 
 DigitCheckboxStory.addDecorator(withKnobs);
 

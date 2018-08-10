@@ -47,7 +47,10 @@ const DigitTextField = ({
 );
 
 DigitTextField.propTypes = {
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.number.isRequired
+  ]),
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   upperLabel: PropTypes.string,

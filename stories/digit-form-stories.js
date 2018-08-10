@@ -21,11 +21,10 @@ import {
   DigitFormFieldArray,
   DigitTextField,
   DigitButton,
-  DigitIconButton
+  DigitIconButton,
+  DigitIfElseRendering
 } from "../components";
 import DigitFormReadme from "../components/elements/digit-form/readme.md";
-
-import DigitIfElseRendering from "../components/declaratives/digit-if-else-rendering/DigitIfElseRendering";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];

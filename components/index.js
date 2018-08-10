@@ -7,6 +7,8 @@ import DigitIconButton from "./elements/digit-icon-button/DigitIconButton";
 import DigitForm from "./elements/digit-form/DigitForm";
 import DigitFormField from "./elements/digit-form-field/DigitFormField";
 import DigitFormFieldArray from "./elements/digit-form-field-array/DigitFormFieldArray";
+import DigitBottomNavigation from "./elements/digit-bottom-navigation/DigitBottomNavigation";
+import DigitTabs from "./elements/digit-tabs/DigitTabs";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering/DigitIfElseRendering";
 
@@ -25,6 +27,8 @@ export {
   DigitForm,
   DigitFormField,
   DigitFormFieldArray,
+  DigitBottomNavigation,
+  DigitTabs,
   /* Declaratives */
   DigitIfElseRendering,
   /* Styles */

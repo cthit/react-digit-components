@@ -17,8 +17,6 @@ import TestTranslations from "./TestTranslations.json";
 import CommonTranslations from "./CommonTranslations.json";
 import { connect } from "react-redux";
 
-import setLanguage from "../../components/utils/setLanguage.utils";
-
 import { setActiveLanguage } from "react-localize-redux";
 
 const DigitTranslationsStory = storiesOf("Elements", module);

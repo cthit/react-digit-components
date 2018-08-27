@@ -7,6 +7,7 @@ import DigitIconButton from "./elements/digit-icon-button";
 import DigitForm from "./elements/digit-form";
 import DigitFormField from "./elements/digit-form-field";
 import DigitFormFieldArray from "./elements/digit-form-field-array";
+import DigitTextArea from "./elements/digit-text-area";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -15,6 +16,7 @@ import DigitProviders from "./declaratives/digit-providers";
 import DigitRedirect from "./declaratives/digit-redirect";
 
 import DigitToast from "./views/digit-toast";
+import DigitDialog from "./views/digit-dialog";
 
 import * as DigitRedirectActions from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
 import * as DigitToastActions from "./views/digit-toast/DigitToast.view.action-creator";
@@ -34,16 +36,19 @@ export {
   DigitForm,
   DigitFormField,
   DigitFormFieldArray,
+  DigitTextArea,
   /* Views */
   DigitToast,
+  DigitDialog,
+  /* Actions */
   DigitToastActions,
+  DigitRedirectActions,
   /* Declaratives */
   DigitIfElseRendering,
   DigitMapStringToValue,
   DigitTranslations,
   DigitProviders,
   DigitRedirect,
-  DigitRedirectActions,
   /* Styles */
   DigitLayout,
   DigitDesign,

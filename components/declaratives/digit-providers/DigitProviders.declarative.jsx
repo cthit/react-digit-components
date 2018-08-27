@@ -13,6 +13,7 @@ import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
 import JssProvider from "react-jss/lib/JssProvider";
 
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
+import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
@@ -38,7 +39,8 @@ class DigitProviders extends React.Component {
       combineReducers({
         ...props.rootReducer,
         localize,
-        toast
+        toast,
+        dialog
       }),
       props.preloadedState,
       applyMiddleware(loggerMiddleware, thunkMiddleware)

@@ -23,7 +23,7 @@ export const Title = styled(({ text, white, bold, ...rest }) => (
     {text}
   </Typography>
 ))`
-  color: ${props => (props.white ? "white" : "inherit")};
+  color: ${props => (props.white ? "white !important" : "inherit")};
   font-weight: ${props => (props.bold ? "500" : "inherit")};
 `;
 

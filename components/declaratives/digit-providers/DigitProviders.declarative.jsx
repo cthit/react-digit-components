@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { localizeReducer as localize } from "react-localize-redux";
 import { renderToStaticMarkup } from "react-dom/server";
 import { createStore, applyMiddleware } from "redux";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import { createLogger } from "redux-logger";
@@ -54,7 +55,9 @@ class DigitProviders extends React.Component {
         <LocalizeProvider store={this.store} defaultLanguage={defaultLanguage}>
           <LocalizeInitalizer>
             <JssProvider jss={jss} generateClassName={generateClassName}>
-              <Provider store={this.store}>{children}</Provider>
+              <Provider store={this.store}>
+                <BrowserRouter>{children}</BrowserRouter>
+              </Provider>
             </JssProvider>
           </LocalizeInitalizer>
         </LocalizeProvider>

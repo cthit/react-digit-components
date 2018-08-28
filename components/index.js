@@ -11,6 +11,7 @@ import DigitTextArea from "./elements/digit-text-area";
 import DigitSelect from "./elements/digit-select";
 import DigitNavigation from "./elements/digit-navigation";
 import DigitNavLink from "./elements/digit-nav-link";
+import DigitFAB from "./elements/digit-fab";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -44,6 +45,7 @@ export {
   DigitSelect,
   DigitNavigation,
   DigitNavLink,
+  DigitFAB,
   /* Views */
   DigitToast,
   DigitDialog,

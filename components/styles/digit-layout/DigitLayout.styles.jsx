@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const DownRightPosition = styled.div`
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+`;
+
 export const Fill = styled.div`
   flex-grow: 1;
   flex-shrink: 1;

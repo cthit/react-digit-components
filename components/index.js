@@ -20,6 +20,7 @@ import DigitRedirect from "./declaratives/digit-redirect";
 
 import DigitToast from "./views/digit-toast";
 import DigitDialog from "./views/digit-dialog";
+import DigitMenu from "./views/digit-menu";
 
 import * as DigitRedirectActions from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
 import * as DigitToastActions from "./views/digit-toast/DigitToast.view.action-creator";
@@ -46,6 +47,7 @@ export {
   /* Views */
   DigitToast,
   DigitDialog,
+  DigitMenu,
   /* Actions */
   DigitToastActions,
   DigitRedirectActions,

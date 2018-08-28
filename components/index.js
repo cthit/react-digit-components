@@ -8,6 +8,7 @@ import DigitForm from "./elements/digit-form";
 import DigitFormField from "./elements/digit-form-field";
 import DigitFormFieldArray from "./elements/digit-form-field-array";
 import DigitTextArea from "./elements/digit-text-area";
+import DigitSelect from "./elements/digit-select";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -37,6 +38,7 @@ export {
   DigitFormField,
   DigitFormFieldArray,
   DigitTextArea,
+  DigitSelect,
   /* Views */
   DigitToast,
   DigitDialog,

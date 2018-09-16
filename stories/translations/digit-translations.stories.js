@@ -14,7 +14,7 @@ import DigitTranslationsReadme from "../../components/declaratives/digit-transla
 import TestTranslations from "./TestTranslations.json";
 import CommonTranslations from "./CommonTranslations.json";
 
-const DigitTranslationsStory = storiesOf("Elements", module);
+const DigitTranslationsStory = storiesOf("Declaratives", module);
 
 DigitTranslationsStory.addDecorator(withKnobs);
 

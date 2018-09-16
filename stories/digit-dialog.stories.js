@@ -24,7 +24,7 @@ import { digitDialogOpen } from "../components/views/digit-dialog/DigitDialog.vi
 
 import DigitDialogReadme from "../components/views/digit-dialog/readme.md";
 
-const DigitDialogStory = storiesOf("Elements", module);
+const DigitDialogStory = storiesOf("Views", module);
 
 DigitDialogStory.addDecorator(withKnobs);
 

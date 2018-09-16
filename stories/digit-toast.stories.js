@@ -32,7 +32,7 @@ const horiLabel = "style";
 const horiOptions = ["raised", "outline", "flat"];
 const horiDefaultValue = "flat";
 
-const DigitButtonStory = storiesOf("Elements", module);
+const DigitButtonStory = storiesOf("Views", module);
 
 DigitButtonStory.addDecorator(withKnobs);
 

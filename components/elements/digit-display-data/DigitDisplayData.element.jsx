@@ -11,7 +11,7 @@ const FixedWidth = styled.div`
   width: ${props => (props.fixedWidth != null ? props.fixedWidth : "125px")};
 `;
 
-const GammaDisplayData = ({ data, keysText, keysOrder, fixedWidth }) => (
+const DigitDisplayData = ({ data, keysText, keysOrder, fixedWidth }) => (
   <Fill>
     {keysOrder.map(key => (
       <Padding key={key}>
@@ -28,4 +28,4 @@ const GammaDisplayData = ({ data, keysText, keysOrder, fixedWidth }) => (
   </Fill>
 );
 
-export default GammaDisplayData;
+export default DigitDisplayData;

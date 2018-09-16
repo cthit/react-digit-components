@@ -9,7 +9,7 @@ import { DigitTextField } from "react-digit-components";
 ```
 
 ```js
-<GammaTextField
+<DigitTextField
   onChange={e => {
     this.setState({
       value: e.target.value

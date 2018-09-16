@@ -7,7 +7,7 @@ import { DigitIconButton } from "react-digit-components";
 ```
 
 ```js
-<GammaIconButton
+<DigitIconButton
   onClick={() => {
     console.log("HeJ");
   }}

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
-import { redirectTo } from "../../../app/views/gamma-redirect/GammaRedirect.view.action-creator";
-import { toastOpen } from "../../../app/views/gamma-toast/GammaToast.view.action-creator";
+import { redirectTo } from "../../../app/views/digit-redirect/DigitRedirect.view.action-creator";
+import { toastOpen } from "../../../app/views/digit-toast/DigitToast.view.action-creator";
 
 import React from "react";
 

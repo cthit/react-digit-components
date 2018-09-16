@@ -7,7 +7,7 @@ import { DigitSwitch } from "react-digit-components";
 ```
 
 ```js
-<GammaSwitch
+<DigitSwitch
   primary
   value={this.state.value}
   label="This is a label"

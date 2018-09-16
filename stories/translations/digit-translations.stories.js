@@ -2,8 +2,6 @@ import React from "react";
 
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
 const langLabel = "Language";
@@ -15,9 +13,6 @@ import DigitTranslationsReadme from "../../components/declaratives/digit-transla
 
 import TestTranslations from "./TestTranslations.json";
 import CommonTranslations from "./CommonTranslations.json";
-import { connect } from "react-redux";
-
-import { setActiveLanguage } from "react-localize-redux";
 
 const DigitTranslationsStory = storiesOf("Elements", module);
 

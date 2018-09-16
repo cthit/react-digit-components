@@ -25,9 +25,11 @@ function loadTranslations(localize, translations, baseUrl, commonTranslations) {
 }
 
 function _loadCommonTranslations(localize, commonTranslations) {
-  const baseUrl = "Common.";
+  if (commonTranslations == null) {
+    return {};
+  }
 
-  console.log(localize);
+  const baseUrl = "Common.";
 
   const translate = textId => getTranslate(localize)(baseUrl + textId);
 
@@ -62,8 +64,6 @@ class DigitTranslations extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   const translations = {};
   _.set(translations, ownProps.uniquePath, ownProps.translations);
-
-  console.log(ownProps);
 
   return {
     text: ownProps.onlyCommon

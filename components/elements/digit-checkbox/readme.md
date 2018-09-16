@@ -9,7 +9,7 @@ import { DigitCheckbox } from "react-digit-components";
 ```
 
 ```js
-<GammaCheckbox
+<DigitCheckbox
   label="First checkbox; primary"
   primary
   value={this.state.checked}
@@ -20,7 +20,7 @@ import { DigitCheckbox } from "react-digit-components";
     console.log("This checkbox has been checked = " + checked);
   }}
 />
-<GammaCheckbox
+<DigitCheckbox
   label="second checkbox; secondary"
   secondary
   value={this.state.checked}
@@ -31,7 +31,7 @@ import { DigitCheckbox } from "react-digit-components";
     console.log("This checkbox has been checked = " + checked);
   }}
 />
-<GammaCheckbox
+<DigitCheckbox
   label="third checkbox; secondary with error"
   secondary
   value={this.state.checked}
@@ -43,7 +43,7 @@ import { DigitCheckbox } from "react-digit-components";
     console.log("This checkbox has been checked = " + checked);
   }}
 />
-<GammaCheckbox
+<DigitCheckbox
   label="fourth checkbox; disabled"
   disabled
   value={this.state.checked}
@@ -54,7 +54,7 @@ import { DigitCheckbox } from "react-digit-components";
     console.log("This checkbox has been checked = " + checked);
   }}
 />
-<GammaCheckbox
+<DigitCheckbox
   label="fifth checkbox; primary and disabled"
   primary
   disabled

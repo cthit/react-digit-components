@@ -41,7 +41,7 @@ const StyledAppBar = styled(AppBar)`
   }
 `;
 
-const GammaTitle = styled(Title)`
+const DigitTitle = styled(Title)`
   align-self: center;
 `;
 
@@ -108,7 +108,7 @@ class DigitNavigation extends React.Component {
               <MenuIcon />
             </StyledMenuButton>
             <HorizontalFill>
-              <GammaTitle text={title} white />
+              <DigitTitle text={title} white />
             </HorizontalFill>
           </StyledToolbar>
         </StyledAppBar>

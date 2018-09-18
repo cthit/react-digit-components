@@ -26,6 +26,7 @@ DigitCheckboxStory.add(
     const label = text("Label", "This is a label");
     const disabled = boolean("Disabled", false);
     const error = boolean("Error", false);
+    const errorMessage = text("Error message", "Something went wrong");
 
     return (
       <State initial={{ checked: true }}>
@@ -33,6 +34,7 @@ DigitCheckboxStory.add(
           <DigitCheckbox
             disabled={disabled}
             error={error}
+            errorMessage={errorMessage}
             label={label}
             primary={color === "primary"}
             secondary={color === "secondary"}

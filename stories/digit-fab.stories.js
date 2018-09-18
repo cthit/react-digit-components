@@ -37,7 +37,7 @@ DigitFABStory.add(
       <Padding>
         <DigitFAB
           onClick={action("Click")}
-          component={
+          icon={
             icon === "Edit"
               ? Edit
               : icon === "Add"

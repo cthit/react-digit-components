@@ -1,13 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { ListItemText, ListItem } from "@material-ui/core";
+import { ListItemText, ListItem, ListItemIcon } from "@material-ui/core";
 
-const DigitNavLink = ({ text, link, onClick }) => (
+const DigitNavLink = ({ text, link, onClick, icon }) => (
   <Link to={link}>
-    <ListItem button>
-      <ListItemText onClick={onClick}>{text}</ListItemText>
-    </ListItem>
+      <ListItem button>
+          {icon&&
+          <ListItemIcon>
+                {React.createElement(icon)}
+          </ListItemIcon>}
+          <ListItemText onClick={onClick}>{text}</ListItemText>
+      </ListItem>
   </Link>
 );
 

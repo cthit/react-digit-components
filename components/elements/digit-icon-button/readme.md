@@ -11,6 +11,6 @@ import { DigitIconButton } from "react-digit-components";
   onClick={() => {
     console.log("HeJ");
   }}
-  component={Add}
+  icon={Add}
 />
 ```

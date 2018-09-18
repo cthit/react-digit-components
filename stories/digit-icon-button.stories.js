@@ -39,7 +39,7 @@ DigitIconButtonStory.add(
         primary={color === "primary"}
         secondary={color === "secondary"}
         disabled={disabled}
-        component={
+        icon={
           icon === "Edit"
             ? Edit
             : icon === "Add"

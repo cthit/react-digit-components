@@ -50,7 +50,7 @@ import {
                       <DigitLayout.VerticalFill key={todo + "_" + index}>
                         <DigitText.Text text={todo} />
                         <DigitIconButton
-                          component={Delete}
+                          icon={Delete}
                           onClick={() => {
                             remove(index);
                           }}

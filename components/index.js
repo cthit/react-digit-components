@@ -13,6 +13,7 @@ import DigitNavigation from "./elements/digit-navigation";
 import DigitNavLink from "./elements/digit-nav-link";
 import DigitFAB from "./elements/digit-fab";
 import DigitDisplayData from "./elements/digit-display-data";
+import DigitEditData from "./elements/digit-edit-data";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -49,6 +50,7 @@ export {
   DigitNavLink,
   DigitFAB,
   DigitDisplayData,
+  DigitEditData,
   /* Views */
   DigitToast,
   DigitDialog,

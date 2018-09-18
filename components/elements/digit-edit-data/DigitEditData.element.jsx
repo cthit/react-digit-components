@@ -11,8 +11,6 @@ import {
 import DigitFormField from "../digit-form-field";
 import DigitFormFieldArray from "../digit-form-field-array";
 import DigitButton from "../digit-button";
-import IfElseRendering from "../../declaratives/if-else-rendering";
-import { FieldArray } from "formik";
 import { DigitIfElseRendering } from "../..";
 const DigitEditData = ({
   initialValues,

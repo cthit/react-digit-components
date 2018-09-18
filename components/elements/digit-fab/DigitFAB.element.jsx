@@ -4,14 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
 
-const DigitFAB = ({
-  onClick,
-  disabled,
-  primary,
-  secondary,
-  submit,
-  component
-}) => (
+const DigitFAB = ({ onClick, disabled, primary, secondary, submit, icon }) => (
   <Button
     variant="fab"
     type={submit ? "submit" : "button"}
@@ -19,7 +12,7 @@ const DigitFAB = ({
     onClick={onClick}
     color={primary ? "primary" : secondary ? "secondary" : "default"}
   >
-    {React.createElement(component, null)}
+    {React.createElement(icon, null)}
   </Button>
 );
 

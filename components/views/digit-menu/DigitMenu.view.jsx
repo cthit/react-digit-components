@@ -39,7 +39,7 @@ class DigitMenu extends React.Component {
           aria-label="More"
           aria-owns={open ? id : null}
           aria-haspopup="true"
-          component={MoreVert}
+          icon={MoreVert}
         />
         <Menu
           id={id}

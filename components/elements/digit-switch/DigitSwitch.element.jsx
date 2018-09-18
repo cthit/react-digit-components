@@ -9,7 +9,6 @@ const DigitSwitch = ({
   onBlur,
   value,
   error,
-  errorMessage,
   disabled,
   primary,
   secondary,
@@ -18,7 +17,6 @@ const DigitSwitch = ({
 }) => (
   <DigitControlLabelWithError
     error={error}
-    label={error != null && error ? errorMessage : label}
     control={
       <Switch
         checked={value}
@@ -29,6 +27,7 @@ const DigitSwitch = ({
         onBlur={onBlur}
       />
     }
+    label={label}
   />
 );
 

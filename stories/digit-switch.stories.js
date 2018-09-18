@@ -25,7 +25,6 @@ DigitSwitchStory.add(
     const color = select(colorLabel, colorOptions, colorDefaultValue);
     const disabled = boolean("Disabled", false);
     const error = boolean("error", false);
-    const errorMessage = text("Error message", "Error oh no");
 
     return (
       <State initial={{ value: true }}>
@@ -44,7 +43,6 @@ DigitSwitchStory.add(
             secondary={color === "secondary"}
             disabled={disabled}
             error={error}
-            errorMessage={errorMessage}
           />
         )}
       </State>

@@ -6,6 +6,8 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
+import { Send } from '@material-ui/icons';
+
 import { DigitNavigation, DigitNavLink, DigitProviders } from "../components";
 import DigitNavigationReadme from "../components/elements/digit-navigation/readme.md";
 
@@ -24,9 +26,7 @@ DigitNavigationStory.add(
           title={title}
           renderMain={() => <div>Hej</div>}
           renderDrawer={closeDrawer => (
-            <div>
-              <DigitNavLink onClick={closeDrawer} link="/hej" text="Hej" />
-            </div>
+              <DigitNavLink onClick={closeDrawer} link="/hej" text="Hej" icon={Send} />
           )}
         />
       </DigitProviders>

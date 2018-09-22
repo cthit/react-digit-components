@@ -1,5 +1,7 @@
 # DigitHeader
 
+If you don't want a navigation, just remove the renderDrawer prop.
+
 ```js
 <DigitProviders>
   <DigitHeader

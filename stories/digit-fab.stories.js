@@ -10,7 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
 import Call from "@material-ui/icons/Call";
 
-import { DigitFAB } from "../components";
+import { DigitFAB, DigitProviders } from "../components";
 import DigitFABReadme from "../components/elements/digit-fab/readme.md";
 import { Padding } from "../components/styles/digit-layout/DigitLayout.styles";
 
@@ -34,23 +34,25 @@ DigitFABStory.add(
     const icon = select(iconLabel, iconOptions, iconDefaultValue);
 
     return (
-      <Padding>
-        <DigitFAB
-          onClick={action("Click")}
-          icon={
-            icon === "Edit"
-              ? Edit
-              : icon === "Add"
-                ? Add
-                : icon === "Call"
-                  ? Call
-                  : null
-          }
-          disabled={disabled}
-          primary={color === "primary"}
-          secondary={color === "secondary"}
-        />
-      </Padding>
+      <DigitProviders>
+        <Padding>
+          <DigitFAB
+            onClick={action("Click")}
+            icon={
+              icon === "Edit"
+                ? Edit
+                : icon === "Add"
+                  ? Add
+                  : icon === "Call"
+                    ? Call
+                    : null
+            }
+            disabled={disabled}
+            primary={color === "primary"}
+            secondary={color === "secondary"}
+          />
+        </Padding>
+      </DigitProviders>
     );
   })
 );

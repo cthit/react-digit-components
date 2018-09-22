@@ -8,7 +8,7 @@ import { linkTo } from "@storybook/addon-links";
 import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitTextField, DigitLayout } from "../components";
+import { DigitTextField, DigitLayout, DigitProviders } from "../components";
 import DigitTextFieldReadme from "../components/elements/digit-text-field/readme.md";
 
 const typeLabel = "type";
@@ -30,31 +30,33 @@ DigitTextFieldStory.add(
     const disabled = boolean("disabled", false);
 
     return (
-      <State initial={{ value: "This is text" }}>
-        {({ state, setState }) => (
-          <DigitLayout.Size width="300px">
-            <DigitTextField
-              value={state.value}
-              onChange={e => {
-                setState({
-                  value: e.target.value
-                });
-                action("value_changed")(e);
-              }}
-              onBlur={e => {
-                action("blur")(e);
-              }}
-              password={type === "password"}
-              numbersOnly={type === "numbersOnly"}
-              error={error}
-              errorMessage={errorMessage}
-              lowerLabel={lowerLabel}
-              upperLabel={upperLabel}
-              disabled={disabled}
-            />
-          </DigitLayout.Size>
-        )}
-      </State>
+      <DigitProviders>
+        <State initial={{ value: "This is text" }}>
+          {({ state, setState }) => (
+            <DigitLayout.Size width="300px">
+              <DigitTextField
+                value={state.value}
+                onChange={e => {
+                  setState({
+                    value: e.target.value
+                  });
+                  action("value_changed")(e);
+                }}
+                onBlur={e => {
+                  action("blur")(e);
+                }}
+                password={type === "password"}
+                numbersOnly={type === "numbersOnly"}
+                error={error}
+                errorMessage={errorMessage}
+                lowerLabel={lowerLabel}
+                upperLabel={upperLabel}
+                disabled={disabled}
+              />
+            </DigitLayout.Size>
+          )}
+        </State>
+      </DigitProviders>
     );
   })
 );

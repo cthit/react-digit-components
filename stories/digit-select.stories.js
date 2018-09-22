@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
-import { DigitSelect } from "../components";
+import { DigitSelect, DigitProviders } from "../components";
 import DigitSelectReadme from "../components/elements/digit-select/readme.md";
 import { Value } from "react-powerplug";
 
@@ -22,27 +22,29 @@ DigitSelectStory.add(
     const lowerLabel = text("Lowerlabel", "Choose the best flavor");
 
     return (
-      <Value
-        initial="chocolate"
-        render={selected => (
-          <DigitSelect
-            onChange={e => {
-              selected.set(e.target.value);
-              action("Selected")(e);
-            }}
-            value={selected.value}
-            disabled={disabled}
-            upperLabel={upperLabel}
-            lowerLabel={lowerLabel}
-            valueToTextMap={{
-              chocolate: "Chocolate",
-              vanilla: "Vanilla",
-              strawberry: "Strawberry"
-            }}
-            allowToChooseNone
-          />
-        )}
-      />
+      <DigitProviders>
+        <Value
+          initial="chocolate"
+          render={selected => (
+            <DigitSelect
+              onChange={e => {
+                selected.set(e.target.value);
+                action("Selected")(e);
+              }}
+              value={selected.value}
+              disabled={disabled}
+              upperLabel={upperLabel}
+              lowerLabel={lowerLabel}
+              valueToTextMap={{
+                chocolate: "Chocolate",
+                vanilla: "Vanilla",
+                strawberry: "Strawberry"
+              }}
+              allowToChooseNone
+            />
+          )}
+        />
+      </DigitProviders>
     );
   })
 );

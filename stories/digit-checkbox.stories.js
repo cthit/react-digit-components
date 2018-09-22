@@ -8,7 +8,7 @@ import { linkTo } from "@storybook/addon-links";
 import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitCheckbox } from "../components";
+import { DigitCheckbox, DigitProviders } from "../components";
 import DigitCheckboxReadme from "../components/elements/digit-checkbox/readme.md";
 
 const colorLabel = "color";
@@ -28,27 +28,29 @@ DigitCheckboxStory.add(
     const error = boolean("Error", false);
 
     return (
-      <State initial={{ checked: true }}>
-        {({ state, setState }) => (
-          <DigitCheckbox
-            disabled={disabled}
-            error={error}
-            label={label}
-            primary={color === "primary"}
-            secondary={color === "secondary"}
-            value={state.checked}
-            onChange={e => {
-              setState({
-                checked: e.target.checked
-              });
-              action("toggled")(e);
-            }}
-            onBlur={e => {
-              action("blur")(e);
-            }}
-          />
-        )}
-      </State>
+      <DigitProviders>
+        <State initial={{ checked: true }}>
+          {({ state, setState }) => (
+            <DigitCheckbox
+              disabled={disabled}
+              error={error}
+              label={label}
+              primary={color === "primary"}
+              secondary={color === "secondary"}
+              value={state.checked}
+              onChange={e => {
+                setState({
+                  checked: e.target.checked
+                });
+                action("toggled")(e);
+              }}
+              onBlur={e => {
+                action("blur")(e);
+              }}
+            />
+          )}
+        </State>
+      </DigitProviders>
     );
   })
 );

@@ -12,7 +12,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
-import { DigitDisplayData } from "../components";
+import { DigitDisplayData, DigitProviders } from "../components";
 import DigitDisplayDataReadme from "../components/elements/digit-display-data/readme.md";
 
 const DigitDisplayDataStory = storiesOf("Elements", module);
@@ -35,22 +35,24 @@ DigitDisplayDataStory.add(
     const nick = text("Nick", "Svennis");
 
     return (
-      <DigitDisplayData
-        fixedWidth={fixedWidth + "px"}
-        data={{
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          nick: nick
-        }}
-        keysText={{
-          firstName: "Förnamn",
-          lastName: "Efternamn",
-          email: "Email",
-          nick: "Nick"
-        }}
-        keysOrder={["firstName", "lastName", "email", "nick"]}
-      />
+      <DigitProviders>
+        <DigitDisplayData
+          fixedWidth={fixedWidth + "px"}
+          data={{
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            nick: nick
+          }}
+          keysText={{
+            firstName: "Förnamn",
+            lastName: "Efternamn",
+            email: "Email",
+            nick: "Nick"
+          }}
+          keysOrder={["firstName", "lastName", "email", "nick"]}
+        />
+      </DigitProviders>
     );
   })
 );

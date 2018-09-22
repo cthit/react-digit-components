@@ -1,8 +1,8 @@
-# DigitNavigation
+# DigitHeader
 
 ```js
 <DigitProviders>
-  <DigitNavigation
+  <DigitHeader
     title={title}
     renderMain={() => <div>Hej</div>}
     renderDrawer={closeDrawer => (

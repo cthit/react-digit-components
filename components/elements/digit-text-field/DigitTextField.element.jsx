@@ -62,7 +62,6 @@ const DigitTextField = ({
         test={filled != null && filled}
         ifRender={() => (
           <FilledInput
-            id="asdf-"
             name={name}
             value={value != null ? value : ""}
             onChange={onChange}

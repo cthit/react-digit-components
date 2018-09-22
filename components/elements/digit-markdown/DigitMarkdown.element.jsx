@@ -2,6 +2,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { DigitText } from "../..";
 import DigitTable from "../../views/digit-table";
+import { Text } from "../../styles/digit-text/DigitText.styles";
 
 const DigitMarkdown = ({ markdownSource }) => (
   <div>
@@ -71,6 +72,9 @@ const DigitMarkdown = ({ markdownSource }) => (
             default:
               return null;
           }
+        },
+        paragraph: data => {
+          return <Text text={data.children} />;
         }
       }}
     />

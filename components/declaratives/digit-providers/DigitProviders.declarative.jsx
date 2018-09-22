@@ -49,7 +49,7 @@ class DigitProviders extends React.Component {
           light: "#4dabf5"
         },
         secondary: {
-          main: "#f44336",
+          main: "#ff9100",
           dark: "#b26500",
           light: "#ffa733"
         }

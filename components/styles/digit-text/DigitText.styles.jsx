@@ -18,6 +18,42 @@ export const Heading = styled(({ text, white, ...rest }) => (
   color: ${props => (props.white ? "white" : "")};
 `;
 
+export const Heading1 = styled(({ text, white, ...rest }) => (
+  <Heading text={text} {...rest} variant="headline" />
+))`
+  font-size: 2em;
+`;
+
+export const Heading2 = styled(({ text, white, ...rest }) => (
+  <Heading text={text} {...rest} variant="headline" />
+))`
+  font-size: 1.5em;
+`;
+
+export const Heading3 = styled(({ text, white, ...rest }) => (
+  <Heading text={text} {...rest} variant="headline" />
+))`
+  font-size: 1.17em;
+`;
+
+export const Heading4 = styled(({ text, white, ...rest }) => (
+  <Heading text={text} {...rest} variant="headline" />
+))`
+  font-size: 1em;
+`;
+
+export const Heading5 = styled(({ text, white, ...rest }) => (
+  <Heading text={text} {...rest} variant="headline" />
+))`
+  font-size: 0.83em;
+`;
+
+export const Heading6 = styled(({ text, white, ...rest }) => (
+  <Heading text={text} {...rest} variant="headline" />
+))`
+  font-size: 0.75em;
+`;
+
 export const Title = styled(({ text, white, bold, ...rest }) => (
   <Typography {...rest} variant="title">
     {text}

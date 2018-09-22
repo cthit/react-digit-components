@@ -46,8 +46,8 @@ const DigitMarkdown = ({ markdownSource }) => (
             <DigitTable
               titleText=""
               searchText=""
-              idProp={first}
-              startOrderBy={first}
+              idProp={headerTextsArray[0]}
+              startOrderBy={headerTextsArray[0]}
               columnsOrder={headerTextsArray}
               headerTexts={headerTexts}
               data={rowsTexts}
@@ -75,6 +75,14 @@ const DigitMarkdown = ({ markdownSource }) => (
         },
         paragraph: data => {
           return <Text text={data.children} />;
+        },
+        listItem: data => {
+          console.log(data);
+          return (
+            <li>
+              <Text text={data.children} />
+            </li>
+          );
         }
       }}
     />

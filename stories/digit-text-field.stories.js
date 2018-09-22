@@ -15,6 +15,10 @@ const typeLabel = "type";
 const typeOptions = ["normal", "password", "numbersOnly"];
 const typeDefaultValue = "normal";
 
+const styleLabel = "style";
+const styleOptions = ["filled", "outline", "standard"];
+const styleDefaultValue = "standard";
+
 const DigitTextFieldStory = storiesOf("Elements", module);
 
 DigitTextFieldStory.addDecorator(withKnobs);
@@ -28,6 +32,7 @@ DigitTextFieldStory.add(
     const error = boolean("Error", false);
     const errorMessage = text("Error message", "Buuuh, this is a error");
     const disabled = boolean("disabled", false);
+    const style = select(styleLabel, styleOptions, styleDefaultValue);
 
     return (
       <State initial={{ value: "This is text" }}>
@@ -51,6 +56,8 @@ DigitTextFieldStory.add(
               lowerLabel={lowerLabel}
               upperLabel={upperLabel}
               disabled={disabled}
+              outline={style === "outline"}
+              filled={style === "filled"}
             />
           </DigitLayout.Size>
         )}

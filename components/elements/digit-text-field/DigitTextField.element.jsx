@@ -1,14 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
+
 import {
   FormHelperText,
   FormControl,
   InputLabel,
-  Input
+  Input,
+  OutlinedInput,
+  FilledInput
 } from "@material-ui/core";
 
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+
+const element = document.createElement("canvas");
+const context = element.getContext("2d");
+
+function get_tex_size(txt, font) {
+  context.font = font;
+  return context.measureText(txt).width;
+}
 
 const DigitTextField = ({
   value,
@@ -21,18 +33,57 @@ const DigitTextField = ({
   numbersOnly,
   error,
   errorMessage,
-  disabled
+  disabled,
+  outline,
+  filled
 }) => (
   <Fill>
-    <FormControl error={error}>
+    <FormControl
+      variant={outline ? "outlined" : filled ? "filled" : "standard"}
+      error={error}
+    >
       <InputLabel>{upperLabel}</InputLabel>
-      <Input
-        name={name}
-        value={value != null ? value : ""}
-        onChange={onChange}
-        onBlur={onBlur}
-        type={password ? "password" : numbersOnly ? "number" : "text"}
-        disabled={disabled}
+      <DigitIfElseRendering
+        test={outline}
+        ifRender={() => (
+          <OutlinedInput
+            name={name}
+            labelWidth={get_tex_size(upperLabel, "1rem Helvetica") * 0.75 + 8}
+            value={value || ""}
+            onChange={onChange}
+            onBlur={onBlur}
+            type={password ? "password" : numbersOnly ? "number" : "text"}
+            disabled={disabled}
+          />
+        )}
+      />
+
+      <DigitIfElseRendering
+        test={filled}
+        ifRender={() => (
+          <FilledInput
+            name={name}
+            value={value || ""}
+            onChange={onChange}
+            onBlur={onBlur}
+            type={password ? "password" : numbersOnly ? "number" : "text"}
+            disabled={disabled}
+          />
+        )}
+      />
+
+      <DigitIfElseRendering
+        test={!filled && !outline}
+        ifRender={() => (
+          <Input
+            name={name}
+            value={value || ""}
+            onChange={onChange}
+            onBlur={onBlur}
+            type={password ? "password" : numbersOnly ? "number" : "text"}
+            disabled={disabled}
+          />
+        )}
       />
 
       <FormHelperText>

@@ -6,12 +6,21 @@ import {
   Input,
   InputLabel,
   MenuItem,
-  FormHelperText
+  FormHelperText,
+  FilledInput,
+  OutlinedInput
 } from "@material-ui/core";
 import styled from "styled-components";
 
-import generateId from "../../utils/generators/id.generator";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+
+const element = document.createElement("canvas");
+const context = element.getContext("2d");
+
+function get_tex_size(txt, font) {
+  context.font = font;
+  return context.measureText(txt).width;
+}
 
 const DigitSelect = ({
   value,
@@ -23,19 +32,36 @@ const DigitSelect = ({
   upperLabel,
   lowerLabel,
   reverse,
-  inputProps
+  inputProps,
+  filled,
+  outline
 }) => (
   <Fill>
-    <StyledFormControl>
+    <StyledFormControl
+      variant={filled ? "filled" : outline ? "outlined" : "standard"}
+    >
       <InputLabel>{upperLabel}</InputLabel>
       <StyledSelect
         onChange={onChange}
         disabled={disabled}
         displayEmpty={allowToChooseNone}
         value={value}
+        variant={filled ? "filled" : outline ? "outlined" : "standard"}
+        input={
+          filled ? (
+            <FilledInput />
+          ) : outline ? (
+            <OutlinedInput
+              labelWidth={get_tex_size(upperLabel, "1rem Helvetica") * 0.75 + 8}
+            />
+          ) : (
+            <Input />
+          )
+        }
         inputProps={{
           id: "id-" + name,
           name: name,
+          color: "secondary",
           ...inputProps
         }}
       >

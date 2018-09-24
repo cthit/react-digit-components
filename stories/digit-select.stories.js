@@ -10,6 +10,10 @@ import { DigitSelect } from "../components";
 import DigitSelectReadme from "../components/elements/digit-select/readme.md";
 import { Value } from "react-powerplug";
 
+const styleLabel = "style";
+const styleOptions = ["filled", "outline", "standard"];
+const styleDefaultValue = "standard";
+
 const DigitSelectStory = storiesOf("Elements", module);
 
 DigitSelectStory.addDecorator(withKnobs);
@@ -20,6 +24,7 @@ DigitSelectStory.add(
     const disabled = boolean("Disabled", false);
     const upperLabel = text("Upperlabel", "Favorite Icecream flavor");
     const lowerLabel = text("Lowerlabel", "Choose the best flavor");
+    const style = select(styleLabel, styleOptions, styleDefaultValue);
 
     return (
       <Value
@@ -40,6 +45,8 @@ DigitSelectStory.add(
               strawberry: "Strawberry"
             }}
             allowToChooseNone
+            outline={style === "outline"}
+            filled={style === "filled"}
           />
         )}
       />

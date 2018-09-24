@@ -18,7 +18,7 @@ const DigitCheckbox = ({
 }) => (
   <DigitControlLabelWithError
     error={error}
-    label={error != null && error ? errorMessage : label}
+    label={error ? errorMessage : label}
     disabled={disabled}
     control={
       <Checkbox

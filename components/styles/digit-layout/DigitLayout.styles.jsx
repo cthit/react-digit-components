@@ -1,4 +1,23 @@
+import React from "react";
 import styled from "styled-components";
+
+export const Flex = styled.div`
+  display: ${props => (!props.inline ? "flex" : "inline-flex")};
+`;
+
+export const Column = styled(
+  ({ leftAlign, rightAlign, reverse, children, ...rest }) => (
+    <Flex {...rest}>{children}</Flex>
+  )
+)`
+  flex-direction: ${props => (!props.reverse ? "column" : "column-reverse")};
+`;
+
+export const Row = styled(({ children, ...rest }) => (
+  <Flex {...rest}>{children}</Flex>
+))`
+  flex-direction: ${props => (!props.reverse ? "row" : "row-reverse")};
+`;
 
 export const DownRightPosition = styled.div`
   position: absolute;
@@ -51,10 +70,6 @@ export const Padding = Fill.extend`
   padding: 8px;
 `;
 
-export const Flex = styled.div`
-  display: flex;
-`;
-
 export const Center = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
@@ -75,9 +90,7 @@ export const Hide = styled.div`
   display: ${props => (props.hidden ? "none" : "inherit")};
 `;
 
-export const Size = styled.div`
-  display: flex;
-
+export const Size = styled(Flex)`
   width: ${props => (props.absWidth != null ? props.absWidth : props.width)};
   height: ${props =>
     props.absHeight != null ? props.absHeight : props.height};

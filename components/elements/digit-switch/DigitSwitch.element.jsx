@@ -18,7 +18,7 @@ const DigitSwitch = ({
 }) => (
   <DigitControlLabelWithError
     error={error}
-    label={error != null && error ? errorMessage : label}
+    label={error ? errorMessage : label}
     control={
       <Switch
         checked={value}

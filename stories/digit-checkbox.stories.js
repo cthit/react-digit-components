@@ -26,30 +26,32 @@ DigitCheckboxStory.add(
     const label = text("Label", "This is a label");
     const disabled = boolean("Disabled", false);
     const error = boolean("Error", false);
+    const errorMessage = text("Error message", "Something went wrong");
 
     return (
       <DigitProviders>
-        <State initial={{ checked: true }}>
-          {({ state, setState }) => (
-            <DigitCheckbox
-              disabled={disabled}
-              error={error}
-              label={label}
-              primary={color === "primary"}
-              secondary={color === "secondary"}
-              value={state.checked}
-              onChange={e => {
-                setState({
-                  checked: e.target.checked
-                });
-                action("toggled")(e);
-              }}
-              onBlur={e => {
-                action("blur")(e);
-              }}
-            />
-          )}
-        </State>
+ <State initial={{ checked: true }}>
+        {({ state, setState }) => (
+          <DigitCheckbox
+            disabled={disabled}
+            error={error}
+            errorMessage={errorMessage}
+            label={label}
+            primary={color === "primary"}
+            secondary={color === "secondary"}
+            value={state.checked}
+            onChange={e => {
+              setState({
+                checked: e.target.checked
+              });
+              action("toggled")(e);
+            }}
+            onBlur={e => {
+              action("blur")(e);
+            }}
+          />
+        )}
+      </State>
       </DigitProviders>
     );
   })

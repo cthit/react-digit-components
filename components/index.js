@@ -9,11 +9,12 @@ import DigitFormField from "./elements/digit-form-field";
 import DigitFormFieldArray from "./elements/digit-form-field-array";
 import DigitTextArea from "./elements/digit-text-area";
 import DigitSelect from "./elements/digit-select";
-import DigitNavigation from "./elements/digit-navigation";
+import DigitHeader from "./elements/digit-header";
 import DigitNavLink from "./elements/digit-nav-link";
 import DigitFAB from "./elements/digit-fab";
 import DigitDisplayData from "./elements/digit-display-data";
 import DigitEditData from "./elements/digit-edit-data";
+import DigitMarkdown from "./elements/digit-markdown";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -46,11 +47,12 @@ export {
   DigitFormFieldArray,
   DigitTextArea,
   DigitSelect,
-  DigitNavigation,
+  DigitHeader,
   DigitNavLink,
   DigitFAB,
   DigitDisplayData,
   DigitEditData,
+  DigitMarkdown,
   /* Views */
   DigitToast,
   DigitDialog,

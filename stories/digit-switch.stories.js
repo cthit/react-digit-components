@@ -25,29 +25,32 @@ DigitSwitchStory.add(
     const color = select(colorLabel, colorOptions, colorDefaultValue);
     const disabled = boolean("Disabled", false);
     const error = boolean("error", false);
+    const errorMessage = text("Error message", "Error oh no");
 
     return (
       <DigitProviders>
-        <State initial={{ value: true }}>
-          {({ state, setState }) => (
-            <DigitSwitch
-              value={state.value}
-              onChange={e => {
-                setState({
-                  value: e.target.checked
-                });
-                action("value")(e);
-              }}
-              label={label}
-              onBlur={action("blur")}
-              primary={color === "primary"}
-              secondary={color === "secondary"}
-              disabled={disabled}
-              error={error}
-            />
-          )}
-        </State>
+       <State initial={{ value: true }}>
+        {({ state, setState }) => (
+          <DigitSwitch
+            value={state.value}
+            onChange={e => {
+              setState({
+                value: e.target.checked
+              });
+              action("value")(e);
+            }}
+            label={label}
+            onBlur={action("blur")}
+            primary={color === "primary"}
+            secondary={color === "secondary"}
+            disabled={disabled}
+            error={error}
+            errorMessage={errorMessage}
+          />
+        )}
+      </State>
       </DigitProviders>
+
     );
   })
 );

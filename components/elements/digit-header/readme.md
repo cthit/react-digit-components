@@ -1,8 +1,10 @@
-# DigitNavigation
+# DigitHeader
+
+If you don't want a navigation, just remove the renderDrawer prop.
 
 ```js
 <DigitProviders>
-  <DigitNavigation
+  <DigitHeader
     title={title}
     renderMain={() => <div>Hej</div>}
     renderDrawer={closeDrawer => (

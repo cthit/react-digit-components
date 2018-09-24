@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
-import { DigitMenu } from "../components";
+import { DigitMenu, DigitProviders } from "../components";
 import DigitMenuReadme from "../components/views/digit-menu/readme.md";
 
 const DigitMenuStory = storiesOf("Views", module);
@@ -17,15 +17,17 @@ DigitMenuStory.add(
   "DigitMenu",
   withReadme(DigitMenuReadme, () => {
     return (
-      <DigitMenu
-        onClick={value => {
-          action(value + " has been selected")(value);
-        }}
-        valueToTextMap={{
-          first_option: "First option",
-          second_option: "Second option"
-        }}
-      />
+      <DigitProviders>
+        <DigitMenu
+          onClick={value => {
+            action(value + " has been selected")(value);
+          }}
+          valueToTextMap={{
+            first_option: "First option",
+            second_option: "Second option"
+          }}
+        />
+      </DigitProviders>
     );
   })
 );

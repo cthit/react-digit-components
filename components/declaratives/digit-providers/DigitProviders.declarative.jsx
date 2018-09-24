@@ -5,12 +5,16 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { ThemeProvider } from "styled-components";
 import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { LocalizeProvider, withLocalize } from "react-localize-redux";
 import { create } from "jss";
-import { createGenerateClassName, jssPreset } from "@material-ui/core/styles";
+import {
+  createGenerateClassName,
+  jssPreset,
+  createMuiTheme,
+  MuiThemeProvider
+} from "@material-ui/core/styles";
 import JssProvider from "react-jss/lib/JssProvider";
 
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
@@ -21,16 +25,6 @@ const jss = create(jssPreset());
 jss.options.insertionPoint = "insertion-point-jss";
 
 const loggerMiddleware = createLogger();
-
-const theme = {
-  breakpoints: {
-    xs: 0,
-    sm: 600,
-    md: 960,
-    lg: 1280,
-    xl: 1920
-  }
-};
 
 class DigitProviders extends React.Component {
   constructor(props) {
@@ -46,12 +40,28 @@ class DigitProviders extends React.Component {
       props.preloadedState,
       applyMiddleware(loggerMiddleware, thunkMiddleware)
     );
+
+    this.theme = createMuiTheme({
+      palette: {
+        primary: {
+          main: "#2196f3",
+          dark: "#1769aa",
+          light: "#4dabf5"
+        },
+        secondary: {
+          main: "#ff9100",
+          dark: "#b26500",
+          light: "#ffa733"
+        }
+      },
+      ...props.theme
+    });
   }
 
   render() {
     const { children, defaultLanguage } = this.props;
     return (
-      <ThemeProvider theme={theme}>
+      <MuiThemeProvider theme={this.theme}>
         <LocalizeProvider store={this.store} defaultLanguage={defaultLanguage}>
           <LocalizeInitalizer>
             <JssProvider jss={jss} generateClassName={generateClassName}>
@@ -61,7 +71,7 @@ class DigitProviders extends React.Component {
             </JssProvider>
           </LocalizeInitalizer>
         </LocalizeProvider>
-      </ThemeProvider>
+      </MuiThemeProvider>
     );
   }
 }

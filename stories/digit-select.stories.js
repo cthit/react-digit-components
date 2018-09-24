@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
-import { DigitSelect } from "../components";
+import { DigitSelect, DigitProviders } from "../components";
 import DigitSelectReadme from "../components/elements/digit-select/readme.md";
 import { Value } from "react-powerplug";
 
@@ -27,7 +27,8 @@ DigitSelectStory.add(
     const style = select(styleLabel, styleOptions, styleDefaultValue);
 
     return (
-      <Value
+      <DigitProviders>
+       <Value
         initial="chocolate"
         render={selected => (
           <DigitSelect
@@ -50,6 +51,9 @@ DigitSelectStory.add(
           />
         )}
       />
+      </DigitProviders>
+      
+
     );
   })
 );

@@ -8,7 +8,7 @@ import { linkTo } from "@storybook/addon-links";
 import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitTextField, DigitLayout } from "../components";
+import { DigitTextField, DigitLayout, DigitProviders } from "../components";
 import DigitTextFieldReadme from "../components/elements/digit-text-field/readme.md";
 
 const typeLabel = "type";
@@ -35,7 +35,8 @@ DigitTextFieldStory.add(
     const style = select(styleLabel, styleOptions, styleDefaultValue);
 
     return (
-      <State initial={{ value: "This is text" }}>
+      <DigitProviders>
+ <State initial={{ value: "This is text" }}>
         {({ state, setState }) => (
           <DigitLayout.Size width="300px">
             <DigitTextField
@@ -62,6 +63,8 @@ DigitTextFieldStory.add(
           </DigitLayout.Size>
         )}
       </State>
+      </DigitProviders>
+
     );
   })
 );

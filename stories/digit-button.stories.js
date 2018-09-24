@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
-import { DigitButton } from "../components";
+import { DigitButton, DigitProviders } from "../components";
 import DigitButtonReadme from "../components/elements/digit-button/readme.md";
 
 const colorLabel = "color";
@@ -30,14 +30,16 @@ DigitButtonStory.add(
     const disabled = boolean("Disabled", false);
 
     return (
-      <DigitButton
-        text={buttonText}
-        primary={color === "primary"}
-        secondary={color === "secondary"}
-        raised={style === "raised"}
-        outline={style === "outline"}
-        disabled={disabled}
-      />
+      <DigitProviders>
+        <DigitButton
+          text={buttonText}
+          primary={color === "primary"}
+          secondary={color === "secondary"}
+          raised={style === "raised"}
+          outline={style === "outline"}
+          disabled={disabled}
+        />
+      </DigitProviders>
     );
   })
 );

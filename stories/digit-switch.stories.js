@@ -7,7 +7,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
-import { DigitSwitch } from "../components";
+import { DigitSwitch, DigitProviders } from "../components";
 import DigitSwitchReadme from "../components/elements/digit-switch/readme.md";
 
 const colorLabel = "color";
@@ -28,7 +28,8 @@ DigitSwitchStory.add(
     const errorMessage = text("Error message", "Error oh no");
 
     return (
-      <State initial={{ value: true }}>
+      <DigitProviders>
+       <State initial={{ value: true }}>
         {({ state, setState }) => (
           <DigitSwitch
             value={state.value}
@@ -48,6 +49,8 @@ DigitSwitchStory.add(
           />
         )}
       </State>
+      </DigitProviders>
+
     );
   })
 );

@@ -1,8 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
+/**
+ * justify-content: jusifyContent
+ * flex-wrap: flexWrap
+ * align-items: alignItems
+ * align-content: alignContent
+ */
 export const Flex = styled.div`
   display: ${props => (!props.inline ? "flex" : "inline-flex")};
+  justify-content: ${props =>
+    props.justifyContent != null ? props.justifyContent : ""};
+  flex-wrap: ${props => (props.flexWrap != null ? props.flexWrap : "")};
+  align-items: ${props => (props.alignItems != null ? props.alignItems : "")};
+  align-content: ${props =>
+    props.alignContent != null ? props.alignContent : ""};
 `;
 
 export const Column = styled(

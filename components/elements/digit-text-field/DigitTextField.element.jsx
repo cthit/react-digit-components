@@ -44,12 +44,12 @@ const DigitTextField = ({
     >
       <InputLabel>{upperLabel}</InputLabel>
       <DigitIfElseRendering
-        test={outline != null && outline}
+        test={outline}
         ifRender={() => (
           <OutlinedInput
             name={name}
             labelWidth={get_tex_size(upperLabel, "1rem Helvetica") * 0.75 + 8}
-            value={value != null ? value : ""}
+            value={value || ""}
             onChange={onChange}
             onBlur={onBlur}
             type={password ? "password" : numbersOnly ? "number" : "text"}
@@ -59,11 +59,11 @@ const DigitTextField = ({
       />
 
       <DigitIfElseRendering
-        test={filled != null && filled}
+        test={filled}
         ifRender={() => (
           <FilledInput
             name={name}
-            value={value != null ? value : ""}
+            value={value || ""}
             onChange={onChange}
             onBlur={onBlur}
             type={password ? "password" : numbersOnly ? "number" : "text"}
@@ -77,7 +77,7 @@ const DigitTextField = ({
         ifRender={() => (
           <Input
             name={name}
-            value={value != null ? value : ""}
+            value={value || ""}
             onChange={onChange}
             onBlur={onBlur}
             type={password ? "password" : numbersOnly ? "number" : "text"}

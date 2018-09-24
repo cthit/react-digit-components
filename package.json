@@ -78,6 +78,7 @@
   },
   "homepage": "https://github.com/cthit/react-digit-components#readme",
   "dependencies": {
+    "react-markdown": "^3.6.0",
     "react-powerplug": "^1.0.0-rc.1"
   },
   "directories": {

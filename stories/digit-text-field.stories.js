@@ -8,12 +8,16 @@ import { linkTo } from "@storybook/addon-links";
 import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitTextField, DigitLayout } from "../components";
+import { DigitTextField, DigitLayout, DigitProviders } from "../components";
 import DigitTextFieldReadme from "../components/elements/digit-text-field/readme.md";
 
 const typeLabel = "type";
 const typeOptions = ["normal", "password", "numbersOnly"];
 const typeDefaultValue = "normal";
+
+const styleLabel = "style";
+const styleOptions = ["filled", "outline", "standard"];
+const styleDefaultValue = "standard";
 
 const DigitTextFieldStory = storiesOf("Elements", module);
 
@@ -28,9 +32,11 @@ DigitTextFieldStory.add(
     const error = boolean("Error", false);
     const errorMessage = text("Error message", "Buuuh, this is a error");
     const disabled = boolean("disabled", false);
+    const style = select(styleLabel, styleOptions, styleDefaultValue);
 
     return (
-      <State initial={{ value: "This is text" }}>
+      <DigitProviders>
+ <State initial={{ value: "This is text" }}>
         {({ state, setState }) => (
           <DigitLayout.Size width="300px">
             <DigitTextField
@@ -51,10 +57,14 @@ DigitTextFieldStory.add(
               lowerLabel={lowerLabel}
               upperLabel={upperLabel}
               disabled={disabled}
+              outline={style === "outline"}
+              filled={style === "filled"}
             />
           </DigitLayout.Size>
         )}
       </State>
+      </DigitProviders>
+
     );
   })
 );

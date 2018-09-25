@@ -2,13 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Switch } from "@material-ui/core";
 
-import DigitControlLabelWithError from "../../utils/digit-control-label-with-error/DigitControlLabelWithError";
+import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
 
 const DigitSwitch = ({
   onChange,
   onBlur,
   value,
   error,
+  errorMessage,
   disabled,
   primary,
   secondary,
@@ -17,6 +18,7 @@ const DigitSwitch = ({
 }) => (
   <DigitControlLabelWithError
     error={error}
+    label={error ? errorMessage : label}
     control={
       <Switch
         checked={value}
@@ -27,7 +29,6 @@ const DigitSwitch = ({
         onBlur={onBlur}
       />
     }
-    label={label}
   />
 );
 

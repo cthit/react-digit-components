@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FormControlLabel, Checkbox } from "@material-ui/core";
 
-import DigitControlLabelWithError from "../../utils/digit-control-label-with-error/DigitControlLabelWithError";
+import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
 
 const DigitCheckbox = ({
   name,
@@ -13,11 +13,12 @@ const DigitCheckbox = ({
   secondary,
   disabled,
   label,
-  error
+  error,
+  errorMessage
 }) => (
   <DigitControlLabelWithError
     error={error}
-    label={label}
+    label={error ? errorMessage : label}
     disabled={disabled}
     control={
       <Checkbox

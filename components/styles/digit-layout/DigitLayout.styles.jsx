@@ -1,4 +1,126 @@
+import React from "react";
 import styled from "styled-components";
+
+/**
+ * justify-content: justifyContent {"flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"}
+ * flex-wrap: flexWrap {"nowrap" | "wrap" | "wrap-reverse"}
+ * align-items: alignItems {"flex-start" | "flex-end" | "center" | "baseline" | "stretch"}
+ * align-content: alignContent {"flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "stretch"}
+ */
+export const Flex = styled.div`
+  display: ${props => (!props.inline ? "flex" : "inline-flex")};
+  justify-content: ${props =>
+    props.justifyContent != null ? props.justifyContent : ""};
+  flex-wrap: ${props => (props.flexWrap != null ? props.flexWrap : "wrap")};
+  align-items: ${props => (props.alignItems != null ? props.alignItems : "")};
+  align-content: ${props =>
+    props.alignContent != null ? props.alignContent : ""};
+`;
+
+function flexAlignLeftOrTop(leftOrTopAlign, rightOrBottomAlign, reverse) {
+  if (reverse ? rightOrBottomAlign : leftOrTopAlign) {
+    return {
+      justifyContent: "flex-start"
+    };
+  }
+  return {};
+}
+
+function flexAlignRightOrBottom(leftOrTopAlign, rightOrBottomAlign, reverse) {
+  if (reverse ? leftOrTopAlign : rightOrBottomAlign) {
+    return {
+      justifyContent: "flex-end"
+    };
+  }
+  return {};
+}
+
+function flexCenterHorizontal(centerHorizontal) {
+  if (centerHorizontal) {
+    return {
+      alignItems: "center",
+      alignContent: "center"
+    };
+  }
+  return {};
+}
+
+function flexCenterVertical(centerVertical) {
+  if (centerVertical) {
+    return {
+      justifyContent: "center"
+    };
+  }
+  return {};
+}
+
+export const Column = styled(
+  ({
+    center,
+    centerVertical,
+    centerHorizontal,
+    topAlign,
+    bottomAlign,
+    reverse,
+    padding,
+    fill,
+    children,
+    ...rest
+  }) => (
+    <Flex
+      {...flexCenterHorizontal(center || centerHorizontal)}
+      {...flexCenterVertical(center || centerVertical)}
+      {...flexAlignLeftOrTop(topAlign, bottomAlign, reverse)}
+      {...flexAlignRightOrBottom(topAlign, bottomAlign, reverse)}
+      {...rest}
+    >
+      {children}
+    </Flex>
+  )
+)`
+  flex-direction: ${props => (!props.reverse ? "column" : "column-reverse")};
+  > * {
+    padding: ${props => (props.padding == null ? "8px" : props.padding)};
+  }
+  flex: ${props => (props.fill ? "1" : "")};
+`;
+
+export const Row = styled(
+  ({
+    center,
+    centerVertical,
+    centerHorizontal,
+    leftAlign,
+    rightAlign,
+    reverse,
+    padding,
+    fill,
+    children,
+    ...rest
+  }) => (
+    <Flex
+      {...flexCenterHorizontal(center || centerVertical)}
+      {...flexCenterVertical(center || centerHorizontal)}
+      {...flexAlignLeftOrTop(leftAlign, rightAlign, reverse)}
+      {...flexAlignRightOrBottom(leftAlign, rightAlign, reverse)}
+      {...rest}
+    >
+      {children}
+    </Flex>
+  )
+)`
+  flex-direction: ${props => (!props.reverse ? "row" : "row-reverse")};
+  > * {
+    padding: ${props => (props.padding == null ? "8px" : props.padding)};
+  }
+  flex: ${props => (props.fill ? "1" : "")};
+`;
+
+export const DownRightPosition = styled.div`
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+`;
 
 export const Fill = styled.div`
   flex-grow: 1;
@@ -45,10 +167,6 @@ export const Padding = Fill.extend`
   padding: 8px;
 `;
 
-export const Flex = styled.div`
-  display: flex;
-`;
-
 export const Center = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
@@ -69,9 +187,7 @@ export const Hide = styled.div`
   display: ${props => (props.hidden ? "none" : "inherit")};
 `;
 
-export const Size = styled.div`
-  display: flex;
-
+export const Size = styled(Flex)`
   width: ${props => (props.absWidth != null ? props.absWidth : props.width)};
   height: ${props =>
     props.absHeight != null ? props.absHeight : props.height};

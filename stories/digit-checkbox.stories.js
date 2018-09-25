@@ -8,7 +8,7 @@ import { linkTo } from "@storybook/addon-links";
 import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitCheckbox } from "../components";
+import { DigitCheckbox, DigitProviders } from "../components";
 import DigitCheckboxReadme from "../components/elements/digit-checkbox/readme.md";
 
 const colorLabel = "color";
@@ -26,13 +26,16 @@ DigitCheckboxStory.add(
     const label = text("Label", "This is a label");
     const disabled = boolean("Disabled", false);
     const error = boolean("Error", false);
+    const errorMessage = text("Error message", "Something went wrong");
 
     return (
-      <State initial={{ checked: true }}>
+      <DigitProviders>
+ <State initial={{ checked: true }}>
         {({ state, setState }) => (
           <DigitCheckbox
             disabled={disabled}
             error={error}
+            errorMessage={errorMessage}
             label={label}
             primary={color === "primary"}
             secondary={color === "secondary"}
@@ -49,6 +52,7 @@ DigitCheckboxStory.add(
           />
         )}
       </State>
+      </DigitProviders>
     );
   })
 );

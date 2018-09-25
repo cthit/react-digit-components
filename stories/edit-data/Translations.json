@@ -1,0 +1,6 @@
+{
+  "firstName": ["First name", "Förnamn"],
+  "lastName": ["Last name", "Efternamn"],
+  "email": ["Email", "Email"],
+  "agreement": ["Agreement", "Avtal"]
+}

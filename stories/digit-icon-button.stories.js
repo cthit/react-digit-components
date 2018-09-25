@@ -10,7 +10,7 @@ import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
 import Call from "@material-ui/icons/Call";
 
-import { DigitIconButton } from "../components";
+import { DigitIconButton, DigitProviders } from "../components";
 import DigitIconButtonReadme from "../components/elements/digit-icon-button/readme.md";
 
 const colorLabel = "color";
@@ -33,22 +33,24 @@ DigitIconButtonStory.add(
     const icon = select(iconLabel, iconOptions, iconDefaultValue);
 
     return (
-      <DigitIconButton
-        onBlur={action("blur")}
-        onClick={action("click")}
-        primary={color === "primary"}
-        secondary={color === "secondary"}
-        disabled={disabled}
-        component={
-          icon === "Edit"
-            ? Edit
-            : icon === "Add"
-              ? Add
-              : icon === "Call"
-                ? Call
-                : null
-        }
-      />
+      <DigitProviders>
+        <DigitIconButton
+          onBlur={action("blur")}
+          onClick={action("click")}
+          primary={color === "primary"}
+          secondary={color === "secondary"}
+          disabled={disabled}
+          icon={
+            icon === "Edit"
+              ? Edit
+              : icon === "Add"
+                ? Add
+                : icon === "Call"
+                  ? Call
+                  : null
+          }
+        />
+      </DigitProviders>
     );
   })
 );

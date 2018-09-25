@@ -21,11 +21,11 @@ import {
   DigitFormFieldArray,
   DigitTextField,
   DigitButton,
-  DigitIconButton
+  DigitIconButton,
+  DigitIfElseRendering,
+  DigitProviders
 } from "../components";
 import DigitFormReadme from "../components/elements/digit-form/readme.md";
-
-import DigitIfElseRendering from "../components/declaratives/digit-if-else-rendering/DigitIfElseRendering";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -41,87 +41,91 @@ DigitFormStory.add(
   "DigitForm",
   withReadme(DigitFormReadme, () => {
     return (
-      <DigitForm
-        onSubmit={(values, actions) => {
-          action("Values")(values);
-        }}
-        initialValues={{ text: "text", todos: ["Aspa digIT"] }}
-        validationSchema={yup.object().shape({
-          text: yup.string().required("This can't be empty"),
-          todos: yup
-            .array()
-            .of(yup.string())
-            .required()
-        })}
-        render={({ errors }) => (
-          <DigitDesign.Card absWidth="300px" absHeight="500px">
-            <DigitDesign.CardBody>
-              {errors.todos && (
-                <DigitText.Text text="You have to have atleast one todo" />
-              )}
-              <DigitFormField
-                name="text"
-                component={DigitTextField}
-                componentProps={{
-                  upperLabel: "Hej"
-                }}
-              />
-              <DigitFormFieldArray
-                name="todos"
-                render={({ form, remove, push }) => (
-                  <DigitLayout.Fill>
-                    <DigitIfElseRendering
-                      test={
-                        form.values.todos != null &&
-                        form.values.todos.length > 0
-                      }
-                      ifRender={() => (
-                        <DigitLayout.Fill>
-                          {form.values.todos.map((todo, index) => (
-                            <DigitLayout.VerticalFill key={todo + "_" + index}>
-                              <DigitText.Text text={todo} />
-                              <DigitIconButton
-                                component={Delete}
-                                onClick={() => {
-                                  remove(index);
-                                }}
-                              />
-                            </DigitLayout.VerticalFill>
-                          ))}
-                        </DigitLayout.Fill>
-                      )}
-                      elseRender={() => (
-                        <DigitText.Text text="You have no todos" />
-                      )}
-                    />
-                    <DigitButton
-                      text="Add random todo"
-                      primary
-                      outline
-                      onClick={() => {
-                        const randomTodos = [
-                          "Finish this form",
-                          "Use DigitButton",
-                          "Aspa digIT",
-                          "Sök digIT",
-                          "Eat icecream",
-                          "Make food",
-                          "Pray for servers"
-                        ];
-
-                        push(_.sample(randomTodos));
-                      }}
-                    />
-                  </DigitLayout.Fill>
+      <DigitProviders>
+        <DigitForm
+          onSubmit={(values, actions) => {
+            action("Values")(values);
+          }}
+          initialValues={{ text: "text", todos: ["Aspa digIT"] }}
+          validationSchema={yup.object().shape({
+            text: yup.string().required("This can't be empty"),
+            todos: yup
+              .array()
+              .of(yup.string())
+              .required()
+          })}
+          render={({ errors }) => (
+            <DigitDesign.Card absWidth="300px" absHeight="500px">
+              <DigitDesign.CardBody>
+                {errors.todos && (
+                  <DigitText.Text text="You have to have atleast one todo" />
                 )}
-              />
-            </DigitDesign.CardBody>
-            <DigitDesign.CardButtons>
-              <DigitButton primary raised submit text="Dummy submit" />
-            </DigitDesign.CardButtons>
-          </DigitDesign.Card>
-        )}
-      />
+                <DigitFormField
+                  name="text"
+                  component={DigitTextField}
+                  componentProps={{
+                    upperLabel: "Hej"
+                  }}
+                />
+                <DigitFormFieldArray
+                  name="todos"
+                  render={({ form, remove, push }) => (
+                    <DigitLayout.Fill>
+                      <DigitIfElseRendering
+                        test={
+                          form.values.todos != null &&
+                          form.values.todos.length > 0
+                        }
+                        ifRender={() => (
+                          <DigitLayout.Fill>
+                            {form.values.todos.map((todo, index) => (
+                              <DigitLayout.VerticalFill
+                                key={todo + "_" + index}
+                              >
+                                <DigitText.Text text={todo} />
+                                <DigitIconButton
+                                  icon={Delete}
+                                  onClick={() => {
+                                    remove(index);
+                                  }}
+                                />
+                              </DigitLayout.VerticalFill>
+                            ))}
+                          </DigitLayout.Fill>
+                        )}
+                        elseRender={() => (
+                          <DigitText.Text text="You have no todos" />
+                        )}
+                      />
+                      <DigitButton
+                        text="Add random todo"
+                        primary
+                        outline
+                        onClick={() => {
+                          const randomTodos = [
+                            "Finish this form",
+                            "Use DigitButton",
+                            "Aspa digIT",
+                            "Sök digIT",
+                            "Eat icecream",
+                            "Make food",
+                            "Pray for servers"
+                          ];
+
+                          push(_.sample(randomTodos));
+                        }}
+                      />
+                    </DigitLayout.Fill>
+                  )}
+                />
+              </DigitDesign.CardBody>
+              <DigitDesign.CardButtons>
+                <DigitButton primary raised submit text="Dummy submit" />
+              </DigitDesign.CardButtons>
+            </DigitDesign.Card>
+          )}
+        />
+      </DigitProviders>
     );
   })
 );

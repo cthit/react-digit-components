@@ -47,6 +47,7 @@ const DummyItem = ({ text, color }) => (
 DigitRowStory.add(
   "DigitRow",
   withReadme(DigitRowReadme, () => {
+    const reverse = boolean("Reverse", false);
     const center = boolean("Center", false);
     const padding = number("Padding", 8, {
       range: true,
@@ -57,7 +58,7 @@ DigitRowStory.add(
 
     return (
       <BorderSize absWidth="500px" absHeight="500px">
-        <Row center={center} fill padding={padding + "px"}>
+        <Row reverse={reverse} center={center} fill padding={padding + "px"}>
           <DummyItem text="1" color="blue" />
           <DummyItem text="2" color="yellow" />
           <DummyItem text="3" color="green" />

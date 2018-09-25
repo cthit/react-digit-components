@@ -17,8 +17,8 @@ export const Flex = styled.div`
     props.alignContent != null ? props.alignContent : ""};
 `;
 
-function flexAlignLeftOrTop(leftAlign, rightAlign, reverse) {
-  if (reverse ? rightAlign : leftAlign) {
+function flexAlignLeftOrTop(leftOrTopAlign, rightOrBottomAlign, reverse) {
+  if (reverse ? rightOrBottomAlign : leftOrTopAlign) {
     return {
       justifyContent: "flex-start"
     };
@@ -26,8 +26,8 @@ function flexAlignLeftOrTop(leftAlign, rightAlign, reverse) {
   return {};
 }
 
-function flexAlignRightOrBottom(leftAlign, rightAlign, reverse) {
-  if (reverse ? leftAlign : rightAlign) {
+function flexAlignRightOrBottom(leftOrTopAlign, rightOrBottomAlign, reverse) {
+  if (reverse ? leftOrTopAlign : rightOrBottomAlign) {
     return {
       justifyContent: "flex-end"
     };
@@ -70,8 +70,8 @@ export const Column = styled(
     <Flex
       {...flexCenterHorizontal(center || centerHorizontal)}
       {...flexCenterVertical(center || centerVertical)}
-      {...flexAlignLeftOrTop(topAlign || reverse)}
-      {...flexAlignRightOrBottom(bottomAlign || reverse)}
+      {...flexAlignLeftOrTop(topAlign, bottomAlign, reverse)}
+      {...flexAlignRightOrBottom(topAlign, bottomAlign, reverse)}
       {...rest}
     >
       {children}

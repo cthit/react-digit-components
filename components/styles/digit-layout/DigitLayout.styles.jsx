@@ -17,26 +17,61 @@ export const Flex = styled.div`
     props.alignContent != null ? props.alignContent : ""};
 `;
 
+function flexCenter(center) {
+  if (center) {
+    return {
+      justifyContent: "center",
+      alignItems: "center",
+      alignContent: "center"
+    };
+  }
+  return {};
+}
+
 export const Column = styled(
-  ({ leftAlign, rightAlign, reverse, padding, children, ...rest }) => (
-    <Flex {...rest}>{children}</Flex>
+  ({
+    center,
+    leftAlign,
+    rightAlign,
+    reverse,
+    padding,
+    fill,
+    children,
+    ...rest
+  }) => (
+    <Flex {...flexCenter(center)} {...rest}>
+      {children}
+    </Flex>
   )
 )`
   flex-direction: ${props => (!props.reverse ? "column" : "column-reverse")};
   > * {
     padding: ${props => (props.padding == null ? "8px" : props.padding)};
   }
+  flex: ${props => (props.fill ? "1" : "")};
 `;
 
 export const Row = styled(
-  ({ topAlign, bottomAlign, reverse, padding, children, ...rest }) => (
-    <Flex {...rest}>{children}</Flex>
+  ({
+    center,
+    topAlign,
+    bottomAlign,
+    reverse,
+    padding,
+    fill,
+    children,
+    ...rest
+  }) => (
+    <Flex {...flexCenter(center)} {...rest}>
+      {children}
+    </Flex>
   )
 )`
   flex-direction: ${props => (!props.reverse ? "row" : "row-reverse")};
   > * {
     padding: ${props => (props.padding == null ? "8px" : props.padding)};
   }
+  flex: ${props => (props.fill ? "1" : "")};
 `;
 
 export const DownRightPosition = styled.div`

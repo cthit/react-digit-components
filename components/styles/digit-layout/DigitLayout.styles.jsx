@@ -18,17 +18,25 @@ export const Flex = styled.div`
 `;
 
 export const Column = styled(
-  ({ leftAlign, rightAlign, reverse, children, ...rest }) => (
+  ({ leftAlign, rightAlign, reverse, padding, children, ...rest }) => (
     <Flex {...rest}>{children}</Flex>
   )
 )`
   flex-direction: ${props => (!props.reverse ? "column" : "column-reverse")};
+  > * {
+    padding: ${props => (props.padding == null ? "8px" : props.padding)};
+  }
 `;
 
-export const Row = styled(({ children, ...rest }) => (
-  <Flex {...rest}>{children}</Flex>
-))`
+export const Row = styled(
+  ({ topAlign, bottomAlign, reverse, padding, children, ...rest }) => (
+    <Flex {...rest}>{children}</Flex>
+  )
+)`
   flex-direction: ${props => (!props.reverse ? "row" : "row-reverse")};
+  > * {
+    padding: ${props => (props.padding == null ? "8px" : props.padding)};
+  }
 `;
 
 export const DownRightPosition = styled.div`

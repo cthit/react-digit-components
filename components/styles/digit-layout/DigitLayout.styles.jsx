@@ -54,6 +54,38 @@ function flexCenterVertical(centerVertical) {
   return {};
 }
 
+export const Grid = styled.div`
+  display: ${props => (props.inline ? "inline-grid" : "grid")};
+  grid-template-columns: ${props => props.columns || ""};
+  grid-template-rows: ${props => props.rows || ""};
+  grid-template-areas: ${props => props.areas || ""}
+  grid-column-gap: ${props => props.columnGap || ""};
+  grid-row-gap: ${props => props.rowGap || ""};
+  justify-items: ${props => props.justifyItems || "center"};
+  align-items: ${props => props.alignItems || "center"};
+  justify-content: ${props => props.justifyContent || ""};
+  align-content: ${props => props.alignContent || ""};		
+  grid-auto-columns: ${props => props.autoColumns || ""};
+  grid-auto-rows: ${props => props.autoRows || ""};
+  grid-auto-flow: ${props => props.autoFlow || ""};
+  flex: ${props => (props.fill ? "1" : "")};
+`;
+
+export const GridItem = styled.div`
+  grid-column-start: ${props => props.columnStart || ""}
+  grid-column-end: ${props => props.columnEnd || ""}
+  grid-row-start: ${props => props.rowStart || ""}
+  grid-row-end: ${props => props.rowEnd || ""}
+  justify-self: ${props => props.justifySelf || ""};
+  align-self: ${props => props.justifySelf || ""};
+`;
+
+export const UniformGrid = styled(({ minWidth, children, ...rest }) => (
+  <Grid columns={`repeat(auto-fit, minmax(${minWidth}, 1fr));`} {...rest}>
+    {children}
+  </Grid>
+))``;
+
 export const Column = styled(
   ({
     center,

@@ -11,14 +11,14 @@ export const Flex = styled.div`
   display: ${props => (!props.inline ? "flex" : "inline-flex")};
   justify-content: ${props =>
     props.justifyContent != null ? props.justifyContent : ""};
-  flex-wrap: ${props => (props.flexWrap != null ? props.flexWrap : "")};
+  flex-wrap: ${props => (props.flexWrap != null ? props.flexWrap : "wrap")};
   align-items: ${props => (props.alignItems != null ? props.alignItems : "")};
   align-content: ${props =>
     props.alignContent != null ? props.alignContent : ""};
 `;
 
-function flexAlignLeftOrTop(alignLeft) {
-  if (alignLeft) {
+function flexAlignLeftOrTop(leftAlign, rightAlign, reverse) {
+  if (reverse ? rightAlign : leftAlign) {
     return {
       justifyContent: "flex-start"
     };
@@ -26,8 +26,8 @@ function flexAlignLeftOrTop(alignLeft) {
   return {};
 }
 
-function flexAlignRightOrBottom(alignRight) {
-  if (alignRight) {
+function flexAlignRightOrBottom(leftAlign, rightAlign, reverse) {
+  if (reverse ? leftAlign : rightAlign) {
     return {
       justifyContent: "flex-end"
     };
@@ -70,8 +70,8 @@ export const Column = styled(
     <Flex
       {...flexCenterHorizontal(center || centerHorizontal)}
       {...flexCenterVertical(center || centerVertical)}
-      {...flexAlignLeftOrTop(topAlign)}
-      {...flexAlignRightOrBottom(bottomAlign)}
+      {...flexAlignLeftOrTop(topAlign || reverse)}
+      {...flexAlignRightOrBottom(bottomAlign || reverse)}
       {...rest}
     >
       {children}
@@ -101,8 +101,8 @@ export const Row = styled(
     <Flex
       {...flexCenterHorizontal(center || centerVertical)}
       {...flexCenterVertical(center || centerHorizontal)}
-      {...flexAlignLeftOrTop(leftAlign)}
-      {...flexAlignRightOrBottom(rightAlign)}
+      {...flexAlignLeftOrTop(leftAlign, rightAlign, reverse)}
+      {...flexAlignRightOrBottom(leftAlign, rightAlign, reverse)}
       {...rest}
     >
       {children}

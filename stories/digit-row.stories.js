@@ -24,6 +24,10 @@ import styled from "styled-components";
 
 const DigitRowStory = storiesOf("Layout", module);
 
+const alignLabel = "Align";
+const alignOptions = ["Left", "Right", "None"];
+const alignDefaultValue = "None";
+
 DigitRowStory.addDecorator(withKnobs);
 
 const BorderSize = styled(Size)`
@@ -47,8 +51,11 @@ const DummyItem = ({ text, color }) => (
 DigitRowStory.add(
   "DigitRow",
   withReadme(DigitRowReadme, () => {
+    const align = select(alignLabel, alignOptions, alignDefaultValue);
     const reverse = boolean("Reverse", false);
     const center = boolean("Center", false);
+    const centerHorizontal = boolean("Center Horizontal", false);
+    const centerVertical = boolean("Center Vertical", false);
     const padding = number("Padding", 8, {
       range: true,
       min: 0,
@@ -58,7 +65,16 @@ DigitRowStory.add(
 
     return (
       <BorderSize absWidth="500px" absHeight="500px">
-        <Row reverse={reverse} center={center} fill padding={padding + "px"}>
+        <Row
+          leftAlign={align === "Left"}
+          rightAlign={align === "Right"}
+          reverse={reverse}
+          center={center}
+          centerHorizontal={centerHorizontal}
+          centerVertical={centerVertical}
+          fill
+          padding={padding + "px"}
+        >
           <DummyItem text="1" color="blue" />
           <DummyItem text="2" color="yellow" />
           <DummyItem text="3" color="green" />

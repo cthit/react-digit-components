@@ -1,6 +1,12 @@
 import React from "react";
 
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import {
+  withKnobs,
+  select,
+  text,
+  boolean,
+  number
+} from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
@@ -37,10 +43,17 @@ const DummyItem = ({ text, color }) => (
 DigitColumnStory.add(
   "DigitColumn",
   withReadme(DigitColumnReadme, () => {
+    const padding = number("Padding", 8, {
+      range: true,
+      min: 0,
+      max: 50,
+      step: 1
+    });
+
     return (
       <div>
         <Display text="Column" />
-        <Column>
+        <Column padding={padding + "px"}>
           <DummyItem text="1" color="blue" />
           <DummyItem text="2" color="yellow" />
           <DummyItem text="3" color="green" />

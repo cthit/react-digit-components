@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 /**
- * justify-content: jusifyContent {"flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"}
+ * justify-content: justifyContent {"flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"}
  * flex-wrap: flexWrap {"nowrap" | "wrap" | "wrap-reverse"}
  * align-items: alignItems {"flex-start" | "flex-end" | "center" | "baseline" | "stretch"}
  * align-content: alignContent {"flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "stretch"}
@@ -17,12 +17,38 @@ export const Flex = styled.div`
     props.alignContent != null ? props.alignContent : ""};
 `;
 
-function flexCenter(center) {
-  if (center) {
+function flexAlignLeftOrTop(alignLeft) {
+  if (alignLeft) {
     return {
-      justifyContent: "center",
+      justifyContent: "flex-start"
+    };
+  }
+  return {};
+}
+
+function flexAlignRightOrBottom(alignRight) {
+  if (alignRight) {
+    return {
+      justifyContent: "flex-end"
+    };
+  }
+  return {};
+}
+
+function flexCenterHorizontal(centerHorizontal) {
+  if (centerHorizontal) {
+    return {
       alignItems: "center",
       alignContent: "center"
+    };
+  }
+  return {};
+}
+
+function flexCenterVertical(centerVertical) {
+  if (centerVertical) {
+    return {
+      justifyContent: "center"
     };
   }
   return {};
@@ -31,15 +57,23 @@ function flexCenter(center) {
 export const Column = styled(
   ({
     center,
-    leftAlign,
-    rightAlign,
+    centerVertical,
+    centerHorizontal,
+    topAlign,
+    bottomAlign,
     reverse,
     padding,
     fill,
     children,
     ...rest
   }) => (
-    <Flex {...flexCenter(center)} {...rest}>
+    <Flex
+      {...flexCenterHorizontal(center || centerHorizontal)}
+      {...flexCenterVertical(center || centerVertical)}
+      {...flexAlignLeftOrTop(topAlign)}
+      {...flexAlignRightOrBottom(bottomAlign)}
+      {...rest}
+    >
       {children}
     </Flex>
   )
@@ -54,15 +88,23 @@ export const Column = styled(
 export const Row = styled(
   ({
     center,
-    topAlign,
-    bottomAlign,
+    centerVertical,
+    centerHorizontal,
+    leftAlign,
+    rightAlign,
     reverse,
     padding,
     fill,
     children,
     ...rest
   }) => (
-    <Flex {...flexCenter(center)} {...rest}>
+    <Flex
+      {...flexCenterHorizontal(center || centerVertical)}
+      {...flexCenterVertical(center || centerHorizontal)}
+      {...flexAlignLeftOrTop(leftAlign)}
+      {...flexAlignRightOrBottom(rightAlign)}
+      {...rest}
+    >
       {children}
     </Flex>
   )

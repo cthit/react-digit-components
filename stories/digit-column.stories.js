@@ -26,6 +26,10 @@ const DigitColumnStory = storiesOf("Layout", module);
 
 DigitColumnStory.addDecorator(withKnobs);
 
+const alignLabel = "Align";
+const alignOptions = ["Top", "Bottom", "None"];
+const alignDefaultValue = "None";
+
 const BorderSize = styled(Size)`
   border: 1px solid black;
 `;
@@ -47,8 +51,11 @@ const DummyItem = ({ text, color }) => (
 DigitColumnStory.add(
   "DigitColumn",
   withReadme(DigitColumnReadme, () => {
+    const align = select(alignLabel, alignOptions, alignDefaultValue);
     const reverse = boolean("Reverse", false);
     const center = boolean("Center", false);
+    const centerHorizontal = boolean("Center Horizontal", false);
+    const centerVertical = boolean("Center Vertical", false);
     const padding = number("Padding", 8, {
       range: true,
       min: 0,
@@ -58,7 +65,16 @@ DigitColumnStory.add(
 
     return (
       <BorderSize absWidth="500px" absHeight="500px">
-        <Column reverse={reverse} center={center} fill padding={padding + "px"}>
+        <Column
+          topAlign={align === "Top"}
+          bottomAlign={align === "Bottom"}
+          reverse={reverse}
+          center={center}
+          centerHorizontal={centerHorizontal}
+          centerVertical={centerVertical}
+          fill
+          padding={padding + "px"}
+        >
           <DummyItem text="1" color="blue" />
           <DummyItem text="2" color="yellow" />
           <DummyItem text="3" color="green" />

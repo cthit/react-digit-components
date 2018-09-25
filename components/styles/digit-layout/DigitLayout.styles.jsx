@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 /**
- * justify-content: jusifyContent
- * flex-wrap: flexWrap
- * align-items: alignItems
- * align-content: alignContent
+ * justify-content: jusifyContent {"flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly"}
+ * flex-wrap: flexWrap {"nowrap" | "wrap" | "wrap-reverse"}
+ * align-items: alignItems {"flex-start" | "flex-end" | "center" | "baseline" | "stretch"}
+ * align-content: alignContent {"flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "stretch"}
  */
 export const Flex = styled.div`
   display: ${props => (!props.inline ? "flex" : "inline-flex")};

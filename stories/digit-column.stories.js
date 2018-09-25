@@ -26,6 +26,10 @@ const DigitColumnStory = storiesOf("Layout", module);
 
 DigitColumnStory.addDecorator(withKnobs);
 
+const BorderSize = styled(Size)`
+  border: 1px solid black;
+`;
+
 const BackgroundColor = styled(Fill)`
   background-color: ${props => props.color};
 `;
@@ -43,6 +47,7 @@ const DummyItem = ({ text, color }) => (
 DigitColumnStory.add(
   "DigitColumn",
   withReadme(DigitColumnReadme, () => {
+    const center = boolean("Center", false);
     const padding = number("Padding", 8, {
       range: true,
       min: 0,
@@ -51,15 +56,14 @@ DigitColumnStory.add(
     });
 
     return (
-      <div>
-        <Display text="Column" />
-        <Column padding={padding + "px"}>
+      <BorderSize absWidth="500px" absHeight="500px">
+        <Column center={center} fill padding={padding + "px"}>
           <DummyItem text="1" color="blue" />
           <DummyItem text="2" color="yellow" />
           <DummyItem text="3" color="green" />
           <DummyItem text="4" color="red" />
         </Column>
-      </div>
+      </BorderSize>
     );
   })
 );

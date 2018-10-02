@@ -17,6 +17,7 @@ import DigitEditData from "./elements/digit-edit-data";
 import DigitMarkdown from "./elements/digit-markdown";
 import DigitTabs from "./elements/digit-tabs/DigitTabs";
 import DigitBottomNavigation from "./elements/digit-bottom-navigation/DigitBottomNavigation";
+import DigitLoading from "./elements/digit-loading";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -57,6 +58,7 @@ export {
   DigitDisplayData,
   DigitEditData,
   DigitMarkdown,
+  DigitLoading,
   /* Views */
   DigitToast,
   DigitDialog,

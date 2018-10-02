@@ -15,6 +15,8 @@ import DigitFAB from "./elements/digit-fab";
 import DigitDisplayData from "./elements/digit-display-data";
 import DigitEditData from "./elements/digit-edit-data";
 import DigitMarkdown from "./elements/digit-markdown";
+import DigitTabs from "./elements/digit-tabs/DigitTabs";
+import DigitBottomNavigation from "./elements/digit-bottom-navigation/DigitBottomNavigation";
 import DigitLoading from "./elements/digit-loading";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
@@ -46,6 +48,8 @@ export {
   DigitForm,
   DigitFormField,
   DigitFormFieldArray,
+  DigitBottomNavigation,
+  DigitTabs,
   DigitTextArea,
   DigitSelect,
   DigitHeader,

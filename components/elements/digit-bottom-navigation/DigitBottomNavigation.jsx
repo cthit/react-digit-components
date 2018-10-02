@@ -10,7 +10,7 @@ const GammaBottomNavigation = ({
   showLabels,
   onChange
 }) => (
-  <StyledBottomNavigation value={selected} showLabels={showLabels} onChange={onChange} >
+  <StyledBottomNavigation value={selected} showLabels={showLabels} onChange={(event, selected) => {onChange(selected)}} >
     {labels.map((label, index) => {
       return(
         <BottomNavigationAction key={label} label={label} icon={icons[index]} />

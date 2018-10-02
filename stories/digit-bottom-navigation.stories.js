@@ -6,6 +6,8 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
+import { Value } from "react-powerplug";
+
 import IconOne from "@material-ui/icons/Android";
 
 import { DigitBottomNavigation } from "../components";
@@ -21,19 +23,24 @@ DigitBottomNavigationStory.addDecorator(withKnobs);
 DigitBottomNavigationStory.add(
   "DigitBottomNavigation",
   withReadme(DigitBottomNavigationReadme, () => {
-    const selected = number("Selected", labels.length, 0);
     const showLabels = boolean("Show Labels", true);
 
     return (
-      <DigitBottomNavigation
-        selected={selected}
-        labels={labels}
-        icons={icons}
-        showLabels={showLabels}
+      <Value
+        initial={0}
+        render={({ value, set }) => (
+          <DigitBottomNavigation
+            selected={value}
+            labels={labels}
+            icons={icons}
+            showLabels={showLabels}
+            onChange={selected => {
+              set(selected);
+            }}
+          />
+        )}
       />
-    );
-  })
-);
-
+  )})
+)
 
 

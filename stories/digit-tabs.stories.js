@@ -1,45 +1,50 @@
-import React from "react";
+import React from "react"
 
-import { withKnobs, select, text, boolean, number } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-import { withReadme } from "storybook-readme";
+import {
+  withKnobs,
+  select,
+  text,
+  boolean,
+  number,
+} from "@storybook/addon-knobs"
+import { storiesOf } from "@storybook/react"
+import { action } from "@storybook/addon-actions"
+import { linkTo } from "@storybook/addon-links"
+import { withReadme } from "storybook-readme"
 
-import { DigitTabs } from "../components";
-import DigitTabsReadme from "../components/elements/digit-tabs/readme.md";
+import { DigitTabs } from "../components"
+import DigitTabsReadme from "../components/elements/digit-tabs/readme.md"
 
-const labels = ["Label One", "Label Two", "Label Three"];
+import {Value} from "react-powerplug";
 
-const DigitTabsStory = storiesOf("Elements", module);
+const labels = ["Label One", "Label Two", "Label Three"]
 
-const options = {
-  range: true,
-  min: 0,
-  max: 2,
-  step: 1,
-};
+const DigitTabsStory = storiesOf("Elements", module)
 
-const groupId = 'GROUP-ID1';
-
-DigitTabsStory.addDecorator(withKnobs);
+DigitTabsStory.addDecorator(withKnobs)
 
 DigitTabsStory.add(
   "DigitTabs",
   withReadme(DigitTabsReadme, () => {
-    const selected = number("Selected", 0, options, groupId);
-    const fullWidth = boolean("Full width", true);
-    const centered = boolean("Centered", true);
+    const fullWidth = boolean("Full width", true)
+    const centered = boolean("Centered", true)
 
     return (
-      <DigitTabs
-        selected={selected}
-        labels={labels}
-        centered={centered}
-        fullWidth={fullWidth}
-      />
-    );
-  })
-);
+      <Value
+        initial={1}
+        render={({ value, set }) => (
+          <DigitTabs
+            selected={value}
+            labels={labels}
+            centered={centered}
+            fullWidth={fullWidth}
+            onChange={selected => {
+              set(selected);
+            }}
+          />
+        )}
 
+    />
 
+  )})
+)

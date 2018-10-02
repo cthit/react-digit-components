@@ -8,10 +8,15 @@ selected,
 labels,
 centered,
 fullWidth,
-handleChange
+onChange
 }) => (
   <Fill>
-    <Tabs value={selected} centered={centered} fullWidth={fullWidth} onChange={handleChange}>
+    <Tabs
+      value={selected}
+      centered={centered}
+      fullWidth={fullWidth}
+      onChange={(event, value) => {onChange(value)}}
+    >
       {labels.map(label => {
         return (
           <Tab key={label} label={label} />
@@ -26,7 +31,7 @@ DigitTabs.propTypes = {
   labels: PropTypes.arrayOf(String).isRequired,
   centered: PropTypes.bool.isRequired,
   fullWidth: PropTypes.bool.isRequired,
-  handleChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired
 };
 
 export default DigitTabs;

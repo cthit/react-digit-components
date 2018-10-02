@@ -53,22 +53,22 @@ DigitGridStory.add(
   withReadme(DigitGridReadme, () => {
     let numItems = number("num of items", 5);
     let numCols = number("number of columns", 3);
+    const padding = number("Padding", 8, {
+      range: true,
+      min: 0,
+      max: 50,
+      step: 1
+    });
 
     return (
-      <BorderSize absWidth="500px" absHeight="500px">
-        <Grid fill columns={`repeat(${numCols}, 1fr)`}>
-          {Array.from(new Array(numItems), (_, i) => (
-            <GridItem>
-              <DummyItem
-                text={`${i + 1}`}
-                color={["red", "green", "blue", "yellow"][i % 4]}
-              >
-                {" "}
-              </DummyItem>
-            </GridItem>
-          ))}
-        </Grid>
-      </BorderSize>
+      <Grid fill columns={`repeat(${numCols}, 1fr)`} padding={`${padding}px`}>
+        {Array.from(new Array(numItems), (_, i) => (
+          <DummyItem
+            text={`Item ${i + 1}`}
+            color={["red", "green", "blue", "yellow"][i % 4]}
+          />
+        ))}
+      </Grid>
     );
   })
 );

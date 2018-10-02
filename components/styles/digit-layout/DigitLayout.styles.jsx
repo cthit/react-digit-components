@@ -58,13 +58,13 @@ export const Grid = styled.div`
   display: ${props => (props.inline ? "inline-grid" : "grid")};
   grid-template-columns: ${props => props.columns || ""};
   grid-template-rows: ${props => props.rows || ""};
-  grid-template-areas: ${props => props.areas || ""}
-  grid-column-gap: ${props => props.columnGap || ""};
-  grid-row-gap: ${props => props.rowGap || ""};
-  justify-items: ${props => props.justifyItems || "center"};
-  align-items: ${props => props.alignItems || "center"};
+  grid-template-areas: ${props => props.areas || ""};
+  grid-column-gap: ${props => props.padding || props.columnGap || ""};
+  grid-row-gap: ${props => props.padding || props.rowGap || ""};
+  justify-items: ${props => props.justifyItems || "stretch"};
+  align-items: ${props => props.alignItems || "stretch"};
   justify-content: ${props => props.justifyContent || ""};
-  align-content: ${props => props.alignContent || ""};		
+  align-content: ${props => props.alignContent || ""};
   grid-auto-columns: ${props => props.autoColumns || ""};
   grid-auto-rows: ${props => props.autoRows || ""};
   grid-auto-flow: ${props => props.autoFlow || ""};
@@ -80,11 +80,17 @@ export const GridItem = styled.div`
   align-self: ${props => props.justifySelf || ""};
 `;
 
-export const UniformGrid = styled(({ minWidth, children, ...rest }) => (
-  <Grid columns={`repeat(auto-fit, minmax(${minWidth}, 1fr));`} {...rest}>
-    {children}
-  </Grid>
-))``;
+export const UniformGrid = styled(
+  ({ minItemWidth, minItemHeight, children, ...rest }) => (
+    <Grid columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`} {...rest}>
+      {children}
+    </Grid>
+  )
+)`
+  & > * {
+    min-height: ${props => props.minItemHeight || ""};
+  }
+`;
 
 export const Column = styled(
   ({

@@ -38,24 +38,30 @@ const DummyItem = ({ text, color }) => (
 DigitUniformGridStory.add(
   "DigitUniformGrid",
   withReadme(DigitUniformGridReadme, () => {
-    let numItems = number("num of items", 5);
-    let minWidth = text("min width", "120px");
+    const numItems = number("num of items", 5);
+    const minItemWidth = text("min item width", "120px");
+    const minItemHeight = text("min item height", "120px");
+    const padding = number("Padding", 8, {
+      range: true,
+      min: 0,
+      max: 50,
+      step: 1
+    });
 
     return (
-      <BorderSize absWidth="500px" absHeight="500px">
-        <UniformGrid minWidth={minWidth} fill>
-          {Array.from(new Array(numItems), (_, i) => (
-            <GridItem>
-              <DummyItem
-                text={`${i + 1}`}
-                color={["red", "green", "blue", "yellow"][i % 4]}
-              >
-                {" "}
-              </DummyItem>
-            </GridItem>
-          ))}
-        </UniformGrid>
-      </BorderSize>
+      <UniformGrid
+        minItemWidth={minItemWidth}
+        minItemHeight={minItemHeight}
+        padding={`${padding}px`}
+        fill
+      >
+        {Array.from(new Array(numItems), (_, i) => (
+          <DummyItem
+            text={`${i + 1}`}
+            color={["red", "green", "blue", "yellow"][i % 4]}
+          />
+        ))}
+      </UniformGrid>
     );
   })
 );

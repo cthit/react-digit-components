@@ -78,6 +78,7 @@
   },
   "homepage": "https://github.com/cthit/react-digit-components#readme",
   "dependencies": {
+    "material-ui-pickers": "^1.0.0-rc.17",
     "react-markdown": "^3.6.0",
     "react-powerplug": "^1.0.0-rc.1"
   },

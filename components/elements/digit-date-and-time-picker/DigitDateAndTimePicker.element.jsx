@@ -66,12 +66,11 @@ DigitDateAndTimePicker.propTypes = {
   okLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   todayLabel: PropTypes.string,
-  value: PropTypes.instanceOf(Date).isRequired,
+  value: PropTypes.instanceOf(Date),
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string,
   showTodayButton: PropTypes.bool,
   setFieldValue: PropTypes.func,
-  values: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired //Supplied by material-ui
 };
 

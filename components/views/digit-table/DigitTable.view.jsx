@@ -83,7 +83,6 @@ class DigitTable extends React.Component {
   };
 
   handleSelectAllClick = (event, checked) => {
-    console.log(checked);
     if (checked) {
       this.props.onSelectedUpdated(
         this.state.data.map(n => n[this.state.idProp])

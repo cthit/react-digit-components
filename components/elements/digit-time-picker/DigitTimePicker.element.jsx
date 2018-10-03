@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TimePicker from "material-ui-pickers/TimePicker";
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -33,5 +34,17 @@ const DigitTimePicker = ({
     ampm={false}
   />
 );
+
+DigitTimePicker.propTypes = {
+  value: PropTypes.instanceOf(Date),
+  onChange: PropTypes.func,
+  upperLabel: PropTypes.string,
+  cancelLabel: PropTypes.string,
+  okLabel: PropTypes.string,
+  clearLabel: PropTypes.string,
+  emptyLabel: PropTypes.string,
+  invalidLabel: PropTypes.string,
+  classes: PropTypes.object
+};
 
 export default withStyles(styles)(DigitTimePicker);

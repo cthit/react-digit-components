@@ -1,1 +1,1 @@
-export { default } from "./DigitBottomNavigation";
+export { default } from "./DigitBottomNavigation.element";

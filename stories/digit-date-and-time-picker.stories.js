@@ -6,7 +6,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
-import { DigitProviders } from "../components";
+import { DigitProviders, DigitLayout } from "../components";
 import DigitDateAndTimePickerReadme from "../components/elements/digit-date-and-time-picker/readme.md";
 import DigitDateAndTimePicker from "../components/elements/digit-date-and-time-picker/DigitDateAndTimePicker.element";
 import { Value } from "react-powerplug";
@@ -18,16 +18,20 @@ DigitDateAndTimePickerStory.addDecorator(withKnobs);
 DigitDateAndTimePickerStory.add(
   "DigitDateAndTimePicker",
   withReadme(DigitDateAndTimePickerReadme, () => {
+    const upperLabel = text("Upperlabel: ", "My date and time");
     return (
       <DigitProviders>
         <Value
           render={({ set, value }) => (
-            <DigitDateAndTimePicker
-              value={value}
-              onChange={date => {
-                set(date);
-              }}
-            />
+            <DigitLayout.Size absWidth="300px" absHeight="300px">
+              <DigitDateAndTimePicker
+                upperLabel={upperLabel}
+                value={value}
+                onChange={date => {
+                  set(date);
+                }}
+              />
+            </DigitLayout.Size>
           )}
         />
       </DigitProviders>

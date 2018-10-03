@@ -21,7 +21,7 @@ import JssProvider from "react-jss/lib/JssProvider";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 
-import MomentUtils from "material-ui-pickers/utils/moment-utils";
+import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
 import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
 
 const generateClassName = createGenerateClassName();
@@ -71,7 +71,7 @@ class DigitProviders extends React.Component {
             <JssProvider jss={jss} generateClassName={generateClassName}>
               <Provider store={this.store}>
                 <BrowserRouter>
-                  <MuiPickersUtilsProvider utils={MomentUtils}>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     {children}
                   </MuiPickersUtilsProvider>
                 </BrowserRouter>

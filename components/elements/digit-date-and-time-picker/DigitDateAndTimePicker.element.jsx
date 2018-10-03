@@ -22,7 +22,6 @@ const DigitDateAndTimePicker = ({
   label,
   showTodayButton,
   onChange,
-  values,
   classes,
   todayLabel = "Idag",
   cancelLabel = "Avbryt",
@@ -35,7 +34,9 @@ const DigitDateAndTimePicker = ({
 }) => (
   <DateTimePicker
     value={value}
-    onChange={e => onChange(e._d)}
+    onChange={date => {
+      onChange(date);
+    }}
     label={label}
     showTodayButton={showTodayButton}
     todayLabel={todayLabel}

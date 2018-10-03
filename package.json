@@ -15,14 +15,17 @@
   },
   "peerDependencies": {
     "@material-ui/core": "^3.1.0",
+    "date-fns": "2.0.0-alpha.20",
     "formik": "^1.0.2",
     "jss": "^9.8.6",
     "lodash": "^4.17.10",
+    "material-ui-pickers": "^1.0.0-rc.17",
     "prop-types": "^15.6.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-jss": "^8.5.1",
     "react-localize-redux": "^3.2.0",
+    "react-markdown": "^3.6.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
@@ -49,15 +52,19 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.24.1",
     "babel-runtime": "^6.26.0",
+    "date-fns": "2.0.0-alpha.20",
     "formik": "^1.0.2",
     "jss": "^9.8.6",
     "lodash": "^4.17.10",
+    "material-ui-pickers": "^1.0.0-rc.17",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-jss": "^8.5.1",
     "react-localize-redux": "^3.2.0",
+    "react-markdown": "^3.6.0",
+    "react-powerplug": "^1.0.0-rc.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
@@ -77,11 +84,6 @@
     "url": "https://github.com/cthit/react-digit-components/issues"
   },
   "homepage": "https://github.com/cthit/react-digit-components#readme",
-  "dependencies": {
-    "material-ui-pickers": "^1.0.0-rc.17",
-    "react-markdown": "^3.6.0",
-    "react-powerplug": "^1.0.0-rc.1"
-  },
   "directories": {
     "lib": "lib"
   }

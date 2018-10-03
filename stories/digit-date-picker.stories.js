@@ -7,22 +7,23 @@ import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
 import { DigitProviders } from "../components";
-import DigitDateAndTimePickerReadme from "../components/elements/digit-button/readme.md";
-import DigitDateAndTimePicker from "../components/elements/digit-date-and-time-picker/DigitDateAndTimePicker.element";
+import DigitDatePickerReadme from "../components/elements/digit-date-picker/readme.md";
+import DigitDatePicker from "../components/elements/digit-date-picker/DigitDatePicker.element";
 import { Value } from "react-powerplug";
 
-const DigitDateAndTimePickerStory = storiesOf("Elements", module);
+const DigitDatePickerStory = storiesOf("Elements", module);
 
-DigitDateAndTimePickerStory.addDecorator(withKnobs);
+DigitDatePickerStory.addDecorator(withKnobs);
 
-DigitDateAndTimePickerStory.add(
-  "DigitDateAndTimePicker",
-  withReadme(DigitDateAndTimePickerReadme, () => {
+DigitDatePickerStory.add(
+  "DigitDatePicker",
+  withReadme(DigitDatePickerReadme, () => {
     return (
       <DigitProviders>
         <Value
+          initial={new Date()}
           render={({ set, value }) => (
-            <DigitDateAndTimePicker
+            <DigitDatePicker
               value={value}
               onChange={date => {
                 set(date);

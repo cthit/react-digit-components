@@ -30,8 +30,6 @@ class DigitDialog extends React.Component {
 
     const { open } = this.state;
 
-    console.log(open);
-
     return (
       <Dialog
         open={open}

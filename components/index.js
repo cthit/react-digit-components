@@ -19,6 +19,7 @@ import DigitTabs from "./elements/digit-tabs";
 import DigitBottomNavigation from "./elements/digit-bottom-navigation";
 import DigitLoading from "./elements/digit-loading";
 import DigitDateAndTimePicker from "./elements/digit-date-and-time-picker";
+import DigitDatePicker from "./elements/digit-date-picker";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -61,6 +62,7 @@ export {
   DigitMarkdown,
   DigitLoading,
   DigitDateAndTimePicker,
+  DigitDatePicker,
   /* Views */
   DigitToast,
   DigitDialog,

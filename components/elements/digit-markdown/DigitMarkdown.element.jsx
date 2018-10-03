@@ -79,7 +79,6 @@ const DigitMarkdown = ({ markdownSource }) => (
           return <Text text={data.children} />;
         },
         listItem: data => {
-          console.log(data);
           return (
             <li>
               <Text text={data.children} />

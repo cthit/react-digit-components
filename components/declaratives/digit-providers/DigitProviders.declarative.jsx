@@ -20,6 +20,9 @@ import JssProvider from "react-jss/lib/JssProvider";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 
+import MomentUtils from "material-ui-pickers/utils/moment-utils";
+import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
+
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = "insertion-point-jss";
@@ -66,7 +69,11 @@ class DigitProviders extends React.Component {
           <LocalizeInitalizer>
             <JssProvider jss={jss} generateClassName={generateClassName}>
               <Provider store={this.store}>
-                <BrowserRouter>{children}</BrowserRouter>
+                <BrowserRouter>
+                  <MuiPickersUtilsProvider utils={MomentUtils}>
+                    {children}
+                  </MuiPickersUtilsProvider>
+                </BrowserRouter>
               </Provider>
             </JssProvider>
           </LocalizeInitalizer>

@@ -12,7 +12,7 @@ const styles = () => ({
 const DigitTimePicker = ({
   value,
   onChange,
-  label,
+  upperLabel,
   cancelLabel = "Avbryt",
   okLabel = "Ok",
   clearLabel = "Rensa",
@@ -21,7 +21,7 @@ const DigitTimePicker = ({
   classes
 }) => (
   <TimePicker
-    label={label}
+    label={upperLabel}
     value={value}
     onChange={date => onChange(date)}
     cancelLabel={cancelLabel}

@@ -17,7 +17,7 @@ const styles = () => ({
 const DigitDatePicker = ({
   value,
   onChange,
-  label,
+  upperLabel,
   showTodayButton,
   todayLabel = "Idag",
   cancelLabel = "Avbryt",
@@ -28,7 +28,7 @@ const DigitDatePicker = ({
   classes
 }) => (
   <DatePicker
-    label={label}
+    label={upperLabel}
     value={value}
     onChange={date => onChange(date)}
     showTodayButton={showTodayButton}

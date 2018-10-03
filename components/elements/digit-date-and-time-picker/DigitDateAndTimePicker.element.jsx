@@ -19,7 +19,7 @@ const styles = () => ({
 
 const DigitDateAndTimePicker = ({
   value,
-  label,
+  upperLabel,
   showTodayButton,
   onChange,
   classes,
@@ -37,7 +37,7 @@ const DigitDateAndTimePicker = ({
     onChange={date => {
       onChange(date);
     }}
-    label={label}
+    label={upperLabel}
     showTodayButton={showTodayButton}
     todayLabel={todayLabel}
     cancelLabel={cancelLabel}

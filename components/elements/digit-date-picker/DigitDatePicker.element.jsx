@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import withStyles from "@material-ui/core/styles/withStyles";
 import DatePicker from "material-ui-pickers/DatePicker";
 
-import DateRange from "@material-ui/icons/DateRange";
 import Keyboard from "@material-ui/icons/Keyboard";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
@@ -18,7 +19,7 @@ const DigitDatePicker = ({
   value,
   onChange,
   upperLabel,
-  showTodayButton,
+  showTodayButton = true,
   todayLabel = "Idag",
   cancelLabel = "Avbryt",
   okLabel = "Ok",
@@ -44,5 +45,19 @@ const DigitDatePicker = ({
     rightArrowIcon={<ChevronRight />}
   />
 );
+
+DigitDatePicker.propTypes = {
+  value: PropTypes.instanceOf(Date),
+  onChange: PropTypes.func,
+  upperLabel: PropTypes.string,
+  showTodayButton: PropTypes.bool,
+  todayLabel: PropTypes.string,
+  cancelLabel: PropTypes.string,
+  okLabel: PropTypes.string,
+  clearLabel: PropTypes.string,
+  emptyLabel: PropTypes.string,
+  invalidLabel: PropTypes.string,
+  classes: PropTypes.object
+};
 
 export default withStyles(styles)(DigitDatePicker);

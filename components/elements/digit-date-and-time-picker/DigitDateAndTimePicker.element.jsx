@@ -20,7 +20,6 @@ const styles = () => ({
 const DigitDateAndTimePicker = ({
   value,
   upperLabel,
-  showTodayButton,
   onChange,
   classes,
   todayLabel = "Idag",
@@ -29,6 +28,7 @@ const DigitDateAndTimePicker = ({
   clearLabel = "Rensa",
   emptyLabel = "Tryck här för tid och datum",
   invalidLabel = "Ogiltigt tid och datum",
+  showTodayButton = true,
   disablePast = true,
   clearable = true
 }) => (

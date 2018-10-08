@@ -19,8 +19,6 @@ const StyledCheckboxTableCell = styled(TableCell)`
 const DigitTableHeader = ({
   order,
   orderBy,
-  numSelected,
-  rowCount,
   headerTexts,
   columnsOrder,
   onRequestSort

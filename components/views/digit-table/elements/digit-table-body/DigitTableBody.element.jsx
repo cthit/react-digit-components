@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
 import { Checkbox, TableRow, TableCell, TableBody } from "@material-ui/core";
@@ -59,8 +60,6 @@ const DigitTableBody = ({
   page,
   rowsPerPage,
   data,
-  classes,
-  searchInput,
   isSelected,
   handleClick,
   rowShouldBeShown,
@@ -124,5 +123,17 @@ const DigitTableBody = ({
       })}
   </TableBody>
 );
+
+DigitTableBody.propTypes = {
+  page: PropTypes.number,
+  rowsPerPage: PropTypes.number,
+  data: PropTypes.arrayOf(PropTypes.object),
+  isSelected: PropTypes.func,
+  handleClick: PropTypes.func,
+  rowShouldBeShown: PropTypes.bool,
+  headerTexts: PropTypes.objectOf(PropTypes.string),
+  columnsOrder: PropTypes.arrayOf(PropTypes.string),
+  idProp: PropTypes.string
+};
 
 export default DigitTableBody;

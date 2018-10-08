@@ -59,7 +59,13 @@ const DigitTableToolbar = ({
 );
 
 DigitTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired
+  numSelected: PropTypes.number.isRequired,
+  showSearchableProps: PropTypes.bool,
+  searchInput: PropTypes.string,
+  onSearchInputChange: PropTypes.func,
+  headerTexts: PropTypes.objectOf(PropTypes.string),
+  titleText: PropTypes.string,
+  searchText: PropTypes.string
 };
 
 function _getAllPossibleThingsToSearchFor(headerTexts) {

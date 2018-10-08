@@ -103,4 +103,25 @@ const DigitTextArea = ({
   </Fill>
 );
 
+DigitTextArea.propTypes = {
+  value: PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.number.isRequired
+  ]),
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func,
+  upperLabel: PropTypes.string,
+  lowerLabel: PropTypes.string,
+  name: PropTypes.string,
+  password: PropTypes.bool,
+  numbersOnly: PropTypes.bool,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string,
+  disabled: PropTypes.bool,
+  rows: PropTypes.number.isRequired,
+  rowsMax: PropTypes.number.isRequired,
+  outline: PropTypes.bool,
+  filled: PropTypes.bool
+};
+
 export default DigitTextArea;

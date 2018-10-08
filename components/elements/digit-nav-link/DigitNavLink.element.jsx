@@ -19,7 +19,7 @@ const Link = styled(NavLink)`
 
 DigitNavLink.propTypes = {
   text: PropTypes.string.isRequired,
-  icon: PropTypes.element,
+  icon: PropTypes.func,
   link: PropTypes.string.isRequired,
   onClick: PropTypes.func
 };

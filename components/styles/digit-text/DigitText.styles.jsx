@@ -12,7 +12,7 @@ export const Display = styled(({ text, white, ...rest }) => (
 `;
 
 Display.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -25,7 +25,7 @@ export const Heading = styled(({ text, white, ...rest }) => (
 `;
 
 Heading.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -36,7 +36,7 @@ export const Heading1 = styled(({ text, white, ...rest }) => (
 `;
 
 Heading1.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -47,7 +47,7 @@ export const Heading2 = styled(({ text, white, ...rest }) => (
 `;
 
 Heading2.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -58,7 +58,7 @@ export const Heading3 = styled(({ text, white, ...rest }) => (
 `;
 
 Heading3.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -69,7 +69,7 @@ export const Heading4 = styled(({ text, white, ...rest }) => (
 `;
 
 Heading4.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -80,7 +80,7 @@ export const Heading5 = styled(({ text, white, ...rest }) => (
 `;
 
 Heading5.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -91,7 +91,7 @@ export const Heading6 = styled(({ text, white, ...rest }) => (
 `;
 
 Heading6.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -105,7 +105,7 @@ export const Title = styled(({ text, white, bold, ...rest }) => (
 `;
 
 Title.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool,
   bold: PropTypes.bool
 };
@@ -119,7 +119,7 @@ export const Subtitle = styled(({ text, white, ...rest }) => (
 `;
 
 Subtitle.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };
 
@@ -134,7 +134,7 @@ export const Text = styled(({ text, white, bold, ...rest }) => (
 `;
 
 Text.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool,
   bold: PropTypes.bool
 };

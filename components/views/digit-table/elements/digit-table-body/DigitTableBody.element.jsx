@@ -130,7 +130,7 @@ DigitTableBody.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   isSelected: PropTypes.func,
   handleClick: PropTypes.func,
-  rowShouldBeShown: PropTypes.bool,
+  rowShouldBeShown: PropTypes.func,
   headerTexts: PropTypes.objectOf(PropTypes.string),
   columnsOrder: PropTypes.arrayOf(PropTypes.string),
   idProp: PropTypes.string

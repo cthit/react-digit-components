@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import {
   ListItem,
@@ -162,5 +163,11 @@ class DigitHeader extends React.Component {
     );
   }
 }
+
+DigitHeader.propTypes = {
+  renderMain: PropTypes.func.isRequired,
+  renderDrawer: PropTypes.func,
+  title: PropTypes.string
+};
 
 export default DigitHeader;

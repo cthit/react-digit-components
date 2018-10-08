@@ -32,7 +32,6 @@ class DigitTable extends React.Component {
       rowsPerPage: 5,
 
       data: [],
-      sort: props.sort,
       columnsOrder: props.columnsOrder,
       idProp: props.idProp
     };
@@ -218,5 +217,20 @@ class DigitTable extends React.Component {
     );
   }
 }
+
+DigitTable.propTypes = {
+  startOrderBy: PropTypes.string,
+  columnsOrder: PropTypes.arrayOf(PropTypes.string),
+  idProp: PropTypes.string,
+  data: PropTypes.arrayOf(PropTypes.object),
+  orderBy: PropTypes.string,
+  onSelectedUpdated: PropTypes.func,
+  selected: PropTypes.array,
+  headerTexts: PropTypes.objectOf(PropTypes.string),
+  emptyTableText: PropTypes.string,
+  titleText: PropTypes.string,
+  searchText: PropTypes.string,
+  showSearchableProps: PropTypes.bool
+};
 
 export default DigitTable;

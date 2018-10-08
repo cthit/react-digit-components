@@ -1,8 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ReactMarkdown from "react-markdown";
 import { DigitText } from "../..";
 import DigitTable from "../../views/digit-table";
 import { Text } from "../../styles/digit-text/DigitText.styles";
+import DigitProviders from "../../declaratives/digit-providers";
 
 const DigitMarkdown = ({ markdownSource }) => (
   <div>
@@ -88,5 +90,9 @@ const DigitMarkdown = ({ markdownSource }) => (
     />
   </div>
 );
+
+DigitProviders.propTypes = {
+  markdownSource: PropTypes.string.isRequired
+};
 
 export default DigitMarkdown;

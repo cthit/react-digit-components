@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { withLocalize } from "react-localize-redux";
@@ -60,6 +61,13 @@ class DigitTranslations extends React.Component {
     );
   }
 }
+
+DigitTranslations.propTypes = {
+  uniquePath: PropTypes.string,
+  translations: PropTypes.object,
+  common: PropTypes.object,
+  render: PropTypes.func
+};
 
 const mapStateToProps = (state, ownProps) => {
   const translations = {};

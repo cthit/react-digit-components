@@ -37,6 +37,7 @@ DigitSwitch.propTypes = {
   onBlur: PropTypes.func,
   value: PropTypes.bool.isRequired,
   error: PropTypes.bool,
+  errorMessage: PropTypes.string,
   disabled: PropTypes.bool,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,

@@ -41,7 +41,8 @@ DigitCheckbox.propTypes = {
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   disabled: PropTypes.bool,
-  error: PropTypes.bool
+  error: PropTypes.bool,
+  errorMessage: PropTypes.string
 };
 
 export default DigitCheckbox;

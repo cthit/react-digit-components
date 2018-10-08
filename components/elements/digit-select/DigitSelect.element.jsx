@@ -104,7 +104,10 @@ DigitSelect.propTypes = {
   upperLabel: PropTypes.string,
   lowerLabel: PropTypes.string,
   reverse: PropTypes.bool,
-  inputProps: PropTypes.object
+  inputProps: PropTypes.object,
+  outline: PropTypes.bool,
+  filled: PropTypes.bool,
+  name: PropTypes.string
 };
 
 const StyledFormControl = styled(FormControl)`

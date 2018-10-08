@@ -1,8 +1,9 @@
+import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 import { redirectTo } from "../../../app/views/digit-redirect/DigitRedirect.view.action-creator";
 import { toastOpen } from "../../../app/views/digit-toast/DigitToast.view.action-creator";
-
-import React from "react";
 
 class ContainUserToAllowedPages extends React.Component {
   componentDidUpdate(prevProps) {
@@ -53,6 +54,16 @@ class ContainUserToAllowedPages extends React.Component {
     return null;
   }
 }
+
+ContainUserToAllowedPages.propTypes = {
+  allowedBasePaths: PropTypes.arrayOf(PropTypes.string),
+  allowedFullPaths: PropTypes.arrayOf(PropTypes.string),
+  currentPath: PropTypes.string,
+  redirectTo: PropTypes.string,
+  to: PropTypes.string,
+  toastTextOnRedirect: PropTypes.string,
+  toastOpen: PropTypes.bool
+};
 
 const mapStateToProps = (state, ownProps) => ({});
 

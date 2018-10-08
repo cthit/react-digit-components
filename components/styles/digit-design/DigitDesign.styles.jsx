@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Paper } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
@@ -13,11 +14,8 @@ import {
 
 /** Props:
  * width, height, maxWidth, maxHeight, minWidth, minHeight
- * absWidth, absHeight: If size, max and min will be the same. use this
- * hasSubTitle and hasIcon must be true if you have them inside your Card.
+ * absWidth, absHeight: If size, max and min will be the same.
  */
-
-/*${shadow4dp()};*/
 
 export const Card = styled(
   ({
@@ -67,6 +65,17 @@ export const Card = styled(
   }
 `;
 
+Card.propTypes = {
+  absWidth: PropTypes.string,
+  absHeight: PropTypes.string,
+  minWidth: PropTypes.string,
+  minHeight: PropTypes.string,
+  maxWidth: PropTypes.string,
+  maxHeight: PropTypes.string
+};
+/**
+ * use this hasSubTitle and hasIcon must be true if you have them inside your Card.
+ */
 export const CardHeader = styled.div`
   padding: 8px;
   display: grid;
@@ -77,6 +86,11 @@ export const CardHeader = styled.div`
   grid-template-rows: ${props =>
     props.hasSubTitle ? "33px 25px auto" : "33px 0px auto"};
 `;
+
+CardHeader.propTypes = {
+  hasSubTitle: PropTypes.bool,
+  hasIcon: PropTypes.bool
+};
 
 export const CardHeaderImage = styled.img`
   grid-column-start: 1;
@@ -174,6 +188,11 @@ export const CardButtons = styled.div`
 
   align-items: center;
 `;
+
+CardButtons.propTypes = {
+  reverseDirection: PropTypes.bool,
+  leftRight: PropTypes.bool
+};
 
 export const Divider = styled.hr`
   width: 80%;

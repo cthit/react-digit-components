@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Fill, Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../styles/digit-text/DigitText.styles";
@@ -27,5 +28,12 @@ const DigitDisplayData = ({ data, keysText, keysOrder, fixedWidth }) => (
     ))}
   </Fill>
 );
+
+DigitDisplayData.propTypes = {
+  data: PropTypes.objectOf(PropTypes.string),
+  keysText: PropTypes.objectOf(PropTypes.string),
+  keysOrder: PropTypes.arrayOf(PropTypes.string),
+  fixedWidth: PropTypes.string //e.g. 200px, 20%
+};
 
 export default DigitDisplayData;

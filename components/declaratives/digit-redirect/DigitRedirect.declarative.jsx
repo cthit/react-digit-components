@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
 class DigitRedirect extends React.Component {
@@ -18,5 +19,11 @@ class DigitRedirect extends React.Component {
     return null;
   }
 }
+
+DigitRedirect.propTypes = {
+  redirectPath: PropTypes.string,
+  redirectFinished: PropTypes.func,
+  currentPath: PropTypes.string
+};
 
 export default DigitRedirect;

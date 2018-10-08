@@ -76,20 +76,14 @@ DigitEditData.propTypes = {
   validationSchema: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
   keysOrder: PropTypes.arrayOf(PropTypes.string),
-  keysComponentData: PropTypes.shape({
-    component: PropTypes.element.isRequired,
-    componentKeys: PropTypes.object
-  }),
+  keysComponentData: PropTypes.objectOf(
+    PropTypes.shape({
+      component: PropTypes.func.isRequired,
+      componentProps: PropTypes.object
+    })
+  ),
   titleText: PropTypes.string,
   submitText: PropTypes.string
 };
-
-initialValues,
-  validationSchema,
-  onSubmit,
-  keysOrder,
-  keysComponentData,
-  titleText,
-  submitText;
 
 export default DigitEditData;

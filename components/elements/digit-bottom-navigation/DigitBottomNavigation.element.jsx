@@ -27,6 +27,7 @@ const DigitBottomNavigation = ({
 
 DigitBottomNavigation.propTypes = {
   selected: PropTypes.number.isRequired,
+  showLabels: PropTypes.bool,
   labels: PropTypes.arrayOf(PropTypes.string).isRequired,
   icons: PropTypes.arrayOf(PropTypes.element).isRequired,
   onChange: PropTypes.func.isRequired

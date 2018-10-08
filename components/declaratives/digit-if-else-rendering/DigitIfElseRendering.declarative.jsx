@@ -13,7 +13,7 @@ const DigitIfElseRendering = ({ test, ifRender, elseRender }) => {
 };
 
 DigitIfElseRendering.propTypes = {
-  test: PropTypes.bool.isRequired,
+  test: PropTypes.bool,
   ifRender: PropTypes.func.isRequired,
   elseRender: PropTypes.func
 };

@@ -11,7 +11,7 @@ const DigitTooltip = ({ children, text }) => (
 
 DigitTooltip.propTypes = {
   children: PropTypes.element.isRequired,
-  text: PropTypes.text.isRequired
+  text: PropTypes.string.isRequired
 };
 
 export default DigitTooltip;

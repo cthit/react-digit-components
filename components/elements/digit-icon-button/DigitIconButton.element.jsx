@@ -22,7 +22,6 @@ const DigitIconButton = ({
 
 DigitIconButton.propTypes = {
   onClick: PropTypes.func.isRequired,
-  component: PropTypes.func.isRequired,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   disabled: PropTypes.bool,

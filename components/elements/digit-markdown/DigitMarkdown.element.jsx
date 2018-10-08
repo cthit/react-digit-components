@@ -91,7 +91,7 @@ const DigitMarkdown = ({ markdownSource }) => (
   </div>
 );
 
-DigitProviders.propTypes = {
+DigitMarkdown.propTypes = {
   markdownSource: PropTypes.string.isRequired
 };
 

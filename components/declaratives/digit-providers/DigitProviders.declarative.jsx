@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { combineReducers } from "redux";
 import { localizeReducer as localize } from "react-localize-redux";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -75,6 +76,14 @@ class DigitProviders extends React.Component {
     );
   }
 }
+
+DigitProviders.propTypes = {
+  theme: PropTypes.object,
+  children: PropTypes.element.isRequired,
+  defaultLanguage: PropTypes.string,
+  preloadedState: PropTypes.object,
+  rootReducer: PropTypes.object
+};
 
 export default DigitProviders;
 

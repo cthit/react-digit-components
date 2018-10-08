@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FieldArray } from "formik";
 
 const DigitFormFieldArray = ({ name, render, component, componentProps }) => (
@@ -18,5 +19,12 @@ const DigitFormFieldArray = ({ name, render, component, componentProps }) => (
     }}
   />
 );
+
+DigitFormFieldArray.propTypes = {
+  name: PropTypes.string.isRequired,
+  render: PropTypes.func,
+  component: PropTypes.element,
+  componentProps: PropTypes.object
+};
 
 export default DigitFormFieldArray;

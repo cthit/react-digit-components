@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import IfElseRendering from "../../declaratives/digit-if-else-rendering";
 import {
   Button,
@@ -79,5 +79,19 @@ class DigitDialog extends React.Component {
     );
   }
 }
+
+DigitDialog.propTypes = {
+  options: PropTypes.shape({
+    onConfirm: PropTypes.func.isRequired,
+    onCancel: PropTypes.func,
+    cancelButtonText: PropTypes.string,
+    confirmButtonText: PropTypes.text,
+    open: PropTypes.bool,
+    title: PropTypes.string,
+    description: PropTypes.string
+  }),
+  digitDialogClosedCancel: PropTypes.func.isRequired,
+  digitDialogClosedConfirm: PropTypes.func.isRequired
+};
 
 export default DigitDialog;

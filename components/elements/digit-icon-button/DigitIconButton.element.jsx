@@ -25,7 +25,8 @@ DigitIconButton.propTypes = {
   component: PropTypes.func.isRequired,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  icon: PropTypes.func.isRequired
 };
 
 export default DigitIconButton;

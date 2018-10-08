@@ -29,6 +29,7 @@ DigitButton.propTypes = {
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   raised: PropTypes.bool,
+  outline: PropTypes.bool,
   disabled: PropTypes.bool,
   submit: PropTypes.bool
 };

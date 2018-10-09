@@ -169,6 +169,7 @@ class DigitTable extends React.Component {
                 test={this.state.data.length > 0}
                 ifRender={() => (
                   <DigitTableBody
+                    search={this.props.search}
                     idProp={this.state.idProp}
                     columnsOrder={this.state.columnsOrder}
                     page={this.state.page}

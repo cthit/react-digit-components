@@ -65,12 +65,13 @@ const DigitTableBody = ({
   rowShouldBeShown,
   headerTexts,
   columnsOrder,
-  idProp
+  idProp,
+  search
 }) => (
   <TableBody>
     {data
       .filter(n => {
-        return rowShouldBeShown(n);
+        return !search || rowShouldBeShown(n);
       })
       .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
       .map(n => {

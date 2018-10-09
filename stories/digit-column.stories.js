@@ -19,7 +19,7 @@ import {
   Center,
   Flex
 } from "../components/styles/digit-layout/DigitLayout.styles";
-import { Display } from "../components/styles/digit-text/DigitText.styles";
+import { Heading5 } from "../components/styles/digit-text/DigitText.styles";
 import styled from "styled-components";
 
 const DigitColumnStory = storiesOf("Layout", module);
@@ -42,7 +42,7 @@ const DummyItem = ({ text, color }) => (
   <Size absWidth="50px" absHeight="50px">
     <BackgroundColor color={color}>
       <Center>
-        <Display text={text} />
+        <Heading5 text={text} />
       </Center>
     </BackgroundColor>
   </Size>

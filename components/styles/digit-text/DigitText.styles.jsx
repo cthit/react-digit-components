@@ -88,7 +88,7 @@ Heading6.propTypes = {
 };
 
 export const Title = styled(({ text, white, ...rest }) => (
-  <Typography {...rest} variant="h5">
+  <Typography {...rest} variant="h6">
     {text}
   </Typography>
 ))`

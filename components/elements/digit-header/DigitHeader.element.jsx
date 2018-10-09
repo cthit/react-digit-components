@@ -61,6 +61,8 @@ const HorizontalFill = styled.div`
 
 const StyledToolbar = styled(Toolbar)`
   height: 64px;
+  padding-left: 8px;
+  padding-right: 8px;
 `;
 
 const StyledDrawer = styled(({ ...rest }) => (

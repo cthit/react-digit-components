@@ -46,6 +46,9 @@ class DigitProviders extends React.Component {
     );
 
     this.theme = createMuiTheme({
+      typography: {
+        useNextVariants: true
+      },
       palette: {
         primary: {
           main: "#2196f3",

@@ -3,36 +3,13 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Typography } from "@material-ui/core";
 
-export const Display = styled(({ text, white, ...rest }) => (
-  <Typography {...rest} variant="display2">
-    {text}
-  </Typography>
-))`
-  color: ${props => (props.white ? "white" : "")};
-`;
-
-Display.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  white: PropTypes.bool
-};
-
-export const Heading = styled(({ text, white, ...rest }) => (
-  <Typography {...rest} variant="headline">
-    {text}
-  </Typography>
-))`
-  color: ${props => (props.white ? "white" : "")};
-`;
-
-Heading.propTypes = {
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  white: PropTypes.bool
-};
-
 export const Heading1 = styled(({ text, white, ...rest }) => (
-  <Heading text={text} {...rest} variant="headline" />
+  <Typography {...rest} variant="h1" component="h2">
+    {text}
+  </Typography>
 ))`
-  font-size: 2em;
+  color: ${props => (props.white ? "white" : "")};
+  font-weight: 900;
 `;
 
 Heading1.propTypes = {
@@ -41,9 +18,12 @@ Heading1.propTypes = {
 };
 
 export const Heading2 = styled(({ text, white, ...rest }) => (
-  <Heading text={text} {...rest} variant="headline" />
+  <Typography {...rest} variant="h2">
+    {text}
+  </Typography>
 ))`
-  font-size: 1.5em;
+  color: ${props => (props.white ? "white" : "")};
+  font-weight: 900;
 `;
 
 Heading2.propTypes = {
@@ -52,9 +32,12 @@ Heading2.propTypes = {
 };
 
 export const Heading3 = styled(({ text, white, ...rest }) => (
-  <Heading text={text} {...rest} variant="headline" />
+  <Typography {...rest} variant="h3">
+    {text}
+  </Typography>
 ))`
-  font-size: 1.17em;
+  color: ${props => (props.white ? "white" : "")};
+  font-weight: 900;
 `;
 
 Heading3.propTypes = {
@@ -63,9 +46,12 @@ Heading3.propTypes = {
 };
 
 export const Heading4 = styled(({ text, white, ...rest }) => (
-  <Heading text={text} {...rest} variant="headline" />
+  <Typography {...rest} variant="h4">
+    {text}
+  </Typography>
 ))`
-  font-size: 1em;
+  color: ${props => (props.white ? "white" : "")};
+  font-weight: 900;
 `;
 
 Heading4.propTypes = {
@@ -74,9 +60,12 @@ Heading4.propTypes = {
 };
 
 export const Heading5 = styled(({ text, white, ...rest }) => (
-  <Heading text={text} {...rest} variant="headline" />
+  <Typography {...rest} variant="h5">
+    {text}
+  </Typography>
 ))`
-  font-size: 0.83em;
+  color: ${props => (props.white ? "white" : "")};
+  font-weight: 900;
 `;
 
 Heading5.propTypes = {
@@ -85,9 +74,12 @@ Heading5.propTypes = {
 };
 
 export const Heading6 = styled(({ text, white, ...rest }) => (
-  <Heading text={text} {...rest} variant="headline" />
+  <Typography {...rest} variant="h6">
+    {text}
+  </Typography>
 ))`
-  font-size: 0.75em;
+  color: ${props => (props.white ? "white" : "")};
+  font-weight: 900;
 `;
 
 Heading6.propTypes = {
@@ -95,23 +87,22 @@ Heading6.propTypes = {
   white: PropTypes.bool
 };
 
-export const Title = styled(({ text, white, bold, ...rest }) => (
-  <Typography {...rest} variant="title">
+export const Title = styled(({ text, white, ...rest }) => (
+  <Typography {...rest} variant="h5">
     {text}
   </Typography>
 ))`
-  color: ${props => (props.white ? "white !important" : "inherit")};
-  font-weight: ${props => (props.bold ? "500" : "inherit")};
+  color: ${props => (props.white ? "white" : "")};
+  font-weight: 900;
 `;
 
 Title.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  white: PropTypes.bool,
-  bold: PropTypes.bool
+  white: PropTypes.bool
 };
 
 export const Subtitle = styled(({ text, white, ...rest }) => (
-  <Typography {...rest} variant="subheading">
+  <Typography {...rest} variant="subtitle1">
     {text}
   </Typography>
 ))`
@@ -119,6 +110,19 @@ export const Subtitle = styled(({ text, white, ...rest }) => (
 `;
 
 Subtitle.propTypes = {
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  white: PropTypes.bool
+};
+
+export const Subtitle2 = styled(({ text, white, ...rest }) => (
+  <Typography {...rest} variant="subtitle2">
+    {text}
+  </Typography>
+))`
+  color: ${props => (props.white ? "white" : "")};
+`;
+
+Subtitle2.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   white: PropTypes.bool
 };

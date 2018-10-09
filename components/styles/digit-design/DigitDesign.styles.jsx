@@ -8,8 +8,7 @@ import {
   HeadingLevel2,
   HeadingLevel3,
   Title,
-  Subtitle,
-  Display
+  Subtitle
 } from "../digit-text/DigitText.styles";
 
 /** Props:
@@ -123,21 +122,6 @@ export const CardMenuContainer = styled.div`
 
 export const CardTitle = styled(Title)`
   font-size: 20px;
-  line-height: 33px;
-
-  margin: 0;
-  margin-top: 8px;
-  margin-left: 8px;
-  margin-right: 8px;
-
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 2;
-`;
-
-export const CardDisplayTitle = styled(Display)`
-  font-size: 30px;
   line-height: 33px;
 
   margin: 0;

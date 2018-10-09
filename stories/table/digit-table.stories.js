@@ -28,8 +28,9 @@ DigitTableStory.add(
   withReadme(DigitTableReadme, () => {
     const lang = select(langLabel, langOptions, langDefaultValue);
     const titleText = text("Title", "Title text");
-    const searchText = text("Search", "Search text");
+    const searchText = text("Search text", "Search text");
     const showSearchableProps = boolean("Show searchable props", true);
+    const search = boolean("Search", true);
 
     return (
       <DigitProviders>
@@ -43,6 +44,7 @@ DigitTableStory.add(
               }
               return (
                 <DigitTable
+                  search={search}
                   titleText={titleText}
                   searchText={searchText}
                   showSearchableProps={showSearchableProps}

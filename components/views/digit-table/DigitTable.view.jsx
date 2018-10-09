@@ -147,6 +147,7 @@ class DigitTable extends React.Component {
               searchText={this.props.searchText}
               headerTexts={this.props.headerTexts}
               showSearchableProps={this.props.showSearchableProps}
+              search={this.props.search}
             />
 
             <Table aria-labelledby="tableTitle">
@@ -229,7 +230,8 @@ DigitTable.propTypes = {
   emptyTableText: PropTypes.string,
   titleText: PropTypes.string,
   searchText: PropTypes.string,
-  showSearchableProps: PropTypes.bool
+  showSearchableProps: PropTypes.bool,
+  search: PropTypes.bool
 };
 
 export default DigitTable;

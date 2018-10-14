@@ -111,7 +111,9 @@ DigitTextField.propTypes = {
   numbersOnly: PropTypes.bool,
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  outline: PropTypes.bool,
+  filled: PropTypes.bool
 };
 
 export default DigitTextField;

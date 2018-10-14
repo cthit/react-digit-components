@@ -15,6 +15,11 @@ import DigitFAB from "./elements/digit-fab";
 import DigitDisplayData from "./elements/digit-display-data";
 import DigitEditData from "./elements/digit-edit-data";
 import DigitMarkdown from "./elements/digit-markdown";
+import DigitTabs from "./elements/digit-tabs";
+import DigitBottomNavigation from "./elements/digit-bottom-navigation";
+import DigitLoading from "./elements/digit-loading";
+import DigitDateAndTimePicker from "./elements/digit-date-and-time-picker";
+import DigitDatePicker from "./elements/digit-date-picker";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -45,6 +50,8 @@ export {
   DigitForm,
   DigitFormField,
   DigitFormFieldArray,
+  DigitBottomNavigation,
+  DigitTabs,
   DigitTextArea,
   DigitSelect,
   DigitHeader,
@@ -53,6 +60,9 @@ export {
   DigitDisplayData,
   DigitEditData,
   DigitMarkdown,
+  DigitLoading,
+  DigitDateAndTimePicker,
+  DigitDatePicker,
   /* Views */
   DigitToast,
   DigitDialog,

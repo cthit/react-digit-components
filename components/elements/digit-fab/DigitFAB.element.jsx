@@ -18,7 +18,7 @@ const DigitFAB = ({ onClick, disabled, primary, secondary, submit, icon }) => (
 
 DigitFAB.propTypes = {
   onClick: PropTypes.func,
-  component: PropTypes.func.isRequired,
+  icon: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   primary: PropTypes.bool,
   secondary: PropTypes.bool,

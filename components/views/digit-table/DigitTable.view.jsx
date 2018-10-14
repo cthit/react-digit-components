@@ -32,7 +32,6 @@ class DigitTable extends React.Component {
       rowsPerPage: 5,
 
       data: [],
-      sort: props.sort,
       columnsOrder: props.columnsOrder,
       idProp: props.idProp
     };
@@ -83,7 +82,6 @@ class DigitTable extends React.Component {
   };
 
   handleSelectAllClick = (event, checked) => {
-    console.log(checked);
     if (checked) {
       this.props.onSelectedUpdated(
         this.state.data.map(n => n[this.state.idProp])
@@ -149,6 +147,7 @@ class DigitTable extends React.Component {
               searchText={this.props.searchText}
               headerTexts={this.props.headerTexts}
               showSearchableProps={this.props.showSearchableProps}
+              search={this.props.search}
             />
 
             <Table aria-labelledby="tableTitle">
@@ -170,6 +169,7 @@ class DigitTable extends React.Component {
                 test={this.state.data.length > 0}
                 ifRender={() => (
                   <DigitTableBody
+                    search={this.props.search}
                     idProp={this.state.idProp}
                     columnsOrder={this.state.columnsOrder}
                     page={this.state.page}
@@ -218,5 +218,21 @@ class DigitTable extends React.Component {
     );
   }
 }
+
+DigitTable.propTypes = {
+  startOrderBy: PropTypes.string,
+  columnsOrder: PropTypes.arrayOf(PropTypes.string),
+  idProp: PropTypes.string,
+  data: PropTypes.arrayOf(PropTypes.object),
+  orderBy: PropTypes.string,
+  onSelectedUpdated: PropTypes.func,
+  selected: PropTypes.array,
+  headerTexts: PropTypes.objectOf(PropTypes.string),
+  emptyTableText: PropTypes.string,
+  titleText: PropTypes.string,
+  searchText: PropTypes.string,
+  showSearchableProps: PropTypes.bool,
+  search: PropTypes.bool
+};
 
 export default DigitTable;

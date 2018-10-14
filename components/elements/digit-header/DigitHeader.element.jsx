@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import {
   ListItem,
@@ -59,7 +60,8 @@ const HorizontalFill = styled.div`
 `;
 
 const StyledToolbar = styled(Toolbar)`
-  height: 64px;
+  height: ${props => (props.height == null ? "64px" : props.height)};
+  min-height: 0px;
 `;
 
 const StyledDrawer = styled(({ ...rest }) => (
@@ -74,7 +76,8 @@ const StyledMain = styled.main`
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin-top: 64px;
+  margin-top: ${props =>
+    props.headerHeight == null ? "64px" : props.headerHeight};
 
   ${props =>
     props.navigation === "true" &&
@@ -97,7 +100,13 @@ class DigitHeader extends React.Component {
   };
 
   render() {
-    const { renderMain, renderDrawer, title } = this.props;
+    const {
+      renderMain,
+      renderDrawer,
+      renderHeader,
+      title,
+      headerHeight
+    } = this.props;
     const { mobileOpen } = this.state;
 
     var drawer = null;
@@ -111,7 +120,7 @@ class DigitHeader extends React.Component {
     return (
       <StyledRoot>
         <StyledAppBar navigation={(drawer != null).toString()}>
-          <StyledToolbar>
+          <StyledToolbar height={headerHeight}>
             <DigitIfElseRendering
               test={drawer != null}
               ifRender={() => (
@@ -127,6 +136,7 @@ class DigitHeader extends React.Component {
 
             <HorizontalFill>
               <DigitTitle text={title} white />
+              {renderHeader()}
             </HorizontalFill>
           </StyledToolbar>
         </StyledAppBar>
@@ -155,12 +165,26 @@ class DigitHeader extends React.Component {
             </div>
           )}
         />
-        <StyledMain navigation={(drawer != null).toString()}>
+        <StyledMain
+          headerHeight={headerHeight}
+          navigation={(drawer != null).toString()}
+        >
           {renderMain()}
         </StyledMain>
       </StyledRoot>
     );
   }
 }
+
+DigitHeader.propTypes = {
+  renderMain: PropTypes.func.isRequired,
+  renderDrawer: PropTypes.func,
+  title: PropTypes.string,
+  renderHeader: PropTypes.func
+};
+
+DigitHeader.defaultProps = {
+  headerHeight: "64px"
+};
 
 export default DigitHeader;

@@ -1,5 +1,5 @@
 import React from "react";
-import * as yup from "yup";
+import PropTypes from "prop-types";
 import DigitForm from "../digit-form";
 import {
   Card,
@@ -70,5 +70,20 @@ const DigitEditData = ({
     )}
   />
 );
+
+DigitEditData.propTypes = {
+  initialValues: PropTypes.object,
+  validationSchema: PropTypes.object,
+  onSubmit: PropTypes.func.isRequired,
+  keysOrder: PropTypes.arrayOf(PropTypes.string),
+  keysComponentData: PropTypes.objectOf(
+    PropTypes.shape({
+      component: PropTypes.func.isRequired,
+      componentProps: PropTypes.object
+    })
+  ),
+  titleText: PropTypes.string,
+  submitText: PropTypes.string
+};
 
 export default DigitEditData;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { combineReducers } from "redux";
 import { localizeReducer as localize } from "react-localize-redux";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -19,6 +20,9 @@ import JssProvider from "react-jss/lib/JssProvider";
 
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
+
+import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
+import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
 
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
@@ -66,7 +70,11 @@ class DigitProviders extends React.Component {
           <LocalizeInitalizer>
             <JssProvider jss={jss} generateClassName={generateClassName}>
               <Provider store={this.store}>
-                <BrowserRouter>{children}</BrowserRouter>
+                <BrowserRouter>
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    {children}
+                  </MuiPickersUtilsProvider>
+                </BrowserRouter>
               </Provider>
             </JssProvider>
           </LocalizeInitalizer>
@@ -75,6 +83,14 @@ class DigitProviders extends React.Component {
     );
   }
 }
+
+DigitProviders.propTypes = {
+  theme: PropTypes.object,
+  children: PropTypes.element.isRequired,
+  defaultLanguage: PropTypes.string,
+  preloadedState: PropTypes.object,
+  rootReducer: PropTypes.object
+};
 
 export default DigitProviders;
 

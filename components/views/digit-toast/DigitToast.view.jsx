@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import { ToastButton, StyledSnackbar } from "./DigitToast.view.styles";
 
 class DigitToast extends React.Component {
@@ -121,5 +121,14 @@ class DigitToast extends React.Component {
     );
   }
 }
+
+DigitToast.propTypes = {
+  toastOptions: PropTypes.shape({
+    text: PropTypes.string,
+    duration: PropTypes.number,
+    actionHandler: PropTypes.func,
+    actionText: PropTypes.string
+  })
+};
 
 export default DigitToast;

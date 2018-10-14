@@ -81,7 +81,7 @@ const Stuff = ({ digitDialogOpen }) => (
               componentProps={{
                 upperLabel: "Body text",
                 rows: 5,
-                maxRows: 10
+                rowsMax: 10
               }}
             />
 

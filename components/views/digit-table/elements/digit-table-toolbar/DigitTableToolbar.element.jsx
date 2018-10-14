@@ -7,6 +7,7 @@ import translations from "./DigitTableToolbar.element.translations.json";
 import { Title } from "../../../../styles/digit-text/DigitText.styles";
 import DigitTextField from "../../../../elements/digit-text-field";
 import { Fill } from "../../../../styles/digit-layout/DigitLayout.styles";
+import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
 
 const TableTitle = styled(Title)`
   flex: 0 0 auto;
@@ -29,7 +30,8 @@ const DigitTableToolbar = ({
   onSearchInputChange,
   headerTexts,
   titleText,
-  searchText
+  searchText,
+  search
 }) => (
   <DigitTranslations
     translations={translations}
@@ -42,15 +44,20 @@ const DigitTableToolbar = ({
           />
         </Fill>
         <Fill>
-          <SearchInput
-            upperLabel={
-              searchText +
-              (showSearchableProps != null && showSearchableProps
-                ? " " + _getAllPossibleThingsToSearchFor(headerTexts)
-                : "")
-            }
-            value={searchInput}
-            onChange={onSearchInputChange}
+          <DigitIfElseRendering
+            test={search}
+            ifRender={() => (
+              <SearchInput
+                upperLabel={
+                  searchText +
+                  (showSearchableProps != null && showSearchableProps
+                    ? " " + _getAllPossibleThingsToSearchFor(headerTexts)
+                    : "")
+                }
+                value={searchInput}
+                onChange={onSearchInputChange}
+              />
+            )}
           />
         </Fill>
       </StyledToolbar>
@@ -59,7 +66,13 @@ const DigitTableToolbar = ({
 );
 
 DigitTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired
+  numSelected: PropTypes.number.isRequired,
+  showSearchableProps: PropTypes.bool,
+  searchInput: PropTypes.string,
+  onSearchInputChange: PropTypes.func,
+  headerTexts: PropTypes.objectOf(PropTypes.string),
+  titleText: PropTypes.string,
+  searchText: PropTypes.string
 };
 
 function _getAllPossibleThingsToSearchFor(headerTexts) {

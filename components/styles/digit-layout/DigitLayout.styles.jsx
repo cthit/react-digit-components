@@ -273,3 +273,11 @@ Size.propTypes = {
   maxWidth: PropTypes.string,
   maxHeight: PropTypes.string
 };
+
+export const Order = styled(Flex)`
+  order: ${props => props.order};
+`;
+
+Order.propTypes = {
+  order: PropTypes.number.isRequired
+};

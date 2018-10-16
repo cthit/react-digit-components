@@ -1,52 +1,22 @@
 import React from "react";
 
-import {
-  withKnobs,
-  select,
-  text,
-  boolean,
-  number
-} from "@storybook/addon-knobs";
+import { withKnobs, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
-import DigitGridReadme from "../components/styles/digit-layout/grid-readme.md";
+import DigitGridReadme from "../../components/styles/digit-layout/grid-readme.md";
 import {
-  Column,
-  Row,
-  Size,
   Fill,
   Center,
-  Flex,
-  Grid,
-  GridItem
-} from "../components/styles/digit-layout/DigitLayout.styles";
-import { Display } from "../components/styles/digit-text/DigitText.styles";
+  Grid
+} from "../../components/styles/digit-layout/DigitLayout.styles";
+import { Display } from "../../components/styles/digit-text/DigitText.styles";
 import styled from "styled-components";
+import DummyItem from "./DummyItem";
 
 const DigitGridStory = storiesOf("Layout", module);
 
-const alignLabel = "Align";
-const alignOptions = ["Left", "Right", "None"];
-const alignDefaultValue = "None";
-
 DigitGridStory.addDecorator(withKnobs);
-
-const BorderSize = styled(Size)`
-  border: 1px solid black;
-`;
-
-const BackgroundColor = styled(Fill)`
-  background-color: ${props => props.color};
-`;
-
-const DummyItem = ({ text, color }) => (
-  <BackgroundColor color={color}>
-    <Center>
-      <Display text={text} />
-    </Center>
-  </BackgroundColor>
-);
 
 DigitGridStory.add(
   "DigitGrid",
@@ -62,14 +32,15 @@ DigitGridStory.add(
 
     return (
       <Grid
-        fill="true"
+        inline
+        fillElement
         columns={`repeat(${numCols}, 1fr)`}
         padding={`${padding}px`}
       >
         {Array.from(new Array(numItems), (_, i) => (
           <DummyItem
             key={i}
-            text={`Item ${i + 1}`}
+            text={`${i + 1}`}
             color={["red", "green", "blue", "yellow"][i % 4]}
           />
         ))}

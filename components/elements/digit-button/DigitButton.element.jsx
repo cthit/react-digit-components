@@ -17,7 +17,7 @@ const DigitButton = ({
     onClick={onClick}
     disabled={disabled}
     color={primary ? "primary" : secondary ? "secondary" : "default"}
-    variant={raised ? "contained" : outline ? "outlined" : "flat"}
+    variant={raised ? "contained" : outline ? "outlined" : "text"}
   >
     {text}
   </Button>

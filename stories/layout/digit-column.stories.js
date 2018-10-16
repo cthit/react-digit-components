@@ -10,48 +10,30 @@ import {
 import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
-import DigitRowReadme from "../components/styles/digit-layout/row-readme.md";
+import DigitColumnReadme from "../../components/styles/digit-layout/column-readme.md";
 import {
   Column,
-  Row,
   Size,
   Fill,
-  Center,
-  Flex
-} from "../components/styles/digit-layout/DigitLayout.styles";
-import { Heading5 } from "../components/styles/digit-text/DigitText.styles";
+  Center
+} from "../../components/styles/digit-layout/DigitLayout.styles";
+import { Heading5 } from "../../components/styles/digit-text/DigitText.styles";
 import styled from "styled-components";
-import DigitProviders from "../components/declaratives/digit-providers";
+import DigitProviders from "../../components/declaratives/digit-providers";
+import DummyItem from "./DummyItem";
+import BorderSize from "./BorderSize";
 
-const DigitRowStory = storiesOf("Layout", module);
+const DigitColumnStory = storiesOf("Layout", module);
+
+DigitColumnStory.addDecorator(withKnobs);
 
 const alignLabel = "Align";
-const alignOptions = ["Left", "Right", "None"];
+const alignOptions = ["Top", "Bottom", "None"];
 const alignDefaultValue = "None";
 
-DigitRowStory.addDecorator(withKnobs);
-
-const BorderSize = styled(Size)`
-  border: 1px solid black;
-`;
-
-const BackgroundColor = styled(Fill)`
-  background-color: ${props => props.color};
-`;
-
-const DummyItem = ({ text, color }) => (
-  <Size absWidth="50px" absHeight="50px">
-    <BackgroundColor color={color}>
-      <Center>
-        <Heading5 text={text} />
-      </Center>
-    </BackgroundColor>
-  </Size>
-);
-
-DigitRowStory.add(
-  "DigitRow",
-  withReadme(DigitRowReadme, () => {
+DigitColumnStory.add(
+  "DigitColumn",
+  withReadme(DigitColumnReadme, () => {
     const align = select(alignLabel, alignOptions, alignDefaultValue);
     const reverse = boolean("Reverse", false);
     const center = boolean("Center", false);
@@ -67,21 +49,21 @@ DigitRowStory.add(
     return (
       <DigitProviders>
         <BorderSize absWidth="500px" absHeight="500px">
-          <Row
-            leftAlign={align === "Left"}
-            rightAlign={align === "Right"}
+          <Column
+            topAlign={align === "Top"}
+            bottomAlign={align === "Bottom"}
             reverse={reverse}
             center={center}
             centerHorizontal={centerHorizontal}
             centerVertical={centerVertical}
-            fill
+            fillElement
             padding={padding + "px"}
           >
             <DummyItem text="1" color="blue" />
             <DummyItem text="2" color="yellow" />
             <DummyItem text="3" color="green" />
             <DummyItem text="4" color="red" />
-          </Row>
+          </Column>
         </BorderSize>
       </DigitProviders>
     );

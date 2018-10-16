@@ -9,31 +9,16 @@ import {
   Grid,
   Center,
   Fill
-} from "../components/styles/digit-layout/DigitLayout.styles";
+} from "../../components/styles/digit-layout/DigitLayout.styles";
 import styled from "styled-components";
 
-import DigitUniformGridReadme from "../components/styles/digit-layout/uniform-grid-readme.md";
+import DigitUniformGridReadme from "../../components/styles/digit-layout/uniform-grid-readme.md";
 import { withReadme } from "storybook-readme";
-import { Display } from "../components/styles/digit-text/DigitText.styles";
+import { Display } from "../../components/styles/digit-text/DigitText.styles";
+import DummyItem from "./DummyItem";
 
 const DigitUniformGridStory = storiesOf("Layout", module);
 DigitUniformGridStory.addDecorator(withKnobs);
-
-const BorderSize = styled(Size)`
-  border: 1px solid black;
-`;
-
-const BackgroundColor = styled(Fill)`
-  background-color: ${props => props.color};
-`;
-
-const DummyItem = ({ text, color }) => (
-  <BackgroundColor color={color}>
-    <Center>
-      <Display text={text} />
-    </Center>
-  </BackgroundColor>
-);
 
 DigitUniformGridStory.add(
   "DigitUniformGrid",
@@ -53,7 +38,7 @@ DigitUniformGridStory.add(
         minItemWidth={minItemWidth}
         minItemHeight={minItemHeight}
         padding={`${padding}px`}
-        fill="true"
+        fillElement
       >
         {Array.from(new Array(numItems), (_, i) => (
           <DummyItem

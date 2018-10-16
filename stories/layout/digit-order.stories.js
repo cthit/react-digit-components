@@ -15,32 +15,16 @@ import {
   Size,
   Fill,
   Center
-} from "../components/styles/digit-layout/DigitLayout.styles";
-import { Display } from "../components/styles/digit-text/DigitText.styles";
+} from "../../components/styles/digit-layout/DigitLayout.styles";
+import { Display } from "../../components/styles/digit-text/DigitText.styles";
 import styled from "styled-components";
-import DigitOrderReadme from "../components/styles/digit-layout/row-readme.md";
+import DigitOrderReadme from "../../components/styles/digit-layout/row-readme.md";
+import DummyItem from "./DummyItem";
+import BorderSize from "./BorderSize";
 
 const DigitOrderStory = storiesOf("Layout", module);
 
 DigitOrderStory.addDecorator(withKnobs);
-
-const BorderSize = styled(Size)`
-  border: 1px solid black;
-`;
-
-const BackgroundColor = styled(Fill)`
-  background-color: ${props => props.color};
-`;
-
-const DummyItem = ({ text, color }) => (
-  <Size absWidth="50px" absHeight="50px">
-    <BackgroundColor color={color}>
-      <Center>
-        <Display text={text} />
-      </Center>
-    </BackgroundColor>
-  </Size>
-);
 
 DigitOrderStory.add(
   "DigitOrder",
@@ -52,7 +36,7 @@ DigitOrderStory.add(
 
     return (
       <BorderSize absWidth="500px" absHeight="500px">
-        <Row center fill padding="8px">
+        <Row center fillElement padding="8px">
           <Order order={orderBlue}>
             <DummyItem text="1" color="blue" />
           </Order>

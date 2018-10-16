@@ -98,7 +98,7 @@ export const Grid = styled.div`
   grid-auto-columns: ${props => props.autoColumns || ""};
   grid-auto-rows: ${props => props.autoRows || ""};
   grid-auto-flow: ${props => props.autoFlow || ""};
-  flex: ${props => (props.fill === "true" ? "1" : "")};
+  flex: ${props => (props.fillElement ? "1" : "")};
 `;
 
 Grid.propTypes = {
@@ -139,7 +139,7 @@ Grid.propTypes = {
   autoColumns: PropTypes.string,
   autoRows: PropTypes.string,
   autoFlow: PropTypes.string,
-  fill: PropTypes.oneOf(["true", "false"])
+  fillElement: PropTypes.bool
 };
 
 export const GridItem = styled.div`
@@ -181,7 +181,7 @@ export const Column = styled(
     bottomAlign,
     reverse,
     padding,
-    fill,
+    fillElement,
     children,
     ...rest
   }) => (
@@ -200,7 +200,7 @@ export const Column = styled(
   > * {
     padding: ${props => (props.padding == null ? "8px" : props.padding)};
   }
-  flex: ${props => (props.fill ? "1" : "")};
+  flex: ${props => (props.fillElement ? "1" : "")};
 `;
 
 Column.propTypes = {
@@ -211,8 +211,11 @@ Column.propTypes = {
   bottomAlign: PropTypes.bool,
   reverse: PropTypes.bool,
   padding: PropTypes.string,
-  fill: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.element)
+  fillElement: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 export const Row = styled(
@@ -224,7 +227,7 @@ export const Row = styled(
     rightAlign,
     reverse,
     padding,
-    fill,
+    fillElement,
     children,
     ...rest
   }) => (
@@ -243,7 +246,7 @@ export const Row = styled(
   > * {
     padding: ${props => (props.padding == null ? "8px" : props.padding)};
   }
-  flex: ${props => (props.fill ? "1" : "")};
+  flex: ${props => (props.fillElement ? "1" : "")};
 `;
 
 Row.propTypes = {
@@ -254,8 +257,11 @@ Row.propTypes = {
   rightAlign: PropTypes.bool,
   reverse: PropTypes.bool,
   padding: PropTypes.string,
-  fill: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.element)
+  fillElement: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 export const DownRightPosition = styled.div`

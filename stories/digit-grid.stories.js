@@ -61,9 +61,14 @@ DigitGridStory.add(
     });
 
     return (
-      <Grid fill columns={`repeat(${numCols}, 1fr)`} padding={`${padding}px`}>
+      <Grid
+        fill="true"
+        columns={`repeat(${numCols}, 1fr)`}
+        padding={`${padding}px`}
+      >
         {Array.from(new Array(numItems), (_, i) => (
           <DummyItem
+            key={i}
             text={`Item ${i + 1}`}
             color={["red", "green", "blue", "yellow"][i % 4]}
           />

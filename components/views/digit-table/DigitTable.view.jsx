@@ -12,7 +12,7 @@ import translations from "./DigitTable.view.translations.json";
 import { DigitTranslations } from "../..";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
-import { Display } from "../../styles/digit-text/DigitText.styles";
+import { Heading3 } from "../../styles/digit-text/DigitText.styles";
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {
@@ -187,7 +187,7 @@ class DigitTable extends React.Component {
                       <td colSpan="100">
                         <Center>
                           <Padding>
-                            <Display text={emptyTableText} />
+                            <Heading3 text={emptyTableText} />
                           </Padding>
                         </Center>
                       </td>

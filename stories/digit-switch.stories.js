@@ -29,28 +29,27 @@ DigitSwitchStory.add(
 
     return (
       <DigitProviders>
-       <State initial={{ value: true }}>
-        {({ state, setState }) => (
-          <DigitSwitch
-            value={state.value}
-            onChange={e => {
-              setState({
-                value: e.target.checked
-              });
-              action("value")(e);
-            }}
-            label={label}
-            onBlur={action("blur")}
-            primary={color === "primary"}
-            secondary={color === "secondary"}
-            disabled={disabled}
-            error={error}
-            errorMessage={errorMessage}
-          />
-        )}
-      </State>
+        <State initial={{ value: true }}>
+          {({ state, setState }) => (
+            <DigitSwitch
+              value={state.value}
+              onChange={e => {
+                setState({
+                  value: e.target.checked
+                });
+                action("value")(e);
+              }}
+              label={label}
+              onBlur={action("blur")}
+              primary={color === "primary"}
+              secondary={color === "secondary"}
+              disabled={disabled}
+              error={error}
+              errorMessage={errorMessage}
+            />
+          )}
+        </State>
       </DigitProviders>
-
     );
   })
 );

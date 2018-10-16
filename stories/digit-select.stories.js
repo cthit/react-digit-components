@@ -28,32 +28,30 @@ DigitSelectStory.add(
 
     return (
       <DigitProviders>
-       <Value
-        initial="chocolate"
-        render={selected => (
-          <DigitSelect
-            onChange={e => {
-              selected.set(e.target.value);
-              action("Selected")(e);
-            }}
-            value={selected.value}
-            disabled={disabled}
-            upperLabel={upperLabel}
-            lowerLabel={lowerLabel}
-            valueToTextMap={{
-              chocolate: "Chocolate",
-              vanilla: "Vanilla",
-              strawberry: "Strawberry"
-            }}
-            allowToChooseNone
-            outline={style === "outline"}
-            filled={style === "filled"}
-          />
-        )}
-      />
+        <Value
+          initial="chocolate"
+          render={selected => (
+            <DigitSelect
+              onChange={e => {
+                selected.set(e.target.value);
+                action("Selected")(e);
+              }}
+              value={selected.value}
+              disabled={disabled}
+              upperLabel={upperLabel}
+              lowerLabel={lowerLabel}
+              valueToTextMap={{
+                chocolate: "Chocolate",
+                vanilla: "Vanilla",
+                strawberry: "Strawberry"
+              }}
+              allowToChooseNone
+              outline={style === "outline"}
+              filled={style === "filled"}
+            />
+          )}
+        />
       </DigitProviders>
-      
-
     );
   })
 );

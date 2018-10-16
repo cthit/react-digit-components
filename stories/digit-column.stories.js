@@ -13,14 +13,13 @@ import { withReadme } from "storybook-readme";
 import DigitColumnReadme from "../components/styles/digit-layout/column-readme.md";
 import {
   Column,
-  Row,
   Size,
   Fill,
-  Center,
-  Flex
+  Center
 } from "../components/styles/digit-layout/DigitLayout.styles";
-import { Display } from "../components/styles/digit-text/DigitText.styles";
+import { Heading5 } from "../components/styles/digit-text/DigitText.styles";
 import styled from "styled-components";
+import DigitProviders from "../components/declaratives/digit-providers";
 
 const DigitColumnStory = storiesOf("Layout", module);
 
@@ -42,7 +41,7 @@ const DummyItem = ({ text, color }) => (
   <Size absWidth="50px" absHeight="50px">
     <BackgroundColor color={color}>
       <Center>
-        <Display text={text} />
+        <Heading5 text={text} />
       </Center>
     </BackgroundColor>
   </Size>
@@ -64,23 +63,25 @@ DigitColumnStory.add(
     });
 
     return (
-      <BorderSize absWidth="500px" absHeight="500px">
-        <Column
-          topAlign={align === "Top"}
-          bottomAlign={align === "Bottom"}
-          reverse={reverse}
-          center={center}
-          centerHorizontal={centerHorizontal}
-          centerVertical={centerVertical}
-          fill
-          padding={padding + "px"}
-        >
-          <DummyItem text="1" color="blue" />
-          <DummyItem text="2" color="yellow" />
-          <DummyItem text="3" color="green" />
-          <DummyItem text="4" color="red" />
-        </Column>
-      </BorderSize>
+      <DigitProviders>
+        <BorderSize absWidth="500px" absHeight="500px">
+          <Column
+            topAlign={align === "Top"}
+            bottomAlign={align === "Bottom"}
+            reverse={reverse}
+            center={center}
+            centerHorizontal={centerHorizontal}
+            centerVertical={centerVertical}
+            fill
+            padding={padding + "px"}
+          >
+            <DummyItem text="1" color="blue" />
+            <DummyItem text="2" color="yellow" />
+            <DummyItem text="3" color="green" />
+            <DummyItem text="4" color="red" />
+          </Column>
+        </BorderSize>
+      </DigitProviders>
     );
   })
 );

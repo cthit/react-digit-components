@@ -19,8 +19,9 @@ import {
   Center,
   Flex
 } from "../components/styles/digit-layout/DigitLayout.styles";
-import { Display } from "../components/styles/digit-text/DigitText.styles";
+import { Heading5 } from "../components/styles/digit-text/DigitText.styles";
 import styled from "styled-components";
+import DigitProviders from "../components/declaratives/digit-providers";
 
 const DigitRowStory = storiesOf("Layout", module);
 
@@ -42,7 +43,7 @@ const DummyItem = ({ text, color }) => (
   <Size absWidth="50px" absHeight="50px">
     <BackgroundColor color={color}>
       <Center>
-        <Display text={text} />
+        <Heading5 text={text} />
       </Center>
     </BackgroundColor>
   </Size>
@@ -64,23 +65,25 @@ DigitRowStory.add(
     });
 
     return (
-      <BorderSize absWidth="500px" absHeight="500px">
-        <Row
-          leftAlign={align === "Left"}
-          rightAlign={align === "Right"}
-          reverse={reverse}
-          center={center}
-          centerHorizontal={centerHorizontal}
-          centerVertical={centerVertical}
-          fill
-          padding={padding + "px"}
-        >
-          <DummyItem text="1" color="blue" />
-          <DummyItem text="2" color="yellow" />
-          <DummyItem text="3" color="green" />
-          <DummyItem text="4" color="red" />
-        </Row>
-      </BorderSize>
+      <DigitProviders>
+        <BorderSize absWidth="500px" absHeight="500px">
+          <Row
+            leftAlign={align === "Left"}
+            rightAlign={align === "Right"}
+            reverse={reverse}
+            center={center}
+            centerHorizontal={centerHorizontal}
+            centerVertical={centerVertical}
+            fill
+            padding={padding + "px"}
+          >
+            <DummyItem text="1" color="blue" />
+            <DummyItem text="2" color="yellow" />
+            <DummyItem text="3" color="green" />
+            <DummyItem text="4" color="red" />
+          </Row>
+        </BorderSize>
+      </DigitProviders>
     );
   })
 );

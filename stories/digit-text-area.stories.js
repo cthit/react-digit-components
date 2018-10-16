@@ -14,7 +14,7 @@ import { linkTo } from "@storybook/addon-links";
 import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitTextArea, DigitLayout } from "../components";
+import { DigitTextArea, DigitLayout, DigitProviders } from "../components";
 import DigitTextAreaReadme from "../components/elements/digit-text-field/readme.md";
 
 const styleLabel = "style";
@@ -49,33 +49,35 @@ DigitTextAreaStory.add(
     });
 
     return (
-      <State initial={{ value: "This is text" }}>
-        {({ state, setState }) => (
-          <DigitLayout.Size width="300px">
-            <DigitTextArea
-              value={state.value}
-              onChange={e => {
-                setState({
-                  value: e.target.value
-                });
-                action("value_changed")(e);
-              }}
-              onBlur={e => {
-                action("blur")(e);
-              }}
-              error={error}
-              errorMessage={errorMessage}
-              lowerLabel={lowerLabel}
-              upperLabel={upperLabel}
-              disabled={disabled}
-              outline={style === "outline"}
-              filled={style === "filled"}
-              rows={rows}
-              rowsMax={rowsMax}
-            />
-          </DigitLayout.Size>
-        )}
-      </State>
+      <DigitProviders>
+        <State initial={{ value: "This is text" }}>
+          {({ state, setState }) => (
+            <DigitLayout.Size width="300px">
+              <DigitTextArea
+                value={state.value}
+                onChange={e => {
+                  setState({
+                    value: e.target.value
+                  });
+                  action("value_changed")(e);
+                }}
+                onBlur={e => {
+                  action("blur")(e);
+                }}
+                error={error}
+                errorMessage={errorMessage}
+                lowerLabel={lowerLabel}
+                upperLabel={upperLabel}
+                disabled={disabled}
+                outline={style === "outline"}
+                filled={style === "filled"}
+                rows={rows}
+                rowsMax={rowsMax}
+              />
+            </DigitLayout.Size>
+          )}
+        </State>
+      </DigitProviders>
     );
   })
 );

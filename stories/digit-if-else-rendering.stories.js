@@ -7,7 +7,9 @@ import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
 import { DigitIfElseRendering } from "../components";
+import DigitProviders from "../components/declaratives/digit-providers";
 import DigitIfElseRenderingReadme from "../components/elements/digit-button/readme.md";
+import { Text, Title } from "../components/styles/digit-text/DigitText.styles";
 
 const DigitIfElseRenderingStory = storiesOf("Declaratives", module);
 
@@ -19,11 +21,13 @@ DigitIfElseRenderingStory.add(
     const renderIf = boolean("Render if", true);
 
     return (
-      <DigitIfElseRendering
-        ifRender={() => <div>Render this?</div>}
-        elseRender={() => <div>Render That</div>}
-        test={renderIf}
-      />
+      <DigitProviders>
+        <DigitIfElseRendering
+          ifRender={() => <Text text="Render this?" />}
+          elseRender={() => <Title text="Render That" />}
+          test={renderIf}
+        />
+      </DigitProviders>
     );
   })
 );

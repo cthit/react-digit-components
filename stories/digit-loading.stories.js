@@ -4,7 +4,7 @@ import { withKnobs, boolean, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
-import { DigitLoading } from "../components";
+import { DigitLoading, DigitProviders } from "../components";
 import DigitLoadingReadme from "../components/elements/digit-loading/readme.md";
 
 const DigitLoadingStory = storiesOf("Elements", module);
@@ -22,6 +22,10 @@ DigitLoadingStory.add(
       step: 1
     });
 
-    return <DigitLoading size={size} loading={loading} />;
+    return (
+      <DigitProviders>
+        <DigitLoading size={size} loading={loading} />
+      </DigitProviders>
+    );
   })
 );

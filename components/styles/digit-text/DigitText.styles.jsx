@@ -9,6 +9,7 @@ export const Heading1 = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 6rem;
   font-weight: 900;
 `;
 
@@ -23,6 +24,7 @@ export const Heading2 = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 3.75rem;
   font-weight: 900;
 `;
 
@@ -37,6 +39,7 @@ export const Heading3 = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 3rem;
   font-weight: 900;
 `;
 
@@ -51,6 +54,7 @@ export const Heading4 = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 2.125rem;
   font-weight: 900;
 `;
 
@@ -65,6 +69,7 @@ export const Heading5 = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 1.5rem;
   font-weight: 900;
 `;
 
@@ -79,6 +84,7 @@ export const Heading6 = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 1.25rem;
   font-weight: 900;
 `;
 
@@ -93,6 +99,7 @@ export const Title = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 1.25rem;
   font-weight: 900;
 `;
 
@@ -107,6 +114,7 @@ export const Subtitle = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 1rem;
 `;
 
 Subtitle.propTypes = {
@@ -120,6 +128,7 @@ export const Subtitle2 = styled(({ text, white, ...rest }) => (
   </Typography>
 ))`
   color: ${props => (props.white ? "white" : "")};
+  font-size: 0.875rem;
 `;
 
 Subtitle2.propTypes = {
@@ -132,9 +141,9 @@ export const Text = styled(({ text, white, bold, ...rest }) => (
     {text}
   </Typography>
 ))`
-  font-size: 16px;
+  font-size: 1rem !important;
   color: ${props => (props.white ? "white" : "")};
-  font-weight: ${props => (props.bold ? "500" : "inherit")};
+  font-weight: ${props => (props.bold ? "900" : "inherit")};
 `;
 
 Text.propTypes = {

@@ -98,8 +98,49 @@ export const Grid = styled.div`
   grid-auto-columns: ${props => props.autoColumns || ""};
   grid-auto-rows: ${props => props.autoRows || ""};
   grid-auto-flow: ${props => props.autoFlow || ""};
-  flex: ${props => (props.fill ? "1" : "")};
+  flex: ${props => (props.fill === "true" ? "1" : "")};
 `;
+
+Grid.propTypes = {
+  inline: PropTypes.bool,
+  columns: PropTypes.string,
+  rows: PropTypes.number,
+  areas: PropTypes.string,
+  padding: PropTypes.string,
+  columnGap: PropTypes.string,
+  rowGap: PropTypes.string,
+  justifyItems: PropTypes.oneOf([
+    "start",
+    "end",
+    "center",
+    "space-between",
+    "space-around",
+    "space-evenly"
+  ]),
+  alignItems: PropTypes.oneOf(["start", "end", "center", "stretch"]),
+  justifyContent: PropTypes.oneOf([
+    "start",
+    "end",
+    "center",
+    "stretch",
+    "space-around",
+    "space-between",
+    "space-evenly"
+  ]),
+  alignContent: PropTypes.oneOf([
+    "start",
+    "end",
+    "center",
+    "stretch",
+    "space-around",
+    "space-between",
+    "space-evenly"
+  ]),
+  autoColumns: PropTypes.string,
+  autoRows: PropTypes.string,
+  autoFlow: PropTypes.string,
+  fill: PropTypes.oneOf(["true", "false"])
+};
 
 export const GridItem = styled.div`
   grid-column-start: ${props => props.columnStart || ""}
@@ -121,6 +162,15 @@ export const UniformGrid = styled(
     min-height: ${props => props.minItemHeight || ""};
   }
 `;
+
+UniformGrid.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired,
+  minItemWidth: PropTypes.string,
+  minItemHeight: PropTypes.string
+};
 
 export const Column = styled(
   ({

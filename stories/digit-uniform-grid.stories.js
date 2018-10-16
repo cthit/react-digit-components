@@ -53,10 +53,11 @@ DigitUniformGridStory.add(
         minItemWidth={minItemWidth}
         minItemHeight={minItemHeight}
         padding={`${padding}px`}
-        fill
+        fill="true"
       >
         {Array.from(new Array(numItems), (_, i) => (
           <DummyItem
+            key={i}
             text={`${i + 1}`}
             color={["red", "green", "blue", "yellow"][i % 4]}
           />

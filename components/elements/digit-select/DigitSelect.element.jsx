@@ -29,12 +29,12 @@ class DigitSelect extends React.Component {
       reverse,
       inputProps,
       filled,
-      outline
+      outlined
     } = this.props;
     return (
       <Fill>
         <StyledFormControl
-          variant={filled ? "filled" : outline ? "outlined" : "standard"}
+          variant={filled ? "filled" : outlined ? "outlined" : "standard"}
         >
           <InputLabel
             ref={ref => {
@@ -48,11 +48,11 @@ class DigitSelect extends React.Component {
             disabled={disabled}
             displayEmpty={allowToChooseNone}
             value={value}
-            variant={filled ? "filled" : outline ? "outlined" : "standard"}
+            variant={filled ? "filled" : outlined ? "outlined" : "standard"}
             input={
               filled ? (
                 <FilledInput />
-              ) : outline ? (
+              ) : outlined ? (
                 <OutlinedInput
                   labelWidth={this.labelRef ? this.labelRef.offsetWidth : 0}
                 />
@@ -109,7 +109,7 @@ DigitSelect.propTypes = {
   lowerLabel: PropTypes.string,
   reverse: PropTypes.bool,
   inputProps: PropTypes.object,
-  outline: PropTypes.bool,
+  outlined: PropTypes.bool,
   filled: PropTypes.bool,
   name: PropTypes.string
 };

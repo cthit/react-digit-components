@@ -14,7 +14,7 @@ const colorOptions = ["primary", "secondary", "none"];
 const colorDefaultValue = "none";
 
 const styleLabel = "style";
-const styleOptions = ["raised", "outline", "flat"];
+const styleOptions = ["raised", "outlined", "flat"];
 const styleDefaultValue = "flat";
 
 const DigitButtonStory = storiesOf("Elements", module);
@@ -36,7 +36,7 @@ DigitButtonStory.add(
           primary={color === "primary"}
           secondary={color === "secondary"}
           raised={style === "raised"}
-          outline={style === "outline"}
+          outlined={style === "outlined"}
           disabled={disabled}
         />
       </DigitProviders>

@@ -29,7 +29,7 @@ const vertOptions = ["primary", "secondary", "none"];
 const vertDefaultValue = "none";
 
 const horiLabel = "style";
-const horiOptions = ["raised", "outline", "flat"];
+const horiOptions = ["raised", "outlined", "flat"];
 const horiDefaultValue = "flat";
 
 const DigitButtonStory = storiesOf("Views", module);

@@ -64,7 +64,7 @@ import {
               <DigitButton
                 text="Add random todo"
                 primary
-                outline
+                outlined
                 onClick={() => {
                   const randomTodos = [
                     "Finish this form",

@@ -29,7 +29,7 @@ class StoryDigitSelect extends React.Component {
           strawberry: "Strawberry"
         }}
         allowToChooseNone
-        outline={style === "outline"}
+        outlined={style === "outlined"}
         filled={style === "filled"}
       />
     );

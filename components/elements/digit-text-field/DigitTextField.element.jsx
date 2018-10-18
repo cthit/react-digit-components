@@ -15,14 +15,6 @@ import {
 
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
-const element = document.createElement("canvas");
-const context = element.getContext("2d");
-
-function get_tex_size(txt, font) {
-  context.font = font;
-  return context.measureText(txt).width;
-}
-
 class DigitTextField extends React.Component {
   render() {
     const {

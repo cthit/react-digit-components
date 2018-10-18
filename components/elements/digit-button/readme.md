@@ -1,6 +1,6 @@
 # DigitButton
 
-A simple button. Use color and style with care, reflect on what button is the most important one in a single page and give that one more color or a differnt style. Do not confuse the user with multiple high priority buttons. The order for priority regarding style is raised, outline and last flat. The order for priority regarding color is secondary, primary and lastly none.
+A simple button. Use color and style with care, reflect on what button is the most important one in a single page and give that one more color or a differnt style. Do not confuse the user with multiple high priority buttons. The order for priority regarding style is raised, outlined and last flat. The order for priority regarding color is secondary, primary and lastly none.
 
 Here are some examples:
 
@@ -27,11 +27,11 @@ import { DigitButton } from "react-digit-components";
 />
 
 <DigitButton
-  text="A secondary outline button"
+  text="A secondary outlined button"
   secondary
-  outline
+  outlined
   onClick={() => {
-    console.log("Secondary and outline button has been pressed");
+    console.log("Secondary and outlined button has been pressed");
   }}
 />
 

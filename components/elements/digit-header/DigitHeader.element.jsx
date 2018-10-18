@@ -62,6 +62,14 @@ const HorizontalFill = styled.div`
 const StyledToolbar = styled(Toolbar)`
   height: ${props => (props.height == null ? "64px" : props.height)};
   min-height: 0px;
+
+  padding-left: 30px;
+  padding-right: 8px;
+
+  /*Medium device (md)*/
+  @media (max-width: 960px) {
+    padding-left: 8px;
+  }
 `;
 
 const StyledDrawer = styled(({ ...rest }) => (

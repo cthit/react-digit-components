@@ -4,11 +4,11 @@ import { State } from "react-powerplug";
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
 import { DigitSwitch, DigitProviders } from "../../components";
 import DigitSwitchReadme from "../../components/elements/digit-switch/readme.md";
+import StoryDigitSwitch from "./StoryDigitSwitch";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -29,26 +29,13 @@ DigitSwitchStory.add(
 
     return (
       <DigitProviders>
-        <State initial={{ value: true }}>
-          {({ state, setState }) => (
-            <DigitSwitch
-              value={state.value}
-              onChange={e => {
-                setState({
-                  value: e.target.checked
-                });
-                action("value")(e);
-              }}
-              label={label}
-              onBlur={action("blur")}
-              primary={color === "primary"}
-              secondary={color === "secondary"}
-              disabled={disabled}
-              error={error}
-              errorMessage={errorMessage}
-            />
-          )}
-        </State>
+        <StoryDigitSwitch
+          label={label}
+          color={color}
+          disabled={disabled}
+          error={error}
+          errorMessage={errorMessage}
+        />
       </DigitProviders>
     );
   })

@@ -3,7 +3,6 @@ import React from "react";
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
 import { DigitProviders } from "../../components";

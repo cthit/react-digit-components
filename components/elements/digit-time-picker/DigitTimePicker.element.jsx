@@ -17,8 +17,8 @@ const DigitTimePicker = ({
   cancelLabel = "Avbryt",
   okLabel = "Ok",
   clearLabel = "Rensa",
-  emptyLabel = "Tryck här för datum",
-  invalidLabel = "Ogiltigt datum",
+  emptyLabel = "Tryck här för tid",
+  invalidLabel = "Ogiltig tid",
   classes
 }) => (
   <TimePicker

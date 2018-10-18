@@ -7,15 +7,12 @@ import {
   boolean,
   number
 } from "@storybook/addon-knobs";
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitTextArea, DigitLayout, DigitProviders } from "../../components";
+import { DigitLayout, DigitProviders } from "../../components";
 import DigitTextAreaReadme from "../../components/elements/digit-text-field/readme.md";
+import StoryDigitTextArea from "./StoryDigitTextArea";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outline", "standard"];
@@ -41,7 +38,7 @@ DigitTextAreaStory.add(
       step: 1
     });
 
-    const rowsMax = number("Fixed width", 10, {
+    const rowsMax = number("Rows max", 10, {
       range: true,
       min: 1,
       max: 20,
@@ -50,33 +47,18 @@ DigitTextAreaStory.add(
 
     return (
       <DigitProviders>
-        <State initial={{ value: "This is text" }}>
-          {({ state, setState }) => (
-            <DigitLayout.Size width="300px">
-              <DigitTextArea
-                value={state.value}
-                onChange={e => {
-                  setState({
-                    value: e.target.value
-                  });
-                  action("value_changed")(e);
-                }}
-                onBlur={e => {
-                  action("blur")(e);
-                }}
-                error={error}
-                errorMessage={errorMessage}
-                lowerLabel={lowerLabel}
-                upperLabel={upperLabel}
-                disabled={disabled}
-                outline={style === "outline"}
-                filled={style === "filled"}
-                rows={rows}
-                rowsMax={rowsMax}
-              />
-            </DigitLayout.Size>
-          )}
-        </State>
+        <DigitLayout.Size width="300px">
+          <StoryDigitTextArea
+            upperLabel={upperLabel}
+            lowerLabel={lowerLabel}
+            error={error}
+            errorMessage={errorMessage}
+            disabled={disabled}
+            style={style}
+            rows={rows}
+            rowsMax={rowsMax}
+          />
+        </DigitLayout.Size>
       </DigitProviders>
     );
   })

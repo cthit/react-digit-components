@@ -1,15 +1,12 @@
 import React from "react";
 
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { withKnobs, text } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 
 import { DigitProviders, DigitLayout } from "../../components";
 import DigitTimePickerReadme from "../../components/elements/digit-time-picker/readme.md";
-import DigitTimePicker from "../../components/elements/digit-time-picker/DigitTimePicker.element";
-import { Value } from "react-powerplug";
+import StoryDigitTimePicker from "./StoryDigitTimePicker";
 
 const DigitTimePickerStory = storiesOf("Elements", module);
 
@@ -22,20 +19,9 @@ DigitTimePickerStory.add(
 
     return (
       <DigitProviders>
-        <Value
-          initial={new Date()}
-          render={({ set, value }) => (
-            <DigitLayout.Size absWidth="300px" absHeight="300px">
-              <DigitTimePicker
-                upperLabel={upperLabel}
-                value={value}
-                onChange={date => {
-                  set(date);
-                }}
-              />
-            </DigitLayout.Size>
-          )}
-        />
+        <DigitLayout.Size absWidth="300px" absHeight="300px">
+          <StoryDigitTimePicker upperLabel={upperLabel} />
+        </DigitLayout.Size>
       </DigitProviders>
     );
   })

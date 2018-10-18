@@ -1,15 +1,14 @@
 import React from "react";
 
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
-import { withInfo } from "@storybook/addon-info";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 import { State } from "react-powerplug";
 import { withReadme } from "storybook-readme";
 
-import { DigitCheckbox, DigitProviders } from "../../components";
+import { DigitProviders } from "../../components";
 import DigitCheckboxReadme from "../../components/elements/digit-checkbox/readme.md";
+import StoryDigitCheckbox from "./StoryDigitCheckbox";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -30,28 +29,19 @@ DigitCheckboxStory.add(
 
     return (
       <DigitProviders>
-        <State initial={{ checked: true }}>
-          {({ state, setState }) => (
-            <DigitCheckbox
-              disabled={disabled}
-              error={error}
-              errorMessage={errorMessage}
-              label={label}
-              primary={color === "primary"}
-              secondary={color === "secondary"}
-              value={state.checked}
-              onChange={e => {
-                setState({
-                  checked: e.target.checked
-                });
-                action("toggled")(e);
-              }}
-              onBlur={e => {
-                action("blur")(e);
-              }}
-            />
-          )}
-        </State>
+        <StoryDigitCheckbox
+          color={color}
+          label={label}
+          disabled={disabled}
+          error={error}
+          errorMessage={errorMessage}
+          onChange={e => {
+            action("toggled")(e);
+          }}
+          onBlur={e => {
+            action("blur")(e);
+          }}
+        />
       </DigitProviders>
     );
   })

@@ -28,13 +28,13 @@ class DigitTextArea extends React.Component {
       disabled,
       rows,
       rowsMax,
-      outline,
+      outlined,
       filled
     } = this.props;
     return (
       <Fill>
         <FormControl
-          variant={outline ? "outlined" : filled ? "filled" : "standard"}
+          variant={outlined ? "outlined" : filled ? "filled" : "standard"}
           error={error}
         >
           <InputLabel
@@ -46,7 +46,7 @@ class DigitTextArea extends React.Component {
           </InputLabel>
 
           <DigitIfElseRendering
-            test={outline != null && outline}
+            test={outlined != null && outlined}
             ifRender={() => (
               <OutlinedInput
                 name={name}
@@ -79,7 +79,7 @@ class DigitTextArea extends React.Component {
           />
 
           <DigitIfElseRendering
-            test={!filled && !outline}
+            test={!filled && !outlined}
             ifRender={() => (
               <Input
                 name={name}
@@ -124,7 +124,7 @@ DigitTextArea.propTypes = {
   disabled: PropTypes.bool,
   rows: PropTypes.number.isRequired,
   rowsMax: PropTypes.number.isRequired,
-  outline: PropTypes.bool,
+  outlined: PropTypes.bool,
   filled: PropTypes.bool
 };
 

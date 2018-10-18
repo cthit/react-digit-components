@@ -34,7 +34,7 @@ class StoryDigitTextArea extends React.Component {
         lowerLabel={lowerLabel}
         upperLabel={upperLabel}
         disabled={disabled}
-        outline={style === "outline"}
+        outlined={style === "outlined"}
         filled={style === "filled"}
         rows={rows}
         rowsMax={rowsMax}

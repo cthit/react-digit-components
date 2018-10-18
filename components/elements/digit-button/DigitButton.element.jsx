@@ -10,14 +10,14 @@ const DigitButton = ({
   raised,
   disabled,
   submit,
-  outline
+  outlined
 }) => (
   <Button
     type={submit ? "submit" : "button"}
     onClick={onClick}
     disabled={disabled}
     color={primary ? "primary" : secondary ? "secondary" : "default"}
-    variant={raised ? "contained" : outline ? "outlined" : "text"}
+    variant={raised ? "contained" : outlined ? "outlined" : "text"}
   >
     {text}
   </Button>
@@ -29,7 +29,7 @@ DigitButton.propTypes = {
   primary: PropTypes.bool,
   secondary: PropTypes.bool,
   raised: PropTypes.bool,
-  outline: PropTypes.bool,
+  outlined: PropTypes.bool,
   disabled: PropTypes.bool,
   submit: PropTypes.bool
 };

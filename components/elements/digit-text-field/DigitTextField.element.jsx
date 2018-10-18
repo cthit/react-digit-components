@@ -29,14 +29,14 @@ class DigitTextField extends React.Component {
       error,
       errorMessage,
       disabled,
-      outline,
+      outlined,
       filled
     } = this.props;
 
     return (
       <Fill>
         <FormControl
-          variant={outline ? "outlined" : filled ? "filled" : "standard"}
+          variant={outlined ? "outlined" : filled ? "filled" : "standard"}
           error={error}
         >
           <InputLabel
@@ -47,7 +47,7 @@ class DigitTextField extends React.Component {
             {upperLabel}
           </InputLabel>
           <DigitIfElseRendering
-            test={outline}
+            test={outlined}
             ifRender={() => (
               <OutlinedInput
                 name={name}
@@ -76,7 +76,7 @@ class DigitTextField extends React.Component {
           />
 
           <DigitIfElseRendering
-            test={!filled && !outline}
+            test={!filled && !outlined}
             ifRender={() => (
               <Input
                 name={name}
@@ -117,7 +117,7 @@ DigitTextField.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
   disabled: PropTypes.bool,
-  outline: PropTypes.bool,
+  outlined: PropTypes.bool,
   filled: PropTypes.bool
 };
 

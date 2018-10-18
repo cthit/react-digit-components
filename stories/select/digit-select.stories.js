@@ -10,7 +10,7 @@ import DigitSelectReadme from "../../components/elements/digit-select/readme.md"
 import StoryDigitSelect from "./StoryDigitSelect";
 
 const styleLabel = "style";
-const styleOptions = ["filled", "outline", "standard"];
+const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
 const DigitSelectStory = storiesOf("Elements", module);

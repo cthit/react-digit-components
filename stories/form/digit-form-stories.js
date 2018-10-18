@@ -32,7 +32,7 @@ const colorOptions = ["primary", "secondary", "none"];
 const colorDefaultValue = "none";
 
 const styleLabel = "style";
-const styleOptions = ["raised", "outline", "flat"];
+const styleOptions = ["raised", "outlined", "flat"];
 const styleDefaultValue = "flat";
 
 const DigitFormStory = storiesOf("Elements", module);
@@ -100,7 +100,7 @@ DigitFormStory.add(
                       <DigitButton
                         text="Add random todo"
                         primary
-                        outline
+                        outlined
                         onClick={() => {
                           const randomTodos = [
                             "Finish this form",

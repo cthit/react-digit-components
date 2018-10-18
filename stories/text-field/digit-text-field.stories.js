@@ -13,7 +13,7 @@ const typeOptions = ["normal", "password", "numbersOnly"];
 const typeDefaultValue = "normal";
 
 const styleLabel = "style";
-const styleOptions = ["filled", "outline", "standard"];
+const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
 const DigitTextFieldStory = storiesOf("Elements", module);

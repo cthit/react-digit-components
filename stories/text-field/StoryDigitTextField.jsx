@@ -35,7 +35,7 @@ class StoryDigitTextField extends React.Component {
         lowerLabel={lowerLabel}
         upperLabel={upperLabel}
         disabled={disabled}
-        outline={style === "outline"}
+        outlined={style === "outlined"}
         filled={style === "filled"}
       />
     );

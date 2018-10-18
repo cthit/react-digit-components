@@ -15,7 +15,7 @@ import DigitTextAreaReadme from "../../components/elements/digit-text-field/read
 import StoryDigitTextArea from "./StoryDigitTextArea";
 
 const styleLabel = "style";
-const styleOptions = ["filled", "outline", "standard"];
+const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
 const DigitTextAreaStory = storiesOf("Elements", module);

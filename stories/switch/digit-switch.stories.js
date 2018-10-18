@@ -1,12 +1,10 @@
 import React from "react";
-import { State } from "react-powerplug";
 
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
 import { withReadme } from "storybook-readme";
 
-import { DigitSwitch, DigitProviders } from "../../components";
+import { DigitProviders } from "../../components";
 import DigitSwitchReadme from "../../components/elements/digit-switch/readme.md";
 import StoryDigitSwitch from "./StoryDigitSwitch";
 

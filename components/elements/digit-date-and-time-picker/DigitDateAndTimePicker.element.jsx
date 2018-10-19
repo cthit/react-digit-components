@@ -63,7 +63,7 @@ DigitDateAndTimePicker.propTypes = {
   clearable: PropTypes.bool,
   /** If true, then the user can't select a date past now. */
   disablePast: PropTypes.bool,
-  /** What will be presented if a date is invalid */
+  /** What will be presented if a date and or time is invalid */
   invalidLabel: PropTypes.string,
   /** What will be presented if no date and time has been selected */
   emptyLabel: PropTypes.string,

@@ -37,15 +37,33 @@ const DigitTimePicker = ({
 
 DigitTimePicker.displayName = "DigitTimePicker";
 DigitTimePicker.propTypes = {
+  /** The current value. This component is uncontrolled, meaning that
+   * you have to store the value and react on changes using
+   * the onChange function.
+   */
   value: PropTypes.instanceOf(Date),
+  /** This function will be called when the user has selected
+   * a new time.
+   */
   onChange: PropTypes.func,
+  /** A label that is shown over the input field. */
   upperLabel: PropTypes.string,
+  /** The label for the cancel button. The user presses button
+   * when they want to close the dialog and not save time.
+   */
   cancelLabel: PropTypes.string,
+  /** The label for the ok button. The user presses this button
+   * when they have selected a time.
+   */
   okLabel: PropTypes.string,
+  /** Button text for the clear button, which will clear the button.
+   * The clear button will only be shown if clearable is true.
+   */
   clearLabel: PropTypes.string,
+  /** What will be presented if no time has been selected */
   emptyLabel: PropTypes.string,
-  invalidLabel: PropTypes.string,
-  classes: PropTypes.object
+  /** What will be presented if a time is invalid */
+  invalidLabel: PropTypes.string
 };
 
 /** This is a temp solution to get the correct prop types from StoryBook. */

@@ -27,7 +27,6 @@ class DigitSelect extends React.Component {
       upperLabel,
       lowerLabel,
       reverse,
-      inputProps,
       filled,
       outlined
     } = this.props;
@@ -63,8 +62,7 @@ class DigitSelect extends React.Component {
             inputProps={{
               id: "id-" + name,
               name: name,
-              color: "secondary",
-              ...inputProps
+              color: "secondary"
             }}
           >
             {allowToChooseNone ? (
@@ -101,17 +99,36 @@ function _getValues(valueToTextMap, reverse) {
 
 DigitSelect.displayName = "DigitSelect";
 DigitSelect.propTypes = {
+  /** The selected value of the DigitSelect. Note that
+   * this component is unmanaged, which means you need to
+   * store the selected value yourself. Use onChange to
+   * get new selected values.
+   */
   value: PropTypes.string.isRequired,
+  /** This function will be called when a new
+   * value has been selected inside the DigitSelect. The
+   * first argument is the new selected value.
+   */
   onChange: PropTypes.func.isRequired,
+  /** If true, then you can't select a new value. */
   disabled: PropTypes.bool,
-  valueToTextMap: PropTypes.object.isRequired,
+  /** A string to string map, the pretty text to render. */
+  valueToTextMap: PropTypes.objectOf(PropTypes.string).isRequired,
+  /** If true, then the user can select nothing. */
   allowToChooseNone: PropTypes.bool,
+  /** The text label over the DigitSelect */
   upperLabel: PropTypes.string,
+  /** The text label under the DigitSelect */
   lowerLabel: PropTypes.string,
+  /** If true, then reverses the list */
   reverse: PropTypes.bool,
-  inputProps: PropTypes.object,
+  /**
+   * Adds an outline around the button in black color.
+   */
   outlined: PropTypes.bool,
+  /** Adds a grey isch background */
   filled: PropTypes.bool,
+  /** A unique name relative to a form. e.g. pizzaTopping or attendanceYear.*/
   name: PropTypes.string
 };
 

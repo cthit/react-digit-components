@@ -164,8 +164,12 @@ GridItem.propTypes = {
 };
 
 export const UniformGrid = styled(
-  ({ minItemWidth, minItemHeight, children, ...rest }) => (
-    <Grid columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`} {...rest}>
+  ({ minItemWidth, minItemHeight, children, padding, ...rest }) => (
+    <Grid
+      columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`}
+      padding={padding}
+      {...rest}
+    >
       {children}
     </Grid>
   )
@@ -182,7 +186,8 @@ UniformGrid.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ]).isRequired,
+  padding: PropTypes.string
 };
 
 export const Column = styled(

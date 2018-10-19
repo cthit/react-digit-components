@@ -1,7 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import styled from "styled-components";
 import { Button } from "@material-ui/core";
 
 const DigitFAB = ({ onClick, disabled, primary, secondary, submit, icon }) => (
@@ -18,11 +16,21 @@ const DigitFAB = ({ onClick, disabled, primary, secondary, submit, icon }) => (
 
 DigitFAB.displayName = "DigitFAB";
 DigitFAB.propTypes = {
+  /** The function which will be called when the button has been pressed.*/
   onClick: PropTypes.func,
+  /** The icon of the FAB. Use @material-ui/icons.  */
   icon: PropTypes.func.isRequired,
+  /** Disables the button. onClick will not be called if you click the button.
+   * The styling of the button also changes to reflect.
+   */
   disabled: PropTypes.bool,
+  /** Sets the color to the primary one. This has predence precedence over secondary. */
   primary: PropTypes.bool,
+  /** Sets the color to the secondary one. This has precedence over the normal button. */
   secondary: PropTypes.bool,
+  /** If true, then forms will be called if you press this button. No need to use onClick.
+   * This can be useful for e.g. DigitForm.
+   */
   submit: PropTypes.bool
 };
 

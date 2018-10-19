@@ -48,7 +48,7 @@ const DigitDatePicker = ({
 
 DigitDatePicker.displayName = "DigitDatePicker";
 DigitDatePicker.propTypes = {
-  /** The current value. This component is unmanaged, meaning that
+  /** The current value. This component is uncontrolled, meaning that
    * you have to store the value and react on changes using
    * the onChange function.
    */

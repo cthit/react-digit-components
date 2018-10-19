@@ -100,7 +100,7 @@ function _getValues(valueToTextMap, reverse) {
 DigitSelect.displayName = "DigitSelect";
 DigitSelect.propTypes = {
   /** The selected value of the DigitSelect. Note that
-   * this component is unmanaged, which means you need to
+   * this component is uncontrolled, which means you need to
    * store the selected value yourself. Use onChange to
    * get new selected values.
    */

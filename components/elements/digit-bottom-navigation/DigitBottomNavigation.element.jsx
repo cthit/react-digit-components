@@ -33,7 +33,7 @@ const DigitBottomNavigation = ({
 DigitBottomNavigation.displayName = "DigitBottomNavigation";
 DigitBottomNavigation.propTypes = {
   /** The selected tab, can be 0 -> (number of tabs - 1).
-   * This is an element, which means its unmanaged.
+   * This is an element, which means its uncontrolled.
    * You need to save selected your self and with
    * onChange update it.
    */

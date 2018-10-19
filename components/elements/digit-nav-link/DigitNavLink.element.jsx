@@ -19,9 +19,18 @@ const Link = styled(NavLink)`
 
 DigitNavLink.displayName = "DigitNavLink";
 DigitNavLink.propTypes = {
+  /** The text display inside the link. */
   text: PropTypes.string.isRequired,
+  /** The icon of the FAB. Use @material-ui/icons.  */
   icon: PropTypes.func,
+  /** The redirect link. Should be relative to the root.
+   * Do not include the website url.
+   */
   link: PropTypes.string.isRequired,
+  /** When the link is clicked, this is called.
+   * It is useful to call closeDrawer from DigitHeaders renderDrawer function
+   * to close the drawer when a user clicks on a link.
+   */
   onClick: PropTypes.func
 };
 

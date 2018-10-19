@@ -64,9 +64,21 @@ class DigitTranslations extends React.Component {
 
 DigitTranslations.displayName = "DigitTranslations";
 DigitTranslations.propTypes = {
+  /** A uniquePath used to distinguish DigitTranslations from each other.
+   * If you use the same translations, use the same uniquePath.
+   */
   uniquePath: PropTypes.string,
+  /** Translations that is unique to the uniquePath */
   translations: PropTypes.object,
+  /** Common translations. This should be the same for every usage of DigitTranslations
+   * Instead of having "Yes" and "No" defined in every translations.json, you can have one common
+   * tranlsations for simple phrases.
+   */
   common: PropTypes.object,
+  /** Render prop that has three argument.
+   * (text) - The text object with the selected language loaded.
+   * (activeLangauge) - The current langauge ["sv", "en"]
+   * (setActiveLangauge) - A function where you can set the active langauge. Either ["sv", "en"] */
   render: PropTypes.func
 };
 

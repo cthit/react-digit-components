@@ -27,19 +27,11 @@ import {
 } from "../../components";
 import DigitFormReadme from "../../components/elements/digit-form/readme.md";
 
-const colorLabel = "color";
-const colorOptions = ["primary", "secondary", "none"];
-const colorDefaultValue = "none";
-
-const styleLabel = "style";
-const styleOptions = ["raised", "outlined", "flat"];
-const styleDefaultValue = "flat";
-
 const DigitFormStory = storiesOf("Elements", module);
 
 DigitFormStory.add(
   "DigitForm",
-  withReadme(DigitFormReadme, () => {
+  () => {
     return (
       <DigitProviders>
         <DigitForm
@@ -127,5 +119,16 @@ DigitFormStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitFormReadme,
+      propTables: [],
+      propTablesExclude: [
+        DigitProviders,
+        DigitLayout.Fill,
+        DigitIfElseRendering
+      ]
+    }
+  }
 );

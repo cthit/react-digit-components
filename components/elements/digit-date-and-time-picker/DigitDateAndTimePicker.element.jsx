@@ -70,8 +70,10 @@ DigitDateAndTimePicker.propTypes = {
   onChange: PropTypes.func.isRequired,
   label: PropTypes.string,
   showTodayButton: PropTypes.bool,
-  setFieldValue: PropTypes.func,
-  classes: PropTypes.object.isRequired //Supplied by material-ui
+  setFieldValue: PropTypes.func
 };
+
+/** This is a temp solution to get the correct prop types from StoryBook. */
+export { DigitDateAndTimePicker };
 
 export default withStyles(styles)(DigitDateAndTimePicker);

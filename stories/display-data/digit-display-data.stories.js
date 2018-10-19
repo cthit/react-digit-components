@@ -1,16 +1,7 @@
 import React from "react";
 
-import {
-  withKnobs,
-  select,
-  text,
-  boolean,
-  number
-} from "@storybook/addon-knobs";
+import { withKnobs, text, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-import { withReadme } from "storybook-readme";
 
 import { DigitDisplayData, DigitProviders } from "../../components";
 import DigitDisplayDataReadme from "../../components/elements/digit-display-data/readme.md";
@@ -21,7 +12,7 @@ DigitDisplayDataStory.addDecorator(withKnobs);
 
 DigitDisplayDataStory.add(
   "DigitDisplayData",
-  withReadme(DigitDisplayDataReadme, () => {
+  () => {
     const fixedWidth = number("Fixed width", 100, {
       range: true,
       min: 0,
@@ -54,5 +45,12 @@ DigitDisplayDataStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitDisplayDataReadme,
+      propTables: [DigitDisplayData],
+      propTablesExclude: [DigitProviders]
+    }
+  }
 );

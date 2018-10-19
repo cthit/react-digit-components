@@ -19,6 +19,7 @@ export const Flex = styled.div`
     props.alignContent != null ? props.alignContent : ""};
 `;
 
+Flex.displayName = "Flex";
 Flex.propTypes = {
   display: PropTypes.oneOf(["flex", "inline-flex"]),
   justifyContent: PropTypes.oneOf([
@@ -101,6 +102,7 @@ export const Grid = styled.div`
   flex: ${props => (props.fillElement ? "1" : "")};
 `;
 
+Grid.displayName = "Grid";
 Grid.propTypes = {
   inline: PropTypes.bool,
   columns: PropTypes.string,
@@ -148,8 +150,18 @@ export const GridItem = styled.div`
   grid-row-start: ${props => props.rowStart || ""}
   grid-row-end: ${props => props.rowEnd || ""}
   justify-self: ${props => props.justifySelf || ""};
-  align-self: ${props => props.justifySelf || ""};
+  align-self: ${props => props.alignSelf || ""};
 `;
+
+GridItem.displayName = "GridItem";
+GridItem.propTypes = {
+  columnStart: PropTypes.string,
+  columnEnd: PropTypes.string,
+  rowStart: PropTypes.string,
+  rowEnd: PropTypes.string,
+  justifySelf: PropTypes.string,
+  alignSelf: PropTypes.string
+};
 
 export const UniformGrid = styled(
   ({ minItemWidth, minItemHeight, children, ...rest }) => (
@@ -163,13 +175,14 @@ export const UniformGrid = styled(
   }
 `;
 
+UniformGrid.displayName = "UniformGrid";
 UniformGrid.propTypes = {
+  minItemWidth: PropTypes.string,
+  minItemHeight: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired,
-  minItemWidth: PropTypes.string,
-  minItemHeight: PropTypes.string
+  ]).isRequired
 };
 
 export const Column = styled(
@@ -203,6 +216,7 @@ export const Column = styled(
   flex: ${props => (props.fillElement ? "1" : "")};
 `;
 
+Column.displayName = "Column";
 Column.propTypes = {
   center: PropTypes.bool,
   centerVertical: PropTypes.bool,
@@ -249,6 +263,7 @@ export const Row = styled(
   flex: ${props => (props.fillElement ? "1" : "")};
 `;
 
+Row.displayName = "Row";
 Row.propTypes = {
   center: PropTypes.bool,
   centerVertical: PropTypes.bool,
@@ -331,6 +346,7 @@ export const HideFill = styled(Fill)`
   display: ${props => (props.hidden ? "none" : "inherit")};
 `;
 
+HideFill.displayName = "HideFill";
 HideFill.propTypes = {
   hidden: PropTypes.bool
 };
@@ -339,6 +355,7 @@ export const Hide = styled.div`
   display: ${props => (props.hidden ? "none" : "inherit")};
 `;
 
+Hide.displayName = "Hide";
 Hide.propTypes = {
   hidden: PropTypes.bool
 };
@@ -359,6 +376,7 @@ export const Size = styled(Flex)`
     props.absHeight != null ? props.absHeight : props.minHeight};
 `;
 
+Size.displayName = "Size";
 Size.propTypes = {
   absWidth: PropTypes.string,
   absHeight: PropTypes.string,
@@ -372,6 +390,7 @@ export const Order = styled(Flex)`
   order: ${props => props.order};
 `;
 
+Order.displayName = "Order";
 Order.propTypes = {
   order: PropTypes.number.isRequired
 };

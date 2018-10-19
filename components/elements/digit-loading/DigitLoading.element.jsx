@@ -10,6 +10,10 @@ const DigitLoading = ({ loading, size }) => (
   />
 );
 
+DigitLoading.defaultProps = {
+  size: "40"
+};
+
 DigitLoading.propTypes = {
   loading: PropTypes.bool.isRequired,
   size: PropTypes.number

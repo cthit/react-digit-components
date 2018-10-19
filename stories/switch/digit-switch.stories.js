@@ -4,7 +4,7 @@ import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
-import { DigitProviders } from "../../components";
+import { DigitProviders, DigitSwitch } from "../../components";
 import DigitSwitchReadme from "../../components/elements/digit-switch/readme.md";
 import StoryDigitSwitch from "./StoryDigitSwitch";
 
@@ -18,7 +18,7 @@ DigitSwitchStory.addDecorator(withKnobs);
 
 DigitSwitchStory.add(
   "DigitSwitch",
-  withReadme(DigitSwitchReadme, () => {
+  () => {
     const label = text("Label", "This is a label");
     const color = select(colorLabel, colorOptions, colorDefaultValue);
     const disabled = boolean("Disabled", false);
@@ -36,5 +36,12 @@ DigitSwitchStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitSwitchReadme,
+      propTables: [DigitSwitch],
+      propTablesExclude: [DigitProviders, StoryDigitSwitch]
+    }
+  }
 );

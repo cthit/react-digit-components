@@ -3,8 +3,6 @@ import React from "react";
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-import { withReadme } from "storybook-readme";
 
 import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
@@ -27,7 +25,7 @@ DigitIconButtonStory.addDecorator(withKnobs);
 
 DigitIconButtonStory.add(
   "DigitIconButton",
-  withReadme(DigitIconButtonReadme, () => {
+  () => {
     const disabled = boolean("Disabled", false);
     const color = select(colorLabel, colorOptions, colorDefaultValue);
     const icon = select(iconLabel, iconOptions, iconDefaultValue);
@@ -52,5 +50,12 @@ DigitIconButtonStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitIconButtonReadme,
+      propTables: [DigitIconButton],
+      propTablesExclude: [DigitProviders]
+    }
+  }
 );

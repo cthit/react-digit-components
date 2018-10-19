@@ -12,6 +12,7 @@ const DigitIfElseRendering = ({ test, ifRender, elseRender }) => {
       : null;
 };
 
+DigitIfElseRendering.displayName = "DigitIfElseRendering";
 DigitIfElseRendering.propTypes = {
   test: PropTypes.bool,
   ifRender: PropTypes.func.isRequired,

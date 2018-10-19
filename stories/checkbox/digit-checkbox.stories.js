@@ -5,7 +5,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { withReadme } from "storybook-readme";
 
-import { DigitProviders } from "../../components";
+import { DigitProviders, DigitCheckbox } from "../../components";
 import DigitCheckboxReadme from "../../components/elements/digit-checkbox/readme.md";
 import StoryDigitCheckbox from "./StoryDigitCheckbox";
 
@@ -19,7 +19,7 @@ DigitCheckboxStory.addDecorator(withKnobs);
 
 DigitCheckboxStory.add(
   "DigitCheckbox",
-  withReadme(DigitCheckboxReadme, () => {
+  () => {
     const color = select(colorLabel, colorOptions, colorDefaultValue);
     const label = text("Label", "This is a label");
     const disabled = boolean("Disabled", false);
@@ -43,5 +43,12 @@ DigitCheckboxStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitCheckboxReadme,
+      propTables: [DigitCheckbox],
+      propTablesExclude: [DigitProviders, StoryDigitCheckbox]
+    }
+  }
 );

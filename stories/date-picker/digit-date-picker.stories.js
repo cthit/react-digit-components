@@ -5,6 +5,7 @@ import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
 import { DigitProviders, DigitLayout } from "../../components";
+import { DigitDatePicker } from "../../components/elements/digit-date-picker/DigitDatePicker.element";
 import DigitDatePickerReadme from "../../components/elements/digit-date-picker/readme.md";
 import StoryDigitDatePicker from "./StoryDigitDatePicker";
 
@@ -14,7 +15,7 @@ DigitDatePickerStory.addDecorator(withKnobs);
 
 DigitDatePickerStory.add(
   "DigitDatePicker",
-  withReadme(DigitDatePickerReadme, () => {
+  () => {
     const upperLabel = text("Upperlabel: ", "My date");
 
     return (
@@ -24,5 +25,16 @@ DigitDatePickerStory.add(
         </DigitLayout.Size>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitDatePickerReadme,
+      propTables: [DigitDatePicker],
+      propTablesExclude: [
+        DigitProviders,
+        DigitLayout.Size,
+        StoryDigitDatePicker
+      ]
+    }
+  }
 );

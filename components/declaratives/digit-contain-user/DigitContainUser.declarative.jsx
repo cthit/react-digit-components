@@ -72,7 +72,9 @@ const mapDispatchToProps = dispatch => ({
   toastOpen: data => dispatch(toastOpen(data))
 });
 
-export default connect(
+const ContainUserToAllowedPagesConnected = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ContainUserToAllowedPages);
+
+export default ContainUserToAllowedPagesConnected;

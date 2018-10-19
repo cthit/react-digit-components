@@ -2,9 +2,9 @@ import React from "react";
 
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { withReadme } from "storybook-readme";
 
 import { DigitProviders } from "../../components";
+import DigitTabs from "../../components/elements/digit-tabs";
 import DigitTabsReadme from "../../components/elements/digit-tabs/readme.md";
 
 import StoryDigitTabs from "./StoryDigitTabs";
@@ -15,7 +15,7 @@ DigitTabsStory.addDecorator(withKnobs);
 
 DigitTabsStory.add(
   "DigitTabs",
-  withReadme(DigitTabsReadme, () => {
+  () => {
     const fullWidth = boolean("Full width", true);
     const centered = boolean("Centered", true);
     const titleFont = boolean("Title font", false);
@@ -29,5 +29,12 @@ DigitTabsStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitTabsReadme,
+      propTables: [DigitTabs],
+      propTablesExclude: [StoryDigitTabs, DigitProviders]
+    }
+  }
 );

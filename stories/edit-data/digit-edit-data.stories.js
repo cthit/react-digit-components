@@ -1,17 +1,9 @@
 import React from "react";
 import * as yup from "yup";
 
-import {
-  withKnobs,
-  select,
-  text,
-  boolean,
-  number
-} from "@storybook/addon-knobs";
+import { withKnobs, select, text } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-import { withReadme } from "storybook-readme";
 
 import Translations from "./Translations.json";
 
@@ -19,9 +11,12 @@ import {
   DigitEditData,
   DigitTextField,
   DigitProviders,
-  DigitTranslations,
   DigitCheckbox
 } from "../../components";
+
+import DigitTranslationsConnected from "../../components/declaratives/digit-translations";
+import DigitTranslations from "../../components/declaratives/digit-translations/DigitTranslations.declarative";
+
 import DigitEditDataReadme from "../../components/elements/digit-edit-data/readme.md";
 
 const langLabel = "Language";
@@ -34,14 +29,14 @@ DigitEditDataStory.addDecorator(withKnobs);
 
 DigitEditDataStory.add(
   "DigitEditData",
-  withReadme(DigitEditDataReadme, () => {
+  () => {
     const title = text("Title", "Title text");
     const submit = text("Submit", "Submit text");
     const lang = select(langLabel, langOptions, langDefaultValue);
 
     return (
       <DigitProviders>
-        <DigitTranslations
+        <DigitTranslationsConnected
           uniquePath="DigitEditDataStory"
           translations={Translations}
           render={(text, activeLanguage, setActiveLanguage) => {
@@ -102,5 +97,12 @@ DigitEditDataStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitEditDataReadme,
+      propTables: [DigitEditData],
+      propTablesExclude: [DigitProviders, DigitTranslationsConnected]
+    }
+  }
 );

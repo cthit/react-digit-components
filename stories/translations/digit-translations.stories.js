@@ -8,7 +8,10 @@ const langLabel = "Language";
 const langOptions = ["sv", "en"];
 const langDefaultValue = "sv";
 
-import { DigitTranslations, DigitProviders } from "../../components";
+import { DigitProviders } from "../../components";
+
+import DigitTranslationsConnected from "../../components/declaratives/digit-translations";
+import { DigitTranslations } from "../../components/declaratives/digit-translations/DigitTranslations.declarative";
 import DigitTranslationsReadme from "../../components/declaratives/digit-translations/readme.md";
 
 import TestTranslations from "./TestTranslations.json";
@@ -20,12 +23,12 @@ DigitTranslationsStory.addDecorator(withKnobs);
 
 DigitTranslationsStory.add(
   "DigitTranslations",
-  withReadme(DigitTranslationsReadme, () => {
+  () => {
     const lang = select(langLabel, langOptions, langDefaultValue);
 
     return (
       <DigitProviders rootReducer={{}} preloadedState={{}}>
-        <DigitTranslations
+        <DigitTranslationsConnected
           uniquePath="DigitTranslationsStories"
           translations={TestTranslations}
           common={CommonTranslations}
@@ -45,5 +48,12 @@ DigitTranslationsStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitTranslationsReadme,
+      propTables: [DigitTranslations],
+      propTablesExclude: [DigitProviders, DigitTranslationsConnected]
+    }
+  }
 );

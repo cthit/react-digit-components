@@ -3,7 +3,6 @@ import React from "react";
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 import { withReadme } from "storybook-readme";
 import { connect } from "react-redux";
 
@@ -15,40 +14,19 @@ import {
   DigitFormField,
   DigitForm,
   DigitTextField,
-  DigitToast,
   DigitProviders,
   DigitSwitch
 } from "../../components";
 
+import DigitToastConnected from "../../components/views/digit-toast";
+import DigitToast from "../../components/views/digit-toast/DigitToast.view";
 import { toastOpen } from "../../components/views/digit-toast/DigitToast.view.action-creator";
 
 import DigitToastReadme from "../../components/views/digit-toast/readme.md";
 
-const vertLabel = "vertical";
-const vertOptions = ["primary", "secondary", "none"];
-const vertDefaultValue = "none";
-
-const horiLabel = "style";
-const horiOptions = ["raised", "outlined", "flat"];
-const horiDefaultValue = "flat";
-
 const DigitButtonStory = storiesOf("Views", module);
 
 DigitButtonStory.addDecorator(withKnobs);
-
-DigitButtonStory.add(
-  "DigitToast",
-  withReadme(DigitToastReadme, () => {
-    const vert = select(vertLabel, vertOptions, vertDefaultValue);
-    const hori = select(horiLabel, horiOptions, horiDefaultValue);
-
-    return (
-      <DigitProviders>
-        <StuffContainer />
-      </DigitProviders>
-    );
-  })
-);
 
 const Stuff = ({ toastOpen }) => (
   <div>
@@ -120,7 +98,7 @@ const Stuff = ({ toastOpen }) => (
       )}
     />
 
-    <DigitToast />
+    <DigitToastConnected />
   </div>
 );
 
@@ -134,3 +112,26 @@ const StuffContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Stuff);
+
+DigitButtonStory.add(
+  "DigitToast",
+  () => {
+    return (
+      <DigitProviders>
+        <StuffContainer />
+      </DigitProviders>
+    );
+  },
+  {
+    info: {
+      text: DigitToastReadme,
+      propTables: [DigitToast],
+      propTablesExclude: [
+        DigitProviders,
+        DigitToastConnected,
+        StuffContainer,
+        Stuff
+      ]
+    }
+  }
+);

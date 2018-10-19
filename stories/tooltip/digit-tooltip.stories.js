@@ -1,10 +1,7 @@
 import React from "react";
 
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { withKnobs, text } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-import { withReadme } from "storybook-readme";
 
 import { DigitTooltip, DigitButton, DigitProviders } from "../../components";
 import DigitTooltipReadme from "../../components/elements/digit-tooltip/readme.md";
@@ -16,7 +13,7 @@ DigitTooltipStory.addDecorator(withKnobs);
 
 DigitTooltipStory.add(
   "DigitTooltip",
-  withReadme(DigitTooltipReadme, () => {
+  () => {
     return (
       <DigitProviders>
         <Size width="200px">
@@ -26,5 +23,12 @@ DigitTooltipStory.add(
         </Size>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitTooltipReadme,
+      propTables: [DigitTooltip],
+      propTablesExclude: [DigitProviders, Size, DigitButton]
+    }
+  }
 );

@@ -36,7 +36,7 @@ const DigitTabs = ({
 
 DigitTabs.propTypes = {
   selected: PropTypes.number.isRequired,
-  labels: PropTypes.arrayOf(String).isRequired,
+  labels: PropTypes.arrayOf(PropTypes.string).isRequired,
   centered: PropTypes.bool.isRequired,
   fullWidth: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,

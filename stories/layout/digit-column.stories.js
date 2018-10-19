@@ -33,7 +33,7 @@ const alignDefaultValue = "None";
 
 DigitColumnStory.add(
   "DigitColumn",
-  withReadme(DigitColumnReadme, () => {
+  () => {
     const align = select(alignLabel, alignOptions, alignDefaultValue);
     const reverse = boolean("Reverse", false);
     const center = boolean("Center", false);
@@ -67,5 +67,12 @@ DigitColumnStory.add(
         </BorderSize>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitColumnReadme,
+      propTables: [Column],
+      propTablesExclude: [DigitProviders, DummyItem, BorderSize]
+    }
+  }
 );

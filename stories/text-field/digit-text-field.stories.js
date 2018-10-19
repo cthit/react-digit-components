@@ -4,7 +4,7 @@ import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
-import { DigitLayout, DigitProviders } from "../../components";
+import { DigitLayout, DigitProviders, DigitTextField } from "../../components";
 import DigitTextFieldReadme from "../../components/elements/digit-text-field/readme.md";
 import StoryDigitTextField from "./StoryDigitTextField";
 
@@ -22,7 +22,7 @@ DigitTextFieldStory.addDecorator(withKnobs);
 
 DigitTextFieldStory.add(
   "DigitTextField",
-  withReadme(DigitTextFieldReadme, () => {
+  () => {
     const type = select(typeLabel, typeOptions, typeDefaultValue);
     const upperLabel = text("Upper label", "This is a upperLabel");
     const lowerLabel = text("Lower label", "This is a lowerLabel");
@@ -46,5 +46,12 @@ DigitTextFieldStory.add(
         </DigitLayout.Size>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitTextFieldReadme,
+      propTables: [DigitTextField],
+      propTablesExclude: [DigitProviders, DigitLayout.Size, StoryDigitTextField]
+    }
+  }
 );

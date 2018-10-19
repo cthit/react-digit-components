@@ -36,7 +36,7 @@ DigitCheckbox.displayName = "DigitCheckbox";
 DigitCheckbox.propTypes = {
   /** A unique name relative to a form. e.g. acceptedTerms or pizza.*/
   name: PropTypes.string,
-  /** Fires on input change. Note that this component is unmanaged, and that
+  /** Fires on input change. Note that this component is uncontrolled, and that
    * you have to save value by yourself. Only argument is the event object. If you want
    * the new text value, use `e.target.value`.
    */
@@ -45,7 +45,7 @@ DigitCheckbox.propTypes = {
   onBlur: PropTypes.func,
   /** A label that is to the right of the checkbox. */
   label: PropTypes.string,
-  /** The checked value of the checkbox. Note that this component is unmanaged, and that you have to
+  /** The checked value of the checkbox. Note that this component is uncontrolled, and that you have to
    * save your value of yourself.
    */
   value: PropTypes.bool.isRequired,

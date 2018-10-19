@@ -34,14 +34,14 @@ const DigitSwitch = ({
 
 DigitSwitch.displayName = "DigitSwitch";
 DigitSwitch.propTypes = {
-  /** Fires on input change. Note that this component is unmanaged, and that
+  /** Fires on input change. Note that this component is uncontrolled, and that
    * you have to save value by yourself. Only argument is the event object. If you want
    * the new text value, use `e.target.value`.
    */
   onChange: PropTypes.func.isRequired,
   /** The onBlur event occurs when an object loses focus. */
   onBlur: PropTypes.func,
-  /** The checked value of the checkbox. Note that this component is unmanaged, and that you have to
+  /** The checked value of the checkbox. Note that this component is uncontrolled, and that you have to
    * save your value of yourself.
    */
   value: PropTypes.bool.isRequired,

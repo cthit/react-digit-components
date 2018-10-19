@@ -99,6 +99,7 @@ function _getValues(valueToTextMap, reverse) {
   return result;
 }
 
+DigitSelect.displayName = "DigitSelect";
 DigitSelect.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,

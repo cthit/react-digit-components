@@ -102,6 +102,7 @@ class DigitTextField extends React.Component {
   }
 }
 
+DigitTextField.displayName = "DigitTextField";
 DigitTextField.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string.isRequired,

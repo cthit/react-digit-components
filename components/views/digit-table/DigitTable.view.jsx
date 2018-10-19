@@ -219,6 +219,7 @@ class DigitTable extends React.Component {
   }
 }
 
+DigitTable.displayName = "DigitTable";
 DigitTable.propTypes = {
   startOrderBy: PropTypes.string,
   columnsOrder: PropTypes.arrayOf(PropTypes.string),

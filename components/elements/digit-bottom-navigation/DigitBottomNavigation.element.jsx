@@ -30,6 +30,7 @@ const DigitBottomNavigation = ({
   </StyledBottomNavigation>
 );
 
+DigitBottomNavigation.displayName = "DigitBottomNavigation";
 DigitBottomNavigation.propTypes = {
   selected: PropTypes.number.isRequired,
   showLabels: PropTypes.bool,

@@ -35,6 +35,7 @@ const DigitTimePicker = ({
   />
 );
 
+DigitTimePicker.displayName = "DigitTimePicker";
 DigitTimePicker.propTypes = {
   value: PropTypes.instanceOf(Date),
   onChange: PropTypes.func,

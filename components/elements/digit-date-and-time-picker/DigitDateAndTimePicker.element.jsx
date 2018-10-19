@@ -57,6 +57,7 @@ const DigitDateAndTimePicker = ({
   />
 );
 
+DigitDateAndTimePicker.displayName = "DigitDateAndTimePicker";
 DigitDateAndTimePicker.propTypes = {
   clearable: PropTypes.bool,
   disablePast: PropTypes.bool,

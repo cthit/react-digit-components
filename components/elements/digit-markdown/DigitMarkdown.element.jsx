@@ -90,6 +90,7 @@ const DigitMarkdown = ({ markdownSource }) => (
   </div>
 );
 
+DigitMarkdown.displayName = "DigitMarkdown";
 DigitMarkdown.propTypes = {
   markdownSource: PropTypes.string.isRequired
 };

@@ -9,6 +9,7 @@ const DigitTooltip = ({ children, text }) => (
   </Tooltip>
 );
 
+DigitTooltip.displayName = "DigitTooltip";
 DigitTooltip.propTypes = {
   children: PropTypes.element.isRequired,
   text: PropTypes.string.isRequired

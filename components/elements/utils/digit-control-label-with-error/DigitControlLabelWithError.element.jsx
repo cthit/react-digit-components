@@ -11,6 +11,7 @@ const DigitControlLabelWithError = styled(({ error, ...props }) => (
   }
 `;
 
+DigitControlLabelWithError.displayName = "DigitControlLabelWithError";
 DigitControlLabelWithError.propTypes = {
   error: PropTypes.bool
 };

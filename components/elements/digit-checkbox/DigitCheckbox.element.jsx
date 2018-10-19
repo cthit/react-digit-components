@@ -32,6 +32,7 @@ const DigitCheckbox = ({
   />
 );
 
+DigitCheckbox.displayName = "DigitCheckbox";
 DigitCheckbox.propTypes = {
   name: PropTypes.string,
   onChange: PropTypes.func.isRequired,

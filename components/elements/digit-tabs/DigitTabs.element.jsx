@@ -34,6 +34,7 @@ const DigitTabs = ({
   </Fill>
 );
 
+DigitTabs.displayName = "DigitTabs";
 DigitTabs.propTypes = {
   selected: PropTypes.number.isRequired,
   labels: PropTypes.arrayOf(PropTypes.string).isRequired,

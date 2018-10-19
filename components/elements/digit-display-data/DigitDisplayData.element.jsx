@@ -29,6 +29,7 @@ const DigitDisplayData = ({ data, keysText, keysOrder, fixedWidth }) => (
   </Fill>
 );
 
+DigitDisplayData.displayName = "DigitDisplayData";
 DigitDisplayData.propTypes = {
   data: PropTypes.objectOf(PropTypes.string),
   keysText: PropTypes.objectOf(PropTypes.string),

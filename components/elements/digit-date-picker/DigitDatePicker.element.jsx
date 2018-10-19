@@ -46,6 +46,7 @@ const DigitDatePicker = ({
   />
 );
 
+DigitDatePicker.displayName = "DigitDatePicker";
 DigitDatePicker.propTypes = {
   value: PropTypes.instanceOf(Date),
   onChange: PropTypes.func,

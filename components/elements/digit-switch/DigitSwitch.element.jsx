@@ -32,6 +32,7 @@ const DigitSwitch = ({
   />
 );
 
+DigitSwitch.displayName = "DigitSwitch";
 DigitSwitch.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,

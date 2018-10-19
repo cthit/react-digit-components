@@ -107,6 +107,7 @@ class DigitTextArea extends React.Component {
   }
 }
 
+DigitTextArea.displayName = "DigitTextArea";
 DigitTextArea.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string.isRequired,

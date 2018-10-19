@@ -20,6 +20,7 @@ const DigitIconButton = ({
   </IconButton>
 );
 
+DigitIconButton.displayName = "DigitIconButton";
 DigitIconButton.propTypes = {
   onClick: PropTypes.func.isRequired,
   primary: PropTypes.bool,

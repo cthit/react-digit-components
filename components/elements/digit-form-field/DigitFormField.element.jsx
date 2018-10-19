@@ -21,6 +21,7 @@ const DigitFormField = ({ name, component, componentProps }) => (
   />
 );
 
+DigitFormField.displayName = "DigitFormField";
 DigitFormField.propTypes = {
   name: PropTypes.string.isRequired,
   component: PropTypes.func.isRequired,

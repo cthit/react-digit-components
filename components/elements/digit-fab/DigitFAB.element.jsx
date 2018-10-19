@@ -16,6 +16,7 @@ const DigitFAB = ({ onClick, disabled, primary, secondary, submit, icon }) => (
   </Button>
 );
 
+DigitFAB.displayName = "DigitFAB";
 DigitFAB.propTypes = {
   onClick: PropTypes.func,
   icon: PropTypes.func.isRequired,

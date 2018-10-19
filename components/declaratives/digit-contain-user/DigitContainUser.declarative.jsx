@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { redirectTo } from "../../../app/views/digit-redirect/DigitRedirect.view.action-creator";
 import { toastOpen } from "../../../app/views/digit-toast/DigitToast.view.action-creator";
 
-class ContainUserToAllowedPages extends React.Component {
+class DigitContainUser extends React.Component {
   componentDidUpdate(prevProps) {
     var {
       allowedBasePaths,
@@ -55,7 +55,8 @@ class ContainUserToAllowedPages extends React.Component {
   }
 }
 
-ContainUserToAllowedPages.propTypes = {
+DigitContainUser.displayName = "DigitContainUser";
+DigitContainUser.propTypes = {
   allowedBasePaths: PropTypes.arrayOf(PropTypes.string),
   allowedFullPaths: PropTypes.arrayOf(PropTypes.string),
   currentPath: PropTypes.string,
@@ -72,9 +73,7 @@ const mapDispatchToProps = dispatch => ({
   toastOpen: data => dispatch(toastOpen(data))
 });
 
-const ContainUserToAllowedPagesConnected = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ContainUserToAllowedPages);
-
-export default ContainUserToAllowedPagesConnected;
+)(DigitContainUser);

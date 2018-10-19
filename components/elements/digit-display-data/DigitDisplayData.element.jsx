@@ -31,10 +31,14 @@ const DigitDisplayData = ({ data, keysText, keysOrder, fixedWidth }) => (
 
 DigitDisplayData.displayName = "DigitDisplayData";
 DigitDisplayData.propTypes = {
+  /** The data to display. It's an object with keys that represent a value.  */
   data: PropTypes.objectOf(PropTypes.string),
+  /** The pretty text of the keys to display.  */
   keysText: PropTypes.objectOf(PropTypes.string),
+  /** The order of the keys. An array of keys.  */
   keysOrder: PropTypes.arrayOf(PropTypes.string),
-  fixedWidth: PropTypes.string //e.g. 200px, 20%
+  /** The fixed width for the left column. E.g. 200px, 20% */
+  fixedWidth: PropTypes.string
 };
 
 export default DigitDisplayData;

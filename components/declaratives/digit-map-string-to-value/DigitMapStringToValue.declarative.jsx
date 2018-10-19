@@ -18,8 +18,11 @@ function getCurrentValue(currentString, stringtoValueMap) {
 
 DigitMapStringToValue.displayName = "DigitMapStringToValue";
 DigitMapStringToValue.propTypes = {
+  /** The current key for the map */
   currentString: PropTypes.string.isRequired,
-  stringtoValueMap: PropTypes.object.isRequired,
+  /** String to any map */
+  stringtoValueMap: PropTypes.objectOf(PropTypes.any).isRequired,
+  /** Render function that has the current value of the selected key as the first and only argument */
   render: PropTypes.func.isRequired
 };
 

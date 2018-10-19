@@ -16,7 +16,9 @@ DigitLoading.defaultProps = {
 
 DigitLoading.displayName = "DigitLoading";
 DigitLoading.propTypes = {
+  /** If true, then the loading animation will be rendered, else nothing will render. */
   loading: PropTypes.bool.isRequired,
+  /** The size in px how big the loading circle should be. E.g. 30 or 60 */
   size: PropTypes.number
 };
 

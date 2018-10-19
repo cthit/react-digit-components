@@ -41,8 +41,7 @@ DigitCheckbox.propTypes = {
    * the new text value, use `e.target.value`.
    */
   onChange: PropTypes.func.isRequired,
-  /** The onblur event occurs when an object loses focus. */
-
+  /** The onBlur event occurs when an object loses focus. */
   onBlur: PropTypes.func,
   /** A label that is to the right of the checkbox. */
   label: PropTypes.string,
@@ -50,7 +49,6 @@ DigitCheckbox.propTypes = {
    * save your value of yourself.
    */
   value: PropTypes.bool.isRequired,
-
   /** Sets the color to the primary one. This has predence precedence over secondary. */
   primary: PropTypes.bool,
   /** Sets the color to the secondary one. This has precedence over the normal button. */

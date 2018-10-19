@@ -137,7 +137,7 @@ DigitTextField.propTypes = {
   /** If true, then you can't edit this text field. */
   disabled: PropTypes.bool,
   /**
-   * Adds an outline around the button in black color.
+   * Adds an outline around the text field in black color.
    */
   outlined: PropTypes.bool,
   /** Adds a grey isch background */

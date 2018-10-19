@@ -25,7 +25,7 @@ DigitTableStory.addDecorator(withKnobs);
 
 DigitTableStory.add(
   "DigitTable",
-  withReadme(DigitTableReadme, () => {
+  () => {
     const lang = select(langLabel, langOptions, langDefaultValue);
     const titleText = text("Title", "Title text");
     const searchText = text("Search text", "Search text");
@@ -108,5 +108,12 @@ DigitTableStory.add(
         </div>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitTableReadme,
+      propTables: [DigitTable],
+      propTablesExclude: [DigitProviders, DigitTranslations]
+    }
+  }
 );

@@ -15,10 +15,12 @@ import {
   DigitFormField,
   DigitForm,
   DigitTextField,
-  DigitDialog,
   DigitProviders,
   DigitTextArea
 } from "../../components";
+
+import DigitDialog from "../../components/views/digit-dialog/DigitDialog.view";
+import DigitDialogConnected from "../../components/views/digit-dialog";
 
 import { digitDialogOpen } from "../../components/views/digit-dialog/DigitDialog.view.action-creator";
 
@@ -27,17 +29,6 @@ import DigitDialogReadme from "../../components/views/digit-dialog/readme.md";
 const DigitDialogStory = storiesOf("Views", module);
 
 DigitDialogStory.addDecorator(withKnobs);
-
-DigitDialogStory.add(
-  "DigitDialog",
-  withReadme(DigitDialogReadme, () => {
-    return (
-      <DigitProviders>
-        <StuffContainer />
-      </DigitProviders>
-    );
-  })
-);
 
 const Stuff = ({ digitDialogOpen }) => (
   <div>
@@ -104,7 +95,7 @@ const Stuff = ({ digitDialogOpen }) => (
       )}
     />
 
-    <DigitDialog />
+    <DigitDialogConnected />
   </div>
 );
 
@@ -118,3 +109,21 @@ const StuffContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(Stuff);
+
+DigitDialogStory.add(
+  "DigitDialog",
+  () => {
+    return (
+      <DigitProviders>
+        <StuffContainer />
+      </DigitProviders>
+    );
+  },
+  {
+    info: {
+      text: DigitDialogReadme,
+      propTables: [DigitDialog],
+      propTablesExclude: [DigitProviders, StuffContainer, Stuff]
+    }
+  }
+);

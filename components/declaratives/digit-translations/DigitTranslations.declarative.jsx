@@ -62,6 +62,7 @@ class DigitTranslations extends React.Component {
   }
 }
 
+DigitTranslations.displayName = "DigitTranslations";
 DigitTranslations.propTypes = {
   uniquePath: PropTypes.string,
   translations: PropTypes.object,
@@ -86,6 +87,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => ({});
+
+/** This is a temp solution to get the correct prop types from StoryBook. */
+export { DigitTranslations };
 
 export default connect(
   mapStateToProps,

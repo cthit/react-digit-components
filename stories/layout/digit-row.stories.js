@@ -35,7 +35,7 @@ DigitRowStory.addDecorator(withKnobs);
 
 DigitRowStory.add(
   "DigitRow",
-  withReadme(DigitRowReadme, () => {
+  () => {
     const align = select(alignLabel, alignOptions, alignDefaultValue);
     const reverse = boolean("Reverse", false);
     const center = boolean("Center", false);
@@ -69,5 +69,12 @@ DigitRowStory.add(
         </BorderSize>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitRowReadme,
+      propTables: [Row],
+      propTablesExclude: [DigitProviders, DummyItem, BorderSize]
+    }
+  }
 );

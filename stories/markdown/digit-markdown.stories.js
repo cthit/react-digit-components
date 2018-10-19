@@ -4,7 +4,7 @@ import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
-import { DigitProviders } from "../../components";
+import { DigitProviders, DigitMarkdown } from "../../components";
 import DigitMarkdownReadme from "../../components/elements/digit-markdown/readme.md";
 import StoryDigitMarkdown from "./StoryDigitMarkdown";
 
@@ -14,11 +14,18 @@ DigitMarkdownStory.addDecorator(withKnobs);
 
 DigitMarkdownStory.add(
   "DigitMarkdown",
-  withReadme(DigitMarkdownReadme, () => {
+  () => {
     return (
       <DigitProviders>
         <StoryDigitMarkdown />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitMarkdownReadme,
+      propTables: [DigitMarkdown],
+      propTablesExclude: [DigitProviders, StoryDigitMarkdown]
+    }
+  }
 );

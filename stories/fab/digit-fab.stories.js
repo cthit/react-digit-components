@@ -28,7 +28,7 @@ DigitFABStory.addDecorator(withKnobs);
 
 DigitFABStory.add(
   "DigitFAB",
-  withReadme(DigitFABReadme, () => {
+  () => {
     const disabled = boolean("Disabled", false);
     const color = select(colorLabel, colorOptions, colorDefaultValue);
     const icon = select(iconLabel, iconOptions, iconDefaultValue);
@@ -54,5 +54,12 @@ DigitFABStory.add(
         </Padding>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitFABReadme,
+      propTables: [],
+      propTablesExclude: [DigitProviders, Padding]
+    }
+  }
 );

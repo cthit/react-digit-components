@@ -47,4 +47,7 @@ DigitTimePicker.propTypes = {
   classes: PropTypes.object
 };
 
+/** This is a temp solution to get the correct prop types from StoryBook. */
+export { DigitTimePicker };
+
 export default withStyles(styles)(DigitTimePicker);

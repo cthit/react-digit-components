@@ -23,7 +23,7 @@ DigitButtonStory.addDecorator(withKnobs);
 
 DigitButtonStory.add(
   "DigitButton",
-  withReadme(DigitButtonReadme, () => {
+  () => {
     const buttonText = text("Text", "This is a button");
     const color = select(colorLabel, colorOptions, colorDefaultValue);
     const style = select(styleLabel, styleOptions, styleDefaultValue);
@@ -41,5 +41,11 @@ DigitButtonStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitButtonReadme,
+      propTablesExclude: [DigitProviders]
+    }
+  }
 );

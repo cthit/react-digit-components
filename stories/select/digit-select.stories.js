@@ -2,12 +2,15 @@ import React from "react";
 
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { withReadme } from "storybook-readme";
 
-import { DigitProviders } from "../../components";
+import { DigitProviders, DigitSelect } from "../../components";
 import DigitSelectReadme from "../../components/elements/digit-select/readme.md";
 import StoryDigitSelect from "./StoryDigitSelect";
+import {
+  MarginTop,
+  Center,
+  Size
+} from "../../components/styles/digit-layout/DigitLayout.styles";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
@@ -19,7 +22,7 @@ DigitSelectStory.addDecorator(withKnobs);
 
 DigitSelectStory.add(
   "DigitSelect",
-  withReadme(DigitSelectReadme, () => {
+  () => {
     const disabled = boolean("Disabled", false);
     const upperLabel = text("Upperlabel", "Favorite Icecream flavor");
     const lowerLabel = text("Lowerlabel", "Choose the best flavor");
@@ -27,13 +30,32 @@ DigitSelectStory.add(
 
     return (
       <DigitProviders>
-        <StoryDigitSelect
-          disabled={disabled}
-          upperLabel={upperLabel}
-          lowerLabel={lowerLabel}
-          style={style}
-        />
+        <MarginTop>
+          <Center>
+            <Size absWidth="300px">
+              <StoryDigitSelect
+                disabled={disabled}
+                upperLabel={upperLabel}
+                lowerLabel={lowerLabel}
+                style={style}
+              />
+            </Size>
+          </Center>
+        </MarginTop>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitSelectReadme,
+      propTables: [DigitSelect],
+      propTablesExclude: [
+        DigitProviders,
+        StoryDigitSelect,
+        Size,
+        Center,
+        MarginTop
+      ]
+    }
+  }
 );

@@ -5,6 +5,9 @@ import { storiesOf } from "@storybook/react";
 import { withReadme } from "storybook-readme";
 
 import { DigitProviders, DigitLayout } from "../../components";
+
+import { DigitDateAndTimePicker } from "../../components/elements/digit-date-and-time-picker/DigitDateAndTimePicker.element";
+
 import DigitDateAndTimePickerReadme from "../../components/elements/digit-date-and-time-picker/readme.md";
 import StoryDigitDateAndTimePicker from "./StoryDigitDateAndTimePicker";
 
@@ -14,7 +17,7 @@ DigitDateAndTimePickerStory.addDecorator(withKnobs);
 
 DigitDateAndTimePickerStory.add(
   "DigitDateAndTimePicker",
-  withReadme(DigitDateAndTimePickerReadme, () => {
+  () => {
     const upperLabel = text("Upperlabel: ", "My date and time");
 
     return (
@@ -24,5 +27,15 @@ DigitDateAndTimePickerStory.add(
         </DigitLayout.Size>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      propTables: [DigitDateAndTimePicker],
+      propTablesExclude: [
+        DigitProviders,
+        DigitLayout.Size,
+        StoryDigitDateAndTimePicker
+      ]
+    }
+  }
 );

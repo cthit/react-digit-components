@@ -8,9 +8,8 @@ import {
   number
 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { withReadme } from "storybook-readme";
 
-import { DigitProviders } from "../../components";
+import { DigitProviders, DigitHeader } from "../../components";
 import DigitHeaderReadme from "../../components/elements/digit-header/readme.md";
 
 import StoryDigitHeader from "./StoryDigitHeader";
@@ -25,7 +24,7 @@ DigitHeaderStory.addDecorator(withKnobs);
 
 DigitHeaderStory.add(
   "DigitHeader",
-  withReadme(DigitHeaderReadme, () => {
+  () => {
     const title = text("Title", "My Website");
     const icon = select(iconLabel, iconOptions, iconDefaultValue);
     const navigation = boolean("Navigation: ", true);
@@ -48,5 +47,12 @@ DigitHeaderStory.add(
         />
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitHeaderReadme,
+      propTables: [DigitHeader],
+      propTablesExclude: [DigitProviders, StoryDigitHeader]
+    }
+  }
 );

@@ -1,13 +1,10 @@
 import React from "react";
 
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-import { withReadme } from "storybook-readme";
 
 import { DigitText, DigitLayout, DigitProviders } from "../../components";
-import DigitTextReadme from "../../components/elements/digit-button/readme.md";
+import DigitTextReadme from "../../components/styles/digit-text/readme.md";
 
 const DigitTextStory = storiesOf("Texts", module);
 
@@ -15,7 +12,7 @@ DigitTextStory.addDecorator(withKnobs);
 
 DigitTextStory.add(
   "DigitText",
-  withReadme(DigitTextReadme, () => {
+  () => {
     return (
       <DigitProviders>
         <DigitLayout.Column>
@@ -32,5 +29,23 @@ DigitTextStory.add(
         </DigitLayout.Column>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitTextReadme,
+      propTables: [
+        DigitText.Heading1,
+        DigitText.Heading2,
+        DigitText.Heading3,
+        DigitText.Heading4,
+        DigitText.Heading5,
+        DigitText.Heading6,
+        DigitText.Title,
+        DigitText.Subtitle,
+        DigitText.Subtitle2,
+        DigitText.Text
+      ],
+      propTablesExclude: [DigitLayout.Column, DigitProviders]
+    }
+  }
 );

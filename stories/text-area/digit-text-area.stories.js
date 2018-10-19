@@ -8,10 +8,9 @@ import {
   number
 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { withReadme } from "storybook-readme";
 
-import { DigitLayout, DigitProviders } from "../../components";
-import DigitTextAreaReadme from "../../components/elements/digit-text-field/readme.md";
+import { DigitLayout, DigitProviders, DigitTextArea } from "../../components";
+import DigitTextAreaReadme from "../../components/elements/digit-text-area/readme.md";
 import StoryDigitTextArea from "./StoryDigitTextArea";
 
 const styleLabel = "style";
@@ -24,7 +23,7 @@ DigitTextAreaStory.addDecorator(withKnobs);
 
 DigitTextAreaStory.add(
   "DigitTextArea",
-  withReadme(DigitTextAreaReadme, () => {
+  () => {
     const upperLabel = text("Upper label", "This is a upperLabel");
     const lowerLabel = text("Lower label", "This is a lowerLabel");
     const error = boolean("Error", false);
@@ -61,5 +60,12 @@ DigitTextAreaStory.add(
         </DigitLayout.Size>
       </DigitProviders>
     );
-  })
+  },
+  {
+    info: {
+      text: DigitTextAreaReadme,
+      propTables: [DigitTextArea],
+      propTablesExclude: [DigitProviders, DigitLayout.Size, StoryDigitTextArea]
+    }
+  }
 );

@@ -21,7 +21,9 @@ export const Flex = styled.div`
 
 Flex.displayName = "Flex";
 Flex.propTypes = {
+  /** https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-2  */
   display: PropTypes.oneOf(["flex", "inline-flex"]),
+  /** https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-6 */
   justifyContent: PropTypes.oneOf([
     "flex-start",
     "flex-end",
@@ -30,7 +32,9 @@ Flex.propTypes = {
     "space-around",
     "space-evenly"
   ]),
+  /** https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-4 */
   flexWrap: PropTypes.oneOf(["nowrap", "wrap", "wrap-reverse"]),
+  /** https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-7 */
   alignItems: PropTypes.oneOf([
     "flex-start",
     "flex-end",
@@ -38,6 +42,7 @@ Flex.propTypes = {
     "baseline",
     "stretch"
   ]),
+  /** https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-8 */
   alignContent: PropTypes.oneOf([
     "flex-start",
     "flex-end",
@@ -104,13 +109,21 @@ export const Grid = styled.div`
 
 Grid.displayName = "Grid";
 Grid.propTypes = {
+  /** If true, then inline-grid. https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-12 */
   inline: PropTypes.bool,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-13 */
   columns: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-13 */
   rows: PropTypes.number,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-14 */
   areas: PropTypes.string,
+  /** Padding between items. Will precedence columnGap and rowGap */
   padding: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
   columnGap: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
   rowGap: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-18 */
   justifyItems: PropTypes.oneOf([
     "start",
     "end",
@@ -119,7 +132,9 @@ Grid.propTypes = {
     "space-around",
     "space-evenly"
   ]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-19 */
   alignItems: PropTypes.oneOf(["start", "end", "center", "stretch"]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-21 */
   justifyContent: PropTypes.oneOf([
     "start",
     "end",
@@ -129,6 +144,7 @@ Grid.propTypes = {
     "space-between",
     "space-evenly"
   ]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-22 */
   alignContent: PropTypes.oneOf([
     "start",
     "end",
@@ -138,9 +154,13 @@ Grid.propTypes = {
     "space-between",
     "space-evenly"
   ]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
   autoColumns: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
   autoRows: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-25 */
   autoFlow: PropTypes.string,
+  /** Fill available layout with flex. */
   fillElement: PropTypes.bool
 };
 
@@ -155,20 +175,54 @@ export const GridItem = styled.div`
 
 GridItem.displayName = "GridItem";
 GridItem.propTypes = {
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-27 */
   columnStart: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-27 */
   columnEnd: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-27 */
   rowStart: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-27 */
   rowEnd: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-30 */
   justifySelf: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-31 */
   alignSelf: PropTypes.string
 };
 
 export const UniformGrid = styled(
-  ({ minItemWidth, minItemHeight, children, padding, ...rest }) => (
+  ({
+    minItemWidth,
+    minItemHeight,
+    children,
+    inline,
+    columns,
+    rows,
+    areas,
+    padding,
+    columnGap,
+    rowGap,
+    jusitfyItems,
+    alignItems,
+    justifyContent,
+    alignContent,
+    autoFlow,
+    fillElement
+  }) => (
     <Grid
       columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`}
       padding={padding}
-      {...rest}
+      inline={inline}
+      columns={columns}
+      rows={rows}
+      areas={areas}
+      columnGap={columnGap}
+      rowGap={rowGap}
+      justifyItems={jusitfyItems}
+      alignItems={alignItems}
+      justifyContent={justifyContent}
+      alignContent={alignContent}
+      autoFlow={autoFlow}
+      fillElement={fillElement}
     >
       {children}
     </Grid>
@@ -181,13 +235,68 @@ export const UniformGrid = styled(
 
 UniformGrid.displayName = "UniformGrid";
 UniformGrid.propTypes = {
+  /** the minimum allowed width for the items whitin the grid. */
   minItemWidth: PropTypes.string,
+  /** the minimum allowed height for the items whitin the grid. */
   minItemHeight: PropTypes.string,
+  /** All the children */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
-  padding: PropTypes.string
+  /** If true, then inline-grid. https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-12 */
+  inline: PropTypes.bool,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-13 */
+  columns: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-13 */
+  rows: PropTypes.number,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-14 */
+  areas: PropTypes.string,
+  /** Padding between items. Will precedence columnGap and rowGap */
+  padding: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
+  columnGap: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
+  rowGap: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-18 */
+  justifyItems: PropTypes.oneOf([
+    "start",
+    "end",
+    "center",
+    "space-between",
+    "space-around",
+    "space-evenly"
+  ]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-19 */
+  alignItems: PropTypes.oneOf(["start", "end", "center", "stretch"]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-21 */
+  justifyContent: PropTypes.oneOf([
+    "start",
+    "end",
+    "center",
+    "stretch",
+    "space-around",
+    "space-between",
+    "space-evenly"
+  ]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-22 */
+  alignContent: PropTypes.oneOf([
+    "start",
+    "end",
+    "center",
+    "stretch",
+    "space-around",
+    "space-between",
+    "space-evenly"
+  ]),
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
+  autoColumns: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
+  autoRows: PropTypes.string,
+  /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-25 */
+  autoFlow: PropTypes.string,
+  /** Fill available layout with flex. */
+  fillElement: PropTypes.bool
 };
 
 export const Column = styled(
@@ -223,14 +332,23 @@ export const Column = styled(
 
 Column.displayName = "Column";
 Column.propTypes = {
+  /** If true, then centerVertical and centerHorizontal is true */
   center: PropTypes.bool,
+  /** If true, then aligns center vertically */
   centerVertical: PropTypes.bool,
+  /** If true, then aligns center horizontal */
   centerHorizontal: PropTypes.bool,
+  /** If true, then aligns top */
   topAlign: PropTypes.bool,
+  /** If true, then align bottom */
   bottomAlign: PropTypes.bool,
+  /** If true, then reverses the order */
   reverse: PropTypes.bool,
+  /** Sets the padding between the children */
   padding: PropTypes.string,
+  /** Fill available layout with flex. */
   fillElement: PropTypes.bool,
+  /** All the children */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -270,14 +388,23 @@ export const Row = styled(
 
 Row.displayName = "Row";
 Row.propTypes = {
+  /** If true, then centerVertical and centerHorizontal is true */
   center: PropTypes.bool,
+  /** If true, then aligns center vertically */
   centerVertical: PropTypes.bool,
+  /** If true, then aligns center horizontal */
   centerHorizontal: PropTypes.bool,
+  /** If true, aligns the items left */
   leftAlign: PropTypes.bool,
+  /** If true, aligns the items right */
   rightAlign: PropTypes.bool,
+  /** If true, reverses the order of the children*/
   reverse: PropTypes.bool,
+  /** Sets the padding between the children */
   padding: PropTypes.string,
+  /** Fill available layout with flex. */
   fillElement: PropTypes.bool,
+  /** All the children */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -405,12 +532,22 @@ export const Size = styled(Flex)`
 
 Size.displayName = "Size";
 Size.propTypes = {
+  /** Sets minWidth, maxWidth and width to absWidth */
   absWidth: PropTypes.string,
+  /** Sets minHeight, maxHeight and height to absHeight */
   absHeight: PropTypes.string,
+  /** minWidth of the child */
   minWidth: PropTypes.string,
+  /** minHeight of the child */
   minHeight: PropTypes.string,
+  /** maxWidth of the child */
   maxWidth: PropTypes.string,
-  maxHeight: PropTypes.string
+  /** maxHeight of the child */
+  maxHeight: PropTypes.string,
+  /** width of the child */
+  width: PropTypes.width,
+  /** height of the child */
+  height: PropTypes.height
 };
 
 export const Order = styled(Flex)`
@@ -419,5 +556,6 @@ export const Order = styled(Flex)`
 
 Order.displayName = "Order";
 Order.propTypes = {
+  /** The order of the child  */
   order: PropTypes.number.isRequired
 };

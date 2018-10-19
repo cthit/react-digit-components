@@ -57,12 +57,19 @@ class DigitContainUser extends React.Component {
 
 DigitContainUser.displayName = "DigitContainUser";
 DigitContainUser.propTypes = {
+  /** E.g. [/users, /songs]. The user may now be at /users/* or /songs/**/
   allowedBasePaths: PropTypes.arrayOf(PropTypes.string),
+  /** E.g. [/users/asdf, /songs/fdsa]. The user may now be at the two specified paths */
   allowedFullPaths: PropTypes.arrayOf(PropTypes.string),
+  /** The current path on the website*/
   currentPath: PropTypes.string,
+  /** redirectTo is the redirect function supplied by react-digit-components */
   redirectTo: PropTypes.string,
+  /** What the website should redirect to if they are not on an allowed path. E.g. a login portal */
   to: PropTypes.string,
+  /** The text to be shown on the toast if the user needs to be redirected */
   toastTextOnRedirect: PropTypes.string,
+  /** toastOpen is the toast function supplie by react-digit-components */
   toastOpen: PropTypes.bool
 };
 

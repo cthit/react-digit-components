@@ -26,6 +26,8 @@ export const Card = styled(
     maxHeight,
     hasSubTitle,
     hasIcon,
+    width,
+    height,
     ...rest
   }) => <Paper {...rest} />
 )`
@@ -47,31 +49,26 @@ export const Card = styled(
     props.absHeight != null ? props.absHeight : props.minHeight};
 
   background-color: white;
-
-  &:hover {
-    ${props => {
-      if (props.pliancy) {
-        /*shadow48p();*/
-      }
-    }};
-  }
-  &:active {
-    ${props => {
-      if (props.pliancy) {
-        /*shadow2dp();*/
-      }
-    }};
-  }
 `;
 
 Card.displayName = "Card";
 Card.propTypes = {
+  /** Sets minWidth, maxWidth and width to absWidth */
   absWidth: PropTypes.string,
+  /** Sets minHeight, maxHeight and height to absHeight */
   absHeight: PropTypes.string,
+  /** minWidth of the card */
   minWidth: PropTypes.string,
+  /** minHeight of the card */
   minHeight: PropTypes.string,
+  /** maxWidth of the card */
   maxWidth: PropTypes.string,
-  maxHeight: PropTypes.string
+  /** maxHeight of the card */
+  maxHeight: PropTypes.string,
+  /** width of the card */
+  width: PropTypes.width,
+  /** height of the card */
+  height: PropTypes.height
 };
 /**
  * use this hasSubTitle and hasIcon must be true if you have them inside your Card.
@@ -89,7 +86,9 @@ export const CardHeader = styled.div`
 
 CardHeader.displayName = "CardHeader";
 CardHeader.propTypes = {
+  /** If you want to have a sub title, set this to true */
   hasSubTitle: PropTypes.bool,
+  /** If you want to have a icon, set this to true */
   hasIcon: PropTypes.bool
 };
 
@@ -189,7 +188,11 @@ export const CardButtons = styled.div`
 
 CardButtons.displayName = "CardButtons";
 CardButtons.propTypes = {
+  /** If true, then the align and order is reversed */
   reverseDirection: PropTypes.bool,
+  /** Recommended to only use when you have two buttons. If true, and you have
+   * two buttons, then this will have one button to the left and one to the right.
+   */
   leftRight: PropTypes.bool
 };
 

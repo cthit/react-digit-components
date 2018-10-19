@@ -186,10 +186,19 @@ class DigitHeader extends React.Component {
 
 DigitHeader.displayName = "DigitHeader";
 DigitHeader.propTypes = {
+  /** A render prop to render main. Has no arguments. */
   renderMain: PropTypes.func.isRequired,
+  /** A render prop to render the drawer. Has a closeDrawer function
+   * that you can call to automatically close the drawer when a link has been pressed.
+   * If null, then there's no drawer.
+   */
   renderDrawer: PropTypes.func,
+  /** A text title.  */
   title: PropTypes.string,
-  renderHeader: PropTypes.func
+  /** A render prop to render in header, next to the title. */
+  renderHeader: PropTypes.func,
+  /** The height for the header. E.g. 100px or 20%. */
+  headerHeight: PropTypes.string
 };
 
 DigitHeader.defaultProps = {

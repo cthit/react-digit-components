@@ -65,7 +65,7 @@ DigitDateAndTimePicker.propTypes = {
   disablePast: PropTypes.bool,
   /** What will be presented if a date is invalid */
   invalidLabel: PropTypes.string,
-  /** What will be presented if no date has been selecteed */
+  /** What will be presented if no date and time has been selected */
   emptyLabel: PropTypes.string,
   /** Button text for the clear button, which will clear the button.
    * The clear button will only be shown if clearable is true.

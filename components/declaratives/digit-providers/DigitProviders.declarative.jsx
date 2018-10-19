@@ -90,11 +90,24 @@ class DigitProviders extends React.Component {
 
 DigitProviders.displayName = "DigitProviders";
 DigitProviders.propTypes = {
+  /** A way to customize material-ui. Warning: Try to avoid using this prop at any cost,
+   * since the usage of material-ui isn't set in stone forever */
   theme: PropTypes.object,
+  /** A single child element */
   children: PropTypes.element.isRequired,
-  defaultLanguage: PropTypes.string,
+  /** The default language that has to be either swedish (sv) or english (en)*/
+  defaultLanguage: PropTypes.oneOf[("sv", "en")],
+  /** Starting redux state for your application */
   preloadedState: PropTypes.object,
+  /** All redux reducer from your application */
   rootReducer: PropTypes.object
+};
+
+DigitProviders.defaultProps = {
+  defaultLanguage: "sv",
+  theme: {},
+  preloadedState: {},
+  rootReducer: {}
 };
 
 export default DigitProviders;
@@ -110,8 +123,7 @@ class DigitLocalizeInitalizer extends React.Component {
       options: {
         renderToStaticMarkup,
         renderInnerHtml: true,
-        defaultLanguage:
-          props.defaultLanguage == null ? "sv" : props.defaultLanguage
+        defaultLanguage: props.defaultLanguage
       }
     });
   }

@@ -22,9 +22,22 @@ const DigitFormFieldArray = ({ name, render, component, componentProps }) => (
 
 DigitFormFieldArray.displayName = "DigitFormFieldArray";
 DigitFormFieldArray.propTypes = {
+  /** A unique name for the form. This name is the key of
+   * the values object in DigitForm.
+   */
   name: PropTypes.string.isRequired,
+  /** A render prop to render the list. See https://jaredpalmer.com/formik/docs/api/fieldarray#render-arrayhelpers-arrayhelpers-reactreactnode.
+   * Also see digit-form-field-array/readme.md for examples.
+   */
   render: PropTypes.func,
+  /** See https://jaredpalmer.com/formik/docs/api/fieldarray#component-reactreactnode.
+   *  Has precedence over the render prop. Also see example in
+   * digit-form-field-array/readme.md for examples.
+   */
   component: PropTypes.element,
+  /** Props for the component. E.g. setting upperLabel in DigitTextField or
+   * primary in DigitCheckbox.
+   */
   componentProps: PropTypes.object
 };
 

@@ -23,6 +23,7 @@ const DigitButton = ({
   </Button>
 );
 
+DigitButton.displayName = "DigitButton";
 DigitButton.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,

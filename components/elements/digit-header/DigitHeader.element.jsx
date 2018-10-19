@@ -184,6 +184,7 @@ class DigitHeader extends React.Component {
   }
 }
 
+DigitHeader.displayName = "DigitHeader";
 DigitHeader.propTypes = {
   renderMain: PropTypes.func.isRequired,
   renderDrawer: PropTypes.func,

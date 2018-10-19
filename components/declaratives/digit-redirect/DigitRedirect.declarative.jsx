@@ -20,6 +20,7 @@ class DigitRedirect extends React.Component {
   }
 }
 
+DigitRedirect.displayName = "DigitRedirect";
 DigitRedirect.propTypes = {
   redirectPath: PropTypes.string,
   redirectFinished: PropTypes.func,

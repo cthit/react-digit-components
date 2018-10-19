@@ -11,6 +11,7 @@ const DigitForm = ({ initialValues, onSubmit, validationSchema, render }) => (
   />
 );
 
+DigitForm.displayName = "DigitForm";
 DigitForm.propTypes = {
   initialValues: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,

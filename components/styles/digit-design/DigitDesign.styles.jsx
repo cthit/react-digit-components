@@ -64,6 +64,7 @@ export const Card = styled(
   }
 `;
 
+Card.displayName = "Card";
 Card.propTypes = {
   absWidth: PropTypes.string,
   absHeight: PropTypes.string,
@@ -86,6 +87,7 @@ export const CardHeader = styled.div`
     props.hasSubTitle ? "33px 25px auto" : "33px 0px auto"};
 `;
 
+CardHeader.displayName = "CardHeader";
 CardHeader.propTypes = {
   hasSubTitle: PropTypes.bool,
   hasIcon: PropTypes.bool
@@ -102,6 +104,8 @@ export const CardHeaderImage = styled.img`
   object-fit: cover;
 `;
 
+CardHeaderImage.displayName = "CardHeaderImage";
+
 export const CardIcon = styled.img`
   grid-column-start: 1;
   grid-column-end: 2;
@@ -113,12 +117,16 @@ export const CardIcon = styled.img`
   object-fit: contain;
 `;
 
+CardIcon.displayName = "CardIcon";
+
 export const CardMenuContainer = styled.div`
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 2;
 `;
+
+CardMenuContainer.displayName = "CardMenuContainer";
 
 export const CardTitle = styled(Title)`
   font-size: 20px;
@@ -134,6 +142,8 @@ export const CardTitle = styled(Title)`
   grid-row-start: 1;
   grid-row-end: 2;
 `;
+
+CardTitle.displayName = "CardTitle";
 
 export const CardSubTitle = styled(Subtitle)`
   font-size: 15px;
@@ -151,6 +161,8 @@ export const CardSubTitle = styled(Subtitle)`
   color: ${({ theme }) => theme.textColorSecondary};
 `;
 
+CardSubTitle.displayName = "CardSubTitle";
+
 export const CardBody = styled.div`
   flex: 1;
 
@@ -158,6 +170,8 @@ export const CardBody = styled.div`
   flex-direction: column;
   padding: 8px;
 `;
+
+CardBody.displayName = "CardBody";
 
 export const CardButtons = styled.div`
   padding: 8px;
@@ -173,6 +187,7 @@ export const CardButtons = styled.div`
   align-items: center;
 `;
 
+CardButtons.displayName = "CardButtons";
 CardButtons.propTypes = {
   reverseDirection: PropTypes.bool,
   leftRight: PropTypes.bool
@@ -185,6 +200,10 @@ export const Divider = styled.hr`
   margin-right: auto;
 `;
 
+Divider.displayName = "Divider";
+
 export const Link = styled(NavLink)`
   text-decoration: none;
 `;
+
+Link.displayName = "Link";

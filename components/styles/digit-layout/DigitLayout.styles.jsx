@@ -285,6 +285,8 @@ export const DownRightPosition = styled.div`
   bottom: 16px;
 `;
 
+DownRightPosition.displayName = "DownRightPosition";
+
 export const Fill = styled.div`
   flex-grow: 1;
   flex-shrink: 1;
@@ -295,30 +297,44 @@ export const Fill = styled.div`
   padding: 0px;
 `;
 
+Fill.displayName = "Fill";
+
 export const VerticalFill = styled(Fill)`
   flex-direction: row;
   align-items: center;
 `;
 
+VerticalFill.displayName = "VerticalFill";
+
 export const MarginTop = Fill.extend`
   margin-top: 8px;
 `;
+
+MarginTop.displayName = "MarginTop";
 
 export const MarginBottom = Fill.extend`
   margin-bottom: 8px;
 `;
 
+MarginBottom.displayName = "MarginBottom";
+
 export const MarginLeft = Fill.extend`
   margin-left: 8px;
 `;
+
+MarginLeft.displayName = "MarginLeft";
 
 export const MarginRight = Fill.extend`
   margin-right: 8px;
 `;
 
+MarginRight.displayName = "MarginRight";
+
 export const Margin = Fill.extend`
   margin: 4px;
 `;
+
+Margin.displayName = "Margin";
 
 export const Spacing = styled.div`
   display: block;
@@ -326,9 +342,13 @@ export const Spacing = styled.div`
   height: 8px;
 `;
 
+Spacing.displayName = "Spacing";
+
 export const Padding = Fill.extend`
   padding: 8px;
 `;
+
+Padding.displayName = "Padding";
 
 export const Center = styled.div`
   flex-grow: 1;
@@ -341,6 +361,8 @@ export const Center = styled.div`
   justify-content: center;
   align-content: center;
 `;
+
+Center.displayName = "Center";
 
 export const HideFill = styled(Fill)`
   display: ${props => (props.hidden ? "none" : "inherit")};

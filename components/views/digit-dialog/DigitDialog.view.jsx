@@ -78,6 +78,7 @@ class DigitDialog extends React.Component {
   }
 }
 
+DigitDialog.displayName = "DigitDialog";
 DigitDialog.propTypes = {
   options: PropTypes.shape({
     onConfirm: PropTypes.func.isRequired,

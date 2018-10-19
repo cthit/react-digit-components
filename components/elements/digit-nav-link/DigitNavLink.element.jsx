@@ -17,6 +17,7 @@ const Link = styled(NavLink)`
   text-decoration: none;
 `;
 
+DigitNavLink.displayName = "DigitNavLink";
 DigitNavLink.propTypes = {
   text: PropTypes.string.isRequired,
   icon: PropTypes.func,

@@ -14,6 +14,7 @@ DigitLoading.defaultProps = {
   size: "40"
 };
 
+DigitLoading.displayName = "DigitLoading";
 DigitLoading.propTypes = {
   loading: PropTypes.bool.isRequired,
   size: PropTypes.number

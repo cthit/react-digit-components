@@ -71,6 +71,7 @@ const DigitEditData = ({
   />
 );
 
+DigitEditData.displayName = "DigitEditData";
 DigitEditData.propTypes = {
   initialValues: PropTypes.object,
   validationSchema: PropTypes.object,

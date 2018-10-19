@@ -88,6 +88,7 @@ class DigitProviders extends React.Component {
   }
 }
 
+DigitProviders.displayName = "DigitProviders";
 DigitProviders.propTypes = {
   theme: PropTypes.object,
   children: PropTypes.element.isRequired,

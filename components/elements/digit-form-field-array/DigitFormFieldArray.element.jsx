@@ -20,6 +20,7 @@ const DigitFormFieldArray = ({ name, render, component, componentProps }) => (
   />
 );
 
+DigitFormFieldArray.displayName = "DigitFormFieldArray";
 DigitFormFieldArray.propTypes = {
   name: PropTypes.string.isRequired,
   render: PropTypes.func,

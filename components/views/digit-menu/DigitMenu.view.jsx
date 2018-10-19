@@ -67,6 +67,7 @@ class DigitMenu extends React.Component {
   }
 }
 
+DigitMenu.displayName = "DigitMenu";
 DigitMenu.propTypes = {
   valueToTextMap: PropTypes.objectOf(PropTypes.string).isRequired,
   onClick: PropTypes.func.isRequired

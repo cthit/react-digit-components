@@ -122,6 +122,7 @@ class DigitToast extends React.Component {
   }
 }
 
+DigitToast.displayName = "DigitToast";
 DigitToast.propTypes = {
   toastOptions: PropTypes.shape({
     text: PropTypes.string,

@@ -16,6 +16,7 @@ function getCurrentValue(currentString, stringtoValueMap) {
   }
 }
 
+DigitMapStringToValue.displayName = "DigitMapStringToValue";
 DigitMapStringToValue.propTypes = {
   currentString: PropTypes.string.isRequired,
   stringtoValueMap: PropTypes.object.isRequired,

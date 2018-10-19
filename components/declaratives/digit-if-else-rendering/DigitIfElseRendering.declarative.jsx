@@ -14,8 +14,11 @@ const DigitIfElseRendering = ({ test, ifRender, elseRender }) => {
 
 DigitIfElseRendering.displayName = "DigitIfElseRendering";
 DigitIfElseRendering.propTypes = {
+  /** If true, ifRender will be called. Otherwise elseRender will be called. */
   test: PropTypes.bool,
+  /** The render prop for if test is true */
   ifRender: PropTypes.func.isRequired,
+  /** The render prop for if test is false */
   elseRender: PropTypes.func
 };
 

@@ -11,7 +11,9 @@ const DigitTooltip = ({ children, text }) => (
 
 DigitTooltip.displayName = "DigitTooltip";
 DigitTooltip.propTypes = {
+  /** The child element which is what you need to hover to show the text */
   children: PropTypes.element.isRequired,
+  /** The hover text. */
   text: PropTypes.string.isRequired
 };
 

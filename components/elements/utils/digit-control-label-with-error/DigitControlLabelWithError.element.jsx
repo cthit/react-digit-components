@@ -13,6 +13,7 @@ const DigitControlLabelWithError = styled(({ error, ...props }) => (
 
 DigitControlLabelWithError.displayName = "DigitControlLabelWithError";
 DigitControlLabelWithError.propTypes = {
+  /** If true, changes the text color to red. */
   error: PropTypes.bool
 };
 

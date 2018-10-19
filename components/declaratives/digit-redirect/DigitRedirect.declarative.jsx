@@ -22,9 +22,12 @@ class DigitRedirect extends React.Component {
 
 DigitRedirect.displayName = "DigitRedirect";
 DigitRedirect.propTypes = {
+  /** Where to redirect. Path is relative from the root, so do not include the websites adress */
   redirectPath: PropTypes.string,
+  /** Callback function when the redirect has been made */
   redirectFinished: PropTypes.func,
-  currentPath: PropTypes.string
+  /** The current path of the application. Used to prevent trying to redirect to a path the website already is at.*/
+  currentPath: PropTypes.string.isRequired
 };
 
 export default DigitRedirect;

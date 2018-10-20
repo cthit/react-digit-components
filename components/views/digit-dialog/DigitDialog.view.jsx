@@ -81,16 +81,21 @@ class DigitDialog extends React.Component {
 DigitDialog.displayName = "DigitDialog";
 DigitDialog.propTypes = {
   options: PropTypes.shape({
+    /** When ok button has been pressed, onConfirm is called */
     onConfirm: PropTypes.func.isRequired,
+    /** When cancel button has been pressed, onCancel is called */
     onCancel: PropTypes.func,
+    /** The text for the cancel button */
     cancelButtonText: PropTypes.string,
+    /** The text for the confirm button */
     confirmButtonText: PropTypes.text,
+    /** If true, then the dialog opens */
     open: PropTypes.bool,
+    /** The title of the dialog */
     title: PropTypes.string,
+    /** The description of the dialog */
     description: PropTypes.string
-  }),
-  digitDialogClosedCancel: PropTypes.func.isRequired,
-  digitDialogClosedConfirm: PropTypes.func.isRequired
+  })
 };
 
 export default DigitDialog;

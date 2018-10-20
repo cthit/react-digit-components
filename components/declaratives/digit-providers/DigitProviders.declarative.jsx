@@ -96,7 +96,7 @@ DigitProviders.propTypes = {
   /** A single child element */
   children: PropTypes.element.isRequired,
   /** The default language that has to be either swedish (sv) or english (en)*/
-  defaultLanguage: PropTypes.oneOf[("sv", "en")],
+  defaultLanguage: PropTypes.oneOf(["sv", "en"]),
   /** Starting redux state for your application */
   preloadedState: PropTypes.object,
   /** All redux reducer from your application */

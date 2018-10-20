@@ -15,7 +15,9 @@ export const Heading1 = styled(({ text, white, ...rest }) => (
 
 Heading1.displayName = "Heading1";
 Heading1.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -31,7 +33,9 @@ export const Heading2 = styled(({ text, white, ...rest }) => (
 
 Heading2.displayName = "Heading2";
 Heading2.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -47,7 +51,9 @@ export const Heading3 = styled(({ text, white, ...rest }) => (
 
 Heading3.displayName = "Heading3";
 Heading3.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -63,7 +69,9 @@ export const Heading4 = styled(({ text, white, ...rest }) => (
 
 Heading4.displayName = "Heading4";
 Heading4.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -79,7 +87,9 @@ export const Heading5 = styled(({ text, white, ...rest }) => (
 
 Heading5.displayName = "Heading5";
 Heading5.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -95,7 +105,9 @@ export const Heading6 = styled(({ text, white, ...rest }) => (
 
 Heading6.displayName = "Heading6";
 Heading6.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -111,7 +123,9 @@ export const Title = styled(({ text, white, ...rest }) => (
 
 Title.displayName = "Title";
 Title.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -126,7 +140,9 @@ export const Subtitle = styled(({ text, white, ...rest }) => (
 
 Subtitle.displayName = "Subtitle";
 Subtitle.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -141,7 +157,9 @@ export const Subtitle2 = styled(({ text, white, ...rest }) => (
 
 Subtitle2.displayName = "Subtitle2";
 Subtitle2.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool
 };
 
@@ -157,7 +175,10 @@ export const Text = styled(({ text, white, bold, ...rest }) => (
 
 Text.displayName = "Text";
 Text.propTypes = {
+  /** The text. */
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  /** Makes the text white if true */
   white: PropTypes.bool,
+  /** Makes the text bold if true */
   bold: PropTypes.bool
 };

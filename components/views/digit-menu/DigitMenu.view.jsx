@@ -69,7 +69,14 @@ class DigitMenu extends React.Component {
 
 DigitMenu.displayName = "DigitMenu";
 DigitMenu.propTypes = {
+  /** Values to text map. Value is what the code
+   * works with, text is what the user sees.
+   */
   valueToTextMap: PropTypes.objectOf(PropTypes.string).isRequired,
+  /** Gets called when a selection on the menu
+   * has been made. First and only argument is the
+   * value of the clicked.
+   */
   onClick: PropTypes.func.isRequired
 };
 

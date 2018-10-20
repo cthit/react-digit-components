@@ -80,6 +80,7 @@ class DigitDialog extends React.Component {
 
 DigitDialog.displayName = "DigitDialog";
 DigitDialog.propTypes = {
+  /** The options for a dialog */
   options: PropTypes.shape({
     /** When ok button has been pressed, onConfirm is called */
     onConfirm: PropTypes.func.isRequired,

@@ -54,7 +54,7 @@ class DigitTable extends React.Component {
   updateData() {
     this.setState({
       data: this.props.data.sort(
-        (a, b) => (a[this.props.orderBy] < b[this.props.orderBy] ? -1 : 1)
+        (a, b) => (a[this.state.orderBy] < b[this.state.orderBy] ? -1 : 1)
       )
     });
   }
@@ -221,18 +221,39 @@ class DigitTable extends React.Component {
 
 DigitTable.displayName = "DigitTable";
 DigitTable.propTypes = {
+  /** The starting column to order rows by */
   startOrderBy: PropTypes.string,
+  /** The specified order of the columns. */
   columnsOrder: PropTypes.arrayOf(PropTypes.string),
+  /** The column that has the id. */
   idProp: PropTypes.string,
+  /** The data. An array of objects where the object
+   * has the keys specified in headerTexts.
+   */
   data: PropTypes.arrayOf(PropTypes.object),
-  orderBy: PropTypes.string,
+  /** When the selected rows has been updated. The first argument is
+   * the current array of selected rows. You need to keep
+   * selected updated yourself.
+   */
   onSelectedUpdated: PropTypes.func,
+  /** An array of selected. When onSelectedUpdated is called,
+   * you need to save the selected rows.*/
   selected: PropTypes.array,
+  /** A key to text map, where the key are the column
+   * and the text is what the user sees.s
+   */
   headerTexts: PropTypes.objectOf(PropTypes.string),
+  /** The text that is shown if the table is emptyK */
   emptyTableText: PropTypes.string,
+  /** The text of the title. */
   titleText: PropTypes.string,
+  /** THe text to show in the searchbar. */
   searchText: PropTypes.string,
+  /** If true, then all the different props you can search for is
+   * added to the search input field.
+   */
   showSearchableProps: PropTypes.bool,
+  /** If true, then there's a search input field. */
   search: PropTypes.bool
 };
 

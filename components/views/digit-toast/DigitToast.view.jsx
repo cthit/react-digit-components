@@ -124,10 +124,15 @@ class DigitToast extends React.Component {
 
 DigitToast.displayName = "DigitToast";
 DigitToast.propTypes = {
+  /** The options for the toast */
   toastOptions: PropTypes.shape({
+    /** The text inside the toast */
     text: PropTypes.string,
+    /** The duration in miliseconds of the toast */
     duration: PropTypes.number,
+    /** Callback function when you press the button on a toast */
     actionHandler: PropTypes.func,
+    /** Button text */
     actionText: PropTypes.string
   })
 };

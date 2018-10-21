@@ -15,3 +15,63 @@ The goal with react-digit-components is the increase the efficiency of digIT by 
 We use Storybook so you can interact with the different components that react-digit-components has. Every component has its own readme which you can view inside the storybook.
 
 [Storybook link!](http://cthit.github.io/react-digit-components)
+
+## Components
+
+### Must have components to use react-digit-components
+
+- DigitHeader
+
+- DigitProviders
+
+### Buttons
+
+### Input
+
+- DigitTextField
+
+- DigitTextArea
+
+- DigitCheckbox
+
+- DigitSwitch
+
+- DigitTime
+
+### Form
+
+### Navigation
+
+- DigitSidebar
+
+  - DigitNavLink
+
+- DigitTabs
+
+- DigitBottom navigation
+
+### Popup information
+
+- DigitMenu
+
+- DigitDialog
+
+- DigitToast
+
+- DigitTooltip
+
+### Display information
+
+- Card
+
+- DigitTable
+
+- DigitDisplayData
+
+### Utils
+
+- DigitIfElseRendering
+
+- DigitTranslations
+
+### Text

@@ -6,7 +6,7 @@ const DigitMapStringToValue = ({ currentString, stringtoValueMap, render }) =>
   render(getCurrentValue(currentString, stringtoValueMap));
 
 function getCurrentValue(currentString, stringtoValueMap) {
-  if (!StringtoValueMap.hasOwnProperty(currentString)) {
+  if (!stringtoValueMap.hasOwnProperty(currentString)) {
     console.log(
       "WARNING: There isn't a Value for the string: " + currentString
     );

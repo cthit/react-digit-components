@@ -1,1 +1,13 @@
 # DigitDatePicker
+
+A modal where you can select the date. Note that `DigitDatePicker` is uncontrolled, meaning you have to controll the current value of `DigitDatePicker`. If you are however using `DigitForm`, then you don't have to worry about it.
+
+```jsx
+import { DigitDatePicker } from "@cthit/react-digit-components";
+
+<DigitDatePicker
+  upperLabel="Choose a date and a time"
+  value={this.state.date}
+  onChange={this.onDateChanged}
+/>;
+```

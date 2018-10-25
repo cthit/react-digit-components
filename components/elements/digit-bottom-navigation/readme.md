@@ -3,7 +3,7 @@
 Mobile navigation, with tabs that has icons and labels. This should only be used for mobile. If you want similar tabs on desktop or tablet, use `DigitTabs`.
 
 ```jsx
-import { DigitBottomNavigation } from "react-digit-components";
+import { DigitBottomNavigation } from "@cthit/react-digit-components";
 
 import Home from "@material-ui/icons/Add";
 import Date from "@material-ui/icons/Date";

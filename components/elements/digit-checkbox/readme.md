@@ -19,3 +19,19 @@ import { DigitCheckbox } from "react-digit-components";
   }}
 />;
 ```
+
+## How to use with `DigitForm`
+
+```jsx
+<DigitForm
+  render={() => (
+    <DigitLayout.Column>
+      <DigitFormField
+        name="wantsCandy"
+        component={DigitCheckbox}
+        componentProps={{ label: "I want candy!" }}
+      />
+    </DigitLayout.Column>
+  )}
+/>
+```

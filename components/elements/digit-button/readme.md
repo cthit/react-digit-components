@@ -16,3 +16,23 @@ import { DigitButton } from "react-digit-components";
   }}
 />;
 ```
+
+## How to use with `DigitForm`
+
+To use `DigitButton` as the submit button for a `DigitForm`, then you have to add the `submit` prop to `DigitButton`. E.g.
+
+```jsx
+<DigitForm
+  render={() => (
+    <DigitLayout.Column>
+      <DigitFormField
+        name="date"
+        component={DigitDatePicker}
+        componentProps={{ upperLabel: "Enter date" }}
+      />
+
+      <DigitButton text="Submit" submit />
+    </DigitLayout.Column>
+  )}
+/>
+```

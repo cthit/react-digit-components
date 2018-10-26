@@ -11,3 +11,19 @@ import { DigitDateAndTimePicker } from "@cthit/react-digit-components";
   onChange={this.onDateChanged}
 />;
 ```
+
+## How to use with `DigitForm`
+
+```jsx
+<DigitForm
+  render={() => (
+    <DigitLayout.Column>
+      <DigitFormField
+        name="dateAndTime"
+        component={DigitDateAndTimePicker}
+        componentProps={{ upperLabel: "Enter date and time" }}
+      />
+    </DigitLayout.Column>
+  )}
+/>
+```

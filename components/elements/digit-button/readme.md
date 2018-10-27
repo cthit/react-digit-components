@@ -5,7 +5,7 @@ A simple button. Use color and style with care, reflect on what button is the mo
 Here are some examples:
 
 ```jsx
-import { DigitButton } from "react-digit-components";
+import { DigitButton } from "@cthit/react-digit-components";
 
 <DigitButton
   text="A primary and raised button"

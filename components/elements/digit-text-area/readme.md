@@ -5,7 +5,7 @@ A text area to input text.
 The `DigitTextArea` is uncontrolled, meaning you have to manage the value and change the value when the `DigitTextArea` recieves change. However, if you use `DigitForm`, you don't have to worry about it.
 
 ```jsx
-import { DigitTextArea } from "react-digit-components";
+import { DigitTextArea } from "@cthit/react-digit-components";
 
 <DigitTextArea
   onChange={e => {

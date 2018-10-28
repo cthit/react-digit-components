@@ -5,7 +5,7 @@ A textfield to input text.
 The `DigitTextField` is uncontrolled, meaning you have to manage the value and change the value when the `DigitTextField` recieves change. However, if you use `DigitForm`, you don't have to worry about it.
 
 ```jsx
-import { DigitTextField } from "react-digit-components";
+import { DigitTextField } from "@cthit/react-digit-components";
 
 <DigitTextField
   onChange={e => {

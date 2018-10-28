@@ -2,7 +2,9 @@
 
 A mobile friendly way of laying out the base blocks. Has a header, an optional drawer and an area for drawing your website. If you don't want a navigation, just remove the renderDrawer prop.
 
-```js
+```jsx
+import { DigitHeader } from "@cthit/react-digit-components";
+
 <DigitProviders>
   <DigitHeader
     title={title}
@@ -13,5 +15,5 @@ A mobile friendly way of laying out the base blocks. Has a header, an optional d
       </div>
     )}
   />
-</DigitProviders>
+</DigitProviders>;
 ```

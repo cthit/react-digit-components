@@ -14,3 +14,23 @@ import Add from "@material-ui/icons/Add";
   }}
 />;
 ```
+
+## How to use with `DigitForm`
+
+To use `DigitFAB` as the submit button for a `DigitForm`, then you have to add the `submit` prop to `DigitFAB`. E.g.
+
+```jsx
+<DigitForm
+  render={() => (
+    <DigitLayout.Column>
+      <DigitFormField
+        name="date"
+        component={DigitDatePicker}
+        componentProps={{ upperLabel: "Enter date" }}
+      />
+
+      <DigitFAB icon={Edit} submit />
+    </DigitLayout.Column>
+  )}
+/>
+```

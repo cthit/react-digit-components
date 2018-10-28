@@ -352,7 +352,52 @@ Column.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ]).isRequired,
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default column properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-2
+   */
+  display: PropTypes.oneOf(["flex", "inline-flex"]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default column properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-6
+   */
+  justifyContent: PropTypes.oneOf([
+    "flex-start",
+    "flex-end",
+    "center",
+    "space-between",
+    "space-around",
+    "space-evenly"
+  ]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default column properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-4
+   */
+  flexWrap: PropTypes.oneOf(["nowrap", "wrap", "wrap-reverse"]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default column properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-7
+   */
+  alignItems: PropTypes.oneOf([
+    "flex-start",
+    "flex-end",
+    "center",
+    "baseline",
+    "stretch"
+  ]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default column properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-8
+   */
+  alignContent: PropTypes.oneOf([
+    "flex-start",
+    "flex-end",
+    "center",
+    "space-between",
+    "space-around",
+    "stretch"
+  ])
 };
 
 export const Row = styled(
@@ -408,7 +453,52 @@ Row.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ]).isRequired,
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default row properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-2
+   */
+  display: PropTypes.oneOf(["flex", "inline-flex"]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default row properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-6
+   */
+  justifyContent: PropTypes.oneOf([
+    "flex-start",
+    "flex-end",
+    "center",
+    "space-between",
+    "space-around",
+    "space-evenly"
+  ]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default row properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-4
+   */
+  flexWrap: PropTypes.oneOf(["nowrap", "wrap", "wrap-reverse"]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default row properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-7
+   */
+  alignItems: PropTypes.oneOf([
+    "flex-start",
+    "flex-end",
+    "center",
+    "baseline",
+    "stretch"
+  ]),
+  /**
+   * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default row properties.
+   * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-8
+   */
+  alignContent: PropTypes.oneOf([
+    "flex-start",
+    "flex-end",
+    "center",
+    "space-between",
+    "space-around",
+    "stretch"
+  ])
 };
 
 export const DownRightPosition = styled.div`

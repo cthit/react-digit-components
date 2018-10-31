@@ -17,20 +17,15 @@ class DigitContainUser extends React.Component {
       toastOpen
     } = this.props;
 
-    if (allowedFullPaths == null) {
-      allowedFullPaths = [];
-    }
     allowedFullPaths.push(to);
 
     var allowedOnThisPage = false;
 
-    if (allowedBasePaths != null) {
-      for (var i in allowedBasePaths) {
-        const basePath = allowedBasePaths[i];
-        if (currentPath.startsWith(basePath)) {
-          allowedOnThisPage = true;
-          break;
-        }
+    for (var i in allowedBasePaths) {
+      const basePath = allowedBasePaths[i];
+      if (currentPath.startsWith(basePath)) {
+        allowedOnThisPage = true;
+        break;
       }
     }
 
@@ -63,14 +58,24 @@ DigitContainUser.propTypes = {
   allowedFullPaths: PropTypes.arrayOf(PropTypes.string),
   /** The current path on the website*/
   currentPath: PropTypes.string,
-  /** redirectTo is the redirect function supplied by react-digit-components */
-  redirectTo: PropTypes.string,
   /** What the website should redirect to if they are not on an allowed path. E.g. a login portal */
   to: PropTypes.string,
   /** The text to be shown on the toast if the user needs to be redirected */
   toastTextOnRedirect: PropTypes.string,
-  /** toastOpen is the toast function supplie by react-digit-components */
-  toastOpen: PropTypes.bool
+  /** redirectTo is the redirect function supplied by react-digit-components */
+  redirectTo: PropTypes.func,
+  /** toastOpen is the toast function supplied by react-digit-components */
+  toastOpen: PropTypes.func
+};
+
+DigitContainUser.defaultProps = {
+  allowedBasePaths: [],
+  allowedFullPaths: [],
+  currentPath: "",
+  to: "",
+  toastTextOnRedirect: "",
+  redirectTo: () => {},
+  toastOpen: () => {}
 };
 
 const mapStateToProps = (state, ownProps) => ({});

@@ -9,7 +9,7 @@ const HorizontalFill = styled(Fill)`
 `;
 
 const FixedWidth = styled.div`
-  width: ${props => (props.fixedWidth != null ? props.fixedWidth : "125px")};
+  width: ${props => props.fixedWidth};
 `;
 
 const DigitDisplayData = ({ data, keysText, keysOrder, fixedWidth }) => (
@@ -39,6 +39,13 @@ DigitDisplayData.propTypes = {
   keysOrder: PropTypes.arrayOf(PropTypes.string),
   /** The fixed width for the left column. E.g. 200px, 20% */
   fixedWidth: PropTypes.string
+};
+
+DigitDisplayData.defaultProps = {
+  data: {},
+  keysText: {},
+  keysOrder: [],
+  fixedWidth: "125px"
 };
 
 export default DigitDisplayData;

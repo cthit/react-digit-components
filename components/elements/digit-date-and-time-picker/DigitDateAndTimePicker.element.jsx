@@ -22,15 +22,15 @@ const DigitDateAndTimePicker = ({
   upperLabel,
   onChange,
   classes,
-  todayLabel = "Idag",
-  cancelLabel = "Avbryt",
-  okLabel = "Ok",
-  clearLabel = "Rensa",
-  emptyLabel = "Tryck här för tid och datum",
-  invalidLabel = "Ogiltigt tid och datum",
-  showTodayButton = true,
-  disablePast = true,
-  clearable = true
+  todayLabel,
+  cancelLabel,
+  okLabel,
+  clearLabel,
+  emptyLabel,
+  invalidLabel,
+  showTodayButton,
+  disablePast,
+  clearable
 }) => (
   <DateTimePicker
     value={value}
@@ -87,7 +87,7 @@ DigitDateAndTimePicker.propTypes = {
    * you have to store the value and react on changes using
    * the onChange function.
    */
-  value: PropTypes.instanceOf(Date),
+  value: PropTypes.instanceOf(Date).isRequired,
   /** This function will be called when the user has selected
    * a new date and a new time.
    */
@@ -96,6 +96,19 @@ DigitDateAndTimePicker.propTypes = {
   upperLabel: PropTypes.string,
   /** If true, then a today button will be shown.  */
   showTodayButton: PropTypes.bool
+};
+
+DigitDateAndTimePicker.defaultProps = {
+  clearable: false,
+  disablePast: false,
+  invalidLabel: "Ogiltigt tid och datum",
+  emptyLabel: "Tryck här för tid och datum",
+  clearLabel: "Rensa",
+  okLabel: "Ok",
+  cancelLabel: "Avbryt",
+  todayLabel: "Idag",
+  upperLabel: "",
+  showTodayButton: false
 };
 
 /** This is a temp solution to get the correct prop types from StoryBook. */

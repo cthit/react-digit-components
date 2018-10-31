@@ -36,4 +36,10 @@ DigitIconButton.propTypes = {
   icon: PropTypes.func.isRequired
 };
 
+DigitIconButton.defaultProps = {
+  primary: false,
+  secondary: false,
+  disabled: false
+};
+
 export default DigitIconButton;

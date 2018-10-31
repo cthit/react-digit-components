@@ -20,7 +20,7 @@ import {
 
 import DigitToastConnected from "../../components/views/digit-toast";
 import DigitToast from "../../components/views/digit-toast/DigitToast.view";
-import { toastOpen } from "../../components/views/digit-toast/DigitToast.view.action-creator";
+import { digitToastOpen } from "../../components/views/digit-toast/DigitToast.view.action-creator";
 
 import DigitToastReadme from "../../components/views/digit-toast/readme.md";
 
@@ -105,7 +105,7 @@ const Stuff = ({ toastOpen }) => (
 const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = dispatch => ({
-  toastOpen: toastData => dispatch(toastOpen(toastData))
+  toastOpen: toastData => dispatch(digitToastOpen(toastData))
 });
 
 const StuffContainer = connect(

@@ -202,7 +202,10 @@ DigitHeader.propTypes = {
 };
 
 DigitHeader.defaultProps = {
-  headerHeight: "64px"
+  headerHeight: "64px",
+  renderDrawer: null,
+  renderHeader: () => null,
+  title: "My website"
 };
 
 export default DigitHeader;

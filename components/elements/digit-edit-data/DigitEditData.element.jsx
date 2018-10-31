@@ -21,52 +21,47 @@ const DigitEditData = ({
   titleText,
   submitText
 }) => (
-  <DigitIfElseRendering
-    test={initialValues != null}
-    ifRender={() => (
-      <DigitForm
-        validationSchema={validationSchema}
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        render={({ isSubmitting, isValid }) => (
-          <Card minWidth="300px" maxWidth="600px">
-            <CardTitle text={titleText} />
-            <CardBody>
-              {keysOrder.map(key => {
-                const keyComponentData = keysComponentData[key];
-                if (keyComponentData.array == null || !keyComponentData.array) {
-                  return (
-                    <DigitFormField
-                      key={key}
-                      name={key}
-                      component={keyComponentData.component}
-                      componentProps={keyComponentData.componentProps}
-                    />
-                  );
-                } else {
-                  return (
-                    <DigitFormFieldArray
-                      key={key}
-                      name={key}
-                      component={keyComponentData.component}
-                      componentProps={keyComponentData.componentProps}
-                    />
-                  );
-                }
-              })}
-            </CardBody>
-            <CardButtons reverseDirection>
-              <DigitButton
-                disabled={isSubmitting || !isValid}
-                submit
-                text={submitText}
-                raised
-                primary
-              />
-            </CardButtons>
-          </Card>
-        )}
-      />
+  <DigitForm
+    validationSchema={validationSchema}
+    initialValues={initialValues}
+    onSubmit={onSubmit}
+    render={({ isSubmitting, isValid }) => (
+      <Card minWidth="300px" maxWidth="600px">
+        <CardTitle text={titleText} />
+        <CardBody>
+          {keysOrder.map(key => {
+            const keyComponentData = keysComponentData[key];
+            if (!keyComponentData.array) {
+              return (
+                <DigitFormField
+                  key={key}
+                  name={key}
+                  component={keyComponentData.component}
+                  componentProps={keyComponentData.componentProps}
+                />
+              );
+            } else {
+              return (
+                <DigitFormFieldArray
+                  key={key}
+                  name={key}
+                  component={keyComponentData.component}
+                  componentProps={keyComponentData.componentProps}
+                />
+              );
+            }
+          })}
+        </CardBody>
+        <CardButtons reverseDirection>
+          <DigitButton
+            disabled={isSubmitting || !isValid}
+            submit
+            text={submitText}
+            raised
+            primary
+          />
+        </CardButtons>
+      </Card>
     )}
   />
 );
@@ -76,15 +71,22 @@ DigitEditData.propTypes = {
   initialValues: PropTypes.object,
   validationSchema: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
-  keysOrder: PropTypes.arrayOf(PropTypes.string),
+  keysOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
   keysComponentData: PropTypes.objectOf(
     PropTypes.shape({
       component: PropTypes.func.isRequired,
       componentProps: PropTypes.object
     })
-  ),
+  ).isRequired,
   titleText: PropTypes.string,
   submitText: PropTypes.string
+};
+
+DigitEditData.defaultProps = {
+  initialValues: {},
+  validationSchema: {},
+  titleText: "",
+  submitText: ""
 };
 
 export default DigitEditData;

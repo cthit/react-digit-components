@@ -66,6 +66,15 @@ DigitTimePicker.propTypes = {
   invalidLabel: PropTypes.string
 };
 
+DigitTimePicker.defaultProps = {
+  cancelLabel: "Avbryt",
+  okLabel: "Ok",
+  clearLabel: "Rensa",
+  emptyLabel: "Tryck här för tid",
+  invalidLabel: "Ogiltig tid",
+  upperLabel: ""
+};
+
 /** This is a temp solution to get the correct prop types from StoryBook. */
 export { DigitTimePicker };
 

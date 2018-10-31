@@ -138,12 +138,12 @@ DigitTextArea.propTypes = {
   /** If true, then you can't edit this text area. */
   disabled: PropTypes.bool,
   /** The least amount of rows for this text area. */
-  rows: PropTypes.number.isRequired,
+  rows: PropTypes.number,
   /** The max amount of rows for this text area. After
    * the text area has hit this amount of rows, it will begin to
    * scroll instead of expanding.
    */
-  rowsMax: PropTypes.number.isRequired,
+  rowsMax: PropTypes.number,
   /**
    * Adds an outline around the text area in black color.
    */
@@ -161,7 +161,9 @@ DigitTextArea.defaultProps = {
   errorMessage: "",
   disabled: false,
   outlined: false,
-  filled: false
+  filled: false,
+  rows: 3,
+  rowsMax: 6
 };
 
 export default DigitTextArea;

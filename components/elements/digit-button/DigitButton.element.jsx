@@ -52,7 +52,7 @@ DigitButton.propTypes = {
 };
 
 DigitButton.defaultProps = {
-  onClick: null,
+  onClick: () => {},
   primary: false,
   secondary: false,
   raised: false,

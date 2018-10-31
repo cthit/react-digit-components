@@ -39,7 +39,7 @@ DigitFormField.propTypes = {
 };
 
 DigitFormField.defaultProps = {
-  componentProps = {}
+  componentProps: {}
 };
 
 export default DigitFormField;

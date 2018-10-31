@@ -29,4 +29,9 @@ DigitForm.propTypes = {
   render: PropTypes.func.isRequired
 };
 
+DigitForm.defaultProps = {
+  initialValues: {},
+  validationSchema: {}
+};
+
 export default DigitForm;

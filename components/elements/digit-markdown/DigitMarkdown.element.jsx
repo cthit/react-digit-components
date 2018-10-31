@@ -96,4 +96,8 @@ DigitMarkdown.propTypes = {
   markdownSource: PropTypes.string.isRequired
 };
 
+DigitMarkdown.defaultProps = {
+  markdownSource: ""
+};
+
 export default DigitMarkdown;

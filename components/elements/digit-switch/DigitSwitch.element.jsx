@@ -63,4 +63,15 @@ DigitSwitch.propTypes = {
   name: PropTypes.string
 };
 
+DigitSwitch.defaultProps = {
+  onBlur: () => {},
+  error: false,
+  errorMessage: "",
+  disabled: false,
+  primary: false,
+  secondary: false,
+  label: "",
+  name: ""
+};
+
 export default DigitSwitch;

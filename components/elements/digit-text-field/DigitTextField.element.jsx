@@ -144,4 +144,16 @@ DigitTextField.propTypes = {
   filled: PropTypes.bool
 };
 
+DigitTextField.defaultProps = {
+  onBlur: () => {},
+  upperLabel: "",
+  lowerLabel: "",
+  name: "",
+  error: false,
+  errorMessage: "",
+  disabled: false,
+  outlined: false,
+  filled: false
+};
+
 export default DigitTextField;

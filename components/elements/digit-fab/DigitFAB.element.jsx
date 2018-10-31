@@ -34,4 +34,12 @@ DigitFAB.propTypes = {
   submit: PropTypes.bool
 };
 
+DigitFAB.defaultProps = {
+  onClick: () => {},
+  disabled: false,
+  primary: false,
+  secondary: false,
+  submit: false
+};
+
 export default DigitFAB;

@@ -52,4 +52,8 @@ DigitTabs.propTypes = {
   titleFont: PropTypes.bool
 };
 
+DigitTabs.defaultProps = {
+  titleFont: false
+};
+
 export default DigitTabs;

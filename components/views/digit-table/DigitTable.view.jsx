@@ -222,15 +222,15 @@ class DigitTable extends React.Component {
 DigitTable.displayName = "DigitTable";
 DigitTable.propTypes = {
   /** The starting column to order rows by */
-  startOrderBy: PropTypes.string,
+  startOrderBy: PropTypes.string.isRequired,
   /** The specified order of the columns. */
-  columnsOrder: PropTypes.arrayOf(PropTypes.string),
+  columnsOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
   /** The column that has the id. */
-  idProp: PropTypes.string,
+  idProp: PropTypes.string.isRequired,
   /** The data. An array of objects where the object
    * has the keys specified in headerTexts.
    */
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   /** When the selected rows has been updated. The first argument is
    * the current array of selected rows. You need to keep
    * selected updated yourself.
@@ -242,7 +242,7 @@ DigitTable.propTypes = {
   /** A key to text map, where the key are the column
    * and the text is what the user sees.s
    */
-  headerTexts: PropTypes.objectOf(PropTypes.string),
+  headerTexts: PropTypes.objectOf(PropTypes.string).isRequired,
   /** The text that is shown if the table is emptyK */
   emptyTableText: PropTypes.string,
   /** The text of the title. */
@@ -255,6 +255,14 @@ DigitTable.propTypes = {
   showSearchableProps: PropTypes.bool,
   /** If true, then there's a search input field. */
   search: PropTypes.bool
+};
+
+DigitTable.defaultProps = {
+  search: false,
+  showSearchableProps: false,
+  searchText: "Sök",
+  titleText: "",
+  emptyTableText: "Tabellen är tom"
 };
 
 export default DigitTable;

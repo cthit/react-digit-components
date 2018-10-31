@@ -51,4 +51,14 @@ DigitButton.propTypes = {
   submit: PropTypes.bool
 };
 
+DigitButton.defaultProps = {
+  onClick: null,
+  primary: false,
+  secondary: false,
+  raised: false,
+  outlined: false,
+  disabled: false,
+  submit: false
+};
+
 export default DigitButton;

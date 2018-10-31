@@ -63,4 +63,15 @@ DigitCheckbox.propTypes = {
   errorMessage: PropTypes.string
 };
 
+DigitCheckbox.defaultProps = {
+  name: "",
+  onBlur: () => {},
+  label: "",
+  primary: false,
+  secondary: false,
+  disabled: false,
+  error: false,
+  errorMessage: ""
+};
+
 export default DigitCheckbox;

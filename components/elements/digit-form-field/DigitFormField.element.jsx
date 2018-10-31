@@ -38,4 +38,8 @@ DigitFormField.propTypes = {
   componentProps: PropTypes.object
 };
 
+DigitFormField.defaultProps = {
+  componentProps = {}
+};
+
 export default DigitFormField;

@@ -11,6 +11,8 @@ import {
   DigitTranslations
 } from "../../../components";
 import DigitTableReadme from "../../../components/views/digit-table/readme.md";
+import { Margin } from "../../../components/styles/digit-layout/DigitLayout.styles";
+import { Text } from "../../../components/styles/digit-text/DigitText.styles";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];
@@ -39,77 +41,86 @@ class DigitTableCheckboxes extends React.Component {
       searchText,
       showSearchableProps
     } = this.props;
+
+    const { selected } = this.state;
+
     return (
-      <DigitTable
-        selected={this.state.selected}
-        onSelectedUpdated={this.onSelectedChange}
-        search={search}
-        titleText={titleText}
-        searchText={searchText}
-        showSearchableProps={showSearchableProps}
-        idProp="id"
-        startOrderBy="firstName"
-        columnsOrder={["id", "firstName", "lastName", "age"]}
-        headerTexts={{
-          id: text.id,
-          firstName: text.firstName,
-          lastName: text.lastName,
-          age: text.age,
-          __checkbox: text.choose,
-          __link: text.info
-        }}
-        data={[
-          {
-            id: "1337",
-            firstName: "Asdf",
-            lastName: "Asdfsson",
-            age: 33,
-            __link: "/link"
-          },
-          {
-            id: "4444",
-            firstName: "Glass",
-            lastName: "Glasssson",
-            age: 50,
-            __link: "/link"
-          },
-          {
-            id: "4324",
-            firstName: "Jeremy",
-            lastName: "Clarkson",
-            age: 50,
-            __link: "/link"
-          },
-          {
-            id: "1234",
-            firstName: "James",
-            lastName: "May",
-            age: 99,
-            __link: "/link"
-          },
-          {
-            id: "4321",
-            firstName: "Richard",
-            lastName: "Hammond",
-            age: 18,
-            __link: "/link"
-          },
-          {
-            id: "9999",
-            firstName: "The",
-            lastName: "Stig",
-            age: 55,
-            __link: "/link"
-          },
-          {
-            id: "2244",
-            firstName: "Henrik",
-            lastName: "Lundqvist",
-            age: 30,
-            __link: "/link"
-          }
-        ]}
-      />
+      <div>
+        {selected.map(s => (
+          <Text text={s + ", "} />
+        ))}
+        <Margin />
+        <DigitTable
+          selected={selected}
+          onSelectedUpdated={this.onSelectedChange}
+          search={search}
+          titleText={titleText}
+          searchText={searchText}
+          showSearchableProps={showSearchableProps}
+          idProp="id"
+          startOrderBy="firstName"
+          columnsOrder={["id", "firstName", "lastName", "age"]}
+          headerTexts={{
+            id: text.id,
+            firstName: text.firstName,
+            lastName: text.lastName,
+            age: text.age,
+            __checkbox: text.choose,
+            __link: text.info
+          }}
+          data={[
+            {
+              id: "1337",
+              firstName: "Asdf",
+              lastName: "Asdfsson",
+              age: 33,
+              __link: "/link"
+            },
+            {
+              id: "4444",
+              firstName: "Glass",
+              lastName: "Glasssson",
+              age: 50,
+              __link: "/link"
+            },
+            {
+              id: "4324",
+              firstName: "Jeremy",
+              lastName: "Clarkson",
+              age: 50,
+              __link: "/link"
+            },
+            {
+              id: "1234",
+              firstName: "James",
+              lastName: "May",
+              age: 99,
+              __link: "/link"
+            },
+            {
+              id: "4321",
+              firstName: "Richard",
+              lastName: "Hammond",
+              age: 18,
+              __link: "/link"
+            },
+            {
+              id: "9999",
+              firstName: "The",
+              lastName: "Stig",
+              age: 55,
+              __link: "/link"
+            },
+            {
+              id: "2244",
+              firstName: "Henrik",
+              lastName: "Lundqvist",
+              age: 30,
+              __link: "/link"
+            }
+          ]}
+        />
+      </div>
     );
   }
 }

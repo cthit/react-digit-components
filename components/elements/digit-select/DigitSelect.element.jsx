@@ -132,6 +132,17 @@ DigitSelect.propTypes = {
   name: PropTypes.string
 };
 
+DigitSelect.defaultProps = {
+  disabled: false,
+  allowToChooseNone: false,
+  upperLabel: "",
+  lowerLabel: "",
+  reverse: false,
+  outlined: false,
+  filled: false,
+  name: ""
+};
+
 const StyledFormControl = styled(FormControl)`
   display: flex;
 `;

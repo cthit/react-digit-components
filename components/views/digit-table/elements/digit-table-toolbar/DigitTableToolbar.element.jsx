@@ -40,7 +40,9 @@ const DigitTableToolbar = ({
       <StyledToolbar>
         <Fill>
           <TableTitle
-            text={numSelected > 0 ? numSelected + text.Selected : titleText}
+            text={
+              numSelected > 0 ? numSelected + " " + text.Selected : titleText
+            }
           />
         </Fill>
         <Fill>

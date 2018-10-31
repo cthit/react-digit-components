@@ -41,4 +41,10 @@ DigitFormFieldArray.propTypes = {
   componentProps: PropTypes.object
 };
 
+DigitFormFieldArray.defaultProps = {
+  componentProps: {},
+  component: null,
+  render: () => null
+};
+
 export default DigitFormFieldArray;

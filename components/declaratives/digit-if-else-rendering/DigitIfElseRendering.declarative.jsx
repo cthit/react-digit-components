@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitIfElseRendering = ({ test, ifRender, elseRender }) => {
-  return (test == null
-  ? false
-  : test)
-    ? ifRender()
-    : elseRender != null
-      ? elseRender()
-      : null;
+  return test ? ifRender() : elseRender();
 };
 
 DigitIfElseRendering.displayName = "DigitIfElseRendering";
@@ -20,6 +14,12 @@ DigitIfElseRendering.propTypes = {
   ifRender: PropTypes.func.isRequired,
   /** The render prop for if test is false */
   elseRender: PropTypes.func
+};
+
+DigitIfElseRendering.defaultProps = {
+  test: false,
+  ifRender: () => {},
+  elseRender: () => {}
 };
 
 export default DigitIfElseRendering;

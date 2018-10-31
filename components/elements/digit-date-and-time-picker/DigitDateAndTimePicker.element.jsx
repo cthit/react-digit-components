@@ -87,7 +87,7 @@ DigitDateAndTimePicker.propTypes = {
    * you have to store the value and react on changes using
    * the onChange function.
    */
-  value: PropTypes.instanceOf(Date).isRequired,
+  value: PropTypes.instanceOf(Date),
   /** This function will be called when the user has selected
    * a new date and a new time.
    */
@@ -99,6 +99,7 @@ DigitDateAndTimePicker.propTypes = {
 };
 
 DigitDateAndTimePicker.defaultProps = {
+  value: null,
   clearable: false,
   disablePast: false,
   invalidLabel: "Ogiltigt tid och datum",

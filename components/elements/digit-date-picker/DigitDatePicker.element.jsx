@@ -19,13 +19,13 @@ const DigitDatePicker = ({
   value,
   onChange,
   upperLabel,
-  showTodayButton = true,
-  todayLabel = "Idag",
-  cancelLabel = "Avbryt",
-  okLabel = "Ok",
-  clearLabel = "Rensa",
-  emptyLabel = "Tryck här för datum",
-  invalidLabel = "Ogiltigt datum",
+  showTodayButton,
+  todayLabel,
+  cancelLabel,
+  okLabel,
+  clearLabel,
+  emptyLabel,
+  invalidLabel,
   classes
 }) => (
   <DatePicker
@@ -56,7 +56,7 @@ DigitDatePicker.propTypes = {
   /** This function will be called when the user has selected
    * a new date.
    */
-  onChange: PropTypes.func,
+  onChange: PropTypes.func.isRequired,
   /** A label that is shown over the input field. */
   upperLabel: PropTypes.string,
   /** If true, then a today button will be shown.  */
@@ -81,6 +81,18 @@ DigitDatePicker.propTypes = {
   emptyLabel: PropTypes.string,
   /** What will be presented if a date is invalid */
   invalidLabel: PropTypes.string
+};
+
+DigitDatePicker.defaultProps = {
+  value: null,
+  upperLabel: "",
+  showTodayButton: false,
+  todayLabel: "Idag",
+  cancelLabel: "Avbryt",
+  okLabel: "Ok",
+  clearLabel: "Rensa",
+  emptyLabel: "Tryck här för datum",
+  invalidLabel: "Ogiltigt datum"
 };
 
 /** This is a temp solution to get the correct prop types from StoryBook. */

@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { Checkbox, TableRow, TableCell, TableBody } from "@material-ui/core";
 import { Text } from "../../../../styles/digit-text/DigitText.styles";
 import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
+import { Link } from "../../../../styles/digit-design/DigitDesign.styles";
+import DigitButton from "../../../../elements/digit-button";
 
 const StyledCheckbox = styled(Checkbox)`
   text-align: center;
@@ -110,9 +112,9 @@ const DigitTableBody = ({
                   test={n.__link != null}
                   ifRender={() => (
                     <StyledTableCell datatitle={headerTexts.__link}>
-                      <DigitLink to={n.__link}>
+                      <Link to={n.__link}>
                         <DigitButton text={headerTexts.__link} raised />
-                      </DigitLink>
+                      </Link>
                     </StyledTableCell>
                   )}
                   elseRender={() => <StyledTableCell />}

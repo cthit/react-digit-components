@@ -247,7 +247,7 @@ DigitTable.propTypes = {
   emptyTableText: PropTypes.string,
   /** The text of the title. */
   titleText: PropTypes.string,
-  /** THe text to show in the searchbar. */
+  /** The text to show in the searchbar. */
   searchText: PropTypes.string,
   /** If true, then all the different props you can search for is
    * added to the search input field.

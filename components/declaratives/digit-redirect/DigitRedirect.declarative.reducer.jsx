@@ -1,6 +1,6 @@
 import {
-  REDIRECT_TO,
-  REDIRECT_FINISHED
+  REDIRECT_FINISHED,
+  REDIRECT_TO
 } from "./DigitRedirect.declarative.actions";
 
 export function redirect(state = {}, action) {

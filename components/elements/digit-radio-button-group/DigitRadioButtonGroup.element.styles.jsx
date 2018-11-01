@@ -1,5 +1,5 @@
+import { FormControl, FormHelperText, FormLabel } from "@material-ui/core";
 import styled from "styled-components";
-import { FormControl, FormLabel, FormHelperText } from "@material-ui/core";
 
 export const UpperLabel = styled(FormLabel)`
   /*material-ui is somewhat buggy and change the colors randomly*/

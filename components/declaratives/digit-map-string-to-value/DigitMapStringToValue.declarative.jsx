@@ -1,6 +1,4 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitMapStringToValue = ({ currentString, stringtoValueMap, render }) =>
   render(getCurrentValue(currentString, stringtoValueMap));

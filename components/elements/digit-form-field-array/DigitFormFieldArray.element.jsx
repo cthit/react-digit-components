@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { FieldArray } from "formik";
+import PropTypes from "prop-types";
+import React from "react";
 
 const DigitFormFieldArray = ({ name, render, component, componentProps }) => (
   <FieldArray

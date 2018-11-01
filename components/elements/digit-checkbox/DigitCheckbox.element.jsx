@@ -1,7 +1,6 @@
-import React from "react";
+import { Checkbox } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { FormControlLabel, Checkbox } from "@material-ui/core";
-
+import React from "react";
 import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
 
 const DigitCheckbox = ({

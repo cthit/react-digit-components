@@ -1,10 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Menu, MenuItem } from "@material-ui/core";
 import { MoreVert } from "@material-ui/icons";
-
+import PropTypes from "prop-types";
+import React from "react";
 import DigitIconButton from "../../elements/digit-icon-button";
-
 import generateId from "../../utils/generators/id.generator";
 
 class DigitMenu extends React.Component {

@@ -1,18 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import {
-  Select,
+  FilledInput,
   FormControl,
+  FormHelperText,
   Input,
   InputLabel,
   MenuItem,
-  FormHelperText,
-  FilledInput,
-  OutlinedInput
+  OutlinedInput,
+  Select
 } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
+import ReactDOM from "react-dom";
 import styled from "styled-components";
-
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 class DigitSelect extends React.Component {

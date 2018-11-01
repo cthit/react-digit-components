@@ -1,25 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import {
-  ListItem,
-  IconButton,
-  AppBar,
-  Toolbar,
-  Drawer,
-  List,
-  ListItemText,
-  Hidden
-} from "@material-ui/core";
-import { Title } from "../../styles/digit-text/DigitText.styles";
-import {
-  Fill,
-  Spacing,
-  HideFill,
-  Padding
-} from "../../styles/digit-layout/DigitLayout.styles";
+import { AppBar, Drawer, Hidden, IconButton, Toolbar } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import PropTypes from "prop-types";
+import React from "react";
+import styled, { css } from "styled-components";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
+import { Title } from "../../styles/digit-text/DigitText.styles";
 
 const StyledMenuButton = styled(IconButton)`
   /*Medium device (md)*/

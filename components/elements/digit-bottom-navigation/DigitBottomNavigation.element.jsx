@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { BottomNavigationAction } from "@material-ui/core";
-import { StyledBottomNavigation } from "./DigitBottomNavigation.styles.element";
+import PropTypes from "prop-types";
+import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
+import { StyledBottomNavigation } from "./DigitBottomNavigation.styles.element";
 
 const DigitBottomNavigation = ({
   selected,

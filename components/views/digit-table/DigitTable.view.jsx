@@ -1,18 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import PropTypes from "prop-types";
+import { Paper, Table, TableBody, TablePagination } from "@material-ui/core";
 import _ from "lodash";
-
-import { Paper, TablePagination, TableBody, Table } from "@material-ui/core";
-
-import DigitTableToolbar from "./elements/digit-table-toolbar";
-import DigitTableBody from "./elements/digit-table-body";
-import DigitTableHeader from "./elements/digit-table-header";
-import translations from "./DigitTable.view.translations.json";
+import PropTypes from "prop-types";
+import React from "react";
 import { DigitTranslations } from "../..";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import { Heading3 } from "../../styles/digit-text/DigitText.styles";
+import translations from "./DigitTable.view.translations.json";
+import DigitTableBody from "./elements/digit-table-body";
+import DigitTableHeader from "./elements/digit-table-header";
+import DigitTableToolbar from "./elements/digit-table-toolbar";
 
 let counter = 0;
 function createData(name, calories, fat, carbs, protein) {

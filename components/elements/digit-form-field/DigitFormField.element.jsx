@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Field } from "formik";
+import PropTypes from "prop-types";
+import React from "react";
 
 const DigitFormField = ({ name, component, componentProps }) => (
   <Field

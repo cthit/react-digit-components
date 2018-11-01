@@ -1,10 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import { DigitText } from "../..";
-import DigitTable from "../../views/digit-table";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import DigitProviders from "../../declaratives/digit-providers";
+import DigitTable from "../../views/digit-table";
 
 const DigitMarkdown = ({ markdownSource }) => (
   <div>

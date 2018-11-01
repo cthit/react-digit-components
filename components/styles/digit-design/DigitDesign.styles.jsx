@@ -1,21 +1,14 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
 import { Paper } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
 import { NavLink } from "react-router-dom";
-
-import {
-  HeadingLevel2,
-  HeadingLevel3,
-  Title,
-  Subtitle
-} from "../digit-text/DigitText.styles";
+import styled from "styled-components";
+import { Subtitle, Title } from "../digit-text/DigitText.styles";
 
 /** Props:
  * width, height, maxWidth, maxHeight, minWidth, minHeight
  * absWidth, absHeight: If size, max and min will be the same.
  */
-
 export const Card = styled(
   ({
     absWidth,

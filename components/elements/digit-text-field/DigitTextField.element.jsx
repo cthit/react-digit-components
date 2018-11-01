@@ -1,18 +1,15 @@
+import {
+  FilledInput,
+  FormControl,
+  FormHelperText,
+  Input,
+  InputLabel,
+  OutlinedInput
+} from "@material-ui/core";
+import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
-
-import {
-  FormHelperText,
-  FormControl,
-  InputLabel,
-  Input,
-  OutlinedInput,
-  FilledInput
-} from "@material-ui/core";
-
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 class DigitTextField extends React.Component {

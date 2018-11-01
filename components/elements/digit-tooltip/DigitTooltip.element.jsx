@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Tooltip } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitTooltip = ({ children, text }) => (

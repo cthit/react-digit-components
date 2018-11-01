@@ -1,12 +1,11 @@
-import React from "react";
+import { Checkbox, TableBody, TableCell, TableRow } from "@material-ui/core";
 import PropTypes from "prop-types";
+import React from "react";
 import styled from "styled-components";
-
-import { Checkbox, TableRow, TableCell, TableBody } from "@material-ui/core";
-import { Text } from "../../../../styles/digit-text/DigitText.styles";
 import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
-import { Link } from "../../../../styles/digit-design/DigitDesign.styles";
 import DigitButton from "../../../../elements/digit-button";
+import { Link } from "../../../../styles/digit-design/DigitDesign.styles";
+import { Text } from "../../../../styles/digit-text/DigitText.styles";
 
 const StyledCheckbox = styled(Checkbox)`
   text-align: center;

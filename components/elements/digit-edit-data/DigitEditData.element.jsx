@@ -1,17 +1,16 @@
-import React from "react";
 import PropTypes from "prop-types";
-import DigitForm from "../digit-form";
+import React from "react";
 import {
   Card,
-  CardTitle,
-  CardButtons,
   CardBody,
-  CardSubTitle
+  CardButtons,
+  CardTitle
 } from "../../styles/digit-design/DigitDesign.styles";
+import DigitButton from "../digit-button";
+import DigitForm from "../digit-form";
 import DigitFormField from "../digit-form-field";
 import DigitFormFieldArray from "../digit-form-field-array";
-import DigitButton from "../digit-button";
-import { DigitIfElseRendering } from "../..";
+
 const DigitEditData = ({
   initialValues,
   validationSchema,

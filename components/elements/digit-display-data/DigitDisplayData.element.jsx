@@ -1,5 +1,5 @@
-import React from "react";
 import PropTypes from "prop-types";
+import React from "react";
 import styled from "styled-components";
 import { Fill, Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../styles/digit-text/DigitText.styles";

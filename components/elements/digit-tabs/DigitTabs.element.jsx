@@ -1,8 +1,8 @@
-import React from "react";
+import { Tab, Tabs } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { Tabs, Tab } from "@material-ui/core";
+import React from "react";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
-import { Title, Text } from "../../styles/digit-text/DigitText.styles";
+import { Text, Title } from "../../styles/digit-text/DigitText.styles";
 
 const DigitTabs = ({
   selected,

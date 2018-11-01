@@ -1,9 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
+import PropTypes from "prop-types";
+import React from "react";
+import { getTranslate, withLocalize } from "react-localize-redux";
 import { connect } from "react-redux";
-import { withLocalize } from "react-localize-redux";
-import { getTranslate } from "react-localize-redux";
 
 function loadTranslations(localize, translations, baseUrl, commonTranslations) {
   if (translations == null && baseUrl == null) {

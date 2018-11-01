@@ -1,6 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
-import { ToastButton, StyledSnackbar } from "./DigitToast.view.styles";
+import React from "react";
+import { StyledSnackbar, ToastButton } from "./DigitToast.view.styles";
 
 class DigitToast extends React.Component {
   state = {

@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import TimePicker from "material-ui-pickers/TimePicker";
 import withStyles from "@material-ui/core/styles/withStyles";
+import TimePicker from "material-ui-pickers/TimePicker";
+import PropTypes from "prop-types";
+import React from "react";
 
 const styles = () => ({
   root: {

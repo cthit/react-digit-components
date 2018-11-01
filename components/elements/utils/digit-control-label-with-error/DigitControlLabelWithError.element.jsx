@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
 import { FormControlLabel } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
 
 const DigitControlLabelWithError = styled(({ error, ...props }) => (
   <FormControlLabel {...props} classes={{ label: "label" }} />

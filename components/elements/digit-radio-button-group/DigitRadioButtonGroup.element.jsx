@@ -1,18 +1,11 @@
-import React from "react";
+import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import PropTypes from "prop-types";
+import React from "react";
 import {
-  Radio,
-  FormControlLabel,
-  RadioGroup,
-  FormHelperText
-} from "@material-ui/core";
-
-import {
-  UpperLabel,
+  Lowerlabel,
   StyledFormControl,
-  Lowerlabel
+  UpperLabel
 } from "./DigitRadioButtonGroup.element.styles";
-import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
 
 const DigitRadioButtonGroup = ({
   value,

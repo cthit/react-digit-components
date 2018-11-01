@@ -1,7 +1,5 @@
 import { connect } from "react-redux";
-
 import DigitDialog from "./DigitDialog.view";
-
 import {
   digitDialogClosedCancel,
   digitDialogClosedConfirm

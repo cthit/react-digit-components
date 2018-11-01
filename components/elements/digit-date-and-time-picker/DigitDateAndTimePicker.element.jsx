@@ -1,14 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-
-import DateTimePicker from "material-ui-pickers/DateTimePicker";
-
-import DateRange from "@material-ui/icons/DateRange";
-import Keyboard from "@material-ui/icons/Keyboard";
+import withStyles from "@material-ui/core/styles/withStyles";
+import AccessTime from "@material-ui/icons/AccessTime";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
-import AccessTime from "@material-ui/icons/AccessTime";
-import withStyles from "@material-ui/core/styles/withStyles";
+import DateRange from "@material-ui/icons/DateRange";
+import Keyboard from "@material-ui/icons/Keyboard";
+import DateTimePicker from "material-ui-pickers/DateTimePicker";
+import PropTypes from "prop-types";
+import React from "react";
 
 const styles = () => ({
   root: {

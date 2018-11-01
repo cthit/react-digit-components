@@ -1,6 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
-import IfElseRendering from "../../declaratives/digit-if-else-rendering";
 import {
   Button,
   Dialog,
@@ -9,6 +6,8 @@ import {
   DialogContentText,
   DialogTitle
 } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
 
 class DigitDialog extends React.Component {
   state = {

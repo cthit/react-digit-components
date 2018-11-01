@@ -1,7 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { Switch } from "@material-ui/core";
-
+import PropTypes from "prop-types";
+import React from "react";
 import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
 
 const DigitSwitch = ({

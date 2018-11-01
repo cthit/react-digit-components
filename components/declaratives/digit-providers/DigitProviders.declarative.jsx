@@ -1,28 +1,28 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { combineReducers } from "redux";
-import { localizeReducer as localize } from "react-localize-redux";
-import { renderToStaticMarkup } from "react-dom/server";
-import { createStore, applyMiddleware } from "redux";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { createLogger } from "redux-logger";
-import thunkMiddleware from "redux-thunk";
-import { LocalizeProvider, withLocalize } from "react-localize-redux";
-import { create } from "jss";
 import {
   createGenerateClassName,
-  jssPreset,
   createMuiTheme,
+  jssPreset,
   MuiThemeProvider
 } from "@material-ui/core/styles";
-import JssProvider from "react-jss/lib/JssProvider";
-
-import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
-import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
-
+import { create } from "jss";
 import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
 import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
+import PropTypes from "prop-types";
+import React from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import JssProvider from "react-jss/lib/JssProvider";
+import {
+  LocalizeProvider,
+  localizeReducer as localize,
+  withLocalize
+} from "react-localize-redux";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { createLogger } from "redux-logger";
+import thunkMiddleware from "redux-thunk";
+import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
+import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());

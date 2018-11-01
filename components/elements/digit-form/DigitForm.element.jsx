@@ -1,6 +1,6 @@
-import React from "react";
+import { Form, Formik } from "formik";
 import PropTypes from "prop-types";
-import { Formik, Form } from "formik";
+import React from "react";
 
 const DigitForm = ({ initialValues, onSubmit, validationSchema, render }) => (
   <Formik

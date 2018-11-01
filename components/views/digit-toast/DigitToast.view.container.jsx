@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-
 import DigitToast from "./DigitToast.view";
 
 const mapStateToProps = state => ({

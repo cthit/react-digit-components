@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { CircularProgress } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
+import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 
 const DigitLoading = ({ loading, size }) => (
   <DigitIfElseRendering

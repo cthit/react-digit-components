@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
 import { Typography } from "@material-ui/core";
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
 
 export const Heading1 = styled(({ text, white, ...rest }) => (
   <Typography {...rest} variant="h1" component="h2">

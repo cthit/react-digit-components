@@ -1,12 +1,9 @@
-import React from "react";
-
-import { withKnobs, boolean } from "@storybook/addon-knobs";
+import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
+import React from "react";
 import { DigitProviders } from "../../components";
 import DigitTabs from "../../components/elements/digit-tabs";
 import DigitTabsReadme from "../../components/elements/digit-tabs/readme.md";
-
 import StoryDigitTabs from "./StoryDigitTabs";
 
 const DigitTabsStory = storiesOf("Elements", module);

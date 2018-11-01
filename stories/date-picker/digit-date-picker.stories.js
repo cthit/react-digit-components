@@ -1,9 +1,7 @@
-import React from "react";
-
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
-import { DigitProviders, DigitLayout } from "../../components";
+import React from "react";
+import { DigitLayout, DigitProviders } from "../../components";
 import { DigitDatePicker } from "../../components/elements/digit-date-picker/DigitDatePicker.element";
 import DigitDatePickerReadme from "../../components/elements/digit-date-picker/readme.md";
 import StoryDigitDatePicker from "./StoryDigitDatePicker";

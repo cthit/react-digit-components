@@ -1,26 +1,21 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
+import { withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react";
+import React from "react";
 import { connect } from "react-redux";
-
 import * as yup from "yup";
-
 import {
   DigitButton,
   DigitDesign,
-  DigitFormField,
   DigitForm,
-  DigitTextField,
+  DigitFormField,
   DigitProviders,
-  DigitSwitch
+  DigitSwitch,
+  DigitTextField
 } from "../../components";
-
 import DigitToastConnected from "../../components/views/digit-toast";
 import DigitToast from "../../components/views/digit-toast/DigitToast.view";
 import { digitToastOpen } from "../../components/views/digit-toast/DigitToast.view.action-creator";
-
 import DigitToastReadme from "../../components/views/digit-toast/readme.md";
 
 const DigitButtonStory = storiesOf("Views", module);

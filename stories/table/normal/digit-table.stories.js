@@ -1,16 +1,13 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
-import Translations from "./Translations.json";
-
+import React from "react";
 import {
-  DigitTable,
   DigitProviders,
+  DigitTable,
   DigitTranslations
 } from "../../../components";
 import DigitTableReadme from "../../../components/views/digit-table/readme.md";
+import Translations from "./Translations.json";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];

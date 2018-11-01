@@ -1,16 +1,9 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { boolean, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
+import React from "react";
 import { DigitProviders } from "../../components";
-import DigitRadioButtonGroupReadme from "../../components/elements/digit-radio-button-group/readme.md";
-import {
-  MarginTop,
-  Center,
-  Size
-} from "../../components/styles/digit-layout/DigitLayout.styles";
 import DigitRadioButtonGroup from "../../components/elements/digit-radio-button-group";
+import DigitRadioButtonGroupReadme from "../../components/elements/digit-radio-button-group/readme.md";
 import StoryRadioButtonGroup from "./StoryRadioButtonGroup";
 
 const DigitRadioButtonGroupStory = storiesOf("Elements", module);

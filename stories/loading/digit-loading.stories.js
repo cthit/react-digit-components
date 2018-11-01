@@ -1,8 +1,6 @@
-import React from "react";
-
-import { withKnobs, boolean, number } from "@storybook/addon-knobs";
+import { boolean, number, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
+import React from "react";
 import { DigitLoading, DigitProviders } from "../../components";
 import DigitLoadingReadme from "../../components/elements/digit-loading/readme.md";
 

@@ -1,9 +1,7 @@
-import React from "react";
-
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
-import { DigitTooltip, DigitButton, DigitProviders } from "../../components";
+import React from "react";
+import { DigitButton, DigitProviders, DigitTooltip } from "../../components";
 import DigitTooltipReadme from "../../components/elements/digit-tooltip/readme.md";
 import { Size } from "../../components/styles/digit-layout/DigitLayout.styles";
 

@@ -1,9 +1,7 @@
-import React from "react";
-
+import { action } from "@storybook/addon-actions";
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-
+import React from "react";
 import { DigitMenu, DigitProviders } from "../../components";
 import DigitMenuReadme from "../../components/views/digit-menu/readme.md";
 

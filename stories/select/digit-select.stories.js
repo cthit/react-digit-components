@@ -1,16 +1,14 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
+import React from "react";
 import { DigitProviders, DigitSelect } from "../../components";
 import DigitSelectReadme from "../../components/elements/digit-select/readme.md";
-import StoryDigitSelect from "./StoryDigitSelect";
 import {
-  MarginTop,
   Center,
+  MarginTop,
   Size
 } from "../../components/styles/digit-layout/DigitLayout.styles";
+import StoryDigitSelect from "./StoryDigitSelect";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];

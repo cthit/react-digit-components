@@ -1,13 +1,8 @@
-import React from "react";
-
-import { withKnobs, text } from "@storybook/addon-knobs";
+import { text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
-import { DigitProviders, DigitLayout } from "../../components";
-
+import React from "react";
+import { DigitLayout, DigitProviders } from "../../components";
 import { DigitDateAndTimePicker } from "../../components/elements/digit-date-and-time-picker/DigitDateAndTimePicker.element";
-
-import DigitDateAndTimePickerReadme from "../../components/elements/digit-date-and-time-picker/readme.md";
 import StoryDigitDateAndTimePicker from "./StoryDigitDateAndTimePicker";
 
 const DigitDateAndTimePickerStory = storiesOf("Elements", module);

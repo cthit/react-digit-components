@@ -1,8 +1,6 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
+import React from "react";
 import { DigitProviders, DigitSwitch } from "../../components";
 import DigitSwitchReadme from "../../components/elements/digit-switch/readme.md";
 import StoryDigitSwitch from "./StoryDigitSwitch";

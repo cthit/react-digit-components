@@ -1,30 +1,23 @@
-import React from "react";
-
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-
 import { Delete } from "@material-ui/icons";
-
-import * as yup from "yup";
-
-import * as DigitDesign from "../../components/styles/digit-design/DigitDesign.styles";
-import * as DigitLayout from "../../components/styles/digit-layout/DigitLayout.styles";
-import * as DigitText from "../../components/styles/digit-text/DigitText.styles";
-
+import { action } from "@storybook/addon-actions";
+import { storiesOf } from "@storybook/react";
 import _ from "lodash";
-
+import React from "react";
+import * as yup from "yup";
 import {
+  DigitButton,
   DigitForm,
   DigitFormField,
   DigitFormFieldArray,
-  DigitTextField,
-  DigitButton,
   DigitIconButton,
   DigitIfElseRendering,
-  DigitProviders
+  DigitProviders,
+  DigitTextField
 } from "../../components";
 import DigitFormReadme from "../../components/elements/digit-form/readme.md";
+import * as DigitDesign from "../../components/styles/digit-design/DigitDesign.styles";
+import * as DigitLayout from "../../components/styles/digit-layout/DigitLayout.styles";
+import * as DigitText from "../../components/styles/digit-text/DigitText.styles";
 
 const DigitFormStory = storiesOf("Elements", module);
 

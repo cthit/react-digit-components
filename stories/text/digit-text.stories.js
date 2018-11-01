@@ -1,9 +1,7 @@
-import React from "react";
-
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
-import { DigitText, DigitLayout, DigitProviders } from "../../components";
+import React from "react";
+import { DigitLayout, DigitProviders, DigitText } from "../../components";
 import DigitTextReadme from "../../components/styles/digit-text/readme.md";
 
 const DigitTextStory = storiesOf("Texts", module);

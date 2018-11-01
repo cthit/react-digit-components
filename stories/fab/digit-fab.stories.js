@@ -1,14 +1,10 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
-
-import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
 import Call from "@material-ui/icons/Call";
-
+import Edit from "@material-ui/icons/Edit";
+import { action } from "@storybook/addon-actions";
+import { boolean, select, withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react";
+import React from "react";
 import { DigitFAB, DigitProviders } from "../../components";
 import DigitFABReadme from "../../components/elements/digit-fab/readme.md";
 import { Padding } from "../../components/styles/digit-layout/DigitLayout.styles";

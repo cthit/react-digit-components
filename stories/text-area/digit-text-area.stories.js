@@ -1,14 +1,12 @@
-import React from "react";
-
 import {
-  withKnobs,
+  boolean,
+  number,
   select,
   text,
-  boolean,
-  number
+  withKnobs
 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
+import React from "react";
 import { DigitLayout, DigitProviders, DigitTextArea } from "../../components";
 import DigitTextAreaReadme from "../../components/elements/digit-text-area/readme.md";
 import StoryDigitTextArea from "./StoryDigitTextArea";

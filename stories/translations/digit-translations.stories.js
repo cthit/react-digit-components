@@ -1,20 +1,16 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
+import { select, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
+import React from "react";
+import { DigitProviders } from "../../components";
+import DigitTranslationsConnected from "../../components/declaratives/digit-translations";
+import { DigitTranslations } from "../../components/declaratives/digit-translations/DigitTranslations.declarative";
+import DigitTranslationsReadme from "../../components/declaratives/digit-translations/readme.md";
+import CommonTranslations from "./CommonTranslations.json";
+import TestTranslations from "./TestTranslations.json";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];
 const langDefaultValue = "sv";
-
-import { DigitProviders } from "../../components";
-
-import DigitTranslationsConnected from "../../components/declaratives/digit-translations";
-import { DigitTranslations } from "../../components/declaratives/digit-translations/DigitTranslations.declarative";
-import DigitTranslationsReadme from "../../components/declaratives/digit-translations/readme.md";
-
-import TestTranslations from "./TestTranslations.json";
-import CommonTranslations from "./CommonTranslations.json";
 
 const DigitTranslationsStory = storiesOf("Declaratives", module);
 

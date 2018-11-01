@@ -1,23 +1,17 @@
+import { action } from "@storybook/addon-actions";
+import { select, text, withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react";
 import React from "react";
 import * as yup from "yup";
-
-import { withKnobs, select, text } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-
-import Translations from "./Translations.json";
-
 import {
+  DigitCheckbox,
   DigitEditData,
-  DigitTextField,
   DigitProviders,
-  DigitCheckbox
+  DigitTextField
 } from "../../components";
-
 import DigitTranslationsConnected from "../../components/declaratives/digit-translations";
-import DigitTranslations from "../../components/declaratives/digit-translations/DigitTranslations.declarative";
-
 import DigitEditDataReadme from "../../components/elements/digit-edit-data/readme.md";
+import Translations from "./Translations.json";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];

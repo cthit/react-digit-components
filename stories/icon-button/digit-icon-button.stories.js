@@ -1,13 +1,10 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-
-import Edit from "@material-ui/icons/Edit";
 import Add from "@material-ui/icons/Add";
 import Call from "@material-ui/icons/Call";
-
+import Edit from "@material-ui/icons/Edit";
+import { action } from "@storybook/addon-actions";
+import { boolean, select, withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react";
+import React from "react";
 import { DigitIconButton, DigitProviders } from "../../components";
 import DigitIconButtonReadme from "../../components/elements/digit-icon-button/readme.md";
 

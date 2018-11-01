@@ -1,10 +1,10 @@
 import React from "react";
-import BackgroundColor from "./BackgroundColor";
 import {
-  Size,
-  Center
+  Center,
+  Size
 } from "../../components/styles/digit-layout/DigitLayout.styles";
 import { Heading5 } from "../../components/styles/digit-text/DigitText.styles";
+import BackgroundColor from "./BackgroundColor";
 const DummyItem = ({ text, color }) => (
   <Size absWidth="100px" absHeight="100px">
     <BackgroundColor color={color}>

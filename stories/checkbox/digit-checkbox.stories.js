@@ -1,10 +1,8 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-
-import { DigitProviders, DigitCheckbox } from "../../components";
+import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react";
+import React from "react";
+import { DigitCheckbox, DigitProviders } from "../../components";
 import DigitCheckboxReadme from "../../components/elements/digit-checkbox/readme.md";
 import StoryDigitCheckbox from "./StoryDigitCheckbox";
 

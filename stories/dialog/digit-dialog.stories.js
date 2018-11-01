@@ -1,28 +1,21 @@
-import React from "react";
-
-import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
-import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
+import { withKnobs } from "@storybook/addon-knobs";
+import { storiesOf } from "@storybook/react";
+import React from "react";
 import { connect } from "react-redux";
-
 import * as yup from "yup";
-
 import {
   DigitButton,
   DigitDesign,
-  DigitFormField,
   DigitForm,
-  DigitTextField,
+  DigitFormField,
   DigitProviders,
-  DigitTextArea
+  DigitTextArea,
+  DigitTextField
 } from "../../components";
-
-import DigitDialog from "../../components/views/digit-dialog/DigitDialog.view";
 import DigitDialogConnected from "../../components/views/digit-dialog";
-
+import DigitDialog from "../../components/views/digit-dialog/DigitDialog.view";
 import { digitDialogOpen } from "../../components/views/digit-dialog/DigitDialog.view.action-creator";
-
 import DigitDialogReadme from "../../components/views/digit-dialog/readme.md";
 
 const DigitDialogStory = storiesOf("Views", module);

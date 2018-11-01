@@ -1,17 +1,14 @@
-import React from "react";
-
 import {
-  withKnobs,
+  boolean,
+  number,
   select,
   text,
-  boolean,
-  number
+  withKnobs
 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
-import { DigitProviders, DigitHeader } from "../../components";
+import React from "react";
+import { DigitHeader, DigitProviders } from "../../components";
 import DigitHeaderReadme from "../../components/elements/digit-header/readme.md";
-
 import StoryDigitHeader from "./StoryDigitHeader";
 
 const iconLabel = "Icon";

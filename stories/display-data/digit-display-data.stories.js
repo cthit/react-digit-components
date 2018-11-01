@@ -1,8 +1,6 @@
-import React from "react";
-
-import { withKnobs, text, number } from "@storybook/addon-knobs";
+import { number, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-
+import React from "react";
 import { DigitDisplayData, DigitProviders } from "../../components";
 import DigitDisplayDataReadme from "../../components/elements/digit-display-data/readme.md";
 

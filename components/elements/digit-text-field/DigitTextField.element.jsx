@@ -150,7 +150,7 @@ DigitTextField.defaultProps = {
   lowerLabel: "",
   name: "",
   error: false,
-  errorMessage: "",
+  errorMessage: null,
   disabled: false,
   outlined: false,
   filled: false

@@ -21,6 +21,7 @@ import DigitLoading from "./elements/digit-loading";
 import DigitDateAndTimePicker from "./elements/digit-date-and-time-picker";
 import DigitDatePicker from "./elements/digit-date-picker";
 import DigitTimePicker from "./elements/digit-time-picker";
+import DigitRadioButtonGroup from "./elements/digit-radio-button-group";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -65,6 +66,7 @@ export {
   DigitDateAndTimePicker,
   DigitDatePicker,
   DigitTimePicker,
+  DigitRadioButtonGroup,
   /* Views */
   DigitToast,
   DigitDialog,

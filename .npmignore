@@ -1,7 +1,0 @@
-.storybook
-stories
-components
-.babelrc
-.gitignore
-yarn.lock
-webpack.config.js

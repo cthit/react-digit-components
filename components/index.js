@@ -36,6 +36,7 @@ import DigitTable from "./views/digit-table";
 
 import * as DigitRedirectActions from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
 import * as DigitToastActions from "./views/digit-toast/DigitToast.view.action-creator";
+import * as DigitDialogActions from "./views/digit-dialog/DigitDialog.view.action-creator";
 
 import * as DigitLayout from "./styles/digit-layout/DigitLayout.styles";
 import * as DigitDesign from "./styles/digit-design/DigitDesign.styles";
@@ -75,6 +76,7 @@ export {
   /* Actions */
   DigitToastActions,
   DigitRedirectActions,
+  DigitDialogActions,
   /* Declaratives */
   DigitIfElseRendering,
   DigitMapStringToValue,

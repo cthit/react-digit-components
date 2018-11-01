@@ -66,9 +66,9 @@ Card.propTypes = {
   /** maxHeight of the card */
   maxHeight: PropTypes.string,
   /** width of the card */
-  width: PropTypes.width,
+  width: PropTypes.string,
   /** height of the card */
-  height: PropTypes.height
+  height: PropTypes.string
 };
 /**
  * use this hasSubTitle and hasIcon must be true if you have them inside your Card.

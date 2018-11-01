@@ -1,5 +1,5 @@
 import { Menu, MenuItem } from "@material-ui/core";
-import { MoreVert } from "@material-ui/icons";
+import MoreVert from "@material-ui/icons/MoreVert";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitIconButton from "../../elements/digit-icon-button";

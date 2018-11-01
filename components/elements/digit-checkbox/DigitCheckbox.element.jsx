@@ -71,7 +71,7 @@ DigitCheckbox.defaultProps = {
   secondary: false,
   disabled: false,
   error: false,
-  errorMessage: ""
+  errorMessage: null
 };
 
 export default DigitCheckbox;

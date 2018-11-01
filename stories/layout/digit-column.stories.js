@@ -8,7 +8,6 @@ import {
   number
 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { withReadme } from "storybook-readme";
 
 import DigitColumnReadme from "../../components/styles/digit-layout/column-readme.md";
 import {

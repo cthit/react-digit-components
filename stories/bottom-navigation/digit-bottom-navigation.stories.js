@@ -2,7 +2,6 @@ import React from "react";
 
 import { withKnobs, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { withReadme } from "storybook-readme";
 
 import DigitBottomNavigationReadme from "../../components/elements/digit-bottom-navigation/readme.md";
 import DigitProviders from "../../components/declaratives/digit-providers";

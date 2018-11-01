@@ -72,7 +72,6 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.3",
     "redux-thunk": "^2.3.0",
-    "storybook-readme": "4.0.0",
     "styled-components": "^3.3.2",
     "webpack": "^4.21.0",
     "webpack-cli": "3.1.2",

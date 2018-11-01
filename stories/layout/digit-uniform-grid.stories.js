@@ -5,7 +5,6 @@ import { withKnobs, number, text } from "@storybook/addon-knobs";
 import { UniformGrid } from "../../components/styles/digit-layout/DigitLayout.styles";
 
 import DigitUniformGridReadme from "../../components/styles/digit-layout/uniform-grid-readme.md";
-import { withReadme } from "storybook-readme";
 import { Display } from "../../components/styles/digit-text/DigitText.styles";
 import DummyItem from "./DummyItem";
 import { DigitProviders } from "../../components";

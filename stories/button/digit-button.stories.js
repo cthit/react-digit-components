@@ -4,7 +4,6 @@ import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
-import { withReadme } from "storybook-readme";
 
 import { DigitButton, DigitProviders } from "../../components";
 import DigitButtonReadme from "../../components/elements/digit-button/readme.md";

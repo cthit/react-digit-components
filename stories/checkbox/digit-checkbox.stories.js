@@ -3,7 +3,6 @@ import React from "react";
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { withReadme } from "storybook-readme";
 
 import { DigitProviders, DigitCheckbox } from "../../components";
 import DigitCheckboxReadme from "../../components/elements/digit-checkbox/readme.md";

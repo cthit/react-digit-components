@@ -2,7 +2,6 @@ import React from "react";
 
 import { withKnobs, select, text, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { withReadme } from "storybook-readme";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];

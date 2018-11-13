@@ -21,38 +21,38 @@ const DigitIconButtonStory = storiesOf("Elements", module);
 DigitIconButtonStory.addDecorator(withKnobs);
 
 DigitIconButtonStory.add(
-  "DigitIconButton",
-  () => {
-    const disabled = boolean("Disabled", false);
-    const color = select(colorLabel, colorOptions, colorDefaultValue);
-    const icon = select(iconLabel, iconOptions, iconDefaultValue);
+    "DigitIconButton",
+    () => {
+        const disabled = boolean("Disabled", false);
+        const color = select(colorLabel, colorOptions, colorDefaultValue);
+        const icon = select(iconLabel, iconOptions, iconDefaultValue);
 
-    return (
-      <DigitProviders>
-        <DigitIconButton
-          onBlur={action("blur")}
-          onClick={action("click")}
-          primary={color === "primary"}
-          secondary={color === "secondary"}
-          disabled={disabled}
-          icon={
-            icon === "Edit"
-              ? Edit
-              : icon === "Add"
-                ? Add
-                : icon === "Call"
-                  ? Call
-                  : null
-          }
-        />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitIconButtonReadme,
-      propTables: [DigitIconButton],
-      propTablesExclude: [DigitProviders]
+        return (
+            <DigitProviders>
+                <DigitIconButton
+                    onBlur={action("blur")}
+                    onClick={action("click")}
+                    primary={color === "primary"}
+                    secondary={color === "secondary"}
+                    disabled={disabled}
+                    icon={
+                        icon === "Edit"
+                            ? Edit
+                            : icon === "Add"
+                            ? Add
+                            : icon === "Call"
+                            ? Call
+                            : null
+                    }
+                />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitIconButtonReadme,
+            propTables: [DigitIconButton],
+            propTablesExclude: [DigitProviders]
+        }
     }
-  }
 );

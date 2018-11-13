@@ -2,28 +2,28 @@ import React from "react";
 import { DigitTimePicker } from "../../components";
 
 class StoryDigitTimePicker extends React.Component {
-  state = {
-    date: null
-  };
+    state = {
+        date: null
+    };
 
-  onTimeChanged = newDate => {
-    this.setState({
-      date: newDate
-    });
-  };
+    onTimeChanged = newDate => {
+        this.setState({
+            date: newDate
+        });
+    };
 
-  render() {
-    const { date } = this.state;
-    const { upperLabel } = this.props;
+    render() {
+        const { date } = this.state;
+        const { upperLabel } = this.props;
 
-    return (
-      <DigitTimePicker
-        upperLabel={upperLabel}
-        value={date}
-        onChange={this.onTimeChanged}
-      />
-    );
-  }
+        return (
+            <DigitTimePicker
+                upperLabel={upperLabel}
+                value={date}
+                onChange={this.onTimeChanged}
+            />
+        );
+    }
 }
 
 export default StoryDigitTimePicker;

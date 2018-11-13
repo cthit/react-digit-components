@@ -14,31 +14,31 @@ const DigitSwitchStory = storiesOf("Elements", module);
 DigitSwitchStory.addDecorator(withKnobs);
 
 DigitSwitchStory.add(
-  "DigitSwitch",
-  () => {
-    const label = text("Label", "This is a label");
-    const color = select(colorLabel, colorOptions, colorDefaultValue);
-    const disabled = boolean("Disabled", false);
-    const error = boolean("error", false);
-    const errorMessage = text("Error message", "Error oh no");
+    "DigitSwitch",
+    () => {
+        const label = text("Label", "This is a label");
+        const color = select(colorLabel, colorOptions, colorDefaultValue);
+        const disabled = boolean("Disabled", false);
+        const error = boolean("error", false);
+        const errorMessage = text("Error message", "Error oh no");
 
-    return (
-      <DigitProviders>
-        <StoryDigitSwitch
-          label={label}
-          color={color}
-          disabled={disabled}
-          error={error}
-          errorMessage={errorMessage}
-        />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitSwitchReadme,
-      propTables: [DigitSwitch],
-      propTablesExclude: [DigitProviders, StoryDigitSwitch]
+        return (
+            <DigitProviders>
+                <StoryDigitSwitch
+                    label={label}
+                    color={color}
+                    disabled={disabled}
+                    error={error}
+                    errorMessage={errorMessage}
+                />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitSwitchReadme,
+            propTables: [DigitSwitch],
+            propTablesExclude: [DigitProviders, StoryDigitSwitch]
+        }
     }
-  }
 );

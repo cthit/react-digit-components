@@ -10,19 +10,19 @@ const DigitMarkdownStory = storiesOf("Elements", module);
 DigitMarkdownStory.addDecorator(withKnobs);
 
 DigitMarkdownStory.add(
-  "DigitMarkdown",
-  () => {
-    return (
-      <DigitProviders>
-        <StoryDigitMarkdown />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitMarkdownReadme,
-      propTables: [DigitMarkdown],
-      propTablesExclude: [DigitProviders, StoryDigitMarkdown]
+    "DigitMarkdown",
+    () => {
+        return (
+            <DigitProviders>
+                <StoryDigitMarkdown />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitMarkdownReadme,
+            propTables: [DigitMarkdown],
+            propTablesExclude: [DigitProviders, StoryDigitMarkdown]
+        }
     }
-  }
 );

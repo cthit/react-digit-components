@@ -2,45 +2,45 @@ import React from "react";
 import { DigitTextArea } from "../../components";
 
 class StoryDigitTextArea extends React.Component {
-  state = {
-    textAreaValue: ""
-  };
+    state = {
+        textAreaValue: ""
+    };
 
-  onTextAreaChanged = e => {
-    this.setState({
-      textAreaValue: e.target.value
-    });
-  };
+    onTextAreaChanged = e => {
+        this.setState({
+            textAreaValue: e.target.value
+        });
+    };
 
-  render() {
-    const { textAreaValue } = this.state;
-    const {
-      error,
-      errorMessage,
-      lowerLabel,
-      upperLabel,
-      disabled,
-      style,
-      rows,
-      rowsMax
-    } = this.props;
+    render() {
+        const { textAreaValue } = this.state;
+        const {
+            error,
+            errorMessage,
+            lowerLabel,
+            upperLabel,
+            disabled,
+            style,
+            rows,
+            rowsMax
+        } = this.props;
 
-    return (
-      <DigitTextArea
-        value={textAreaValue}
-        onChange={this.onTextAreaChanged}
-        error={error}
-        errorMessage={errorMessage}
-        lowerLabel={lowerLabel}
-        upperLabel={upperLabel}
-        disabled={disabled}
-        outlined={style === "outlined"}
-        filled={style === "filled"}
-        rows={rows}
-        rowsMax={rowsMax}
-      />
-    );
-  }
+        return (
+            <DigitTextArea
+                value={textAreaValue}
+                onChange={this.onTextAreaChanged}
+                error={error}
+                errorMessage={errorMessage}
+                lowerLabel={lowerLabel}
+                upperLabel={upperLabel}
+                disabled={disabled}
+                outlined={style === "outlined"}
+                filled={style === "filled"}
+                rows={rows}
+                rowsMax={rowsMax}
+            />
+        );
+    }
 }
 
 export default StoryDigitTextArea;

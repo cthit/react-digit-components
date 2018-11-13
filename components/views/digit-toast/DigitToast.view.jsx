@@ -3,138 +3,140 @@ import React from "react";
 import { StyledSnackbar, ToastButton } from "./DigitToast.view.styles";
 
 class DigitToast extends React.Component {
-  state = {
-    open: false,
-    toastClosed: true,
-    currentText: "",
-    currentDuration: 0,
-    currentActionHandler: null,
-    currentActionText: "",
-    messages: []
-  };
+    state = {
+        open: false,
+        toastClosed: true,
+        currentText: "",
+        currentDuration: 0,
+        currentActionHandler: null,
+        currentActionText: "",
+        messages: []
+    };
 
-  handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
+    handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        this.setState({
+            open: false
+        });
+    };
+
+    handleExited = () => {
+        this.setState({
+            toastClosed: true
+        });
+    };
+
+    componentDidUpdate(prevProps, prevState) {
+        if (
+            this.state.open &&
+            this.state.messages.length > 0 &&
+            !this.toastClosed
+        ) {
+            this.setState({
+                open: false
+            });
+        } else if (
+            prevState !== this.state &&
+            !this.state.open &&
+            this.state.messages.length > 0 &&
+            this.state.toastClosed
+        ) {
+            const {
+                text,
+                duration,
+                actionHandler,
+                actionText
+            } = this.state.messages.pop();
+
+            this.setState({
+                open: true,
+                toastClosed: false,
+                currentText: text,
+                currentDuration: duration,
+                currentActionHandler: actionHandler,
+                currentActionText: actionText
+            });
+        }
+
+        //A new message get added through props, one added, props will be ignored until next update
+        else if (prevProps !== this.props) {
+            const {
+                text,
+                duration,
+                actionHandler,
+                actionText
+            } = this.props.toastOptions;
+
+            this.setState({
+                messages: [
+                    ...this.state.messages,
+                    {
+                        text: text,
+                        duration: duration == null ? 3000 : duration,
+                        actionText: actionText,
+                        actionHandler: actionHandler
+                    }
+                ]
+            });
+        }
     }
 
-    this.setState({
-      open: false
-    });
-  };
-
-  handleExited = () => {
-    this.setState({
-      toastClosed: true
-    });
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.open &&
-      this.state.messages.length > 0 &&
-      !this.toastClosed
-    ) {
-      this.setState({
-        open: false
-      });
-    } else if (
-      prevState !== this.state &&
-      !this.state.open &&
-      this.state.messages.length > 0 &&
-      this.state.toastClosed
-    ) {
-      const {
-        text,
-        duration,
-        actionHandler,
-        actionText
-      } = this.state.messages.pop();
-
-      this.setState({
-        open: true,
-        toastClosed: false,
-        currentText: text,
-        currentDuration: duration,
-        currentActionHandler: actionHandler,
-        currentActionText: actionText
-      });
+    render() {
+        return (
+            <div>
+                <StyledSnackbar
+                    anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left"
+                    }}
+                    autoHideDuration={this.state.currentDuration}
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    onExited={this.handleExited}
+                    ContentProps={{
+                        "aria-describedby": "message-id"
+                    }}
+                    message={
+                        <span id="message-id">{this.state.currentText}</span>
+                    }
+                    action={
+                        <ToastButton
+                            hide={this.state.currentActionText == null}
+                            key="undo"
+                            color="secondary"
+                            size="small"
+                            onClick={() => {
+                                this.state.currentActionHandler();
+                                this.handleClose();
+                            }}
+                        >
+                            {this.state.currentActionText == null //Text in a button must not be null
+                                ? ""
+                                : this.state.currentActionText}
+                        </ToastButton>
+                    }
+                />
+            </div>
+        );
     }
-
-    //A new message get added through props, one added, props will be ignored until next update
-    else if (prevProps !== this.props) {
-      const {
-        text,
-        duration,
-        actionHandler,
-        actionText
-      } = this.props.toastOptions;
-
-      this.setState({
-        messages: [
-          ...this.state.messages,
-          {
-            text: text,
-            duration: duration == null ? 3000 : duration,
-            actionText: actionText,
-            actionHandler: actionHandler
-          }
-        ]
-      });
-    }
-  }
-
-  render() {
-    return (
-      <div>
-        <StyledSnackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left"
-          }}
-          autoHideDuration={this.state.currentDuration}
-          open={this.state.open}
-          onClose={this.handleClose}
-          onExited={this.handleExited}
-          ContentProps={{
-            "aria-describedby": "message-id"
-          }}
-          message={<span id="message-id">{this.state.currentText}</span>}
-          action={
-            <ToastButton
-              hide={this.state.currentActionText == null}
-              key="undo"
-              color="secondary"
-              size="small"
-              onClick={() => {
-                this.state.currentActionHandler();
-                this.handleClose();
-              }}
-            >
-              {this.state.currentActionText == null //Text in a button must not be null
-                ? ""
-                : this.state.currentActionText}
-            </ToastButton>
-          }
-        />
-      </div>
-    );
-  }
 }
 
 DigitToast.displayName = "DigitToast";
 DigitToast.propTypes = {
-  /** The options for the toast */
-  toastOptions: PropTypes.shape({
-    /** The text inside the toast */
-    text: PropTypes.string,
-    /** The duration in miliseconds of the toast */
-    duration: PropTypes.number,
-    /** Callback function when you press the button on a toast */
-    actionHandler: PropTypes.func,
-    /** Button text */
-    actionText: PropTypes.string
-  })
+    /** The options for the toast */
+    toastOptions: PropTypes.shape({
+        /** The text inside the toast */
+        text: PropTypes.string,
+        /** The duration in miliseconds of the toast */
+        duration: PropTypes.number,
+        /** Callback function when you press the button on a toast */
+        actionHandler: PropTypes.func,
+        /** Button text */
+        actionText: PropTypes.string
+    })
 };
 
 export default DigitToast;

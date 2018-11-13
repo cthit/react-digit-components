@@ -1,8 +1,15 @@
-import { Tab, Tabs } from "@material-ui/core";
+import { Tab, Tabs, withStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text, Title } from "../../styles/digit-text/DigitText.styles";
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.primary.main
+    }
+});
 
 const DigitTabs = ({
     selected,
@@ -10,10 +17,12 @@ const DigitTabs = ({
     centered,
     fullWidth,
     onChange,
-    titleFont
+    titleFont,
+    classes
 }) => (
     <Fill>
         <Tabs
+            className={classes.root}
             value={selected}
             centered={centered}
             fullWidth={fullWidth}
@@ -27,9 +36,9 @@ const DigitTabs = ({
                         key={label}
                         label={
                             titleFont ? (
-                                <Title text={label} />
+                                <Title white text={label} />
                             ) : (
-                                <Text text={label} />
+                                <Text white text={label} />
                             )
                         }
                     />
@@ -62,4 +71,6 @@ DigitTabs.defaultProps = {
     titleFont: false
 };
 
-export default DigitTabs;
+export { DigitTabs };
+
+export default withStyles(styles)(DigitTabs);

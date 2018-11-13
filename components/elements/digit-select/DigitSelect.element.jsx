@@ -155,7 +155,8 @@ DigitSelect.defaultProps = {
     reverse: false,
     outlined: false,
     filled: false,
-    name: ""
+    name: "",
+    valueToTextMap: {}
 };
 
 const StyledFormControl = styled(FormControl)`

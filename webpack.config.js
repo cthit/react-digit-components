@@ -36,6 +36,7 @@ module.exports = {
             commonjs2: "react-dom",
             amd: "ReactDOM",
             root: "ReactDOM"
-        }
+        },
+        "styled-components": "styled-components"
     }
 };

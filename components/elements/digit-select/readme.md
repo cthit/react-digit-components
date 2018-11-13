@@ -6,14 +6,19 @@ Note that `DigitSelect` is uncontrolled, meaning you have to manage the state fr
 
 ```jsx
 <DigitSelect
-  filled
-  upperLabel="This is a upperlabel"
-  value={this.state.value}
-  onChange={e => {
-    this.setState({
-      value: e.target.checked
-    });
-  }}
+    filled
+    upperLabel="This is a upperlabel"
+    value={this.state.value}
+    onChange={e => {
+        this.setState({
+            value: e.target.checked
+        });
+    }}
+    valueToTextMap={{
+        chocolate: "Chocolate",
+        vanilla: "Vanilla",
+        strawberry: "Strawberry"
+    }}
 />
 ```
 
@@ -21,22 +26,22 @@ Note that `DigitSelect` is uncontrolled, meaning you have to manage the state fr
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="favoriteIcecreamFlavour"
-        component={DigitSelect}
-        componentProps={{
-          upperLabel: "What is icecream flavour?",
-          valueToTextMap: {
-            chocolate: "Chocolate",
-            vanilla: "Vanilla",
-            strawberry: "Strawberry"
-          },
-          filled: true
-        }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="favoriteIcecreamFlavour"
+                component={DigitSelect}
+                componentProps={{
+                    upperLabel: "What is icecream flavour?",
+                    valueToTextMap: {
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    },
+                    filled: true
+                }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

@@ -8,12 +8,12 @@ Here are some examples:
 import { DigitButton } from "@cthit/react-digit-components";
 
 <DigitButton
-  text="A primary and raised button"
-  primary
-  raised
-  onClick={() => {
-    console.log("Primary and raised button has been pressed");
-  }}
+    text="A primary and raised button"
+    primary
+    raised
+    onClick={() => {
+        console.log("Primary and raised button has been pressed");
+    }}
 />;
 ```
 
@@ -23,16 +23,16 @@ To use `DigitButton` as the submit button for a `DigitForm`, then you have to ad
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="date"
-        component={DigitDatePicker}
-        componentProps={{ upperLabel: "Enter date" }}
-      />
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="date"
+                component={DigitDatePicker}
+                componentProps={{ upperLabel: "Enter date" }}
+            />
 
-      <DigitButton text="Submit" submit />
-    </DigitLayout.Column>
-  )}
+            <DigitButton text="Submit" submit />
+        </DigitLayout.Column>
+    )}
 />
 ```

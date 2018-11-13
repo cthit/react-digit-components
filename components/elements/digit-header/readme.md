@@ -6,14 +6,14 @@ A mobile friendly way of laying out the base blocks. Has a header, an optional d
 import { DigitHeader } from "@cthit/react-digit-components";
 
 <DigitProviders>
-  <DigitHeader
-    title={title}
-    renderMain={() => <div>Hej</div>}
-    renderDrawer={closeDrawer => (
-      <div>
-        <DigitNavLink onClick={closeDrawer} link="/hej" text="Hej" />
-      </div>
-    )}
-  />
+    <DigitHeader
+        title={title}
+        renderMain={() => <div>Hej</div>}
+        renderDrawer={closeDrawer => (
+            <div>
+                <DigitNavLink onClick={closeDrawer} link="/hej" text="Hej" />
+            </div>
+        )}
+    />
 </DigitProviders>;
 ```

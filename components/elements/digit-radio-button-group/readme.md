@@ -4,35 +4,35 @@ Should be used when only one of multiple options can be made. You create the act
 
 ```jsx
 <DigitRadioButtonGroup
-  value={this.state.selected}
-  onChange={e => {
-    this.setState({
-      selected: e.target.value
-    });
-  }}
-  upperLabel="This is an upper label"
-  lowerLabel="This is an lower label"
-  radioButtons={[
-    {
-      id: "5000",
-      primary: true,
-      label: "Primary"
-    },
-    {
-      id: "4000",
-      secondary: true,
-      label: "Secondary"
-    },
-    {
-      id: "3000",
-      label: "Default"
-    },
-    {
-      id: "2000",
-      disabled: true,
-      label: "Disabled"
-    }
-  ]}
+    value={this.state.selected}
+    onChange={e => {
+        this.setState({
+            selected: e.target.value
+        });
+    }}
+    upperLabel="This is an upper label"
+    lowerLabel="This is an lower label"
+    radioButtons={[
+        {
+            id: "5000",
+            primary: true,
+            label: "Primary"
+        },
+        {
+            id: "4000",
+            secondary: true,
+            label: "Secondary"
+        },
+        {
+            id: "3000",
+            label: "Default"
+        },
+        {
+            id: "2000",
+            disabled: true,
+            label: "Disabled"
+        }
+    ]}
 />
 ```
 
@@ -40,20 +40,28 @@ Should be used when only one of multiple options can be made. You create the act
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="delivery"
-        component={DigitRadioButtonGroup}
-        componentProps={{
-          radioButtons: [
-            { id: "fast", label: "1-2 days, 10 dollars", primary: true },
-            { id: "slow", label: "4-5 days, 5 dollars", primary: true },
-            { id: "free", label: "9-10 days, free", primary: true }
-          ]
-        }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="delivery"
+                component={DigitRadioButtonGroup}
+                componentProps={{
+                    radioButtons: [
+                        {
+                            id: "fast",
+                            label: "1-2 days, 10 dollars",
+                            primary: true
+                        },
+                        {
+                            id: "slow",
+                            label: "4-5 days, 5 dollars",
+                            primary: true
+                        },
+                        { id: "free", label: "9-10 days, free", primary: true }
+                    ]
+                }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

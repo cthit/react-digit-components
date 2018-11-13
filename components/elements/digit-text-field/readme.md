@@ -8,15 +8,15 @@ The `DigitTextField` is uncontrolled, meaning you have to manage the value and c
 import { DigitTextField } from "@cthit/react-digit-components";
 
 <DigitTextField
-  onChange={e => {
-    this.setState({
-      value: e.target.value
-    });
-    console.log("New value: " + e.target.value);
-  }}
-  startValue={this.state.value}
-  upperLabel="Hello lowerLabel"
-  lowerLabel="Why hello upperLabel"
+    onChange={e => {
+        this.setState({
+            value: e.target.value
+        });
+        console.log("New value: " + e.target.value);
+    }}
+    startValue={this.state.value}
+    upperLabel="Hello lowerLabel"
+    lowerLabel="Why hello upperLabel"
 />;
 ```
 
@@ -24,14 +24,14 @@ import { DigitTextField } from "@cthit/react-digit-components";
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="firstName"
-        component={DigitTextField}
-        componentProps={{ upperLabel: "Your first name" }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="firstName"
+                component={DigitTextField}
+                componentProps={{ upperLabel: "Your first name" }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

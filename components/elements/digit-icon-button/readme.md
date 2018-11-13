@@ -6,9 +6,9 @@ A small circular button with only a icon. Only use IconButton when the icon can 
 import { DigitIconButton } from "@cthit/react-digit-components";
 
 <DigitIconButton
-  onClick={() => {
-    console.log("HeJ");
-  }}
-  icon={Add}
+    onClick={() => {
+        console.log("HeJ");
+    }}
+    icon={Add}
 />;
 ```

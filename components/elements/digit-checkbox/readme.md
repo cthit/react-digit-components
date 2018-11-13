@@ -8,15 +8,15 @@ Note that `DigitCheckbox` is uncontrolled, meaning you have to manage the state 
 import { DigitCheckbox } from "react-digit-components";
 
 <DigitCheckbox
-  label="First checkbox; primary"
-  primary
-  value={this.state.checked}
-  onChange={e => {
-    setState({
-      checked: e.target.checked
-    });
-    console.log("This checkbox has been checked = " + checked);
-  }}
+    label="First checkbox; primary"
+    primary
+    value={this.state.checked}
+    onChange={e => {
+        setState({
+            checked: e.target.checked
+        });
+        console.log("This checkbox has been checked = " + checked);
+    }}
 />;
 ```
 
@@ -24,14 +24,14 @@ import { DigitCheckbox } from "react-digit-components";
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="wantsCandy"
-        component={DigitCheckbox}
-        componentProps={{ label: "I want candy!" }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="wantsCandy"
+                component={DigitCheckbox}
+                componentProps={{ label: "I want candy!" }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

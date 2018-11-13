@@ -6,9 +6,9 @@ A modal where you can select the date. Note that `DigitDatePicker` is uncontroll
 import { DigitDatePicker } from "@cthit/react-digit-components";
 
 <DigitDatePicker
-  upperLabel="Choose a date"
-  value={this.state.date}
-  onChange={this.onDateChanged}
+    upperLabel="Choose a date"
+    value={this.state.date}
+    onChange={this.onDateChanged}
 />;
 ```
 
@@ -16,14 +16,14 @@ import { DigitDatePicker } from "@cthit/react-digit-components";
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="date"
-        component={DigitDatePicker}
-        componentProps={{ upperLabel: "Enter date" }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="date"
+                component={DigitDatePicker}
+                componentProps={{ upperLabel: "Enter date" }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

@@ -6,6 +6,6 @@ A tooltip should be used as often as possible.
 import { DigitTooltip } from "@cthit/react-digit-components";
 
 <DigitTooltip text="Tooltip">
-  <div>Hover over me</div>
+    <div>Hover over me</div>
 </DigitTooltip>;
 ```

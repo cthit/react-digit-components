@@ -11,27 +11,27 @@ const DigitDatePickerStory = storiesOf("Elements", module);
 DigitDatePickerStory.addDecorator(withKnobs);
 
 DigitDatePickerStory.add(
-  "DigitDatePicker",
-  () => {
-    const upperLabel = text("Upperlabel: ", "My date");
+    "DigitDatePicker",
+    () => {
+        const upperLabel = text("Upperlabel: ", "My date");
 
-    return (
-      <DigitProviders>
-        <DigitLayout.Size absWidth="300px" absHeight="300px">
-          <StoryDigitDatePicker upperLabel={upperLabel} />
-        </DigitLayout.Size>
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitDatePickerReadme,
-      propTables: [DigitDatePicker],
-      propTablesExclude: [
-        DigitProviders,
-        DigitLayout.Size,
-        StoryDigitDatePicker
-      ]
+        return (
+            <DigitProviders>
+                <DigitLayout.Size absWidth="300px" absHeight="300px">
+                    <StoryDigitDatePicker upperLabel={upperLabel} />
+                </DigitLayout.Size>
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitDatePickerReadme,
+            propTables: [DigitDatePicker],
+            propTablesExclude: [
+                DigitProviders,
+                DigitLayout.Size,
+                StoryDigitDatePicker
+            ]
+        }
     }
-  }
 );

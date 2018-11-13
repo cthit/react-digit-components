@@ -6,30 +6,30 @@ const labels = ["Label One", "Label Two", "Label Three"];
 const icons = [<IconOne />, <IconOne />, <IconOne />];
 
 class StoryDigitBottomNavigation extends React.Component {
-  state = {
-    selected: 0
-  };
+    state = {
+        selected: 0
+    };
 
-  onSelectedChange = selected => {
-    this.setState({
-      selected: selected
-    });
-  };
+    onSelectedChange = selected => {
+        this.setState({
+            selected: selected
+        });
+    };
 
-  render() {
-    const { selected } = this.state;
-    const { showLabels } = this.props;
+    render() {
+        const { selected } = this.state;
+        const { showLabels } = this.props;
 
-    return (
-      <DigitBottomNavigation
-        selected={selected}
-        onChange={this.onSelectedChange}
-        labels={labels}
-        icons={icons}
-        showLabels={showLabels}
-      />
-    );
-  }
+        return (
+            <DigitBottomNavigation
+                selected={selected}
+                onChange={this.onSelectedChange}
+                labels={labels}
+                icons={icons}
+                showLabels={showLabels}
+            />
+        );
+    }
 }
 
 export default StoryDigitBottomNavigation;

@@ -10,27 +10,27 @@ const DigitMenuStory = storiesOf("Views", module);
 DigitMenuStory.addDecorator(withKnobs);
 
 DigitMenuStory.add(
-  "DigitMenu",
-  () => {
-    return (
-      <DigitProviders>
-        <DigitMenu
-          onClick={value => {
-            action(value + " has been selected")(value);
-          }}
-          valueToTextMap={{
-            first_option: "First option",
-            second_option: "Second option"
-          }}
-        />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitMenuReadme,
-      propTables: [DigitMenu],
-      propTablesExclude: [DigitProviders]
+    "DigitMenu",
+    () => {
+        return (
+            <DigitProviders>
+                <DigitMenu
+                    onClick={value => {
+                        action(value + " has been selected")(value);
+                    }}
+                    valueToTextMap={{
+                        first_option: "First option",
+                        second_option: "Second option"
+                    }}
+                />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitMenuReadme,
+            propTables: [DigitMenu],
+            propTablesExclude: [DigitProviders]
+        }
     }
-  }
 );

@@ -4,17 +4,17 @@ import React from "react";
 import styled from "styled-components";
 
 const DigitControlLabelWithError = styled(({ error, ...props }) => (
-  <FormControlLabel {...props} classes={{ label: "label" }} />
+    <FormControlLabel {...props} classes={{ label: "label" }} />
 ))`
-  & .label {
-    color: ${props => (props.error ? "#F44336" : "inherit")};
-  }
+    & .label {
+        color: ${props => (props.error ? "#F44336" : "inherit")};
+    }
 `;
 
 DigitControlLabelWithError.displayName = "DigitControlLabelWithError";
 DigitControlLabelWithError.propTypes = {
-  /** If true, changes the text color to red. */
-  error: PropTypes.bool
+    /** If true, changes the text color to red. */
+    error: PropTypes.bool
 };
 
 export default DigitControlLabelWithError;

@@ -1,18 +1,18 @@
 import React from "react";
 import {
-  Center,
-  Size
+    Center,
+    Size
 } from "../../components/styles/digit-layout/DigitLayout.styles";
 import { Heading5 } from "../../components/styles/digit-text/DigitText.styles";
 import BackgroundColor from "./BackgroundColor";
 const DummyItem = ({ text, color }) => (
-  <Size absWidth="100px" absHeight="100px">
-    <BackgroundColor color={color}>
-      <Center>
-        <Heading5 text={text} />
-      </Center>
-    </BackgroundColor>
-  </Size>
+    <Size absWidth="100px" absHeight="100px">
+        <BackgroundColor color={color}>
+            <Center>
+                <Heading5 text={text} />
+            </Center>
+        </BackgroundColor>
+    </Size>
 );
 
 export default DummyItem;

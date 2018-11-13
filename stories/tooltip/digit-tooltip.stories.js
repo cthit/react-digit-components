@@ -10,23 +10,25 @@ const DigitTooltipStory = storiesOf("Elements", module);
 DigitTooltipStory.addDecorator(withKnobs);
 
 DigitTooltipStory.add(
-  "DigitTooltip",
-  () => {
-    return (
-      <DigitProviders>
-        <Size width="200px">
-          <DigitTooltip text={text("Tooltip text", "This is a tooltip")}>
-            <DigitButton text="Hover me" />
-          </DigitTooltip>
-        </Size>
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitTooltipReadme,
-      propTables: [DigitTooltip],
-      propTablesExclude: [DigitProviders, Size, DigitButton]
+    "DigitTooltip",
+    () => {
+        return (
+            <DigitProviders>
+                <Size width="200px">
+                    <DigitTooltip
+                        text={text("Tooltip text", "This is a tooltip")}
+                    >
+                        <DigitButton text="Hover me" />
+                    </DigitTooltip>
+                </Size>
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitTooltipReadme,
+            propTables: [DigitTooltip],
+            propTablesExclude: [DigitProviders, Size, DigitButton]
+        }
     }
-  }
 );

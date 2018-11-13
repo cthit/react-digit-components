@@ -17,38 +17,41 @@ const DigitTranslationsStory = storiesOf("Declaratives", module);
 DigitTranslationsStory.addDecorator(withKnobs);
 
 DigitTranslationsStory.add(
-  "DigitTranslations",
-  () => {
-    const lang = select(langLabel, langOptions, langDefaultValue);
+    "DigitTranslations",
+    () => {
+        const lang = select(langLabel, langOptions, langDefaultValue);
 
-    return (
-      <DigitProviders rootReducer={{}} preloadedState={{}}>
-        <DigitTranslationsConnected
-          uniquePath="DigitTranslationsStories"
-          translations={TestTranslations}
-          common={CommonTranslations}
-          render={(text, activeLanguage, setActiveLanguage) => {
-            if (activeLanguage != null && activeLanguage.code != lang) {
-              setActiveLanguage(lang);
-            }
+        return (
+            <DigitProviders rootReducer={{}} preloadedState={{}}>
+                <DigitTranslationsConnected
+                    uniquePath="DigitTranslationsStories"
+                    translations={TestTranslations}
+                    common={CommonTranslations}
+                    render={(text, activeLanguage, setActiveLanguage) => {
+                        if (
+                            activeLanguage != null &&
+                            activeLanguage.code != lang
+                        ) {
+                            setActiveLanguage(lang);
+                        }
 
-            return (
-              <div>
-                <h1>{text.YouHaveWon}</h1>
-                <h1>{text.Yes}</h1>
-                <h1>{text.No}</h1>
-              </div>
-            );
-          }}
-        />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitTranslationsReadme,
-      propTables: [DigitTranslations],
-      propTablesExclude: [DigitProviders, DigitTranslationsConnected]
+                        return (
+                            <div>
+                                <h1>{text.YouHaveWon}</h1>
+                                <h1>{text.Yes}</h1>
+                                <h1>{text.No}</h1>
+                            </div>
+                        );
+                    }}
+                />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitTranslationsReadme,
+            propTables: [DigitTranslations],
+            propTablesExclude: [DigitProviders, DigitTranslationsConnected]
+        }
     }
-  }
 );

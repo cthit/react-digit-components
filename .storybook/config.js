@@ -7,19 +7,19 @@ import PropTypesTable from "./PropTypesTable";
 // automatically import all files ending in *.stories.js
 const req = require.context("../stories", true, /.stories.js$/);
 function loadStories() {
-  req.keys().forEach(filename => req(filename));
+    req.keys().forEach(filename => req(filename));
 }
 
 addDecorator(
-  withInfo({
-    inline: false,
-    source: false,
-    header: false
-  })
+    withInfo({
+        inline: false,
+        source: false,
+        header: false
+    })
 );
 
 configure(loadStories, module);
 
 setDefaults({
-  TableComponent: PropTypesTable // Override the component used to render the props table
+    TableComponent: PropTypesTable // Override the component used to render the props table
 });

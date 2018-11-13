@@ -6,13 +6,13 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
 import { DigitTabs } from "@cthit/react-digit-components";
 
 <DigitTabs
-  centered
-  labels={["First tab", "Second tab"]}
-  selected={this.state.selectedTab}
-  onChange={selected => {
-    this.setState({
-      selectedTab: selected
-    });
-  }}
+    centered
+    labels={["First tab", "Second tab"]}
+    selected={this.state.selectedTab}
+    onChange={selected => {
+        this.setState({
+            selectedTab: selected
+        });
+    }}
 />;
 ```

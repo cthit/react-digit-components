@@ -8,14 +8,14 @@ Note that `DigitSwitch` is uncontrolled, meaning you have to manage the state fr
 import { DigitSwitch } from "@cthit/react-digit-components";
 
 <DigitSwitch
-  primary
-  label="This is a label"
-  value={this.state.value}
-  onChange={e => {
-    this.setState({
-      value: e.target.checked
-    });
-  }}
+    primary
+    label="This is a label"
+    value={this.state.value}
+    onChange={e => {
+        this.setState({
+            value: e.target.checked
+        });
+    }}
 />;
 ```
 
@@ -23,16 +23,16 @@ import { DigitSwitch } from "@cthit/react-digit-components";
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="acceptTerms"
-        component={DigitSwitch}
-        componentProps={{
-          label: "Do you accept these terms?"
-        }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="acceptTerms"
+                component={DigitSwitch}
+                componentProps={{
+                    label: "Do you accept these terms?"
+                }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

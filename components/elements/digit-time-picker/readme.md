@@ -6,9 +6,9 @@ A modal where you can select the time. Note that `DigitTimePicker` is uncontroll
 import { DigitTimePicker } from "@cthit/react-digit-components";
 
 <DigitTimePicker
-  upperLabel="Choose a time"
-  value={this.state.time}
-  onChange={this.onTimeChanged}
+    upperLabel="Choose a time"
+    value={this.state.time}
+    onChange={this.onTimeChanged}
 />;
 ```
 
@@ -16,12 +16,12 @@ import { DigitTimePicker } from "@cthit/react-digit-components";
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitFormField
-      name="time"
-      component={DigitTimePicker}
-      componentProps={{ upperLabel: "Enter date" }}
-    />
-  )}
+    render={() => (
+        <DigitFormField
+            name="time"
+            component={DigitTimePicker}
+            componentProps={{ upperLabel: "Enter date" }}
+        />
+    )}
 />
 ```

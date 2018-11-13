@@ -11,29 +11,29 @@ const DigitRadioButtonGroupStory = storiesOf("Elements", module);
 DigitRadioButtonGroupStory.addDecorator(withKnobs);
 
 DigitRadioButtonGroupStory.add(
-  "DigitRadioButtonGroup",
-  () => {
-    const upperLabel = text("Upperlabel", "Upperlabel");
-    const lowerLabel = text("Lowerlabel", "Lowerlabel");
-    const error = boolean("Error", false);
-    const errorMessage = text("ErrorMessage", "This is an error");
+    "DigitRadioButtonGroup",
+    () => {
+        const upperLabel = text("Upperlabel", "Upperlabel");
+        const lowerLabel = text("Lowerlabel", "Lowerlabel");
+        const error = boolean("Error", false);
+        const errorMessage = text("ErrorMessage", "This is an error");
 
-    return (
-      <DigitProviders>
-        <StoryRadioButtonGroup
-          upperLabel={upperLabel}
-          lowerLabel={lowerLabel}
-          error={error}
-          errorMessage={errorMessage}
-        />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitRadioButtonGroupReadme,
-      propTables: [DigitRadioButtonGroup],
-      propTablesExclude: [StoryRadioButtonGroup, DigitProviders]
+        return (
+            <DigitProviders>
+                <StoryRadioButtonGroup
+                    upperLabel={upperLabel}
+                    lowerLabel={lowerLabel}
+                    error={error}
+                    errorMessage={errorMessage}
+                />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitRadioButtonGroupReadme,
+            propTables: [DigitRadioButtonGroup],
+            propTablesExclude: [StoryRadioButtonGroup, DigitProviders]
+        }
     }
-  }
 );

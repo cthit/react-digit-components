@@ -10,8 +10,8 @@ import Date from "@material-ui/icons/Date";
 import Info from "@material-ui/icons/Info";
 
 <DigitBottomNavigation
-  labels={["Home", "Calendar", "Information"]}
-  icons={[<Home />, <Date />, <Info />]}
-  showLabels
+    labels={["Home", "Calendar", "Information"]}
+    icons={[<Home />, <Date />, <Info />]}
+    showLabels
 />;
 ```

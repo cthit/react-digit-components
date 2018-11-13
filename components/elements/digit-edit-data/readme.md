@@ -4,54 +4,54 @@ The easier, but not as customizable way, to create a form as opposed to `DigitFo
 
 ```jsx
 <DigitEditData
-  initialValues={{
-    firstname: "Smurf",
-    surname: "Smurfsson",
-    email: "email@email.com",
-    agreement: false
-  }}
-  onSubmit={(values, actions) => {
-    console.log(values);
-    actions.resetForm();
-  }}
-  validationSchema={yup.object().shape({
-    firstname: yup.string().required(),
-    surname: yup.string().required(),
-    email: yup.string().required(),
-    agreement: yup.boolean().required()
-  })}
-  titleText={title}
-  submitText={submit}
-  keysOrder={["firstname", "surname", "email", "agreement"]}
-  keysComponentData={{
-    firstname: {
-      component: DigitTextField,
-      componentProps: {
-        filled: true,
-        upperLabel: "Firstname"
-      }
-    },
-    surname: {
-      component: DigitTextField,
-      componentProps: {
-        filled: true,
-        upperLabel: "Surname"
-      }
-    },
-    email: {
-      component: DigitTextField,
-      componentProps: {
-        filled: true,
-        upperLabel: "Email"
-      }
-    },
-    agreement: {
-      component: DigitCheckbox,
-      componentProps: {
-        primary: true,
-        label: "Agreement"
-      }
-    }
-  }}
+    initialValues={{
+        firstname: "Smurf",
+        surname: "Smurfsson",
+        email: "email@email.com",
+        agreement: false
+    }}
+    onSubmit={(values, actions) => {
+        console.log(values);
+        actions.resetForm();
+    }}
+    validationSchema={yup.object().shape({
+        firstname: yup.string().required(),
+        surname: yup.string().required(),
+        email: yup.string().required(),
+        agreement: yup.boolean().required()
+    })}
+    titleText={title}
+    submitText={submit}
+    keysOrder={["firstname", "surname", "email", "agreement"]}
+    keysComponentData={{
+        firstname: {
+            component: DigitTextField,
+            componentProps: {
+                filled: true,
+                upperLabel: "Firstname"
+            }
+        },
+        surname: {
+            component: DigitTextField,
+            componentProps: {
+                filled: true,
+                upperLabel: "Surname"
+            }
+        },
+        email: {
+            component: DigitTextField,
+            componentProps: {
+                filled: true,
+                upperLabel: "Email"
+            }
+        },
+        agreement: {
+            component: DigitCheckbox,
+            componentProps: {
+                primary: true,
+                label: "Agreement"
+            }
+        }
+    }}
 />
 ```

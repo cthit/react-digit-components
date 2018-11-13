@@ -6,15 +6,15 @@ translations.json
 
 ```json
 {
-  //"welcome" is the prop type you'll use the get the translations.
-  "welcome": [
-    "Welcome to my website", //First value in the array is always the english translation.
-    "Välkommen till min hemsida" //Second value is always the swedish translation.
-  ],
-  "icecream": [
-    "You can buy one icecream for a 1 dollar",
-    "Du kan köpa en glass för 10 kr"
-  ]
+    //"welcome" is the prop type you'll use the get the translations.
+    "welcome": [
+        "Welcome to my website", //First value in the array is always the english translation.
+        "Välkommen till min hemsida" //Second value is always the swedish translation.
+    ],
+    "icecream": [
+        "You can buy one icecream for a 1 dollar",
+        "Du kan köpa en glass för 10 kr"
+    ]
 }
 ```
 
@@ -23,14 +23,14 @@ import { DigitTranslations } from "@cthit/react-digit-components";
 import Translations from "./translations.json";
 
 <DigitTranslations
-  uniquePath="TestTranslations"
-  translations={Translations}
-  render={(text, activeLanguage, setActiveLanguage) => (
-    <div>
-      <p>{text.welcome}</p>
-      <p>{text.icecream}</p>
-    </div>
-  )}
+    uniquePath="TestTranslations"
+    translations={Translations}
+    render={(text, activeLanguage, setActiveLanguage) => (
+        <div>
+            <p>{text.welcome}</p>
+            <p>{text.icecream}</p>
+        </div>
+    )}
 />;
 ```
 

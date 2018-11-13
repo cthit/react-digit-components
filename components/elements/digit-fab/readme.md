@@ -7,11 +7,11 @@ import { DigitFAB } from "@cthit/react-digit-components";
 import Add from "@material-ui/icons/Add";
 
 <DigitFAB
-  icon={Add}
-  secondary
-  onClick={() => {
-    console.log("Secondary Add FAB");
-  }}
+    icon={Add}
+    secondary
+    onClick={() => {
+        console.log("Secondary Add FAB");
+    }}
 />;
 ```
 
@@ -21,16 +21,16 @@ To use `DigitFAB` as the submit button for a `DigitForm`, then you have to add t
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="date"
-        component={DigitDatePicker}
-        componentProps={{ upperLabel: "Enter date" }}
-      />
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="date"
+                component={DigitDatePicker}
+                componentProps={{ upperLabel: "Enter date" }}
+            />
 
-      <DigitFAB icon={Edit} submit />
-    </DigitLayout.Column>
-  )}
+            <DigitFAB icon={Edit} submit />
+        </DigitLayout.Column>
+    )}
 />
 ```

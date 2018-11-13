@@ -6,17 +6,17 @@
 import { DigitDisplayData } from "@cthit/react-digit-components";
 
 <DigitDisplayData
-  fixedWidth={"200px"}
-  data={{
-    firstname: "Smurf",
-    surname: "Smurfsson",
-    username: "Coder"
-  }}
-  keysText={{
-    firstname: "Firstname",
-    surname: "Surname",
-    username: "Username"
-  }}
-  keysOrder={["firstname", "surname", "username"]}
+    fixedWidth={"200px"}
+    data={{
+        firstname: "Smurf",
+        surname: "Smurfsson",
+        username: "Coder"
+    }}
+    keysText={{
+        firstname: "Firstname",
+        surname: "Surname",
+        username: "Username"
+    }}
+    keysOrder={["firstname", "surname", "username"]}
 />;
 ```

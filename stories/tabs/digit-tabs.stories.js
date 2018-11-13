@@ -11,27 +11,27 @@ const DigitTabsStory = storiesOf("Elements", module);
 DigitTabsStory.addDecorator(withKnobs);
 
 DigitTabsStory.add(
-  "DigitTabs",
-  () => {
-    const fullWidth = boolean("Full width", true);
-    const centered = boolean("Centered", true);
-    const titleFont = boolean("Title font", false);
+    "DigitTabs",
+    () => {
+        const fullWidth = boolean("Full width", true);
+        const centered = boolean("Centered", true);
+        const titleFont = boolean("Title font", false);
 
-    return (
-      <DigitProviders>
-        <StoryDigitTabs
-          fullWidth={fullWidth}
-          centered={centered}
-          titleFont={titleFont}
-        />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitTabsReadme,
-      propTables: [DigitTabs],
-      propTablesExclude: [StoryDigitTabs, DigitProviders]
+        return (
+            <DigitProviders>
+                <StoryDigitTabs
+                    fullWidth={fullWidth}
+                    centered={centered}
+                    titleFont={titleFont}
+                />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitTabsReadme,
+            propTables: [DigitTabs],
+            propTablesExclude: [StoryDigitTabs, DigitProviders]
+        }
     }
-  }
 );

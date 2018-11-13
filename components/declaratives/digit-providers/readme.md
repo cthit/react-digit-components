@@ -9,27 +9,27 @@ DigitProviders is something you must include on your website to ensure the prope
 
 DigitProviders initializes the following things:
 
-- Redux
-- Translations
-- Theming of the components
-- BrowerRouter for react-router-dom
+-   Redux
+-   Translations
+-   Theming of the components
+-   BrowerRouter for react-router-dom
 
 ```jsx
 import { DigitProviders } from "@cthit/react-digit-components";
 
 <DigitProviders
-  preloadedState={{
-    loading: true
-  }}
-  defaultLangauge="sv"
+    preloadedState={{
+        loading: true
+    }}
+    defaultLangauge="sv"
 >
-  <DigitHeader
-    text="Example"
-    renderDrawer={() => (
-      <div>
-        <p>Content</p>
-      </div>
-    )}
-  />
+    <DigitHeader
+        text="Example"
+        renderDrawer={() => (
+            <div>
+                <p>Content</p>
+            </div>
+        )}
+    />
 </DigitProviders>;
 ```

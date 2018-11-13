@@ -11,27 +11,27 @@ const DigitTimePickerStory = storiesOf("Elements", module);
 DigitTimePickerStory.addDecorator(withKnobs);
 
 DigitTimePickerStory.add(
-  "DigitTimePicker",
-  () => {
-    const upperLabel = text("Upperlabel: ", "My time");
+    "DigitTimePicker",
+    () => {
+        const upperLabel = text("Upperlabel: ", "My time");
 
-    return (
-      <DigitProviders>
-        <DigitLayout.Size absWidth="300px" absHeight="300px">
-          <StoryDigitTimePicker upperLabel={upperLabel} />
-        </DigitLayout.Size>
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitTimePickerReadme,
-      propTables: [DigitTimePicker],
-      propTablesExclude: [
-        DigitProviders,
-        DigitLayout.Size,
-        StoryDigitTimePicker
-      ]
+        return (
+            <DigitProviders>
+                <DigitLayout.Size absWidth="300px" absHeight="300px">
+                    <StoryDigitTimePicker upperLabel={upperLabel} />
+                </DigitLayout.Size>
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitTimePickerReadme,
+            propTables: [DigitTimePicker],
+            propTablesExclude: [
+                DigitProviders,
+                DigitLayout.Size,
+                StoryDigitTimePicker
+            ]
+        }
     }
-  }
 );

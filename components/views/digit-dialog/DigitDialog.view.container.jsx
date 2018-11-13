@@ -1,20 +1,20 @@
 import { connect } from "react-redux";
 import DigitDialog from "./DigitDialog.view";
 import {
-  digitDialogClosedCancel,
-  digitDialogClosedConfirm
+    digitDialogClosedCancel,
+    digitDialogClosedConfirm
 } from "./DigitDialog.view.action-creator";
 
 const mapStateToProps = (state, ownProps) => ({
-  options: state.dialog
+    options: state.dialog
 });
 
 const mapDispatchToProps = dispatch => ({
-  digitDialogClosedConfirm: () => dispatch(digitDialogClosedConfirm()),
-  digitDialogClosedCancel: () => dispatch(digitDialogClosedCancel())
+    digitDialogClosedConfirm: () => dispatch(digitDialogClosedConfirm()),
+    digitDialogClosedCancel: () => dispatch(digitDialogClosedCancel())
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(DigitDialog);

@@ -17,30 +17,30 @@ const DigitButtonStory = storiesOf("Elements", module);
 DigitButtonStory.addDecorator(withKnobs);
 
 DigitButtonStory.add(
-  "DigitButton",
-  () => {
-    const buttonText = text("Text", "This is a button");
-    const color = select(colorLabel, colorOptions, colorDefaultValue);
-    const style = select(styleLabel, styleOptions, styleDefaultValue);
-    const disabled = boolean("Disabled", false);
+    "DigitButton",
+    () => {
+        const buttonText = text("Text", "This is a button");
+        const color = select(colorLabel, colorOptions, colorDefaultValue);
+        const style = select(styleLabel, styleOptions, styleDefaultValue);
+        const disabled = boolean("Disabled", false);
 
-    return (
-      <DigitProviders>
-        <DigitButton
-          text={buttonText}
-          primary={color === "primary"}
-          secondary={color === "secondary"}
-          raised={style === "raised"}
-          outlined={style === "outlined"}
-          disabled={disabled}
-        />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitButtonReadme,
-      propTablesExclude: [DigitProviders]
+        return (
+            <DigitProviders>
+                <DigitButton
+                    text={buttonText}
+                    primary={color === "primary"}
+                    secondary={color === "secondary"}
+                    raised={style === "raised"}
+                    outlined={style === "outlined"}
+                    disabled={disabled}
+                />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitButtonReadme,
+            propTablesExclude: [DigitProviders]
+        }
     }
-  }
 );

@@ -8,13 +8,13 @@ A super easy way to define a grid. Best explained in a few examples.
 import { DigitLayout } from "@cthit/react-digit-components";
 
 <DigitLayout.Grid columns={3} padding="8px">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-  <div>6</div>
-  <div>7</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
 </DigitLayout.Grid>;
 ```
 
@@ -24,12 +24,12 @@ import { DigitLayout } from "@cthit/react-digit-components";
 import { DigitLayout } from "@cthit/react-digit-components";
 
 <DigitLayout.Grid rows={3} padding="8px">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-  <div>6</div>
-  <div>7</div>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
 </DigitLayout.Grid>;
 ```

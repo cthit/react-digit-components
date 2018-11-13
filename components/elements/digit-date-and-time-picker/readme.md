@@ -6,9 +6,9 @@ A modal where you can select the date and the time. Note that `DigitDateAndTimeP
 import { DigitDateAndTimePicker } from "@cthit/react-digit-components";
 
 <DigitDateAndTimePicker
-  upperLabel="Choose a date and a time"
-  value={this.state.date}
-  onChange={this.onDateChanged}
+    upperLabel="Choose a date and a time"
+    value={this.state.date}
+    onChange={this.onDateChanged}
 />;
 ```
 
@@ -16,14 +16,14 @@ import { DigitDateAndTimePicker } from "@cthit/react-digit-components";
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="dateAndTime"
-        component={DigitDateAndTimePicker}
-        componentProps={{ upperLabel: "Enter date and time" }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="dateAndTime"
+                component={DigitDateAndTimePicker}
+                componentProps={{ upperLabel: "Enter date and time" }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

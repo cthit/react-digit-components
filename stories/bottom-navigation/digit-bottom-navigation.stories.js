@@ -11,21 +11,21 @@ const DigitBottomNavigationStory = storiesOf("Elements", module);
 DigitBottomNavigationStory.addDecorator(withKnobs);
 
 DigitBottomNavigationStory.add(
-  "DigitBottomNavigation",
-  () => {
-    const showLabels = boolean("Show Labels", true);
+    "DigitBottomNavigation",
+    () => {
+        const showLabels = boolean("Show Labels", true);
 
-    return (
-      <DigitProviders>
-        <StoryDigitBottomNavigation showLabels={showLabels} />
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitBottomNavigationReadme,
-      propTables: [DigitBottomNavigation],
-      propTablesExclude: [DigitProviders, StoryDigitBottomNavigation]
+        return (
+            <DigitProviders>
+                <StoryDigitBottomNavigation showLabels={showLabels} />
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitBottomNavigationReadme,
+            propTables: [DigitBottomNavigation],
+            propTablesExclude: [DigitProviders, StoryDigitBottomNavigation]
+        }
     }
-  }
 );

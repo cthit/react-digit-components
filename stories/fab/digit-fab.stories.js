@@ -22,39 +22,39 @@ const DigitFABStory = storiesOf("Elements", module);
 DigitFABStory.addDecorator(withKnobs);
 
 DigitFABStory.add(
-  "DigitFAB",
-  () => {
-    const disabled = boolean("Disabled", false);
-    const color = select(colorLabel, colorOptions, colorDefaultValue);
-    const icon = select(iconLabel, iconOptions, iconDefaultValue);
+    "DigitFAB",
+    () => {
+        const disabled = boolean("Disabled", false);
+        const color = select(colorLabel, colorOptions, colorDefaultValue);
+        const icon = select(iconLabel, iconOptions, iconDefaultValue);
 
-    return (
-      <DigitProviders>
-        <Padding>
-          <DigitFAB
-            onClick={action("Click")}
-            icon={
-              icon === "Edit"
-                ? Edit
-                : icon === "Add"
-                  ? Add
-                  : icon === "Call"
-                    ? Call
-                    : null
-            }
-            disabled={disabled}
-            primary={color === "primary"}
-            secondary={color === "secondary"}
-          />
-        </Padding>
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitFABReadme,
-      propTables: [],
-      propTablesExclude: [DigitProviders, Padding]
+        return (
+            <DigitProviders>
+                <Padding>
+                    <DigitFAB
+                        onClick={action("Click")}
+                        icon={
+                            icon === "Edit"
+                                ? Edit
+                                : icon === "Add"
+                                ? Add
+                                : icon === "Call"
+                                ? Call
+                                : null
+                        }
+                        disabled={disabled}
+                        primary={color === "primary"}
+                        secondary={color === "secondary"}
+                    />
+                </Padding>
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitFABReadme,
+            propTables: [],
+            propTablesExclude: [DigitProviders, Padding]
+        }
     }
-  }
 );

@@ -6,40 +6,40 @@ A dialog with a title, description, confirm text and cancel text. You can only o
 import { DigitDialog, DigitDialogActions } from "@cthit/react-digit-components";
 
 <DigitProviders>
-  <DigitDialog />
-  <MyComponentConnected />
+    <DigitDialog />
+    <MyComponentConnected />
 </DigitProviders>;
 
 class MyComponent extends React.Component {
-  render() {
-    const { dialogOpen } = this.props;
-    return (
-      <div>
-        <DigitButton
-          text="Open dialog"
-          onClick={() => {
-            dialogOpen({
-              title: "This is a title",
-              description: "Description",
-              cancelButtonText: "No",
-              confirmButtonText: "Yes"
-            });
-          }}
-        />
-      </div>
-    );
-  }
+    render() {
+        const { dialogOpen } = this.props;
+        return (
+            <div>
+                <DigitButton
+                    text="Open dialog"
+                    onClick={() => {
+                        dialogOpen({
+                            title: "This is a title",
+                            description: "Description",
+                            cancelButtonText: "No",
+                            confirmButtonText: "Yes"
+                        });
+                    }}
+                />
+            </div>
+        );
+    }
 }
 
 const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = dispatch => ({
-  dialogOpen: dialogData =>
-    dispatch(DigitDialogActions.digitDialogOpen(dialogData))
+    dialogOpen: dialogData =>
+        dispatch(DigitDialogActions.digitDialogOpen(dialogData))
 });
 
 const MyComponentConnected = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(MyComponent);
 ```

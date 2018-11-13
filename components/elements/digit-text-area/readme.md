@@ -8,17 +8,17 @@ The `DigitTextArea` is uncontrolled, meaning you have to manage the value and ch
 import { DigitTextArea } from "@cthit/react-digit-components";
 
 <DigitTextArea
-  onChange={e => {
-    this.setState({
-      value: e.target.value
-    });
-    console.log("New value: " + e.target.value);
-  }}
-  startValue={this.state.value}
-  upperLabel="Hello lowerLabel"
-  lowerLabel="Why hello upperLabel"
-  rows={5}
-  rowsMax={10}
+    onChange={e => {
+        this.setState({
+            value: e.target.value
+        });
+        console.log("New value: " + e.target.value);
+    }}
+    startValue={this.state.value}
+    upperLabel="Hello lowerLabel"
+    lowerLabel="Why hello upperLabel"
+    rows={5}
+    rowsMax={10}
 />;
 ```
 
@@ -26,18 +26,18 @@ import { DigitTextArea } from "@cthit/react-digit-components";
 
 ```jsx
 <DigitForm
-  render={() => (
-    <DigitLayout.Column>
-      <DigitFormField
-        name="description"
-        component={DigitTextArea}
-        componentProps={{
-          upperLabel: "Description",
-          rows: 5,
-          rowsMax: 10
-        }}
-      />
-    </DigitLayout.Column>
-  )}
+    render={() => (
+        <DigitLayout.Column>
+            <DigitFormField
+                name="description"
+                component={DigitTextArea}
+                componentProps={{
+                    upperLabel: "Description",
+                    rows: 5,
+                    rowsMax: 10
+                }}
+            />
+        </DigitLayout.Column>
+    )}
 />
 ```

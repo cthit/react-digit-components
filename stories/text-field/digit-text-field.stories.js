@@ -18,37 +18,41 @@ const DigitTextFieldStory = storiesOf("Elements", module);
 DigitTextFieldStory.addDecorator(withKnobs);
 
 DigitTextFieldStory.add(
-  "DigitTextField",
-  () => {
-    const type = select(typeLabel, typeOptions, typeDefaultValue);
-    const upperLabel = text("Upper label", "This is a upperLabel");
-    const lowerLabel = text("Lower label", "This is a lowerLabel");
-    const error = boolean("Error", false);
-    const errorMessage = text("Error message", "Buuuh, this is a error");
-    const disabled = boolean("disabled", false);
-    const style = select(styleLabel, styleOptions, styleDefaultValue);
+    "DigitTextField",
+    () => {
+        const type = select(typeLabel, typeOptions, typeDefaultValue);
+        const upperLabel = text("Upper label", "This is a upperLabel");
+        const lowerLabel = text("Lower label", "This is a lowerLabel");
+        const error = boolean("Error", false);
+        const errorMessage = text("Error message", "Buuuh, this is a error");
+        const disabled = boolean("disabled", false);
+        const style = select(styleLabel, styleOptions, styleDefaultValue);
 
-    return (
-      <DigitProviders>
-        <DigitLayout.Size width="300px">
-          <StoryDigitTextField
-            type={type}
-            upperLabel={upperLabel}
-            lowerLabel={lowerLabel}
-            error={error}
-            errorMessage={errorMessage}
-            disabled={disabled}
-            style={style}
-          />
-        </DigitLayout.Size>
-      </DigitProviders>
-    );
-  },
-  {
-    info: {
-      text: DigitTextFieldReadme,
-      propTables: [DigitTextField],
-      propTablesExclude: [DigitProviders, DigitLayout.Size, StoryDigitTextField]
+        return (
+            <DigitProviders>
+                <DigitLayout.Size width="300px">
+                    <StoryDigitTextField
+                        type={type}
+                        upperLabel={upperLabel}
+                        lowerLabel={lowerLabel}
+                        error={error}
+                        errorMessage={errorMessage}
+                        disabled={disabled}
+                        style={style}
+                    />
+                </DigitLayout.Size>
+            </DigitProviders>
+        );
+    },
+    {
+        info: {
+            text: DigitTextFieldReadme,
+            propTables: [DigitTextField],
+            propTablesExclude: [
+                DigitProviders,
+                DigitLayout.Size,
+                StoryDigitTextField
+            ]
+        }
     }
-  }
 );

@@ -8,6 +8,9 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         backgroundColor: theme.palette.primary.main
+    },
+    scrollButtonsAuto: {
+        color: "white"
     }
 });
 
@@ -22,13 +25,19 @@ const DigitTabs = ({
 }) => (
     <Fill>
         <Tabs
-            className={classes.root}
+            classes={{
+                root: classes.root,
+                scrollButtonsAuto: classes.scrollButtonsAuto
+            }}
             value={selected}
             centered={centered}
             fullWidth={fullWidth}
             onChange={(event, value) => {
                 onChange(value);
             }}
+            scrollable
+            scrollButtons="auto"
+            textColor="primary"
         >
             {labels.map(label => {
                 return (

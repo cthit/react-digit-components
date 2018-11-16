@@ -195,7 +195,6 @@ export const UniformGrid = styled(
         minItemHeight,
         children,
         inline,
-        columns,
         rows,
         areas,
         padding,
@@ -212,7 +211,6 @@ export const UniformGrid = styled(
             columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`}
             padding={padding}
             inline={inline}
-            columns={columns}
             rows={rows}
             areas={areas}
             columnGap={columnGap}

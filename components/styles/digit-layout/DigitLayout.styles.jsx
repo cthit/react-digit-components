@@ -192,7 +192,6 @@ GridItem.propTypes = {
 export const UniformGrid = styled(
     ({
         minItemWidth,
-        minItemHeight,
         children,
         inline,
         rows,
@@ -200,7 +199,7 @@ export const UniformGrid = styled(
         padding,
         columnGap,
         rowGap,
-        jusitfyItems,
+        justifyItems,
         alignItems,
         justifyContent,
         alignContent,
@@ -215,7 +214,7 @@ export const UniformGrid = styled(
             areas={areas}
             columnGap={columnGap}
             rowGap={rowGap}
-            justifyItems={jusitfyItems}
+            justifyItems={justifyItems}
             alignItems={alignItems}
             justifyContent={justifyContent}
             alignContent={alignContent}

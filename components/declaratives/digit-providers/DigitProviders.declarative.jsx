@@ -23,6 +23,7 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
+import { redirect } from "../../declaratives/digit-redirect/DigitRedirect.declarative.reducer";
 
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
@@ -39,7 +40,8 @@ class DigitProviders extends React.Component {
                 ...props.rootReducer,
                 localize,
                 toast,
-                dialog
+                dialog,
+                redirect
             }),
             props.preloadedState,
             applyMiddleware(loggerMiddleware, thunkMiddleware)

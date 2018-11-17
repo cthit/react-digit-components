@@ -308,6 +308,7 @@ export const Column = styled(
         padding,
         fillElement,
         children,
+        scroll,
         ...rest
     }) => (
         <Flex
@@ -326,6 +327,7 @@ export const Column = styled(
         padding: ${props => (props.padding == null ? "8px" : props.padding)};
     }
     flex: ${props => (props.fillElement ? "1" : "")};
+    overflow: ${props => (props.scroll ? "scroll" : "visible")};
 `;
 
 Column.displayName = "Column";
@@ -395,7 +397,13 @@ Column.propTypes = {
         "space-between",
         "space-around",
         "stretch"
-    ])
+    ]),
+    /** If true, then overflow will show a scrollbar. */
+    scroll: PropTypes.bool
+};
+
+Column.defaultProps = {
+    flexWrap: "nowrap"
 };
 
 export const Row = styled(
@@ -409,6 +417,7 @@ export const Row = styled(
         padding,
         fillElement,
         children,
+        scroll,
         ...rest
     }) => (
         <Flex
@@ -427,6 +436,7 @@ export const Row = styled(
         padding: ${props => (props.padding == null ? "8px" : props.padding)};
     }
     flex: ${props => (props.fillElement ? "1" : "")};
+    overflow: ${props => (props.scroll ? "scroll" : "visible")};
 `;
 
 Row.displayName = "Row";
@@ -496,7 +506,13 @@ Row.propTypes = {
         "space-between",
         "space-around",
         "stretch"
-    ])
+    ]),
+    /** If true, then overflow will show a scrollbar. */
+    scroll: PropTypes.bool
+};
+
+Row.defaultProps = {
+    flexWrap: "nowrap"
 };
 
 export const DownRightPosition = styled.div`
@@ -633,9 +649,9 @@ Size.propTypes = {
     /** maxHeight of the child */
     maxHeight: PropTypes.string,
     /** width of the child */
-    width: PropTypes.width,
+    width: PropTypes.string,
     /** height of the child */
-    height: PropTypes.height
+    height: PropTypes.string
 };
 
 export const Order = styled(Flex)`

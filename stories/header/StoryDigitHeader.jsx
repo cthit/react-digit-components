@@ -6,7 +6,9 @@ import {
     DigitTextField,
     DigitButton,
     DigitDisplayData,
-    DigitNavLink
+    DigitNavLink,
+    DigitTabs,
+    DigitMenu
 } from "../../components";
 
 import Send from "@material-ui/icons/Send";
@@ -27,6 +29,7 @@ class StoryDigitHeader extends React.Component {
     render() {
         const {
             customHeaderDemo,
+            customToolbarDemo,
             headerHeight,
             navigation,
             icon,
@@ -41,16 +44,20 @@ class StoryDigitHeader extends React.Component {
                 renderHeader={() =>
                     customHeaderDemo && (
                         <DigitLayout.Row>
-                            <DigitTextField
-                                upperLabel="Upper upper label"
-                                lowerLabel="Lower lower label"
-                                value={textFieldValue}
-                                onChange={this.onTextFieldChange}
-                            />
                             <DigitButton text="Logga in" />
+                            <DigitMenu
+                                onClick={value => {
+                                    console.log(value + " has been selected");
+                                }}
+                                valueToTextMap={{
+                                    first_option: "First option",
+                                    second_option: "Second option"
+                                }}
+                            />
                         </DigitLayout.Row>
                     )
                 }
+                renderToolbar={() => customToolbarDemo && <TabsToolbar />}
                 renderMain={() => (
                     <DigitLayout.Center>
                         <DigitDisplayData
@@ -98,6 +105,39 @@ class StoryDigitHeader extends React.Component {
                 }
             />
         );
+    }
+}
+
+class TabsToolbar extends React.Component {
+    state = {
+        selected: "/page-1"
+    };
+
+    onSelectedChange = selected => {
+        this.setState({
+            selected: selected
+        });
+    };
+
+    render() {
+        return (
+            <DigitTabs
+                selected={this.state.selected}
+                onChange={this.onSelectedChange}
+                tabs={this._generateTabs(100)}
+            />
+        );
+    }
+
+    _generateTabs(nLabels) {
+        const output = [];
+        for (let i = 0; i < nLabels; i++) {
+            output.push({
+                text: "Page " + (i + 1),
+                value: "/page-" + (i + 1)
+            });
+        }
+        return output;
     }
 }
 

@@ -14,7 +14,7 @@ const DigitIconButton = ({
         disabled={disabled}
         onClick={onClick}
         onBlur={onBlur}
-        color={primary ? "primary" : secondary ? "secondary" : "default"}
+        color={primary ? "primary" : secondary ? "secondary" : "inherit"}
     >
         {React.createElement(icon, null)}
     </IconButton>

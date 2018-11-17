@@ -20,14 +20,14 @@ const StyledRoot = styled.div`
 
 const StyledAppBar = styled(AppBar)`
     position: absolute;
-    margin-left: 240px;
-
     ${props =>
         props.navigation === "true" &&
         css`
             /*Medium device (md)*/
             @media (min-width: 960px) {
                 width: calc(100vw - 241px);
+                max-width: calc(100vw - 241px);
+                margin-left: 241px;
             }
         `};
 `;
@@ -55,6 +55,12 @@ const StyledToolbar = styled(Toolbar)`
     @media (max-width: 960px) {
         padding-left: 8px;
     }
+`;
+
+const NonPaddingToolbar = styled(Toolbar)`
+    display: flex;
+    padding: 0px;
+    min-height: 0px;
 `;
 
 const StyledDrawer = styled(({ ...rest }) => (
@@ -98,7 +104,8 @@ class DigitHeader extends React.Component {
             renderDrawer,
             renderHeader,
             title,
-            headerHeight
+            headerHeight,
+            renderToolbar
         } = this.props;
         const { mobileOpen } = this.state;
 
@@ -112,7 +119,10 @@ class DigitHeader extends React.Component {
 
         return (
             <StyledRoot>
-                <StyledAppBar navigation={(drawer != null).toString()}>
+                <StyledAppBar
+                    position="static"
+                    navigation={(drawer != null).toString()}
+                >
                     <StyledToolbar height={headerHeight}>
                         <DigitIfElseRendering
                             test={drawer != null}
@@ -132,6 +142,15 @@ class DigitHeader extends React.Component {
                             {renderHeader()}
                         </HorizontalFill>
                     </StyledToolbar>
+                    {renderToolbar()}
+
+                    {/* <DigitIfElseRendering
+                        test={renderToolbar != null}
+                        ifRender={() => (
+                            <NonPaddingToolbar>
+                            </NonPaddingToolbar>
+                        )}
+                    /> */}
                 </StyledAppBar>
                 <DigitIfElseRendering
                     test={drawer != null}
@@ -183,13 +202,16 @@ DigitHeader.propTypes = {
     /** A render prop to render in header, next to the title. */
     renderHeader: PropTypes.func,
     /** The height for the header. E.g. 100px or 20%. */
-    headerHeight: PropTypes.string
+    headerHeight: PropTypes.string,
+    /** A render prop to render in the toolbar, under the header. */
+    renderToolbar: PropTypes.func
 };
 
 DigitHeader.defaultProps = {
     headerHeight: "64px",
     renderDrawer: null,
     renderHeader: () => null,
+    renderToolbar: () => null,
     title: "My website"
 };
 

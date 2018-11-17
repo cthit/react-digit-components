@@ -4,7 +4,8 @@ import {
     FormHelperText,
     Input,
     InputLabel,
-    OutlinedInput
+    OutlinedInput,
+    withStyles
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
@@ -89,7 +90,6 @@ class DigitTextField extends React.Component {
                             />
                         )}
                     />
-
                     <DigitIfElseRendering
                         test={!filled && !outlined}
                         ifRender={() => (

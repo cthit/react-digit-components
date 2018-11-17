@@ -8,6 +8,7 @@ import _ from "lodash";
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        width: "100%",
         backgroundColor: theme.palette.primary.main
     },
     scrollButtonsAuto: {
@@ -37,7 +38,6 @@ const DigitTabs = ({
                 onChange(tabs[value].value);
             }}
             scrollable
-            scrollButtons="auto"
             textColor="primary"
         >
             {tabs.map(tabs => {
@@ -75,9 +75,9 @@ DigitTabs.propTypes = {
         })
     ).isRequired,
     /** If true, then centers the tabs*/
-    centered: PropTypes.bool.isRequired,
+    centered: PropTypes.bool,
     /** If true, then expands the tabs*/
-    fullWidth: PropTypes.bool.isRequired,
+    fullWidth: PropTypes.bool,
     /** A function with the new selected index as the only argument.
      * Use this to keep track of the currently selected tab.
      */

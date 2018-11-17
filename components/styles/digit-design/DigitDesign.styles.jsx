@@ -200,6 +200,7 @@ export const Divider = styled.hr`
 Divider.displayName = "Divider";
 
 export const Link = styled(NavLink)`
+    color: inherit;
     text-decoration: none;
 `;
 

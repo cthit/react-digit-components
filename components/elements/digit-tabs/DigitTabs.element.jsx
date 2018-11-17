@@ -11,7 +11,7 @@ const styles = theme => ({
         width: "100%",
         backgroundColor: theme.palette.primary.main
     },
-    scrollButtonsAuto: {
+    scrollButtons: {
         color: "white"
     }
 });
@@ -29,7 +29,7 @@ const DigitTabs = ({
         <Tabs
             classes={{
                 root: classes.root,
-                scrollButtonsAuto: classes.scrollButtonsAuto
+                scrollButtons: classes.scrollButtons
             }}
             value={_.findIndex(tabs, tab => tab.value == selected)}
             centered={centered}
@@ -38,6 +38,7 @@ const DigitTabs = ({
                 onChange(tabs[value].value);
             }}
             scrollable={!centered}
+            scrollButtons="on"
             textColor="primary"
         >
             {tabs.map(tabs => {

@@ -90,9 +90,6 @@ class DigitTextField extends React.Component {
                             />
                         )}
                     />
-                    {console.log(lightColor)}
-                    {console.log(classes.inputLightColor)}
-
                     <DigitIfElseRendering
                         test={!filled && !outlined}
                         ifRender={() => (

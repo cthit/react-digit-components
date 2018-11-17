@@ -37,7 +37,7 @@ const DigitTabs = ({
             onChange={(event, value) => {
                 onChange(tabs[value].value);
             }}
-            scrollable
+            scrollable={!centered}
             textColor="primary"
         >
             {tabs.map(tabs => {

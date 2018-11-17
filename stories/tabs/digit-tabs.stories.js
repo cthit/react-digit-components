@@ -1,4 +1,4 @@
-import { boolean, withKnobs } from "@storybook/addon-knobs";
+import { boolean, withKnobs, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitProviders } from "../../components";
@@ -16,6 +16,12 @@ DigitTabsStory.add(
         const fullWidth = boolean("Full width", true);
         const centered = boolean("Centered", true);
         const titleFont = boolean("Title font", false);
+        const nLabels = number("Labels", 3, {
+            range: true,
+            min: 1,
+            max: 50,
+            step: 1
+        });
 
         return (
             <DigitProviders>
@@ -23,6 +29,7 @@ DigitTabsStory.add(
                     fullWidth={fullWidth}
                     centered={centered}
                     titleFont={titleFont}
+                    nLabels={nLabels}
                 />
             </DigitProviders>
         );

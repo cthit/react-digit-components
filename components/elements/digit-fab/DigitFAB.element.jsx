@@ -8,7 +8,7 @@ const DigitFAB = ({ onClick, disabled, primary, secondary, submit, icon }) => (
         type={submit ? "submit" : "button"}
         disabled={disabled}
         onClick={onClick}
-        color={primary ? "primary" : secondary ? "secondary" : "default"}
+        color={primary ? "primary" : secondary ? "secondary" : "inherit"}
     >
         {React.createElement(icon, null)}
     </Button>

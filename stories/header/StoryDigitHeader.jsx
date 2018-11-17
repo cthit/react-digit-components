@@ -7,7 +7,8 @@ import {
     DigitButton,
     DigitDisplayData,
     DigitNavLink,
-    DigitTabs
+    DigitTabs,
+    DigitMenu
 } from "../../components";
 
 import Send from "@material-ui/icons/Send";
@@ -43,13 +44,16 @@ class StoryDigitHeader extends React.Component {
                 renderHeader={() =>
                     customHeaderDemo && (
                         <DigitLayout.Row>
-                            <DigitTextField
-                                upperLabel="Upper upper label"
-                                lowerLabel="Lower lower label"
-                                value={textFieldValue}
-                                onChange={this.onTextFieldChange}
-                            />
                             <DigitButton text="Logga in" />
+                            <DigitMenu
+                                onClick={value => {
+                                    console.log(value + " has been selected");
+                                }}
+                                valueToTextMap={{
+                                    first_option: "First option",
+                                    second_option: "Second option"
+                                }}
+                            />
                         </DigitLayout.Row>
                     )
                 }

@@ -16,7 +16,7 @@ const DigitButton = ({
         type={submit ? "submit" : "button"}
         onClick={onClick}
         disabled={disabled}
-        color={primary ? "primary" : secondary ? "secondary" : "default"}
+        color={primary ? "primary" : secondary ? "secondary" : "inherit"}
         variant={raised ? "contained" : outlined ? "outlined" : "text"}
     >
         {text}

@@ -4,13 +4,20 @@ import {
     FormHelperText,
     Input,
     InputLabel,
-    OutlinedInput
+    OutlinedInput,
+    withStyles
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+
+const styles = theme => ({
+    inputLightColor: {
+        color: "white"
+    }
+});
 
 class DigitTextField extends React.Component {
     render() {
@@ -27,7 +34,9 @@ class DigitTextField extends React.Component {
             errorMessage,
             disabled,
             outlined,
-            filled
+            filled,
+            lightColor,
+            classes
         } = this.props;
 
         return (
@@ -89,11 +98,18 @@ class DigitTextField extends React.Component {
                             />
                         )}
                     />
+                    {console.log(lightColor)}
+                    {console.log(classes.inputLightColor)}
 
                     <DigitIfElseRendering
                         test={!filled && !outlined}
                         ifRender={() => (
                             <Input
+                                inputProps={{
+                                    classes: lightColor
+                                        ? classes.inputLightColor
+                                        : null
+                                }}
                                 name={name}
                                 value={value || ""}
                                 onChange={onChange}
@@ -177,4 +193,6 @@ DigitTextField.defaultProps = {
     filled: false
 };
 
-export default DigitTextField;
+export { DigitTextField };
+
+export default withStyles(styles)(DigitTextField);

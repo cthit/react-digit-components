@@ -7,7 +7,10 @@ import { DigitTabs } from "@cthit/react-digit-components";
 
 <DigitTabs
     centered
-    labels={["First tab", "Second tab"]}
+    labels={[
+        { text: "First tab", value: "first" },
+        { text: "Second tab", value: "second" }
+    ]}
     selected={this.state.selectedTab}
     onChange={selected => {
         this.setState({

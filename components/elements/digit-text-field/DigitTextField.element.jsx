@@ -13,12 +13,6 @@ import ReactDOM from "react-dom";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
-const styles = theme => ({
-    inputLightColor: {
-        color: "white"
-    }
-});
-
 class DigitTextField extends React.Component {
     render() {
         const {
@@ -34,9 +28,7 @@ class DigitTextField extends React.Component {
             errorMessage,
             disabled,
             outlined,
-            filled,
-            lightColor,
-            classes
+            filled
         } = this.props;
 
         return (
@@ -105,11 +97,6 @@ class DigitTextField extends React.Component {
                         test={!filled && !outlined}
                         ifRender={() => (
                             <Input
-                                inputProps={{
-                                    classes: lightColor
-                                        ? classes.inputLightColor
-                                        : null
-                                }}
                                 name={name}
                                 value={value || ""}
                                 onChange={onChange}
@@ -193,6 +180,4 @@ DigitTextField.defaultProps = {
     filled: false
 };
 
-export { DigitTextField };
-
-export default withStyles(styles)(DigitTextField);
+export default DigitTextField;

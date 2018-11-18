@@ -29,6 +29,8 @@ import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
 import DigitTranslations from "./declaratives/digit-translations";
 import DigitProviders from "./declaratives/digit-providers";
 import DigitRedirect from "./declaratives/digit-redirect";
+import DigitComponentSelector from "./declaratives/digit-component-selector";
+import DigitRenderSelector from "./declaratives/digit-render-selector";
 
 import DigitToast from "./views/digit-toast";
 import DigitDialog from "./views/digit-dialog";
@@ -85,6 +87,8 @@ export {
     DigitTranslations,
     DigitProviders,
     DigitRedirect,
+    DigitComponentSelector,
+    DigitRenderSelector,
     /* Styles */
     DigitLayout,
     DigitDesign,

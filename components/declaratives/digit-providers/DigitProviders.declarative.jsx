@@ -69,14 +69,14 @@ class DigitProviders extends React.Component {
     }
 
     render() {
-        const { children, defaultLanguage } = this.props;
+        const { children, defaultLanguage, commonTranslations } = this.props;
         return (
             <MuiThemeProvider theme={this.theme}>
                 <LocalizeProvider
                     store={this.store}
                     defaultLanguage={defaultLanguage}
                 >
-                    <LocalizeInitalizer>
+                    <LocalizeInitalizer commonTranslations={commonTranslations}>
                         <JssProvider
                             jss={jss}
                             generateClassName={generateClassName}
@@ -110,14 +110,16 @@ DigitProviders.propTypes = {
     /** Starting redux state for your application */
     preloadedState: PropTypes.object,
     /** All redux reducer from your application */
-    rootReducer: PropTypes.object
+    rootReducer: PropTypes.object,
+    commonTranslations: PropTypes.object
 };
 
 DigitProviders.defaultProps = {
     defaultLanguage: "sv",
     theme: {},
     preloadedState: {},
-    rootReducer: {}
+    rootReducer: {},
+    commonTranslations: {}
 };
 
 export default DigitProviders;
@@ -135,6 +137,10 @@ class DigitLocalizeInitalizer extends React.Component {
                 renderInnerHtml: true,
                 defaultLanguage: props.defaultLanguage
             }
+        });
+
+        props.addTranslation({
+            CommonTranslations: { ...props.commonTranslations }
         });
     }
 

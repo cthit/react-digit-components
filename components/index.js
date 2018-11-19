@@ -24,6 +24,8 @@ import DigitTimePicker from "./elements/digit-time-picker";
 import DigitRadioButtonGroup from "./elements/digit-radio-button-group";
 import DigitStepper from "./elements/digit-stepper";
 import DigitImage from "./elements/digit-image";
+import DigitAvatar from "./elements/digit-avatar";
+import DigitChip from "./elements/digit-chip";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -74,6 +76,8 @@ export {
     DigitRadioButtonGroup,
     DigitStepper,
     DigitImage,
+    DigitChip,
+    DigitAvatar,
     /* Views */
     DigitToast,
     DigitDialog,

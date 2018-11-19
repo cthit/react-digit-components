@@ -1,5 +1,5 @@
 import withStyles from "@material-ui/core/styles/withStyles";
-import TimePicker from "material-ui-pickers/TimePicker";
+import { TimePicker } from "material-ui-pickers";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -14,15 +14,22 @@ const DigitTimePicker = ({
     value,
     onChange,
     upperLabel,
-    cancelLabel = "Avbryt",
-    okLabel = "Ok",
-    clearLabel = "Rensa",
-    emptyLabel = "Tryck här för tid",
-    invalidLabel = "Ogiltig tid",
-    classes
+    cancelLabel,
+    okLabel,
+    clearLabel,
+    emptyLabel,
+    invalidLabel,
+    classes,
+    outlined,
+    filled,
+    lowerLabel,
+    error,
+    errorMessage
 }) => (
     <TimePicker
         label={upperLabel}
+        error={error}
+        helperText={error && errorMessage !== "" ? errorMessage : lowerLabel}
         value={value}
         onChange={date => onChange(date)}
         cancelLabel={cancelLabel}
@@ -32,6 +39,7 @@ const DigitTimePicker = ({
         invalidLabel={invalidLabel}
         className={classes.root}
         ampm={false}
+        variant={filled ? "filled" : outlined ? "outlined" : "standard"}
     />
 );
 
@@ -63,7 +71,12 @@ DigitTimePicker.propTypes = {
     /** What will be presented if no time has been selected */
     emptyLabel: PropTypes.string,
     /** What will be presented if a time is invalid */
-    invalidLabel: PropTypes.string
+    invalidLabel: PropTypes.string,
+    outlined: PropTypes.bool,
+    filled: PropTypes.bool,
+    lowerLabel: PropTypes.string,
+    error: PropTypes.bool,
+    errorMessage: PropTypes.string
 };
 
 DigitTimePicker.defaultProps = {
@@ -72,7 +85,10 @@ DigitTimePicker.defaultProps = {
     clearLabel: "Rensa",
     emptyLabel: "Tryck här för tid",
     invalidLabel: "Ogiltig tid",
-    upperLabel: ""
+    upperLabel: "",
+    outlined: false,
+    filled: false,
+    lowerLabel: ""
 };
 
 /** This is a temp solution to get the correct prop types from StoryBook. */

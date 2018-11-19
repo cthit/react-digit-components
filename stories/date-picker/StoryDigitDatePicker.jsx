@@ -13,11 +13,22 @@ class StoryDigitDatePicker extends React.Component {
     };
 
     render() {
-        const { upperLabel } = this.props;
+        const {
+            upperLabel,
+            style,
+            lowerLabel,
+            error,
+            errorMessage
+        } = this.props;
         const { date } = this.state;
 
         return (
             <DigitDatePicker
+                lowerLabel={lowerLabel}
+                error={error}
+                errorMessage={errorMessage}
+                outlined={style === "outlined"}
+                filled={style === "filled"}
                 upperLabel={upperLabel}
                 value={date}
                 onChange={this.onDateChanged}

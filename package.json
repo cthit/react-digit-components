@@ -18,12 +18,13 @@
         "url": "git+https://github.com/cthit/react-digit-components.git"
     },
     "peerDependencies": {
+        "@date-io/date-fns": "^0.0.2",
         "@material-ui/core": "^3.2.2",
-        "date-fns": "2.0.0-alpha.20",
+        "date-fns": "2.0.0-alpha.21",
         "formik": "^1.0.2",
         "jss": "^9.8.6",
         "lodash": "^4.17.10",
-        "material-ui-pickers": "^1.0.0-rc.17",
+        "material-ui-pickers": "^2.0.1",
         "prop-types": "^15.6.2",
         "react": "^16.4.0",
         "react-dom": "^16.4.0",
@@ -40,6 +41,8 @@
         "yup": "^0.26.6"
     },
     "devDependencies": {
+        "@babel/core": "7.1.2",
+        "@date-io/date-fns": "^0.0.2",
         "@material-ui/core": "^3.2.2",
         "@material-ui/icons": "^3.0.1",
         "@storybook/addon-actions": "4.0.2",
@@ -49,7 +52,6 @@
         "@storybook/addon-links": "4.0.2",
         "@storybook/addons": "4.0.2",
         "@storybook/react": "4.0.2",
-        "@babel/core": "7.1.2",
         "babel-core": "^6.21.0",
         "babel-loader": "^7.1.4",
         "babel-preset-env": "^1.6.1",
@@ -61,7 +63,7 @@
         "formik": "^1.0.2",
         "jss": "^9.8.6",
         "lodash": "^4.17.10",
-        "material-ui-pickers": "^1.0.0-rc.17",
+        "material-ui-pickers": "^2.0.1",
         "path": "^0.12.7",
         "prop-types": "^15.6.2",
         "react": "^16.4.0",

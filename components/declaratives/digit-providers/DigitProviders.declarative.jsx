@@ -5,8 +5,8 @@ import {
     MuiThemeProvider
 } from "@material-ui/core/styles";
 import { create } from "jss";
-import DateFnsUtils from "material-ui-pickers/utils/date-fns-utils";
-import MuiPickersUtilsProvider from "material-ui-pickers/utils/MuiPickersUtilsProvider";
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider } from "material-ui-pickers";
 import PropTypes from "prop-types";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";

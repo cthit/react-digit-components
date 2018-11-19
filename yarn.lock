@@ -5568,6 +5568,13 @@ material-colors@^1.2.1:
   resolved "https://registry.yarnpkg.com/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
   integrity sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==
 
+material-ui-image@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/material-ui-image/-/material-ui-image-3.0.3.tgz#60daa543fc44c8c4b8a74dd295a03d002eb4bfc7"
+  integrity sha512-b8Mzrl3VRIHISi0IsUf6LMX6KwNJtS6e9zaRxYVWfhs7GBHNSabwcXOnX+L2yGdK7P5/JwRwwXJ6Mcm7C3bsjg==
+  dependencies:
+    prop-types "^15.5.8"
+
 material-ui-pickers@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/material-ui-pickers/-/material-ui-pickers-2.0.1.tgz#e1b1236288c345c40f624670fbc94bcb3c4f39b6"

@@ -23,6 +23,7 @@ import DigitDatePicker from "./elements/digit-date-picker";
 import DigitTimePicker from "./elements/digit-time-picker";
 import DigitRadioButtonGroup from "./elements/digit-radio-button-group";
 import DigitStepper from "./elements/digit-stepper";
+import DigitImage from "./elements/digit-image";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -72,6 +73,7 @@ export {
     DigitTimePicker,
     DigitRadioButtonGroup,
     DigitStepper,
+    DigitImage,
     /* Views */
     DigitToast,
     DigitDialog,

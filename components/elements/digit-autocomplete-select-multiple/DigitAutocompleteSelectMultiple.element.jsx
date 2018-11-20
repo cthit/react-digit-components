@@ -13,48 +13,6 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import { DigitTextField } from "../..";
-import { consolidateStreamedStyles } from "styled-components";
-
-const suggestions = [
-    { label: "Afghanistan" },
-    { label: "Aland Islands" },
-    { label: "Albania" },
-    { label: "Algeria" },
-    { label: "American Samoa" },
-    { label: "Andorra" },
-    { label: "Angola" },
-    { label: "Anguilla" },
-    { label: "Antarctica" },
-    { label: "Antigua and Barbuda" },
-    { label: "Argentina" },
-    { label: "Armenia" },
-    { label: "Aruba" },
-    { label: "Australia" },
-    { label: "Austria" },
-    { label: "Azerbaijan" },
-    { label: "Bahamas" },
-    { label: "Bahrain" },
-    { label: "Bangladesh" },
-    { label: "Barbados" },
-    { label: "Belarus" },
-    { label: "Belgium" },
-    { label: "Belize" },
-    { label: "Benin" },
-    { label: "Bermuda" },
-    { label: "Bhutan" },
-    { label: "Bolivia, Plurinational State of" },
-    { label: "Bonaire, Sint Eustatius and Saba" },
-    { label: "Bosnia and Herzegovina" },
-    { label: "Botswana" },
-    { label: "Bouvet Island" },
-    { label: "Brazil" },
-    { label: "British Indian Ocean Territory" },
-    { label: "Brunei Darussalam" }
-].map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label
-}));
 
 const styles = theme => ({
     input: {
@@ -193,25 +151,30 @@ const components = {
 
 class DigitAutocompleteSelectMultiple extends React.Component {
     state = {
-        multi: [],
         multiOpen: false
     };
 
-    handleChange = name => value => {
+    handleOpenChange = open => {
         this.setState({
-            [name]: value
-        });
-    };
-
-    handleOpenChange = (name, open) => {
-        const nameOpen = name + "Open";
-        this.setState({
-            nameOpen: open
+            multiOpen: open
         });
     };
 
     render() {
-        const { classes, theme } = this.props;
+        const {
+            classes,
+            theme,
+            value,
+            onChange,
+            filled,
+            outlined,
+            upperLabel,
+            lowerLabel,
+            error,
+            errorMessage,
+            name,
+            selectableValues
+        } = this.props;
 
         const selectStyles = {
             input: base => ({
@@ -222,12 +185,13 @@ class DigitAutocompleteSelectMultiple extends React.Component {
         return (
             <NoSsr>
                 <Select
+                    name={name}
                     classes={classes}
                     styles={selectStyles}
-                    options={suggestions}
+                    options={selectableValues}
                     components={components}
-                    value={this.state.multi}
-                    onChange={this.handleChange("multi")}
+                    value={value}
+                    onChange={onChange}
                     isMulti
                     placeholder=""
                     onOpen={() => {
@@ -237,13 +201,21 @@ class DigitAutocompleteSelectMultiple extends React.Component {
                         this.handleOpenChange("multi", false);
                     }}
                     textFieldProps={{
-                        label: "Label",
+                        label: upperLabel,
+                        helperText:
+                            error && errorMessage != null
+                                ? errorMessage
+                                : lowerLabel,
                         InputLabelProps: {
                             shrink:
-                                this.state.multi.length > 0 ||
+                                (value != null && value.length > 0) ||
                                 this.state.multipleOpen
                         },
-                        variant: "filled"
+                        variant: filled
+                            ? "filled"
+                            : outlined
+                            ? "outlined"
+                            : "standard"
                     }}
                 />
             </NoSsr>

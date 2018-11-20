@@ -26,6 +26,8 @@ import DigitStepper from "./elements/digit-stepper";
 import DigitImage from "./elements/digit-image";
 import DigitAvatar from "./elements/digit-avatar";
 import DigitChip from "./elements/digit-chip";
+import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-single";
+import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -78,6 +80,8 @@ export {
     DigitImage,
     DigitChip,
     DigitAvatar,
+    DigitAutocompleteSelectSingle,
+    DigitAutocompleteSelectMultiple,
     /* Views */
     DigitToast,
     DigitDialog,

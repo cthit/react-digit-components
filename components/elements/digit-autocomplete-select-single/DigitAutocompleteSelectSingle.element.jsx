@@ -67,10 +67,7 @@ function Control(props) {
                 }
             }}
             {...props.selectProps.textFieldProps}
-            label="Hej"
-            helperText="Hmm"
             placeholder=""
-            margin="normal"
         />
     );
 }

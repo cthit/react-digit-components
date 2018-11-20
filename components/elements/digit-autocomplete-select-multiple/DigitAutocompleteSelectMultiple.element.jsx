@@ -45,9 +45,6 @@ const styles = theme => ({
         marginTop: theme.spacing.unit,
         left: 0,
         right: 0
-    },
-    divider: {
-        height: theme.spacing.unit * 2
     }
 });
 
@@ -151,12 +148,12 @@ const components = {
 
 class DigitAutocompleteSelectMultiple extends React.Component {
     state = {
-        multiOpen: false
+        menuIsOpen: false
     };
 
-    handleOpenChange = open => {
+    onMenuIsOpenChange = open => {
         this.setState({
-            multiOpen: open
+            menuIsOpen: open
         });
     };
 
@@ -176,6 +173,8 @@ class DigitAutocompleteSelectMultiple extends React.Component {
             selectableValues
         } = this.props;
 
+        const { menuIsOpen } = this.state;
+
         const selectStyles = {
             input: base => ({
                 ...base,
@@ -194,11 +193,12 @@ class DigitAutocompleteSelectMultiple extends React.Component {
                     onChange={onChange}
                     isMulti
                     placeholder=""
-                    onOpen={() => {
-                        this.handleOpenChange("multi", true);
+                    menuIsOpen={menuIsOpen}
+                    onMenuOpen={() => {
+                        this.onMenuIsOpenChange(true);
                     }}
-                    onClose={() => {
-                        this.handleOpenChange("multi", false);
+                    onMenuClose={() => {
+                        this.onMenuIsOpenChange(false);
                     }}
                     textFieldProps={{
                         label: upperLabel,

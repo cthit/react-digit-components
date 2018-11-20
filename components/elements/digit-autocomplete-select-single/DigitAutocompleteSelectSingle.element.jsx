@@ -13,48 +13,6 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import { DigitTextField } from "../..";
-import { consolidateStreamedStyles } from "styled-components";
-
-const suggestions = [
-    { label: "Afghanistan" },
-    { label: "Aland Islands" },
-    { label: "Albania" },
-    { label: "Algeria" },
-    { label: "American Samoa" },
-    { label: "Andorra" },
-    { label: "Angola" },
-    { label: "Anguilla" },
-    { label: "Antarctica" },
-    { label: "Antigua and Barbuda" },
-    { label: "Argentina" },
-    { label: "Armenia" },
-    { label: "Aruba" },
-    { label: "Australia" },
-    { label: "Austria" },
-    { label: "Azerbaijan" },
-    { label: "Bahamas" },
-    { label: "Bahrain" },
-    { label: "Bangladesh" },
-    { label: "Barbados" },
-    { label: "Belarus" },
-    { label: "Belgium" },
-    { label: "Belize" },
-    { label: "Benin" },
-    { label: "Bermuda" },
-    { label: "Bhutan" },
-    { label: "Bolivia, Plurinational State of" },
-    { label: "Bonaire, Sint Eustatius and Saba" },
-    { label: "Bosnia and Herzegovina" },
-    { label: "Botswana" },
-    { label: "Bouvet Island" },
-    { label: "Brazil" },
-    { label: "British Indian Ocean Territory" },
-    { label: "Brunei Darussalam" }
-].map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label
-}));
 
 const styles = theme => ({
     input: {
@@ -67,17 +25,6 @@ const styles = theme => ({
         alignItems: "center",
         overflow: "hidden"
     },
-    chip: {
-        margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
-    },
-    chipFocused: {
-        backgroundColor: emphasize(
-            theme.palette.type === "light"
-                ? theme.palette.grey[300]
-                : theme.palette.grey[700],
-            0.08
-        )
-    },
     noOptionsMessage: {
         padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
     },
@@ -87,9 +34,6 @@ const styles = theme => ({
         marginTop: theme.spacing.unit,
         left: 0,
         right: 0
-    },
-    divider: {
-        height: theme.spacing.unit * 2
     }
 });
 
@@ -193,27 +137,32 @@ const components = {
 
 class DigitAutocompleteSelectSingle extends React.Component {
     state = {
-        single: "",
-        singleOpen: false,
-        multi: [],
-        multiOpen: true
+        menuIsOpen: false
     };
 
-    handleChange = name => value => {
+    onMenuIsOpenChange = open => {
         this.setState({
-            [name]: value
-        });
-    };
-
-    handleOpenChange = (name, open) => {
-        const nameOpen = name + "Open";
-        this.setState({
-            nameOpen: open
+            menuIsOpen: open
         });
     };
 
     render() {
-        const { classes, theme } = this.props;
+        const {
+            classes,
+            theme,
+            value,
+            onChange,
+            filled,
+            outlined,
+            upperLabel,
+            lowerLabel,
+            error,
+            errorMessage,
+            name,
+            selectableValues
+        } = this.props;
+
+        const { menuIsOpen } = this.state;
 
         const selectStyles = {
             input: base => ({
@@ -225,26 +174,35 @@ class DigitAutocompleteSelectSingle extends React.Component {
         return (
             <NoSsr>
                 <Select
+                    name={name}
                     classes={classes}
                     styles={selectStyles}
-                    options={suggestions}
+                    options={selectableValues}
                     components={components}
-                    value={this.state.single}
-                    onChange={this.handleChange("single")}
+                    value={value}
+                    onChange={onChange}
                     placeholder=""
-                    onOpen={() => {
-                        this.handleOpenChange("single", true);
+                    menuIsOpen={menuIsOpen}
+                    onMenuOpen={() => {
+                        this.onMenuIsOpenChange(true);
                     }}
-                    onClose={() => {
-                        this.handleOpenChange("single", false);
+                    onMenuClose={() => {
+                        this.onMenuIsOpenChange(false);
                     }}
                     textFieldProps={{
-                        variant: "outlined",
+                        label: upperLabel,
+                        helperText:
+                            error && errorMessage != null
+                                ? errorMessage
+                                : lowerLabel,
                         InputLabelProps: {
-                            shrink:
-                                this.state.single !== "" ||
-                                this.state.singleOpen
-                        }
+                            shrink: value !== "" || this.state.singleOpen
+                        },
+                        variant: filled
+                            ? "filled"
+                            : outlined
+                            ? "outlined"
+                            : "standard"
                     }}
                 />
             </NoSsr>

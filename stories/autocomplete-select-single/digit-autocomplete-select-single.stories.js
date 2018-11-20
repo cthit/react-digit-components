@@ -10,10 +10,7 @@ import {
     Column,
     MarginTop
 } from "../../components/styles/digit-layout/DigitLayout.styles";
-
-const typeLabel = "Type";
-const typeOptions = ["Icon", "Image"];
-const typeDefaultValue = "Icon";
+import StoryDigitAutocompleteSelectSingle from "./StoryDigitAutocompleteSelectSingle";
 
 const DigitAutocompleteSelectSingleStory = storiesOf("Elements", module);
 
@@ -26,7 +23,7 @@ DigitAutocompleteSelectSingleStory.add(
             <DigitProviders>
                 <Column>
                     <MarginTop />
-                    <DigitAutocompleteSelectSingle />
+                    <StoryDigitAutocompleteSelectSingle />
                 </Column>
             </DigitProviders>
         );

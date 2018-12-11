@@ -53,7 +53,8 @@ const StyledToolbar = styled(Toolbar)`
 
     /*Medium device (md)*/
     @media (max-width: 960px) {
-        padding-left: ${props => (props.navigation ? "8px" : "32px")};
+        padding-left: ${props =>
+            props.navigation === "true" ? "8px" : "32px"};
     }
 `;
 
@@ -125,7 +126,7 @@ class DigitHeader extends React.Component {
                 >
                     <StyledToolbar
                         height={headerHeight}
-                        navigation={drawer != null}
+                        navigation={(drawer != null).toString()}
                     >
                         <DigitIfElseRendering
                             test={drawer != null}

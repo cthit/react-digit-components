@@ -22,11 +22,14 @@ DigitTranslationsStory.add(
         const lang = select(langLabel, langOptions, langDefaultValue);
 
         return (
-            <DigitProviders rootReducer={{}} preloadedState={{}}>
+            <DigitProviders
+                commonTranslations={CommonTranslations}
+                rootReducer={{}}
+                preloadedState={{}}
+            >
                 <DigitTranslationsConnected
                     uniquePath="DigitTranslationsStories"
                     translations={TestTranslations}
-                    common={CommonTranslations}
                     render={(text, activeLanguage, setActiveLanguage) => {
                         if (
                             activeLanguage != null &&

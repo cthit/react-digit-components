@@ -25,49 +25,43 @@ const DigitTableHeader = ({
     <DigitIfElseRendering
         test={headerTexts != null}
         ifRender={() => (
-            <Hidden only="xs">
-                <TableHead>
-                    <TableRow>
-                        <DigitIfElseRendering
-                            test={headerTexts.__checkbox != null}
-                            ifRender={() => (
-                                <TableCell>
-                                    <Text bold text={headerTexts.__checkbox} />
-                                </TableCell>
-                            )}
-                        />
-
-                        {columnsOrder.map(column => (
-                            <TableCell
-                                key={column}
-                                column={column}
-                                sortDirection={
-                                    orderBy === column ? order : false
-                                }
-                            >
-                                <TableSortLabel
-                                    active={orderBy === column}
-                                    direction={order}
-                                    onClick={event =>
-                                        onRequestSort(event, column)
-                                    }
-                                >
-                                    <Text bold text={headerTexts[column]} />
-                                </TableSortLabel>
+            <TableHead>
+                <TableRow>
+                    <DigitIfElseRendering
+                        test={headerTexts.__checkbox != null}
+                        ifRender={() => (
+                            <TableCell>
+                                <Text bold text={headerTexts.__checkbox} />
                             </TableCell>
-                        ))}
+                        )}
+                    />
 
-                        <DigitIfElseRendering
-                            test={headerTexts.__link != null}
-                            ifRender={() => (
-                                <TableCell>
-                                    <Text bold text={headerTexts.__link} />
-                                </TableCell>
-                            )}
-                        />
-                    </TableRow>
-                </TableHead>
-            </Hidden>
+                    {columnsOrder.map(column => (
+                        <TableCell
+                            key={column}
+                            column={column}
+                            sortDirection={orderBy === column ? order : false}
+                        >
+                            <TableSortLabel
+                                active={orderBy === column}
+                                direction={order}
+                                onClick={event => onRequestSort(event, column)}
+                            >
+                                <Text bold text={headerTexts[column]} />
+                            </TableSortLabel>
+                        </TableCell>
+                    ))}
+
+                    <DigitIfElseRendering
+                        test={headerTexts.__link != null}
+                        ifRender={() => (
+                            <TableCell>
+                                <Text bold text={headerTexts.__link} />
+                            </TableCell>
+                        )}
+                    />
+                </TableRow>
+            </TableHead>
         )}
     />
 );

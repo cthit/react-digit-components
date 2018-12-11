@@ -3,12 +3,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import { getTranslate, withLocalize } from "react-localize-redux";
 import { connect } from "react-redux";
+import flatten from "flat";
 
 function loadTranslations(localize, translations, baseUrl, commonTranslations) {
-    if (translations == null && baseUrl == null) {
-        return _loadCommonTranslations(localize, commonTranslations);
-    }
-
     const translate = textId => getTranslate(localize)(baseUrl + "." + textId);
 
     const textsToTranslate = _.keys(_.at(translations, baseUrl)[0]);
@@ -21,19 +18,16 @@ function loadTranslations(localize, translations, baseUrl, commonTranslations) {
         ),
         _loadCommonTranslations(localize, commonTranslations)
     );
+
     return texts;
 }
 
 function _loadCommonTranslations(localize, commonTranslations) {
-    if (commonTranslations == null) {
-        return {};
-    }
-
-    const baseUrl = "Common.";
+    const baseUrl = "CommonTranslations.";
 
     const translate = textId => getTranslate(localize)(baseUrl + textId);
 
-    const textsToTranslate = _.keys(commonTranslations.Common);
+    const textsToTranslate = _.keys(commonTranslations);
 
     return _.zipObject(
         textsToTranslate,
@@ -43,12 +37,12 @@ function _loadCommonTranslations(localize, commonTranslations) {
 
 class DigitTranslations extends React.Component {
     constructor(props) {
-        super();
+        super(props);
 
         if (props.uniquePath != null && props.translations != null) {
             const translations = {};
             _.set(translations, props.uniquePath, props.translations);
-            props.addTranslation({ ...translations, ...props.common });
+            props.addTranslation({ ...translations });
         }
     }
 
@@ -69,11 +63,6 @@ DigitTranslations.propTypes = {
     uniquePath: PropTypes.string,
     /** Translations that is unique to the uniquePath */
     translations: PropTypes.object,
-    /** Common translations. This should be the same for every usage of DigitTranslations
-     * Instead of having "Yes" and "No" defined in every translations.json, you can have one common
-     * tranlsations for simple phrases.
-     */
-    common: PropTypes.object,
     /** Render prop that has three argument.
      * (text) - The text object with the selected language loaded.
      * (activeLangauge) - The current langauge ["sv", "en"]
@@ -85,15 +74,15 @@ const mapStateToProps = (state, ownProps) => {
     const translations = {};
     _.set(translations, ownProps.uniquePath, ownProps.translations);
 
+    const t = flatten.unflatten(state.localize.translations);
+
     return {
-        text: ownProps.onlyCommon
-            ? loadTranslations(state.localize, null, null, ownProps.common)
-            : loadTranslations(
-                  state.localize,
-                  translations,
-                  ownProps.uniquePath,
-                  ownProps.common
-              )
+        text: loadTranslations(
+            state.localize,
+            translations,
+            ownProps.uniquePath,
+            t.CommonTranslations
+        )
     };
 };
 

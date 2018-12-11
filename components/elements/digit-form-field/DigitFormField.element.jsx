@@ -1,9 +1,13 @@
-import { Field } from "formik";
+import { Field, FastField } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 
-const DigitFormField = ({ name, component, componentProps }) => (
-    <Field
+const BaseField = props =>
+    props.notFast ? <Field {...props} /> : <FastField {...props} />;
+
+const DigitFormField = ({ name, component, componentProps, notFast }) => (
+    <BaseField
+        notFast={notFast}
         type="text"
         name={name}
         render={props => {

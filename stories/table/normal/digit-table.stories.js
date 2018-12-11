@@ -25,6 +25,7 @@ DigitTableStory.add(
         const searchText = text("Search text", "Search text");
         const showSearchableProps = boolean("Show searchable props", true);
         const search = boolean("Search", true);
+        const empty = boolean("Empty", false);
 
         return (
             <DigitProviders>
@@ -35,12 +36,13 @@ DigitTableStory.add(
                         render={(text, activeLanguage, setActiveLanguage) => {
                             if (
                                 activeLanguage != null &&
-                                activeLanguage.code != lang
+                                activeLanguage.code !== lang
                             ) {
                                 setActiveLanguage(lang);
                             }
                             return (
                                 <DigitTable
+                                    emptyTableText={text.emptyTableText}
                                     search={search}
                                     titleText={titleText}
                                     searchText={searchText}
@@ -59,50 +61,54 @@ DigitTableStory.add(
                                         lastName: text.lastName,
                                         age: text.age
                                     }}
-                                    data={[
-                                        {
-                                            id: "1337",
-                                            firstName: "Asdf",
-                                            lastName: "Asdfsson",
-                                            age: 33
-                                        },
-                                        {
-                                            id: "4444",
-                                            firstName: "Glass",
-                                            lastName: "Glasssson",
-                                            age: 50
-                                        },
-                                        {
-                                            id: "4324",
-                                            firstName: "Jeremy",
-                                            lastName: "Clarkson",
-                                            age: 50
-                                        },
-                                        {
-                                            id: "1234",
-                                            firstName: "James",
-                                            lastName: "May",
-                                            age: 99
-                                        },
-                                        {
-                                            id: "4321",
-                                            firstName: "Richard",
-                                            lastName: "Hammond",
-                                            age: 18
-                                        },
-                                        {
-                                            id: "9999",
-                                            firstName: "The",
-                                            lastName: "Stig",
-                                            age: 55
-                                        },
-                                        {
-                                            id: "2244",
-                                            firstName: "Henrik",
-                                            lastName: "Lundqvist",
-                                            age: 30
-                                        }
-                                    ]}
+                                    data={
+                                        !empty
+                                            ? [
+                                                  {
+                                                      id: "1337",
+                                                      firstName: "Asdf",
+                                                      lastName: "Asdfsson",
+                                                      age: 33
+                                                  },
+                                                  {
+                                                      id: "4444",
+                                                      firstName: "Glass",
+                                                      lastName: "Glasssson",
+                                                      age: 50
+                                                  },
+                                                  {
+                                                      id: "4324",
+                                                      firstName: "Jeremy",
+                                                      lastName: "Clarkson",
+                                                      age: 50
+                                                  },
+                                                  {
+                                                      id: "1234",
+                                                      firstName: "James",
+                                                      lastName: "May",
+                                                      age: 99
+                                                  },
+                                                  {
+                                                      id: "4321",
+                                                      firstName: "Richard",
+                                                      lastName: "Hammond",
+                                                      age: 18
+                                                  },
+                                                  {
+                                                      id: "9999",
+                                                      firstName: "The",
+                                                      lastName: "Stig",
+                                                      age: 55
+                                                  },
+                                                  {
+                                                      id: "2244",
+                                                      firstName: "Henrik",
+                                                      lastName: "Lundqvist",
+                                                      age: 30
+                                                  }
+                                              ]
+                                            : []
+                                    }
                                 />
                             );
                         }}

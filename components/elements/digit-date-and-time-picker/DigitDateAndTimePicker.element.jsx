@@ -4,7 +4,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import DateRange from "@material-ui/icons/DateRange";
 import Keyboard from "@material-ui/icons/Keyboard";
-import DateTimePicker from "material-ui-pickers/DateTimePicker";
+import { DateTimePicker } from "material-ui-pickers";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -28,7 +28,12 @@ const DigitDateAndTimePicker = ({
     invalidLabel,
     showTodayButton,
     disablePast,
-    clearable
+    clearable,
+    filled,
+    outlined,
+    lowerLabel,
+    error,
+    errorMessage
 }) => (
     <DateTimePicker
         value={value}
@@ -36,6 +41,8 @@ const DigitDateAndTimePicker = ({
             onChange(date);
         }}
         label={upperLabel}
+        error={error}
+        helperText={error & (errorMessage != "") ? errorMessage : lowerLabel}
         showTodayButton={showTodayButton}
         todayLabel={todayLabel}
         cancelLabel={cancelLabel}
@@ -52,6 +59,7 @@ const DigitDateAndTimePicker = ({
         clearable={clearable}
         ampm={false}
         className={classes.root}
+        variant={filled ? "filled" : outlined ? "outlined" : "standard"}
     />
 );
 
@@ -93,7 +101,12 @@ DigitDateAndTimePicker.propTypes = {
     /** A label that is shown over the input field. */
     upperLabel: PropTypes.string,
     /** If true, then a today button will be shown.  */
-    showTodayButton: PropTypes.bool
+    showTodayButton: PropTypes.bool,
+    outlined: PropTypes.bool,
+    filled: PropTypes.bool,
+    lowerLabel: PropTypes.string,
+    error: PropTypes.bool,
+    errorMessage: PropTypes.string
 };
 
 DigitDateAndTimePicker.defaultProps = {
@@ -107,7 +120,12 @@ DigitDateAndTimePicker.defaultProps = {
     cancelLabel: "Avbryt",
     todayLabel: "Idag",
     upperLabel: "",
-    showTodayButton: false
+    lowerLabel: "",
+    showTodayButton: false,
+    filled: false,
+    outlined: false,
+    error: false,
+    errorMessage: ""
 };
 
 /** This is a temp solution to get the correct prop types from StoryBook. */

@@ -22,12 +22,20 @@ import DigitDateAndTimePicker from "./elements/digit-date-and-time-picker";
 import DigitDatePicker from "./elements/digit-date-picker";
 import DigitTimePicker from "./elements/digit-time-picker";
 import DigitRadioButtonGroup from "./elements/digit-radio-button-group";
+import DigitStepper from "./elements/digit-stepper";
+import DigitImage from "./elements/digit-image";
+import DigitAvatar from "./elements/digit-avatar";
+import DigitChip from "./elements/digit-chip";
+import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-single";
+import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
 import DigitTranslations from "./declaratives/digit-translations";
 import DigitProviders from "./declaratives/digit-providers";
 import DigitRedirect from "./declaratives/digit-redirect";
+import DigitComponentSelector from "./declaratives/digit-component-selector";
+import DigitRenderSelector from "./declaratives/digit-render-selector";
 
 import DigitToast from "./views/digit-toast";
 import DigitDialog from "./views/digit-dialog";
@@ -68,6 +76,12 @@ export {
     DigitDatePicker,
     DigitTimePicker,
     DigitRadioButtonGroup,
+    DigitStepper,
+    DigitImage,
+    DigitChip,
+    DigitAvatar,
+    DigitAutocompleteSelectSingle,
+    DigitAutocompleteSelectMultiple,
     /* Views */
     DigitToast,
     DigitDialog,
@@ -83,6 +97,8 @@ export {
     DigitTranslations,
     DigitProviders,
     DigitRedirect,
+    DigitComponentSelector,
+    DigitRenderSelector,
     /* Styles */
     DigitLayout,
     DigitDesign,

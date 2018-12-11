@@ -1,2 +1,2 @@
-import DigitTranslations from "./DigitTranslations.declarative";
+import DigitTranslations from "./DigitTranslations.declarative.container";
 export default DigitTranslations;

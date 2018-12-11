@@ -73,5 +73,4 @@ DigitTranslations.propTypes = {
     activeLanguage: PropTypes.string
 };
 
-/** This is a temp solution to get the correct prop types from StoryBook. */
 export default DigitTranslations;

@@ -1,29 +1,74 @@
-import { Field, FastField } from "formik";
+import { FastField, Field } from "formik";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 
-const BaseField = props =>
-    props.notFast ? <Field {...props} /> : <FastField {...props} />;
+class DigitFormField extends Component {
+    state = {};
 
-const DigitFormField = ({ name, component, componentProps, notFast }) => (
-    <BaseField
-        notFast={notFast}
-        type="text"
-        name={name}
-        render={props => {
-            const { field, form } = props;
-            const error = form.touched[name] && form.errors[name];
-            field.value = field.value == null ? "" : field.value;
-
-            return React.createElement(component, {
-                error: error != null,
-                errorMessage: error,
-                ...field,
-                ...componentProps
+    componentDidUpdate(prevProps) {
+        if (
+            JSON.stringify(this.props.componentProps) !==
+            JSON.stringify(prevProps.componentProps)
+        )
+            this.setState({
+                lastComponentProps: prevProps.componentProps
             });
-        }}
-    />
-);
+    }
+
+    render() {
+        let {
+            name,
+            component,
+            componentProps,
+            lastComponentProps,
+            notFast
+        } = this.props;
+        if (notFast) {
+            return (
+                <Field
+                    type="text"
+                    name={name}
+                    render={props => {
+                        const { field, form } = props;
+                        const error = form.touched[name] && form.errors[name];
+                        field.value = field.value == null ? "" : field.value;
+
+                        return React.createElement(component, {
+                            error: error != null,
+                            errorMessage: error,
+                            ...field,
+                            ...componentProps
+                        });
+                    }}
+                />
+            );
+        } else {
+            return (
+                <FastField
+                    shouldUpdate={() =>
+                        JSON.stringify(componentProps) !==
+                        JSON.stringify(lastComponentProps)
+                    }
+                    notFast={notFast}
+                    type="text"
+                    name={name}
+                    render={props => {
+                        const { field, form } = props;
+                        const error = form.touched[name] && form.errors[name];
+                        field.value = field.value == null ? "" : field.value;
+
+                        return React.createElement(component, {
+                            error: error != null,
+                            errorMessage: error,
+                            ...field,
+                            ...componentProps
+                        });
+                    }}
+                />
+            );
+        }
+    }
+}
 
 DigitFormField.displayName = "DigitFormField";
 DigitFormField.propTypes = {

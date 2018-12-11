@@ -11,13 +11,6 @@ DigitDisplayDataStory.addDecorator(withKnobs);
 DigitDisplayDataStory.add(
     "DigitDisplayData",
     () => {
-        const fixedWidth = number("Fixed width", 100, {
-            range: true,
-            min: 0,
-            max: 500,
-            step: 10
-        });
-
         const firstName = text("Förnamn", "Sven");
         const lastName = text("Efternamn", "Svensson");
         const email = text("Email", "Sven@svensson.se");
@@ -26,7 +19,6 @@ DigitDisplayDataStory.add(
         return (
             <DigitProviders>
                 <DigitDisplayData
-                    fixedWidth={fixedWidth + "px"}
                     data={{
                         firstName: firstName,
                         lastName: lastName,

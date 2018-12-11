@@ -2,27 +2,35 @@ import { FastField, Field } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
+var hasJustUpdated = false;
+
+function shouldUpdate(state) {}
+
 class DigitFormField extends Component {
-    state = {};
+    constructor(props) {
+        super(props);
+        this.state = {
+            lastComponentProps: props.componentProps
+        };
+    }
 
     componentDidUpdate(prevProps) {
         if (
+            !this.props.notFast &&
             JSON.stringify(this.props.componentProps) !==
-            JSON.stringify(prevProps.componentProps)
-        )
+                JSON.stringify(prevProps.componentProps)
+        ) {
             this.setState({
-                lastComponentProps: prevProps.componentProps
+                lastComponentProps: prevProps.lastComponentProps
             });
+        }
     }
 
     render() {
-        let {
-            name,
-            component,
-            componentProps,
-            lastComponentProps,
-            notFast
-        } = this.props;
+        const { name, component, componentProps, notFast } = this.props;
+
+        const { lastComponentProps } = this.state;
+
         if (notFast) {
             return (
                 <Field
@@ -45,11 +53,18 @@ class DigitFormField extends Component {
         } else {
             return (
                 <FastField
-                    shouldUpdate={() =>
-                        JSON.stringify(componentProps) !==
-                        JSON.stringify(lastComponentProps)
-                    }
-                    notFast={notFast}
+                    shouldUpdate={() => {
+                        const shouldUpdate =
+                            JSON.stringify(componentProps) !==
+                            JSON.stringify(lastComponentProps);
+
+                        if (shouldUpdate) {
+                            this.setState({
+                                lastComponentProps: componentProps
+                            });
+                        }
+                        return shouldUpdate;
+                    }}
                     type="text"
                     name={name}
                     render={props => {

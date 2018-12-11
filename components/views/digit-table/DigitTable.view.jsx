@@ -5,7 +5,7 @@ import React from "react";
 import { DigitTranslations } from "../..";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
-import { Heading3 } from "../../styles/digit-text/DigitText.styles";
+import { Heading5 } from "../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTable.view.translations.json";
 import DigitTableBody from "./elements/digit-table-body";
 import DigitTableHeader from "./elements/digit-table-header";
@@ -196,7 +196,7 @@ class DigitTable extends React.Component {
                                             <td colSpan="100">
                                                 <Center>
                                                     <Padding>
-                                                        <Heading3
+                                                        <Heading5
                                                             text={
                                                                 emptyTableText
                                                             }

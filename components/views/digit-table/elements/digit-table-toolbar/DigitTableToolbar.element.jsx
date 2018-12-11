@@ -19,6 +19,7 @@ const SearchInput = styled(DigitTextField)`
 `;
 
 const StyledToolbar = styled(Toolbar)`
+    min-width: 600px;
     display: flex;
     justify-content: space-between;
 `;

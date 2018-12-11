@@ -12,49 +12,17 @@ const StyledCheckbox = styled(Checkbox)`
 `;
 
 const StyledTableRow = styled(TableRow)`
-    display: block;
-    height: auto;
-    margin-top: 10px;
-    background-color: white;
-
-    @media (min-width: 600px) {
-        height: 48px;
-        display: table-row;
-        border: 0;
-    }
+    height: 48px;
+    display: table-row;
+    border: 0;
 `;
 
 const StyledTableCell = styled(TableCell)`
-    display: block;
-    padding: 12px;
+    display: table-cell;
+    padding: 20px 24px;
     font-size: 14px;
-    text-align: right;
-    border: 0;
-
-    &:before {
-        content: attr(datatitle);
-        font-weight: 500;
-        float: left;
-        color: #000;
-    }
-
-    @media (min-width: 600px) {
-        display: table-cell;
-        padding: 20px 24px;
-        font-size: 14px;
-        text-align: left;
-        border-bottom: 1px solid rgba(244, 244, 244, 1);
-
-        &:before {
-            content: "";
-            display: none;
-        }
-    }
-
-    //For some reason TableCell likes to do this.
-    &:last-child {
-        padding-right: 12px;
-    }
+    text-align: left;
+    border-bottom: 1px solid rgba(244, 244, 244, 1);
 `;
 
 const DigitTableBody = ({

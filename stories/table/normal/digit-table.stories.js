@@ -36,7 +36,7 @@ DigitTableStory.add(
                         render={(text, activeLanguage, setActiveLanguage) => {
                             if (
                                 activeLanguage != null &&
-                                activeLanguage.code != lang
+                                activeLanguage.code !== lang
                             ) {
                                 setActiveLanguage(lang);
                             }

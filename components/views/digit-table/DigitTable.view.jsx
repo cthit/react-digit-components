@@ -10,12 +10,20 @@ import translations from "./DigitTable.view.translations.json";
 import DigitTableBody from "./elements/digit-table-body";
 import DigitTableHeader from "./elements/digit-table-header";
 import DigitTableToolbar from "./elements/digit-table-toolbar";
+import styled from "styled-components";
 
-let counter = 0;
-function createData(name, calories, fat, carbs, protein) {
-    counter += 1;
-    return { id: counter, name, calories, fat, carbs, protein };
-}
+const StyledTablePagination = styled(TablePagination)`
+    min-width: 600px;
+`;
+
+const StyledTable = styled(Table)`
+    min-width: 632px;
+`;
+
+const TablePaper = styled(Paper)`
+    max-width: 100vw;
+    overflow-x: auto;
+`;
 
 class DigitTable extends React.Component {
     constructor(props, context) {
@@ -143,7 +151,7 @@ class DigitTable extends React.Component {
                 translations={translations}
                 uniquePath="DigitTable"
                 render={text => (
-                    <Paper>
+                    <TablePaper>
                         <DigitTableToolbar
                             numSelected={
                                 selected == null ? -1 : selected.length
@@ -157,7 +165,7 @@ class DigitTable extends React.Component {
                             search={this.props.search}
                         />
 
-                        <Table aria-labelledby="tableTitle">
+                        <StyledTable aria-labelledby="tableTitle">
                             <DigitTableHeader
                                 numSelected={
                                     selected == null
@@ -208,9 +216,9 @@ class DigitTable extends React.Component {
                                     </TableBody>
                                 )}
                             />
-                        </Table>
+                        </StyledTable>
 
-                        <TablePagination
+                        <StyledTablePagination
                             component="div"
                             count={
                                 data.filter(n => this.rowShouldBeShown(n))
@@ -228,7 +236,7 @@ class DigitTable extends React.Component {
                             onChangeRowsPerPage={this.handleChangeRowsPerPage}
                             labelRowsPerPage={text.RowsPerPage}
                         />
-                    </Paper>
+                    </TablePaper>
                 )}
             />
         );

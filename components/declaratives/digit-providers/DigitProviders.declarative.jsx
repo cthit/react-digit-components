@@ -11,11 +11,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import JssProvider from "react-jss/lib/JssProvider";
-import {
-    LocalizeProvider,
-    localizeReducer as localize,
-    withLocalize
-} from "react-localize-redux";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, combineReducers, createStore } from "redux";
@@ -24,6 +19,7 @@ import thunkMiddleware from "redux-thunk";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import { redirect } from "../../declaratives/digit-redirect/DigitRedirect.declarative.reducer";
+import { digitTranslations } from "../digit-translations/DigitTranslations.declarative.reducer";
 
 const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
@@ -38,10 +34,10 @@ class DigitProviders extends React.Component {
         this.store = createStore(
             combineReducers({
                 ...props.rootReducer,
-                localize,
                 toast,
                 dialog,
-                redirect
+                redirect,
+                digitTranslations
             }),
             props.preloadedState,
             applyMiddleware(loggerMiddleware, thunkMiddleware)
@@ -69,30 +65,18 @@ class DigitProviders extends React.Component {
     }
 
     render() {
-        const { children, defaultLanguage, commonTranslations } = this.props;
+        const { children } = this.props;
         return (
             <MuiThemeProvider theme={this.theme}>
-                <LocalizeProvider
-                    store={this.store}
-                    defaultLanguage={defaultLanguage}
-                >
-                    <LocalizeInitalizer commonTranslations={commonTranslations}>
-                        <JssProvider
-                            jss={jss}
-                            generateClassName={generateClassName}
-                        >
-                            <Provider store={this.store}>
-                                <BrowserRouter>
-                                    <MuiPickersUtilsProvider
-                                        utils={DateFnsUtils}
-                                    >
-                                        {children}
-                                    </MuiPickersUtilsProvider>
-                                </BrowserRouter>
-                            </Provider>
-                        </JssProvider>
-                    </LocalizeInitalizer>
-                </LocalizeProvider>
+                <JssProvider jss={jss} generateClassName={generateClassName}>
+                    <Provider store={this.store}>
+                        <BrowserRouter>
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                {children}
+                            </MuiPickersUtilsProvider>
+                        </BrowserRouter>
+                    </Provider>
+                </JssProvider>
             </MuiThemeProvider>
         );
     }
@@ -105,49 +89,16 @@ DigitProviders.propTypes = {
     theme: PropTypes.object,
     /** A single child element */
     children: PropTypes.element.isRequired,
-    /** The default language that has to be either swedish (sv) or english (en)*/
-    defaultLanguage: PropTypes.oneOf(["sv", "en"]),
     /** Starting redux state for your application */
     preloadedState: PropTypes.object,
     /** All redux reducer from your application */
-    rootReducer: PropTypes.object,
-    commonTranslations: PropTypes.object
+    rootReducer: PropTypes.object
 };
 
 DigitProviders.defaultProps = {
-    defaultLanguage: "sv",
     theme: {},
     preloadedState: {},
-    rootReducer: {},
-    commonTranslations: {}
+    rootReducer: {}
 };
 
 export default DigitProviders;
-
-class DigitLocalizeInitalizer extends React.Component {
-    constructor(props) {
-        super();
-        props.initialize({
-            languages: [
-                { name: "English", code: "en" },
-                { name: "Swedish", code: "sv" }
-            ],
-            options: {
-                renderToStaticMarkup,
-                renderInnerHtml: true,
-                defaultLanguage: props.defaultLanguage
-            }
-        });
-
-        props.addTranslation({
-            CommonTranslations: { ...props.commonTranslations }
-        });
-    }
-
-    render() {
-        const { children } = this.props;
-        return children;
-    }
-}
-
-const LocalizeInitalizer = withLocalize(DigitLocalizeInitalizer);

@@ -95,8 +95,8 @@ export const Grid = styled.div`
     grid-template-columns: ${props => props.columns || ""};
     grid-template-rows: ${props => props.rows || ""};
     grid-template-areas: ${props => props.areas || ""};
-    grid-column-gap: ${props => props.padding || props.columnGap || ""};
-    grid-row-gap: ${props => props.padding || props.rowGap || ""};
+    grid-column-gap: ${props => props.margin || props.columnGap || ""};
+    grid-row-gap: ${props => props.margin || props.rowGap || ""};
     justify-items: ${props => props.justifyItems || "stretch"};
     align-items: ${props => props.alignItems || "stretch"};
     justify-content: ${props => props.justifyContent || ""};
@@ -117,8 +117,8 @@ Grid.propTypes = {
     rows: PropTypes.number,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-14 */
     areas: PropTypes.string,
-    /** Padding between items. Will precedence columnGap and rowGap */
-    padding: PropTypes.string,
+    /** Margin between items. Will precedence columnGap and rowGap */
+    margin: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
     columnGap: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
@@ -196,7 +196,7 @@ export const UniformGrid = styled(
         inline,
         rows,
         areas,
-        padding,
+        margin,
         columnGap,
         rowGap,
         justifyItems,
@@ -208,7 +208,7 @@ export const UniformGrid = styled(
     }) => (
         <Grid
             columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`}
-            padding={padding}
+            margin={margin}
             inline={inline}
             rows={rows}
             areas={areas}
@@ -249,8 +249,8 @@ UniformGrid.propTypes = {
     rows: PropTypes.number,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-14 */
     areas: PropTypes.string,
-    /** Padding between items. Will precedence columnGap and rowGap */
-    padding: PropTypes.string,
+    /** Margin between items. Will precedence columnGap and rowGap */
+    margin: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
     columnGap: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-16 */
@@ -304,7 +304,6 @@ export const Column = styled(
         topAlign,
         bottomAlign,
         reverse,
-        padding,
         margin,
         marginVertical,
         fillElement,
@@ -325,10 +324,9 @@ export const Column = styled(
 )`
     flex-direction: ${props => (!props.reverse ? "column" : "column-reverse")};
     > * {
-        padding: ${props => props.padding} !important;
+        margin: ${props => props.margin} !important;
         margin-top: ${props => props.marginVertical} !important;
         margin-bottom: ${props => props.marginVertical} !important;
-        margin: ${props => props.margin} !important;
     }
     flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
@@ -348,8 +346,6 @@ Column.propTypes = {
     bottomAlign: PropTypes.bool,
     /** If true, then reverses the order */
     reverse: PropTypes.bool,
-    /** Sets the padding between the children */
-    padding: PropTypes.string,
     /** Fill available layout with flex. */
     fillElement: PropTypes.bool,
     /** All the children */
@@ -409,8 +405,7 @@ Column.propTypes = {
 Column.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginVertical: "8px",
-    padding: "0px"
+    marginVertical: "8px"
 };
 
 export const Row = styled(
@@ -421,7 +416,6 @@ export const Row = styled(
         leftAlign,
         rightAlign,
         reverse,
-        padding,
         fillElement,
         children,
         scroll,
@@ -440,10 +434,9 @@ export const Row = styled(
 )`
     flex-direction: ${props => (!props.reverse ? "row" : "row-reverse")};
     > * {
-        padding: ${props => props.padding} !important;
+        margin: ${props => props.margin} !important;
         margin-right: ${props => props.marginHorizontal} !important;
         margin-left: ${props => props.marginHorizontal} !important;
-        margin: ${props => props.margin} !important;
     }
     flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
@@ -463,8 +456,6 @@ Row.propTypes = {
     rightAlign: PropTypes.bool,
     /** If true, reverses the order of the children*/
     reverse: PropTypes.bool,
-    /** Sets the padding between the children */
-    padding: PropTypes.string,
     /** Fill available layout with flex. */
     fillElement: PropTypes.bool,
     /** All the children */
@@ -524,8 +515,7 @@ Row.propTypes = {
 Row.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginHorizontal: "8px",
-    padding: "0px"
+    marginHorizontal: "8px"
 };
 
 export const DownRightPosition = styled.div`

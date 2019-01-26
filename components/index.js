@@ -36,6 +36,7 @@ import DigitProviders from "./declaratives/digit-providers";
 import DigitRedirect from "./declaratives/digit-redirect";
 import DigitComponentSelector from "./declaratives/digit-component-selector";
 import DigitRenderSelector from "./declaratives/digit-render-selector";
+import DigitContainUser from "./declaratives/digit-contain-user";
 
 import DigitToast from "./views/digit-toast";
 import DigitDialog from "./views/digit-dialog";
@@ -101,6 +102,7 @@ export {
     DigitRedirect,
     DigitComponentSelector,
     DigitRenderSelector,
+    DigitContainUser,
     /* Styles */
     DigitLayout,
     DigitDesign,

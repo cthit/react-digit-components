@@ -1,9 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-
-import { redirectTo } from "../../../app/views/digit-redirect/DigitRedirect.view.action-creator";
-import { toastOpen } from "../../../app/views/digit-toast/DigitToast.view.action-creator";
 
 class DigitContainUser extends React.Component {
     componentDidUpdate(prevProps) {
@@ -11,10 +7,10 @@ class DigitContainUser extends React.Component {
             allowedBasePaths,
             allowedFullPaths,
             currentPath,
-            redirectTo,
+            digitRedirectTo,
             to,
             toastTextOnRedirect,
-            toastOpen
+            digitToastOpen
         } = this.props;
 
         allowedFullPaths.push(to);
@@ -38,8 +34,8 @@ class DigitContainUser extends React.Component {
         }
 
         if (!allowedOnThisPage) {
-            redirectTo(to);
-            toastOpen({
+            digitRedirectTo(to);
+            digitToastOpen({
                 text: toastTextOnRedirect
             });
         }
@@ -62,10 +58,10 @@ DigitContainUser.propTypes = {
     to: PropTypes.string,
     /** The text to be shown on the toast if the user needs to be redirected */
     toastTextOnRedirect: PropTypes.string,
-    /** redirectTo is the redirect function supplied by react-digit-components */
-    redirectTo: PropTypes.func,
+    /** digitRedirectTo is the redirect function supplied by react-digit-components */
+    digitRedirectTo: PropTypes.func,
     /** toastOpen is the toast function supplied by react-digit-components */
-    toastOpen: PropTypes.func
+    digitToastOpen: PropTypes.func
 };
 
 DigitContainUser.defaultProps = {
@@ -74,18 +70,8 @@ DigitContainUser.defaultProps = {
     currentPath: "",
     to: "",
     toastTextOnRedirect: "",
-    redirectTo: () => {},
-    toastOpen: () => {}
+    digitRedirectTo: () => {},
+    digitToastOpen: () => {}
 };
 
-const mapStateToProps = (state, ownProps) => ({});
-
-const mapDispatchToProps = dispatch => ({
-    redirectTo: to => dispatch(redirectTo(to)),
-    toastOpen: data => dispatch(toastOpen(data))
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(DigitContainUser);
+export default DigitContainUser;

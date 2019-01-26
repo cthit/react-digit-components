@@ -23,7 +23,7 @@ DigitTranslationsStory.add(
 
         return (
             <DigitProviders
-                commonTranslations={CommonTranslations}
+                // commonTranslations={CommonTranslations}
                 rootReducer={{}}
                 preloadedState={{}}
             >

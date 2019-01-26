@@ -3,7 +3,7 @@ import {
     REDIRECT_TO
 } from "./DigitRedirect.declarative.actions";
 
-export function redirectTo(path) {
+export function digitRedirectTo(path) {
     return {
         type: REDIRECT_TO,
         error: false,

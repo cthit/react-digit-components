@@ -5,6 +5,47 @@ import DigitTextField from "../../components/elements/digit-text-field";
 import DigitCheckbox from "../../components/elements/digit-checkbox";
 import { connect } from "react-redux";
 import { setActiveLanguage } from "../../components/declaratives/digit-translations/DigitTranslations.declarative.action-creator";
+import { DigitAutocompleteSelectSingle } from "../../components";
+
+const suggestions = [
+    { label: "Afghanistan" },
+    { label: "Aland Islands" },
+    { label: "Albania" },
+    { label: "Algeria" },
+    { label: "American Samoa" },
+    { label: "Andorra" },
+    { label: "Angola" },
+    { label: "Anguilla" },
+    { label: "Antarctica" },
+    { label: "Antigua and Barbuda" },
+    { label: "Argentina" },
+    { label: "Armenia" },
+    { label: "Aruba" },
+    { label: "Australia" },
+    { label: "Austria" },
+    { label: "Azerbaijan" },
+    { label: "Bahamas" },
+    { label: "Bahrain" },
+    { label: "Bangladesh" },
+    { label: "Barbados" },
+    { label: "Belarus" },
+    { label: "Belgium" },
+    { label: "Belize" },
+    { label: "Benin" },
+    { label: "Bermuda" },
+    { label: "Bhutan" },
+    { label: "Bolivia, Plurinational State of" },
+    { label: "Bonaire, Sint Eustatius and Saba" },
+    { label: "Bosnia and Herzegovina" },
+    { label: "Botswana" },
+    { label: "Bouvet Island" },
+    { label: "Brazil" },
+    { label: "British Indian Ocean Territory" },
+    { label: "Brunei Darussalam" }
+].map(suggestion => ({
+    value: suggestion.label,
+    label: suggestion.label
+}));
 
 const mapStateToProps = () => ({});
 
@@ -22,22 +63,34 @@ class StoryDigitEditData extends Component {
     render() {
         return (
             <DigitEditData
+                minWidth="300px"
+                width="90%"
+                maxWidth="600px"
                 initialValues={{
                     firstName: "Smurf",
                     lastName: "Smurfsson",
                     email: "email@email.com",
-                    agreement: false
+                    agreement: false,
+                    aCountry: ""
                 }}
                 onSubmit={this.props.onSubmit}
                 validationSchema={yup.object().shape({
                     firstName: yup.string().required(),
                     lastName: yup.string().required(),
                     email: yup.string().required(),
-                    agreement: yup.boolean().required()
+                    agreement: yup.boolean().required(),
+                    aCountry: yup.string().required()
                 })}
+                marginVertical="16px"
                 titleText={this.props.titleText}
                 submitText={this.props.submitText}
-                keysOrder={["firstName", "lastName", "email", "agreement"]}
+                keysOrder={[
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "agreement",
+                    "aCountry"
+                ]}
                 keysComponentData={{
                     firstName: {
                         component: DigitTextField,
@@ -63,6 +116,13 @@ class StoryDigitEditData extends Component {
                         componentProps: {
                             primary: true,
                             label: this.props.text.agreement
+                        }
+                    },
+                    aCountry: {
+                        component: DigitAutocompleteSelectSingle,
+                        componentProps: {
+                            upperLabel: "Country",
+                            selectableValues: suggestions
                         }
                     }
                 }}

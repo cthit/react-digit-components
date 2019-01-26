@@ -22,8 +22,10 @@ import { redirect } from "../../declaratives/digit-redirect/DigitRedirect.declar
 import { digitTranslations } from "../digit-translations/DigitTranslations.declarative.reducer";
 
 const generateClassName = createGenerateClassName();
-const jss = create(jssPreset());
-jss.options.insertionPoint = "insertion-point-jss";
+const jss = create({
+    ...jssPreset(),
+    insertionPoint: document.getElementById("jss-insertion-point")
+});
 
 const loggerMiddleware = createLogger();
 

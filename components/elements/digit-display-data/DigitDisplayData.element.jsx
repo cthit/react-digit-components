@@ -22,12 +22,12 @@ const DigitDisplayData = ({ data, keysText, keysOrder }) => (
     <Row>
         <RightAlignedColumn>
             {keysOrder.map(key => (
-                <Text bold text={keysText[key]} />
+                <Text bold key={key} text={keysText[key]} />
             ))}
         </RightAlignedColumn>
         <Column>
             {keysOrder.map(key => (
-                <Text text={data[key]} />
+                <Text key={key} text={data[key]} />
             ))}
         </Column>
     </Row>

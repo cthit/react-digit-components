@@ -4,13 +4,19 @@ import {
     Card,
     CardBody,
     CardButtons,
-    CardTitle
+    CardTitle,
+    Link
 } from "../../styles/digit-design/DigitDesign.styles";
 import DigitButton from "../digit-button";
 import DigitForm from "../digit-form";
 import DigitFormField from "../digit-form-field";
 import DigitFormFieldArray from "../digit-form-field-array";
-import { Column, Size } from "../../styles/digit-layout/DigitLayout.styles";
+import {
+    Column,
+    Padding,
+    Size
+} from "../../styles/digit-layout/DigitLayout.styles";
+import { DigitIfElseRendering } from "../../index";
 
 const DigitEditData = ({
     initialValues,
@@ -28,7 +34,9 @@ const DigitEditData = ({
     maxWidth,
     maxHeight,
     width,
-    height
+    height,
+    extraButton,
+    extraButtonTo
 }) => (
     <Size
         minWidth={minWidth}
@@ -97,6 +105,23 @@ const DigitEditData = ({
                             text={submitText}
                             raised
                             primary
+                        />
+                        <Padding />
+                        <DigitIfElseRendering
+                            test={extraButton != null}
+                            ifRender={() => (
+                                <DigitIfElseRendering
+                                    test={extraButtonTo == null}
+                                    ifRender={() => (
+                                        <DigitButton {...extraButton} />
+                                    )}
+                                    elseRender={() => (
+                                        <Link to={extraButtonTo}>
+                                            <DigitButton {...extraButton} />
+                                        </Link>
+                                    )}
+                                />
+                            )}
                         />
                     </CardButtons>
                 </Card>

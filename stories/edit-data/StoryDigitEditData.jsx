@@ -61,6 +61,17 @@ class StoryDigitEditData extends Component {
     }
 
     render() {
+        var extraButton = {};
+
+        if (this.props.hasExtraButton) {
+            extraButton = {
+                extraButton: {
+                    text: "Text"
+                },
+                extraButtonTo: "/asdf"
+            };
+        }
+
         return (
             <DigitEditData
                 minWidth="300px"
@@ -91,6 +102,7 @@ class StoryDigitEditData extends Component {
                     "agreement",
                     "aCountry"
                 ]}
+                {...extraButton}
                 keysComponentData={{
                     firstName: {
                         component: DigitTextField,

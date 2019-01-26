@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { select, text, withKnobs } from "@storybook/addon-knobs";
+import { select, text, boolean, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import {
@@ -25,6 +25,7 @@ DigitEditDataStory.add(
         const title = text("Title", "Title text");
         const submit = text("Submit", "Submit text");
         const lang = select(langLabel, langOptions, langDefaultValue);
+        const hasExtraButton = boolean("Extra button", false);
 
         return (
             <DigitProviders>
@@ -39,6 +40,7 @@ DigitEditDataStory.add(
                             submitText={submit}
                             text={text}
                             lang={lang}
+                            hasExtraButton={hasExtraButton}
                         />
                     )}
                 />

@@ -5,7 +5,8 @@ import DigitContainUser from "./DigitContainUser.declarative";
 const mapStateToProps = (state, ownProps) => ({});
 
 const mapDispatchToProps = dispatch => ({
-    digitRedirectTo: to => dispatch(DigitRedirectActions.digitRedirectTo(to)),
+    digitRedirectTo: (to, externalRedirect) =>
+        dispatch(DigitRedirectActions.digitRedirectTo(to, externalRedirect)),
     digitToastOpen: data => dispatch(DigitToastActions.digitToastOpen(data))
 });
 

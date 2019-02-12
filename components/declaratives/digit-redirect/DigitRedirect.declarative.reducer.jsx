@@ -8,7 +8,8 @@ export function redirect(state = {}, action) {
         case REDIRECT_TO:
             return {
                 ...state,
-                redirectPath: action.payload.path
+                redirectPath: action.payload.path,
+                externalRedirect: action.payload.externalRedirect
             };
         case REDIRECT_FINISHED:
             return {

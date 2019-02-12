@@ -34,6 +34,7 @@ import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
 import DigitTranslations from "./declaratives/digit-translations";
 import DigitProviders from "./declaratives/digit-providers";
 import DigitRedirect from "./declaratives/digit-redirect";
+import DigitRedirectExternal from "./declaratives/digit-redirect-external";
 import DigitComponentSelector from "./declaratives/digit-component-selector";
 import DigitRenderSelector from "./declaratives/digit-render-selector";
 import DigitContainUser from "./declaratives/digit-contain-user";
@@ -103,6 +104,7 @@ export {
     DigitComponentSelector,
     DigitRenderSelector,
     DigitContainUser,
+    DigitRedirectExternal,
     /* Styles */
     DigitLayout,
     DigitDesign,

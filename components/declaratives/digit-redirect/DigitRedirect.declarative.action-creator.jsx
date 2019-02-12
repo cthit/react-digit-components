@@ -3,12 +3,13 @@ import {
     REDIRECT_TO
 } from "./DigitRedirect.declarative.actions";
 
-export function digitRedirectTo(path) {
+export function digitRedirectTo(path, externalRedirect = false) {
     return {
         type: REDIRECT_TO,
         error: false,
         payload: {
-            path: path
+            path: path,
+            externalRedirect: externalRedirect
         }
     };
 }

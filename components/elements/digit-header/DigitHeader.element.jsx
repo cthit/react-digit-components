@@ -5,6 +5,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Title } from "../../styles/digit-text/DigitText.styles";
+import { Row } from "../../styles/digit-layout/DigitLayout.styles";
 
 const StyledMenuButton = styled(IconButton)`
     /*Medium device (md)*/
@@ -19,6 +20,13 @@ const StyledRoot = styled.div`
 `;
 
 const StyledAppBar = styled(AppBar)`
+    ${props =>
+        props.cssimagestring != null &&
+        css`
+            background-image: ${props => props.cssimagestring};
+            background-position: center;
+            background-size: cover;
+        `};
     position: absolute;
     ${props =>
         props.navigation === "true" &&
@@ -37,6 +45,7 @@ const DigitTitle = styled(Title)`
 `;
 
 const HorizontalFill = styled.div`
+    padding-top: 8px;
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -48,20 +57,17 @@ const StyledToolbar = styled(Toolbar)`
     height: ${props => (props.height == null ? "64px" : props.height)};
     min-height: 0px;
 
+    padding-top: 8px;
     padding-left: 30px;
     padding-right: 8px;
+
+    align-items: flex-start;
 
     /*Medium device (md)*/
     @media (max-width: 960px) {
         padding-left: ${props =>
             props.navigation === "true" ? "8px" : "32px"};
     }
-`;
-
-const NonPaddingToolbar = styled(Toolbar)`
-    display: flex;
-    padding: 0px;
-    min-height: 0px;
 `;
 
 const StyledDrawer = styled(({ ...rest }) => (
@@ -106,7 +112,9 @@ class DigitHeader extends React.Component {
             renderHeader,
             title,
             headerHeight,
-            renderToolbar
+            renderToolbar,
+            cssImageString,
+            renderTitle
         } = this.props;
         const { mobileOpen } = this.state;
 
@@ -121,6 +129,7 @@ class DigitHeader extends React.Component {
         return (
             <StyledRoot>
                 <StyledAppBar
+                    cssimagestring={cssImageString}
                     position="static"
                     navigation={(drawer != null).toString()}
                 >
@@ -142,19 +151,19 @@ class DigitHeader extends React.Component {
                         />
 
                         <HorizontalFill>
-                            <DigitTitle text={title} white />
-                            {renderHeader()}
+                            <Row>
+                                <DigitIfElseRendering
+                                    test={renderTitle == null}
+                                    ifRender={() => (
+                                        <DigitTitle text={title} white />
+                                    )}
+                                    elseRender={renderTitle}
+                                />
+                            </Row>
+                            <Row>{renderHeader()}</Row>
                         </HorizontalFill>
                     </StyledToolbar>
                     {renderToolbar()}
-
-                    {/* <DigitIfElseRendering
-                        test={renderToolbar != null}
-                        ifRender={() => (
-                            <NonPaddingToolbar>
-                            </NonPaddingToolbar>
-                        )}
-                    /> */}
                 </StyledAppBar>
                 <DigitIfElseRendering
                     test={drawer != null}
@@ -208,7 +217,8 @@ DigitHeader.propTypes = {
     /** The height for the header. E.g. 100px or 20%. */
     headerHeight: PropTypes.string,
     /** A render prop to render in the toolbar, under the header. */
-    renderToolbar: PropTypes.func
+    renderToolbar: PropTypes.func,
+    renderTitle: PropTypes.func
 };
 
 DigitHeader.defaultProps = {
@@ -216,6 +226,7 @@ DigitHeader.defaultProps = {
     renderDrawer: null,
     renderHeader: () => null,
     renderToolbar: () => null,
+    renderTitle: null,
     title: "My website"
 };
 

@@ -14,7 +14,7 @@ const DigitImage = ({
         imageStyle={imageStyle}
         aspectRatio={aspectRatio}
         onClick={onClick}
-        backgroundColor={backgroundColor}
+        // backgroundColor={backgroundColor}
     />
 );
 

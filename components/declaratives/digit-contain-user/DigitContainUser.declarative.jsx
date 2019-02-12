@@ -10,7 +10,8 @@ class DigitContainUser extends React.Component {
             digitRedirectTo,
             to,
             toastTextOnRedirect,
-            digitToastOpen
+            digitToastOpen,
+            externalRedirect
         } = this.props;
 
         allowedFullPaths.push(to);
@@ -34,7 +35,7 @@ class DigitContainUser extends React.Component {
         }
 
         if (!allowedOnThisPage) {
-            digitRedirectTo(to);
+            digitRedirectTo(to, externalRedirect);
             digitToastOpen({
                 text: toastTextOnRedirect
             });
@@ -61,7 +62,9 @@ DigitContainUser.propTypes = {
     /** digitRedirectTo is the redirect function supplied by react-digit-components */
     digitRedirectTo: PropTypes.func,
     /** toastOpen is the toast function supplied by react-digit-components */
-    digitToastOpen: PropTypes.func
+    digitToastOpen: PropTypes.func,
+    /** If the "to" should be external or not */
+    externalRedirect: PropTypes.bool
 };
 
 DigitContainUser.defaultProps = {

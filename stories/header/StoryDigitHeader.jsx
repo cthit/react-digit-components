@@ -1,19 +1,25 @@
 import React from "react";
+import styled from "styled-components";
 
 import {
     DigitHeader,
     DigitLayout,
-    DigitTextField,
     DigitButton,
     DigitDisplayData,
     DigitNavLink,
     DigitTabs,
-    DigitMenu
+    DigitMenu,
+    DigitText
 } from "../../components";
 
 import Send from "@material-ui/icons/Send";
 import Info from "@material-ui/icons/Info";
 import Code from "@material-ui/icons/Code";
+
+const StyledIcon = styled.img`
+    width: 32px;
+    height: 32px;
+`;
 
 class StoryDigitHeader extends React.Component {
     state = {
@@ -33,7 +39,9 @@ class StoryDigitHeader extends React.Component {
             headerHeight,
             navigation,
             icon,
-            title
+            title,
+            customImage,
+            customTitleDemo
         } = this.props;
         const { textFieldValue } = this.state;
 
@@ -41,6 +49,11 @@ class StoryDigitHeader extends React.Component {
             <DigitHeader
                 title={title}
                 headerHeight={headerHeight + "px"}
+                cssImageString={
+                    customImage
+                        ? "url(https://images.unsplash.com/photo-1546706872-9c90b8d0c94f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)"
+                        : null
+                }
                 renderHeader={() =>
                     customHeaderDemo && (
                         <DigitLayout.Row>
@@ -56,6 +69,21 @@ class StoryDigitHeader extends React.Component {
                             />
                         </DigitLayout.Row>
                     )
+                }
+                renderTitle={
+                    customTitleDemo
+                        ? () => (
+                              <React.Fragment>
+                                  <StyledIcon
+                                      src={"https://i.imgur.com/wicS3do.png"}
+                                  />
+                                  <DigitText.Title
+                                      white
+                                      text={"Heey custom title"}
+                                  />
+                              </React.Fragment>
+                          )
+                        : null
                 }
                 renderToolbar={() => customToolbarDemo && <TabsToolbar />}
                 renderMain={() => (
@@ -122,6 +150,7 @@ class TabsToolbar extends React.Component {
     render() {
         return (
             <DigitTabs
+                inheritBackground
                 selected={this.state.selected}
                 onChange={this.onSelectedChange}
                 tabs={this._generateTabs(100)}

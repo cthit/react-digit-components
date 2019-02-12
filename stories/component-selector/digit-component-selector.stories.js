@@ -1,24 +1,15 @@
 import { boolean, select, number, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import {
-    DigitProviders,
-    DigitSelect,
-    DigitComponentSelector
-} from "../../components";
-import DigitSelectReadme from "../../components/declaratives/digit-component-selector/readme.md";
-import {
-    Center,
-    MarginTop,
-    Size
-} from "../../components/styles/digit-layout/DigitLayout.styles";
+import { DigitProviders, DigitComponentSelector } from "../../components";
+import DigitComponentSelectorReadme from "../../components/declaratives/digit-component-selector/readme.md";
 import CounterTestComponent from "./CounterTestComponent";
 
-const DigitSelectStory = storiesOf("Declaratives", module);
+const DigitComponentSelectorStory = storiesOf("Declaratives", module);
 
-DigitSelectStory.addDecorator(withKnobs);
+DigitComponentSelectorStory.addDecorator(withKnobs);
 
-DigitSelectStory.add(
+DigitComponentSelectorStory.add(
     "DigitComponentSelector",
     () => {
         const activeComponent = number("What component", 0, {
@@ -47,7 +38,7 @@ DigitSelectStory.add(
     },
     {
         info: {
-            text: DigitSelectReadme,
+            text: DigitComponentSelectorReadme,
             propTables: [DigitComponentSelector],
             propTablesExclude: [DigitProviders]
         }

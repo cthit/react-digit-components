@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Redirect } from "react-router-dom";
+import DigitRedirectExternal from "../digit-redirect-external";
 
 class DigitRedirect extends React.Component {
     componentDidUpdate() {
@@ -11,10 +12,21 @@ class DigitRedirect extends React.Component {
     }
 
     render() {
-        const { redirectPath, currentPath } = this.props;
+        const {
+            redirectPath,
+            currentPath,
+            externalRedirect,
+            window
+        } = this.props;
 
         if (redirectPath != null && currentPath !== redirectPath) {
-            return <Redirect to={redirectPath} push={true} />;
+            if (externalRedirect) {
+                return (
+                    <DigitRedirectExternal window={window} to={redirectPath} />
+                );
+            } else {
+                return <Redirect to={redirectPath} push={true} />;
+            }
         }
         return null;
     }

@@ -11,6 +11,11 @@ const styles = theme => ({
         width: "100%",
         backgroundColor: theme.palette.primary.main
     },
+    rootInherit: {
+        flexGrow: 1,
+        width: "100%",
+        background: "inherit"
+    },
     scrollButtons: {
         color: "white"
     }
@@ -23,12 +28,13 @@ const DigitTabs = ({
     fullWidth,
     onChange,
     titleFont,
-    classes
+    classes,
+    inheritBackground
 }) => (
     <Fill>
         <Tabs
             classes={{
-                root: classes.root,
+                root: inheritBackground ? classes.rootInherit : classes.root,
                 scrollButtons: classes.scrollButtons
             }}
             value={_.findIndex(tabs, tab => tab.value == selected)}
@@ -84,7 +90,8 @@ DigitTabs.propTypes = {
      */
     onChange: PropTypes.func.isRequired,
     /** If true, then the text uses the DigitText.Title font instead */
-    titleFont: PropTypes.bool
+    titleFont: PropTypes.bool,
+    inheritBackground: PropTypes.bool
 };
 
 DigitTabs.defaultProps = {

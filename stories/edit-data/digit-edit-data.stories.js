@@ -1,17 +1,15 @@
 import { action } from "@storybook/addon-actions";
-import { select, text, withKnobs } from "@storybook/addon-knobs";
+import { select, text, boolean, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import * as yup from "yup";
 import {
-    DigitCheckbox,
+    DigitTranslations,
     DigitEditData,
-    DigitProviders,
-    DigitTextField
+    DigitProviders
 } from "../../components";
-import DigitTranslationsConnected from "../../components/declaratives/digit-translations";
 import DigitEditDataReadme from "../../components/elements/digit-edit-data/readme.md";
 import Translations from "./Translations.json";
+import StoryDigitEditData from "./StoryDigitEditData";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];
@@ -27,75 +25,24 @@ DigitEditDataStory.add(
         const title = text("Title", "Title text");
         const submit = text("Submit", "Submit text");
         const lang = select(langLabel, langOptions, langDefaultValue);
+        const hasExtraButton = boolean("Extra button", false);
 
         return (
             <DigitProviders>
-                <DigitTranslationsConnected
-                    uniquePath="DigitEditDataStory"
+                <DigitTranslations
                     translations={Translations}
-                    render={(text, activeLanguage, setActiveLanguage) => {
-                        if (
-                            activeLanguage != null &&
-                            activeLanguage.code != lang
-                        ) {
-                            setActiveLanguage(lang);
-                        }
-
-                        return (
-                            <DigitEditData
-                                initialValues={{
-                                    firstName: "Smurf",
-                                    lastName: "Smurfsson",
-                                    email: "email@email.com",
-                                    agreement: false
-                                }}
-                                onSubmit={(values, actions) => {
-                                    action("Values")(values);
-                                }}
-                                validationSchema={yup.object().shape({
-                                    firstName: yup.string().required(),
-                                    lastName: yup.string().required(),
-                                    email: yup.string().required(),
-                                    agreement: yup.boolean().required()
-                                })}
-                                titleText={title}
-                                submitText={submit}
-                                keysOrder={[
-                                    "firstName",
-                                    "lastName",
-                                    "email",
-                                    "agreement"
-                                ]}
-                                keysComponentData={{
-                                    firstName: {
-                                        component: DigitTextField,
-                                        componentProps: {
-                                            upperLabel: text.firstName
-                                        }
-                                    },
-                                    lastName: {
-                                        component: DigitTextField,
-                                        componentProps: {
-                                            upperLabel: text.lastName
-                                        }
-                                    },
-                                    email: {
-                                        component: DigitTextField,
-                                        componentProps: {
-                                            upperLabel: text.email
-                                        }
-                                    },
-                                    agreement: {
-                                        component: DigitCheckbox,
-                                        componentProps: {
-                                            primary: true,
-                                            label: text.agreement
-                                        }
-                                    }
-                                }}
-                            />
-                        );
-                    }}
+                    render={text => (
+                        <StoryDigitEditData
+                            onSubmit={(values, actions) => {
+                                action("Values")(values);
+                            }}
+                            titleText={title}
+                            submitText={submit}
+                            text={text}
+                            lang={lang}
+                            hasExtraButton={hasExtraButton}
+                        />
+                    )}
                 />
             </DigitProviders>
         );
@@ -104,7 +51,7 @@ DigitEditDataStory.add(
         info: {
             text: DigitEditDataReadme,
             propTables: [DigitEditData],
-            propTablesExclude: [DigitProviders, DigitTranslationsConnected]
+            propTablesExclude: [DigitProviders, DigitTranslations]
         }
     }
 );

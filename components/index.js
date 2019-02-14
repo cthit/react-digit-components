@@ -34,8 +34,10 @@ import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
 import DigitTranslations from "./declaratives/digit-translations";
 import DigitProviders from "./declaratives/digit-providers";
 import DigitRedirect from "./declaratives/digit-redirect";
+import DigitRedirectExternal from "./declaratives/digit-redirect-external";
 import DigitComponentSelector from "./declaratives/digit-component-selector";
 import DigitRenderSelector from "./declaratives/digit-render-selector";
+import DigitContainUser from "./declaratives/digit-contain-user";
 
 import DigitToast from "./views/digit-toast";
 import DigitDialog from "./views/digit-dialog";
@@ -45,6 +47,7 @@ import DigitTable from "./views/digit-table";
 import * as DigitRedirectActions from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
 import * as DigitToastActions from "./views/digit-toast/DigitToast.view.action-creator";
 import * as DigitDialogActions from "./views/digit-dialog/DigitDialog.view.action-creator";
+import * as DigitTranslationsActions from "./declaratives/digit-translations/DigitTranslations.declarative.action-creator";
 
 import * as DigitLayout from "./styles/digit-layout/DigitLayout.styles";
 import * as DigitDesign from "./styles/digit-design/DigitDesign.styles";
@@ -91,6 +94,7 @@ export {
     DigitToastActions,
     DigitRedirectActions,
     DigitDialogActions,
+    DigitTranslationsActions,
     /* Declaratives */
     DigitIfElseRendering,
     DigitMapStringToValue,
@@ -99,6 +103,8 @@ export {
     DigitRedirect,
     DigitComponentSelector,
     DigitRenderSelector,
+    DigitContainUser,
+    DigitRedirectExternal,
     /* Styles */
     DigitLayout,
     DigitDesign,

@@ -1,13 +1,18 @@
 import { Form, Formik } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
+import styled from "styled-components";
+
+const FullWidthForm = styled(Form)`
+    width: 100%;
+`;
 
 const DigitForm = ({ initialValues, onSubmit, validationSchema, render }) => (
     <Formik
         validationSchema={validationSchema}
         initialValues={{ ...initialValues }}
         onSubmit={onSubmit}
-        render={formData => <Form>{render(formData)}</Form>}
+        render={formData => <FullWidthForm>{render(formData)}</FullWidthForm>}
     />
 );
 

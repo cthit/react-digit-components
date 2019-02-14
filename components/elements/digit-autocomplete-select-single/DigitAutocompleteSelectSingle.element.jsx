@@ -38,15 +38,7 @@ const styles = theme => ({
 });
 
 function NoOptionsMessage(props) {
-    return (
-        <Typography
-            color="textSecondary"
-            className={props.selectProps.classes.noOptionsMessage}
-            {...props.innerProps}
-        >
-            {props.children}
-        </Typography>
-    );
+    return <Text text={props.children} />;
 }
 
 function inputComponent({ inputRef, ...props }) {

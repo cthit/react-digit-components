@@ -1241,7 +1241,7 @@
     react-inspector "^2.3.0"
     uuid "^3.3.2"
 
-"@storybook/addon-centered@5.0.1":
+"@storybook/addon-centered@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@storybook/addon-centered/-/addon-centered-5.0.1.tgz#891c6ba6e9605b48ff23f6be87dd1be167c91c1d"
   integrity sha512-zNn+du4RoobyAF5zT0J5yzNHMbyyCpQH2MH4rnwkeVwZ0rh/S6CBRFVVMqX1XGOaMocBMJgBCpSWCnasuY1wnA==

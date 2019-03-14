@@ -5,6 +5,7 @@ import { DigitLayout, DigitProviders } from "../../components";
 import { DigitTimePicker } from "../../components/elements/digit-time-picker/DigitTimePicker.element";
 import DigitTimePickerReadme from "../../components/elements/digit-time-picker/readme.md";
 import StoryDigitTimePicker from "./StoryDigitTimePicker";
+import centered from "@storybook/addon-centered/react";
 
 const DigitTimePickerStory = storiesOf("Elements", module);
 
@@ -12,6 +13,7 @@ const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
+DigitTimePickerStory.addDecorator(centered);
 DigitTimePickerStory.addDecorator(withKnobs);
 
 DigitTimePickerStory.add(

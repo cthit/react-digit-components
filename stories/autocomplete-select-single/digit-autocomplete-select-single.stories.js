@@ -11,9 +11,11 @@ import {
     MarginTop
 } from "../../components/styles/digit-layout/DigitLayout.styles";
 import StoryDigitAutocompleteSelectSingle from "./StoryDigitAutocompleteSelectSingle";
+import centered from "@storybook/addon-centered/react";
 
 const DigitAutocompleteSelectSingleStory = storiesOf("Elements", module);
 
+DigitAutocompleteSelectSingleStory.addDecorator(centered);
 DigitAutocompleteSelectSingleStory.addDecorator(withKnobs);
 
 DigitAutocompleteSelectSingleStory.add(

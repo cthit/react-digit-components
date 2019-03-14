@@ -9,9 +9,11 @@ import {
     MarginTop,
     Column
 } from "../../components/styles/digit-layout/DigitLayout.styles";
+import centered from "@storybook/addon-centered/react";
 
 const DigitChipStory = storiesOf("Elements", module);
 
+DigitChipStory.addDecorator(centered);
 DigitChipStory.addDecorator(withKnobs);
 
 DigitChipStory.add(

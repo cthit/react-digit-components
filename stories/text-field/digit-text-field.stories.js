@@ -4,6 +4,7 @@ import React from "react";
 import { DigitLayout, DigitProviders, DigitTextField } from "../../components";
 import DigitTextFieldReadme from "../../components/elements/digit-text-field/readme.md";
 import StoryDigitTextField from "./StoryDigitTextField";
+import centered from "@storybook/addon-centered/react";
 
 const typeLabel = "type";
 const typeOptions = ["normal", "password", "numbersOnly"];
@@ -15,6 +16,7 @@ const styleDefaultValue = "standard";
 
 const DigitTextFieldStory = storiesOf("Elements", module);
 
+DigitTextFieldStory.addDecorator(centered);
 DigitTextFieldStory.addDecorator(withKnobs);
 
 DigitTextFieldStory.add(

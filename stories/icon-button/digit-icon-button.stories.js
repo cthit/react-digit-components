@@ -7,6 +7,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitIconButton, DigitProviders } from "../../components";
 import DigitIconButtonReadme from "../../components/elements/digit-icon-button/readme.md";
+import centered from "@storybook/addon-centered/react";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -18,6 +19,7 @@ const iconDefaultValue = "Edit";
 
 const DigitIconButtonStory = storiesOf("Elements", module);
 
+DigitIconButtonStory.addDecorator(centered);
 DigitIconButtonStory.addDecorator(withKnobs);
 
 DigitIconButtonStory.add(

@@ -17,9 +17,11 @@ import DigitDialogConnected from "../../components/views/digit-dialog";
 import DigitDialog from "../../components/views/digit-dialog/DigitDialog.view";
 import { digitDialogOpen } from "../../components/views/digit-dialog/DigitDialog.view.action-creator";
 import DigitDialogReadme from "../../components/views/digit-dialog/readme.md";
+import centered from "@storybook/addon-centered/react";
 
 const DigitDialogStory = storiesOf("Views", module);
 
+DigitDialogStory.addDecorator(centered);
 DigitDialogStory.addDecorator(withKnobs);
 
 const Stuff = ({ digitDialogOpen }) => (

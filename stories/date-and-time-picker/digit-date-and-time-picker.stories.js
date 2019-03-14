@@ -4,6 +4,7 @@ import React from "react";
 import { DigitLayout, DigitProviders } from "../../components";
 import { DigitDateAndTimePicker } from "../../components/elements/digit-date-and-time-picker/DigitDateAndTimePicker.element";
 import StoryDigitDateAndTimePicker from "./StoryDigitDateAndTimePicker";
+import centered from "@storybook/addon-centered/react";
 
 const DigitDateAndTimePickerStory = storiesOf("Elements", module);
 
@@ -11,6 +12,7 @@ const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
+DigitDateAndTimePickerStory.addDecorator(centered);
 DigitDateAndTimePickerStory.addDecorator(withKnobs);
 
 DigitDateAndTimePickerStory.add(

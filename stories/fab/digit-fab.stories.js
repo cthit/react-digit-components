@@ -8,6 +8,7 @@ import React from "react";
 import { DigitFAB, DigitProviders } from "../../components";
 import DigitFABReadme from "../../components/elements/digit-fab/readme.md";
 import { Padding } from "../../components/styles/digit-layout/DigitLayout.styles";
+import centered from "@storybook/addon-centered/react";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -19,6 +20,7 @@ const iconDefaultValue = "Edit";
 
 const DigitFABStory = storiesOf("Elements", module);
 
+DigitFABStory.addDecorator(centered);
 DigitFABStory.addDecorator(withKnobs);
 
 DigitFABStory.add(

@@ -3,9 +3,11 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitLoading, DigitProviders } from "../../components";
 import DigitLoadingReadme from "../../components/elements/digit-loading/readme.md";
+import centered from "@storybook/addon-centered/react";
 
 const DigitLoadingStory = storiesOf("Elements", module);
 
+DigitLoadingStory.addDecorator(centered);
 DigitLoadingStory.addDecorator(withKnobs);
 
 DigitLoadingStory.add(

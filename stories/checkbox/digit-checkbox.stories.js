@@ -5,6 +5,7 @@ import React from "react";
 import { DigitCheckbox, DigitProviders } from "../../components";
 import DigitCheckboxReadme from "../../components/elements/digit-checkbox/readme.md";
 import StoryDigitCheckbox from "./StoryDigitCheckbox";
+import centered from "@storybook/addon-centered/react";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -12,6 +13,7 @@ const colorDefaultValue = "none";
 
 const DigitCheckboxStory = storiesOf("Elements", module);
 
+DigitCheckboxStory.addDecorator(centered);
 DigitCheckboxStory.addDecorator(withKnobs);
 
 DigitCheckboxStory.add(

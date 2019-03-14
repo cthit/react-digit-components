@@ -15,6 +15,9 @@ import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 
 const styles = theme => ({
+    container: {
+        display: "flex"
+    },
     input: {
         display: "flex"
     },
@@ -31,9 +34,7 @@ const styles = theme => ({
     paper: {
         position: "absolute",
         zIndex: 1,
-        marginTop: theme.spacing.unit,
-        left: 0,
-        right: 0
+        marginTop: theme.spacing.unit
     }
 });
 
@@ -154,6 +155,10 @@ class DigitAutocompleteSelectSingle extends React.Component {
         const { menuIsOpen } = this.state;
 
         const selectStyles = {
+            container: () => ({
+                display: "flex",
+                flex: 1
+            }),
             input: base => ({
                 ...base,
                 color: theme.palette.text.primary

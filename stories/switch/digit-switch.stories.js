@@ -4,6 +4,7 @@ import React from "react";
 import { DigitProviders, DigitSwitch } from "../../components";
 import DigitSwitchReadme from "../../components/elements/digit-switch/readme.md";
 import StoryDigitSwitch from "./StoryDigitSwitch";
+import centered from "@storybook/addon-centered/react";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -11,6 +12,7 @@ const colorDefaultValue = "none";
 
 const DigitSwitchStory = storiesOf("Elements", module);
 
+DigitSwitchStory.addDecorator(centered);
 DigitSwitchStory.addDecorator(withKnobs);
 
 DigitSwitchStory.add(

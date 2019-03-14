@@ -1,20 +1,19 @@
 import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
 import Select from "react-select";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import NoSsr from "@material-ui/core/NoSsr";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
+import { DigitLayout } from "../../";
 
 const styles = theme => ({
+    container: {
+        display: "flex"
+    },
     input: {
         display: "flex"
     },
@@ -42,9 +41,7 @@ const styles = theme => ({
     paper: {
         position: "absolute",
         zIndex: 1,
-        marginTop: theme.spacing.unit,
-        left: 0,
-        right: 0
+        marginTop: theme.spacing.unit
     }
 });
 
@@ -165,49 +162,51 @@ class DigitAutocompleteSelectMultiple extends React.Component {
         const { menuIsOpen } = this.state;
 
         const selectStyles = {
+            container: () => ({
+                display: "flex",
+                flex: 1
+            }),
             input: base => ({
                 ...base,
                 color: theme.palette.text.primary
             })
         };
         return (
-            <NoSsr>
-                <Select
-                    name={name}
-                    classes={classes}
-                    styles={selectStyles}
-                    options={selectableValues}
-                    components={components}
-                    value={value}
-                    onChange={onChange}
-                    isMulti
-                    placeholder=""
-                    menuIsOpen={menuIsOpen}
-                    onMenuOpen={() => {
-                        this.onMenuIsOpenChange(true);
-                    }}
-                    onMenuClose={() => {
-                        this.onMenuIsOpenChange(false);
-                    }}
-                    textFieldProps={{
-                        label: upperLabel,
-                        helperText:
-                            error && errorMessage != null
-                                ? errorMessage
-                                : lowerLabel,
-                        InputLabelProps: {
-                            shrink:
-                                (value != null && value.length > 0) ||
-                                this.state.multipleOpen
-                        },
-                        variant: filled
-                            ? "filled"
-                            : outlined
-                            ? "outlined"
-                            : "standard"
-                    }}
-                />
-            </NoSsr>
+            <Select
+                name={name}
+                classes={classes}
+                styles={selectStyles}
+                options={selectableValues}
+                components={components}
+                value={value}
+                onChange={onChange}
+                isMulti
+                placeholder=""
+                menuIsOpen={menuIsOpen}
+                onMenuOpen={() => {
+                    this.onMenuIsOpenChange(true);
+                }}
+                onMenuClose={() => {
+                    this.onMenuIsOpenChange(false);
+                }}
+                textFieldProps={{
+                    label: upperLabel,
+                    helperText:
+                        error && errorMessage != null
+                            ? errorMessage
+                            : lowerLabel,
+                    InputLabelProps: {
+                        shrink:
+                            (value != null && value.length > 0) ||
+                            this.state.multipleOpen
+                    },
+                    variant: filled
+                        ? "filled"
+                        : outlined
+                        ? "outlined"
+                        : "standard"
+                }}
+            />
         );
     }
 }

@@ -4,9 +4,11 @@ import React from "react";
 import { DigitProviders, DigitComponentSelector } from "../../components";
 import DigitComponentSelectorReadme from "../../components/declaratives/digit-component-selector/readme.md";
 import CounterTestComponent from "./CounterTestComponent";
+import centered from "@storybook/addon-centered/react";
 
 const DigitComponentSelectorStory = storiesOf("Declaratives", module);
 
+DigitComponentSelectorStory.addDecorator(centered);
 DigitComponentSelectorStory.addDecorator(withKnobs);
 
 DigitComponentSelectorStory.add(

@@ -3,6 +3,7 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitButton, DigitProviders } from "../../components";
 import DigitButtonReadme from "../../components/elements/digit-button/readme.md";
+import centered from "@storybook/addon-centered/react";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
@@ -14,6 +15,7 @@ const styleDefaultValue = "flat";
 
 const DigitButtonStory = storiesOf("Elements", module);
 
+DigitButtonStory.addDecorator(centered);
 DigitButtonStory.addDecorator(withKnobs);
 
 DigitButtonStory.add(

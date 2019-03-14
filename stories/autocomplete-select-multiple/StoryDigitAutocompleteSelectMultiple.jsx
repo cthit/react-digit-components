@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitAutocompleteSelectMultiple } from "../../components";
+import { DigitAutocompleteSelectMultiple, DigitLayout } from "../../components";
 import { Column } from "../../components/styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../components/styles/digit-text/DigitText.styles";
 
@@ -57,11 +57,13 @@ class StoryDigitAutocompleteSelectMultiple extends React.Component {
     render() {
         return (
             <Column>
-                <DigitAutocompleteSelectMultiple
-                    selectableValues={suggestions}
-                    value={this.state.selected}
-                    onChange={this.onSelectedChange}
-                />
+                <DigitLayout.Size absWidth={"200px"}>
+                    <DigitAutocompleteSelectMultiple
+                        selectableValues={suggestions}
+                        value={this.state.selected}
+                        onChange={this.onSelectedChange}
+                    />
+                </DigitLayout.Size>
                 {this.state.selected.map(select => (
                     <Text text={select.value} key={select.value} />
                 ))}

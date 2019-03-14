@@ -7,6 +7,7 @@ import DigitTranslations from "../../components/declaratives/digit-translations/
 import DigitTranslationsReadme from "../../components/declaratives/digit-translations/readme.md";
 import CommonTranslations from "./CommonTranslations.json";
 import StoryDigitTranslations from "./StoryDigitTranslations";
+import centered from "@storybook/addon-centered/react";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];
@@ -14,6 +15,7 @@ const langDefaultValue = "sv";
 
 const DigitTranslationsStory = storiesOf("Declaratives", module);
 
+DigitTranslationsStory.addDecorator(centered);
 DigitTranslationsStory.addDecorator(withKnobs);
 
 DigitTranslationsStory.add(

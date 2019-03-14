@@ -4,9 +4,11 @@ import React from "react";
 import { DigitButton, DigitProviders, DigitTooltip } from "../../components";
 import DigitTooltipReadme from "../../components/elements/digit-tooltip/readme.md";
 import { Size } from "../../components/styles/digit-layout/DigitLayout.styles";
+import centered from "@storybook/addon-centered/react";
 
 const DigitTooltipStory = storiesOf("Elements", module);
 
+DigitTooltipStory.addDecorator(centered);
 DigitTooltipStory.addDecorator(withKnobs);
 
 DigitTooltipStory.add(

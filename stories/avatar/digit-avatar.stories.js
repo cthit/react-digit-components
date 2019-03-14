@@ -4,6 +4,7 @@ import React from "react";
 import { DigitAvatar, DigitProviders, DigitImage } from "../../components";
 import DigitAvatarReadme from "../../components/elements/digit-avatar/readme.md";
 import HomeIcon from "@material-ui/icons/Home";
+import centered from "@storybook/addon-centered/react";
 
 const typeLabel = "Type";
 const typeOptions = ["Icon", "Image"];
@@ -11,6 +12,7 @@ const typeDefaultValue = "Icon";
 
 const DigitAvatarStory = storiesOf("Elements", module);
 
+DigitAvatarStory.addDecorator(centered);
 DigitAvatarStory.addDecorator(withKnobs);
 
 DigitAvatarStory.add(

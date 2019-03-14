@@ -5,9 +5,11 @@ import { DigitProviders } from "../../components";
 import DigitRadioButtonGroup from "../../components/elements/digit-radio-button-group";
 import DigitRadioButtonGroupReadme from "../../components/elements/digit-radio-button-group/readme.md";
 import StoryRadioButtonGroup from "./StoryRadioButtonGroup";
+import centered from "@storybook/addon-centered/react";
 
 const DigitRadioButtonGroupStory = storiesOf("Elements", module);
 
+DigitRadioButtonGroupStory.addDecorator(centered);
 DigitRadioButtonGroupStory.addDecorator(withKnobs);
 
 DigitRadioButtonGroupStory.add(

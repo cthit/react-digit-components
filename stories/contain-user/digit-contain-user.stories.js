@@ -7,9 +7,11 @@ import {
     DigitRedirect
 } from "../../components";
 import DigitContainUserReadme from "../../components/declaratives/digit-contain-user/readme.md";
+import centered from "@storybook/addon-centered/react";
 
 const DigitContainUserStory = storiesOf("Declaratives", module);
 
+DigitContainUserStory.addDecorator(centered);
 DigitContainUserStory.addDecorator(withKnobs);
 
 DigitContainUserStory.add(

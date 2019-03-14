@@ -4,9 +4,11 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitMenu, DigitProviders } from "../../components";
 import DigitMenuReadme from "../../components/views/digit-menu/readme.md";
+import centered from "@storybook/addon-centered/react";
 
 const DigitMenuStory = storiesOf("Views", module);
 
+DigitMenuStory.addDecorator(centered);
 DigitMenuStory.addDecorator(withKnobs);
 
 DigitMenuStory.add(

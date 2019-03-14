@@ -9,6 +9,7 @@ import {
     Size
 } from "../../components/styles/digit-layout/DigitLayout.styles";
 import StoryDigitSelect from "./StoryDigitSelect";
+import centered from "@storybook/addon-centered/react";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
@@ -16,6 +17,7 @@ const styleDefaultValue = "standard";
 
 const DigitSelectStory = storiesOf("Elements", module);
 
+DigitSelectStory.addDecorator(centered);
 DigitSelectStory.addDecorator(withKnobs);
 
 DigitSelectStory.add(

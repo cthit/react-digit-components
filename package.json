@@ -47,7 +47,7 @@
         "@material-ui/core": "^3.9.2",
         "@material-ui/icons": "^3.0.2",
         "@storybook/addon-actions": "5.0.1",
-        "@storybook/addon-centered": "5.0.1",
+        "@storybook/addon-centered": "^5.0.1",
         "@storybook/addon-info": "5.0.1",
         "@storybook/addon-knobs": "5.0.1",
         "@storybook/addon-links": "5.0.1",

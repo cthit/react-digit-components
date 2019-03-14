@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitAutocompleteSelectSingle } from "../../components";
+import { DigitAutocompleteSelectSingle, DigitLayout } from "../../components";
 
 const suggestions = [
     { label: "Afghanistan" },
@@ -54,11 +54,13 @@ class StoryDigitAutocompleteSelectSingle extends React.Component {
 
     render() {
         return (
-            <DigitAutocompleteSelectSingle
-                selectableValues={suggestions}
-                value={this.state.selected}
-                onChange={this.onSelectedChange}
-            />
+            <DigitLayout.Size absWidth={"200px"}>
+                <DigitAutocompleteSelectSingle
+                    selectableValues={suggestions}
+                    value={this.state.selected}
+                    onChange={this.onSelectedChange}
+                />
+            </DigitLayout.Size>
         );
     }
 }

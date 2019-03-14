@@ -18,8 +18,11 @@ import DigitFormReadme from "../../components/elements/digit-form/readme.md";
 import * as DigitDesign from "../../components/styles/digit-design/DigitDesign.styles";
 import * as DigitLayout from "../../components/styles/digit-layout/DigitLayout.styles";
 import * as DigitText from "../../components/styles/digit-text/DigitText.styles";
+import centered from "@storybook/addon-centered/react";
 
 const DigitFormStory = storiesOf("Elements", module);
+
+DigitFormStory.addDecorator(centered);
 
 DigitFormStory.add(
     "DigitForm",

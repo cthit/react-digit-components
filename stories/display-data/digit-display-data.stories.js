@@ -3,9 +3,11 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitDisplayData, DigitProviders } from "../../components";
 import DigitDisplayDataReadme from "../../components/elements/digit-display-data/readme.md";
+import centered from "@storybook/addon-centered/react";
 
 const DigitDisplayDataStory = storiesOf("Elements", module);
 
+DigitDisplayDataStory.addDecorator(centered);
 DigitDisplayDataStory.addDecorator(withKnobs);
 
 DigitDisplayDataStory.add(

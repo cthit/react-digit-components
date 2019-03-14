@@ -8,9 +8,11 @@ import {
     Text,
     Title
 } from "../../components/styles/digit-text/DigitText.styles";
+import centered from "@storybook/addon-centered/react";
 
 const DigitRenderSelectorStory = storiesOf("Declaratives", module);
 
+DigitRenderSelectorStory.addDecorator(centered);
 DigitRenderSelectorStory.addDecorator(withKnobs);
 
 DigitRenderSelectorStory.add(

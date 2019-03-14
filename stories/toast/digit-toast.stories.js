@@ -17,10 +17,12 @@ import DigitToastConnected from "../../components/views/digit-toast";
 import DigitToast from "../../components/views/digit-toast/DigitToast.view";
 import { digitToastOpen } from "../../components/views/digit-toast/DigitToast.view.action-creator";
 import DigitToastReadme from "../../components/views/digit-toast/readme.md";
+import centered from "@storybook/addon-centered/react";
 
-const DigitButtonStory = storiesOf("Views", module);
+const DigitToastStory = storiesOf("Views", module);
 
-DigitButtonStory.addDecorator(withKnobs);
+DigitToastStory.addDecorator(centered);
+DigitToastStory.addDecorator(withKnobs);
 
 const Stuff = ({ toastOpen }) => (
     <div>
@@ -107,7 +109,7 @@ const StuffContainer = connect(
     mapDispatchToProps
 )(Stuff);
 
-DigitButtonStory.add(
+DigitToastStory.add(
     "DigitToast",
     () => {
         return (

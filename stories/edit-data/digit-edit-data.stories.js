@@ -10,6 +10,7 @@ import {
 import DigitEditDataReadme from "../../components/elements/digit-edit-data/readme.md";
 import Translations from "./Translations.json";
 import StoryDigitEditData from "./StoryDigitEditData";
+import centered from "@storybook/addon-centered/react";
 
 const langLabel = "Language";
 const langOptions = ["sv", "en"];
@@ -17,6 +18,7 @@ const langDefaultValue = "sv";
 
 const DigitEditDataStory = storiesOf("Elements", module);
 
+DigitEditDataStory.addDecorator(centered);
 DigitEditDataStory.addDecorator(withKnobs);
 
 DigitEditDataStory.add(

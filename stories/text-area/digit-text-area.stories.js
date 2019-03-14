@@ -10,6 +10,7 @@ import React from "react";
 import { DigitLayout, DigitProviders, DigitTextArea } from "../../components";
 import DigitTextAreaReadme from "../../components/elements/digit-text-area/readme.md";
 import StoryDigitTextArea from "./StoryDigitTextArea";
+import centered from "@storybook/addon-centered/react";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
@@ -17,6 +18,7 @@ const styleDefaultValue = "standard";
 
 const DigitTextAreaStory = storiesOf("Elements", module);
 
+DigitTextAreaStory.addDecorator(centered);
 DigitTextAreaStory.addDecorator(withKnobs);
 
 DigitTextAreaStory.add(

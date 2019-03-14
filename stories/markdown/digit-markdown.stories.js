@@ -4,9 +4,11 @@ import React from "react";
 import { DigitMarkdown, DigitProviders } from "../../components";
 import DigitMarkdownReadme from "../../components/elements/digit-markdown/readme.md";
 import StoryDigitMarkdown from "./StoryDigitMarkdown";
+import centered from "@storybook/addon-centered/react";
 
 const DigitMarkdownStory = storiesOf("Elements", module);
 
+DigitMarkdownStory.addDecorator(centered);
 DigitMarkdownStory.addDecorator(withKnobs);
 
 DigitMarkdownStory.add(

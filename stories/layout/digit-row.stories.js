@@ -40,7 +40,7 @@ DigitRowStory.add(
         const center = boolean("Center", false);
         const centerHorizontal = boolean("Center Horizontal", false);
         const centerVertical = boolean("Center Vertical", false);
-        const padding = number("Padding", 8, {
+        const marginHorizontal = number("Margin horizontal", 8, {
             range: true,
             min: 0,
             max: 50,
@@ -58,7 +58,7 @@ DigitRowStory.add(
                         centerHorizontal={centerHorizontal}
                         centerVertical={centerVertical}
                         fillElement
-                        padding={padding + "px"}
+                        marginHorizontal={marginHorizontal + "px"}
                     >
                         <DummyItem text="1" color="blue" />
                         <DummyItem text="2" color="yellow" />

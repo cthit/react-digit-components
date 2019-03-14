@@ -18,7 +18,7 @@ DigitUniformGridStory.add(
         const numItems = number("num of items", 5);
         const minItemWidth = text("min item width", "120px");
         const minItemHeight = text("min item height", "120px");
-        const padding = number("Padding", 8, {
+        const margin = number("Margin", 8, {
             range: true,
             min: 0,
             max: 50,
@@ -30,7 +30,7 @@ DigitUniformGridStory.add(
                 <UniformGrid
                     minItemWidth={minItemWidth}
                     minItemHeight={minItemHeight}
-                    padding={`${padding}px`}
+                    margin={`${margin}px`}
                     fillElement
                 >
                     {Array.from(new Array(numItems), (_, i) => (

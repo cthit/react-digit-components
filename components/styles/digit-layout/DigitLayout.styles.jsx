@@ -304,7 +304,6 @@ export const Column = styled(
         topAlign,
         bottomAlign,
         reverse,
-        margin,
         marginVertical,
         fillElement,
         children,
@@ -324,9 +323,8 @@ export const Column = styled(
 )`
     flex-direction: ${props => (!props.reverse ? "column" : "column-reverse")};
     > * {
-        margin: ${props => props.margin} !important;
-        margin-top: ${props => props.marginVertical} !important;
-        margin-bottom: ${props => props.marginVertical} !important;
+        margin-top: ${props => props.marginVertical};
+        margin-bottom: ${props => props.marginVertical};
     }
     flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
@@ -405,7 +403,7 @@ Column.propTypes = {
 Column.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginVertical: "8px"
+    marginVertical: "4px"
 };
 
 export const Row = styled(
@@ -419,6 +417,7 @@ export const Row = styled(
         fillElement,
         children,
         scroll,
+        marginHorizontal,
         ...rest
     }) => (
         <Flex
@@ -434,9 +433,8 @@ export const Row = styled(
 )`
     flex-direction: ${props => (!props.reverse ? "row" : "row-reverse")};
     > * {
-        margin: ${props => props.margin} !important;
-        margin-right: ${props => props.marginHorizontal} !important;
-        margin-left: ${props => props.marginHorizontal} !important;
+        margin-right: ${props => props.marginHorizontal};
+        margin-left: ${props => props.marginHorizontal};
     }
     flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
@@ -515,7 +513,7 @@ Row.propTypes = {
 Row.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginHorizontal: "8px"
+    marginHorizontal: "4px"
 };
 
 export const DownRightPosition = styled.div`

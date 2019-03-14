@@ -38,7 +38,7 @@ DigitColumnStory.add(
         const center = boolean("Center", false);
         const centerHorizontal = boolean("Center Horizontal", false);
         const centerVertical = boolean("Center Vertical", false);
-        const padding = number("Padding", 8, {
+        const marginVertical = number("Margin vertical", 8, {
             range: true,
             min: 0,
             max: 50,
@@ -56,7 +56,7 @@ DigitColumnStory.add(
                         centerHorizontal={centerHorizontal}
                         centerVertical={centerVertical}
                         fillElement
-                        padding={padding + "px"}
+                        marginVertical={marginVertical + "px"}
                     >
                         <DummyItem text="1" color="blue" />
                         <DummyItem text="2" color="yellow" />

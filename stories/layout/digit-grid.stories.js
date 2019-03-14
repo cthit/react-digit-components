@@ -17,7 +17,7 @@ DigitGridStory.add(
     () => {
         let numItems = number("num of items", 5);
         let numCols = number("number of columns", 3);
-        const padding = number("Padding", 8, {
+        const margin = number("Margin", 8, {
             range: true,
             min: 0,
             max: 50,
@@ -30,7 +30,7 @@ DigitGridStory.add(
                     inline
                     fillElement
                     columns={`repeat(${numCols}, 1fr)`}
-                    padding={`${padding}px`}
+                    margin={`${margin}px`}
                 >
                     {Array.from(new Array(numItems), (_, i) => (
                         <DummyItem

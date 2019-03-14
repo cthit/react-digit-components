@@ -92,7 +92,6 @@ class StoryDigitEditData extends Component {
                     agreement: yup.boolean().required(),
                     aCountry: yup.string().required()
                 })}
-                marginVertical="16px"
                 titleText={this.props.titleText}
                 submitText={this.props.submitText}
                 keysOrder={[

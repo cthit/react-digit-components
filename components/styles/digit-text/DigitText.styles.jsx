@@ -168,7 +168,7 @@ export const Text = styled(({ text, white, bold, ...rest }) => (
         {text}
     </Typography>
 ))`
-    font-size: 1rem !important;
+    font-size: 1rem;
     color: ${props => (props.white ? "white" : "")};
     font-weight: ${props => (props.bold ? "900" : "inherit")};
 `;

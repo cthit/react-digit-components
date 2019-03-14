@@ -9,11 +9,6 @@ import {
 import { Margin } from "../../../components/styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../../components/styles/digit-text/DigitText.styles";
 import DigitTableReadme from "../../../components/views/digit-table/readme.md";
-import Translations from "./Translations.json";
-
-const langLabel = "Language";
-const langOptions = ["sv", "en"];
-const langDefaultValue = "sv";
 
 const DigitTableCheckboxesStory = storiesOf("Views", module);
 
@@ -32,7 +27,6 @@ class DigitTableCheckboxes extends React.Component {
 
     render() {
         const {
-            text,
             search,
             titleText,
             searchText,
@@ -58,12 +52,12 @@ class DigitTableCheckboxes extends React.Component {
                     startOrderBy="firstName"
                     columnsOrder={["id", "firstName", "lastName", "age"]}
                     headerTexts={{
-                        id: text.id,
-                        firstName: text.firstName,
-                        lastName: text.lastName,
-                        age: text.age,
-                        __checkbox: text.choose,
-                        __link: text.info
+                        id: "Id",
+                        firstName: "Förnamn",
+                        lastName: "Efternamn",
+                        age: "Ålder",
+                        __checkbox: "Välj",
+                        __link: "Information"
                     }}
                     data={[
                         {
@@ -125,7 +119,6 @@ class DigitTableCheckboxes extends React.Component {
 DigitTableCheckboxesStory.add(
     "DigitTableCheckboxes",
     () => {
-        const lang = select(langLabel, langOptions, langDefaultValue);
         const titleText = text("Title", "Title text");
         const searchText = text("Search text", "Search text");
         const showSearchableProps = boolean("Show searchable props", true);
@@ -133,29 +126,12 @@ DigitTableCheckboxesStory.add(
 
         return (
             <DigitProviders>
-                <div>
-                    <DigitTranslations
-                        uniquePath="DigitTableCheckboxesTranslations"
-                        translations={Translations}
-                        render={(text, activeLanguage, setActiveLanguage) => {
-                            if (
-                                activeLanguage != null &&
-                                activeLanguage.code != lang
-                            ) {
-                                setActiveLanguage(lang);
-                            }
-                            return (
-                                <DigitTableCheckboxes
-                                    text={text}
-                                    titleText={titleText}
-                                    searchText={searchText}
-                                    showSearchableProps={showSearchableProps}
-                                    search={search}
-                                />
-                            );
-                        }}
-                    />
-                </div>
+                <DigitTableCheckboxes
+                    titleText={titleText}
+                    searchText={searchText}
+                    showSearchableProps={showSearchableProps}
+                    search={search}
+                />
             </DigitProviders>
         );
     },

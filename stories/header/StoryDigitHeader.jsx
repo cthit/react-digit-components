@@ -15,6 +15,7 @@ import {
 import Send from "@material-ui/icons/Send";
 import Info from "@material-ui/icons/Info";
 import Code from "@material-ui/icons/Code";
+import { Text } from "../../components/styles/digit-text/DigitText.styles";
 
 const StyledIcon = styled.img`
     width: 32px;
@@ -36,6 +37,7 @@ class StoryDigitHeader extends React.Component {
         const {
             customHeaderDemo,
             customToolbarDemo,
+            customFooterDemo,
             headerHeight,
             navigation,
             icon,
@@ -86,31 +88,13 @@ class StoryDigitHeader extends React.Component {
                         : null
                 }
                 renderToolbar={() => customToolbarDemo && <TabsToolbar />}
-                renderMain={() => (
-                    <DigitLayout.Center>
-                        <DigitDisplayData
-                            fixedWidth={"200px"}
-                            data={{
-                                firstName: "Asdf",
-                                lastName: "Asdfsson",
-                                email: "email",
-                                nick: "Asdfasdf"
-                            }}
-                            keysText={{
-                                firstName: "Förnamn",
-                                lastName: "Efternamn",
-                                email: "Email",
-                                nick: "Nick"
-                            }}
-                            keysOrder={[
-                                "firstName",
-                                "lastName",
-                                "email",
-                                "nick"
-                            ]}
-                        />
-                    </DigitLayout.Center>
-                )}
+                renderMain={() => {
+                    const output = [];
+                    for (var i = 0; i < 1000; i++) {
+                        output.push(<Text text={"Hej " + i} />);
+                    }
+                    return output;
+                }}
                 renderDrawer={
                     navigation
                         ? closeDrawer => (
@@ -130,6 +114,11 @@ class StoryDigitHeader extends React.Component {
                               />
                           )
                         : null
+                }
+                renderFooter={() =>
+                    customFooterDemo ? (
+                        <Text text={"Made by digIT with <3"} />
+                    ) : null
                 }
             />
         );

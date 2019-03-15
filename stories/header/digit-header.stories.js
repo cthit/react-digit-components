@@ -28,6 +28,7 @@ DigitHeaderStory.add(
         const customHeaderDemo = boolean("Custom header demo", false);
         const customToolbarDemo = boolean("Custom toolbar demo", false);
         const customTitleDemo = boolean("Custom title demo", false);
+        const customFooterDemo = boolean("Custom footer demo", false);
         const customImage = boolean("Custom image", false);
         const headerHeight = number("Header height", 64, {
             range: true,
@@ -40,6 +41,7 @@ DigitHeaderStory.add(
             <DigitProviders>
                 <StoryDigitHeader
                     customTitleDemo={customTitleDemo}
+                    customFooterDemo={customFooterDemo}
                     customImage={customImage}
                     title={title}
                     icon={icon}

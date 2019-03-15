@@ -633,6 +633,8 @@ export const Size = styled(Flex)`
         props.absWidth != null ? props.absWidth : props.minWidth};
     min-height: ${props =>
         props.absHeight != null ? props.absHeight : props.minHeight};
+
+    overflow: ${props => (props.visibleOverflow ? "visible" : "auto")};
 `;
 
 Size.displayName = "Size";

@@ -6,6 +6,7 @@ import styled, { css } from "styled-components";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Title } from "../../styles/digit-text/DigitText.styles";
 import { Row, Column } from "../../styles/digit-layout/DigitLayout.styles";
+import { Link } from "../../styles/digit-design/DigitDesign.styles";
 
 const StyledMenuButton = styled(IconButton)`
     /*Medium device (md)*/
@@ -117,7 +118,8 @@ class DigitHeader extends React.Component {
             headerHeight,
             renderToolbar,
             cssImageString,
-            renderTitle
+            renderTitle,
+            homeLink
         } = this.props;
         const { mobileOpen } = this.state;
 
@@ -129,14 +131,11 @@ class DigitHeader extends React.Component {
             });
         }
 
-        console.log(renderFooter());
-
         return (
             <StyledRoot>
                 <Column>
                     <StyledAppBar
                         cssimagestring={cssImageString}
-                        // position="static"
                         navigation={(drawer != null).toString()}
                     >
                         <StyledToolbar
@@ -160,9 +159,21 @@ class DigitHeader extends React.Component {
                                 <Row>
                                     <DigitIfElseRendering
                                         test={renderTitle == null}
-                                        ifRender={() => (
-                                            <DigitTitle text={title} white />
-                                        )}
+                                        ifRender={() =>
+                                            homeLink != null ? (
+                                                <Link to={homeLink}>
+                                                    <DigitTitle
+                                                        text={title}
+                                                        white
+                                                    />
+                                                </Link>
+                                            ) : (
+                                                <DigitTitle
+                                                    text={title}
+                                                    white
+                                                />
+                                            )
+                                        }
                                         elseRender={renderTitle}
                                     />
                                 </Row>
@@ -227,7 +238,8 @@ DigitHeader.propTypes = {
     /** A render prop to render in the toolbar, under the header. */
     renderToolbar: PropTypes.func,
     renderTitle: PropTypes.func,
-    renderFooter: PropTypes.func
+    renderFooter: PropTypes.func,
+    homeLink: PropTypes.String
 };
 
 DigitHeader.defaultProps = {
@@ -237,7 +249,8 @@ DigitHeader.defaultProps = {
     renderToolbar: () => null,
     renderFooter: () => null,
     renderTitle: null,
-    title: "My website"
+    title: "My website",
+    homeLink: null
 };
 
 export default DigitHeader;

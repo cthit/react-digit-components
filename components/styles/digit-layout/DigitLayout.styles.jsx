@@ -543,31 +543,31 @@ export const VerticalFill = styled(Fill)`
 
 VerticalFill.displayName = "VerticalFill";
 
-export const MarginTop = Fill.extend`
+export const MarginTop = styled(Fill)`
     margin-top: 8px;
 `;
 
 MarginTop.displayName = "MarginTop";
 
-export const MarginBottom = Fill.extend`
+export const MarginBottom = styled(Fill)`
     margin-bottom: 8px;
 `;
 
 MarginBottom.displayName = "MarginBottom";
 
-export const MarginLeft = Fill.extend`
+export const MarginLeft = styled(Fill)`
     margin-left: 8px;
 `;
 
 MarginLeft.displayName = "MarginLeft";
 
-export const MarginRight = Fill.extend`
+export const MarginRight = styled(Fill)`
     margin-right: 8px;
 `;
 
 MarginRight.displayName = "MarginRight";
 
-export const Margin = Fill.extend`
+export const Margin = styled(Fill)`
     margin: 4px;
 `;
 
@@ -581,7 +581,7 @@ export const Spacing = styled.div`
 
 Spacing.displayName = "Spacing";
 
-export const Padding = Fill.extend`
+export const Padding = styled(Fill)`
     padding: 8px;
 `;
 

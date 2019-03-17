@@ -13,7 +13,7 @@ const HorizontalFill = styled(Fill)`
     flex-direction: row;
 `;
 
-const RightAlignedColumn = Column.extend`
+const RightAlignedColumn = styled(Column)`
     text-align: right;
     margin-right: 8px !important;
 `;

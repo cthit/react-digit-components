@@ -103,7 +103,8 @@ DigitRadioButtonGroup.defaultProps = {
     upperLabel: "",
     lowerLabel: "",
     error: false,
-    errorMessage: null
+    errorMessage: null,
+    radioButtons: []
 };
 
 export default DigitRadioButtonGroup;

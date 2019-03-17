@@ -168,7 +168,9 @@ DigitFormField.propTypes = {
 };
 
 DigitFormField.defaultProps = {
-    componentProps: {}
+    componentProps: {},
+    component: () => null,
+    name: ""
 };
 
 export default DigitFormField;

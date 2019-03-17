@@ -95,7 +95,8 @@ DigitTabs.propTypes = {
 };
 
 DigitTabs.defaultProps = {
-    titleFont: false
+    titleFont: false,
+    tabs: []
 };
 
 export { DigitTabs };

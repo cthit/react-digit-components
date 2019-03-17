@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 import { StyledBottomNavigation } from "./DigitBottomNavigation.styles.element";
+import Error from "@material-ui/icons/Error";
 
 const DigitBottomNavigation = ({
     selected,
-    labels,
-    icons,
+    labels = ["No labels added"],
+    icons = [<Error />],
     showLabels,
     onChange
 }) => (

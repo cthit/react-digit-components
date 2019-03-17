@@ -172,7 +172,8 @@ DigitEditData.defaultProps = {
     absWidth: null,
     absHeight: null,
     minWidth: "300px",
-    maxWidth: "300px"
+    maxWidth: "300px",
+    keysOrder: []
 };
 
 export default DigitEditData;

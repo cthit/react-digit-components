@@ -73,4 +73,9 @@ DigitTranslations.propTypes = {
     activeLanguage: PropTypes.string
 };
 
+DigitTranslations.defaultProps = {
+    render: () => null,
+    translations: {}
+};
+
 export default DigitTranslations;

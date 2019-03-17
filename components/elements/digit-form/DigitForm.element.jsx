@@ -36,7 +36,9 @@ DigitForm.propTypes = {
 
 DigitForm.defaultProps = {
     initialValues: {},
-    validationSchema: {}
+    validationSchema: {},
+    onSubmit: () => {},
+    render: () => null
 };
 
 export default DigitForm;

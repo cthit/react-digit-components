@@ -248,6 +248,7 @@ DigitHeader.defaultProps = {
     renderHeader: () => null,
     renderToolbar: () => null,
     renderFooter: () => null,
+    renderMain: () => null,
     renderTitle: null,
     title: "My website",
     homeLink: null

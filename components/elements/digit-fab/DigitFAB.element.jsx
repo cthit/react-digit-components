@@ -39,7 +39,8 @@ DigitFAB.defaultProps = {
     disabled: false,
     primary: false,
     secondary: false,
-    submit: false
+    submit: false,
+    icon: () => null
 };
 
 export default DigitFAB;

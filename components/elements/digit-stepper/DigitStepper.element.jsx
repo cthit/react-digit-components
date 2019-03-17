@@ -17,6 +17,11 @@ const DigitStepper = ({ activeStep, steps }) => (
     </Column>
 );
 
+DigitStepper.defaultProps = {
+    steps: [],
+    activeStep: 0
+};
+
 DigitStepper.propTypes = {
     steps: PropTypes.arrayOf(
         PropTypes.shape({

@@ -16,7 +16,8 @@ import { Text } from "../../styles/digit-text/DigitText.styles";
 
 const styles = theme => ({
     container: {
-        display: "flex"
+        display: "flex",
+        height: 250
     },
     input: {
         display: "flex"
@@ -34,7 +35,7 @@ const styles = theme => ({
     paper: {
         position: "absolute",
         zIndex: 1,
-        marginTop: theme.spacing.unit
+        marginTop: 50
     }
 });
 
@@ -166,40 +167,37 @@ class DigitAutocompleteSelectSingle extends React.Component {
         };
 
         return (
-            <NoSsr>
-                <Select
-                    name={name}
-                    classes={classes}
-                    styles={selectStyles}
-                    options={selectableValues}
-                    components={components}
-                    value={value}
-                    onChange={onChange}
-                    placeholder=""
-                    menuIsOpen={menuIsOpen}
-                    onMenuOpen={() => {
-                        this.onMenuIsOpenChange(true);
-                    }}
-                    onMenuClose={() => {
-                        this.onMenuIsOpenChange(false);
-                    }}
-                    textFieldProps={{
-                        label: upperLabel,
-                        helperText:
-                            error && errorMessage != null
-                                ? errorMessage
-                                : lowerLabel,
-                        InputLabelProps: {
-                            shrink: value !== "" || this.state.singleOpen
-                        },
-                        variant: filled
-                            ? "filled"
-                            : outlined
-                            ? "outlined"
-                            : "standard"
-                    }}
-                />
-            </NoSsr>
+            <Select
+                name={name}
+                classes={classes}
+                styles={selectStyles}
+                options={selectableValues}
+                components={components}
+                value={value}
+                onChange={onChange}
+                menuIsOpen={menuIsOpen}
+                onMenuOpen={() => {
+                    this.onMenuIsOpenChange(true);
+                }}
+                onMenuClose={() => {
+                    this.onMenuIsOpenChange(false);
+                }}
+                textFieldProps={{
+                    label: upperLabel,
+                    helperText:
+                        error && errorMessage != null
+                            ? errorMessage
+                            : lowerLabel,
+                    InputLabelProps: {
+                        shrink: value !== "" || this.state.singleOpen
+                    },
+                    variant: filled
+                        ? "filled"
+                        : outlined
+                        ? "outlined"
+                        : "standard"
+                }}
+            />
         );
     }
 }

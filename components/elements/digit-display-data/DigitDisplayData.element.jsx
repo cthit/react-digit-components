@@ -15,7 +15,7 @@ const HorizontalFill = styled(Fill)`
 
 const RightAlignedColumn = styled(Column)`
     text-align: right;
-    margin-right: 8px !important;
+    margin-right: 8px;
 `;
 
 const DigitDisplayData = ({ data, keysText, keysOrder }) => (

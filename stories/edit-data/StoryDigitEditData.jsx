@@ -82,7 +82,7 @@ class StoryDigitEditData extends Component {
                     lastName: "Smurfsson",
                     email: "email@email.com",
                     agreement: false,
-                    aCountry: ""
+                    aCountry: "Angola"
                 }}
                 onSubmit={this.props.onSubmit}
                 validationSchema={yup.object().shape({

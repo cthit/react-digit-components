@@ -116,7 +116,8 @@ class StoryDigitEditData extends Component {
                     firstName: {
                         component: DigitTextField,
                         componentProps: {
-                            upperLabel: this.props.text.firstName
+                            upperLabel: this.props.text.firstName,
+                            maxLength: 15
                         }
                     },
                     lastName: {

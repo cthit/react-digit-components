@@ -14,6 +14,13 @@ import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 class DigitTextField extends React.Component {
+    handleOnChange = (e, maxLength, onChange) => {
+        const newValue = e.target.value;
+        if (maxLength === -1 || newValue.length <= maxLength) {
+            onChange(e);
+        }
+    };
+
     render() {
         const {
             value,
@@ -28,7 +35,8 @@ class DigitTextField extends React.Component {
             errorMessage,
             disabled,
             outlined,
-            filled
+            filled,
+            maxLength
         } = this.props;
 
         return (
@@ -57,7 +65,9 @@ class DigitTextField extends React.Component {
                                         : 0
                                 }
                                 value={value || ""}
-                                onChange={onChange}
+                                onChange={e =>
+                                    this.handleOnChange(e, maxLength, onChange)
+                                }
                                 onBlur={onBlur}
                                 type={
                                     password
@@ -77,7 +87,9 @@ class DigitTextField extends React.Component {
                             <FilledInput
                                 name={name}
                                 value={value || ""}
-                                onChange={onChange}
+                                onChange={e =>
+                                    this.handleOnChange(e, maxLength, onChange)
+                                }
                                 onBlur={onBlur}
                                 type={
                                     password
@@ -96,7 +108,9 @@ class DigitTextField extends React.Component {
                             <Input
                                 name={name}
                                 value={value || ""}
-                                onChange={onChange}
+                                onChange={e =>
+                                    this.handleOnChange(e, maxLength, onChange)
+                                }
                                 onBlur={onBlur}
                                 type={
                                     password
@@ -113,6 +127,8 @@ class DigitTextField extends React.Component {
                     <FormHelperText>
                         {error && errorMessage != null
                             ? errorMessage
+                            : maxLength !== -1
+                            ? value.length + "/" + maxLength
                             : lowerLabel != null
                             ? lowerLabel
                             : ""}
@@ -174,7 +190,8 @@ DigitTextField.defaultProps = {
     errorMessage: null,
     disabled: false,
     outlined: false,
-    filled: false
+    filled: false,
+    maxLength: -1
 };
 
 export default DigitTextField;

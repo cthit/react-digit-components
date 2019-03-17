@@ -4,7 +4,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import DateRange from "@material-ui/icons/DateRange";
 import Keyboard from "@material-ui/icons/Keyboard";
-import { DateTimePicker } from "material-ui-pickers";
+import { DateTimePicker, TimePicker } from "material-ui-pickers";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -37,9 +37,7 @@ const DigitDateAndTimePicker = ({
 }) => (
     <DateTimePicker
         value={value}
-        onChange={date => {
-            onChange(date);
-        }}
+        onChange={date => onChange({ target: { value: date } })}
         label={upperLabel}
         error={error}
         helperText={error & (errorMessage != "") ? errorMessage : lowerLabel}

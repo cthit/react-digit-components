@@ -31,7 +31,7 @@ const DigitTimePicker = ({
         error={error}
         helperText={error && errorMessage !== "" ? errorMessage : lowerLabel}
         value={value}
-        onChange={date => onChange(date)}
+        onChange={date => onChange({ target: { value: date } })}
         cancelLabel={cancelLabel}
         okLabel={okLabel}
         clearLabel={clearLabel}

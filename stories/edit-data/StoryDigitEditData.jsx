@@ -5,7 +5,11 @@ import DigitTextField from "../../components/elements/digit-text-field";
 import DigitCheckbox from "../../components/elements/digit-checkbox";
 import { connect } from "react-redux";
 import { setActiveLanguage } from "../../components/declaratives/digit-translations/DigitTranslations.declarative.action-creator";
-import { DigitAutocompleteSelectSingle } from "../../components";
+import {
+    DigitAutocompleteSelectSingle,
+    DigitSelect,
+    DigitTimePicker
+} from "../../components";
 
 const suggestions = [
     { label: "Afghanistan" },
@@ -82,7 +86,9 @@ class StoryDigitEditData extends Component {
                     lastName: "Smurfsson",
                     email: "email@email.com",
                     agreement: false,
-                    aCountry: "Angola"
+                    aCountry: "Angola",
+                    time: Date.now(),
+                    year: 2006
                 }}
                 onSubmit={this.props.onSubmit}
                 validationSchema={yup.object().shape({
@@ -90,7 +96,9 @@ class StoryDigitEditData extends Component {
                     lastName: yup.string().required(),
                     email: yup.string().required(),
                     agreement: yup.boolean().required(),
-                    aCountry: yup.string().required()
+                    aCountry: yup.string().required(),
+                    time: yup.date().required(),
+                    year: yup.number().required()
                 })}
                 titleText={this.props.titleText}
                 submitText={this.props.submitText}
@@ -99,7 +107,9 @@ class StoryDigitEditData extends Component {
                     "lastName",
                     "email",
                     "agreement",
-                    "aCountry"
+                    "aCountry",
+                    "time",
+                    "year"
                 ]}
                 {...extraButton}
                 keysComponentData={{
@@ -134,6 +144,23 @@ class StoryDigitEditData extends Component {
                         componentProps: {
                             upperLabel: "Country",
                             selectableValues: suggestions
+                        }
+                    },
+                    time: {
+                        component: DigitTimePicker,
+                        componentProps: {
+                            upperLabel: "Time"
+                        }
+                    },
+                    year: {
+                        component: DigitSelect,
+                        componentProps: {
+                            upperLabel: "Year",
+                            valueToTextMap: {
+                                2005: "2005",
+                                2006: "2006",
+                                2007: "2007"
+                            }
                         }
                     }
                 }}

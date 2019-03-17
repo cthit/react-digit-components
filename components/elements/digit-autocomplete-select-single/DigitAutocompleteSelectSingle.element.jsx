@@ -166,6 +166,13 @@ class DigitAutocompleteSelectSingle extends React.Component {
             })
         };
 
+        const selectedValue = _.find(selectableValues, { value });
+        var selectedValueLabel = null;
+
+        if (selectedValue != null) {
+            selectedValueLabel = selectedValue.label;
+        }
+
         return (
             <Select
                 name={name}
@@ -173,8 +180,14 @@ class DigitAutocompleteSelectSingle extends React.Component {
                 styles={selectStyles}
                 options={selectableValues}
                 components={components}
-                value={value}
-                onChange={onChange}
+                value={
+                    selectedValueLabel == null
+                        ? null
+                        : { value, label: selectedValueLabel }
+                }
+                onChange={e => {
+                    onChange({ target: { value: e.value } });
+                }}
                 menuIsOpen={menuIsOpen}
                 onMenuOpen={() => {
                     this.onMenuIsOpenChange(true);

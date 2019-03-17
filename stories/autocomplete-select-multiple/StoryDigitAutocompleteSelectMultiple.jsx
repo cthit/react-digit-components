@@ -45,12 +45,12 @@ const suggestions = [
 
 class StoryDigitAutocompleteSelectMultiple extends React.Component {
     state = {
-        selected: []
+        selected: ["Benin", "Belarus", "Austria"]
     };
 
-    onSelectedChange = selected => {
+    onSelectedChange = e => {
         this.setState({
-            selected: selected
+            selected: e.target.value
         });
     };
 

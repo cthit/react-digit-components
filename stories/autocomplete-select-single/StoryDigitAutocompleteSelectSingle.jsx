@@ -46,9 +46,9 @@ class StoryDigitAutocompleteSelectSingle extends React.Component {
         selected: ""
     };
 
-    onSelectedChange = selected => {
+    onSelectedChange = e => {
         this.setState({
-            selected: selected
+            selected: e.target.value
         });
     };
 

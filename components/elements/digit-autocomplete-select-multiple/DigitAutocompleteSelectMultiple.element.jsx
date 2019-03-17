@@ -9,6 +9,7 @@ import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 import { DigitLayout } from "../../";
+import * as _ from "lodash";
 
 const styles = theme => ({
     container: {
@@ -171,6 +172,11 @@ class DigitAutocompleteSelectMultiple extends React.Component {
                 color: theme.palette.text.primary
             })
         };
+
+        const selectedValueObjects = value.map(value =>
+            _.find(selectableValues, { value })
+        );
+
         return (
             <Select
                 name={name}
@@ -178,8 +184,14 @@ class DigitAutocompleteSelectMultiple extends React.Component {
                 styles={selectStyles}
                 options={selectableValues}
                 components={components}
-                value={value}
-                onChange={onChange}
+                value={selectedValueObjects}
+                onChange={e => {
+                    onChange({
+                        target: {
+                            value: e.map(value => value.value)
+                        }
+                    });
+                }}
                 isMulti
                 placeholder=""
                 menuIsOpen={menuIsOpen}

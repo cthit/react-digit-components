@@ -1,17 +1,38 @@
-import { Button } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
+import { Text } from "../../styles/digit-text/DigitText.styles";
+import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
+import Fab from "@material-ui/core/Fab";
+import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 
-const DigitFAB = ({ onClick, disabled, primary, secondary, submit, icon }) => (
-    <Button
-        variant="fab"
+const DigitFAB = ({
+    onClick,
+    disabled,
+    primary,
+    secondary,
+    submit,
+    icon,
+    text
+}) => (
+    <Fab
+        variant={text == null ? "fab" : "extended"}
         type={submit ? "submit" : "button"}
         disabled={disabled}
         onClick={onClick}
         color={primary ? "primary" : secondary ? "secondary" : "inherit"}
     >
         {React.createElement(icon, null)}
-    </Button>
+        <DigitIfElseRendering
+            test={text != null}
+            ifRender={() => (
+                <>
+                    <Padding />
+                    <Text text={text} />
+                    <Padding />
+                </>
+            )}
+        />
+    </Fab>
 );
 
 DigitFAB.displayName = "DigitFAB";
@@ -31,7 +52,11 @@ DigitFAB.propTypes = {
     /** If true, then forms will be called if you press this button. No need to use onClick.
      * This can be useful for e.g. DigitForm.
      */
-    submit: PropTypes.bool
+    submit: PropTypes.bool,
+    /**
+     * If provided, the fab will become an extended fab
+     */
+    text: PropTypes.string
 };
 
 DigitFAB.defaultProps = {
@@ -40,7 +65,8 @@ DigitFAB.defaultProps = {
     primary: false,
     secondary: false,
     submit: false,
-    icon: () => null
+    icon: () => null,
+    text: null
 };
 
 export default DigitFAB;

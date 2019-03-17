@@ -2,7 +2,7 @@ import Add from "@material-ui/icons/Add";
 import Call from "@material-ui/icons/Call";
 import Edit from "@material-ui/icons/Edit";
 import { action } from "@storybook/addon-actions";
-import { boolean, select, withKnobs } from "@storybook/addon-knobs";
+import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitFAB, DigitProviders } from "../../components";
@@ -29,6 +29,7 @@ DigitFABStory.add(
         const disabled = boolean("Disabled", false);
         const color = select(colorLabel, colorOptions, colorDefaultValue);
         const icon = select(iconLabel, iconOptions, iconDefaultValue);
+        const text1 = text("Text", "");
 
         return (
             <DigitProviders>
@@ -47,6 +48,7 @@ DigitFABStory.add(
                         disabled={disabled}
                         primary={color === "primary"}
                         secondary={color === "secondary"}
+                        text={text1 === "" ? null : text1}
                     />
                 </Padding>
             </DigitProviders>

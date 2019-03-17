@@ -536,13 +536,6 @@ export const Fill = styled.div`
 
 Fill.displayName = "Fill";
 
-export const VerticalFill = styled(Fill)`
-    flex-direction: row;
-    align-items: center;
-`;
-
-VerticalFill.displayName = "VerticalFill";
-
 export const MarginTop = styled(Fill)`
     margin-top: 8px;
 `;
@@ -582,7 +575,7 @@ export const Spacing = styled.div`
 Spacing.displayName = "Spacing";
 
 export const Padding = styled(Fill)`
-    padding: 8px;
+    padding: 4px;
 `;
 
 Padding.displayName = "Padding";

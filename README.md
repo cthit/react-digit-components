@@ -39,7 +39,7 @@ Setups up redux, translations and all the components. You must only have one, no
 
 ```
 <!-- This comment is used to make react-digit-components work properly -->
-<!-- insertion-point-jss -->
+<noscript id="jss-insertion-point"></noscript>
 ```
 
 ### Buttons

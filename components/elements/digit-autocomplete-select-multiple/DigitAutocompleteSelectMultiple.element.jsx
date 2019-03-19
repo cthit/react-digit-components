@@ -150,8 +150,6 @@ class DigitAutocompleteSelectMultiple extends React.Component {
             theme,
             value,
             onChange,
-            filled,
-            outlined,
             upperLabel,
             lowerLabel,
             error,
@@ -211,12 +209,7 @@ class DigitAutocompleteSelectMultiple extends React.Component {
                         shrink:
                             (value != null && value.length > 0) ||
                             this.state.multipleOpen
-                    },
-                    variant: filled
-                        ? "filled"
-                        : outlined
-                        ? "outlined"
-                        : "standard"
+                    }
                 }}
             />
         );

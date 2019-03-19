@@ -143,8 +143,6 @@ class DigitAutocompleteSelectSingle extends React.Component {
             theme,
             value,
             onChange,
-            filled,
-            outlined,
             upperLabel,
             lowerLabel,
             error,
@@ -203,12 +201,7 @@ class DigitAutocompleteSelectSingle extends React.Component {
                             : lowerLabel,
                     InputLabelProps: {
                         shrink: value !== "" || this.state.singleOpen
-                    },
-                    variant: filled
-                        ? "filled"
-                        : outlined
-                        ? "outlined"
-                        : "standard"
+                    }
                 }}
             />
         );

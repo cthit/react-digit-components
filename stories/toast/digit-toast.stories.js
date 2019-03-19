@@ -18,11 +18,8 @@ import DigitToast from "../../components/views/digit-toast/DigitToast.view";
 import { digitToastOpen } from "../../components/views/digit-toast/DigitToast.view.action-creator";
 import DigitToastReadme from "../../components/views/digit-toast/readme.md";
 import centered from "@storybook/addon-centered/react";
-
-const DigitToastStory = storiesOf("Views", module);
-
-DigitToastStory.addDecorator(centered);
-DigitToastStory.addDecorator(withKnobs);
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 const Stuff = ({ toastOpen }) => (
     <div>
@@ -109,25 +106,28 @@ const StuffContainer = connect(
     mapDispatchToProps
 )(Stuff);
 
-DigitToastStory.add(
-    "DigitToast",
-    () => {
-        return (
-            <DigitProviders>
-                <StuffContainer />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitToastReadme,
-            propTables: [DigitToast],
-            propTablesExclude: [
-                DigitProviders,
-                DigitToastConnected,
-                StuffContainer,
-                Stuff
-            ]
+storiesOf("Views", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitToast",
+        () => {
+            return <StuffContainer />;
+        },
+        {
+            info: {
+                text: DigitToastReadme,
+                propTables: [DigitToast],
+                propTablesExclude: [
+                    DigitProviders,
+                    DigitToastConnected,
+                    StuffContainer,
+                    Stuff
+                ],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

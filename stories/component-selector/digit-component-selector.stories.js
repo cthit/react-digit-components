@@ -5,26 +5,27 @@ import { DigitProviders, DigitComponentSelector } from "../../components";
 import DigitComponentSelectorReadme from "../../components/declaratives/digit-component-selector/readme.md";
 import CounterTestComponent from "./CounterTestComponent";
 import centered from "@storybook/addon-centered/react";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import { withInfo } from "@storybook/addon-info";
 
-const DigitComponentSelectorStory = storiesOf("Declaratives", module);
+storiesOf("Declaratives", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitComponentSelector",
+        () => {
+            const activeComponent = number("What component", 0, {
+                range: false,
+                min: 0,
+                max: 3,
+                step: 1
+            });
 
-DigitComponentSelectorStory.addDecorator(centered);
-DigitComponentSelectorStory.addDecorator(withKnobs);
+            const mounted = boolean("Mounted", false);
 
-DigitComponentSelectorStory.add(
-    "DigitComponentSelector",
-    () => {
-        const activeComponent = number("What component", 0, {
-            range: false,
-            min: 0,
-            max: 3,
-            step: 1
-        });
-
-        const mounted = boolean("Mounted", false);
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitComponentSelector
                     activeComponent={activeComponent}
                     components={[
@@ -35,14 +36,15 @@ DigitComponentSelectorStory.add(
                     ]}
                     keepAllMounted={mounted}
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitComponentSelectorReadme,
-            propTables: [DigitComponentSelector],
-            propTablesExclude: [DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitComponentSelectorReadme,
+                propTables: [DigitComponentSelector],
+                propTablesExclude: [DigitProviders],
+                source: false,
+                header: false
+            }
         }
-    }
-);
+    );

@@ -6,36 +6,38 @@ import DigitRadioButtonGroup from "../../components/elements/digit-radio-button-
 import DigitRadioButtonGroupReadme from "../../components/elements/digit-radio-button-group/readme.md";
 import StoryRadioButtonGroup from "./StoryRadioButtonGroup";
 import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitRadioButtonGroupStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitRadioButtonGroup",
+        () => {
+            const upperLabel = text("Upperlabel", "Upperlabel");
+            const lowerLabel = text("Lowerlabel", "Lowerlabel");
+            const error = boolean("Error", false);
+            const errorMessage = text("ErrorMessage", "This is an error");
 
-DigitRadioButtonGroupStory.addDecorator(centered);
-DigitRadioButtonGroupStory.addDecorator(withKnobs);
-
-DigitRadioButtonGroupStory.add(
-    "DigitRadioButtonGroup",
-    () => {
-        const upperLabel = text("Upperlabel", "Upperlabel");
-        const lowerLabel = text("Lowerlabel", "Lowerlabel");
-        const error = boolean("Error", false);
-        const errorMessage = text("ErrorMessage", "This is an error");
-
-        return (
-            <DigitProviders>
+            return (
                 <StoryRadioButtonGroup
                     upperLabel={upperLabel}
                     lowerLabel={lowerLabel}
                     error={error}
                     errorMessage={errorMessage}
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitRadioButtonGroupReadme,
-            propTables: [DigitRadioButtonGroup],
-            propTablesExclude: [StoryRadioButtonGroup, DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitRadioButtonGroupReadme,
+                propTables: [DigitRadioButtonGroup],
+                propTablesExclude: [StoryRadioButtonGroup, DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

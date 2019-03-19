@@ -6,25 +6,25 @@ import DigitAutocompleteSelectMultipleReadme from "../../components/elements/dig
 import StoryDigitAutocompleteSelectMultiple from "./StoryDigitAutocompleteSelectMultiple";
 
 import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitAutocompleteSelectMultipleStory = storiesOf("Elements", module);
-
-DigitAutocompleteSelectMultipleStory.addDecorator(centered);
-DigitAutocompleteSelectMultipleStory.addDecorator(withKnobs);
-
-DigitAutocompleteSelectMultipleStory.add(
-    "DigitAutocompleteSelectMultiple",
-    () => {
-        return (
-            <DigitProviders>
-                <StoryDigitAutocompleteSelectMultiple />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitAutocompleteSelectMultipleReadme,
-            propTablesExclude: [DigitProviders]
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitAutocompleteSelectMultiple",
+        () => {
+            return <StoryDigitAutocompleteSelectMultiple />;
+        },
+        {
+            info: {
+                text: DigitAutocompleteSelectMultipleReadme,
+                propTablesExclude: [DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

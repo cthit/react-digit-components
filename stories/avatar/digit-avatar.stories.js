@@ -5,35 +5,39 @@ import { DigitAvatar, DigitProviders, DigitImage } from "../../components";
 import DigitAvatarReadme from "../../components/elements/digit-avatar/readme.md";
 import HomeIcon from "@material-ui/icons/Home";
 import centered from "@storybook/addon-centered/react";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import { withInfo } from "@storybook/addon-info";
 
 const typeLabel = "Type";
 const typeOptions = ["Icon", "Image"];
 const typeDefaultValue = "Icon";
 
-const DigitAvatarStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitAvatar",
+        () => {
+            const type = select(typeLabel, typeOptions, typeDefaultValue);
 
-DigitAvatarStory.addDecorator(centered);
-DigitAvatarStory.addDecorator(withKnobs);
-
-DigitAvatarStory.add(
-    "DigitAvatar",
-    () => {
-        const type = select(typeLabel, typeOptions, typeDefaultValue);
-
-        return (
-            <DigitProviders>
-                {type === "Icon" ? (
-                    <DigitAvatar icon={HomeIcon} />
-                ) : type === "Image" ? (
+            if (type === "Icon") {
+                return <DigitAvatar icon={HomeIcon} />;
+            } else if (type === "Image") {
+                return (
                     <DigitAvatar imageSrc="https://i.imgur.com/G8lFDH1.jpg" />
-                ) : null}
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitAvatarReadme,
-            propTablesExclude: [DigitProviders]
+                );
+            } else {
+                return null;
+            }
+        },
+        {
+            info: {
+                text: DigitAvatarReadme,
+                propTablesExclude: [DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

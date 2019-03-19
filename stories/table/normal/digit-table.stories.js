@@ -7,22 +7,23 @@ import {
     DigitTranslations
 } from "../../../components";
 import DigitTableReadme from "../../../components/views/digit-table/readme.md";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../../.storybook/DigitProvidersDecorator";
 
-const DigitTableStory = storiesOf("Views", module);
+storiesOf("Views", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitTable",
+        () => {
+            const titleText = text("Title", "Title text");
+            const searchText = text("Search text", "Search text");
+            const showSearchableProps = boolean("Show searchable props", true);
+            const search = boolean("Search", true);
+            const empty = boolean("Empty", false);
 
-DigitTableStory.addDecorator(withKnobs);
-
-DigitTableStory.add(
-    "DigitTable",
-    () => {
-        const titleText = text("Title", "Title text");
-        const searchText = text("Search text", "Search text");
-        const showSearchableProps = boolean("Show searchable props", true);
-        const search = boolean("Search", true);
-        const empty = boolean("Empty", false);
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitTable
                     emptyTableText={text.emptyTableText}
                     search={search}
@@ -87,14 +88,15 @@ DigitTableStory.add(
                             : []
                     }
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitTableReadme,
-            propTables: [DigitTable],
-            propTablesExclude: [DigitProviders, DigitTranslations]
+            );
+        },
+        {
+            info: {
+                text: DigitTableReadme,
+                propTables: [DigitTable],
+                propTablesExclude: [DigitProviders, DigitTranslations],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

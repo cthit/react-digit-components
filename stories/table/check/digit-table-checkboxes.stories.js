@@ -9,10 +9,8 @@ import {
 import { Margin } from "../../../components/styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../../components/styles/digit-text/DigitText.styles";
 import DigitTableReadme from "../../../components/views/digit-table/readme.md";
-
-const DigitTableCheckboxesStory = storiesOf("Views", module);
-
-DigitTableCheckboxesStory.addDecorator(withKnobs);
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../../.storybook/DigitProvidersDecorator";
 
 class DigitTableCheckboxes extends React.Component {
     state = {
@@ -116,30 +114,34 @@ class DigitTableCheckboxes extends React.Component {
     }
 }
 
-DigitTableCheckboxesStory.add(
-    "DigitTableCheckboxes",
-    () => {
-        const titleText = text("Title", "Title text");
-        const searchText = text("Search text", "Search text");
-        const showSearchableProps = boolean("Show searchable props", true);
-        const search = boolean("Search", true);
+storiesOf("Views", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitTableCheckboxes",
+        () => {
+            const titleText = text("Title", "Title text");
+            const searchText = text("Search text", "Search text");
+            const showSearchableProps = boolean("Show searchable props", true);
+            const search = boolean("Search", true);
 
-        return (
-            <DigitProviders>
+            return (
                 <DigitTableCheckboxes
                     titleText={titleText}
                     searchText={searchText}
                     showSearchableProps={showSearchableProps}
                     search={search}
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitTableReadme,
-            propTables: [DigitTable],
-            propTablesExclude: [DigitProviders, DigitTranslations]
+            );
+        },
+        {
+            info: {
+                text: DigitTableReadme,
+                propTables: [DigitTable],
+                propTablesExclude: [DigitProviders, DigitTranslations],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

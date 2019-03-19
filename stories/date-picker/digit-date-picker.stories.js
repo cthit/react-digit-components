@@ -6,27 +6,28 @@ import { DigitDatePicker } from "../../components/elements/digit-date-picker/Dig
 import DigitDatePickerReadme from "../../components/elements/digit-date-picker/readme.md";
 import StoryDigitDatePicker from "./StoryDigitDatePicker";
 import centered from "@storybook/addon-centered/react";
-
-const DigitDatePickerStory = storiesOf("Elements", module);
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import { withInfo } from "@storybook/addon-info";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
-DigitDatePickerStory.addDecorator(centered);
-DigitDatePickerStory.addDecorator(withKnobs);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitDatePicker",
+        () => {
+            const upperLabel = text("Upperlabel: ", "My date");
+            const lowerLabel = text("Lowerlabel: ", "Please enter something");
+            const errorMessage = text("Error message: ", "ERROR ERROR");
+            const error = boolean("Error: ", false);
+            const style = select(styleLabel, styleOptions, styleDefaultValue);
 
-DigitDatePickerStory.add(
-    "DigitDatePicker",
-    () => {
-        const upperLabel = text("Upperlabel: ", "My date");
-        const lowerLabel = text("Lowerlabel: ", "Please enter something");
-        const errorMessage = text("Error message: ", "ERROR ERROR");
-        const error = boolean("Error: ", false);
-        const style = select(styleLabel, styleOptions, styleDefaultValue);
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitLayout.Size absWidth="300px" absHeight="300px">
                     <StoryDigitDatePicker
                         lowerLabel={lowerLabel}
@@ -36,18 +37,19 @@ DigitDatePickerStory.add(
                         upperLabel={upperLabel}
                     />
                 </DigitLayout.Size>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitDatePickerReadme,
-            propTables: [DigitDatePicker],
-            propTablesExclude: [
-                DigitProviders,
-                DigitLayout.Size,
-                StoryDigitDatePicker
-            ]
+            );
+        },
+        {
+            info: {
+                text: DigitDatePickerReadme,
+                propTables: [DigitDatePicker],
+                propTablesExclude: [
+                    DigitProviders,
+                    DigitLayout.Size,
+                    StoryDigitDatePicker
+                ],
+                source: false,
+                header: false
+            }
         }
-    }
-);
+    );

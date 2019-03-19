@@ -26,11 +26,8 @@ import {
 import DigitDialogReadme from "../../components/views/digit-dialog/readme.md";
 import centered from "@storybook/addon-centered/react";
 import { Text } from "../../components/styles/digit-text/DigitText.styles";
-
-const DigitDialogCustomStory = storiesOf("Views", module);
-
-DigitDialogCustomStory.addDecorator(centered);
-DigitDialogCustomStory.addDecorator(withKnobs);
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 const Stuff = ({ digitDialogCustomOpen }) => (
     <div>
@@ -115,20 +112,23 @@ const StuffContainer = connect(
     mapDispatchToProps
 )(Stuff);
 
-DigitDialogCustomStory.add(
-    "DigitDialogCustom",
-    () => {
-        return (
-            <DigitProviders>
-                <StuffContainer />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitDialogReadme,
-            propTables: [DigitDialog],
-            propTablesExclude: [DigitProviders, StuffContainer, Stuff]
+storiesOf("Views", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitDialogCustom",
+        () => {
+            return <StuffContainer />;
+        },
+        {
+            info: {
+                text: DigitDialogReadme,
+                propTables: [DigitDialog],
+                propTablesExclude: [DigitProviders, StuffContainer, Stuff],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

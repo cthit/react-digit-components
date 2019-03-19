@@ -9,22 +9,18 @@ import {
 import DigitOrderReadme from "../../components/styles/digit-layout/row-readme.md";
 import DummyItem from "./DummyItem";
 import BorderSize from "./BorderSize";
-import { DigitProviders } from "../../components";
 
-const DigitOrderStory = storiesOf("Layout", module);
+storiesOf("Layout", module)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitOrder",
+        () => {
+            const orderBlue = number("Order blue", 1);
+            const orderYellow = number("Order yellow", 2);
+            const orderGreen = number("Order green", 3);
+            const orderRed = number("Order red", 4);
 
-DigitOrderStory.addDecorator(withKnobs);
-
-DigitOrderStory.add(
-    "DigitOrder",
-    () => {
-        const orderBlue = number("Order blue", 1);
-        const orderYellow = number("Order yellow", 2);
-        const orderGreen = number("Order green", 3);
-        const orderRed = number("Order red", 4);
-
-        return (
-            <DigitProviders>
+            return (
                 <BorderSize absWidth="500px" absHeight="500px">
                     <Row center fillElement padding="8px">
                         <Order order={orderBlue}>
@@ -41,14 +37,15 @@ DigitOrderStory.add(
                         </Order>
                     </Row>
                 </BorderSize>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitOrderReadme,
-            propTables: [Order],
-            propTablesExclude: [BorderSize, Row, DummyItem]
+            );
+        },
+        {
+            info: {
+                text: DigitOrderReadme,
+                propTables: [Order],
+                propTablesExclude: [BorderSize, Row, DummyItem],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

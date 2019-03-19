@@ -5,27 +5,27 @@ import { DigitBottomNavigation } from "../../components";
 import DigitProviders from "../../components/declaratives/digit-providers";
 import DigitBottomNavigationReadme from "../../components/elements/digit-bottom-navigation/readme.md";
 import StoryDigitBottomNavigation from "./StoryDigitBottomNavigation";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import { withInfo } from "@storybook/addon-info";
 
-const DigitBottomNavigationStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitBottomNavigation",
+        () => {
+            const showLabels = boolean("Show Labels", true);
 
-DigitBottomNavigationStory.addDecorator(withKnobs);
-
-DigitBottomNavigationStory.add(
-    "DigitBottomNavigation",
-    () => {
-        const showLabels = boolean("Show Labels", true);
-
-        return (
-            <DigitProviders>
-                <StoryDigitBottomNavigation showLabels={showLabels} />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitBottomNavigationReadme,
-            propTables: [DigitBottomNavigation],
-            propTablesExclude: [DigitProviders, StoryDigitBottomNavigation]
+            return <StoryDigitBottomNavigation showLabels={showLabels} />;
+        },
+        {
+            info: {
+                text: DigitBottomNavigationReadme,
+                propTables: [DigitBottomNavigation],
+                propTablesExclude: [DigitProviders, StoryDigitBottomNavigation],
+                source: false,
+                header: false
+            }
         }
-    }
-);
+    );

@@ -5,6 +5,8 @@ import { DigitLayout, DigitProviders, DigitTextField } from "../../components";
 import DigitTextFieldReadme from "../../components/elements/digit-text-field/readme.md";
 import StoryDigitTextField from "./StoryDigitTextField";
 import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 const typeLabel = "type";
 const typeOptions = ["normal", "password", "numbersOnly"];
@@ -14,24 +16,26 @@ const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
-const DigitTextFieldStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitTextField",
+        () => {
+            const type = select(typeLabel, typeOptions, typeDefaultValue);
+            const upperLabel = text("Upper label", "This is a upperLabel");
+            const lowerLabel = text("Lower label", "This is a lowerLabel");
+            const error = boolean("Error", false);
+            const errorMessage = text(
+                "Error message",
+                "Buuuh, this is a error"
+            );
+            const disabled = boolean("disabled", false);
+            const style = select(styleLabel, styleOptions, styleDefaultValue);
 
-DigitTextFieldStory.addDecorator(centered);
-DigitTextFieldStory.addDecorator(withKnobs);
-
-DigitTextFieldStory.add(
-    "DigitTextField",
-    () => {
-        const type = select(typeLabel, typeOptions, typeDefaultValue);
-        const upperLabel = text("Upper label", "This is a upperLabel");
-        const lowerLabel = text("Lower label", "This is a lowerLabel");
-        const error = boolean("Error", false);
-        const errorMessage = text("Error message", "Buuuh, this is a error");
-        const disabled = boolean("disabled", false);
-        const style = select(styleLabel, styleOptions, styleDefaultValue);
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitLayout.Size width="300px">
                     <StoryDigitTextField
                         type={type}
@@ -43,18 +47,19 @@ DigitTextFieldStory.add(
                         style={style}
                     />
                 </DigitLayout.Size>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitTextFieldReadme,
-            propTables: [DigitTextField],
-            propTablesExclude: [
-                DigitProviders,
-                DigitLayout.Size,
-                StoryDigitTextField
-            ]
+            );
+        },
+        {
+            info: {
+                text: DigitTextFieldReadme,
+                propTables: [DigitTextField],
+                propTablesExclude: [
+                    DigitProviders,
+                    DigitLayout.Size,
+                    StoryDigitTextField
+                ],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

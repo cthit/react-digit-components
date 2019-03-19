@@ -6,27 +6,28 @@ import { DigitCheckbox, DigitProviders } from "../../components";
 import DigitCheckboxReadme from "../../components/elements/digit-checkbox/readme.md";
 import StoryDigitCheckbox from "./StoryDigitCheckbox";
 import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 const colorLabel = "color";
 const colorOptions = ["primary", "secondary", "none"];
 const colorDefaultValue = "none";
 
-const DigitCheckboxStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitCheckbox",
+        () => {
+            const color = select(colorLabel, colorOptions, colorDefaultValue);
+            const label = text("Label", "This is a label");
+            const disabled = boolean("Disabled", false);
+            const error = boolean("Error", false);
+            const errorMessage = text("Error message", "Something went wrong");
 
-DigitCheckboxStory.addDecorator(centered);
-DigitCheckboxStory.addDecorator(withKnobs);
-
-DigitCheckboxStory.add(
-    "DigitCheckbox",
-    () => {
-        const color = select(colorLabel, colorOptions, colorDefaultValue);
-        const label = text("Label", "This is a label");
-        const disabled = boolean("Disabled", false);
-        const error = boolean("Error", false);
-        const errorMessage = text("Error message", "Something went wrong");
-
-        return (
-            <DigitProviders>
+            return (
                 <StoryDigitCheckbox
                     color={color}
                     label={label}
@@ -40,14 +41,15 @@ DigitCheckboxStory.add(
                         action("blur")(e);
                     }}
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitCheckboxReadme,
-            propTables: [DigitCheckbox],
-            propTablesExclude: [DigitProviders, StoryDigitCheckbox]
+            );
+        },
+        {
+            info: {
+                text: DigitCheckboxReadme,
+                propTables: [DigitCheckbox],
+                propTablesExclude: [DigitProviders, StoryDigitCheckbox],
+                source: false,
+                header: false
+            }
         }
-    }
-);
+    );

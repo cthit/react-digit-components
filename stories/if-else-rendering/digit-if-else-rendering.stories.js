@@ -9,32 +9,34 @@ import {
     Title
 } from "../../components/styles/digit-text/DigitText.styles";
 import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitIfElseRenderingStory = storiesOf("Declaratives", module);
+storiesOf("Declaratives", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitIfElseRendering",
+        () => {
+            const renderIf = boolean("Render if", true);
 
-DigitIfElseRenderingStory.addDecorator(centered);
-DigitIfElseRenderingStory.addDecorator(withKnobs);
-
-DigitIfElseRenderingStory.add(
-    "DigitIfElseRendering",
-    () => {
-        const renderIf = boolean("Render if", true);
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitIfElseRendering
                     ifRender={() => <Text text="Render this?" />}
                     elseRender={() => <Title text="Render That" />}
                     test={renderIf}
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitIfElseRenderingReadme,
-            propTables: [DigitIfElseRendering],
-            propTablesExclude: [DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitIfElseRenderingReadme,
+                propTables: [DigitIfElseRendering],
+                propTablesExclude: [DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

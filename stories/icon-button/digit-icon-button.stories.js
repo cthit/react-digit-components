@@ -17,20 +17,17 @@ const iconLabel = "Icon";
 const iconOptions = ["Edit", "Add", "Call"];
 const iconDefaultValue = "Edit";
 
-const DigitIconButtonStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitIconButton",
+        () => {
+            const disabled = boolean("Disabled", false);
+            const color = select(colorLabel, colorOptions, colorDefaultValue);
+            const icon = select(iconLabel, iconOptions, iconDefaultValue);
 
-DigitIconButtonStory.addDecorator(centered);
-DigitIconButtonStory.addDecorator(withKnobs);
-
-DigitIconButtonStory.add(
-    "DigitIconButton",
-    () => {
-        const disabled = boolean("Disabled", false);
-        const color = select(colorLabel, colorOptions, colorDefaultValue);
-        const icon = select(iconLabel, iconOptions, iconDefaultValue);
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitIconButton
                     onBlur={action("blur")}
                     onClick={action("click")}
@@ -47,14 +44,15 @@ DigitIconButtonStory.add(
                             : null
                     }
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitIconButtonReadme,
-            propTables: [DigitIconButton],
-            propTablesExclude: [DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitIconButtonReadme,
+                propTables: [DigitIconButton],
+                propTablesExclude: [DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

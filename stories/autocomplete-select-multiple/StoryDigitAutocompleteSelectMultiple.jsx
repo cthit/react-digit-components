@@ -65,7 +65,11 @@ class StoryDigitAutocompleteSelectMultiple extends React.Component {
                     />
                 </DigitLayout.Size>
                 {this.state.selected.map(select => (
-                    <Text text={select.value} key={select.value} />
+                    <Text
+                        key={select.value}
+                        text={select.value}
+                        key={select.value}
+                    />
                 ))}
             </Column>
         );

@@ -10,14 +10,6 @@ function loadStories() {
     req.keys().forEach(filename => req(filename));
 }
 
-addDecorator(
-    withInfo({
-        inline: false,
-        source: false,
-        header: false
-    })
-);
-
 setDefaults({
     TableComponent: PropTypesTable // Override the component used to render the props table
 });

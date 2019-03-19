@@ -25,24 +25,14 @@ const styles = theme => ({
         alignItems: "center",
         overflow: "hidden"
     },
-    chip: {
-        margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
-    },
-    chipFocused: {
-        backgroundColor: emphasize(
-            theme.palette.type === "light"
-                ? theme.palette.grey[300]
-                : theme.palette.grey[700],
-            0.08
-        )
-    },
     noOptionsMessage: {
         padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
     },
     paper: {
         position: "absolute",
         zIndex: 1,
-        marginTop: 50
+        top: "75%",
+        bottom: "auto"
     }
 });
 
@@ -134,7 +124,8 @@ const components = {
 
 class DigitAutocompleteSelectMultiple extends React.Component {
     state = {
-        menuIsOpen: false
+        menuIsOpen: false,
+        height: 0
     };
 
     onMenuIsOpenChange = open => {

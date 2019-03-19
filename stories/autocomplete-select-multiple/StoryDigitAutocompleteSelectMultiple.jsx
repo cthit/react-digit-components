@@ -55,10 +55,23 @@ class StoryDigitAutocompleteSelectMultiple extends React.Component {
     };
 
     render() {
+        const {
+            disabled,
+            upperLabel,
+            lowerLabel,
+            error,
+            errorMessage
+        } = this.props;
+
         return (
             <Column>
                 <DigitLayout.Size absWidth={"200px"}>
                     <DigitAutocompleteSelectMultiple
+                        disabled={disabled}
+                        upperLabel={upperLabel}
+                        lowerLabel={lowerLabel}
+                        error={error}
+                        errorMessage={errorMessage}
                         selectableValues={suggestions}
                         value={this.state.selected}
                         onChange={this.onSelectedChange}

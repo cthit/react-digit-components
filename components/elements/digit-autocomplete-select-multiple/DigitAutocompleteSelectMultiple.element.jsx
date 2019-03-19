@@ -68,7 +68,6 @@ function Control(props) {
                 }
             }}
             {...props.selectProps.textFieldProps}
-            placeholder=""
         />
     );
 }
@@ -105,7 +104,7 @@ function MultiValue(props) {
     return (
         <DigitChip
             label={props.children}
-            onDelete={props.removeProps.onClick}
+            onDelete={!props.isDisabled ? props.removeProps.onClick : null}
             deleteIcon={<CancelIcon {...props.removeProps} />}
         />
     );
@@ -155,7 +154,8 @@ class DigitAutocompleteSelectMultiple extends React.Component {
             error,
             errorMessage,
             name,
-            selectableValues
+            selectableValues,
+            disabled
         } = this.props;
 
         const { menuIsOpen } = this.state;
@@ -199,8 +199,11 @@ class DigitAutocompleteSelectMultiple extends React.Component {
                 onMenuClose={() => {
                     this.onMenuIsOpenChange(false);
                 }}
+                isDisabled={disabled}
                 textFieldProps={{
                     label: upperLabel,
+                    error: error,
+                    disabled: disabled,
                     helperText:
                         error && errorMessage != null
                             ? errorMessage

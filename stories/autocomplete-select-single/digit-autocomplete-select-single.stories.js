@@ -1,15 +1,8 @@
-import { select, withKnobs } from "@storybook/addon-knobs";
+import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import {
-    DigitAutocompleteSelectSingle,
-    DigitProviders
-} from "../../components";
+import { DigitProviders } from "../../components";
 import DigitAutocompleteSelectSingleReadme from "../../components/elements/digit-autocomplete-select-single/readme.md";
-import {
-    Column,
-    MarginTop
-} from "../../components/styles/digit-layout/DigitLayout.styles";
 import StoryDigitAutocompleteSelectSingle from "./StoryDigitAutocompleteSelectSingle";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
@@ -23,7 +16,24 @@ storiesOf("Elements", module)
     .add(
         "DigitAutocompleteSelectSingle",
         () => {
-            return <StoryDigitAutocompleteSelectSingle />;
+            const upperLabel = text("Upper label", "This is a upperLabel");
+            const lowerLabel = text("Lower label", "This is a lowerLabel");
+            const error = boolean("Error", false);
+            const errorMessage = text(
+                "Error message",
+                "Buuuh, this is a error"
+            );
+            const disabled = boolean("disabled", false);
+
+            return (
+                <StoryDigitAutocompleteSelectSingle
+                    upperLabel={upperLabel}
+                    lowerLabel={lowerLabel}
+                    error={error}
+                    errorMessage={errorMessage}
+                    disabled={disabled}
+                />
+            );
         },
         {
             info: {

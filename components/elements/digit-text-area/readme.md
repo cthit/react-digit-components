@@ -14,7 +14,7 @@ import { DigitTextArea } from "@cthit/react-digit-components";
         });
         console.log("New value: " + e.target.value);
     }}
-    startValue={this.state.value}
+    value={this.state.value}
     upperLabel="Hello lowerLabel"
     lowerLabel="Why hello upperLabel"
     rows={5}

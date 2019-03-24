@@ -20,12 +20,11 @@ translations.json
 
 ```jsx
 import { DigitTranslations } from "@cthit/react-digit-components";
-import Translations from "./translations.json";
+import translations from "./translations.json";
 
 <DigitTranslations
-    uniquePath="TestTranslations"
-    translations={Translations}
-    render={(text, activeLanguage, setActiveLanguage) => (
+    translations={translations}
+    render={(text, activeLanguage) => (
         <div>
             <p>{text.welcome}</p>
             <p>{text.icecream}</p>
@@ -41,4 +40,4 @@ Välkommen till min hemsida
 Du kan köpa en glass för 10 kr
 ```
 
-Here, text is the source of the translations. You don't need to use activeLanguage to get the set language, `DigitTranslations` solves this for you. The activeLanguage is either `"en"` or `"sv"`. If you want to change the language for the _whole_ website, you can use setActiveLanguage with either `"en"` or `"sv"`.
+Use DigitTranslationsActions to change active language.

@@ -7,6 +7,7 @@ import StoryDigitDateAndTimePicker from "./StoryDigitDateAndTimePicker";
 import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import { withInfo } from "@storybook/addon-info";
+import DigitDateAndTimePickerReadme from "../../components/elements/digit-date-and-time-picker/readme.md";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
@@ -39,12 +40,15 @@ storiesOf("Elements", module)
         },
         {
             info: {
+                text: DigitDateAndTimePickerReadme,
                 propTables: [DigitDateAndTimePicker],
                 propTablesExclude: [
                     DigitProviders,
                     DigitLayout.Size,
                     StoryDigitDateAndTimePicker
-                ]
+                ],
+                source: false,
+                header: false
             }
         }
     );

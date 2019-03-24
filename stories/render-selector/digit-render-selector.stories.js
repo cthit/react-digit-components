@@ -46,8 +46,6 @@ storiesOf("Declaratives", module)
         {
             info: {
                 text: DigitRenderSelectorReadme,
-                propTables: [DigitRenderSelector],
-                propTablesExclude: [DigitProviders],
                 header: false,
                 source: false
             }

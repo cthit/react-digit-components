@@ -6,7 +6,6 @@
 import { DigitDisplayData } from "@cthit/react-digit-components";
 
 <DigitDisplayData
-    fixedWidth={"200px"}
     data={{
         firstname: "Smurf",
         surname: "Smurfsson",

@@ -17,13 +17,12 @@ import DigitDialogConnected from "../../components/views/digit-dialog";
 import DigitDialog from "../../components/views/digit-dialog/DigitDialog.view";
 import { digitDialogOpen } from "../../components/views/digit-dialog/DigitDialog.view.action-creator";
 import DigitDialogReadme from "../../components/views/digit-dialog/readme.md";
-
-const DigitDialogStory = storiesOf("Views", module);
-
-DigitDialogStory.addDecorator(withKnobs);
+import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 const Stuff = ({ digitDialogOpen }) => (
-    <div>
+    <>
         <DigitForm
             onSubmit={values => {
                 digitDialogOpen({
@@ -92,7 +91,7 @@ const Stuff = ({ digitDialogOpen }) => (
         />
 
         <DigitDialogConnected />
-    </div>
+    </>
 );
 
 const mapStateToProps = (state, ownProps) => ({});
@@ -106,20 +105,23 @@ const StuffContainer = connect(
     mapDispatchToProps
 )(Stuff);
 
-DigitDialogStory.add(
-    "DigitDialog",
-    () => {
-        return (
-            <DigitProviders>
-                <StuffContainer />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitDialogReadme,
-            propTables: [DigitDialog],
-            propTablesExclude: [DigitProviders, StuffContainer, Stuff]
+storiesOf("Views", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitDialog",
+        () => {
+            return <StuffContainer />;
+        },
+        {
+            info: {
+                text: DigitDialogReadme,
+                propTables: [DigitDialog],
+                propTablesExclude: [DigitProviders, StuffContainer, Stuff],
+                source: false,
+                header: false
+            }
         }
-    }
-);
+    );

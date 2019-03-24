@@ -8,29 +8,31 @@ import DigitUniformGridReadme from "../../components/styles/digit-layout/uniform
 import { Display } from "../../components/styles/digit-text/DigitText.styles";
 import DummyItem from "./DummyItem";
 import { DigitProviders } from "../../components";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitUniformGridStory = storiesOf("Layout", module);
-DigitUniformGridStory.addDecorator(withKnobs);
+storiesOf("Layout", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitUniformGrid",
+        () => {
+            const numItems = number("num of items", 5);
+            const minItemWidth = text("min item width", "120px");
+            const minItemHeight = text("min item height", "120px");
+            const margin = number("Margin", 8, {
+                range: true,
+                min: 0,
+                max: 50,
+                step: 1
+            });
 
-DigitUniformGridStory.add(
-    "DigitUniformGrid",
-    () => {
-        const numItems = number("num of items", 5);
-        const minItemWidth = text("min item width", "120px");
-        const minItemHeight = text("min item height", "120px");
-        const padding = number("Padding", 8, {
-            range: true,
-            min: 0,
-            max: 50,
-            step: 1
-        });
-
-        return (
-            <DigitProviders>
+            return (
                 <UniformGrid
                     minItemWidth={minItemWidth}
                     minItemHeight={minItemHeight}
-                    padding={`${padding}px`}
+                    margin={`${margin}px`}
                     fillElement
                 >
                     {Array.from(new Array(numItems), (_, i) => (
@@ -41,14 +43,15 @@ DigitUniformGridStory.add(
                         />
                     ))}
                 </UniformGrid>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitUniformGridReadme,
-            propTables: [UniformGrid],
-            propTablesExclude: [DummyItem, DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitUniformGridReadme,
+                propTables: [UniformGrid],
+                propTablesExclude: [DummyItem, DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

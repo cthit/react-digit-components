@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const DigitButton = ({
-    text,
+    text = "Button",
     onClick,
     primary,
     secondary,

@@ -304,7 +304,6 @@ export const Column = styled(
         topAlign,
         bottomAlign,
         reverse,
-        margin,
         marginVertical,
         fillElement,
         children,
@@ -324,9 +323,8 @@ export const Column = styled(
 )`
     flex-direction: ${props => (!props.reverse ? "column" : "column-reverse")};
     > * {
-        margin: ${props => props.margin} !important;
-        margin-top: ${props => props.marginVertical} !important;
-        margin-bottom: ${props => props.marginVertical} !important;
+        margin-top: ${props => props.marginVertical};
+        margin-bottom: ${props => props.marginVertical};
     }
     flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
@@ -405,7 +403,7 @@ Column.propTypes = {
 Column.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginVertical: "8px"
+    marginVertical: "4px"
 };
 
 export const Row = styled(
@@ -419,6 +417,7 @@ export const Row = styled(
         fillElement,
         children,
         scroll,
+        marginHorizontal,
         ...rest
     }) => (
         <Flex
@@ -434,9 +433,8 @@ export const Row = styled(
 )`
     flex-direction: ${props => (!props.reverse ? "row" : "row-reverse")};
     > * {
-        margin: ${props => props.margin} !important;
-        margin-right: ${props => props.marginHorizontal} !important;
-        margin-left: ${props => props.marginHorizontal} !important;
+        margin-right: ${props => props.marginHorizontal};
+        margin-left: ${props => props.marginHorizontal};
     }
     flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
@@ -515,7 +513,7 @@ Row.propTypes = {
 Row.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginHorizontal: "8px"
+    marginHorizontal: "4px"
 };
 
 export const DownRightPosition = styled.div`
@@ -538,38 +536,31 @@ export const Fill = styled.div`
 
 Fill.displayName = "Fill";
 
-export const VerticalFill = styled(Fill)`
-    flex-direction: row;
-    align-items: center;
-`;
-
-VerticalFill.displayName = "VerticalFill";
-
-export const MarginTop = Fill.extend`
+export const MarginTop = styled(Fill)`
     margin-top: 8px;
 `;
 
 MarginTop.displayName = "MarginTop";
 
-export const MarginBottom = Fill.extend`
+export const MarginBottom = styled(Fill)`
     margin-bottom: 8px;
 `;
 
 MarginBottom.displayName = "MarginBottom";
 
-export const MarginLeft = Fill.extend`
+export const MarginLeft = styled(Fill)`
     margin-left: 8px;
 `;
 
 MarginLeft.displayName = "MarginLeft";
 
-export const MarginRight = Fill.extend`
+export const MarginRight = styled(Fill)`
     margin-right: 8px;
 `;
 
 MarginRight.displayName = "MarginRight";
 
-export const Margin = Fill.extend`
+export const Margin = styled(Fill)`
     margin: 4px;
 `;
 
@@ -583,8 +574,8 @@ export const Spacing = styled.div`
 
 Spacing.displayName = "Spacing";
 
-export const Padding = Fill.extend`
-    padding: 8px;
+export const Padding = styled(Fill)`
+    padding: 4px;
 `;
 
 Padding.displayName = "Padding";
@@ -635,6 +626,8 @@ export const Size = styled(Flex)`
         props.absWidth != null ? props.absWidth : props.minWidth};
     min-height: ${props =>
         props.absHeight != null ? props.absHeight : props.minHeight};
+
+    overflow: ${props => (props.autoScroll ? "auto" : "visible")};
 `;
 
 Size.displayName = "Size";

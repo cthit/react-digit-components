@@ -15,6 +15,10 @@ import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 
 const styles = theme => ({
+    container: {
+        display: "flex",
+        height: 250
+    },
     input: {
         display: "flex"
     },
@@ -30,10 +34,8 @@ const styles = theme => ({
     },
     paper: {
         position: "absolute",
-        zIndex: 1,
-        marginTop: theme.spacing.unit,
-        left: 0,
-        right: 0
+        top: "75%",
+        bottom: "auto"
     }
 });
 
@@ -96,7 +98,7 @@ function MultiValue(props) {
     return (
         <DigitChip
             label={props.children}
-            onDelete={props.removeProps.onClick}
+            onDelete={!props.isDisabled ? props.removeProps.onClick : null}
             deleteIcon={<CancelIcon {...props.removeProps} />}
         />
     );
@@ -141,60 +143,71 @@ class DigitAutocompleteSelectSingle extends React.Component {
             theme,
             value,
             onChange,
-            filled,
-            outlined,
             upperLabel,
             lowerLabel,
             error,
             errorMessage,
             name,
-            selectableValues
+            selectableValues,
+            disabled
         } = this.props;
 
         const { menuIsOpen } = this.state;
 
         const selectStyles = {
+            container: () => ({
+                display: "flex",
+                flex: 1
+            }),
             input: base => ({
                 ...base,
                 color: theme.palette.text.primary
             })
         };
 
+        const selectedValue = _.find(selectableValues, { value });
+        var selectedValueLabel = null;
+
+        if (selectedValue != null) {
+            selectedValueLabel = selectedValue.label;
+        }
+
         return (
-            <NoSsr>
-                <Select
-                    name={name}
-                    classes={classes}
-                    styles={selectStyles}
-                    options={selectableValues}
-                    components={components}
-                    value={value}
-                    onChange={onChange}
-                    placeholder=""
-                    menuIsOpen={menuIsOpen}
-                    onMenuOpen={() => {
-                        this.onMenuIsOpenChange(true);
-                    }}
-                    onMenuClose={() => {
-                        this.onMenuIsOpenChange(false);
-                    }}
-                    textFieldProps={{
-                        label: upperLabel,
-                        helperText:
-                            error && errorMessage != null
-                                ? errorMessage
-                                : lowerLabel,
-                        InputLabelProps: {
-                            shrink: value !== "" || this.state.singleOpen
-                        },
-                        variant: filled
-                            ? "filled"
-                            : outlined
-                            ? "outlined"
-                            : "standard"
-                    }}
-                />
-            </NoSsr>
+            <Select
+                name={name}
+                classes={classes}
+                styles={selectStyles}
+                options={selectableValues}
+                components={components}
+                placeholder=""
+                value={
+                    selectedValueLabel == null
+                        ? null
+                        : { value, label: selectedValueLabel }
+                }
+                onChange={e => {
+                    onChange({ target: { value: e.value } });
+                }}
+                menuIsOpen={menuIsOpen}
+                onMenuOpen={() => {
+                    this.onMenuIsOpenChange(true);
+                }}
+                onMenuClose={() => {
+                    this.onMenuIsOpenChange(false);
+                }}
+                textFieldProps={{
+                    label: upperLabel,
+                    error: error,
+                    disabled: disabled,
+                    helperText:
+                        error && errorMessage != null
+                            ? errorMessage
+                            : lowerLabel,
+                    InputLabelProps: {
+                        shrink: value !== "" || this.state.singleOpen
+                    }
+                }}
+            />
         );
     }
 }

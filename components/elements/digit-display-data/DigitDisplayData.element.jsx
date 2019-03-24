@@ -13,9 +13,9 @@ const HorizontalFill = styled(Fill)`
     flex-direction: row;
 `;
 
-const RightAlignedColumn = Column.extend`
+const RightAlignedColumn = styled(Column)`
     text-align: right;
-    margin-right: 8px !important;
+    margin-right: 8px;
 `;
 
 const DigitDisplayData = ({ data, keysText, keysOrder }) => (

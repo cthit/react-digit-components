@@ -1,8 +1,0 @@
-{
-    "firstName": ["First name", "Förnamn"],
-    "lastName": ["Last name", "Efternamn"],
-    "age": ["Age", "Ålder"],
-    "id": ["Id", "Id"],
-    "choose": ["Choose", "Välj"],
-    "info": ["More information", "Mer information"]
-}

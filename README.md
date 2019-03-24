@@ -1,3 +1,4 @@
+
 # react-digit-components
 
 This is a set of reusable ReactJS components that digIT uses. The components are built mainly using [material-ui](https://material-ui.com). But we also use awesome libraries like [Formik](https://jaredpalmer.com/formik), [material-ui-pickers](https://material-ui-pickers.firebaseapp.com/) and more!
@@ -38,7 +39,7 @@ Setups up redux, translations and all the components. You must only have one, no
 
 ```
 <!-- This comment is used to make react-digit-components work properly -->
-<!-- insertion-point-jss -->
+<noscript id="jss-insertion-point"></noscript>
 ```
 
 ### Buttons

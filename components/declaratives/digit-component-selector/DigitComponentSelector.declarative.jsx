@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Hide } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitComponentSelector = ({
-    activeComponent,
-    components,
+    activeComponent = 0,
+    components = [_A],
     keepAllMounted
 }) => {
     return keepAllMounted ? (
@@ -27,9 +27,12 @@ const _DigitComponentSelectorMounted = ({ activeComponent, components }) => {
         </Hide>
     ));
 };
+
 const _DigitComponentSelectorUnmounted = ({ activeComponent, components }) => {
     return React.createElement(components[activeComponent], {});
 };
+
+const _A = () => <div>No components</div>;
 
 DigitComponentSelector.propTypes = {
     activeComponent: PropTypes.number.isRequired,

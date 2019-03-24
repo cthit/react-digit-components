@@ -6,7 +6,8 @@ import {
 } from "./DigitDialog.view.action-creator";
 
 const mapStateToProps = (state, ownProps) => ({
-    options: state.dialog
+    options: state.dialog,
+    custom: state.dialog != null ? state.dialog.custom : false
 });
 
 const mapDispatchToProps = dispatch => ({

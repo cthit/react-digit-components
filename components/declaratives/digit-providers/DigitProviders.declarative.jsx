@@ -50,6 +50,13 @@ class DigitProviders extends React.Component {
                 useNextVariants: true,
                 fontSize: 16
             },
+            overrides: {
+                MuiTooltip: {
+                    tooltip: {
+                        fontSize: 14
+                    }
+                }
+            },
             palette: {
                 primary: {
                     main: "#2196f3",

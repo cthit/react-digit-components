@@ -66,6 +66,7 @@ DigitSwitch.propTypes = {
 
 DigitSwitch.defaultProps = {
     onBlur: () => {},
+    onChange: () => {},
     error: false,
     errorMessage: "",
     disabled: false,

@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitSelect } from "../../components";
+import { DigitSelect, DigitLayout } from "../../components";
 
 class StoryDigitSelect extends React.Component {
     state = {
@@ -17,21 +17,23 @@ class StoryDigitSelect extends React.Component {
         const { disabled, upperLabel, lowerLabel, style } = this.props;
 
         return (
-            <DigitSelect
-                onChange={this.onSelectChanged}
-                value={selectedFlavour}
-                disabled={disabled}
-                upperLabel={upperLabel}
-                lowerLabel={lowerLabel}
-                valueToTextMap={{
-                    chocolate: "Chocolate",
-                    vanilla: "Vanilla",
-                    strawberry: "Strawberry"
-                }}
-                allowToChooseNone
-                outlined={style === "outlined"}
-                filled={style === "filled"}
-            />
+            <DigitLayout.Size width="200px" height="150px">
+                <DigitSelect
+                    onChange={this.onSelectChanged}
+                    value={selectedFlavour}
+                    disabled={disabled}
+                    upperLabel={upperLabel}
+                    lowerLabel={lowerLabel}
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    allowToChooseNone
+                    outlined={style === "outlined"}
+                    filled={style === "filled"}
+                />
+            </DigitLayout.Size>
         );
     }
 }

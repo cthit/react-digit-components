@@ -1,41 +1,47 @@
-import { select, withKnobs } from "@storybook/addon-knobs";
+import { boolean, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import {
-    DigitAutocompleteSelectMultiple,
-    DigitProviders
-} from "../../components";
+import { DigitProviders } from "../../components";
 import DigitAutocompleteSelectMultipleReadme from "../../components/elements/digit-autocomplete-select-multiple/readme.md";
-import {
-    Column,
-    MarginTop
-} from "../../components/styles/digit-layout/DigitLayout.styles";
 import StoryDigitAutocompleteSelectMultiple from "./StoryDigitAutocompleteSelectMultiple";
 
-const typeLabel = "Type";
-const typeOptions = ["Icon", "Image"];
-const typeDefaultValue = "Icon";
+import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitAutocompleteSelectMultipleStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitAutocompleteSelectMultiple",
+        () => {
+            const upperLabel = text("Upper label", "This is a upperLabel");
+            const lowerLabel = text("Lower label", "This is a lowerLabel");
+            const error = boolean("Error", false);
+            const errorMessage = text(
+                "Error message",
+                "Buuuh, this is a error"
+            );
+            const disabled = boolean("disabled", false);
 
-DigitAutocompleteSelectMultipleStory.addDecorator(withKnobs);
-
-DigitAutocompleteSelectMultipleStory.add(
-    "DigitAutocompleteSelectMultiple",
-    () => {
-        return (
-            <DigitProviders>
-                <Column>
-                    <MarginTop />
-                    <StoryDigitAutocompleteSelectMultiple />
-                </Column>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitAutocompleteSelectMultipleReadme,
-            propTablesExclude: [DigitProviders]
+            return (
+                <StoryDigitAutocompleteSelectMultiple
+                    upperLabel={upperLabel}
+                    lowerLabel={lowerLabel}
+                    error={error}
+                    errorMessage={errorMessage}
+                    disabled={disabled}
+                />
+            );
+        },
+        {
+            info: {
+                text: DigitAutocompleteSelectMultipleReadme,
+                propTablesExclude: [DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

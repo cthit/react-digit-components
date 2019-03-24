@@ -4,16 +4,19 @@ import React from "react";
 import { DigitButton, DigitProviders, DigitTooltip } from "../../components";
 import DigitTooltipReadme from "../../components/elements/digit-tooltip/readme.md";
 import { Size } from "../../components/styles/digit-layout/DigitLayout.styles";
+import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitTooltipStory = storiesOf("Elements", module);
-
-DigitTooltipStory.addDecorator(withKnobs);
-
-DigitTooltipStory.add(
-    "DigitTooltip",
-    () => {
-        return (
-            <DigitProviders>
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitTooltip",
+        () => {
+            return (
                 <Size width="200px">
                     <DigitTooltip
                         text={text("Tooltip text", "This is a tooltip")}
@@ -21,14 +24,15 @@ DigitTooltipStory.add(
                         <DigitButton text="Hover me" />
                     </DigitTooltip>
                 </Size>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitTooltipReadme,
-            propTables: [DigitTooltip],
-            propTablesExclude: [DigitProviders, Size, DigitButton]
+            );
+        },
+        {
+            info: {
+                text: DigitTooltipReadme,
+                propTables: [DigitTooltip],
+                propTablesExclude: [DigitProviders, Size, DigitButton],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

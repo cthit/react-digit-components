@@ -3,27 +3,29 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitImage, DigitProviders } from "../../components";
 import DigitImageReadme from "../../components/elements/digit-image/readme.md";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitImageStory = storiesOf("Elements", module);
-
-DigitImageStory.addDecorator(withKnobs);
-
-DigitImageStory.add(
-    "DigitImage",
-    () => {
-        return (
-            <DigitProviders>
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitImage",
+        () => {
+            return (
                 <DigitImage
                     imageStyle={{ width: "300px", height: "300px" }}
                     src="https://i.imgur.com/G8lFDH1.jpg"
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitImageReadme,
-            propTablesExclude: [DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitImageReadme,
+                propTablesExclude: [DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

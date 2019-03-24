@@ -7,30 +7,31 @@ import { DigitProviders } from "../../components";
 import DigitGridReadme from "../../components/styles/digit-layout/grid-readme.md";
 import { Grid } from "../../components/styles/digit-layout/DigitLayout.styles";
 import DummyItem from "./DummyItem";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitGridStory = storiesOf("Layout", module);
+storiesOf("Layout", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitGrid",
+        () => {
+            let numItems = number("num of items", 5);
+            let numCols = number("number of columns", 3);
+            const margin = number("Margin", 8, {
+                range: true,
+                min: 0,
+                max: 50,
+                step: 1
+            });
 
-DigitGridStory.addDecorator(withKnobs);
-
-DigitGridStory.add(
-    "DigitGrid",
-    () => {
-        let numItems = number("num of items", 5);
-        let numCols = number("number of columns", 3);
-        const padding = number("Padding", 8, {
-            range: true,
-            min: 0,
-            max: 50,
-            step: 1
-        });
-
-        return (
-            <DigitProviders>
+            return (
                 <Grid
                     inline
                     fillElement
                     columns={`repeat(${numCols}, 1fr)`}
-                    padding={`${padding}px`}
+                    margin={`${margin}px`}
                 >
                     {Array.from(new Array(numItems), (_, i) => (
                         <DummyItem
@@ -40,14 +41,15 @@ DigitGridStory.add(
                         />
                     ))}
                 </Grid>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitGridReadme,
-            propTables: [Grid],
-            propTablesExclude: [DummyItem, DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitGridReadme,
+                propTables: [Grid],
+                propTablesExclude: [DummyItem, DigitProviders],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

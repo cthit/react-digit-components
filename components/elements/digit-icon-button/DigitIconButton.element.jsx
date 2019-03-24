@@ -39,7 +39,9 @@ DigitIconButton.propTypes = {
 DigitIconButton.defaultProps = {
     primary: false,
     secondary: false,
-    disabled: false
+    disabled: false,
+    icon: () => null,
+    onClick: () => {}
 };
 
 export default DigitIconButton;

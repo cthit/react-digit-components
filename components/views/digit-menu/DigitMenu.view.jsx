@@ -78,4 +78,8 @@ DigitMenu.propTypes = {
     onClick: PropTypes.func.isRequired
 };
 
+DigitMenu.defaultProps = {
+    valueToTextMap: {}
+};
+
 export default DigitMenu;

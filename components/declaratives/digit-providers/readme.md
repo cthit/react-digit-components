@@ -4,13 +4,12 @@ DigitProviders is something you must include on your website to ensure the prope
 
 ```
 <!-- This comment is used to make react-digit-components work properly -->
-<!-- insertion-point-jss -->
+<noscript id="jss-insertion-point"></noscript>
 ```
 
 DigitProviders initializes the following things:
 
 -   Redux
--   Translations
 -   Theming of the components
 -   BrowerRouter for react-router-dom
 

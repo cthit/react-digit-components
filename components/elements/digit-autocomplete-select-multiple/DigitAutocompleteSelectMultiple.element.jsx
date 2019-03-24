@@ -1,20 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
 import Select from "react-select";
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import NoSsr from "@material-ui/core/NoSsr";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
 import CancelIcon from "@material-ui/icons/Cancel";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
+import { DigitLayout } from "../../";
+import * as _ from "lodash";
 
 const styles = theme => ({
+    container: {
+        display: "flex"
+    },
     input: {
         display: "flex"
     },
@@ -25,26 +25,14 @@ const styles = theme => ({
         alignItems: "center",
         overflow: "hidden"
     },
-    chip: {
-        margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
-    },
-    chipFocused: {
-        backgroundColor: emphasize(
-            theme.palette.type === "light"
-                ? theme.palette.grey[300]
-                : theme.palette.grey[700],
-            0.08
-        )
-    },
     noOptionsMessage: {
         padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
     },
     paper: {
         position: "absolute",
         zIndex: 1,
-        marginTop: theme.spacing.unit,
-        left: 0,
-        right: 0
+        top: "75%",
+        bottom: "auto"
     }
 });
 
@@ -70,7 +58,6 @@ function Control(props) {
                 }
             }}
             {...props.selectProps.textFieldProps}
-            placeholder=""
         />
     );
 }
@@ -107,7 +94,7 @@ function MultiValue(props) {
     return (
         <DigitChip
             label={props.children}
-            onDelete={props.removeProps.onClick}
+            onDelete={!props.isDisabled ? props.removeProps.onClick : null}
             deleteIcon={<CancelIcon {...props.removeProps} />}
         />
     );
@@ -137,7 +124,8 @@ const components = {
 
 class DigitAutocompleteSelectMultiple extends React.Component {
     state = {
-        menuIsOpen: false
+        menuIsOpen: false,
+        height: 0
     };
 
     onMenuIsOpenChange = open => {
@@ -152,62 +140,72 @@ class DigitAutocompleteSelectMultiple extends React.Component {
             theme,
             value,
             onChange,
-            filled,
-            outlined,
             upperLabel,
             lowerLabel,
             error,
             errorMessage,
             name,
-            selectableValues
+            selectableValues,
+            disabled
         } = this.props;
 
         const { menuIsOpen } = this.state;
 
         const selectStyles = {
+            container: () => ({
+                display: "flex",
+                flex: 1
+            }),
             input: base => ({
                 ...base,
                 color: theme.palette.text.primary
             })
         };
+
+        const selectedValueObjects = value.map(value =>
+            _.find(selectableValues, { value })
+        );
+
         return (
-            <NoSsr>
-                <Select
-                    name={name}
-                    classes={classes}
-                    styles={selectStyles}
-                    options={selectableValues}
-                    components={components}
-                    value={value}
-                    onChange={onChange}
-                    isMulti
-                    placeholder=""
-                    menuIsOpen={menuIsOpen}
-                    onMenuOpen={() => {
-                        this.onMenuIsOpenChange(true);
-                    }}
-                    onMenuClose={() => {
-                        this.onMenuIsOpenChange(false);
-                    }}
-                    textFieldProps={{
-                        label: upperLabel,
-                        helperText:
-                            error && errorMessage != null
-                                ? errorMessage
-                                : lowerLabel,
-                        InputLabelProps: {
-                            shrink:
-                                (value != null && value.length > 0) ||
-                                this.state.multipleOpen
-                        },
-                        variant: filled
-                            ? "filled"
-                            : outlined
-                            ? "outlined"
-                            : "standard"
-                    }}
-                />
-            </NoSsr>
+            <Select
+                name={name}
+                classes={classes}
+                styles={selectStyles}
+                options={selectableValues}
+                components={components}
+                value={selectedValueObjects}
+                onChange={e => {
+                    onChange({
+                        target: {
+                            value: e.map(value => value.value)
+                        }
+                    });
+                }}
+                isMulti
+                placeholder=""
+                menuIsOpen={menuIsOpen}
+                onMenuOpen={() => {
+                    this.onMenuIsOpenChange(true);
+                }}
+                onMenuClose={() => {
+                    this.onMenuIsOpenChange(false);
+                }}
+                isDisabled={disabled}
+                textFieldProps={{
+                    label: upperLabel,
+                    error: error,
+                    disabled: disabled,
+                    helperText:
+                        error && errorMessage != null
+                            ? errorMessage
+                            : lowerLabel,
+                    InputLabelProps: {
+                        shrink:
+                            (value != null && value.length > 0) ||
+                            this.state.multipleOpen
+                    }
+                }}
+            />
         );
     }
 }

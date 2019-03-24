@@ -5,26 +5,29 @@ import { DigitLayout, DigitProviders } from "../../components";
 import { DigitTimePicker } from "../../components/elements/digit-time-picker/DigitTimePicker.element";
 import DigitTimePickerReadme from "../../components/elements/digit-time-picker/readme.md";
 import StoryDigitTimePicker from "./StoryDigitTimePicker";
-
-const DigitTimePickerStory = storiesOf("Elements", module);
+import centered from "@storybook/addon-centered/react";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import { withInfo } from "@storybook/addon-info";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
 const styleDefaultValue = "standard";
 
-DigitTimePickerStory.addDecorator(withKnobs);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitTimePicker",
+        () => {
+            const upperLabel = text("Upperlabel: ", "My time");
+            const lowerLabel = text("Lowerlabel: ", "Please enter something");
+            const errorMessage = text("Error message: ", "ERROR ERROR");
+            const error = boolean("Error: ", false);
+            const style = select(styleLabel, styleOptions, styleDefaultValue);
 
-DigitTimePickerStory.add(
-    "DigitTimePicker",
-    () => {
-        const upperLabel = text("Upperlabel: ", "My time");
-        const lowerLabel = text("Lowerlabel: ", "Please enter something");
-        const errorMessage = text("Error message: ", "ERROR ERROR");
-        const error = boolean("Error: ", false);
-        const style = select(styleLabel, styleOptions, styleDefaultValue);
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitLayout.Size absWidth="300px" absHeight="300px">
                     <StoryDigitTimePicker
                         error={error}
@@ -34,18 +37,19 @@ DigitTimePickerStory.add(
                         upperLabel={upperLabel}
                     />
                 </DigitLayout.Size>
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitTimePickerReadme,
-            propTables: [DigitTimePicker],
-            propTablesExclude: [
-                DigitProviders,
-                DigitLayout.Size,
-                StoryDigitTimePicker
-            ]
+            );
+        },
+        {
+            info: {
+                text: DigitTimePickerReadme,
+                propTables: [DigitTimePicker],
+                propTablesExclude: [
+                    DigitProviders,
+                    DigitLayout.Size,
+                    StoryDigitTimePicker
+                ],
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

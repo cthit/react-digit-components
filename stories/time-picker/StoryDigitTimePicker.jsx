@@ -6,9 +6,9 @@ class StoryDigitTimePicker extends React.Component {
         date: null
     };
 
-    onTimeChanged = newDate => {
+    onTimeChanged = e => {
         this.setState({
-            date: newDate
+            date: e.target.value
         });
     };
 

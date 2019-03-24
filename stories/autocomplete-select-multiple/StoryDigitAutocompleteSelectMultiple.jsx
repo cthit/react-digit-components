@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitAutocompleteSelectMultiple } from "../../components";
+import { DigitAutocompleteSelectMultiple, DigitLayout } from "../../components";
 import { Column } from "../../components/styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../components/styles/digit-text/DigitText.styles";
 
@@ -45,25 +45,44 @@ const suggestions = [
 
 class StoryDigitAutocompleteSelectMultiple extends React.Component {
     state = {
-        selected: []
+        selected: ["Benin", "Belarus", "Austria"]
     };
 
-    onSelectedChange = selected => {
+    onSelectedChange = e => {
         this.setState({
-            selected: selected
+            selected: e.target.value
         });
     };
 
     render() {
+        const {
+            disabled,
+            upperLabel,
+            lowerLabel,
+            error,
+            errorMessage
+        } = this.props;
+
         return (
             <Column>
-                <DigitAutocompleteSelectMultiple
-                    selectableValues={suggestions}
-                    value={this.state.selected}
-                    onChange={this.onSelectedChange}
-                />
+                <DigitLayout.Size absWidth={"200px"}>
+                    <DigitAutocompleteSelectMultiple
+                        disabled={disabled}
+                        upperLabel={upperLabel}
+                        lowerLabel={lowerLabel}
+                        error={error}
+                        errorMessage={errorMessage}
+                        selectableValues={suggestions}
+                        value={this.state.selected}
+                        onChange={this.onSelectedChange}
+                    />
+                </DigitLayout.Size>
                 {this.state.selected.map(select => (
-                    <Text text={select.value} key={select.value} />
+                    <Text
+                        key={select.value}
+                        text={select.value}
+                        key={select.value}
+                    />
                 ))}
             </Column>
         );

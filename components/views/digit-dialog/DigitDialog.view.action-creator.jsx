@@ -1,6 +1,7 @@
 import {
     DIGIT_DIALOG_CLOSED_CANCEL,
     DIGIT_DIALOG_CLOSED_CONFIRM,
+    DIGIT_DIALOG_CUSTOM_OPEN,
     DIGIT_DIALOG_OPEN
 } from "./DigitDialog.view.actions";
 
@@ -16,7 +17,23 @@ export function digitDialogOpen(options) {
         type: DIGIT_DIALOG_OPEN,
         error: false,
         payload: {
-            options: options
+            options
+        }
+    };
+}
+
+/**
+ * Options
+ *  - renderMain
+ *  - title
+ *  - renderButtons
+ */
+export function digitDialogCustomOpen(options) {
+    return {
+        type: DIGIT_DIALOG_CUSTOM_OPEN,
+        error: false,
+        payload: {
+            options
         }
     };
 }

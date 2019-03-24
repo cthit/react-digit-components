@@ -3,21 +3,24 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitDisplayData, DigitProviders } from "../../components";
 import DigitDisplayDataReadme from "../../components/elements/digit-display-data/readme.md";
+import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitDisplayDataStory = storiesOf("Elements", module);
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitDisplayData",
+        () => {
+            const firstName = text("Förnamn", "Sven");
+            const lastName = text("Efternamn", "Svensson");
+            const email = text("Email", "Sven@svensson.se");
+            const nick = text("Nick", "Svennis");
 
-DigitDisplayDataStory.addDecorator(withKnobs);
-
-DigitDisplayDataStory.add(
-    "DigitDisplayData",
-    () => {
-        const firstName = text("Förnamn", "Sven");
-        const lastName = text("Efternamn", "Svensson");
-        const email = text("Email", "Sven@svensson.se");
-        const nick = text("Nick", "Svennis");
-
-        return (
-            <DigitProviders>
+            return (
                 <DigitDisplayData
                     data={{
                         firstName: firstName,
@@ -33,14 +36,15 @@ DigitDisplayDataStory.add(
                     }}
                     keysOrder={["firstName", "lastName", "email", "nick"]}
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitDisplayDataReadme,
-            propTables: [DigitDisplayData],
-            propTablesExclude: [DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitDisplayDataReadme,
+                propTables: [DigitDisplayData],
+                propTablesExclude: [DigitProviders],
+                source: false,
+                header: false
+            }
         }
-    }
-);
+    );

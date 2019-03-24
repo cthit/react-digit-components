@@ -84,17 +84,6 @@ class DigitFormField extends Component {
     render() {
         const { name, component, componentProps, notFast } = this.props;
 
-        var customOnChange = null;
-
-        if (
-            component === DigitAutocompleteSelectSingle ||
-            component === DigitAutocompleteSelectMultiple
-        ) {
-            customOnChange = form => value => {
-                form.setFieldValue(name, value);
-            };
-        }
-
         if (notFast) {
             return (
                 <Field
@@ -104,6 +93,9 @@ class DigitFormField extends Component {
                         const { field, form } = props;
                         const error = form.touched[name] && form.errors[name];
                         field.value = field.value == null ? "" : field.value;
+                        field.onChange = e => {
+                            form.setFieldValue(field.name, e.target.value);
+                        };
 
                         return React.createElement(component, {
                             error: error != null,
@@ -132,10 +124,9 @@ class DigitFormField extends Component {
                         const { field, form } = props;
                         const error = form.touched[name] && form.errors[name];
                         field.value = field.value == null ? "" : field.value;
-
-                        if (customOnChange != null) {
-                            field.onChange = customOnChange(form);
-                        }
+                        field.onChange = e => {
+                            form.setFieldValue(field.name, e.target.value);
+                        };
 
                         return React.createElement(component, {
                             error: error != null,
@@ -168,7 +159,9 @@ DigitFormField.propTypes = {
 };
 
 DigitFormField.defaultProps = {
-    componentProps: {}
+    componentProps: {},
+    component: () => null,
+    name: ""
 };
 
 export default DigitFormField;

@@ -8,23 +8,26 @@ import {
     Text,
     Title
 } from "../../components/styles/digit-text/DigitText.styles";
+import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitRenderSelectorStory = storiesOf("Declaratives", module);
+storiesOf("Declaratives", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .addDecorator(withKnobs)
+    .add(
+        "DigitRenderSelector",
+        () => {
+            const activeRender = number("What render", 0, {
+                range: false,
+                min: 0,
+                max: 2,
+                step: 1
+            });
 
-DigitRenderSelectorStory.addDecorator(withKnobs);
-
-DigitRenderSelectorStory.add(
-    "DigitRenderSelector",
-    () => {
-        const activeRender = number("What render", 0, {
-            range: false,
-            min: 0,
-            max: 2,
-            step: 1
-        });
-
-        return (
-            <Column>
+            return (
                 <DigitRenderSelector
                     activeRender={activeRender}
                     renders={[
@@ -38,14 +41,13 @@ DigitRenderSelectorStory.add(
                         )
                     ]}
                 />
-            </Column>
-        );
-    },
-    {
-        info: {
-            text: DigitRenderSelectorReadme,
-            propTables: [DigitRenderSelector],
-            propTablesExclude: [DigitProviders]
+            );
+        },
+        {
+            info: {
+                text: DigitRenderSelectorReadme,
+                header: false,
+                source: false
+            }
         }
-    }
-);
+    );

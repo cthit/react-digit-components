@@ -18,14 +18,18 @@ import DigitFormReadme from "../../components/elements/digit-form/readme.md";
 import * as DigitDesign from "../../components/styles/digit-design/DigitDesign.styles";
 import * as DigitLayout from "../../components/styles/digit-layout/DigitLayout.styles";
 import * as DigitText from "../../components/styles/digit-text/DigitText.styles";
+import centered from "@storybook/addon-centered/react";
+import { withInfo } from "@storybook/addon-info";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-const DigitFormStory = storiesOf("Elements", module);
-
-DigitFormStory.add(
-    "DigitForm",
-    () => {
-        return (
-            <DigitProviders>
+storiesOf("Elements", module)
+    .addDecorator(withInfo)
+    .addDecorator(DigitProvidersDecorator)
+    .addDecorator(centered)
+    .add(
+        "DigitForm",
+        () => {
+            return (
                 <DigitForm
                     onSubmit={(values, actions) => {
                         action("Values")(values);
@@ -128,18 +132,19 @@ DigitFormStory.add(
                         </DigitDesign.Card>
                     )}
                 />
-            </DigitProviders>
-        );
-    },
-    {
-        info: {
-            text: DigitFormReadme,
-            propTables: [],
-            propTablesExclude: [
-                DigitProviders,
-                DigitLayout.Fill,
-                DigitIfElseRendering
-            ]
+            );
+        },
+        {
+            info: {
+                text: DigitFormReadme,
+                propTables: [],
+                propTablesExclude: [
+                    DigitProviders,
+                    DigitLayout.Fill,
+                    DigitIfElseRendering
+                ],
+                source: false,
+                header: false
+            }
         }
-    }
-);
+    );

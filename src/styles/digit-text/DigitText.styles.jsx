@@ -8,7 +8,7 @@ export const Heading1 = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 6rem;
     font-weight: 900;
 `;
@@ -26,7 +26,7 @@ export const Heading2 = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 3.75rem;
     font-weight: 900;
 `;
@@ -44,7 +44,7 @@ export const Heading3 = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 3rem;
     font-weight: 900;
 `;
@@ -62,7 +62,7 @@ export const Heading4 = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 2.125rem;
     font-weight: 900;
 `;
@@ -80,7 +80,7 @@ export const Heading5 = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 1.5rem;
     font-weight: 900;
 `;
@@ -98,7 +98,7 @@ export const Heading6 = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 1.25rem;
     font-weight: 900;
 `;
@@ -116,7 +116,7 @@ export const Title = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 1.25rem;
     font-weight: 900;
 `;
@@ -134,7 +134,7 @@ export const Subtitle = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 1rem;
 `;
 
@@ -151,7 +151,7 @@ export const Subtitle2 = styled(({ text, white, ...rest }) => (
         {text}
     </Typography>
 ))`
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-size: 0.875rem;
 `;
 
@@ -169,7 +169,7 @@ export const Text = styled(({ text, white, bold, ...rest }) => (
     </Typography>
 ))`
     font-size: 1rem;
-    color: ${props => (props.white ? "white" : "")};
+    color: ${props => (props.white ? "white" : "")} !important;
     font-weight: ${props => (props.bold ? "900" : "inherit")};
 `;
 

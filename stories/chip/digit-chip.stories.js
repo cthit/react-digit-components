@@ -1,8 +1,8 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitChip, DigitProviders, DigitAvatar } from "../../components";
-import DigitChipReadme from "../../components/elements/digit-chip/readme.md";
+import { DigitChip, DigitProviders, DigitAvatar } from "../../src";
+import DigitChipReadme from "../../src/elements/digit-chip/readme.md";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

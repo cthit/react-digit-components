@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitSwitch } from "../../components";
+import { DigitSwitch } from "../../src";
 
 class StoryDigitSwitch extends React.Component {
     state = {

@@ -44,14 +44,131 @@ import DigitDialog from "./views/digit-dialog";
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
 
-import * as DigitRedirectActions from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
-import * as DigitToastActions from "./views/digit-toast/DigitToast.view.action-creator";
-import * as DigitDialogActions from "./views/digit-dialog/DigitDialog.view.action-creator";
-import * as DigitTranslationsActions from "./declaratives/digit-translations/DigitTranslations.declarative.action-creator";
+import {
+    digitRedirectTo,
+    redirectFinished
+} from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
+const DigitRedirectActions = { digitRedirectTo, redirectFinished };
 
-import * as DigitLayout from "./styles/digit-layout/DigitLayout.styles";
-import * as DigitDesign from "./styles/digit-design/DigitDesign.styles";
-import * as DigitText from "./styles/digit-text/DigitText.styles";
+import {
+    digitDialogOpen,
+    digitDialogCustomOpen,
+    digitDialogClosedCancel,
+    digitDialogClosedConfirm
+} from "./views/digit-dialog/DigitDialog.view.action-creator";
+const DigitDialogActions = {
+    digitDialogOpen,
+    digitDialogCustomOpen,
+    digitDialogClosedCancel,
+    digitDialogClosedConfirm
+};
+
+import { digitToastOpen } from "./views/digit-toast/DigitToast.view.action-creator";
+const DigitToastActions = { digitToastOpen };
+
+import {
+    setCommonTranslations,
+    setActiveLanguage
+} from "./declaratives/digit-translations/DigitTranslations.declarative.action-creator";
+const DigitTranslationsActions = { setCommonTranslations, setActiveLanguage };
+
+import {
+    Flex,
+    Grid,
+    GridItem,
+    UniformGrid,
+    Column,
+    Row,
+    DownRightPosition,
+    Fill,
+    MarginTop,
+    MarginBottom,
+    MarginLeft,
+    MarginRight,
+    Margin,
+    Padding,
+    Center,
+    HideFill,
+    Hide,
+    Size,
+    Order,
+    Spacing
+} from "./styles/digit-layout/DigitLayout.styles";
+const DigitLayout = {
+    Flex,
+    Grid,
+    GridItem,
+    UniformGrid,
+    Column,
+    Row,
+    DownRightPosition,
+    Fill,
+    MarginTop,
+    MarginBottom,
+    MarginLeft,
+    MarginRight,
+    Margin,
+    Padding,
+    Center,
+    HideFill,
+    Hide,
+    Size,
+    Order,
+    Spacing
+};
+
+import {
+    Card,
+    CardHeader,
+    CardHeaderImage,
+    CardIcon,
+    CardMenuContainer,
+    CardTitle,
+    CardSubTitle,
+    CardBody,
+    CardButtons,
+    Divider,
+    Link
+} from "./styles/digit-design/DigitDesign.styles";
+const DigitDesign = {
+    Card,
+    CardHeader,
+    CardHeaderImage,
+    CardIcon,
+    CardMenuContainer,
+    CardTitle,
+    CardSubTitle,
+    CardBody,
+    CardButtons,
+    Divider,
+    Link
+};
+
+import {
+    Heading1,
+    Heading2,
+    Heading3,
+    Heading4,
+    Heading5,
+    Heading6,
+    Subtitle,
+    Subtitle2,
+    Text,
+    Title
+} from "./styles/digit-text/DigitText.styles";
+
+const DigitText = {
+    Heading1,
+    Heading2,
+    Heading3,
+    Heading4,
+    Heading5,
+    Heading6,
+    Subtitle,
+    Subtitle2,
+    Text,
+    Title
+};
 
 export {
     /* Elements */

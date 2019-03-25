@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitSelect, DigitLayout } from "../../components";
+import { DigitSelect, DigitLayout } from "../../src";
 
 class StoryDigitSelect extends React.Component {
     state = {

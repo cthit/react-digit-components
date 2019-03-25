@@ -12,11 +12,11 @@ import {
     DigitProviders,
     DigitTextArea,
     DigitTextField
-} from "../../components";
-import DigitDialogConnected from "../../components/views/digit-dialog";
-import DigitDialog from "../../components/views/digit-dialog/DigitDialog.view";
-import { digitDialogOpen } from "../../components/views/digit-dialog/DigitDialog.view.action-creator";
-import DigitDialogReadme from "../../components/views/digit-dialog/readme.md";
+} from "../../src";
+import DigitDialogConnected from "../../src/views/digit-dialog";
+import DigitDialog from "../../src/views/digit-dialog/DigitDialog.view";
+import { digitDialogOpen } from "../../src/views/digit-dialog/DigitDialog.view.action-creator";
+import DigitDialogReadme from "../../src/views/digit-dialog/readme.md";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

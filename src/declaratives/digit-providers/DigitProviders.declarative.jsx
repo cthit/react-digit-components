@@ -14,7 +14,7 @@ import JssProvider from "react-jss/lib/JssProvider";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import { createLogger } from "redux-logger";
+import logger from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
@@ -26,8 +26,6 @@ const jss = create({
     ...jssPreset(),
     insertionPoint: document.getElementById("jss-insertion-point")
 });
-
-const loggerMiddleware = createLogger();
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -42,7 +40,7 @@ class DigitProviders extends React.Component {
                 digitTranslations
             }),
             props.preloadedState,
-            applyMiddleware(loggerMiddleware, thunkMiddleware)
+            applyMiddleware(logger, thunkMiddleware)
         );
 
         this.theme = createMuiTheme({

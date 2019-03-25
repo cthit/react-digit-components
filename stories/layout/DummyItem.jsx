@@ -2,8 +2,8 @@ import React from "react";
 import {
     Center,
     Size
-} from "../../components/styles/digit-layout/DigitLayout.styles";
-import { Heading5 } from "../../components/styles/digit-text/DigitText.styles";
+} from "../../src/styles/digit-layout/DigitLayout.styles";
+import { Heading5 } from "../../src/styles/digit-text/DigitText.styles";
 import BackgroundColor from "./BackgroundColor";
 const DummyItem = ({ text, color }) => (
     <Size absWidth="100px" absHeight="100px">

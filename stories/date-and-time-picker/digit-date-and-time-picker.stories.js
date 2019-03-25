@@ -1,13 +1,13 @@
 import { text, withKnobs, select, boolean } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitLayout, DigitProviders } from "../../components";
-import { DigitDateAndTimePicker } from "../../components/elements/digit-date-and-time-picker/DigitDateAndTimePicker.element";
+import { DigitLayout, DigitProviders } from "../../src";
+import { DigitDateAndTimePicker } from "../../src/elements/digit-date-and-time-picker/DigitDateAndTimePicker.element";
 import StoryDigitDateAndTimePicker from "./StoryDigitDateAndTimePicker";
 import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import { withInfo } from "@storybook/addon-info";
-import DigitDateAndTimePickerReadme from "../../components/elements/digit-date-and-time-picker/readme.md";
+import DigitDateAndTimePickerReadme from "../../src/elements/digit-date-and-time-picker/readme.md";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];

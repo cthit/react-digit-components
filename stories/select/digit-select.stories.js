@@ -1,9 +1,9 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders, DigitSelect } from "../../components";
-import DigitSelectReadme from "../../components/elements/digit-select/readme.md";
-import { Size } from "../../components/styles/digit-layout/DigitLayout.styles";
+import { DigitProviders, DigitSelect } from "../../src";
+import DigitSelectReadme from "../../src/elements/digit-select/readme.md";
+import { Size } from "../../src/styles/digit-layout/DigitLayout.styles";
 import StoryDigitSelect from "./StoryDigitSelect";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

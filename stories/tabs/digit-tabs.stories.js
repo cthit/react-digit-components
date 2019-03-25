@@ -1,9 +1,9 @@
 import { boolean, withKnobs, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders } from "../../components";
-import DigitTabs from "../../components/elements/digit-tabs";
-import DigitTabsReadme from "../../components/elements/digit-tabs/readme.md";
+import { DigitProviders } from "../../src";
+import DigitTabs from "../../src/elements/digit-tabs";
+import DigitTabsReadme from "../../src/elements/digit-tabs/readme.md";
 import StoryDigitTabs from "./StoryDigitTabs";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

@@ -1,8 +1,8 @@
 import { select, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitAvatar, DigitProviders, DigitImage } from "../../components";
-import DigitAvatarReadme from "../../components/elements/digit-avatar/readme.md";
+import { DigitAvatar, DigitProviders, DigitImage } from "../../src";
+import DigitAvatarReadme from "../../src/elements/digit-avatar/readme.md";
 import HomeIcon from "@material-ui/icons/Home";
 import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

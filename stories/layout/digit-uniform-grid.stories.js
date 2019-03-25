@@ -2,12 +2,12 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 import { withKnobs, number, text } from "@storybook/addon-knobs";
-import { UniformGrid } from "../../components/styles/digit-layout/DigitLayout.styles";
+import { UniformGrid } from "../../src/styles/digit-layout/DigitLayout.styles";
 
-import DigitUniformGridReadme from "../../components/styles/digit-layout/uniform-grid-readme.md";
-import { Display } from "../../components/styles/digit-text/DigitText.styles";
+import DigitUniformGridReadme from "../../src/styles/digit-layout/uniform-grid-readme.md";
+import { Display } from "../../src/styles/digit-text/DigitText.styles";
 import DummyItem from "./DummyItem";
-import { DigitProviders } from "../../components";
+import { DigitProviders } from "../../src";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 

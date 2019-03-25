@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import DigitEditData from "../../components/elements/digit-edit-data";
+import DigitEditData from "../../src/elements/digit-edit-data";
 import * as yup from "yup";
-import DigitTextField from "../../components/elements/digit-text-field";
-import DigitCheckbox from "../../components/elements/digit-checkbox";
+import DigitTextField from "../../src/elements/digit-text-field";
+import DigitCheckbox from "../../src/elements/digit-checkbox";
 import { connect } from "react-redux";
-import { setActiveLanguage } from "../../components/declaratives/digit-translations/DigitTranslations.declarative.action-creator";
+import { setActiveLanguage } from "../../src/declaratives/digit-translations/DigitTranslations.declarative.action-creator";
 import {
     DigitAutocompleteSelectSingle,
     DigitSelect,
     DigitTimePicker
-} from "../../components";
+} from "../../src";
 
 const suggestions = [
     { label: "Afghanistan" },

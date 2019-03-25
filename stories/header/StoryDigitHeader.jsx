@@ -5,17 +5,16 @@ import {
     DigitHeader,
     DigitLayout,
     DigitButton,
-    DigitDisplayData,
     DigitNavLink,
     DigitTabs,
     DigitMenu,
     DigitText
-} from "../../components";
+} from "../../src";
 
 import Send from "@material-ui/icons/Send";
 import Info from "@material-ui/icons/Info";
 import Code from "@material-ui/icons/Code";
-import { Text } from "../../components/styles/digit-text/DigitText.styles";
+import { Text } from "../../src/styles/digit-text/DigitText.styles";
 
 const StyledIcon = styled.img`
     width: 32px;
@@ -90,7 +89,7 @@ class StoryDigitHeader extends React.Component {
                 renderToolbar={() => customToolbarDemo && <TabsToolbar />}
                 renderMain={() => {
                     const output = [];
-                    for (var i = 0; i < 1000; i++) {
+                    for (var i = 0; i < 500; i++) {
                         output.push(<Text text={"Hej " + i} />);
                     }
                     return output;

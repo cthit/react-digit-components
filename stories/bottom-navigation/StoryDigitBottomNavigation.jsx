@@ -1,6 +1,6 @@
 import React from "react";
 import IconOne from "@material-ui/icons/Android";
-import { DigitBottomNavigation } from "../../components";
+import { DigitBottomNavigation } from "../../src";
 
 const labels = ["Label One", "Label Two", "Label Three"];
 const icons = [<IconOne />, <IconOne />, <IconOne />];

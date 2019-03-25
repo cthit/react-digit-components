@@ -29,10 +29,9 @@ const StyledAppBar = styled(AppBar)`
             background-size: cover;
         `};
 
-    width: calc(100vw - 15px);
+    position: inherit;
     padding: 0px;
     margin: 0px;
-    position: relative;
 
     ${props =>
         props.navigation === "true" &&
@@ -99,6 +98,10 @@ const StyledMain = styled.main`
         `};
 `;
 
+const StyledColumn = styled(Column)`
+    width: 100vw;
+`;
+
 class DigitHeader extends React.Component {
     state = {
         mobileOpen: false
@@ -133,7 +136,7 @@ class DigitHeader extends React.Component {
 
         return (
             <StyledRoot>
-                <Column>
+                <StyledColumn marginVertical={"0px"}>
                     <StyledAppBar
                         cssimagestring={cssImageString}
                         navigation={(drawer != null).toString()}
@@ -189,7 +192,7 @@ class DigitHeader extends React.Component {
                         {renderMain()}
                         {renderFooter()}
                     </StyledMain>
-                </Column>
+                </StyledColumn>
                 <DigitIfElseRendering
                     test={drawer != null}
                     ifRender={() => (
@@ -239,7 +242,7 @@ DigitHeader.propTypes = {
     renderToolbar: PropTypes.func,
     renderTitle: PropTypes.func,
     renderFooter: PropTypes.func,
-    homeLink: PropTypes.String
+    homeLink: PropTypes.string
 };
 
 DigitHeader.defaultProps = {

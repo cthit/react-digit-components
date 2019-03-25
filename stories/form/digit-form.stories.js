@@ -13,11 +13,11 @@ import {
     DigitIfElseRendering,
     DigitProviders,
     DigitTextField
-} from "../../components";
-import DigitFormReadme from "../../components/elements/digit-form/readme.md";
-import * as DigitDesign from "../../components/styles/digit-design/DigitDesign.styles";
-import * as DigitLayout from "../../components/styles/digit-layout/DigitLayout.styles";
-import * as DigitText from "../../components/styles/digit-text/DigitText.styles";
+} from "../../src";
+import DigitFormReadme from "../../src/elements/digit-form/readme.md";
+import * as DigitDesign from "../../src/styles/digit-design/DigitDesign.styles";
+import * as DigitLayout from "../../src/styles/digit-layout/DigitLayout.styles";
+import * as DigitText from "../../src/styles/digit-text/DigitText.styles";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
@@ -68,7 +68,7 @@ storiesOf("Elements", module)
                                                     <DigitLayout.Fill>
                                                         {form.values.todos.map(
                                                             (todo, index) => (
-                                                                <DigitLayout.VerticalFill
+                                                                <DigitLayout.Column
                                                                     key={
                                                                         todo +
                                                                         "_" +
@@ -90,7 +90,7 @@ storiesOf("Elements", module)
                                                                             );
                                                                         }}
                                                                     />
-                                                                </DigitLayout.VerticalFill>
+                                                                </DigitLayout.Column>
                                                             )
                                                         )}
                                                     </DigitLayout.Fill>
@@ -137,7 +137,6 @@ storiesOf("Elements", module)
         {
             info: {
                 text: DigitFormReadme,
-                propTables: [],
                 propTablesExclude: [
                     DigitProviders,
                     DigitLayout.Fill,

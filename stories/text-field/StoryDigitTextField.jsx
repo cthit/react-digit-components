@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitTextField } from "../../components";
+import { DigitTextField } from "../../src";
 
 class StoryDigitTextField extends React.Component {
     state = {

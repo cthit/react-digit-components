@@ -1,8 +1,8 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitMarkdown, DigitProviders } from "../../components";
-import DigitMarkdownReadme from "../../components/elements/digit-markdown/readme.md";
+import { DigitMarkdown, DigitProviders } from "../../src";
+import DigitMarkdownReadme from "../../src/elements/digit-markdown/readme.md";
 import StoryDigitMarkdown from "./StoryDigitMarkdown";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

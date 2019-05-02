@@ -87,12 +87,10 @@ class DigitFormField extends Component {
         if (notFast) {
             return (
                 <Field
-                    type="text"
                     name={name}
                     render={props => {
                         const { field, form } = props;
                         const error = form.touched[name] && form.errors[name];
-                        field.value = field.value == null ? "" : field.value;
                         field.onChange = e => {
                             form.setFieldValue(field.name, e.target.value);
                         };
@@ -118,14 +116,21 @@ class DigitFormField extends Component {
                             oldFormikProps
                         );
                     }}
-                    type="text"
                     name={name}
                     render={props => {
                         const { field, form } = props;
                         const error = form.touched[name] && form.errors[name];
-                        field.value = field.value == null ? "" : field.value;
+
                         field.onChange = e => {
-                            form.setFieldValue(field.name, e.target.value);
+                            var value = e.target.value;
+                            if (value == null || value === "") {
+                                //maybe a checked property?
+                                value = e.target.checked;
+                            }
+                            if (value == null || value === "") {
+                                value = form.initialValues[name];
+                            }
+                            form.setFieldValue(field.name, value);
                         };
 
                         return React.createElement(component, {

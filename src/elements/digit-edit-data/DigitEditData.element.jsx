@@ -18,6 +18,11 @@ import {
 } from "../../styles/digit-layout/DigitLayout.styles";
 import { DigitIfElseRendering } from "../../index";
 
+function isInitialValid(props) {
+    if (!props.validationSchema) return true;
+    return props.validationSchema.isValidSync(props.initialValues);
+}
+
 const DigitEditData = ({
     initialValues,
     validationSchema,
@@ -51,6 +56,7 @@ const DigitEditData = ({
         <DigitForm
             validationSchema={validationSchema}
             initialValues={initialValues}
+            isInitialValid={isInitialValid}
             onSubmit={onSubmit}
             render={({ isSubmitting, isValid }) => (
                 <Card
@@ -100,7 +106,7 @@ const DigitEditData = ({
                     </CardBody>
                     <CardButtons reverseDirection>
                         <DigitButton
-                            disabled={isSubmitting || !isValid}
+                            disabled={isSubmitting || !isValid} //props.validationSchema.isValidSync(props.initialValues)
                             submit
                             text={submitText}
                             raised
@@ -160,7 +166,9 @@ DigitEditData.propTypes = {
     /** width of the card */
     width: PropTypes.string,
     /** height of the card */
-    height: PropTypes.string
+    height: PropTypes.string,
+    /** If new data should be force */
+    isInitialValid: PropTypes.bool
 };
 
 DigitEditData.defaultProps = {
@@ -173,7 +181,8 @@ DigitEditData.defaultProps = {
     absHeight: null,
     minWidth: "300px",
     maxWidth: "300px",
-    keysOrder: []
+    keysOrder: [],
+    isInitialValid: false
 };
 
 export default DigitEditData;

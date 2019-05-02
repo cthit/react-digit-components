@@ -85,9 +85,9 @@ class StoryDigitEditData extends Component {
                     firstName: "Smurf",
                     lastName: "Smurfsson",
                     email: "email@email.com",
-                    agreement: false,
+                    agreement: true,
                     aCountry: "Angola",
-                    time: Date.now(),
+                    time: new Date(),
                     year: 2006
                 }}
                 onSubmit={this.props.onSubmit}

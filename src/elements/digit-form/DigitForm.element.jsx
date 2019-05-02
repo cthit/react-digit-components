@@ -7,8 +7,15 @@ const FullWidthForm = styled(Form)`
     width: 100%;
 `;
 
-const DigitForm = ({ initialValues, onSubmit, validationSchema, render }) => (
+const DigitForm = ({
+    initialValues,
+    onSubmit,
+    validationSchema,
+    render,
+    isInitialValid
+}) => (
     <Formik
+        isInitialValid={isInitialValid}
         validationSchema={validationSchema}
         initialValues={{ ...initialValues }}
         onSubmit={onSubmit}

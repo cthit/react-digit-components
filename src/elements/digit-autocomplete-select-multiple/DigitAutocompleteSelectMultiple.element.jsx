@@ -30,8 +30,8 @@ const styles = theme => ({
     },
     paper: {
         position: "absolute",
-        zIndex: 1,
-        top: "75%",
+        zIndex: 1000,
+        top: "66%",
         bottom: "auto"
     }
 });

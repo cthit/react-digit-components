@@ -34,7 +34,8 @@ const styles = theme => ({
     },
     paper: {
         position: "absolute",
-        top: "75%",
+        zIndex: 1000,
+        top: "66%",
         bottom: "auto"
     }
 });

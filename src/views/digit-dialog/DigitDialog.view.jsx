@@ -31,8 +31,6 @@ class DigitDialog extends React.Component {
 
         const { open } = this.state;
 
-        console.log(options);
-
         return (
             <DigitIfElseRendering
                 test={options != null}

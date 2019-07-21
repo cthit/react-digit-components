@@ -163,14 +163,18 @@ Subtitle2.propTypes = {
     white: PropTypes.bool
 };
 
-export const Text = styled(({ text, white, bold, ...rest }) => (
-    <Typography {...rest} variant="body1">
-        {text}
-    </Typography>
-))`
+export const Text = styled(
+    ({ text, white, bold, alignCenter, alignRight, ...rest }) => (
+        <Typography {...rest} variant="body1">
+            {text}
+        </Typography>
+    )
+)`
     font-size: 1rem;
     color: ${props => (props.white ? "white" : "")} !important;
     font-weight: ${props => (props.bold ? "900" : "inherit")};
+    text-align: ${props =>
+        props.alignCenter ? "center" : props.alignRight ? "right" : "left"};
 `;
 
 Text.displayName = "Text";
@@ -180,5 +184,9 @@ Text.propTypes = {
     /** Makes the text white if true */
     white: PropTypes.bool,
     /** Makes the text bold if true */
-    bold: PropTypes.bool
+    bold: PropTypes.bool,
+    /** text-align: center */
+    alignCenter: PropTypes.bool,
+    /** text-align: right */
+    alignRight: PropTypes.bool
 };

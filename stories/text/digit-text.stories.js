@@ -27,6 +27,14 @@ storiesOf("Texts", module)
                     <DigitText.Subtitle text="Subtitle;  The quick brown fox jumps over the lazy dog" />
                     <DigitText.Subtitle2 text="Subtitle2;  The quick brown fox jumps over the lazy dog" />
                     <DigitText.Text text="Text;  The quick brown fox jumps over the lazy dog" />
+                    <DigitText.Text
+                        alignCenter
+                        text="Text;  aligned center dog"
+                    />
+                    <DigitText.Text
+                        alignRight
+                        text="Text;  aligned right dog"
+                    />
                 </DigitLayout.Column>
             );
         },

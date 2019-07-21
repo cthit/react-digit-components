@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitCheckbox } from "../../components";
+import { DigitCheckbox } from "../../src";
 
 class StoryDigitCheckbox extends React.Component {
     state = {

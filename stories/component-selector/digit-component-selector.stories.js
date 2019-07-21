@@ -1,8 +1,8 @@
 import { boolean, select, number, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders, DigitComponentSelector } from "../../components";
-import DigitComponentSelectorReadme from "../../components/declaratives/digit-component-selector/readme.md";
+import { DigitProviders, DigitComponentSelector } from "../../src";
+import DigitComponentSelectorReadme from "../../src/declaratives/digit-component-selector/readme.md";
 import CounterTestComponent from "./CounterTestComponent";
 import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
@@ -28,7 +28,7 @@ storiesOf("Declaratives", module)
             return (
                 <DigitComponentSelector
                     activeComponent={activeComponent}
-                    components={[
+                    src={[
                         CounterTestComponent,
                         CounterTestComponent,
                         CounterTestComponent,

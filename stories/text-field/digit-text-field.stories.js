@@ -1,8 +1,8 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitLayout, DigitProviders, DigitTextField } from "../../components";
-import DigitTextFieldReadme from "../../components/elements/digit-text-field/readme.md";
+import { DigitLayout, DigitProviders, DigitTextField } from "../../src";
+import DigitTextFieldReadme from "../../src/elements/digit-text-field/readme.md";
 import StoryDigitTextField from "./StoryDigitTextField";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

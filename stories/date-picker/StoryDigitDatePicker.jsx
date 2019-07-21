@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitDatePicker } from "../../components";
+import { DigitDatePicker } from "../../src";
 
 class StoryDigitDatePicker extends React.Component {
     state = {

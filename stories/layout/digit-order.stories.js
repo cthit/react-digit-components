@@ -5,8 +5,8 @@ import { storiesOf } from "@storybook/react";
 import {
     Order,
     Row
-} from "../../components/styles/digit-layout/DigitLayout.styles";
-import DigitOrderReadme from "../../components/styles/digit-layout/row-readme.md";
+} from "../../src/styles/digit-layout/DigitLayout.styles";
+import DigitOrderReadme from "../../src/styles/digit-layout/row-readme.md";
 import DummyItem from "./DummyItem";
 import BorderSize from "./BorderSize";
 

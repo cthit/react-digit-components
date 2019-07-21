@@ -2,9 +2,9 @@ import React from "react";
 import {
     Column,
     Center
-} from "../../components/styles/digit-layout/DigitLayout.styles";
-import { Text } from "../../components/styles/digit-text/DigitText.styles";
-import { DigitButton } from "../../components";
+} from "../../src/styles/digit-layout/DigitLayout.styles";
+import { Text } from "../../src/styles/digit-text/DigitText.styles";
+import { DigitButton } from "../../src";
 
 class CounterTestComponent extends React.Component {
     constructor(props) {

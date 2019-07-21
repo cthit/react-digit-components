@@ -1,11 +1,11 @@
 import React from "react";
-import { DigitStepper, DigitButton } from "../../components";
+import { DigitStepper, DigitButton } from "../../src";
 import {
     Column,
     Size,
     Center
-} from "../../components/styles/digit-layout/DigitLayout.styles";
-import DigitComponentSelector from "../../components/declaratives/digit-component-selector";
+} from "../../src/styles/digit-layout/DigitLayout.styles";
+import DigitComponentSelector from "../../src/declaratives/digit-component-selector";
 
 class StoryDigitStepper extends React.Component {
     state = {
@@ -39,7 +39,7 @@ class StoryDigitStepper extends React.Component {
                 />
                 <DigitComponentSelector
                     activeComponent={activeStep}
-                    components={[
+                    src={[
                         TestComponent1,
                         TestComponent2,
                         TestComponent3,

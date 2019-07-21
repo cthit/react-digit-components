@@ -1,8 +1,8 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitButton, DigitProviders } from "../../components";
-import DigitButtonReadme from "../../components/elements/digit-button/readme.md";
+import { DigitButton, DigitProviders } from "../../src";
+import DigitButtonReadme from "../../src/elements/digit-button/readme.md";
 import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import { addDecorator } from "@storybook/react/dist/client/preview";

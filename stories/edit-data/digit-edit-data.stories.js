@@ -6,8 +6,8 @@ import {
     DigitTranslations,
     DigitEditData,
     DigitProviders
-} from "../../components";
-import DigitEditDataReadme from "../../components/elements/digit-edit-data/readme.md";
+} from "../../src";
+import DigitEditDataReadme from "../../src/elements/digit-edit-data/readme.md";
 import Translations from "./Translations.json";
 import StoryDigitEditData from "./StoryDigitEditData";
 import centered from "@storybook/addon-centered/react";

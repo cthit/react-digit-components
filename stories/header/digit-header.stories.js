@@ -7,8 +7,8 @@ import {
 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitHeader, DigitProviders } from "../../components";
-import DigitHeaderReadme from "../../components/elements/digit-header/readme.md";
+import { DigitHeader, DigitProviders } from "../../src";
+import DigitHeaderReadme from "../../src/elements/digit-header/readme.md";
 import StoryDigitHeader from "./StoryDigitHeader";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

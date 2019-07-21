@@ -1,9 +1,9 @@
 import { text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitButton, DigitProviders, DigitTooltip } from "../../components";
-import DigitTooltipReadme from "../../components/elements/digit-tooltip/readme.md";
-import { Size } from "../../components/styles/digit-layout/DigitLayout.styles";
+import { DigitButton, DigitProviders, DigitTooltip } from "../../src";
+import DigitTooltipReadme from "../../src/elements/digit-tooltip/readme.md";
+import { Size } from "../../src/styles/digit-layout/DigitLayout.styles";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

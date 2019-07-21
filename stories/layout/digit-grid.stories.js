@@ -2,10 +2,10 @@ import React from "react";
 
 import { withKnobs, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
-import { DigitProviders } from "../../components";
+import { DigitProviders } from "../../src";
 
-import DigitGridReadme from "../../components/styles/digit-layout/grid-readme.md";
-import { Grid } from "../../components/styles/digit-layout/DigitLayout.styles";
+import DigitGridReadme from "../../src/styles/digit-layout/grid-readme.md";
+import { Grid } from "../../src/styles/digit-layout/DigitLayout.styles";
 import DummyItem from "./DummyItem";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

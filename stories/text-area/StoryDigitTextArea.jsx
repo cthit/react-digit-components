@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitTextArea } from "../../components";
+import { DigitTextArea } from "../../src";
 
 class StoryDigitTextArea extends React.Component {
     state = {

@@ -12,11 +12,11 @@ import {
     DigitProviders,
     DigitSwitch,
     DigitTextField
-} from "../../components";
-import DigitToastConnected from "../../components/views/digit-toast";
-import DigitToast from "../../components/views/digit-toast/DigitToast.view";
-import { digitToastOpen } from "../../components/views/digit-toast/DigitToast.view.action-creator";
-import DigitToastReadme from "../../components/views/digit-toast/readme.md";
+} from "../../src";
+import DigitToastConnected from "../../src/views/digit-toast";
+import DigitToast from "../../src/views/digit-toast/DigitToast.view";
+import { digitToastOpen } from "../../src/views/digit-toast/DigitToast.view.action-creator";
+import DigitToastReadme from "../../src/views/digit-toast/readme.md";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

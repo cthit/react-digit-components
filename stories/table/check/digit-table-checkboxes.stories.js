@@ -1,14 +1,10 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import {
-    DigitProviders,
-    DigitTable,
-    DigitTranslations
-} from "../../../components";
-import { Margin } from "../../../components/styles/digit-layout/DigitLayout.styles";
-import { Text } from "../../../components/styles/digit-text/DigitText.styles";
-import DigitTableReadme from "../../../components/views/digit-table/readme.md";
+import { DigitProviders, DigitTable, DigitTranslations } from "../../../src";
+import { Margin } from "../../../src/styles/digit-layout/DigitLayout.styles";
+import { Text } from "../../../src/styles/digit-text/DigitText.styles";
+import DigitTableReadme from "../../../src/views/digit-table/readme.md";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../../.storybook/DigitProvidersDecorator";
 
@@ -139,7 +135,7 @@ storiesOf("Views", module)
             info: {
                 text: DigitTableReadme,
                 propTables: [DigitTable],
-                propTablesExclude: [DigitProviders, DigitTranslations],
+                propTablesExclude: [DigitProviders, DigitTableCheckboxes],
                 header: false,
                 source: false
             }

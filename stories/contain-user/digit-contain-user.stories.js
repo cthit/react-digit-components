@@ -5,8 +5,8 @@ import {
     DigitProviders,
     DigitContainUser,
     DigitRedirect
-} from "../../components";
-import DigitContainUserReadme from "../../components/declaratives/digit-contain-user/readme.md";
+} from "../../src";
+import DigitContainUserReadme from "../../src/declaratives/digit-contain-user/readme.md";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

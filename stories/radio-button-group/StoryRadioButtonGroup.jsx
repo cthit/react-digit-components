@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitRadioButtonGroup } from "../../components";
+import { DigitRadioButtonGroup } from "../../src";
 
 class StoryRadioButtonGroup extends React.Component {
     state = {

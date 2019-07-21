@@ -1,7 +1,7 @@
 import React from "react";
-import { DigitAutocompleteSelectMultiple, DigitLayout } from "../../components";
-import { Column } from "../../components/styles/digit-layout/DigitLayout.styles";
-import { Text } from "../../components/styles/digit-text/DigitText.styles";
+import { DigitAutocompleteSelectMultiple, DigitLayout } from "../../src";
+import { Column } from "../../src/styles/digit-layout/DigitLayout.styles";
+import { Text } from "../../src/styles/digit-text/DigitText.styles";
 
 const suggestions = [
     { label: "Afghanistan" },

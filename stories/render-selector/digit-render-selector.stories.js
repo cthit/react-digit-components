@@ -1,13 +1,13 @@
 import { number, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders, DigitRenderSelector } from "../../components";
-import DigitRenderSelectorReadme from "../../components/declaratives/digit-render-selector/readme.md";
-import { Column } from "../../components/styles/digit-layout/DigitLayout.styles";
+import { DigitProviders, DigitRenderSelector } from "../../src";
+import DigitRenderSelectorReadme from "../../src/declaratives/digit-render-selector/readme.md";
+import { Column } from "../../src/styles/digit-layout/DigitLayout.styles";
 import {
     Text,
     Title
-} from "../../components/styles/digit-text/DigitText.styles";
+} from "../../src/styles/digit-text/DigitText.styles";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

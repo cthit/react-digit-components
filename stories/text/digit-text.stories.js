@@ -1,8 +1,8 @@
 import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitLayout, DigitProviders, DigitText } from "../../components";
-import DigitTextReadme from "../../components/styles/digit-text/readme.md";
+import { DigitLayout, DigitProviders, DigitText } from "../../src";
+import DigitTextReadme from "../../src/styles/digit-text/readme.md";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

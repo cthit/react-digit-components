@@ -3,7 +3,7 @@ import {
     DigitAutocompleteSelectMultiple,
     DigitAutocompleteSelectSingle,
     DigitLayout
-} from "../../components";
+} from "../../src";
 
 const suggestions = [
     { label: "Afghanistan" },

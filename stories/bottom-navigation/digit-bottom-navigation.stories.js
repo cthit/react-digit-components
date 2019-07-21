@@ -1,9 +1,9 @@
 import { boolean, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitBottomNavigation } from "../../components";
-import DigitProviders from "../../components/declaratives/digit-providers";
-import DigitBottomNavigationReadme from "../../components/elements/digit-bottom-navigation/readme.md";
+import { DigitBottomNavigation } from "../../src";
+import DigitProviders from "../../src/declaratives/digit-providers";
+import DigitBottomNavigationReadme from "../../src/elements/digit-bottom-navigation/readme.md";
 import StoryDigitBottomNavigation from "./StoryDigitBottomNavigation";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import { withInfo } from "@storybook/addon-info";

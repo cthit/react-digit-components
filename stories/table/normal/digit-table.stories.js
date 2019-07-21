@@ -5,8 +5,8 @@ import {
     DigitProviders,
     DigitTable,
     DigitTranslations
-} from "../../../components";
-import DigitTableReadme from "../../../components/views/digit-table/readme.md";
+} from "../../../src";
+import DigitTableReadme from "../../../src/views/digit-table/readme.md";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../../.storybook/DigitProvidersDecorator";
 

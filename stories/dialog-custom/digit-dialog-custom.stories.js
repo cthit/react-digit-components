@@ -16,16 +16,16 @@ import {
     DigitSwitch,
     DigitTextArea,
     DigitTextField
-} from "../../components";
-import DigitDialogConnected from "../../components/views/digit-dialog";
-import DigitDialog from "../../components/views/digit-dialog/DigitDialog.view";
+} from "../../src";
+import DigitDialogConnected from "../../src/views/digit-dialog";
+import DigitDialog from "../../src/views/digit-dialog/DigitDialog.view";
 import {
     digitDialogCustomOpen,
     digitDialogOpen
-} from "../../components/views/digit-dialog/DigitDialog.view.action-creator";
-import DigitDialogReadme from "../../components/views/digit-dialog/readme.md";
+} from "../../src/views/digit-dialog/DigitDialog.view.action-creator";
+import DigitDialogReadme from "../../src/views/digit-dialog/readme.md";
 import centered from "@storybook/addon-centered/react";
-import { Text } from "../../components/styles/digit-text/DigitText.styles";
+import { Text } from "../../src/styles/digit-text/DigitText.styles";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 

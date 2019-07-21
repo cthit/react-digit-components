@@ -1,8 +1,8 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders } from "../../components";
-import DigitAutocompleteSelectSingleReadme from "../../components/elements/digit-autocomplete-select-single/readme.md";
+import { DigitProviders } from "../../src";
+import DigitAutocompleteSelectSingleReadme from "../../src/elements/digit-autocomplete-select-single/readme.md";
 import StoryDigitAutocompleteSelectSingle from "./StoryDigitAutocompleteSelectSingle";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

@@ -1,8 +1,8 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders, DigitStepper } from "../../components";
-import DigitStepperReadme from "../../components/elements/digit-stepper/readme.md";
+import { DigitProviders, DigitStepper } from "../../src";
+import DigitStepperReadme from "../../src/elements/digit-stepper/readme.md";
 import StoryDigitStepper from "./StoryDigitStepper";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

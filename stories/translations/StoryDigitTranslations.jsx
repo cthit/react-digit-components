@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import {
     setActiveLanguage,
     setCommonTranslations
-} from "../../components/declaratives/digit-translations/DigitTranslations.declarative.action-creator";
-import DigitTranslations from "../../components/declaratives/digit-translations";
+} from "../../src/declaratives/digit-translations/DigitTranslations.declarative.action-creator";
+import DigitTranslations from "../../src/declaratives/digit-translations";
 import CommonTranslations from "./CommonTranslations.json";
 import TestTranslations from "./TestTranslations.json";
 

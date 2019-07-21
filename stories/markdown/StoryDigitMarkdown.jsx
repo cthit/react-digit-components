@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitLayout, DigitMarkdown, DigitTextArea } from "../../components";
+import { DigitLayout, DigitMarkdown, DigitTextArea } from "../../src";
 
 class StoryDigitMarkdown extends React.Component {
     state = {

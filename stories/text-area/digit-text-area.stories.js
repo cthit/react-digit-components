@@ -7,8 +7,8 @@ import {
 } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitLayout, DigitProviders, DigitTextArea } from "../../components";
-import DigitTextAreaReadme from "../../components/elements/digit-text-area/readme.md";
+import { DigitLayout, DigitProviders, DigitTextArea } from "../../src";
+import DigitTextAreaReadme from "../../src/elements/digit-text-area/readme.md";
 import StoryDigitTextArea from "./StoryDigitTextArea";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

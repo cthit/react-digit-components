@@ -1,10 +1,10 @@
 import { select, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders } from "../../components";
-import DigitTranslationsConnected from "../../components/declaratives/digit-translations";
-import DigitTranslations from "../../components/declaratives/digit-translations/DigitTranslations.declarative";
-import DigitTranslationsReadme from "../../components/declaratives/digit-translations/readme.md";
+import { DigitProviders } from "../../src";
+import DigitTranslationsConnected from "../../src/declaratives/digit-translations";
+import DigitTranslations from "../../src/declaratives/digit-translations/DigitTranslations.declarative";
+import DigitTranslationsReadme from "../../src/declaratives/digit-translations/readme.md";
 import StoryDigitTranslations from "./StoryDigitTranslations";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

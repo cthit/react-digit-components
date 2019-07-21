@@ -1,8 +1,8 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import { DigitProviders, DigitSwitch } from "../../components";
-import DigitSwitchReadme from "../../components/elements/digit-switch/readme.md";
+import { DigitProviders, DigitSwitch } from "../../src";
+import DigitSwitchReadme from "../../src/elements/digit-switch/readme.md";
 import StoryDigitSwitch from "./StoryDigitSwitch";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

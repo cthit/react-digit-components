@@ -1,5 +1,5 @@
 import React from "react";
-import { DigitProviders } from "../components";
+import { DigitProviders } from "../src";
 
 const DigitProvidersDecorator = storyFn => (
     <DigitProviders>{storyFn()}</DigitProviders>

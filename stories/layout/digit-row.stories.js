@@ -3,12 +3,12 @@ import React from "react";
 import { withKnobs, select, boolean, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 
-import DigitRowReadme from "../../components/styles/digit-layout/row-readme.md";
+import DigitRowReadme from "../../src/styles/digit-layout/row-readme.md";
 import {
     Row,
     Center
-} from "../../components/styles/digit-layout/DigitLayout.styles";
-import DigitProviders from "../../components/declaratives/digit-providers";
+} from "../../src/styles/digit-layout/DigitLayout.styles";
+import DigitProviders from "../../src/declaratives/digit-providers";
 import DummyItem from "./DummyItem";
 import BorderSize from "./BorderSize";
 import { withInfo } from "@storybook/addon-info";

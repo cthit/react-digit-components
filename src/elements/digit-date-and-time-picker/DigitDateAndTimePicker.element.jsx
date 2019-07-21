@@ -1,10 +1,10 @@
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from "@material-ui/styles/withStyles";
 import AccessTime from "@material-ui/icons/AccessTime";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import DateRange from "@material-ui/icons/DateRange";
 import Keyboard from "@material-ui/icons/Keyboard";
-import { DateTimePicker, TimePicker } from "material-ui-pickers";
+import { DateTimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -40,7 +40,7 @@ const DigitDateAndTimePicker = ({
         onChange={date => onChange({ target: { value: date } })}
         label={upperLabel}
         error={error}
-        helperText={error & (errorMessage != "") ? errorMessage : lowerLabel}
+        helperText={error & (errorMessage !== "") ? errorMessage : lowerLabel}
         showTodayButton={showTodayButton}
         todayLabel={todayLabel}
         cancelLabel={cancelLabel}

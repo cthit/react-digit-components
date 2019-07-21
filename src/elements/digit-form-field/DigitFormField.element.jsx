@@ -1,10 +1,6 @@
 import { FastField, Field } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import {
-    DigitAutocompleteSelectSingle,
-    DigitAutocompleteSelectMultiple
-} from "../..";
 
 class DigitFormField extends Component {
     constructor(props) {

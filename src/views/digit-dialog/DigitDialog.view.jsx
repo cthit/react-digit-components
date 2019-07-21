@@ -1,5 +1,4 @@
 import {
-    Button,
     Dialog,
     DialogActions,
     DialogContent,
@@ -118,7 +117,7 @@ DigitDialog.propTypes = {
         /** The text for the cancel button */
         cancelButtonText: PropTypes.string,
         /** The text for the confirm button */
-        confirmButtonText: PropTypes.text,
+        confirmButtonText: PropTypes.string,
         /** If true, then the dialog opens */
         open: PropTypes.bool,
         /** The title of the dialog */

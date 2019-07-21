@@ -1,5 +1,4 @@
 import {
-    Hidden,
     TableCell,
     TableHead,
     TableRow,
@@ -7,13 +6,8 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import styled from "styled-components";
 import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
 import { Text } from "../../../../styles/digit-text/DigitText.styles";
-
-const StyledCheckboxTableCell = styled(TableCell)`
-    padding-left: 24px;
-`;
 
 const DigitTableHeader = ({
     order,

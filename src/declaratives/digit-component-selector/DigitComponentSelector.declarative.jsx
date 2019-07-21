@@ -22,7 +22,7 @@ const DigitComponentSelector = ({
 
 const _DigitComponentSelectorMounted = ({ activeComponent, components }) => {
     return components.map((component, index) => (
-        <Hide hidden={index != activeComponent} key={index}>
+        <Hide hidden={index !== activeComponent} key={index}>
             {React.createElement(component, {})}
         </Hide>
     ));

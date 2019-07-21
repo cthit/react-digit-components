@@ -1,20 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import Select from "react-select";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import NoSsr from "@material-ui/core/NoSsr";
+import { useTheme, withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
-import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
 import CancelIcon from "@material-ui/icons/Cancel";
-import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
+import _ from "lodash";
 
-const styles = theme => ({
+const styles = {
     container: {
         display: "flex",
         height: 250
@@ -30,7 +26,7 @@ const styles = theme => ({
         overflow: "hidden"
     },
     noOptionsMessage: {
-        padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
+        padding: `4px 4px`
     },
     paper: {
         position: "absolute",
@@ -38,7 +34,7 @@ const styles = theme => ({
         top: "66%",
         bottom: "auto"
     }
-});
+};
 
 function NoOptionsMessage(props) {
     return <Text text={props.children} />;
@@ -127,97 +123,88 @@ const components = {
     ValueContainer
 };
 
-class DigitAutocompleteSelectSingle extends React.Component {
-    state = {
+const DigitAutocompleteSelectSingle = ({
+    classes,
+    value,
+    onChange,
+    upperLabel,
+    lowerLabel,
+    error,
+    errorMessage,
+    name,
+    selectableValues,
+    disabled
+}) => {
+    const [state, setState] = useState({
         menuIsOpen: false
-    };
+    });
+    const theme = useTheme();
 
-    onMenuIsOpenChange = open => {
-        this.setState({
+    function onMenuIsOpenChange(open) {
+        setState({
             menuIsOpen: open
         });
+    }
+
+    const { menuIsOpen } = state;
+
+    const selectStyles = {
+        container: () => ({
+            display: "flex",
+            flex: 1
+        }),
+        input: base => ({
+            ...base,
+            color: theme.palette.text.primary
+        })
     };
 
-    render() {
-        const {
-            classes,
-            theme,
-            value,
-            onChange,
-            upperLabel,
-            lowerLabel,
-            error,
-            errorMessage,
-            name,
-            selectableValues,
-            disabled
-        } = this.props;
+    const selectedValue = _.find(selectableValues, { value });
+    var selectedValueLabel = null;
 
-        const { menuIsOpen } = this.state;
-
-        const selectStyles = {
-            container: () => ({
-                display: "flex",
-                flex: 1
-            }),
-            input: base => ({
-                ...base,
-                color: theme.palette.text.primary
-            })
-        };
-
-        const selectedValue = _.find(selectableValues, { value });
-        var selectedValueLabel = null;
-
-        if (selectedValue != null) {
-            selectedValueLabel = selectedValue.label;
-        }
-
-        return (
-            <Select
-                name={name}
-                classes={classes}
-                styles={selectStyles}
-                options={selectableValues}
-                components={components}
-                placeholder=""
-                value={
-                    selectedValueLabel == null
-                        ? null
-                        : { value, label: selectedValueLabel }
-                }
-                onChange={e => {
-                    onChange({ target: { value: e.value } });
-                }}
-                menuIsOpen={menuIsOpen}
-                onMenuOpen={() => {
-                    this.onMenuIsOpenChange(true);
-                }}
-                onMenuClose={() => {
-                    this.onMenuIsOpenChange(false);
-                }}
-                textFieldProps={{
-                    label: upperLabel,
-                    error: error,
-                    disabled: disabled,
-                    helperText:
-                        error && errorMessage != null
-                            ? errorMessage
-                            : lowerLabel,
-                    InputLabelProps: {
-                        shrink: value !== "" || this.state.singleOpen
-                    }
-                }}
-            />
-        );
+    if (selectedValue != null) {
+        selectedValueLabel = selectedValue.label;
     }
-}
 
-DigitAutocompleteSelectSingle.propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired
+    return (
+        <Select
+            name={name}
+            classes={classes}
+            styles={selectStyles}
+            options={selectableValues}
+            components={components}
+            placeholder=""
+            value={
+                selectedValueLabel == null
+                    ? null
+                    : { value, label: selectedValueLabel }
+            }
+            onChange={e => {
+                onChange({ target: { value: e.value } });
+            }}
+            menuIsOpen={menuIsOpen}
+            onMenuOpen={() => {
+                onMenuIsOpenChange(true);
+            }}
+            onMenuClose={() => {
+                onMenuIsOpenChange(false);
+            }}
+            textFieldProps={{
+                label: upperLabel,
+                error: error,
+                disabled: disabled,
+                helperText:
+                    error && errorMessage != null ? errorMessage : lowerLabel,
+                InputLabelProps: {
+                    shrink: value !== "" || this.state.singleOpen
+                }
+            }}
+        />
+    );
 };
 
-export default withStyles(styles, { withTheme: true })(
-    DigitAutocompleteSelectSingle
-);
+DigitAutocompleteSelectSingle.propTypes = {
+    classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(DigitAutocompleteSelectSingle);

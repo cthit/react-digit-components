@@ -44,11 +44,12 @@ import DigitDialog from "./views/digit-dialog";
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
 
+import useDigitTranslations from "./hooks/use-digit-translations";
+
 import {
     digitRedirectTo,
     redirectFinished
 } from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
-const DigitRedirectActions = { digitRedirectTo, redirectFinished };
 
 import {
     digitDialogOpen,
@@ -56,21 +57,13 @@ import {
     digitDialogClosedCancel,
     digitDialogClosedConfirm
 } from "./views/digit-dialog/DigitDialog.view.action-creator";
-const DigitDialogActions = {
-    digitDialogOpen,
-    digitDialogCustomOpen,
-    digitDialogClosedCancel,
-    digitDialogClosedConfirm
-};
 
 import { digitToastOpen } from "./views/digit-toast/DigitToast.view.action-creator";
-const DigitToastActions = { digitToastOpen };
 
 import {
     setCommonTranslations,
     setActiveLanguage
 } from "./declaratives/digit-translations/DigitTranslations.declarative.action-creator";
-const DigitTranslationsActions = { setCommonTranslations, setActiveLanguage };
 
 import {
     Flex,
@@ -94,6 +87,47 @@ import {
     Order,
     Spacing
 } from "./styles/digit-layout/DigitLayout.styles";
+
+import {
+    Card,
+    CardHeader,
+    CardHeaderImage,
+    CardIcon,
+    CardMenuContainer,
+    CardTitle,
+    CardSubTitle,
+    CardBody,
+    CardButtons,
+    Divider,
+    Link
+} from "./styles/digit-design/DigitDesign.styles";
+
+import {
+    Heading1,
+    Heading2,
+    Heading3,
+    Heading4,
+    Heading5,
+    Heading6,
+    Subtitle,
+    Subtitle2,
+    Text,
+    Title
+} from "./styles/digit-text/DigitText.styles";
+
+const DigitRedirectActions = { digitRedirectTo, redirectFinished };
+
+const DigitDialogActions = {
+    digitDialogOpen,
+    digitDialogCustomOpen,
+    digitDialogClosedCancel,
+    digitDialogClosedConfirm
+};
+
+const DigitToastActions = { digitToastOpen };
+
+const DigitTranslationsActions = { setCommonTranslations, setActiveLanguage };
+
 const DigitLayout = {
     Flex,
     Grid,
@@ -117,19 +151,6 @@ const DigitLayout = {
     Spacing
 };
 
-import {
-    Card,
-    CardHeader,
-    CardHeaderImage,
-    CardIcon,
-    CardMenuContainer,
-    CardTitle,
-    CardSubTitle,
-    CardBody,
-    CardButtons,
-    Divider,
-    Link
-} from "./styles/digit-design/DigitDesign.styles";
 const DigitDesign = {
     Card,
     CardHeader,
@@ -143,19 +164,6 @@ const DigitDesign = {
     Divider,
     Link
 };
-
-import {
-    Heading1,
-    Heading2,
-    Heading3,
-    Heading4,
-    Heading5,
-    Heading6,
-    Subtitle,
-    Subtitle2,
-    Text,
-    Title
-} from "./styles/digit-text/DigitText.styles";
 
 const DigitText = {
     Heading1,
@@ -225,5 +233,7 @@ export {
     /* Styles */
     DigitLayout,
     DigitDesign,
-    DigitText
+    DigitText,
+    /* Hooks */
+    useDigitTranslations
 };

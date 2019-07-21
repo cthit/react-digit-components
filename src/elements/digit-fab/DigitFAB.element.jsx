@@ -15,7 +15,7 @@ const DigitFAB = ({
     text
 }) => (
     <Fab
-        variant={text == null ? "fab" : "extended"}
+        variant={text == null ? "round" : "extended"}
         type={submit ? "submit" : "button"}
         disabled={disabled}
         onClick={onClick}
@@ -40,7 +40,7 @@ DigitFAB.propTypes = {
     /** The function which will be called when the button has been pressed.*/
     onClick: PropTypes.func,
     /** The icon of the FAB. Use @material-ui/icons.  */
-    icon: PropTypes.func.isRequired,
+    icon: PropTypes.object.isRequired,
     /** Disables the button. onClick will not be called if you click the button.
      * The styling of the button also changes to reflect.
      */

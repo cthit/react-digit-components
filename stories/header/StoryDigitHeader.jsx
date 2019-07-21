@@ -90,7 +90,7 @@ class StoryDigitHeader extends React.Component {
                 renderMain={() => {
                     const output = [];
                     for (var i = 0; i < 500; i++) {
-                        output.push(<Text text={"Hej " + i} />);
+                        output.push(<Text key={i} text={"Hej " + i} />);
                     }
                     return output;
                 }}

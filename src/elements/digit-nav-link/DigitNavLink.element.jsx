@@ -15,6 +15,7 @@ const DigitNavLink = ({ text, link, onClick, icon }) => (
 
 const Link = styled(NavLink)`
     text-decoration: none;
+    color: black;
 `;
 
 DigitNavLink.displayName = "DigitNavLink";
@@ -22,7 +23,7 @@ DigitNavLink.propTypes = {
     /** The text display inside the link. */
     text: PropTypes.string.isRequired,
     /** The icon of the FAB. Use @material-ui/icons.  */
-    icon: PropTypes.func,
+    icon: PropTypes.object,
     /** The redirect link. Should be relative to the root.
      * Do not include the website url.
      */

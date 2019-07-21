@@ -4,8 +4,7 @@ import {
     FormHelperText,
     Input,
     InputLabel,
-    OutlinedInput,
-    withStyles
+    OutlinedInput
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";

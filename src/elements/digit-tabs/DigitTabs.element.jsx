@@ -37,7 +37,7 @@ const DigitTabs = ({
                 root: inheritBackground ? classes.rootInherit : classes.root,
                 scrollButtons: classes.scrollButtons
             }}
-            value={_.findIndex(tabs, tab => tab.value == selected)}
+            value={_.findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
             fullWidth={fullWidth}
             onChange={(event, value) => {

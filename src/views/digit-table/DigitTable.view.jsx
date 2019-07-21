@@ -142,9 +142,6 @@ class DigitTable extends React.Component {
     render() {
         const { selected, emptyTableText, headerTexts } = this.props;
         const { data, order, orderBy, rowsPerPage, page } = this.state;
-        const emptyRows =
-            rowsPerPage -
-            Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
         return (
             <DigitTranslations

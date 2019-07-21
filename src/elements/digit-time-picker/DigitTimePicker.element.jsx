@@ -1,5 +1,5 @@
-import withStyles from "@material-ui/core/styles/withStyles";
-import { TimePicker } from "material-ui-pickers";
+import withStyles from "@material-ui/styles/withStyles";
+import { TimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 

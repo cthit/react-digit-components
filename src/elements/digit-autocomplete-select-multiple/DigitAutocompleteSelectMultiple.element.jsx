@@ -1,17 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
-import { withStyles } from "@material-ui/core/styles";
+import { useTheme, withStyles } from "@material-ui/styles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import CancelIcon from "@material-ui/icons/Cancel";
-import { emphasize } from "@material-ui/core/styles/colorManipulator";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import { DigitLayout } from "../../";
 import * as _ from "lodash";
 
-const styles = theme => ({
+const styles = {
     container: {
         display: "flex"
     },
@@ -26,7 +24,7 @@ const styles = theme => ({
         overflow: "hidden"
     },
     noOptionsMessage: {
-        padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
+        padding: `4px 4px`
     },
     paper: {
         position: "absolute",
@@ -34,7 +32,7 @@ const styles = theme => ({
         top: "66%",
         bottom: "auto"
     }
-});
+};
 
 function NoOptionsMessage(props) {
     return <Text text={props.children} />;
@@ -122,94 +120,85 @@ const components = {
     ValueContainer
 };
 
-class DigitAutocompleteSelectMultiple extends React.Component {
-    state = {
-        menuIsOpen: false,
-        height: 0
-    };
+const DigitAutocompleteSelectMultiple = ({
+    classes,
+    value,
+    onChange,
+    upperLabel,
+    lowerLabel,
+    error,
+    errorMessage,
+    name,
+    selectableValues,
+    disabled
+}) => {
+    const theme = useTheme();
+    const [state, setState] = useState({
+        menuIsOpen: false
+    });
 
-    onMenuIsOpenChange = open => {
-        this.setState({
+    function onMenuIsOpenChange(open) {
+        setState({
             menuIsOpen: open
         });
+    }
+
+    const { menuIsOpen } = state;
+
+    const selectStyles = {
+        container: () => ({
+            display: "flex",
+            flex: 1
+        }),
+        input: base => ({
+            ...base,
+            color: theme.palette.text.primary
+        })
     };
 
-    render() {
-        const {
-            classes,
-            theme,
-            value,
-            onChange,
-            upperLabel,
-            lowerLabel,
-            error,
-            errorMessage,
-            name,
-            selectableValues,
-            disabled
-        } = this.props;
+    const selectedValueObjects = value.map(value =>
+        _.find(selectableValues, { value })
+    );
 
-        const { menuIsOpen } = this.state;
-
-        const selectStyles = {
-            container: () => ({
-                display: "flex",
-                flex: 1
-            }),
-            input: base => ({
-                ...base,
-                color: theme.palette.text.primary
-            })
-        };
-
-        const selectedValueObjects = value.map(value =>
-            _.find(selectableValues, { value })
-        );
-
-        return (
-            <Select
-                name={name}
-                classes={classes}
-                styles={selectStyles}
-                options={selectableValues}
-                components={components}
-                value={selectedValueObjects}
-                onChange={e => {
-                    onChange({
-                        target: {
-                            value: e.map(value => value.value)
-                        }
-                    });
-                }}
-                isMulti
-                placeholder=""
-                menuIsOpen={menuIsOpen}
-                onMenuOpen={() => {
-                    this.onMenuIsOpenChange(true);
-                }}
-                onMenuClose={() => {
-                    this.onMenuIsOpenChange(false);
-                }}
-                isDisabled={disabled}
-                textFieldProps={{
-                    label: upperLabel,
-                    error: error,
-                    disabled: disabled,
-                    helperText:
-                        error && errorMessage != null
-                            ? errorMessage
-                            : lowerLabel,
-                    InputLabelProps: {
-                        shrink:
-                            (value != null && value.length > 0) ||
-                            this.state.multipleOpen
+    return (
+        <Select
+            name={name}
+            classes={classes}
+            styles={selectStyles}
+            options={selectableValues}
+            components={components}
+            value={selectedValueObjects}
+            onChange={e => {
+                onChange({
+                    target: {
+                        value: e.map(value => value.value)
                     }
-                }}
-            />
-        );
-    }
-}
+                });
+            }}
+            isMulti
+            placeholder=""
+            menuIsOpen={menuIsOpen}
+            onMenuOpen={() => {
+                onMenuIsOpenChange(true);
+            }}
+            onMenuClose={() => {
+                onMenuIsOpenChange(false);
+            }}
+            isDisabled={disabled}
+            textFieldProps={{
+                label: upperLabel,
+                error: error,
+                disabled: disabled,
+                helperText:
+                    error && errorMessage != null ? errorMessage : lowerLabel,
+                InputLabelProps: {
+                    shrink:
+                        (value != null && value.length > 0) ||
+                        this.state.multipleOpen
+                }
+            }}
+        />
+    );
+};
 
-export default withStyles(styles, { withTheme: true })(
-    DigitAutocompleteSelectMultiple
-);
+export default withStyles(styles)(DigitAutocompleteSelectMultiple);

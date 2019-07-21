@@ -39,7 +39,7 @@ DigitRedirect.propTypes = {
     /** Callback function when the redirect has been made */
     redirectFinished: PropTypes.func,
     /** The current path of the application. Used to prevent trying to redirect to a path the website already is at.*/
-    currentPath: PropTypes.string.isRequired
+    currentPath: PropTypes.string
 };
 
 export default DigitRedirect;

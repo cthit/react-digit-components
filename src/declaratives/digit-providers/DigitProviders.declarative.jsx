@@ -1,16 +1,8 @@
-import {
-    createGenerateClassName,
-    createMuiTheme,
-    jssPreset,
-    MuiThemeProvider
-} from "@material-ui/core/styles";
-import { create } from "jss";
+import { StylesProvider, ThemeProvider } from "@material-ui/styles";
 import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider } from "material-ui-pickers";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
-import { renderToStaticMarkup } from "react-dom/server";
-import JssProvider from "react-jss/lib/JssProvider";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { applyMiddleware, combineReducers, createStore } from "redux";
@@ -20,12 +12,7 @@ import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import { redirect } from "../../declaratives/digit-redirect/DigitRedirect.declarative.reducer";
 import { digitTranslations } from "../digit-translations/DigitTranslations.declarative.reducer";
-
-const generateClassName = createGenerateClassName();
-const jss = create({
-    ...jssPreset(),
-    insertionPoint: document.getElementById("jss-insertion-point")
-});
+import { createMuiTheme } from "@material-ui/core/styles";
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -74,8 +61,8 @@ class DigitProviders extends React.Component {
     render() {
         const { children } = this.props;
         return (
-            <MuiThemeProvider theme={this.theme}>
-                <JssProvider jss={jss} generateClassName={generateClassName}>
+            <ThemeProvider theme={this.theme}>
+                <StylesProvider injectFirst>
                     <Provider store={this.store}>
                         <BrowserRouter>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -83,8 +70,8 @@ class DigitProviders extends React.Component {
                             </MuiPickersUtilsProvider>
                         </BrowserRouter>
                     </Provider>
-                </JssProvider>
-            </MuiThemeProvider>
+                </StylesProvider>
+            </ThemeProvider>
         );
     }
 }

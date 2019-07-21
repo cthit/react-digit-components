@@ -18,7 +18,7 @@ class DigitContainUser extends React.Component {
 
         var allowedOnThisPage = false;
 
-        for (var i in allowedBasePaths) {
+        for (let i in allowedBasePaths) {
             const basePath = allowedBasePaths[i];
             if (currentPath.startsWith(basePath)) {
                 allowedOnThisPage = true;
@@ -26,7 +26,7 @@ class DigitContainUser extends React.Component {
             }
         }
 
-        for (var i in allowedFullPaths) {
+        for (let i in allowedFullPaths) {
             const fullPath = allowedFullPaths[i];
             if (currentPath === fullPath) {
                 allowedOnThisPage = true;

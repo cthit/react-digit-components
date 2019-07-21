@@ -1,8 +1,8 @@
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from "@material-ui/styles/withStyles";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import Keyboard from "@material-ui/icons/Keyboard";
-import { DatePicker, TimePicker } from "material-ui-pickers";
+import { DatePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 

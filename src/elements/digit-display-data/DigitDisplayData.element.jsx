@@ -1,27 +1,22 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Column, Row } from "../../styles/digit-layout/DigitLayout.styles";
+import { Grid } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import styled from "styled-components";
-
-const RightAlignedColumn = styled(Column)`
-    text-align: right;
-    margin-right: 8px;
-`;
 
 const DigitDisplayData = ({ data, keysText, keysOrder }) => (
-    <Row>
-        <RightAlignedColumn>
-            {keysOrder.map(key => (
-                <Text bold key={key} text={keysText[key]} />
-            ))}
-        </RightAlignedColumn>
-        <Column>
-            {keysOrder.map(key => (
-                <Text key={key} text={data[key]} />
-            ))}
-        </Column>
-    </Row>
+    <Grid columns={`auto 1fr`} margin={"4px"}>
+        {keysOrder.map(keyOrder => (
+            <>
+                <Text
+                    alignRight
+                    bold
+                    key={keyOrder}
+                    text={keysText[keyOrder]}
+                />
+                <Text key={keyOrder} text={data[keyOrder]} />
+            </>
+        ))}
+    </Grid>
 );
 
 DigitDisplayData.displayName = "DigitDisplayData";

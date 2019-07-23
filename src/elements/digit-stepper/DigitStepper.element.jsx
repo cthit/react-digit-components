@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Stepper, Step, StepLabel } from "@material-ui/core";
+import { Step, StepLabel, Stepper } from "@material-ui/core";
 import { Column } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitStepper = ({ activeStep, steps }) => (

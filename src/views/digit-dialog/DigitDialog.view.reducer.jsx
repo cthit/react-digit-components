@@ -1,8 +1,8 @@
 import {
-    DIGIT_DIALOG_OPEN,
-    DIGIT_DIALOG_CLOSED_CONFIRM,
     DIGIT_DIALOG_CLOSED_CANCEL,
-    DIGIT_DIALOG_CUSTOM_OPEN
+    DIGIT_DIALOG_CLOSED_CONFIRM,
+    DIGIT_DIALOG_CUSTOM_OPEN,
+    DIGIT_DIALOG_OPEN
 } from "./DigitDialog.view.actions";
 
 export function dialog(state = null, action) {

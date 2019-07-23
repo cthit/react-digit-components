@@ -5,7 +5,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Title } from "../../styles/digit-text/DigitText.styles";
-import { Row, Column } from "../../styles/digit-layout/DigitLayout.styles";
+import { Column, Row } from "../../styles/digit-layout/DigitLayout.styles";
 import { Link } from "../../styles/digit-design/DigitDesign.styles";
 
 const StyledMenuButton = styled(IconButton)`

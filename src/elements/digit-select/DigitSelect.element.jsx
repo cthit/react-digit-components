@@ -11,8 +11,8 @@ import {
 import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
-import styled from "styled-components";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+import styled from "styled-components";
 
 class DigitSelect extends React.Component {
     render() {

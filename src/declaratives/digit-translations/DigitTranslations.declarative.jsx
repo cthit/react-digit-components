@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { useDigitTranslations } from "../../";
+import useDigitTranslations from "../../hooks/use-digit-translations";
 
 //Should be removed in v2
 const DigitTranslations = ({ translations, render }) => {

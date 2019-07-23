@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { DigitText } from "../..";
-import { Text } from "../../styles/digit-text/DigitText.styles";
+import {
+    Heading1,
+    Heading2,
+    Heading3,
+    Heading4,
+    Heading5,
+    Heading6,
+    Text
+} from "../../styles/digit-text/DigitText.styles";
 import DigitTable from "../../views/digit-table";
 
 const DigitMarkdown = ({ markdownSource }) => (
@@ -61,17 +68,17 @@ const DigitMarkdown = ({ markdownSource }) => (
                     const text = data.children[0];
                     switch (data.level) {
                         case 1:
-                            return <DigitText.Heading1 text={text} />;
+                            return <Heading1 text={text} />;
                         case 2:
-                            return <DigitText.Heading2 text={text} />;
+                            return <Heading2 text={text} />;
                         case 3:
-                            return <DigitText.Heading3 text={text} />;
+                            return <Heading3 text={text} />;
                         case 4:
-                            return <DigitText.Heading4 text={text} />;
+                            return <Heading4 text={text} />;
                         case 5:
-                            return <DigitText.Heading5 text={text} />;
+                            return <Heading5 text={text} />;
                         case 6:
-                            return <DigitText.Heading6 text={text} />;
+                            return <Heading6 text={text} />;
                         default:
                             return null;
                     }

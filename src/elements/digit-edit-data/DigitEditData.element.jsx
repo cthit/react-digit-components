@@ -16,7 +16,7 @@ import {
     Padding,
     Size
 } from "../../styles/digit-layout/DigitLayout.styles";
-import { DigitIfElseRendering } from "../../index";
+import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 
 function isInitialValid(props) {
     if (!props.validationSchema) return true;

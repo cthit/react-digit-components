@@ -17,7 +17,10 @@ const styles = {
         height: 250
     },
     input: {
-        display: "flex"
+        display: "flex",
+        flex: "1 1 auto",
+        height: "100%",
+        minWidth: "250px"
     },
     valueContainer: {
         display: "flex",
@@ -197,7 +200,7 @@ const DigitAutocompleteSelectSingle = ({
                 helperText:
                     error && errorMessage != null ? errorMessage : lowerLabel,
                 InputLabelProps: {
-                    shrink: value !== "" || this.state.singleOpen
+                    shrink: value !== "" || state.singleOpen
                 }
             }}
         />

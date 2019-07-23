@@ -12,10 +12,14 @@ import find from "lodash/find";
 
 const styles = {
     container: {
-        display: "flex"
+        display: "flex",
+        height: 250
     },
     input: {
-        display: "flex"
+        display: "flex",
+        flex: "1 1 auto",
+        height: "100%",
+        minWidth: "250px"
     },
     valueContainer: {
         display: "flex",
@@ -195,7 +199,7 @@ const DigitAutocompleteSelectMultiple = ({
                 InputLabelProps: {
                     shrink:
                         (value != null && value.length > 0) ||
-                        this.state.multipleOpen
+                        state.multipleOpen
                 }
             }}
         />

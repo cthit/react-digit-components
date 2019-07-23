@@ -19,13 +19,24 @@ class DigitDialog extends React.Component {
         }
     }
 
+    cancel = () => {
+        const { options, digitDialogClosedCancel } = this.props;
+        digitDialogClosedCancel();
+        if (options.onCancel != null) {
+            options.onCancel();
+        }
+        this.setState({ open: false });
+    };
+
+    confirm = () => {
+        const { options, digitDialogClosedConfirm } = this.props;
+        digitDialogClosedConfirm();
+        options.onConfirm();
+        this.setState({ open: false });
+    };
+
     render() {
-        const {
-            options,
-            digitDialogClosedCancel,
-            digitDialogClosedConfirm,
-            custom
-        } = this.props;
+        const { options, custom } = this.props;
 
         const { open } = this.state;
 
@@ -35,10 +46,7 @@ class DigitDialog extends React.Component {
                 ifRender={() => (
                     <Dialog
                         open={open}
-                        onClose={() => {
-                            digitDialogClosedCancel();
-                            this.setState({ open: false });
-                        }}
+                        onClose={this.cancel}
                         aria-labelledby="alert-dialog-title"
                         aria-describedby="alert-dialog-description"
                     >
@@ -61,17 +69,16 @@ class DigitDialog extends React.Component {
                         <DialogActions>
                             <DigitIfElseRendering
                                 test={custom}
-                                ifRender={options.renderButtons}
+                                ifRender={() =>
+                                    options.renderButtons(
+                                        this.confirm,
+                                        this.cancel
+                                    )
+                                }
                                 elseRender={() => (
                                     <>
                                         <DigitButton
-                                            onClick={e => {
-                                                digitDialogClosedCancel();
-                                                if (options.onCancel != null) {
-                                                    options.onCancel(e);
-                                                }
-                                                this.setState({ open: false });
-                                            }}
+                                            onClick={this.cancel}
                                             primary
                                             text={
                                                 options != null
@@ -80,11 +87,7 @@ class DigitDialog extends React.Component {
                                             }
                                         />
                                         <DigitButton
-                                            onClick={e => {
-                                                digitDialogClosedConfirm();
-                                                options.onConfirm(e);
-                                                this.setState({ open: false });
-                                            }}
+                                            onClick={this.confirm}
                                             primary
                                             autoFocus
                                             raised

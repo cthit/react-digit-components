@@ -9,23 +9,17 @@ import {
     DigitDesign,
     DigitForm,
     DigitFormField,
-    DigitIfElseRendering,
     DigitLoading,
     DigitProviders,
     DigitSelect,
     DigitSwitch,
-    DigitTextArea,
     DigitTextField
 } from "../../src";
 import DigitDialogConnected from "../../src/views/digit-dialog";
 import DigitDialog from "../../src/views/digit-dialog/DigitDialog.view";
-import {
-    digitDialogCustomOpen,
-    digitDialogOpen
-} from "../../src/views/digit-dialog/DigitDialog.view.action-creator";
+import { digitDialogCustomOpen } from "../../src/views/digit-dialog/DigitDialog.view.action-creator";
 import DigitDialogReadme from "../../src/views/digit-dialog/readme.md";
 import centered from "@storybook/addon-centered/react";
-import { Text } from "../../src/styles/digit-text/DigitText.styles";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
@@ -45,13 +39,11 @@ const Stuff = ({ digitDialogCustomOpen }) => (
                             ) : null}
                         </>
                     ),
-                    renderButtons: () => (
-                        <Text
-                            text={
-                                "Use digitDialogClosedConfirm and digitDialogClosedCancel from DigitDialogActions " +
-                                "to implement your own dialog buttons row. But for now you can click beside the dialog"
-                            }
-                        />
+                    renderButtons: (confirm, cancel) => (
+                        <>
+                            <DigitButton text={"Confirm"} onClick={confirm} />
+                            <DigitButton text={"cancel"} onClick={cancel} />
+                        </>
                     ),
                     onCancel: e => {
                         action("Cancel")(e);

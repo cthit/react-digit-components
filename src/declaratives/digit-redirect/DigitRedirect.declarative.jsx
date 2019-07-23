@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import Redirect from "react-router-dom/Redirect";
+import { Redirect } from "react-router-dom";
 import DigitRedirectExternal from "../digit-redirect-external";
 
 class DigitRedirect extends React.Component {

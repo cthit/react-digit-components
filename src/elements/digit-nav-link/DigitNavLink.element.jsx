@@ -3,7 +3,7 @@ import ListItemIcon from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItem";
 import PropTypes from "prop-types";
 import React from "react";
-import NavLink from "react-router-dom/NavLink";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const DigitNavLink = ({ text, link, onClick, icon }) => (

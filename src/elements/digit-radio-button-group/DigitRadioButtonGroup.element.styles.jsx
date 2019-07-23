@@ -1,4 +1,6 @@
-import { FormControl, FormHelperText, FormLabel } from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormLabel from "@material-ui/core/FormLabel";
 import styled from "styled-components";
 
 export const UpperLabel = styled(FormLabel)`

@@ -1,7 +1,9 @@
-import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItem";
 import PropTypes from "prop-types";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import NavLink from "react-router-dom/NavLink";
 import styled from "styled-components";
 
 const DigitNavLink = ({ text, link, onClick, icon }) => (

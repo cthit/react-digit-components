@@ -51,52 +51,52 @@ import {
 } from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
 
 import {
-    digitDialogOpen,
-    digitDialogCustomOpen,
     digitDialogClosedCancel,
-    digitDialogClosedConfirm
+    digitDialogClosedConfirm,
+    digitDialogCustomOpen,
+    digitDialogOpen
 } from "./views/digit-dialog/DigitDialog.view.action-creator";
 
 import { digitToastOpen } from "./views/digit-toast/DigitToast.view.action-creator";
 
 import {
-    setCommonTranslations,
-    setActiveLanguage
+    setActiveLanguage,
+    setCommonTranslations
 } from "./declaratives/digit-translations/DigitTranslations.declarative.action-creator";
 
 import {
+    Center,
+    Column,
+    DownRightPosition,
+    Fill,
     Flex,
     Grid,
     GridItem,
-    UniformGrid,
-    Column,
-    Row,
-    DownRightPosition,
-    Fill,
-    MarginTop,
+    Hide,
+    HideFill,
+    Margin,
     MarginBottom,
     MarginLeft,
     MarginRight,
-    Margin,
-    Padding,
-    Center,
-    HideFill,
-    Hide,
-    Size,
+    MarginTop,
     Order,
-    Spacing
+    Padding,
+    Row,
+    Size,
+    Spacing,
+    UniformGrid
 } from "./styles/digit-layout/DigitLayout.styles";
 
 import {
     Card,
+    CardBody,
+    CardButtons,
     CardHeader,
     CardHeaderImage,
     CardIcon,
     CardMenuContainer,
-    CardTitle,
     CardSubTitle,
-    CardBody,
-    CardButtons,
+    CardTitle,
     Divider,
     Link
 } from "./styles/digit-design/DigitDesign.styles";

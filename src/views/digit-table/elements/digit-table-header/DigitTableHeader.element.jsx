@@ -1,9 +1,7 @@
-import {
-    TableCell,
-    TableHead,
-    TableRow,
-    TableSortLabel
-} from "@material-ui/core";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";

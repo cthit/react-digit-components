@@ -1,13 +1,13 @@
-import { Toolbar } from "@material-ui/core";
+import Toolbar from "@material-ui/core/Toolbar";
 import PropTypes from "prop-types";
 import React from "react";
-import styled from "styled-components";
 import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
 import DigitTranslations from "../../../../declaratives/digit-translations";
 import DigitTextField from "../../../../elements/digit-text-field";
 import { Fill } from "../../../../styles/digit-layout/DigitLayout.styles";
 import { Title } from "../../../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTableToolbar.element.translations.json";
+import styled from "styled-components";
 
 const TableTitle = styled(Title)`
     flex: 0 0 auto;

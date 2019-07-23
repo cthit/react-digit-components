@@ -1,4 +1,4 @@
-import { Tooltip } from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
 import PropTypes from "prop-types";
 import React from "react";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";

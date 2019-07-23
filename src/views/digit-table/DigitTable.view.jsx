@@ -1,5 +1,8 @@
-import { Paper, Table, TableBody, TablePagination } from "@material-ui/core";
-import _ from "lodash";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Paper";
+import TableBody from "@material-ui/core/TableBody";
+import TablePagination from "@material-ui/core/TablePagination";
+import isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
@@ -50,7 +53,7 @@ class DigitTable extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (
-            !_.isEqual(
+            !isEqual(
                 prevProps.data.slice().sort(),
                 this.props.data.slice().sort()
             )

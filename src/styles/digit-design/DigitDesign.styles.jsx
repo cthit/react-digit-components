@@ -1,7 +1,7 @@
-import { Paper } from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
 import PropTypes from "prop-types";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import NavLink from "react-router-dom/NavLink";
 import styled from "styled-components";
 import { Subtitle, Title } from "../digit-text/DigitText.styles";
 

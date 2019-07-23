@@ -1,11 +1,15 @@
-import { AppBar, Drawer, Hidden, IconButton, Toolbar } from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
 import React from "react";
 import styled, { css } from "styled-components";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Title } from "../../styles/digit-text/DigitText.styles";
-import { Row, Column } from "../../styles/digit-layout/DigitLayout.styles";
+import { Column, Row } from "../../styles/digit-layout/DigitLayout.styles";
 import { Link } from "../../styles/digit-design/DigitDesign.styles";
 
 const StyledMenuButton = styled(IconButton)`

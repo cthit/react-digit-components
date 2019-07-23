@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
 
 const DigitAvatar = ({ icon, imageSrc, alt }) => (
     <Avatar alt={alt} src={imageSrc}>

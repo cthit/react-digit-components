@@ -1,5 +1,5 @@
 import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 import withStyles from "@material-ui/styles/withStyles";
 import PropTypes from "prop-types";
 import React from "react";

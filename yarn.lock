@@ -992,7 +992,7 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@date-io/core@^1.3.8":
+"@date-io/core@1.3.8", "@date-io/core@^1.3.8":
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.3.8.tgz#a20da7125f1444631dd96a6e8baa8982665aaa95"
   integrity sha512-XlvpzhipF/badZEJPAfgXRX9bFG2UpFl1T6O0hn1RzWJf3yexf9/M2wcEm6jh7RVyrlSayttkXtGPqVPdoJQ7Q==
@@ -8330,13 +8330,6 @@ material-colors@^1.2.1:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
   integrity sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==
-
-material-ui-image@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/material-ui-image/-/material-ui-image-3.2.0.tgz#557a2838c33a975a223947707736f90439bd47c1"
-  integrity sha512-4eee8BOEXLqAVqj+Vlck7b8+vdlo+8UzuxOGFO3/7w8lnJv7fdy0c6pAXnB5A5rsy3S3JzTKrhzpceN2nPKxLQ==
-  dependencies:
-    prop-types "^15.5.8"
 
 md5.js@^1.3.4:
   version "1.3.5"

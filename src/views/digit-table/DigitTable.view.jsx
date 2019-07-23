@@ -1,5 +1,5 @@
 import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TablePagination from "@material-ui/core/TablePagination";
 import isEqual from "lodash/isEqual";

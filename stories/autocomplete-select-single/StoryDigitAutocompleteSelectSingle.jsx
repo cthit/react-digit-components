@@ -77,6 +77,7 @@ class StoryDigitAutocompleteSelectSingle extends React.Component {
                     value={this.state.selected}
                     onChange={this.onSelectedChange}
                 />
+                {this.state.selected}
             </DigitLayout.Size>
         );
     }

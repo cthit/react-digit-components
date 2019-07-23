@@ -4,10 +4,7 @@ import React from "react";
 import { DigitIfElseRendering } from "../../src";
 import DigitIfElseRenderingReadme from "../../src/declaratives/digit-if-else-rendering/readme.md";
 import DigitProviders from "../../src/declaratives/digit-providers";
-import {
-    Text,
-    Title
-} from "../../src/styles/digit-text/DigitText.styles";
+import { Text, Title } from "../../src/styles/digit-text/DigitText.styles";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";

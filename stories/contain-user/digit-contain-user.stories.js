@@ -1,11 +1,7 @@
 import { withKnobs, text } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import {
-    DigitProviders,
-    DigitContainUser,
-    DigitRedirect
-} from "../../src";
+import { DigitProviders, DigitContainUser, DigitRedirect } from "../../src";
 import DigitContainUserReadme from "../../src/declaratives/digit-contain-user/readme.md";
 import centered from "@storybook/addon-centered/react";
 import { withInfo } from "@storybook/addon-info";

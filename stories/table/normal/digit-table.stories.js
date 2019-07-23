@@ -1,11 +1,7 @@
 import { boolean, select, text, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import {
-    DigitProviders,
-    DigitTable,
-    DigitTranslations
-} from "../../../src";
+import { DigitProviders, DigitTable, DigitTranslations } from "../../../src";
 import DigitTableReadme from "../../../src/views/digit-table/readme.md";
 import { withInfo } from "@storybook/addon-info";
 import DigitProvidersDecorator from "../../../.storybook/DigitProvidersDecorator";

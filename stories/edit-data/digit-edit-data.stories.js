@@ -2,11 +2,7 @@ import { action } from "@storybook/addon-actions";
 import { select, text, boolean, withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
-import {
-    DigitTranslations,
-    DigitEditData,
-    DigitProviders
-} from "../../src";
+import { DigitTranslations, DigitEditData, DigitProviders } from "../../src";
 import DigitEditDataReadme from "../../src/elements/digit-edit-data/readme.md";
 import Translations from "./Translations.json";
 import StoryDigitEditData from "./StoryDigitEditData";

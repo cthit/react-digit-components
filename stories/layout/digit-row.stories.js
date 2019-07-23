@@ -4,10 +4,7 @@ import { withKnobs, select, boolean, number } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 
 import DigitRowReadme from "../../src/styles/digit-layout/row-readme.md";
-import {
-    Row,
-    Center
-} from "../../src/styles/digit-layout/DigitLayout.styles";
+import { Row, Center } from "../../src/styles/digit-layout/DigitLayout.styles";
 import DigitProviders from "../../src/declaratives/digit-providers";
 import DummyItem from "./DummyItem";
 import BorderSize from "./BorderSize";

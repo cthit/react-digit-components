@@ -4,7 +4,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Subtitle, Title } from "../digit-text/DigitText.styles";
-import DigitImage from "../../elements/digit-image";
 
 /** Props:
  * width, height, maxWidth, maxHeight, minWidth, minHeight
@@ -86,7 +85,7 @@ CardHeader.propTypes = {
     hasIcon: PropTypes.bool
 };
 
-export const CardHeaderImage = styled(DigitImage)`
+export const CardHeaderImage = styled.img`
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 3;

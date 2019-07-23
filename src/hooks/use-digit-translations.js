@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveLanguage } from "../declaratives/digit-translations/DigitTranslations.declarative.action-creator";
-import * as _ from "lodash";
+import merge from "lodash/merge";
 
 function getNewText(translations, commonTranslations, activeLanguage) {
     let newText = {};
 
-    _.merge(newText, translations, commonTranslations);
+    merge(newText, translations, commonTranslations);
 
     const langIndex = activeLanguage === "en" ? 0 : 1;
 

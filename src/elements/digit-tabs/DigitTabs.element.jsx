@@ -1,9 +1,11 @@
-import { Tab, Tabs, withStyles } from "@material-ui/core";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tab";
+import withStyles from "@material-ui/styles/withStyles";
 import PropTypes from "prop-types";
 import React from "react";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text, Title } from "../../styles/digit-text/DigitText.styles";
-import _ from "lodash";
+import findIndex from "lodash/findIndex";
 
 const styles = theme => ({
     root: {
@@ -37,7 +39,7 @@ const DigitTabs = ({
                 root: inheritBackground ? classes.rootInherit : classes.root,
                 scrollButtons: classes.scrollButtons
             }}
-            value={_.findIndex(tabs, tab => tab.value === selected)}
+            value={findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
             fullWidth={fullWidth}
             onChange={(event, value) => {

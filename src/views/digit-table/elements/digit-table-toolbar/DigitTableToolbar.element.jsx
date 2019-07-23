@@ -1,4 +1,4 @@
-import { Toolbar } from "@material-ui/core";
+import Toolbar from "@material-ui/core/Toolbar";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";

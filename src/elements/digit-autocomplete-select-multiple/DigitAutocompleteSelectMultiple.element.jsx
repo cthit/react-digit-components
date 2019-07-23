@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
-import { useTheme, withStyles } from "@material-ui/styles";
+import useTheme from "@material-ui/styles/useTheme";
+import withStyles from "@material-ui/styles/withStyles";
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import CancelIcon from "@material-ui/icons/Cancel";
 import DigitChip from "../digit-chip";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import * as _ from "lodash";
+import find from "lodash/find";
 
 const styles = {
     container: {
@@ -157,7 +158,7 @@ const DigitAutocompleteSelectMultiple = ({
     };
 
     const selectedValueObjects = value.map(value =>
-        _.find(selectableValues, { value })
+        find(selectableValues, { value })
     );
 
     return (

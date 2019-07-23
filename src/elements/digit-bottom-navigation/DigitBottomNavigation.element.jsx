@@ -1,4 +1,4 @@
-import { BottomNavigationAction } from "@material-ui/core";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import PropTypes from "prop-types";
 import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";

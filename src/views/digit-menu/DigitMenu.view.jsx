@@ -1,4 +1,5 @@
-import { Menu, MenuItem } from "@material-ui/core";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import MoreVert from "@material-ui/icons/MoreVert";
 import PropTypes from "prop-types";
 import React from "react";

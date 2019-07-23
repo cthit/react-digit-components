@@ -7,7 +7,8 @@ import {
 } from "@material-ui/core";
 import PropTypes from "prop-types";
 import React from "react";
-import { DigitButton, DigitIfElseRendering } from "../../index";
+import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
+import DigitButton from "../../elements/digit-button";
 
 class DigitDialog extends React.Component {
     state = {

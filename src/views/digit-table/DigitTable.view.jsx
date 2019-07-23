@@ -2,7 +2,6 @@ import { Paper, Table, TableBody, TablePagination } from "@material-ui/core";
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
-import { DigitTranslations } from "../..";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import { Heading5 } from "../../styles/digit-text/DigitText.styles";
@@ -11,6 +10,7 @@ import DigitTableBody from "./elements/digit-table-body";
 import DigitTableHeader from "./elements/digit-table-header";
 import DigitTableToolbar from "./elements/digit-table-toolbar";
 import styled from "styled-components";
+import DigitTranslations from "../../declaratives/digit-translations/DigitTranslations.declarative";
 
 const StyledTablePagination = styled(TablePagination)`
     min-width: 600px;
@@ -146,7 +146,6 @@ class DigitTable extends React.Component {
         return (
             <DigitTranslations
                 translations={translations}
-                uniquePath="DigitTable"
                 render={text => (
                     <TablePaper>
                         <DigitTableToolbar

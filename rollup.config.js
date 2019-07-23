@@ -26,7 +26,7 @@ export default {
         alias({
             resolve: [".jsx", ".js"]
         }),
-        external(),
+        external(["styled-components"]),
         url(),
         svgr(),
         babel({
@@ -36,7 +36,58 @@ export default {
         resolve({
             extensions: [".js", ".jsx", ".json"]
         }),
-        commonjs(),
+        commonjs({
+            namedExports: {
+                react: [
+                    "cloneElement",
+                    "createFactory",
+                    "Component",
+                    "PropTypes",
+                    "createElement",
+                    "createContext",
+                    "isValidElement",
+                    "Children",
+                    "useLayoutEffect",
+                    "useEffect",
+                    "useState",
+                    "useContext",
+                    "useMemo",
+                    "useReducer",
+                    "useRef",
+                    "useCallback",
+                    "Fragment",
+                    "forwardRef",
+                    "memo",
+                    "useDebugValue",
+                    "PureComponent"
+                ],
+                "prop-types": [
+                    "func",
+                    "oneOfType",
+                    "object",
+                    "string",
+                    "element",
+                    "arrayOf",
+                    "bool",
+                    "any",
+                    "number",
+                    "instanceOf",
+                    "oneOf",
+                    "node"
+                ],
+                "react-dom": [
+                    "render, findDOMNode",
+                    "unstable_batchedUpdates",
+                    "createPortal"
+                ],
+                "react-is": [
+                    "isElement",
+                    "isValidElementType",
+                    "ForwardRef",
+                    "isContextConsumer"
+                ]
+            }
+        }),
         json()
     ]
 };

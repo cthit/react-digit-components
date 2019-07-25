@@ -350,7 +350,7 @@ Column.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
-    ]).isRequired,
+    ]),
     /**
      * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default column properties.
      * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-2
@@ -460,7 +460,7 @@ Row.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
-    ]).isRequired,
+    ]),
     /**
      * Should be avoided, only use if you feel comfortable in flex. Try to use any of the other default row properties.
      * https://css-tricks.com/snippets/css/a-guide-to-flexbox/#article-header-id-2

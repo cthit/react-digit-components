@@ -38,7 +38,6 @@ DigitNavLink.propTypes = {
 };
 
 DigitNavLink.defaultProps = {
-    icon: () => null,
     onClick: () => {}
 };
 

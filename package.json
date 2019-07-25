@@ -1,6 +1,6 @@
 {
   "name": "@cthit/react-digit-components",
-  "version": "1.0.0-beta.25",
+  "version": "1.0.0-beta.28",
   "description": "A collection of components that digIT uses in their websites. Uses libraries like material-ui, formik and yup.",
   "author": "digIT",
   "license": "ISC",
@@ -24,12 +24,10 @@
   "peerDependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-is": "^16.8.6",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
-    "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2"
   },
   "dependencies": {
@@ -46,6 +44,8 @@
     "prop-types": "15.7.2",
     "react-markdown": "4.1.0",
     "react-select": "3.0.4",
+    "react-is": "^16.8.6",
+    "redux-thunk": "^2.3.0",
     "yup": "0.27.0"
   },
   "devDependencies": {

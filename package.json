@@ -1,6 +1,6 @@
 {
   "name": "@cthit/react-digit-components",
-  "version": "1.0.0-beta.24",
+  "version": "1.0.0-beta.25",
   "description": "A collection of components that digIT uses in their websites. Uses libraries like material-ui, formik and yup.",
   "author": "digIT",
   "license": "ISC",
@@ -21,6 +21,17 @@
     "storybook": "start-storybook -p 6006",
     "prepare": "yarn run build"
   },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-is": "^16.8.6",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.3.2"
+  },
   "dependencies": {
     "@date-io/core": "1.3.8",
     "@date-io/date-fns": "1.3.8",
@@ -33,17 +44,8 @@
     "jss": "9.8.7",
     "lodash": "4.17.15",
     "prop-types": "15.7.2",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
-    "react-is": "^16.8.6",
     "react-markdown": "4.1.0",
-    "react-redux": "7.1.0",
-    "react-router": "5.0.1",
-    "react-router-dom": "5.0.1",
     "react-select": "3.0.4",
-    "redux": "4.0.4",
-    "redux-thunk": "2.3.0",
-    "styled-components": "4.3.2",
     "yup": "0.27.0"
   },
   "devDependencies": {

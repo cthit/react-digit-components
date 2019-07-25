@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import React from "react";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 
 //Should be removed in v2

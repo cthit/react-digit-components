@@ -31,10 +31,7 @@ function useDigitTranslations(translations) {
     //Calculates text
     useEffect(() => {
         setText(getNewText(translations, commonTranslations, activeLanguage));
-    }, [
-        activeLanguage,
-        JSON.stringify({ ...translations, ...commonTranslations })
-    ]);
+    }, [activeLanguage, translations, commonTranslations]);
 
     return [text, activeLanguage, lang => dispatch(setActiveLanguage(lang))];
 }

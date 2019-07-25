@@ -143,10 +143,7 @@ DigitTextField.propTypes = {
      * the value of the text field yourself. For updates of the value,
      * use the onChange function.
      */
-    value: PropTypes.oneOfType([
-        PropTypes.string.isRequired,
-        PropTypes.number.isRequired
-    ]),
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     /** This function will be called when the input changes.
      * The first argument is the event. To get the new value,
      * use e.target.value.
@@ -183,6 +180,7 @@ DigitTextField.defaultProps = {
     upperLabel: "",
     lowerLabel: "",
     name: "",
+    value: "",
     error: false,
     errorMessage: null,
     disabled: false,

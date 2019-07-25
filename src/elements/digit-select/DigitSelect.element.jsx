@@ -117,7 +117,7 @@ DigitSelect.propTypes = {
      * store the selected value yourself. Use onChange to
      * get new selected values.
      */
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     /** This function will be called when a new
      * value has been selected inside the DigitSelect. The
      * first argument is the new selected value.
@@ -154,6 +154,7 @@ DigitSelect.defaultProps = {
     outlined: false,
     filled: false,
     name: "",
+    value: "",
     valueToTextMap: {}
 };
 

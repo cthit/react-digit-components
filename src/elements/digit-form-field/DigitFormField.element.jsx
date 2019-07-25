@@ -119,12 +119,14 @@ class DigitFormField extends Component {
 
                         field.onChange = e => {
                             var value = e.target.value;
-                            if (value == null || value === "") {
+                            if (
+                                value == null ||
+                                (value === "" &&
+                                    (form.initialValues[name] === true ||
+                                        form.initialValues[name] === false))
+                            ) {
                                 //maybe a checked property?
                                 value = e.target.checked;
-                            }
-                            if (value == null || value === "") {
-                                value = form.initialValues[name];
                             }
                             form.setFieldValue(field.name, value);
                         };

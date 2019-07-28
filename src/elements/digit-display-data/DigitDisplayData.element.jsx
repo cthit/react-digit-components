@@ -10,10 +10,10 @@ const DigitDisplayData = ({ data, keysText, keysOrder }) => (
                 <Text
                     alignRight
                     bold
-                    key={keyOrder}
+                    key={"left-" + keyOrder}
                     text={keysText[keyOrder]}
                 />
-                <Text key={keyOrder} text={data[keyOrder]} />
+                <Text key={"right-" + keyOrder} text={data[keyOrder]} />
             </>
         ))}
     </Grid>

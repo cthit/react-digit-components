@@ -20,16 +20,33 @@ class DigitProviders extends React.Component {
         super();
 
         this.store = createStore(
-            combineReducers({
-                ...props.rootReducer,
-                toast,
-                dialog,
-                redirect,
-                digitTranslations
-            }),
+            createReducer({}),
             props.preloadedState,
             applyMiddleware(logger, thunkMiddleware)
         );
+
+        this.store.asyncReducers = {};
+
+        this.store.injectReducer = (key, asyncReducer) => {
+            this.store.asyncReducers[key] = asyncReducer;
+            this.store.replaceReducer(createReducer(this.store.asyncReducers));
+        };
+
+        this.store.removeInjectedReducer = key => {
+            delete this.store.asyncReducers[key];
+            this.store.replaceReducer(createReducer(this.store.asyncReducers));
+        };
+
+        function createReducer(asyncReducers) {
+            return combineReducers({
+                toast,
+                dialog,
+                redirect,
+                digitTranslations,
+                ...asyncReducers,
+                ...props.rootReducer
+            });
+        }
 
         this.theme = createMuiTheme({
             typography: {

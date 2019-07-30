@@ -115,6 +115,7 @@ const DigitCRUDUpdate = ({
                             dispatch(
                                 digitDialogOpen({
                                     title: dialogDeleteTitle(one),
+                                    description: dialogDeleteDescription(one),
                                     cancelButtonText: dialogDeleteCancel(one),
                                     confirmButtonText: dialogDeleteConfirm(one),
                                     onCancel: () => {},

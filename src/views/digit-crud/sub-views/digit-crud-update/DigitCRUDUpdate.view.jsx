@@ -102,14 +102,14 @@ const DigitCRUDUpdate = ({
                     }}
                     extraButtonTo={path + "/" + id}
                     initialValues={one}
-                    submitText={updateButtonText}
+                    submitText={updateButtonText(one)}
                     titleText={updateTitle(one)}
                 />
             </Center>
             {deleteAction != null && (
                 <DownRightPosition>
                     <DigitFAB
-                        text={deleteButtonText}
+                        text={deleteButtonText(one)}
                         icon={Delete}
                         onClick={() => {
                             dispatch(
@@ -151,21 +151,6 @@ const DigitCRUDUpdate = ({
             )}
         </>
     );
-};
-
-DigitCRUDUpdate.defaultProps = {
-    updateTitle: () => "Uppdatera",
-    toastUpdateSuccessful: () => "Skapning lyckades",
-    toastUpdateFailed: () => "Skapning misslyckades",
-    backButtonText: "Tillbaka",
-    updateButtonText: "Uppdatera",
-    deleteButtonText: "Radera",
-    dialogDeleteTitle: () => "Är du säker?",
-    dialogDeleteDescription: () => "",
-    dialogDeleteConfirm: () => "Radera",
-    dialogDeleteCancel: () => "Avbryt",
-    toastDeleteSuccessful: () => "Raderingen lyckades",
-    toastDeleteFailed: () => "Raderingen misslyckades"
 };
 
 export default DigitCRUDUpdate;

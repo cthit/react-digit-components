@@ -60,11 +60,4 @@ const DigitCRUDCreate = ({
     );
 };
 
-DigitCRUDCreate.defaultProps = {
-    toastCreateSuccessful: () => "Skapning lyckades",
-    toastCreateFailed: () => "Skapning misslyckades",
-    backButtonText: "Tillbaka",
-    createButtonText: "Skapa"
-};
-
 export default DigitCRUDCreate;

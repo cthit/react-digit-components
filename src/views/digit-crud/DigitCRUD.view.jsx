@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 
 import { Route, Switch } from "react-router-dom";
 import DigitCRUDReadAll from "./sub-views/digit-crud-read-all";
@@ -195,6 +196,96 @@ const DigitCRUD = ({
             </Switch>
         </Fill>
     );
+};
+
+DigitCRUD.propTypes = {
+    /** Under what path this CRUD will be under */
+    path: PropTypes.string.isRequired,
+    /** The name of the CRUD. Will be the name of the reducer */
+    name: PropTypes.string.isRequired,
+    /** A function GET request that returns a promise. Args: (id), resolve: {data: {...}}, reject: {error}*/
+    readOneRequest: PropTypes.func,
+    /** A function GET request that returns a promise. Args: (), resolve: {data: {...}}, reject: {error}*/
+    readAllRequest: PropTypes.func,
+    /** Function PUT request that returns a promise. Args: (id, newData), resolve: {}, reject: {error}*/
+    updateRequest: PropTypes.func,
+    /** Function POST request that returns a promise. Args: (newData), resolve: {}, reject: {error}*/
+    createRequest: PropTypes.func,
+    /** Function POST request that returns a promise. Args: (id), resolve: {}, reject: {error}*/
+    deleteRequest: PropTypes.func,
+    /** The order that the props of a data object should be in */
+    keysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** The header text for each data prop */
+    keysText: PropTypes.objectOf(PropTypes.string),
+    /** The id prop for the data */
+    idProp: PropTypes.string,
+    /** See DigitTable */
+    tableProps: PropTypes.object,
+    /** See editComponentData in DigitEditData */
+    formComponentData: PropTypes.objectOf(
+        PropTypes.shape({
+            component: PropTypes.func.isRequired,
+            componentProps: PropTypes.object
+        })
+    ),
+    /** See validationSchema in DigitEditData*/
+    formValidationSchema: PropTypes.object,
+    /** String for create title */
+    createTitle: PropTypes.string,
+    /** Function to create update title, Args: (data) */
+    updateTitle: PropTypes.func,
+    /** The initial values for Create form */
+    formInitialValues: PropTypes.object,
+    /** Function to create toast text when creation is successful, Args: (data, response)*/
+    toastCreateSuccessful: PropTypes.func,
+    /** Function to create toast text when creation failed, Args: (data, error)*/
+    toastCreateFailed: PropTypes.func,
+    /** Back button text */
+    backButtonText: PropTypes.string,
+    /** Create button text */
+    createButtonText: PropTypes.string,
+    /**Function to create toast text when update is successful, Args: (new, old, response) */
+    toastUpdateSuccessful: PropTypes.func,
+    /**Function to create toast text when update failed, Args: (new, old, error) */
+    toastUpdateFailed: PropTypes.func,
+    /** Function to create update button text, Args: (data)*/
+    updateButtonText: PropTypes.func,
+    /** Function to create delete button text, Args: (data)*/
+    deleteButtonText: PropTypes.func,
+    /** Function to create dialog delete title, Args: (data) */
+    dialogDeleteTitle: PropTypes.func,
+    /** Function to create dialog delete description, Args: (data) */
+    dialogDeleteDescription: PropTypes.func,
+    /** Function to create dialog delete confirm button text, Args: (data) */
+    dialogDeleteConfirm: PropTypes.func,
+    /** Function to create dialog delete cancel button text, Args: (data) */
+    dialogDeleteCancel: PropTypes.func,
+    /** Function to create toast delete successful text, Args: (data, response)*/
+    toastDeleteSuccessful: PropTypes.func,
+    /** Function to create toast delete failed text, Args: (data, error)*/
+    toastDeleteFailed: PropTypes.func,
+    /** Details button text in read all table*/
+    detailsButtonText: PropTypes.string
+};
+
+DigitCRUD.defaultProps = {
+    updateTitle: () => "Uppdatera",
+    toastUpdateSuccessful: () => "Skapning lyckades",
+    toastUpdateFailed: () => "Skapning misslyckades",
+    backButtonText: "Tillbaka",
+    updateButtonText: () => "Redigera",
+    deleteButtonText: () => "Radera",
+    dialogDeleteTitle: () => "Är du säker?",
+    dialogDeleteDescription: () => "",
+    dialogDeleteConfirm: () => "Radera",
+    dialogDeleteCancel: () => "Avbryt",
+    toastDeleteSuccessful: () => "Raderingen lyckades",
+    toastDeleteFailed: () => "Raderingen misslyckades",
+    toastCreateSuccessful: () => "Skapning lyckades",
+    toastCreateFailed: () => "Skapning misslyckades",
+    createButtonText: "Skapa",
+    detailsButtonText: "Detaljer",
+    createTitle: "Skapa"
 };
 
 export default DigitCRUD;

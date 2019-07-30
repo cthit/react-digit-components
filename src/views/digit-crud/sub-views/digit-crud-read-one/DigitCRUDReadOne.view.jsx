@@ -64,7 +64,7 @@ const DigitCRUDReadOne = ({
                             <DigitButton
                                 primary
                                 raised
-                                text={updateButtonText}
+                                text={updateButtonText(one)}
                                 onClick={() =>
                                     history.push(path + "/" + id + "/edit")
                                 }
@@ -75,11 +75,6 @@ const DigitCRUDReadOne = ({
             </Card>
         </Center>
     );
-};
-
-DigitCRUDReadOne.defaultProps = {
-    backButtonText: "Tillbaka",
-    updateButtonText: "Redigera"
 };
 
 export default DigitCRUDReadOne;

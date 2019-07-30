@@ -72,8 +72,4 @@ const DigitCRUDReadAll = ({
     );
 };
 
-DigitCRUDReadAll.defaultProps = {
-    detailsButtonText: "Detaljer"
-};
-
 export default DigitCRUDReadAll;

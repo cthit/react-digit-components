@@ -156,8 +156,8 @@ const StoryDigitCRUD = () => {
                             data.name +
                             " misslyckades"
                         }
-                        deleteButtonText={"Radera"}
-                        updateButtonText={"Uppdatera"}
+                        deleteButtonText={() => "Radera"}
+                        updateButtonText={() => "Uppdatera"}
                         dialogDeleteTitle={data => "Är du säker?"}
                         dialogDeleteDescription={data =>
                             "Är du säker på att du vill radera användaren " +

@@ -2,13 +2,13 @@ import { withKnobs } from "@storybook/addon-knobs";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitProviders } from "../../src";
-import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import { withInfo } from "@storybook/addon-info";
 import DigitCRUD from "../../src/views/digit-crud";
 import StoryDigitCRUD from "./StoryDigitCRUD";
 import DigitToast from "../../src/views/digit-toast/DigitToast.view.container";
 import DigitDialog from "../../src/views/digit-dialog/DigitDialog.view.container";
+import DigitCRUDReadme from "../../src/views/digit-crud/README.md";
 
 storiesOf("Views", module)
     .addDecorator(withInfo)
@@ -32,8 +32,14 @@ storiesOf("Views", module)
         ),
         {
             info: {
-                text: DigitCRUD,
-                propTablesExclude: [DigitProviders],
+                text: DigitCRUDReadme,
+                propTables: [DigitCRUD],
+                propTablesExclude: [
+                    DigitProviders,
+                    DigitDialog,
+                    DigitToast,
+                    StoryDigitCRUD
+                ],
                 header: false,
                 source: false
             }

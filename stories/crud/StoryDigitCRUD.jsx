@@ -131,6 +131,12 @@ const StoryDigitCRUD = () => {
                             age: 18
                         }}
                         createTitle={"Skapa användare"}
+                        createButtonText={"Skapa"}
+                        toastCreateSuccessful={response => "Användare skapad"}
+                        toastCreateFailed={error =>
+                            "Skapande av användare misslyckades"
+                        }
+                        backButtonText={"Tillbaka"}
                         updateTitle={"Uppdatera användare"}
                     />
                 </>

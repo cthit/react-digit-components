@@ -11,7 +11,11 @@ const DigitCRUDCreate = ({
     formValidationSchema,
     formInitialValues,
     keysOrder,
-    createTitle
+    createTitle,
+    toastCreateSuccessful,
+    toastCreateFailed,
+    backButtonText,
+    createButtonText
 }) => {
     const dispatch = useDispatch();
 
@@ -24,7 +28,7 @@ const DigitCRUDCreate = ({
                             actions.resetForm();
                             dispatch(
                                 digitToastOpen({
-                                    text: "Skapning lyckades"
+                                    text: toastCreateSuccessful(response)
                                 })
                             );
                         })
@@ -32,7 +36,7 @@ const DigitCRUDCreate = ({
                             actions.setSubmitting(false);
                             dispatch(
                                 digitToastOpen({
-                                    text: "Skapning misslyckades"
+                                    text: toastCreateFailed(error)
                                 })
                             );
                         });
@@ -44,15 +48,22 @@ const DigitCRUDCreate = ({
                 validationSchema={formValidationSchema}
                 extraButton={{
                     outlined: true,
-                    text: "Tillbaka"
+                    text: backButtonText
                 }}
                 extraButtonTo={path}
                 initialValues={formInitialValues}
-                submitText={"Skapa"}
+                submitText={createButtonText}
                 titleText={createTitle}
             />
         </Center>
     );
+};
+
+DigitCRUDCreate.defaultProps = {
+    toastCreateSuccessful: () => "Skapning lyckades",
+    toastCreateFailed: () => "Skapning misslyckades",
+    backButtonText: "Tillbaka",
+    createButtonText: "Skapa"
 };
 
 export default DigitCRUDCreate;

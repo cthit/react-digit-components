@@ -22,8 +22,6 @@ import {
 } from "../../styles/digit-layout/DigitLayout.styles";
 import DigitFAB from "../../elements/digit-fab";
 import Add from "@material-ui/icons/Add";
-import { digitDialogOpen } from "../digit-dialog/DigitDialog.view.action-creator";
-import { digitToastOpen } from "../digit-toast/DigitToast.view.action-creator";
 
 const DigitCRUD = ({
     path,
@@ -41,7 +39,11 @@ const DigitCRUD = ({
     formValidationSchema,
     createTitle,
     updateTitle,
-    formInitialValues
+    formInitialValues,
+    toastCreateSuccessful,
+    toastCreateFailed,
+    backButtonText,
+    createButtonText
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -106,6 +108,14 @@ const DigitCRUD = ({
                                             }
                                             keysOrder={keysOrder}
                                             createTitle={createTitle}
+                                            toastCreateFailed={
+                                                toastCreateFailed
+                                            }
+                                            toastCreateSuccessful={
+                                                toastCreateSuccessful
+                                            }
+                                            createButtonText={createButtonText}
+                                            backButtonText={backButtonText}
                                         />
                                     )}
                                 />

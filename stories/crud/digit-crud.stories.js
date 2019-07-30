@@ -21,10 +21,12 @@ storiesOf("Views", module)
                     resolve({
                         data: [
                             {
+                                id: "asdf-fdsafasd",
                                 name: "Theodor",
                                 age: 55
                             },
                             {
+                                id: "fdas-fdsafasd",
                                 name: "Sven",
                                 age: 99
                             }
@@ -35,7 +37,16 @@ storiesOf("Views", module)
             return (
                 <DigitCRUD
                     name={"users"}
+                    keysOrder={["name", "age"]}
+                    keysText={{ name: "Namn", age: "Ålder" }}
                     readAllRequest={readAllRequestPromise}
+                    tableProps={{
+                        idProp: "id",
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
                 />
             );
         },

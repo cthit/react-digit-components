@@ -1,7 +1,16 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import DigitTable from "../../../digit-table";
+import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 
-const DigitCRUDReadAll = ({ name, readAllAction, resetAction }) => {
+const DigitCRUDReadAll = ({
+    name,
+    readAllAction,
+    resetAction,
+    keysText,
+    keysOrder,
+    tableProps
+}) => {
     const all = useSelector(state => state[name].all);
 
     useEffect(() => {
@@ -10,13 +19,14 @@ const DigitCRUDReadAll = ({ name, readAllAction, resetAction }) => {
     }, []);
 
     return (
-        <div>
-            {all.map(row => (
-                <div>
-                    <p>{row.name}</p>
-                </div>
-            ))}
-        </div>
+        <Center>
+            <DigitTable
+                data={all}
+                columnsOrder={keysOrder}
+                headerTexts={keysText}
+                {...tableProps}
+            />
+        </Center>
     );
 };
 

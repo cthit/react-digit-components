@@ -33,7 +33,10 @@ const DigitCRUD = ({
     readAllRequest,
     updateRequest,
     createRequest,
-    deleteRequest
+    deleteRequest,
+    keysOrder,
+    keysText,
+    tableProps
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -129,6 +132,9 @@ const DigitCRUD = ({
                                     name={name}
                                     readAllAction={readAllAction}
                                     clearAction={clearAction}
+                                    keysText={keysText}
+                                    keysOrder={keysOrder}
+                                    tableProps={tableProps}
                                 />
                             )}
                         />

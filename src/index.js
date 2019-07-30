@@ -42,6 +42,7 @@ import DigitToast from "./views/digit-toast";
 import DigitDialog from "./views/digit-dialog";
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
+import DigitCRUD from "./views/digit-crud";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
 
@@ -213,6 +214,7 @@ export {
     DigitDialog,
     DigitMenu,
     DigitTable,
+    DigitCRUD,
     /* Actions */
     DigitToastActions,
     DigitRedirectActions,

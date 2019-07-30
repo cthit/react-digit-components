@@ -28,7 +28,11 @@ const DigitCRUD = ({
     keysOrder,
     keysText,
     idProp,
-    tableProps
+    tableProps,
+    formComponentData,
+    formValidationSchema,
+    createTitle,
+    updateTitle
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -87,13 +91,20 @@ const DigitCRUD = ({
                 <Route
                     exact
                     path={path + "/:id/edit"}
-                    render={() => (
+                    render={props => (
                         <DigitCRUDUpdate
                             name={name}
                             readOneAction={readOneAction}
                             updateAction={updateAction}
                             deleteAction={deleteAction}
                             clearAction={clearAction}
+                            updateTitle={updateTitle}
+                            id={props.match.params.id}
+                            history={props.history}
+                            path={path}
+                            formComponentData={formComponentData}
+                            formValidationSchema={formValidationSchema}
+                            keysOrder={keysOrder}
                         />
                     )}
                 />
@@ -102,11 +113,17 @@ const DigitCRUD = ({
                 <Route
                     exact
                     path={path + "/:id"}
-                    render={() => (
+                    render={props => (
                         <DigitCRUDReadOne
                             name={name}
                             readOneAction={readOneAction}
                             clearAction={clearAction}
+                            keysText={keysText}
+                            keysOrder={keysOrder}
+                            path={path}
+                            id={props.match.params.id}
+                            history={props.history}
+                            hasUpdate={hasUpdate}
                         />
                     )}
                 />
@@ -125,7 +142,7 @@ const DigitCRUD = ({
                             tableProps={tableProps}
                             idProp={idProp}
                             hasReadOne={hasReadOne}
-                            pathname={path}
+                            path={path}
                         />
                     )}
                 />

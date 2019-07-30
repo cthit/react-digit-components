@@ -62,9 +62,9 @@ export function createDeleteAction(name, deleteRequest, id) {
 export function createUpdateAction(name, updateRequest, id, data) {
     return requestPromise(
         () => updateRequest(id, data),
-        loading(name + updateLoading),
-        successfully(name + updateSuccessfully),
-        failed(name + updateFailed)
+        loading(updateLoading(name)),
+        successfully(updateSuccessfully(name)),
+        failed(updateFailed(name))
     );
 }
 

@@ -2,24 +2,34 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import DigitTable from "../../../digit-table";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
+import DigitLoading from "../../../../elements/digit-loading";
 
 const DigitCRUDReadAll = ({
     name,
     readAllAction,
-    resetAction,
+    clearAction,
     keysText,
     keysOrder,
     tableProps,
     idProp,
     hasReadOne,
-    pathname
+    path
 }) => {
     const all = useSelector(state => state[name].all);
+    const loading = useSelector(state => state[name].loading);
 
     useEffect(() => {
         readAllAction();
-        return resetAction;
+        return clearAction;
     }, []);
+
+    if (loading) {
+        return (
+            <Center>
+                <DigitLoading loading />
+            </Center>
+        );
+    }
 
     return (
         <Center>
@@ -28,7 +38,7 @@ const DigitCRUDReadAll = ({
                     hasReadOne
                         ? all.map(one => ({
                               ...one,
-                              __link: pathname + "/" + one[idProp]
+                              __link: path + "/" + one[idProp]
                           }))
                         : all
                 }

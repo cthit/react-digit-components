@@ -132,12 +132,25 @@ const StoryDigitCRUD = () => {
                         }}
                         createTitle={"Skapa användare"}
                         createButtonText={"Skapa"}
-                        toastCreateSuccessful={response => "Användare skapad"}
-                        toastCreateFailed={error =>
-                            "Skapande av användare misslyckades"
+                        toastCreateSuccessful={(data, response) =>
+                            "Användaren " + data.name + " skapad"
+                        }
+                        toastCreateFailed={(data, error) =>
+                            "Användaren " + data.name + " raderad"
                         }
                         backButtonText={"Tillbaka"}
-                        updateTitle={"Uppdatera användare"}
+                        updateTitle={data =>
+                            "Uppdatera " + data.name + " användare"
+                        }
+                        toastUpdateSuccessful={(updated, old, response) =>
+                            "Användare " + updated.name + " har uppdateras"
+                        }
+                        toastUpdateFailed={(updated, old, error) =>
+                            "Användare " + updated.name + " har inte uppdateras"
+                        }
+                        toastDeleteSuccessful={(data, response) =>
+                            "Användare " + data.name + " har raderats"
+                        }
                     />
                 </>
             )}

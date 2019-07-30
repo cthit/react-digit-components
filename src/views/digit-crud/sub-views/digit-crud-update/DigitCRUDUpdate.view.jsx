@@ -23,7 +23,18 @@ const DigitCRUDUpdate = ({
     formComponentData,
     formValidationSchema,
     updateTitle,
-    keysOrder
+    keysOrder,
+    toastUpdateSuccessful,
+    toastUpdateFailed,
+    backButtonText,
+    updateButtonText,
+    deleteButtonText,
+    dialogDeleteTitle,
+    dialogDeleteDescription,
+    dialogDeleteConfirm,
+    dialogDeleteCancel,
+    toastDeleteSuccessful,
+    toastDeleteFailed
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -50,13 +61,19 @@ const DigitCRUDUpdate = ({
             <Center>
                 <DigitEditData
                     onSubmit={(values, actions) => {
-                        updateAction(id, values)
+                        const _old = one;
+                        const _updated = values;
+                        updateAction(id, _updated)
                             .then(response => {
                                 readOneAction(id);
                                 actions.setSubmitting(false);
                                 dispatch(
                                     digitToastOpen({
-                                        text: "Uppdateringen lyckades"
+                                        text: toastUpdateSuccessful(
+                                            _updated,
+                                            _old,
+                                            response
+                                        )
                                     })
                                 );
                             })
@@ -64,7 +81,11 @@ const DigitCRUDUpdate = ({
                                 actions.setSubmitting(false);
                                 dispatch(
                                     digitToastOpen({
-                                        text: "Uppdateringen misslyckades"
+                                        text: toastUpdateFailed(
+                                            _updated,
+                                            _old,
+                                            error
+                                        )
                                     })
                                 );
                             });
@@ -77,41 +98,46 @@ const DigitCRUDUpdate = ({
                     isInitialValid={true}
                     extraButton={{
                         outlined: true,
-                        text: "Tillbaka"
+                        text: backButtonText
                     }}
                     extraButtonTo={path + "/" + id}
                     initialValues={one}
-                    submitText={"Uppdatera"}
-                    titleText={updateTitle}
+                    submitText={updateButtonText}
+                    titleText={updateTitle(one)}
                 />
             </Center>
             {deleteAction != null && (
                 <DownRightPosition>
                     <DigitFAB
-                        text={"Radera"}
+                        text={deleteButtonText}
                         icon={Delete}
                         onClick={() => {
                             dispatch(
                                 digitDialogOpen({
-                                    title: "Är du säker?",
-                                    cancelButtonText: "Avbryt",
-                                    confirmButtonText: "Radera",
+                                    title: dialogDeleteTitle(one),
+                                    cancelButtonText: dialogDeleteCancel(one),
+                                    confirmButtonText: dialogDeleteConfirm(one),
                                     onCancel: () => {},
                                     onConfirm: () => {
                                         deleteAction(id)
-                                            .then(() => {
+                                            .then(response => {
                                                 dispatch(
                                                     digitToastOpen({
-                                                        text: "Radering lyckaes"
+                                                        text: toastDeleteSuccessful(
+                                                            one,
+                                                            response
+                                                        )
                                                     })
                                                 );
                                                 history.push(path);
                                             })
-                                            .catch(() => {
+                                            .catch(error => {
                                                 dispatch(
                                                     digitToastOpen({
-                                                        text:
-                                                            "Någonting gick fel"
+                                                        text: toastDeleteFailed(
+                                                            one,
+                                                            error
+                                                        )
                                                     })
                                                 );
                                             });
@@ -124,6 +150,21 @@ const DigitCRUDUpdate = ({
             )}
         </>
     );
+};
+
+DigitCRUDUpdate.defaultProps = {
+    updateTitle: () => "Uppdatera",
+    toastUpdateSuccessful: () => "Skapning lyckades",
+    toastUpdateFailed: () => "Skapning misslyckades",
+    backButtonText: "Tillbaka",
+    updateButtonText: "Uppdatera",
+    deleteButtonText: "Radera",
+    dialogDeleteTitle: () => "Är du säker?",
+    dialogDeleteDescription: () => "",
+    dialogDeleteConfirm: () => "Radera",
+    dialogDeleteCancel: () => "Avbryt",
+    toastDeleteSuccessful: () => "Raderingen lyckades",
+    toastDeleteFailed: () => "Raderingen misslyckades"
 };
 
 export default DigitCRUDUpdate;

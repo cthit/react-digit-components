@@ -23,12 +23,13 @@ const DigitCRUDCreate = ({
         <Center>
             <DigitEditData
                 onSubmit={(values, actions) => {
-                    createAction(values)
+                    const _new = values;
+                    createAction(_new)
                         .then(response => {
                             actions.resetForm();
                             dispatch(
                                 digitToastOpen({
-                                    text: toastCreateSuccessful(response)
+                                    text: toastCreateSuccessful(_new, response)
                                 })
                             );
                         })
@@ -36,7 +37,7 @@ const DigitCRUDCreate = ({
                             actions.setSubmitting(false);
                             dispatch(
                                 digitToastOpen({
-                                    text: toastCreateFailed(error)
+                                    text: toastCreateFailed(_new, error)
                                 })
                             );
                         });

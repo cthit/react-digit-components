@@ -43,7 +43,17 @@ const DigitCRUD = ({
     toastCreateSuccessful,
     toastCreateFailed,
     backButtonText,
-    createButtonText
+    createButtonText,
+    toastUpdateSuccessful,
+    toastUpdateFailed,
+    updateButtonText,
+    deleteButtonText,
+    dialogDeleteTitle,
+    dialogDeleteDescription,
+    dialogDeleteConfirm,
+    dialogDeleteCancel,
+    toastDeleteSuccessful,
+    toastDeleteFailed
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -142,6 +152,33 @@ const DigitCRUD = ({
                                                 formValidationSchema
                                             }
                                             keysOrder={keysOrder}
+                                            toastUpdateSuccessful={
+                                                toastUpdateSuccessful
+                                            }
+                                            toastUpdateFailed={
+                                                toastUpdateFailed
+                                            }
+                                            backButtonText={backButtonText}
+                                            updateButtonText={updateButtonText}
+                                            deleteButtonText={deleteButtonText}
+                                            dialogDeleteTitle={
+                                                dialogDeleteTitle
+                                            }
+                                            dialogDeleteDescription={
+                                                dialogDeleteDescription
+                                            }
+                                            dialogDeleteConfirm={
+                                                dialogDeleteConfirm
+                                            }
+                                            dialogDeleteCancel={
+                                                dialogDeleteCancel
+                                            }
+                                            toastDeleteSuccessful={
+                                                toastDeleteSuccessful
+                                            }
+                                            toastDeleteFailed={
+                                                toastDeleteFailed
+                                            }
                                         />
                                     )}
                                 />
@@ -190,7 +227,7 @@ const DigitCRUD = ({
                         <DownRightPosition>
                             <DigitFAB
                                 primary
-                                text={"Skapa"}
+                                text={createButtonText}
                                 icon={Add}
                                 onClick={() => history.push(path + "/add")}
                             />

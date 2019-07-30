@@ -31,6 +31,8 @@ const DigitCRUDReadAll = ({
         );
     }
 
+    console.log(all);
+
     return (
         <Center>
             <DigitTable

@@ -5,7 +5,8 @@ import {
     readAllSuccessfully,
     readOneFailed,
     readOneLoading,
-    readOneSuccessfully
+    readOneSuccessfully,
+    updateSuccessfully
 } from "./DigitCRUD.actions";
 
 const createCRUDReducer = name => (state = { one: {}, all: [] }, action) => {
@@ -45,6 +46,12 @@ const createCRUDReducer = name => (state = { one: {}, all: [] }, action) => {
                 one: {},
                 all: [],
                 error: true
+            };
+
+        case updateSuccessfully(name):
+            return {
+                one: {},
+                all: []
             };
 
         case clear(name):

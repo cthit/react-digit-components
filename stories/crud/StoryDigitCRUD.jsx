@@ -19,19 +19,27 @@ const startData = [
     }
 ];
 
-const StoryDigitCRUD = () => {
-    const [data, setData] = useState(startData);
+setData.data = startData;
 
+function setData(_data) {
+    setData.data = _data;
+}
+
+function getData() {
+    return setData.data;
+}
+
+const StoryDigitCRUD = () => {
     const readAllRequestPromise = () =>
         new Promise(resolve => {
             resolve({
-                data
+                data: getData()
             });
         });
 
     const readOneRequestPromise = id =>
         new Promise((resolve, reject) => {
-            const result = _.find(data, { id });
+            const result = _.find(getData(), { id });
             if (result == null) {
                 reject();
             } else {
@@ -41,12 +49,31 @@ const StoryDigitCRUD = () => {
 
     const updateRequestPromise = (id, newUser) =>
         new Promise((resolve, reject) => {
-            const index = _.findIndex(data, { id });
+            const index = _.findIndex(getData(), { id });
             if (index === -1) {
                 reject();
             } else {
-                const newData = data;
+                const newData = [...getData()];
                 newData[index] = { id, ...newUser };
+                setData(newData);
+                resolve({});
+            }
+        });
+
+    const createRequestPromise = newUser =>
+        new Promise(resolve => {
+            setData([...getData(), { ...newUser, id: "hej-" + newUser.name }]);
+            resolve({});
+        });
+
+    const deleteRequestPromise = id =>
+        new Promise((resolve, reject) => {
+            const index = _.findIndex(getData(), { id });
+            if (index === -1) {
+                reject();
+            } else {
+                const newData = [...getData()];
+                delete newData[index];
                 setData(newData);
                 resolve({});
             }
@@ -61,6 +88,8 @@ const StoryDigitCRUD = () => {
                         readAllRequest={readAllRequestPromise}
                         readOneRequest={readOneRequestPromise}
                         updateRequest={updateRequestPromise}
+                        deleteRequest={deleteRequestPromise}
+                        createRequest={createRequestPromise}
                         path={"/iframe.html"}
                         name={"users"}
                         keysOrder={["id", "name", "age"]}
@@ -97,6 +126,12 @@ const StoryDigitCRUD = () => {
                             name: yup.string().required(),
                             age: yup.number().required()
                         })}
+                        formInitialValues={{
+                            name: "",
+                            age: 18
+                        }}
+                        createTitle={"Skapa användare"}
+                        updateTitle={"Uppdatera användare"}
                     />
                 </>
             )}

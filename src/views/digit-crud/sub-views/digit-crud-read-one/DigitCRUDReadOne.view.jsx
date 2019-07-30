@@ -61,7 +61,7 @@ const DigitCRUDReadOne = ({
                             <Padding />
                             <DigitButton
                                 primary
-                                outlined
+                                raised
                                 text={"Redigera"}
                                 onClick={() =>
                                     history.push(path + "/" + id + "/edit")

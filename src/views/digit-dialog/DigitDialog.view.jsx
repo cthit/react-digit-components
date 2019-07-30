@@ -79,7 +79,6 @@ class DigitDialog extends React.Component {
                                     <>
                                         <DigitButton
                                             onClick={this.cancel}
-                                            primary
                                             text={
                                                 options != null
                                                     ? options.cancelButtonText

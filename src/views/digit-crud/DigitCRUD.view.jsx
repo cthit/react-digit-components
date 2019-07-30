@@ -6,7 +6,6 @@ import DigitCRUDCreate from "./sub-views/digit-crud-create";
 import DigitCRUDUpdate from "./sub-views/digit-crud-update";
 import DigitCRUDReadOne from "./sub-views/digit-crud-read-one";
 
-import trimEnd from "lodash/trimEnd";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import {
     createClearAction,
@@ -17,17 +16,9 @@ import {
     createUpdateAction
 } from "./DigitCRUD.action-creator";
 import createCRUDReducer from "./DigitCRUD.reducer";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
-
-function removeLastSlash(pathname) {
-    return trimEnd(pathname, "/");
-}
-
-function ensureLastSlash(pathname) {
-    return removeLastSlash(pathname) + "/";
-}
 
 const DigitCRUD = ({
+    path,
     name,
     readOneRequest,
     readAllRequest,
@@ -36,6 +27,7 @@ const DigitCRUD = ({
     deleteRequest,
     keysOrder,
     keysText,
+    idProp,
     tableProps
 }) => {
     const dispatch = useDispatch();
@@ -77,71 +69,68 @@ const DigitCRUD = ({
     }
 
     return (
-        <Route
-            render={({ location }) => (
-                <Switch>
-                    {hasCreate && (
-                        <Route
-                            exact
-                            path={ensureLastSlash(location.pathname) + "add"}
-                            render={() => (
-                                <DigitCRUDCreate
-                                    name={name}
-                                    createAction={createAction}
-                                    clearAction={clearAction}
-                                />
-                            )}
+        <Switch>
+            {hasCreate && (
+                <Route
+                    exact
+                    path={path + "/add"}
+                    render={() => (
+                        <DigitCRUDCreate
+                            name={name}
+                            createAction={createAction}
+                            clearAction={clearAction}
                         />
                     )}
-                    {hasUpdate && hasReadOne && (
-                        <Route
-                            exact
-                            path={
-                                ensureLastSlash(location.pathname) + ":id/edit"
-                            }
-                            render={() => (
-                                <DigitCRUDUpdate
-                                    name={name}
-                                    readOneAction={readOneAction}
-                                    updateAction={updateAction}
-                                    deleteAction={deleteAction}
-                                    clearAction={clearAction}
-                                />
-                            )}
-                        />
-                    )}
-                    {hasReadOne && (
-                        <Route
-                            exact
-                            path={ensureLastSlash(location.pathname) + ":id"}
-                            render={() => (
-                                <DigitCRUDReadOne
-                                    name={name}
-                                    readOneAction={readOneAction}
-                                    clearAction={clearAction}
-                                />
-                            )}
-                        />
-                    )}
-                    {hasReadAll && (
-                        <Route
-                            exact
-                            path={ensureLastSlash(location.pathname)}
-                            render={() => (
-                                <DigitCRUDReadAll
-                                    name={name}
-                                    readAllAction={readAllAction}
-                                    clearAction={clearAction}
-                                    keysText={keysText}
-                                    keysOrder={keysOrder}
-                                    tableProps={tableProps}
-                                />
-                            )}
-                        />
-                    )}
-                </Switch>
+                />
             )}
-        />
+            {hasUpdate && hasReadOne && (
+                <Route
+                    exact
+                    path={path + "/:id/edit"}
+                    render={() => (
+                        <DigitCRUDUpdate
+                            name={name}
+                            readOneAction={readOneAction}
+                            updateAction={updateAction}
+                            deleteAction={deleteAction}
+                            clearAction={clearAction}
+                        />
+                    )}
+                />
+            )}
+            {hasReadOne && (
+                <Route
+                    exact
+                    path={path + "/:id"}
+                    render={() => (
+                        <DigitCRUDReadOne
+                            name={name}
+                            readOneAction={readOneAction}
+                            clearAction={clearAction}
+                        />
+                    )}
+                />
+            )}
+            {hasReadAll && (
+                <Route
+                    exact
+                    path={path}
+                    render={() => (
+                        <DigitCRUDReadAll
+                            name={name}
+                            readAllAction={readAllAction}
+                            clearAction={clearAction}
+                            keysText={keysText}
+                            keysOrder={keysOrder}
+                            tableProps={tableProps}
+                            idProp={idProp}
+                            hasReadOne={hasReadOne}
+                            pathname={path}
+                        />
+                    )}
+                />
+            )}
+        </Switch>
     );
 };
 

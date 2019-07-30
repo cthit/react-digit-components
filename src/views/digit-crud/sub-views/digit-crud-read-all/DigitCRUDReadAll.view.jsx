@@ -9,7 +9,10 @@ const DigitCRUDReadAll = ({
     resetAction,
     keysText,
     keysOrder,
-    tableProps
+    tableProps,
+    idProp,
+    hasReadOne,
+    pathname
 }) => {
     const all = useSelector(state => state[name].all);
 
@@ -21,9 +24,17 @@ const DigitCRUDReadAll = ({
     return (
         <Center>
             <DigitTable
-                data={all}
+                data={
+                    hasReadOne
+                        ? all.map(one => ({
+                              ...one,
+                              __link: pathname + "/" + one[idProp]
+                          }))
+                        : all
+                }
                 columnsOrder={keysOrder}
-                headerTexts={keysText}
+                headerTexts={{ ...keysText, __link: "Detaljer" }}
+                idProp={idProp}
                 {...tableProps}
             />
         </Center>

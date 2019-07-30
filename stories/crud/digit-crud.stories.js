@@ -7,6 +7,9 @@ import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import { withInfo } from "@storybook/addon-info";
 import DigitCRUD from "../../src/views/digit-crud";
+import * as _ from "lodash";
+import { Text } from "../../src/styles/digit-text/DigitText.styles";
+import { Route } from "react-router-dom";
 
 storiesOf("Views", module)
     .addDecorator(withInfo)
@@ -16,37 +19,62 @@ storiesOf("Views", module)
     .add(
         "DigitCRUD",
         () => {
+            const data = [
+                {
+                    id: "asdf-fdsafasd",
+                    name: "Theodor",
+                    age: 55
+                },
+                {
+                    id: "fdas-fdsafasd",
+                    name: "Sven",
+                    age: 99
+                }
+            ];
+
             const readAllRequestPromise = () =>
                 new Promise(resolve => {
                     resolve({
-                        data: [
-                            {
-                                id: "asdf-fdsafasd",
-                                name: "Theodor",
-                                age: 55
-                            },
-                            {
-                                id: "fdas-fdsafasd",
-                                name: "Sven",
-                                age: 99
-                            }
-                        ]
+                        data
                     });
                 });
 
+            const readOneRequestPromise = id =>
+                new Promise((resolve, reject) => {
+                    const result = _.find(data, { id });
+                    if (result == null) {
+                        reject();
+                    } else {
+                        resolve(result);
+                    }
+                });
+
             return (
-                <DigitCRUD
-                    name={"users"}
-                    keysOrder={["name", "age"]}
-                    keysText={{ name: "Namn", age: "Ålder" }}
-                    readAllRequest={readAllRequestPromise}
-                    tableProps={{
-                        idProp: "id",
-                        titleText: "Användare",
-                        emptyTableText: "Det finns inga användare",
-                        search: true,
-                        startOrderBy: "name"
-                    }}
+                <Route
+                    render={({ location }) => (
+                        <>
+                            <Text text={"Path: " + location.pathname} />
+                            <DigitCRUD
+                                path={"/iframe.html"}
+                                name={"users"}
+                                keysOrder={["id", "name", "age"]}
+                                keysText={{
+                                    id: "Id",
+                                    name: "Namn",
+                                    age: "Ålder"
+                                }}
+                                readAllRequest={readAllRequestPromise}
+                                readOneRequest={readOneRequestPromise}
+                                idProp="id"
+                                tableProps={{
+                                    titleText: "Användare",
+                                    emptyTableText: "Det finns inga användare",
+                                    search: true,
+                                    startOrderBy: "name"
+                                }}
+                            />
+                        </>
+                    )}
                 />
             );
         },

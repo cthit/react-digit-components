@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import DigitTable from "../../../digit-table";
-import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
+import {
+    Center,
+    DownRightPosition
+} from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitLoading from "../../../../elements/digit-loading";
+import DigitFAB from "../../../../elements/digit-fab";
+import Add from "@material-ui/core/SvgIcon/SvgIcon";
 
 const DigitCRUDReadAll = ({
     name,
@@ -13,7 +18,9 @@ const DigitCRUDReadAll = ({
     tableProps,
     idProp,
     hasReadOne,
-    path
+    path,
+    detailsButtonText,
+    hasCreate
 }) => {
     const all = useSelector(state => state[name].all);
     const loading = useSelector(state => state[name].loading);
@@ -31,26 +38,40 @@ const DigitCRUDReadAll = ({
         );
     }
 
-    console.log(all);
-
     return (
-        <Center>
-            <DigitTable
-                data={
-                    hasReadOne
-                        ? all.map(one => ({
-                              ...one,
-                              __link: path + "/" + one[idProp]
-                          }))
-                        : all
-                }
-                columnsOrder={keysOrder}
-                headerTexts={{ ...keysText, __link: "Detaljer" }}
-                idProp={idProp}
-                {...tableProps}
-            />
-        </Center>
+        <>
+            <Center>
+                <DigitTable
+                    data={
+                        hasReadOne
+                            ? all.map(one => ({
+                                  ...one,
+                                  __link: path + "/" + one[idProp]
+                              }))
+                            : all
+                    }
+                    columnsOrder={keysOrder}
+                    headerTexts={{ ...keysText, __link: detailsButtonText }}
+                    idProp={idProp}
+                    {...tableProps}
+                />
+            </Center>
+            {hasCreate && (
+                <DownRightPosition>
+                    <DigitFAB
+                        primary
+                        text={createButtonText}
+                        icon={Add}
+                        onClick={() => history.push(path + "/add")}
+                    />
+                </DownRightPosition>
+            )}
+        </>
     );
+};
+
+DigitCRUDReadAll.defaultProps = {
+    detailsButtonText: "Detaljer"
 };
 
 export default DigitCRUDReadAll;

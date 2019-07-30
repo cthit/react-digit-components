@@ -151,6 +151,21 @@ const StoryDigitCRUD = () => {
                         toastDeleteSuccessful={(data, response) =>
                             "Användare " + data.name + " har raderats"
                         }
+                        toastDeleteFailed={(data, error) =>
+                            "Radering av användare " +
+                            data.name +
+                            " misslyckades"
+                        }
+                        deleteButtonText={"Radera"}
+                        updateButtonText={"Uppdatera"}
+                        dialogDeleteTitle={data => "Är du säker?"}
+                        dialogDeleteDescription={data =>
+                            "Är du säker på att du vill radera användaren " +
+                            data.name
+                        }
+                        dialogDeleteConfirm={data => "Radera " + data.name}
+                        dialogDeleteCancel={data => "Avbryt"}
+                        detailsButtonText={"Detaljer"}
                     />
                 </>
             )}

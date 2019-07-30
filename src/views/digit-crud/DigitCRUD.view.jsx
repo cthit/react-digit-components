@@ -53,7 +53,8 @@ const DigitCRUD = ({
     dialogDeleteConfirm,
     dialogDeleteCancel,
     toastDeleteSuccessful,
-    toastDeleteFailed
+    toastDeleteFailed,
+    detailsButtonText
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -94,150 +95,107 @@ const DigitCRUD = ({
     }
 
     return (
-        <Route
-            render={({ history }) => (
-                <>
-                    <Fill>
-                        <Switch>
-                            {hasCreate && (
-                                <Route
-                                    exact
-                                    path={path + "/add"}
-                                    render={() => (
-                                        <DigitCRUDCreate
-                                            createAction={createAction}
-                                            path={path}
-                                            formComponentData={
-                                                formComponentData
-                                            }
-                                            formValidationSchema={
-                                                formValidationSchema
-                                            }
-                                            formInitialValues={
-                                                formInitialValues
-                                            }
-                                            keysOrder={keysOrder}
-                                            createTitle={createTitle}
-                                            toastCreateFailed={
-                                                toastCreateFailed
-                                            }
-                                            toastCreateSuccessful={
-                                                toastCreateSuccessful
-                                            }
-                                            createButtonText={createButtonText}
-                                            backButtonText={backButtonText}
-                                        />
-                                    )}
-                                />
-                            )}
-                            {hasUpdate && hasReadOne && (
-                                <Route
-                                    exact
-                                    path={path + "/:id/edit"}
-                                    render={props => (
-                                        <DigitCRUDUpdate
-                                            name={name}
-                                            readOneAction={readOneAction}
-                                            updateAction={updateAction}
-                                            deleteAction={deleteAction}
-                                            clearAction={clearAction}
-                                            updateTitle={updateTitle}
-                                            id={props.match.params.id}
-                                            history={props.history}
-                                            path={path}
-                                            formComponentData={
-                                                formComponentData
-                                            }
-                                            formValidationSchema={
-                                                formValidationSchema
-                                            }
-                                            keysOrder={keysOrder}
-                                            toastUpdateSuccessful={
-                                                toastUpdateSuccessful
-                                            }
-                                            toastUpdateFailed={
-                                                toastUpdateFailed
-                                            }
-                                            backButtonText={backButtonText}
-                                            updateButtonText={updateButtonText}
-                                            deleteButtonText={deleteButtonText}
-                                            dialogDeleteTitle={
-                                                dialogDeleteTitle
-                                            }
-                                            dialogDeleteDescription={
-                                                dialogDeleteDescription
-                                            }
-                                            dialogDeleteConfirm={
-                                                dialogDeleteConfirm
-                                            }
-                                            dialogDeleteCancel={
-                                                dialogDeleteCancel
-                                            }
-                                            toastDeleteSuccessful={
-                                                toastDeleteSuccessful
-                                            }
-                                            toastDeleteFailed={
-                                                toastDeleteFailed
-                                            }
-                                        />
-                                    )}
-                                />
-                            )}
-                            {hasReadOne && (
-                                <Route
-                                    exact
-                                    path={path + "/:id"}
-                                    render={props => (
-                                        <DigitCRUDReadOne
-                                            name={name}
-                                            readOneAction={readOneAction}
-                                            clearAction={clearAction}
-                                            keysText={keysText}
-                                            keysOrder={keysOrder}
-                                            path={path}
-                                            id={props.match.params.id}
-                                            history={props.history}
-                                            hasUpdate={hasUpdate}
-                                            backButtonText={backButtonText}
-                                            updateButtonText={updateButtonText}
-                                        />
-                                    )}
-                                />
-                            )}
-                            {hasReadAll && (
-                                <Route
-                                    exact
-                                    path={path}
-                                    render={() => (
-                                        <DigitCRUDReadAll
-                                            name={name}
-                                            readAllAction={readAllAction}
-                                            clearAction={clearAction}
-                                            keysText={keysText}
-                                            keysOrder={keysOrder}
-                                            tableProps={tableProps}
-                                            idProp={idProp}
-                                            hasReadOne={hasReadOne}
-                                            path={path}
-                                        />
-                                    )}
-                                />
-                            )}
-                        </Switch>
-                    </Fill>
-                    {hasCreate && (
-                        <DownRightPosition>
-                            <DigitFAB
-                                primary
-                                text={createButtonText}
-                                icon={Add}
-                                onClick={() => history.push(path + "/add")}
+        <Fill>
+            <Switch>
+                {hasCreate && (
+                    <Route
+                        exact
+                        path={path + "/add"}
+                        render={() => (
+                            <DigitCRUDCreate
+                                createAction={createAction}
+                                path={path}
+                                formComponentData={formComponentData}
+                                formValidationSchema={formValidationSchema}
+                                formInitialValues={formInitialValues}
+                                keysOrder={keysOrder}
+                                createTitle={createTitle}
+                                toastCreateFailed={toastCreateFailed}
+                                toastCreateSuccessful={toastCreateSuccessful}
+                                createButtonText={createButtonText}
+                                backButtonText={backButtonText}
                             />
-                        </DownRightPosition>
-                    )}
-                </>
-            )}
-        />
+                        )}
+                    />
+                )}
+                {hasUpdate && hasReadOne && (
+                    <Route
+                        exact
+                        path={path + "/:id/edit"}
+                        render={props => (
+                            <DigitCRUDUpdate
+                                name={name}
+                                readOneAction={readOneAction}
+                                updateAction={updateAction}
+                                deleteAction={deleteAction}
+                                clearAction={clearAction}
+                                updateTitle={updateTitle}
+                                id={props.match.params.id}
+                                history={props.history}
+                                path={path}
+                                formComponentData={formComponentData}
+                                formValidationSchema={formValidationSchema}
+                                keysOrder={keysOrder}
+                                toastUpdateSuccessful={toastUpdateSuccessful}
+                                toastUpdateFailed={toastUpdateFailed}
+                                backButtonText={backButtonText}
+                                updateButtonText={updateButtonText}
+                                deleteButtonText={deleteButtonText}
+                                dialogDeleteTitle={dialogDeleteTitle}
+                                dialogDeleteDescription={
+                                    dialogDeleteDescription
+                                }
+                                dialogDeleteConfirm={dialogDeleteConfirm}
+                                dialogDeleteCancel={dialogDeleteCancel}
+                                toastDeleteSuccessful={toastDeleteSuccessful}
+                                toastDeleteFailed={toastDeleteFailed}
+                            />
+                        )}
+                    />
+                )}
+                {hasReadOne && (
+                    <Route
+                        exact
+                        path={path + "/:id"}
+                        render={props => (
+                            <DigitCRUDReadOne
+                                name={name}
+                                readOneAction={readOneAction}
+                                clearAction={clearAction}
+                                keysText={keysText}
+                                keysOrder={keysOrder}
+                                path={path}
+                                id={props.match.params.id}
+                                history={props.history}
+                                hasUpdate={hasUpdate}
+                                backButtonText={backButtonText}
+                                updateButtonText={updateButtonText}
+                            />
+                        )}
+                    />
+                )}
+                {hasReadAll && (
+                    <Route
+                        exact
+                        path={path}
+                        render={() => (
+                            <DigitCRUDReadAll
+                                name={name}
+                                readAllAction={readAllAction}
+                                clearAction={clearAction}
+                                keysText={keysText}
+                                keysOrder={keysOrder}
+                                tableProps={tableProps}
+                                idProp={idProp}
+                                hasReadOne={hasReadOne}
+                                path={path}
+                                detailsButtonText={detailsButtonText}
+                            />
+                        )}
+                    />
+                )}
+            </Switch>
+        </Fill>
     );
 };
 

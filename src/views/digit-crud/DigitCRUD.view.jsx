@@ -16,12 +16,7 @@ import {
     createUpdateAction
 } from "./DigitCRUD.action-creator";
 import createCRUDReducer from "./DigitCRUD.reducer";
-import {
-    DownRightPosition,
-    Fill
-} from "../../styles/digit-layout/DigitLayout.styles";
-import DigitFAB from "../../elements/digit-fab";
-import Add from "@material-ui/icons/Add";
+import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitCRUD = ({
     path,
@@ -178,7 +173,7 @@ const DigitCRUD = ({
                     <Route
                         exact
                         path={path}
-                        render={() => (
+                        render={({ history }) => (
                             <DigitCRUDReadAll
                                 name={name}
                                 readAllAction={readAllAction}
@@ -190,6 +185,9 @@ const DigitCRUD = ({
                                 hasReadOne={hasReadOne}
                                 path={path}
                                 detailsButtonText={detailsButtonText}
+                                createButtonText={createButtonText}
+                                hasCreate={hasCreate}
+                                history={history}
                             />
                         )}
                     />

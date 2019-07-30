@@ -7,7 +7,7 @@ import {
 } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitLoading from "../../../../elements/digit-loading";
 import DigitFAB from "../../../../elements/digit-fab";
-import Add from "@material-ui/core/SvgIcon/SvgIcon";
+import Add from "@material-ui/icons/Add";
 
 const DigitCRUDReadAll = ({
     name,
@@ -20,7 +20,9 @@ const DigitCRUDReadAll = ({
     hasReadOne,
     path,
     detailsButtonText,
-    hasCreate
+    hasCreate,
+    createButtonText,
+    history
 }) => {
     const all = useSelector(state => state[name].all);
     const loading = useSelector(state => state[name].loading);

@@ -22,7 +22,9 @@ const DigitCRUDReadOne = ({
     path,
     id,
     history,
-    hasUpdate
+    hasUpdate,
+    backButtonText,
+    updateButtonText
 }) => {
     const one = useSelector(state => state[name].one);
     const loading = useSelector(state => state[name].loading);
@@ -52,7 +54,7 @@ const DigitCRUDReadOne = ({
                 </CardBody>
                 <CardButtons>
                     <DigitButton
-                        text={"Tillbaka"}
+                        text={backButtonText}
                         outlined
                         onClick={() => history.push(path)}
                     />
@@ -62,7 +64,7 @@ const DigitCRUDReadOne = ({
                             <DigitButton
                                 primary
                                 raised
-                                text={"Redigera"}
+                                text={updateButtonText}
                                 onClick={() =>
                                     history.push(path + "/" + id + "/edit")
                                 }
@@ -73,6 +75,11 @@ const DigitCRUDReadOne = ({
             </Card>
         </Center>
     );
+};
+
+DigitCRUDReadOne.defaultProps = {
+    backButtonText: "Tillbaka",
+    updateButtonText: "Redigera"
 };
 
 export default DigitCRUDReadOne;

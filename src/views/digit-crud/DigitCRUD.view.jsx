@@ -198,6 +198,8 @@ const DigitCRUD = ({
                                             id={props.match.params.id}
                                             history={props.history}
                                             hasUpdate={hasUpdate}
+                                            backButtonText={backButtonText}
+                                            updateButtonText={updateButtonText}
                                         />
                                     )}
                                 />

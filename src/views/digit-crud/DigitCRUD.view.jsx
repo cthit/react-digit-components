@@ -50,7 +50,9 @@ const DigitCRUD = ({
     dialogDeleteCancel,
     toastDeleteSuccessful,
     toastDeleteFailed,
-    detailsButtonText
+    detailsButtonText,
+    detailsTitle,
+    detailsRenderCardEnd
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -166,6 +168,19 @@ const DigitCRUD = ({
                                 hasUpdate={hasUpdate}
                                 backButtonText={backButtonText}
                                 updateButtonText={updateButtonText}
+                                detailsTitle={detailsTitle}
+                                detailsRenderCardEnd={detailsRenderCardEnd}
+                                /** Only used if update is null*/
+                                deleteAction={deleteAction}
+                                deleteButtonText={deleteButtonText}
+                                dialogDeleteTitle={dialogDeleteTitle}
+                                dialogDeleteDescription={
+                                    dialogDeleteDescription
+                                }
+                                dialogDeleteConfirm={dialogDeleteConfirm}
+                                dialogDeleteCancel={dialogDeleteCancel}
+                                toastDeleteSuccessful={toastDeleteSuccessful}
+                                toastDeleteFailed={toastDeleteFailed}
                             />
                         )}
                     />
@@ -224,8 +239,11 @@ DigitCRUD.propTypes = {
     /** See editComponentData in DigitEditData */
     formComponentData: PropTypes.objectOf(
         PropTypes.shape({
-            component: PropTypes.func.isRequired,
-            componentProps: PropTypes.object
+            component: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+                .isRequired,
+            componentProps: PropTypes.object,
+            formatEvent: PropTypes.func,
+            render: PropTypes.func
         })
     ),
     /** See validationSchema in DigitEditData*/
@@ -265,7 +283,11 @@ DigitCRUD.propTypes = {
     /** Function to create toast delete failed text, Args: (data, error)*/
     toastDeleteFailed: PropTypes.func,
     /** Details button text in read all table*/
-    detailsButtonText: PropTypes.string
+    detailsButtonText: PropTypes.string,
+    /** Details title (data) => string*/
+    detailsTitle: PropTypes.func,
+    /** Renders after DisplayData but before buttons in ReadOne */
+    detailsRenderCardEnd: PropTypes.func
 };
 
 DigitCRUD.defaultProps = {
@@ -285,7 +307,9 @@ DigitCRUD.defaultProps = {
     toastCreateFailed: () => "Skapning misslyckades",
     createButtonText: "Skapa",
     detailsButtonText: "Detaljer",
-    createTitle: "Skapa"
+    createTitle: "Skapa",
+    detailsTitle: () => "",
+    detailsRenderCardEnd: () => null
 };
 
 export default DigitCRUD;

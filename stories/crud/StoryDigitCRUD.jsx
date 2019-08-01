@@ -5,6 +5,7 @@ import * as _ from "lodash";
 import { Route } from "react-router-dom";
 import DigitTextField from "../../src/elements/digit-text-field";
 import * as yup from "yup";
+import DigitButton from "../../src/elements/digit-button";
 
 const startData = [
     {
@@ -172,6 +173,10 @@ const StoryDigitCRUD = () => {
                         dialogDeleteConfirm={data => "Radera " + data.name}
                         dialogDeleteCancel={data => "Avbryt"}
                         detailsButtonText={"Detaljer"}
+                        detailsTitle={data => data.name}
+                        detailsRenderCardEnd={data => (
+                            <DigitButton text={"Test"} onClick={() => {}} />
+                        )}
                     />
                 </>
             )}

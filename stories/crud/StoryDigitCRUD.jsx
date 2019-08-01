@@ -79,10 +79,16 @@ const StoryDigitCRUD = () => {
             }
         });
 
+    const [startPath, setStartPath] = useState(null);
+
     return (
         <Route
             render={({ location }) => (
                 <>
+                    {/*Don't mind me making react angry*/}
+                    {setStartPath(
+                        startPath == null ? location.pathname : startPath
+                    )}
                     <Text text={"Path: " + location.pathname} />
                     <DigitCRUD
                         readAllRequest={readAllRequestPromise}
@@ -90,7 +96,7 @@ const StoryDigitCRUD = () => {
                         updateRequest={updateRequestPromise}
                         deleteRequest={deleteRequestPromise}
                         createRequest={createRequestPromise}
-                        path={"/iframe.html"}
+                        path={startPath}
                         name={"users"}
                         keysOrder={["id", "name", "age"]}
                         keysText={{

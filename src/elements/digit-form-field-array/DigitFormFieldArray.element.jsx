@@ -34,7 +34,7 @@ DigitFormFieldArray.propTypes = {
      *  Has precedence over the render prop. Also see example in
      * digit-form-field-array/readme.md for examples.
      */
-    component: PropTypes.element,
+    component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /** Props for the component. E.g. setting upperLabel in DigitTextField or
      * primary in DigitCheckbox.
      */

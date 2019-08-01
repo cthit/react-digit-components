@@ -25,7 +25,7 @@ DigitNavLink.propTypes = {
     /** The text display inside the link. */
     text: PropTypes.string.isRequired,
     /** The icon of the FAB. Use @material-ui/icons.  */
-    icon: PropTypes.object,
+    icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
     /** The redirect link. Should be relative to the root.
      * Do not include the website url.
      */

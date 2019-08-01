@@ -33,7 +33,7 @@ DigitIconButton.propTypes = {
      */
     disabled: PropTypes.bool,
     /** The icon of the FAB. Use @material-ui/icons.  */
-    icon: PropTypes.object.isRequired
+    icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired
 };
 
 DigitIconButton.defaultProps = {

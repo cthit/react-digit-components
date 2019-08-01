@@ -154,7 +154,7 @@ DigitFormField.propTypes = {
      * DigitTextField, DigitSwitch, DigitCheckbox or DigitSelect. Anything that is
      * input.
      */
-    component: PropTypes.func.isRequired,
+    component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /** Props for the component. E.g. setting upperLabel in DigitTextField or
      * primary in DigitCheckbox.
      */

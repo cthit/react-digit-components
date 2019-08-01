@@ -144,8 +144,9 @@ DigitEditData.propTypes = {
     keysOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
     keysComponentData: PropTypes.objectOf(
         PropTypes.shape({
-            component: PropTypes.func.isRequired,
-            componentProps: PropTypes.object
+            component: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+                .isRequired,
+            componentProps: PropTypes.object,
         })
     ).isRequired,
     titleText: PropTypes.string,

@@ -40,7 +40,7 @@ DigitFAB.propTypes = {
     /** The function which will be called when the button has been pressed.*/
     onClick: PropTypes.func,
     /** The icon of the FAB. Use @material-ui/icons.  */
-    icon: PropTypes.object.isRequired,
+    icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
     /** Disables the button. onClick will not be called if you click the button.
      * The styling of the button also changes to reflect.
      */

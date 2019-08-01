@@ -1,6 +1,8 @@
 import { FastField, Field } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
+import DigitCheckbox from "../digit-checkbox";
+import DigitSwitch from "../digit-switch";
 
 class DigitFormField extends Component {
     constructor(props) {
@@ -78,7 +80,35 @@ class DigitFormField extends Component {
     }
 
     render() {
-        const { name, component, componentProps, notFast } = this.props;
+        const {
+            name,
+            component,
+            componentProps,
+            notFast,
+            formatEvent,
+            render
+        } = this.props;
+
+        var _formatEvent = formatEvent;
+
+        if (
+            _formatEvent == null &&
+            (component === DigitCheckbox || component === DigitSwitch)
+        ) {
+            _formatEvent = e => e.target.checked;
+        } else {
+            _formatEvent = e => e.target.value;
+        }
+
+        const c = (error, errorMessage, field, componentProps) =>
+            component != null
+                ? React.createElement(component, {
+                      error,
+                      errorMessage,
+                      ...field,
+                      ...componentProps
+                  })
+                : render(error, errorMessage, field, componentProps);
 
         if (notFast) {
             return (
@@ -88,15 +118,10 @@ class DigitFormField extends Component {
                         const { field, form } = props;
                         const error = form.touched[name] && form.errors[name];
                         field.onChange = e => {
-                            form.setFieldValue(field.name, e.target.value);
+                            form.setFieldValue(field.name, _formatEvent(e));
                         };
 
-                        return React.createElement(component, {
-                            error: error != null,
-                            errorMessage: error,
-                            ...field,
-                            ...componentProps
-                        });
+                        return c(error != null, error, field, componentProps);
                     }}
                 />
             );
@@ -118,25 +143,10 @@ class DigitFormField extends Component {
                         const error = form.touched[name] && form.errors[name];
 
                         field.onChange = e => {
-                            var value = e.target.value;
-                            if (
-                                value == null ||
-                                (value === "" &&
-                                    (form.initialValues[name] === true ||
-                                        form.initialValues[name] === false))
-                            ) {
-                                //maybe a checked property?
-                                value = e.target.checked;
-                            }
-                            form.setFieldValue(field.name, value);
+                            form.setFieldValue(field.name, _formatEvent(e));
                         };
 
-                        return React.createElement(component, {
-                            error: error != null,
-                            errorMessage: error,
-                            ...field,
-                            ...componentProps
-                        });
+                        return c(error != null, error, field, componentProps);
                     }}
                 />
             );
@@ -150,6 +160,7 @@ DigitFormField.propTypes = {
      * the values object in DigitForm.
      */
     name: PropTypes.string.isRequired,
+    render: PropTypes.func,
     /** The component that the DigitFormField should wrap. Can be for example a
      * DigitTextField, DigitSwitch, DigitCheckbox or DigitSelect. Anything that is
      * input.
@@ -158,7 +169,9 @@ DigitFormField.propTypes = {
     /** Props for the component. E.g. setting upperLabel in DigitTextField or
      * primary in DigitCheckbox.
      */
-    componentProps: PropTypes.object
+    componentProps: PropTypes.object,
+    /** Turns the event from onChange to the actual data that the component uses */
+    formatEvent: PropTypes.func
 };
 
 DigitFormField.defaultProps = {

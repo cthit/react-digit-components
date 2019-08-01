@@ -79,11 +79,15 @@ const DigitEditData = ({
                                         <DigitFormField
                                             key={key}
                                             name={key}
+                                            render={keyComponentData.render}
                                             component={
                                                 keyComponentData.component
                                             }
                                             componentProps={
                                                 keyComponentData.componentProps
+                                            }
+                                            formatEvent={
+                                                keyComponentData.formatEvent
                                             }
                                         />
                                     );
@@ -92,6 +96,7 @@ const DigitEditData = ({
                                         <DigitFormFieldArray
                                             key={key}
                                             name={key}
+                                            render={keyComponentData.render}
                                             component={
                                                 keyComponentData.component
                                             }
@@ -147,6 +152,8 @@ DigitEditData.propTypes = {
             component: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
                 .isRequired,
             componentProps: PropTypes.object,
+            formatEvent: PropTypes.func,
+            render: PropTypes.func
         })
     ).isRequired,
     titleText: PropTypes.string,

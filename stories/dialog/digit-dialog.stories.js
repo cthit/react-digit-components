@@ -28,7 +28,6 @@ const Stuff = ({ digitDialogOpen }) => (
                 digitDialogOpen({
                     ...values,
                     onCancel: e => {
-                        digit - dialog;
                         action("Cancel")(e);
                     },
                     onConfirm: e => {

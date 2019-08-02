@@ -37,10 +37,22 @@ const createCRUDReducer = name => (state = { one: {}, all: [] }, action) => {
                 loading: true
             };
         case readOneSuccessfully(name):
-            return {
-                one: action.payload.data,
-                all: []
-            };
+            //Promise array
+            console.log("HEJHEJ");
+            console.log(action.payload.data);
+            if (Array.isArray(action.payload.data)) {
+                const results = action.payload.data.map(result => result.data);
+                console.log(Object.assign(...results));
+                return {
+                    one: Object.assign(...results),
+                    all: []
+                };
+            } else {
+                return {
+                    one: action.payload.data,
+                    all: []
+                };
+            }
         case readOneFailed(name):
             return {
                 one: {},

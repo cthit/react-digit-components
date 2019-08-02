@@ -73,7 +73,7 @@ function successfully(type) {
         type,
         error: false,
         payload: {
-            data: response.data
+            data: Array.isArray(response) ? response : response.data
         }
     });
 }

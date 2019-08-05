@@ -1,140 +1,56 @@
-import FilledInput from "@material-ui/core/FilledInput";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import PropTypes from "prop-types";
 import React from "react";
-import ReactDOM from "react-dom";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+import TextField from "@material-ui/core/TextField";
 
-class DigitTextField extends React.Component {
-    handleOnChange = (e, maxLength, onChange) => {
+const DigitTextField = ({
+    value,
+    onChange,
+    onBlur,
+    upperLabel,
+    lowerLabel,
+    name,
+    password,
+    numbersOnly,
+    error,
+    errorMessage,
+    disabled,
+    outlined,
+    filled,
+    maxLength
+}) => {
+    const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
         if (maxLength === -1 || newValue.length <= maxLength) {
             onChange(e);
         }
     };
 
-    render() {
-        const {
-            value,
-            onChange,
-            onBlur,
-            upperLabel,
-            lowerLabel,
-            name,
-            password,
-            numbersOnly,
-            error,
-            errorMessage,
-            disabled,
-            outlined,
-            filled,
-            maxLength
-        } = this.props;
+    console.log(value);
 
-        return (
-            <Fill>
-                <FormControl
-                    variant={
-                        outlined ? "outlined" : filled ? "filled" : "standard"
-                    }
-                    error={error}
-                >
-                    <InputLabel
-                        ref={ref => {
-                            this.labelRef = ReactDOM.findDOMNode(ref);
-                        }}
-                    >
-                        {upperLabel}
-                    </InputLabel>
-                    <DigitIfElseRendering
-                        test={outlined}
-                        ifRender={() => (
-                            <OutlinedInput
-                                name={name}
-                                labelWidth={
-                                    this.labelRef
-                                        ? this.labelRef.offsetWidth
-                                        : 0
-                                }
-                                value={value || ""}
-                                onChange={e =>
-                                    this.handleOnChange(e, maxLength, onChange)
-                                }
-                                onBlur={onBlur}
-                                type={
-                                    password
-                                        ? "password"
-                                        : numbersOnly
-                                        ? "number"
-                                        : "text"
-                                }
-                                disabled={disabled}
-                            />
-                        )}
-                    />
-
-                    <DigitIfElseRendering
-                        test={filled}
-                        ifRender={() => (
-                            <FilledInput
-                                name={name}
-                                value={value || ""}
-                                onChange={e =>
-                                    this.handleOnChange(e, maxLength, onChange)
-                                }
-                                onBlur={onBlur}
-                                type={
-                                    password
-                                        ? "password"
-                                        : numbersOnly
-                                        ? "number"
-                                        : "text"
-                                }
-                                disabled={disabled}
-                            />
-                        )}
-                    />
-                    <DigitIfElseRendering
-                        test={!filled && !outlined}
-                        ifRender={() => (
-                            <Input
-                                name={name}
-                                value={value || ""}
-                                onChange={e =>
-                                    this.handleOnChange(e, maxLength, onChange)
-                                }
-                                onBlur={onBlur}
-                                type={
-                                    password
-                                        ? "password"
-                                        : numbersOnly
-                                        ? "number"
-                                        : "text"
-                                }
-                                disabled={disabled}
-                            />
-                        )}
-                    />
-
-                    <FormHelperText>
-                        {error && errorMessage != null
-                            ? errorMessage
-                            : maxLength !== -1
-                            ? value.length + "/" + maxLength
-                            : lowerLabel != null
-                            ? lowerLabel
-                            : ""}
-                    </FormHelperText>
-                </FormControl>
-            </Fill>
-        );
-    }
-}
+    return (
+        <TextField
+            name={name}
+            error={error}
+            label={upperLabel}
+            value={value || ""}
+            helperText={
+                error && errorMessage != null
+                    ? errorMessage
+                    : maxLength !== -1
+                    ? value.length + "/" + maxLength
+                    : lowerLabel != null
+                    ? lowerLabel
+                    : ""
+            }
+            onBlur={onBlur}
+            type={password ? "password" : numbersOnly ? "number" : "text"}
+            onChange={e => handleOnChange(e, maxLength, onChange)}
+            margin="normal"
+            disabled={disabled}
+            variant={outlined ? "outlined" : filled ? "filled" : "standard"}
+        />
+    );
+};
 
 DigitTextField.displayName = "DigitTextField";
 DigitTextField.propTypes = {

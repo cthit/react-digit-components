@@ -14,7 +14,7 @@ const typeDefaultValue = "normal";
 
 const styleLabel = "style";
 const styleOptions = ["filled", "outlined", "standard"];
-const styleDefaultValue = "standard";
+const styleDefaultValue = "outlined";
 
 storiesOf("Elements", module)
     .addDecorator(withInfo)

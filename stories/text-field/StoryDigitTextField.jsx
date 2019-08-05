@@ -3,7 +3,7 @@ import { DigitTextField } from "../../src";
 
 class StoryDigitTextField extends React.Component {
     state = {
-        textFieldValue: ""
+        textFieldValue: "hej"
     };
 
     onTextFieldChanged = e => {

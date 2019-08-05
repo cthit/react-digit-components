@@ -1,6 +1,6 @@
 {
   "name": "@cthit/react-digit-components",
-  "version": "1.0.0-beta.35",
+  "version": "1.0.0-beta.36",
   "description": "A collection of components that digIT uses in their websites. Uses libraries like material-ui, formik and yup.",
   "author": "digIT",
   "license": "ISC",

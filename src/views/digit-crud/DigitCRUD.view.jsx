@@ -52,7 +52,8 @@ const DigitCRUD = ({
     toastDeleteFailed,
     detailsButtonText,
     detailsTitle,
-    detailsRenderCardEnd
+    detailsRenderCardEnd,
+    customDetailsRenders
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -170,6 +171,7 @@ const DigitCRUD = ({
                                 updateButtonText={updateButtonText}
                                 detailsTitle={detailsTitle}
                                 detailsRenderCardEnd={detailsRenderCardEnd}
+                                customDetailsRenders={customDetailsRenders}
                                 /** Only used if update is null*/
                                 deleteAction={deleteAction}
                                 deleteButtonText={deleteButtonText}
@@ -287,7 +289,9 @@ DigitCRUD.propTypes = {
     /** Details title (data) => string*/
     detailsTitle: PropTypes.func,
     /** Renders after DisplayData but before buttons in ReadOne */
-    detailsRenderCardEnd: PropTypes.func
+    detailsRenderCardEnd: PropTypes.func,
+    /** If you want a prop not to be rendered by DigitDisplayData in view */
+    customDetailsRenders: PropTypes.objectOf(PropTypes.func)
 };
 
 DigitCRUD.defaultProps = {
@@ -309,7 +313,8 @@ DigitCRUD.defaultProps = {
     detailsButtonText: "Detaljer",
     createTitle: "Skapa",
     detailsTitle: () => "",
-    detailsRenderCardEnd: () => null
+    detailsRenderCardEnd: () => null,
+    customDetailsRenders: {}
 };
 
 export default DigitCRUD;

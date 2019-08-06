@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text } from "../../src/styles/digit-text/DigitText.styles";
+import { Text, Title } from "../../src/styles/digit-text/DigitText.styles";
 import DigitCRUD from "../../src/views/digit-crud";
 import * as _ from "lodash";
 import { Route } from "react-router-dom";
@@ -177,6 +177,9 @@ const StoryDigitCRUD = () => {
                         detailsRenderCardEnd={data => (
                             <DigitButton text={"Test"} onClick={() => {}} />
                         )}
+                        customDetailsRenders={{
+                            age: one => <Title text={one.age + " yer age is"} />
+                        }}
                     />
                 </>
             )}

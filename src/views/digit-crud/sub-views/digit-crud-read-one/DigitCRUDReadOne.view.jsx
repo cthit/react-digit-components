@@ -40,7 +40,8 @@ const DigitCRUDReadOne = ({
     toastDeleteSuccessful,
     toastDeleteFailed,
     detailsTitle,
-    detailsRenderCardEnd
+    detailsRenderCardEnd,
+    customDetailsRenders
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -59,17 +60,28 @@ const DigitCRUDReadOne = ({
         );
     }
 
+    const displayData = {};
+    const customDetailsRenderKeys = Object.keys(customDetailsRenders);
+    Object.keys(one)
+        .filter(key => !customDetailsRenderKeys.includes(key))
+        .forEach(key => (displayData[key] = one[key]));
+
     return (
         <>
             <Center>
                 <Card>
-                    <CardTitle text={detailsTitle(one)} />
+                    <CardTitle text={detailsTitle(one) + ""} />
                     <CardBody>
                         <DigitDisplayData
                             keysText={keysText}
                             keysOrder={keysOrder}
-                            data={one}
+                            data={displayData}
                         />
+                        {keysOrder
+                            .filter(key =>
+                                customDetailsRenderKeys.includes(key)
+                            )
+                            .map(key => customDetailsRenders[key](one))}
                         {detailsRenderCardEnd(one)}
                     </CardBody>
                     <CardButtons>

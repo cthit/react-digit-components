@@ -25,8 +25,6 @@ const DigitTextField = ({
         }
     };
 
-    console.log(value);
-
     return (
         <TextField
             name={name}

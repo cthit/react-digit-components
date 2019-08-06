@@ -5,17 +5,14 @@ import { Text } from "../../styles/digit-text/DigitText.styles";
 
 const DigitDisplayData = ({ data, keysText, keysOrder }) => (
     <Grid columns={`auto 1fr`} margin={"4px"}>
-        {keysOrder.map(keyOrder => (
-            <>
-                <Text
-                    alignRight
-                    bold
-                    key={"left-" + keyOrder}
-                    text={keysText[keyOrder]}
-                />
-                <Text key={"right-" + keyOrder} text={data[keyOrder]} />
-            </>
-        ))}
+        {keysOrder
+            .filter(keyOrder => Object.keys(data).includes(keyOrder))
+            .map(keyOrder => (
+                <React.Fragment key={keyOrder}>
+                    <Text alignRight bold text={keysText[keyOrder]} />
+                    <Text text={data[keyOrder]} />
+                </React.Fragment>
+            ))}
     </Grid>
 );
 

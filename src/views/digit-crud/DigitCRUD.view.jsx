@@ -52,7 +52,11 @@ const DigitCRUD = ({
     toastDeleteFailed,
     detailsButtonText,
     detailsTitle,
+    detailsRenderCardStart,
     detailsRenderCardEnd,
+    detailsRenderStart,
+    detailsRenderEnd,
+    detailsCustomRender,
     customDetailsRenders
 }) => {
     const dispatch = useDispatch();
@@ -170,6 +174,10 @@ const DigitCRUD = ({
                                 backButtonText={backButtonText}
                                 updateButtonText={updateButtonText}
                                 detailsTitle={detailsTitle}
+                                detailsCustomRender={detailsCustomRender}
+                                detailsRenderStart={detailsRenderStart}
+                                detailsRenderEnd={detailsRenderEnd}
+                                detailsRenderCardStart={detailsRenderCardStart}
                                 detailsRenderCardEnd={detailsRenderCardEnd}
                                 customDetailsRenders={customDetailsRenders}
                                 /** Only used if update is null*/
@@ -288,7 +296,15 @@ DigitCRUD.propTypes = {
     detailsButtonText: PropTypes.string,
     /** Details title (data) => string*/
     detailsTitle: PropTypes.func,
-    /** Renders after DisplayData but before buttons in ReadOne */
+    /** Overwrites the default DigitDisplayData behavior. (data, goBack, goToEdit) */
+    detailsCustomRender: PropTypes.func,
+    /** Renders before card in details (data) */
+    detailsRenderStart: PropTypes.func,
+    /** Renders after card in details (data) */
+    detailsRenderEnd: PropTypes.func,
+    /** Renders before DisplayData inside card (data)*/
+    detailsRenderCardStart: PropTypes.func,
+    /** Renders after DisplayData but before buttons in ReadOne (data)*/
     detailsRenderCardEnd: PropTypes.func,
     /** If you want a prop not to be rendered by DigitDisplayData in view */
     customDetailsRenders: PropTypes.objectOf(PropTypes.func)
@@ -313,6 +329,10 @@ DigitCRUD.defaultProps = {
     detailsButtonText: "Detaljer",
     createTitle: "Skapa",
     detailsTitle: () => "",
+    detailsCustomRender: null,
+    detailsRenderStart: () => null,
+    detailsRenderEnd: () => null,
+    detailsRenderCardStart: () => null,
     detailsRenderCardEnd: () => null,
     customDetailsRenders: {}
 };

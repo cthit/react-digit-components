@@ -40,7 +40,11 @@ const DigitCRUDReadOne = ({
     toastDeleteSuccessful,
     toastDeleteFailed,
     detailsTitle,
+    detailsRenderCardStart,
     detailsRenderCardEnd,
+    detailsRenderStart,
+    detailsRenderEnd,
+    detailsCustomRender,
     customDetailsRenders
 }) => {
     const dispatch = useDispatch();
@@ -66,12 +70,77 @@ const DigitCRUDReadOne = ({
         .filter(key => !customDetailsRenderKeys.includes(key))
         .forEach(key => (displayData[key] = one[key]));
 
+    const goBack = () => {
+        history.push(path);
+    };
+    const goToEdit = () => {
+        history.push(path + "/" + id + "/edit");
+    };
+    var deleteFAB = () => null;
+
+    if (!hasUpdate && deleteAction != null) {
+        deleteFAB = one => (
+            <DownRightPosition>
+                <DigitFAB
+                    text={deleteButtonText(one)}
+                    icon={Delete}
+                    onClick={() => {
+                        dispatch(
+                            digitDialogOpen({
+                                title: dialogDeleteTitle(one),
+                                description: dialogDeleteDescription(one),
+                                cancelButtonText: dialogDeleteCancel(one),
+                                confirmButtonText: dialogDeleteConfirm(one),
+                                onCancel: () => {},
+                                onConfirm: () => {
+                                    deleteAction(id)
+                                        .then(response => {
+                                            dispatch(
+                                                digitToastOpen({
+                                                    text: toastDeleteSuccessful(
+                                                        one,
+                                                        response
+                                                    )
+                                                })
+                                            );
+                                            history.push(path);
+                                        })
+                                        .catch(error => {
+                                            dispatch(
+                                                digitToastOpen({
+                                                    text: toastDeleteFailed(
+                                                        one,
+                                                        error
+                                                    )
+                                                })
+                                            );
+                                        });
+                                }
+                            })
+                        );
+                    }}
+                />
+            </DownRightPosition>
+        );
+    }
+
+    if (detailsCustomRender != null) {
+        return (
+            <>
+                {detailsCustomRender(one, goBack, goToEdit)}
+                {deleteFAB(one)}
+            </>
+        );
+    }
+
     return (
         <>
             <Center>
+                {detailsRenderStart(one)}
                 <Card>
                     <CardTitle text={detailsTitle(one) + ""} />
                     <CardBody>
+                        {detailsRenderCardStart(one)}
                         <DigitDisplayData
                             keysText={keysText}
                             keysOrder={keysOrder}
@@ -88,7 +157,7 @@ const DigitCRUDReadOne = ({
                         <DigitButton
                             text={backButtonText}
                             outlined
-                            onClick={() => history.push(path)}
+                            onClick={goBack}
                         />
                         {hasUpdate && (
                             <>
@@ -97,58 +166,15 @@ const DigitCRUDReadOne = ({
                                     primary
                                     raised
                                     text={updateButtonText(one)}
-                                    onClick={() =>
-                                        history.push(path + "/" + id + "/edit")
-                                    }
+                                    onClick={goToEdit}
                                 />
                             </>
                         )}
                     </CardButtons>
                 </Card>
+                {detailsRenderEnd(one)}
+                {deleteFAB(one)}
             </Center>
-            {!hasUpdate && deleteAction != null && (
-                <DownRightPosition>
-                    <DigitFAB
-                        text={deleteButtonText(one)}
-                        icon={Delete}
-                        onClick={() => {
-                            dispatch(
-                                digitDialogOpen({
-                                    title: dialogDeleteTitle(one),
-                                    description: dialogDeleteDescription(one),
-                                    cancelButtonText: dialogDeleteCancel(one),
-                                    confirmButtonText: dialogDeleteConfirm(one),
-                                    onCancel: () => {},
-                                    onConfirm: () => {
-                                        deleteAction(id)
-                                            .then(response => {
-                                                dispatch(
-                                                    digitToastOpen({
-                                                        text: toastDeleteSuccessful(
-                                                            one,
-                                                            response
-                                                        )
-                                                    })
-                                                );
-                                                history.push(path);
-                                            })
-                                            .catch(error => {
-                                                dispatch(
-                                                    digitToastOpen({
-                                                        text: toastDeleteFailed(
-                                                            one,
-                                                            error
-                                                        )
-                                                    })
-                                                );
-                                            });
-                                    }
-                                })
-                            );
-                        }}
-                    />
-                </DownRightPosition>
-            )}
         </>
     );
 };

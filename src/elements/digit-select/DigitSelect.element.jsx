@@ -25,7 +25,10 @@ class DigitSelect extends React.Component {
             lowerLabel,
             reverse,
             filled,
-            outlined
+            outlined,
+            error,
+            errorMessage,
+            onBlur
         } = this.props;
         return (
             <Fill>
@@ -42,6 +45,7 @@ class DigitSelect extends React.Component {
                         {upperLabel}
                     </InputLabel>
                     <StyledSelect
+                        onBlur={onBlur}
                         onChange={onChange}
                         disabled={disabled}
                         displayEmpty={allowToChooseNone}
@@ -93,7 +97,13 @@ class DigitSelect extends React.Component {
                             );
                         })}
                     </StyledSelect>
-                    <FormHelperText>{lowerLabel}</FormHelperText>
+                    {(lowerLabel != null || errorMessage != null) && (
+                        <FormHelperText>
+                            {error && errorMessage != null
+                                ? errorMessage
+                                : lowerLabel}
+                        </FormHelperText>
+                    )}
                 </StyledFormControl>
             </Fill>
         );

@@ -14,7 +14,14 @@ class StoryDigitSelect extends React.Component {
 
     render() {
         const { selectedFlavour } = this.state;
-        const { disabled, upperLabel, lowerLabel, style } = this.props;
+        const {
+            disabled,
+            upperLabel,
+            lowerLabel,
+            style,
+            error,
+            errorMessage
+        } = this.props;
 
         return (
             <DigitLayout.Size width="200px" height="150px">
@@ -32,6 +39,8 @@ class StoryDigitSelect extends React.Component {
                     allowToChooseNone
                     outlined={style === "outlined"}
                     filled={style === "filled"}
+                    error={error}
+                    errorMessage={errorMessage}
                 />
             </DigitLayout.Size>
         );

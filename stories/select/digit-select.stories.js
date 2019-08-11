@@ -25,6 +25,8 @@ storiesOf("Elements", module)
             const upperLabel = text("Upperlabel", "Favorite Icecream flavor");
             const lowerLabel = text("Lowerlabel", "Choose the best flavor");
             const style = select(styleLabel, styleOptions, styleDefaultValue);
+            const error = boolean("Error", false);
+            const errorMessage = text("Error message", "Oh no");
 
             return (
                 <Size absWidth="300px">
@@ -33,6 +35,8 @@ storiesOf("Elements", module)
                         upperLabel={upperLabel}
                         lowerLabel={lowerLabel}
                         style={style}
+                        error={error}
+                        errorMessage={errorMessage}
                     />
                 </Size>
             );

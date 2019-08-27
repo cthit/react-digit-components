@@ -14,13 +14,19 @@ function format(input, extractActiveLanguage, activeLanguage) {
         return input;
     }
 
+    const output = {};
+
     for (var key in input) {
         if (input.hasOwnProperty(key)) {
-            console.log(key);
+            if (typeof input[key] === "object") {
+                output[key] = input[key][activeLanguage];
+            } else {
+                output[key] = input[key];
+            }
         }
     }
 
-    return input;
+    return output;
 }
 
 const createCRUDReducer = (name, extractActiveLanguage, activeLanguage) => (

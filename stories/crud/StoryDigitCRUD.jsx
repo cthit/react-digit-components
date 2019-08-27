@@ -11,12 +11,20 @@ const startData = [
     {
         id: "asdf-fdsafasd",
         name: "Theodor",
-        age: 55
+        age: 55,
+        quote: {
+            sv: "Svenska",
+            en: "English"
+        }
     },
     {
         id: "fdas-fdsafasd",
         name: "Sven",
-        age: 99
+        age: 99,
+        quote: {
+            sv: "Svenska",
+            en: "English"
+        }
     }
 ];
 
@@ -51,7 +59,15 @@ const StoryDigitCRUD = () => {
             if (result == null) {
                 reject();
             } else {
-                resolve({ data: result });
+                resolve({
+                    data: {
+                        ...result,
+                        quote: {
+                            sv: "Svenska",
+                            en: "English"
+                        }
+                    }
+                });
             }
         });
 
@@ -101,7 +117,7 @@ const StoryDigitCRUD = () => {
                         createRequest={createRequestPromise}
                         path={getStartPath(location.pathname)}
                         name={"users"}
-                        keysOrder={["id", "name", "age"]}
+                        keysOrder={["id", "name", "age", "quote"]}
                         keysText={{
                             id: "Id",
                             name: "Namn",
@@ -183,6 +199,10 @@ const StoryDigitCRUD = () => {
                         customDetailsRenders={{
                             age: one => <Title text={one.age + " yer age is"} />
                         }}
+                        extractActiveLanguage
+                        detailsRenderStart={() => "details start"}
+                        detailsRenderEnd={() => "details end"}
+                        detailsRenderCardStart={() => "card start"}
                     />
                 </>
             )}

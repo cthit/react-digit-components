@@ -1,6 +1,6 @@
 {
   "name": "@cthit/react-digit-components",
-  "version": "1.0.0-beta.37",
+  "version": "1.0.0-beta.40",
   "description": "A collection of components that digIT uses in their websites. Uses libraries like material-ui, formik and yup.",
   "author": "digIT",
   "license": "ISC",
@@ -22,8 +22,8 @@
     "prepare": "yarn run build"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, Title } from "../../src/styles/digit-text/DigitText.styles";
 import DigitCRUD from "../../src/views/digit-crud";
 import * as _ from "lodash";
@@ -11,12 +11,20 @@ const startData = [
     {
         id: "asdf-fdsafasd",
         name: "Theodor",
-        age: 55
+        age: 55,
+        quote: {
+            sv: "Svenska",
+            en: "English"
+        }
     },
     {
         id: "fdas-fdsafasd",
         name: "Sven",
-        age: 99
+        age: 99,
+        quote: {
+            sv: "Svenska",
+            en: "English"
+        }
     }
 ];
 
@@ -28,6 +36,13 @@ function setData(_data) {
 
 function getData() {
     return setData.data;
+}
+
+function getStartPath(_startPath) {
+    if (getStartPath.startPath == null) {
+        getStartPath.startPath = _startPath;
+    }
+    return getStartPath.startPath;
 }
 
 const StoryDigitCRUD = () => {
@@ -44,7 +59,15 @@ const StoryDigitCRUD = () => {
             if (result == null) {
                 reject();
             } else {
-                resolve({ data: result });
+                resolve({
+                    data: {
+                        ...result,
+                        quote: {
+                            sv: "Svenska",
+                            en: "English"
+                        }
+                    }
+                });
             }
         });
 
@@ -80,30 +103,26 @@ const StoryDigitCRUD = () => {
             }
         });
 
-    const [startPath, setStartPath] = useState(null);
-
     return (
         <Route
             render={({ location }) => (
                 <>
                     {/*Don't mind me making react angry*/}
-                    {setStartPath(
-                        startPath == null ? location.pathname : startPath
-                    )}
-                    <Text text={"Path: " + location.pathname} />
+                    <Text text={"Path: " + getStartPath(location.pathname)} />
                     <DigitCRUD
                         readAllRequest={readAllRequestPromise}
                         readOneRequest={readOneRequestPromise}
                         updateRequest={updateRequestPromise}
                         deleteRequest={deleteRequestPromise}
                         createRequest={createRequestPromise}
-                        path={startPath}
+                        path={getStartPath(location.pathname)}
                         name={"users"}
-                        keysOrder={["id", "name", "age"]}
+                        keysOrder={["id", "name", "age", "quote"]}
                         keysText={{
                             id: "Id",
                             name: "Namn",
-                            age: "Ålder"
+                            age: "Ålder",
+                            quote: "Citat"
                         }}
                         idProp="id"
                         tableProps={{
@@ -180,6 +199,10 @@ const StoryDigitCRUD = () => {
                         customDetailsRenders={{
                             age: one => <Title text={one.age + " yer age is"} />
                         }}
+                        extractActiveLanguage
+                        detailsRenderStart={() => "details start"}
+                        detailsRenderEnd={() => "details end"}
+                        detailsRenderCardStart={() => "card start"}
                     />
                 </>
             )}

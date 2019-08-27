@@ -18,6 +18,7 @@ import {
 } from "./DigitCRUD.action-creator";
 import createCRUDReducer from "./DigitCRUD.reducer";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+import useDigitTranslations from "../../hooks/use-digit-translations";
 
 const DigitCRUD = ({
     path,
@@ -52,12 +53,18 @@ const DigitCRUD = ({
     toastDeleteFailed,
     detailsButtonText,
     detailsTitle,
+    detailsRenderCardStart,
     detailsRenderCardEnd,
-    customDetailsRenders
+    detailsRenderStart,
+    detailsRenderEnd,
+    detailsCustomRender,
+    customDetailsRenders,
+    extractActiveLanguage
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
     const crudState = useSelector(state => state[name]);
+    const [_, activeLanguage] = useDigitTranslations({});
 
     const hasCreate = createRequest != null;
     const hasReadAll = readAllRequest != null;
@@ -84,7 +91,10 @@ const DigitCRUD = ({
     const clearAction = () => dispatch(createClearAction(name));
 
     useEffect(() => {
-        store.injectReducer(name, createCRUDReducer(name));
+        store.injectReducer(
+            name,
+            createCRUDReducer(name, extractActiveLanguage, activeLanguage)
+        );
         dispatch({ type: "INIT_" + name + "_REDUCER" });
         return () => store.removeInjectedReducer(name);
     }, []);
@@ -170,6 +180,10 @@ const DigitCRUD = ({
                                 backButtonText={backButtonText}
                                 updateButtonText={updateButtonText}
                                 detailsTitle={detailsTitle}
+                                detailsCustomRender={detailsCustomRender}
+                                detailsRenderStart={detailsRenderStart}
+                                detailsRenderEnd={detailsRenderEnd}
+                                detailsRenderCardStart={detailsRenderCardStart}
                                 detailsRenderCardEnd={detailsRenderCardEnd}
                                 customDetailsRenders={customDetailsRenders}
                                 /** Only used if update is null*/
@@ -288,10 +302,20 @@ DigitCRUD.propTypes = {
     detailsButtonText: PropTypes.string,
     /** Details title (data) => string*/
     detailsTitle: PropTypes.func,
-    /** Renders after DisplayData but before buttons in ReadOne */
+    /** Overwrites the default DigitDisplayData behavior. (data, goBack, goToEdit) */
+    detailsCustomRender: PropTypes.func,
+    /** Renders before card in details (data) */
+    detailsRenderStart: PropTypes.func,
+    /** Renders after card in details (data) */
+    detailsRenderEnd: PropTypes.func,
+    /** Renders before DisplayData inside card (data)*/
+    detailsRenderCardStart: PropTypes.func,
+    /** Renders after DisplayData but before buttons in ReadOne (data)*/
     detailsRenderCardEnd: PropTypes.func,
     /** If you want a prop not to be rendered by DigitDisplayData in view */
-    customDetailsRenders: PropTypes.objectOf(PropTypes.func)
+    customDetailsRenders: PropTypes.objectOf(PropTypes.func),
+    /** If true, then object that has {sv: "...", en: "..."} will be converted to "" depending on activeLanguage */
+    extractActiveLanguage: PropTypes.bool
 };
 
 DigitCRUD.defaultProps = {
@@ -313,8 +337,13 @@ DigitCRUD.defaultProps = {
     detailsButtonText: "Detaljer",
     createTitle: "Skapa",
     detailsTitle: () => "",
+    detailsCustomRender: null,
+    detailsRenderStart: () => null,
+    detailsRenderEnd: () => null,
+    detailsRenderCardStart: () => null,
     detailsRenderCardEnd: () => null,
-    customDetailsRenders: {}
+    customDetailsRenders: {},
+    extractActiveLanguage: false
 };
 
 export default DigitCRUD;

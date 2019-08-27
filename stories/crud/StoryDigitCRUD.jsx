@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, Title } from "../../src/styles/digit-text/DigitText.styles";
 import DigitCRUD from "../../src/views/digit-crud";
 import * as _ from "lodash";
@@ -28,6 +28,13 @@ function setData(_data) {
 
 function getData() {
     return setData.data;
+}
+
+function getStartPath(_startPath) {
+    if (getStartPath.startPath == null) {
+        getStartPath.startPath = _startPath;
+    }
+    return getStartPath.startPath;
 }
 
 const StoryDigitCRUD = () => {
@@ -80,30 +87,26 @@ const StoryDigitCRUD = () => {
             }
         });
 
-    const [startPath, setStartPath] = useState(null);
-
     return (
         <Route
             render={({ location }) => (
                 <>
                     {/*Don't mind me making react angry*/}
-                    {setStartPath(
-                        startPath == null ? location.pathname : startPath
-                    )}
-                    <Text text={"Path: " + location.pathname} />
+                    <Text text={"Path: " + getStartPath(location.pathname)} />
                     <DigitCRUD
                         readAllRequest={readAllRequestPromise}
                         readOneRequest={readOneRequestPromise}
                         updateRequest={updateRequestPromise}
                         deleteRequest={deleteRequestPromise}
                         createRequest={createRequestPromise}
-                        path={startPath}
+                        path={getStartPath(location.pathname)}
                         name={"users"}
                         keysOrder={["id", "name", "age"]}
                         keysText={{
                             id: "Id",
                             name: "Namn",
-                            age: "Ålder"
+                            age: "Ålder",
+                            quote: "Citat"
                         }}
                         idProp="id"
                         tableProps={{

@@ -9,7 +9,24 @@ import {
     updateSuccessfully
 } from "./DigitCRUD.actions";
 
-const createCRUDReducer = name => (state = { one: {}, all: [] }, action) => {
+function format(input, extractActiveLanguage, activeLanguage) {
+    if (!extractActiveLanguage) {
+        return input;
+    }
+
+    for (var key in input) {
+        if (input.hasOwnProperty(key)) {
+            console.log(key);
+        }
+    }
+
+    return input;
+}
+
+const createCRUDReducer = (name, extractActiveLanguage, activeLanguage) => (
+    state = { one: {}, all: [] },
+    action
+) => {
     switch (action.type) {
         case readAllLoading(name):
             return {
@@ -20,7 +37,9 @@ const createCRUDReducer = name => (state = { one: {}, all: [] }, action) => {
         case readAllSuccessfully(name):
             return {
                 one: {},
-                all: action.payload.data,
+                all: action.payload.data.map(one =>
+                    format(one, extractActiveLanguage, activeLanguage)
+                ),
                 loading: false
             };
         case readAllFailed(name):
@@ -41,12 +60,20 @@ const createCRUDReducer = name => (state = { one: {}, all: [] }, action) => {
             if (Array.isArray(action.payload.data)) {
                 const results = action.payload.data.map(result => result.data);
                 return {
-                    one: Object.assign(...results),
+                    one: format(
+                        Object.assign(...results),
+                        extractActiveLanguage,
+                        activeLanguage
+                    ),
                     all: []
                 };
             } else {
                 return {
-                    one: action.payload.data,
+                    one: format(
+                        action.payload.data,
+                        extractActiveLanguage,
+                        activeLanguage
+                    ),
                     all: []
                 };
             }

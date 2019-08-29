@@ -16,7 +16,8 @@ const DigitTextField = ({
     disabled,
     outlined,
     filled,
-    maxLength
+    maxLength,
+    fullWidth,
 }) => {
     const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
@@ -46,6 +47,7 @@ const DigitTextField = ({
             margin="normal"
             disabled={disabled}
             variant={outlined ? "outlined" : filled ? "filled" : "standard"}
+            fullWidth={fullWidth}
         />
     );
 };

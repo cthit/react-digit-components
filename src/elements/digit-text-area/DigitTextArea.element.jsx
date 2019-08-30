@@ -9,6 +9,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+import { TextField } from '@material-ui/core';
 
 class DigitTextArea extends React.Component {
     render() {
@@ -28,83 +29,26 @@ class DigitTextArea extends React.Component {
             filled
         } = this.props;
         return (
-            <Fill>
-                <FormControl
-                    variant={
-                        outlined ? "outlined" : filled ? "filled" : "standard"
-                    }
-                    error={error}
-                >
-                    <InputLabel
-                        ref={ref => {
-                            this.labelRef = ReactDOM.findDOMNode(ref);
-                        }}
-                    >
-                        {upperLabel}
-                    </InputLabel>
-
-                    <DigitIfElseRendering
-                        test={outlined != null && outlined}
-                        ifRender={() => (
-                            <OutlinedInput
-                                name={name}
-                                labelWidth={
-                                    this.labelRef
-                                        ? this.labelRef.offsetWidth
-                                        : 0
-                                }
-                                value={value || ""}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                disabled={disabled}
-                                rows={rows}
-                                rowsMax={rowsMax}
-                                multiline
-                            />
-                        )}
-                    />
-
-                    <DigitIfElseRendering
-                        test={filled != null && filled}
-                        ifRender={() => (
-                            <FilledInput
-                                name={name}
-                                value={value != null ? value : ""}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                disabled={disabled}
-                                rows={rows}
-                                rowsMax={rowsMax}
-                                multiline
-                            />
-                        )}
-                    />
-
-                    <DigitIfElseRendering
-                        test={!filled && !outlined}
-                        ifRender={() => (
-                            <Input
-                                name={name}
-                                value={value != null ? value : ""}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                disabled={disabled}
-                                rows={rows}
-                                rowsMax={rowsMax}
-                                multiline
-                            />
-                        )}
-                    />
-
-                    <FormHelperText>
-                        {error && errorMessage != null
-                            ? errorMessage
-                            : lowerLabel != null
-                            ? lowerLabel
-                            : ""}
-                    </FormHelperText>
-                </FormControl>
-            </Fill>
+            <TextField
+                value={value}
+                onChange={onChange}
+                onBlur={onBlur}
+                label={upperLabel}
+                helperText={error ? errorMessage : lowerLabel}
+                name={name}
+                error={error}
+                disabled={disabled}
+                rows={rows}
+                variant={
+                    outlined 
+                        ? 'outlined' 
+                        : filled 
+                        ? 'filled' 
+                        : 'standard'
+                }
+                rowsMax={rowsMax}
+                multiline
+            />
         );
     }
 }

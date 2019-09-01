@@ -71,7 +71,7 @@ DigitTextArea.propTypes = {
     error: PropTypes.bool,
     /** If error is true, then this errorMessage will be shown instead of lowerLabel */
     errorMessage: PropTypes.string,
-    /** If true, then you can"t edit this text area. */
+    /** If true, then you can't edit this text area. */
     disabled: PropTypes.bool,
     /** The least amount of rows for this text area. */
     rows: PropTypes.number,

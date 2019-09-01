@@ -1,57 +1,47 @@
-import FilledInput from "@material-ui/core/FilledInput";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import PropTypes from "prop-types";
 import React from "react";
-import ReactDOM from "react-dom";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
-import { TextField } from '@material-ui/core';
+import { TextField } from "@material-ui/core";
 
-class DigitTextArea extends React.Component {
-    render() {
-        const {
-            value,
-            onChange,
-            onBlur,
-            upperLabel,
-            lowerLabel,
-            name,
-            error,
-            errorMessage,
-            disabled,
-            rows,
-            rowsMax,
-            outlined,
-            filled
-        } = this.props;
-        return (
-            <TextField
-                value={value}
-                onChange={onChange}
-                onBlur={onBlur}
-                label={upperLabel}
-                helperText={error ? errorMessage : lowerLabel}
-                name={name}
-                error={error}
-                disabled={disabled}
-                rows={rows}
-                variant={
-                    outlined 
-                        ? 'outlined' 
-                        : filled 
-                        ? 'filled' 
-                        : 'standard'
-                }
-                rowsMax={rowsMax}
-                multiline
-            />
-        );
-    }
-}
+const DigitTextArea = ({
+    value,
+    onChange,
+    onBlur,
+    upperLabel,
+    lowerLabel,
+    name,
+    error,
+    errorMessage,
+    disabled,
+    rows,
+    rowsMax,
+    outlined,
+    filled
+}) => 
+    <TextField
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        label={upperLabel}
+        helperText={
+            error 
+                ? errorMessage 
+                : lowerLabel
+        }
+        name={name}
+        error={error}
+        disabled={disabled}
+        rows={rows}
+        variant={
+            outlined 
+                ? "outlined" 
+                : filled 
+                ? "filled" 
+                : "standard"
+        }
+        rowsMax={rowsMax}
+        multiline
+    />
+
 
 DigitTextArea.displayName = "DigitTextArea";
 DigitTextArea.propTypes = {
@@ -81,7 +71,7 @@ DigitTextArea.propTypes = {
     error: PropTypes.bool,
     /** If error is true, then this errorMessage will be shown instead of lowerLabel */
     errorMessage: PropTypes.string,
-    /** If true, then you can't edit this text area. */
+    /** If true, then you can"t edit this text area. */
     disabled: PropTypes.bool,
     /** The least amount of rows for this text area. */
     rows: PropTypes.number,

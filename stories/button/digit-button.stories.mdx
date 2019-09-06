@@ -1,0 +1,26 @@
+import { Fragment } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitButton } from "../../src";
+
+<Meta title="Elements|DigitButton" component={DigitButton} />
+
+# DigitButton
+
+A simple button. Use color and style with care, reflect on what button is the most important one in a single page and give that one more color or a differnt style. Do not confuse the user with multiple high priority buttons. The order for priority regarding style is raised, outlined and last flat. The order for priority regarding color is secondary, primary and lastly none.
+
+<Preview>
+    <Story name="Primary outlined button">
+        <DigitButton primary outlined text="Send" />
+    </Story>
+    <Story name="Primary raised button">
+        <DigitButton primary raised text="Add" />
+    </Story>
+    <Story name="Secondary raised button">
+        <DigitButton secondary raised text="Remove" />
+    </Story>
+    <Story name="Flat button">
+        <DigitButton text="Info" />
+    </Story>
+</Preview>
+
+<Props of={DigitButton} />

@@ -86,15 +86,13 @@ DigitTextField.propTypes = {
      */
     outlined: PropTypes.bool,
     /** Adds a grey isch background */
-    filled: PropTypes.bool
+    filled: PropTypes.bool,
+    /** Sets a max length for the textfield */
+    maxLength: PropTypes.number
 };
 
 DigitTextField.defaultProps = {
     onBlur: () => {},
-    upperLabel: "",
-    lowerLabel: "",
-    name: "",
-    value: "",
     error: false,
     errorMessage: null,
     disabled: false,

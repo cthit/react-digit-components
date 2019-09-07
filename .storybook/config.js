@@ -1,8 +1,9 @@
-import { configure, addParameters } from "@storybook/react";
+import { configure, addParameters, addDecorator } from "@storybook/react";
+import DigitProvidersDecorator from "./DigitProvidersDecorator";
 
 addParameters({
     options: {
-        isToolshown: true
+        isToolshown: false
     }
 });
 

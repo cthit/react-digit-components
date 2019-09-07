@@ -1,0 +1,56 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitSwitch } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitSwitch"
+    component={DigitSwitch}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitSwitch - NOT FINISHED
+
+A circular spinning animation that is nice to symbolize loading. The color is your primary color.
+
+## Switch
+
+<Preview>
+    <Story name="Primary">
+        <DigitSwitch label="Primary" primary />
+    </Story>
+    <Story name="Secondary">
+        <DigitSwitch label="Secondary" secondary />
+    </Story>
+    <Story name="Normal">
+        <DigitSwitch label="Normal" />
+    </Story>
+    <Story name="Disabled">
+        <DigitSwitch label="Disabled" disabled />
+    </Story>
+</Preview>
+
+## Errors
+
+<Preview>
+    <Story name="Error switch">
+        <DigitSwitch label="Set error on the switches" primary />
+    </Story>
+    <Story name="Secondary error">
+        <DigitSwitch
+            label="Secondary"
+            secondary
+            error={true}
+            errorMessage="This is an error"
+        />
+    </Story>
+    <Story name="Disabled error">
+        <DigitSwitch
+            label="Disabled"
+            disabled
+            error={true}
+            errorMessage="This is also an error"
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitSwitch} />

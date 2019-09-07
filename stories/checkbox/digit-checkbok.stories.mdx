@@ -1,0 +1,112 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitCheckbox, DigitProviders } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitCheckbox"
+    component={DigitCheckbox}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitCheckbox
+
+DigitCheckbox should be used when multiple alternatives can be selected. If only one thing can be selected, then `DigitRadioButtonGroup` should be used instead. If you want to be able to toggle one or more thing, like a setting, then a `DigitSwitch` should be used instead.
+
+Note that `DigitCheckbox` is uncontrolled, meaning you have to manage the state from `DigitCheckbox`. If you are using a `DigitForm`, then you don't have to worry about state.
+
+## Checkboxses
+
+<Preview>
+    <Story name="Primary checkbox">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitCheckbox
+                    label="Primary"
+                    primary
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Secondary checkbox">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitCheckbox
+                    label="Seconday"
+                    secondary
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Normal checkbox">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitCheckbox
+                    label="Normal"
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled checkbox">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitCheckbox
+                    label="Disabled"
+                    disabled
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Errors
+
+<Preview>
+    <Story name="Error checkbox">
+        {() => {
+            const [state, setState] = useState(true);
+            const [state2, setState2] = useState(true);
+            const [error, setError] = useState(true);
+            return (
+                <div>
+                      <DigitCheckbox
+                          label="Set error on the checkboxes"
+                          primary
+                          value={error}
+                          onChange={e => setError(e.target.checked)}
+                      />
+                      <DigitCheckbox
+                          label="Seconday"
+                          error={error}
+                          errorMessage="Error message"
+                          secondary
+                          value={state}
+                          onChange={e => setState(e.target.checked)}
+                      />
+                      <DigitCheckbox
+                          label="Seconday"
+                          error={error}
+                          errorMessage="Error message again"
+                          disabled
+                          value={state2}
+                          onChange={e => setState(e.target.checked)}
+                      />
+                  </div>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitCheckbox} />

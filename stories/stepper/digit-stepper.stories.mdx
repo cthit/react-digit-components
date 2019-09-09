@@ -1,0 +1,103 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitStepper, DigitButton } from "../../src";
+import { Center } from "../../src/styles/digit-layout/DigitLayout.styles";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitStepper"
+    component={DigitStepper}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitStepper
+
+## Stepper
+
+<Preview>
+    <Story name="Normla">
+        {() => {
+            const [activeStep, setStep] = useState(0);
+            return (
+                <div>
+                    <DigitStepper
+                        activeStep={activeStep}
+                        steps={[
+                            {
+                                text: "First step of this stepper"
+                            },
+                            {
+                                text: "The second of the cool cooler stepper"
+                            },
+                            {
+                                text: "Whaaaaaaat"
+                            },
+                            {
+                                text: "Almost finished"
+                            },
+                            {
+                                text: "Finished"
+                            }
+                        ]}
+                    />
+                    <Center>
+                        <DigitButton
+                            primary
+                            raised
+                            text="Next"
+                            onClick={() => {
+                                setStep((activeStep + 1) % 6);
+                            }}
+                        />
+                    </Center>
+                </div>
+            );
+        }}
+    </Story>
+</Preview>
+
+## Other starting step
+
+<Preview>
+    <Story name="Other start">
+        {() => {
+            const [activeStep, setStep] = useState(2);
+            return (
+                <div>
+                    <DigitStepper
+                        activeStep={activeStep}
+                        steps={[
+                            {
+                                text: "First step of this stepper"
+                            },
+                            {
+                                text: "The second of the stepper"
+                            },
+                            {
+                                text: "WhaaaaOnly a few steps to go"
+                            },
+                            {
+                                text: "So close"
+                            },
+                            {
+                                text: "You did it!"
+                            }
+                        ]}
+                    />
+                    <Center>
+                        <DigitButton
+                            primary
+                            raised
+                            text="Next"
+                            onClick={() => {
+                                setStep((activeStep + 1) % 6);
+                            }}
+                        />
+                    </Center>
+                </div>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitStepper} />

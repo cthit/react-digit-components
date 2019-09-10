@@ -1,0 +1,54 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitTimePicker } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitTimePicker"
+    component={DigitTimePicker}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitTimePicker
+
+A modal where you can select the time. Note that `DigitTimePicker` is uncontrolled, meaning you have to controll the current value of `DigitTimePicker`. If you are however using `DigitForm`, then you don't have to worry about it.
+
+## TimePicker
+
+<Preview>
+    <Story name="Normal">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitTimePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Custom labels
+
+<Preview>
+    <Story name="Cutom label">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitTimePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    okLabel="Select time"
+                    cancelLabel="Nah, don't want this"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitTimePicker} />

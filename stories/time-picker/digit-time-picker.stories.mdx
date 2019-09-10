@@ -18,13 +18,13 @@ A modal where you can select the time. Note that `DigitTimePicker` is uncontroll
 <Preview>
     <Story name="Normal">
         {() => {
-            const [date, setDate] = useState(null);
+            const [date, setState] = useState(null);
             return (
                 <DigitTimePicker
                     upperLabel="Upper label"
                     lowerLabel="Lower label"
                     value={date}
-                    onChange={e => setDate(e.target.value)}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}
@@ -34,9 +34,9 @@ A modal where you can select the time. Note that `DigitTimePicker` is uncontroll
 ## Custom labels
 
 <Preview>
-    <Story name="Cutom label">
+    <Story name="Custom label">
         {() => {
-            const [date, setDate] = useState(null);
+            const [date, setState] = useState(null);
             return (
                 <DigitTimePicker
                     upperLabel="Upper label"
@@ -44,7 +44,27 @@ A modal where you can select the time. Note that `DigitTimePicker` is uncontroll
                     okLabel="Select time"
                     cancelLabel="Nah, don't want this"
                     value={date}
-                    onChange={e => setDate(e.target.value)}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Error
+
+<Preview>
+    <Story name="Normal error">
+        {() => {
+            const [date, setState] = useState(null);
+            return (
+                <DigitTimePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    error
+                    errorMessage="This is an error"
+                    value={date}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}

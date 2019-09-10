@@ -3,12 +3,14 @@ import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import { DigitTabs, DigitProviders } from "../../src";
 import { DigitTabs as DigitTabsProps } from "../../src/elements/digit-tabs/DigitTabs.element.jsx";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
-import MaxSizeDecorator from "../../.storybook/MaxSizeDecorator";
 
 <Meta
     title="Elements|DigitTabs"
     component={DigitTabsProps}
-    decorators={[DigitProvidersDecorator, MaxSizeDecorator]}
+    decorators={[
+        DigitProvidersDecorator,
+        storyFn => <div style={{ maxWidth: "500px" }}>{storyFn()}</div>
+    ]}
 />
 
 # DigitTabs

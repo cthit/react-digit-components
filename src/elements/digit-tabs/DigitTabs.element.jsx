@@ -19,7 +19,7 @@ const styles = theme => ({
         background: "inherit"
     },
     scrollButtons: {
-        color: "white"
+        color: "white !important"
     }
 });
 
@@ -27,9 +27,9 @@ const DigitTabs = ({
     selected,
     tabs,
     centered,
-    fullWidth,
     onChange,
     titleFont,
+    fullWidth,
     classes,
     inheritBackground
 }) => (
@@ -41,13 +41,15 @@ const DigitTabs = ({
             }}
             value={findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
-            fullWidth={fullWidth}
             onChange={(event, value) => {
                 onChange(tabs[value].value);
             }}
             scrollable={!centered}
             scrollButtons="on"
             textColor="primary"
+            variant={
+                fullWidth ? "fullWidth" : centered ? "default" : "scrollable"
+            }
         >
             {tabs.map(tabs => {
                 return (

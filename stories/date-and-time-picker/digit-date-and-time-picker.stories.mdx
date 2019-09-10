@@ -1,30 +1,30 @@
 import { useState } from "react";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { DigitDatePicker } from "../../src";
+import { DigitDateAndTimePicker } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 <Meta
-    title="Elements|DigitDatePicker"
-    component={DigitDatePicker}
+    title="Elements|DigitDateAndTimePicker"
+    component={DigitDateAndTimePicker}
     decorators={[DigitProvidersDecorator]}
 />
 
-# DigitDatePicker
+# DigitDateAndTimePicker
 
-A modal where you can select the date. Note that `DigitDatePicker` is uncontrolled, meaning you have to controll the current value of `DigitDatePicker`. If you are however using `DigitForm`, then you don't have to worry about it.
+A modal where you can select the date. Note that `DigitDateAndTimePicker` is uncontrolled, meaning you have to controll the current value of `DigitDateAndTimePicker`. If you are however using `DigitForm`, then you don't have to worry about it.
 
-## DatePicker
+## DateAndTimePicker
 
 <Preview>
     <Story name="Normal">
         {() => {
-            const [date, setDate] = useState(null);
+            const [state, setState] = useState(null);
             return (
-                <DigitDatePicker
+                <DigitDateAndTimePicker
                     upperLabel="Upper label"
                     lowerLabel="Lower label"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}
@@ -36,29 +36,29 @@ A modal where you can select the date. Note that `DigitDatePicker` is uncontroll
 <Preview>
     <Story name="Custom label cancel">
         {() => {
-            const [date, setDate] = useState(null);
+            const [state, setState] = useState(null);
             return (
-                <DigitDatePicker
+                <DigitDateAndTimePicker
                     upperLabel="Custom cancel and ok label"
                     lowerLabel="Lower label"
                     okLabel="Select date"
                     cancelLabel="Nah, don't want this"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}
     </Story>
     <Story name="Custom label empty">
         {() => {
-            const [date, setDate] = useState(null);
+            const [state, setState] = useState(null);
             return (
-                <DigitDatePicker
+                <DigitDateAndTimePicker
                     upperLabel="Custom empty label"
                     lowerLabel="Lower label"
                     emptyLabel="Pick a date! Quick!"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}
@@ -68,29 +68,29 @@ A modal where you can select the date. Note that `DigitDatePicker` is uncontroll
 <Preview>
     <Story name="Today button">
         {() => {
-            const [date, setDate] = useState(null);
+            const [state, setState] = useState(null);
             return (
-                <DigitDatePicker
-                    upperLabel="A 'Today' button"
+                <DigitDateAndTimePicker
+                    upperLabel="A 'Today'/'Now' button"
                     lowerLabel="Lower label"
                     showTodayButton={true}
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}
     </Story>
-    <Story name="Custom today label">
+    <Story name="Custom now label">
         {() => {
-            const [date, setDate] = useState(null);
+            const [state, setState] = useState(null);
             return (
-                <DigitDatePicker
+                <DigitDateAndTimePicker
                     upperLabel="Custom 'today' label"
                     lowerLabel="Lower label"
                     showTodayButton={true}
                     todayLabel="Bring me to today"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}
@@ -102,19 +102,19 @@ A modal where you can select the date. Note that `DigitDatePicker` is uncontroll
 <Preview>
     <Story name="Normal error">
         {() => {
-            const [date, setDate] = useState(null);
+            const [state, setState] = useState(null);
             return (
-                <DigitDatePicker
+                <DigitDateAndTimePicker
                     upperLabel="Upper label"
                     lowerLabel="Lower label"
                     error
                     errorMessage="This is an error"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
                 />
             );
         }}
     </Story>
 </Preview>
 
-<Props of={DigitDatePicker} />
+<Props of={DigitDateAndTimePicker} />

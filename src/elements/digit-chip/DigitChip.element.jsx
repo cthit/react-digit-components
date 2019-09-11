@@ -1,6 +1,7 @@
 import React from "react";
 import Chip from "@material-ui/core/Chip";
 import Close from "@material-ui/icons/Close";
+import PropTypes from "prop-types";
 
 const DigitChip = ({
     avatar,
@@ -12,7 +13,9 @@ const DigitChip = ({
     deleteIcon
 }) => (
     <Chip
-        deleteIcon={deleteIcon}
+        deleteIcon={
+            deleteIcon != null ? React.createElement(deleteIcon, null) : null
+        }
         onDelete={onDelete}
         avatar={avatar}
         label={label}
@@ -21,8 +24,25 @@ const DigitChip = ({
     />
 );
 
+DigitChip.propTypes = {
+    /** Usually a DigitAvatar. An image for the chip. */
+    avatar: PropTypes.element,
+    /** Text label inside the chip */
+    label: PropTypes.string,
+    /** If primary color should be used */
+    primary: PropTypes.bool,
+    /** If secondary color should be used */
+    secondary: PropTypes.bool,
+    /** If the chip should be outlined */
+    outlined: PropTypes.bool,
+    /** If not null, then the deleteIcon will be shown and this function will be its callback function */
+    onDelete: PropTypes.func,
+    /** The icon that invokes onDelete. Not shown if onDelete is null */
+    deleteIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+};
+
 DigitChip.defaultProps = {
-    deleteIcon: <Close />
+    deleteIcon: Close
 };
 
 export default DigitChip;

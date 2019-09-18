@@ -1,5 +1,4 @@
-import { configure, addParameters, addDecorator } from "@storybook/react";
-import DigitProvidersDecorator from "./DigitProvidersDecorator";
+import { configure, addParameters } from "@storybook/react";
 
 addParameters({
     options: {

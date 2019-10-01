@@ -1,0 +1,102 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitIfElseRendering,
+    DigitMarkdown,
+    DigitCheckbox,
+    DigitSelect,
+    DigitSwitch
+} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Declarative|DigitIfElseRendering"
+    component={DigitIfElseRendering}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitIfElseRendering
+
+A circular spinning animation that is nice to symbolize loading. The color is your primary color.
+
+## IfElseRendering
+
+<Preview>
+    <Story name="Checkbox">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <div>
+                    <DigitCheckbox
+                        label="Render?"
+                        primary
+                        value={state}
+                        onChange={e => setState(e.target.checked)}
+                    />
+                    <DigitIfElseRendering
+                        test={state}
+                        ifRender={() => (
+                            <DigitMarkdown markdownSource="Render this" />
+                        )}
+                        elseRender={() => (
+                            <DigitMarkdown markdownSource="Render that" />
+                        )}
+                    />
+                </div>
+            );
+        }}
+    </Story>
+    <Story name="Select">
+        {() => {
+            const [state, setState] = useState("this");
+            return (
+                <div>
+                    <DigitSelect
+                        upperLabel="Render this?"
+                        valueToTextMap={{
+                            this: "Render this?",
+                            that: "Render that?"
+                        }}
+                        value={state}
+                        onChange={e => setState(e.target.value)}
+                    />
+                    <DigitIfElseRendering
+                        test={state === "this"}
+                        ifRender={() => (
+                            <DigitMarkdown markdownSource="Render this" />
+                        )}
+                        elseRender={() => (
+                            <DigitMarkdown markdownSource="Render that" />
+                        )}
+                    />
+                </div>
+            );
+        }}
+    </Story>
+    <Story name="Switch">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <div>
+                    <DigitSwitch
+                        label="Render?"
+                        primary
+                        value={state}
+                        onChange={e => setState(e.target.checked)}
+                    />
+                    <DigitIfElseRendering
+                        test={state}
+                        ifRender={() => (
+                            <DigitMarkdown markdownSource="Render this" />
+                        )}
+                        elseRender={() => (
+                            <DigitMarkdown markdownSource="Render that" />
+                        )}
+                    />
+                </div>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitIfElseRendering} />

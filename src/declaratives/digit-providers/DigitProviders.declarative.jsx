@@ -79,8 +79,8 @@ class DigitProviders extends React.Component {
     render() {
         const { children } = this.props;
         return (
-            <ThemeProvider theme={this.theme}>
-                <StylesProvider injectFirst>
+            <StylesProvider injectFirst>
+                <ThemeProvider theme={this.theme}>
                     <Provider store={this.store}>
                         <BrowserRouter>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -88,8 +88,8 @@ class DigitProviders extends React.Component {
                             </MuiPickersUtilsProvider>
                         </BrowserRouter>
                     </Provider>
-                </StylesProvider>
-            </ThemeProvider>
+                </ThemeProvider>
+            </StylesProvider>
         );
     }
 }

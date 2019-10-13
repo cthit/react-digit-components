@@ -37,6 +37,7 @@ export default {
             extensions: [".js", ".jsx", ".json"]
         }),
         commonjs({
+            include: "node_modules/**",
             namedExports: {
                 react: [
                     "cloneElement",
@@ -73,10 +74,12 @@ export default {
                     "number",
                     "instanceOf",
                     "oneOf",
-                    "node"
+                    "node",
+                    "elementType"
                 ],
                 "react-dom": [
-                    "render, findDOMNode",
+                    "render",
+                    "findDOMNode",
                     "unstable_batchedUpdates",
                     "createPortal"
                 ],

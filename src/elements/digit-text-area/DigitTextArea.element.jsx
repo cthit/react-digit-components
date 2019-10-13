@@ -15,33 +15,41 @@ const DigitTextArea = ({
     rows,
     rowsMax,
     outlined,
-    filled
-}) => 
-    <TextField
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        label={upperLabel}
-        helperText={
-            error 
-                ? errorMessage 
-                : lowerLabel
+    filled,
+    maxLength
+}) => {
+    const handleOnChange = (e, maxLength, onChange) => {
+        const newValue = e.target.value;
+        if (maxLength === -1 || newValue.length <= maxLength) {
+            onChange(e);
         }
-        name={name}
-        error={error}
-        disabled={disabled}
-        rows={rows}
-        variant={
-            outlined 
-                ? "outlined" 
-                : filled 
-                ? "filled" 
-                : "standard"
-        }
-        rowsMax={rowsMax}
-        multiline
-    />
+    };
 
+    return (
+        <TextField
+            value={value}
+            onChange={e => handleOnChange(e, maxLength, onChange)}
+            onBlur={onBlur}
+            label={upperLabel}
+            helperText={
+                error && errorMessage != null
+                    ? errorMessage
+                    : maxLength !== -1
+                    ? value.length + "/" + maxLength
+                    : lowerLabel != null
+                    ? lowerLabel
+                    : ""
+            }
+            name={name}
+            error={error}
+            disabled={disabled}
+            rows={rows}
+            variant={outlined ? "outlined" : filled ? "filled" : "standard"}
+            rowsMax={rowsMax}
+            multiline
+        />
+    );
+};
 
 DigitTextArea.displayName = "DigitTextArea";
 DigitTextArea.propTypes = {

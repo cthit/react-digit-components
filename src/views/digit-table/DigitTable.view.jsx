@@ -37,7 +37,7 @@ class DigitTable extends React.Component {
             order: "asc",
             orderBy: props.startOrderBy,
             page: 0,
-            rowsPerPage: 5,
+            rowsPerPage: 10,
 
             data: [],
             columnsOrder: props.columnsOrder,

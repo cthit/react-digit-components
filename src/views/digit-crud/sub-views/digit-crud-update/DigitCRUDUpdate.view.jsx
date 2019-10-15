@@ -34,7 +34,9 @@ const DigitCRUDUpdate = ({
     dialogDeleteConfirm,
     dialogDeleteCancel,
     toastDeleteSuccessful,
-    toastDeleteFailed
+    toastDeleteFailed,
+    readOnePath,
+    readAllPath
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -100,7 +102,7 @@ const DigitCRUDUpdate = ({
                         outlined: true,
                         text: backButtonText
                     }}
-                    extraButtonTo={path + "/" + id}
+                    extraButtonTo={path + readOnePath.replace(":id", id)}
                     initialValues={one}
                     submitText={updateButtonText(one)}
                     titleText={updateTitle(one)}
@@ -130,7 +132,9 @@ const DigitCRUDUpdate = ({
                                                         )
                                                     })
                                                 );
-                                                history.push(path);
+                                                history.push(
+                                                    path + readAllPath
+                                                );
                                             })
                                             .catch(error => {
                                                 dispatch(

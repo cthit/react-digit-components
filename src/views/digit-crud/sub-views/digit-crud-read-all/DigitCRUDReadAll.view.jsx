@@ -22,7 +22,9 @@ const DigitCRUDReadAll = ({
     detailsButtonText,
     hasCreate,
     createButtonText,
-    history
+    history,
+    readOnePath,
+    createPath
 }) => {
     const all = useSelector(state => state[name].all);
     const loading = useSelector(state => state[name].loading);
@@ -48,7 +50,9 @@ const DigitCRUDReadAll = ({
                         hasReadOne
                             ? all.map(one => ({
                                   ...one,
-                                  __link: path + "/" + one[idProp]
+                                  __link:
+                                      path +
+                                      readOnePath.replace(":id", one[idProp])
                               }))
                             : all
                     }
@@ -64,7 +68,7 @@ const DigitCRUDReadAll = ({
                         primary
                         text={createButtonText}
                         icon={Add}
-                        onClick={() => history.push(path + "/add")}
+                        onClick={() => history.push(path + createPath)}
                     />
                 </DownRightPosition>
             )}

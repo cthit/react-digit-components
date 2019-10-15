@@ -15,7 +15,8 @@ const DigitCRUDCreate = ({
     toastCreateSuccessful,
     toastCreateFailed,
     backButtonText,
-    createButtonText
+    createButtonText,
+    readAllPath
 }) => {
     const dispatch = useDispatch();
 
@@ -51,7 +52,7 @@ const DigitCRUDCreate = ({
                     outlined: true,
                     text: backButtonText
                 }}
-                extraButtonTo={path}
+                extraButtonTo={path + readAllPath}
                 initialValues={formInitialValues}
                 submitText={createButtonText}
                 titleText={createTitle}

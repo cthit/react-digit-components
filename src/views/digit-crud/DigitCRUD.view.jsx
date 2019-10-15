@@ -59,7 +59,12 @@ const DigitCRUD = ({
     detailsRenderEnd,
     detailsCustomRender,
     customDetailsRenders,
-    extractActiveLanguage
+    extractActiveLanguage,
+    createPath,
+    readAllPath,
+    readOnePath,
+    updatePath,
+    staticId
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -109,7 +114,7 @@ const DigitCRUD = ({
                 {hasCreate && (
                     <Route
                         exact
-                        path={path + "/add"}
+                        path={path + createPath}
                         render={() => (
                             <DigitCRUDCreate
                                 createAction={createAction}
@@ -123,6 +128,7 @@ const DigitCRUD = ({
                                 toastCreateSuccessful={toastCreateSuccessful}
                                 createButtonText={createButtonText}
                                 backButtonText={backButtonText}
+                                readAllPath={readAllPath}
                             />
                         )}
                     />
@@ -130,7 +136,7 @@ const DigitCRUD = ({
                 {hasUpdate && hasReadOne && (
                     <Route
                         exact
-                        path={path + "/:id/edit"}
+                        path={path + updatePath}
                         render={props => (
                             <DigitCRUDUpdate
                                 name={name}
@@ -139,7 +145,11 @@ const DigitCRUD = ({
                                 deleteAction={deleteAction}
                                 clearAction={clearAction}
                                 updateTitle={updateTitle}
-                                id={props.match.params.id}
+                                id={
+                                    staticId != null
+                                        ? staticId
+                                        : props.match.params.id
+                                }
                                 history={props.history}
                                 path={path}
                                 formComponentData={formComponentData}
@@ -158,6 +168,8 @@ const DigitCRUD = ({
                                 dialogDeleteCancel={dialogDeleteCancel}
                                 toastDeleteSuccessful={toastDeleteSuccessful}
                                 toastDeleteFailed={toastDeleteFailed}
+                                readAllPath={readAllPath}
+                                readOnePath={readOnePath}
                             />
                         )}
                     />
@@ -165,7 +177,7 @@ const DigitCRUD = ({
                 {hasReadOne && (
                     <Route
                         exact
-                        path={path + "/:id"}
+                        path={path + readOnePath}
                         render={props => (
                             <DigitCRUDReadOne
                                 name={name}
@@ -174,7 +186,11 @@ const DigitCRUD = ({
                                 keysText={keysText}
                                 keysOrder={keysOrder}
                                 path={path}
-                                id={props.match.params.id}
+                                id={
+                                    staticId != null
+                                        ? staticId
+                                        : props.match.params.id
+                                }
                                 history={props.history}
                                 hasUpdate={hasUpdate}
                                 backButtonText={backButtonText}
@@ -197,6 +213,8 @@ const DigitCRUD = ({
                                 dialogDeleteCancel={dialogDeleteCancel}
                                 toastDeleteSuccessful={toastDeleteSuccessful}
                                 toastDeleteFailed={toastDeleteFailed}
+                                readAllPath={readAllPath}
+                                updatePath={updatePath}
                             />
                         )}
                     />
@@ -204,7 +222,7 @@ const DigitCRUD = ({
                 {hasReadAll && (
                     <Route
                         exact
-                        path={path}
+                        path={path + readAllPath}
                         render={({ history }) => (
                             <DigitCRUDReadAll
                                 name={name}
@@ -220,6 +238,8 @@ const DigitCRUD = ({
                                 createButtonText={createButtonText}
                                 hasCreate={hasCreate}
                                 history={history}
+                                readOnePath={readOnePath}
+                                createPath={createPath}
                             />
                         )}
                     />
@@ -315,7 +335,13 @@ DigitCRUD.propTypes = {
     /** If you want a prop not to be rendered by DigitDisplayData in view */
     customDetailsRenders: PropTypes.objectOf(PropTypes.func),
     /** If true, then object that has {sv: "...", en: "..."} will be converted to "" depending on activeLanguage */
-    extractActiveLanguage: PropTypes.bool
+    extractActiveLanguage: PropTypes.bool,
+    createPath: PropTypes.string,
+    readAllPath: PropTypes.string,
+    readOnePath: PropTypes.string,
+    updatePath: PropTypes.string,
+    /**  */
+    staticId: PropTypes.string
 };
 
 DigitCRUD.defaultProps = {
@@ -343,7 +369,12 @@ DigitCRUD.defaultProps = {
     detailsRenderCardStart: () => null,
     detailsRenderCardEnd: () => null,
     customDetailsRenders: {},
-    extractActiveLanguage: false
+    extractActiveLanguage: false,
+    createPath: "/add",
+    readAllPath: "/",
+    readOnePath: "/:id",
+    updatePath: "/:id/edit",
+    staticId: null
 };
 
 export default DigitCRUD;

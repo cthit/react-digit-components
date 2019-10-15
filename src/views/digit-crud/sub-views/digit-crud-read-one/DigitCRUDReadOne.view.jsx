@@ -45,7 +45,9 @@ const DigitCRUDReadOne = ({
     detailsRenderStart,
     detailsRenderEnd,
     detailsCustomRender,
-    customDetailsRenders
+    customDetailsRenders,
+    updatePath,
+    readAllPath
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -71,10 +73,10 @@ const DigitCRUDReadOne = ({
         .forEach(key => (displayData[key] = one[key]));
 
     const goBack = () => {
-        history.push(path);
+        history.push(path + readAllPath);
     };
     const goToEdit = () => {
-        history.push(path + "/" + id + "/edit");
+        history.push(path + updatePath.replace(":id", id));
     };
     var deleteFAB = () => null;
 
@@ -103,7 +105,7 @@ const DigitCRUDReadOne = ({
                                                     )
                                                 })
                                             );
-                                            history.push(path);
+                                            history.push(path + readAllPath);
                                         })
                                         .catch(error => {
                                             dispatch(

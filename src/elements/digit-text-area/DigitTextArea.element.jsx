@@ -107,7 +107,8 @@ DigitTextArea.defaultProps = {
     outlined: false,
     filled: false,
     rows: 3,
-    rowsMax: 6
+    rowsMax: 6,
+    maxLength: -1
 };
 
 export default DigitTextArea;

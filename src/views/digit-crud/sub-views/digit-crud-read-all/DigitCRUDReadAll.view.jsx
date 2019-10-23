@@ -34,7 +34,7 @@ const DigitCRUDReadAll = ({
         return clearAction;
     }, []);
 
-    if (loading) {
+    if (loading || all == null) {
         return (
             <Center>
                 <DigitLoading loading />

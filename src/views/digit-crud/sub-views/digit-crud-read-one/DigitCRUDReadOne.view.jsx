@@ -47,7 +47,8 @@ const DigitCRUDReadOne = ({
     detailsCustomRender,
     customDetailsRenders,
     updatePath,
-    readAllPath
+    readAllPath,
+    backFromReadOnePath
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -73,7 +74,11 @@ const DigitCRUDReadOne = ({
         .forEach(key => (displayData[key] = one[key]));
 
     const goBack = () => {
-        history.push(path + readAllPath);
+        history.push(
+            backFromReadOnePath == null
+                ? path + readAllPath
+                : backFromReadOnePath
+        );
     };
     const goToEdit = () => {
         history.push(path + updatePath.replace(":id", id));

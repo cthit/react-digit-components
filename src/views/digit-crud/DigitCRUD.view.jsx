@@ -64,7 +64,11 @@ const DigitCRUD = ({
     readAllPath,
     readOnePath,
     updatePath,
-    staticId
+    staticId,
+    backFromReadOnePath,
+    backFromUpdatePath,
+    backFromDeletePath,
+    backFromCreatePath
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -129,6 +133,7 @@ const DigitCRUD = ({
                                 createButtonText={createButtonText}
                                 backButtonText={backButtonText}
                                 readAllPath={readAllPath}
+                                backFromCreatePath={backFromCreatePath}
                             />
                         )}
                     />
@@ -170,6 +175,7 @@ const DigitCRUD = ({
                                 toastDeleteFailed={toastDeleteFailed}
                                 readAllPath={readAllPath}
                                 readOnePath={readOnePath}
+                                backFromUpdatePath={backFromUpdatePath}
                             />
                         )}
                     />
@@ -215,6 +221,7 @@ const DigitCRUD = ({
                                 toastDeleteFailed={toastDeleteFailed}
                                 readAllPath={readAllPath}
                                 updatePath={updatePath}
+                                backFromReadOnePath={backFromReadOnePath}
                             />
                         )}
                     />
@@ -341,7 +348,11 @@ DigitCRUD.propTypes = {
     readOnePath: PropTypes.string,
     updatePath: PropTypes.string,
     /**  */
-    staticId: PropTypes.string
+    staticId: PropTypes.string,
+    backFromReadOnePath: PropTypes.string,
+    backFromUpdatePath: PropTypes.string,
+    backFromDeletePath: PropTypes.string,
+    backFromCreatePath: PropTypes.string
 };
 
 DigitCRUD.defaultProps = {
@@ -374,7 +385,11 @@ DigitCRUD.defaultProps = {
     readAllPath: "/",
     readOnePath: "/:id",
     updatePath: "/:id/edit",
-    staticId: null
+    staticId: null,
+    backFromReadOnePath: null,
+    backFromUpdatePath: null,
+    backFromDeletePath: null,
+    backFromCreatePath: null
 };
 
 export default DigitCRUD;

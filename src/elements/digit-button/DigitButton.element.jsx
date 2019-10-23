@@ -11,7 +11,9 @@ const DigitButton = ({
     disabled,
     submit,
     outlined,
-    form
+    form,
+    startIcon,
+    endIcon
 }) => (
     <Button
         type={submit ? "submit" : "button"}
@@ -20,6 +22,8 @@ const DigitButton = ({
         color={primary ? "primary" : secondary ? "secondary" : "inherit"}
         variant={raised ? "contained" : outlined ? "outlined" : "text"}
         form={form}
+        startIcon={startIcon}
+        endIcon={endIcon}
     >
         {text}
     </Button>
@@ -62,7 +66,9 @@ DigitButton.defaultProps = {
     outlined: false,
     disabled: false,
     submit: false,
-    deleteDialogForm: ""
+    deleteDialogForm: "",
+    startIcon: null,
+    endIcon: null
 };
 
 export default DigitButton;

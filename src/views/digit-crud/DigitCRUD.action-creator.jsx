@@ -50,9 +50,9 @@ export function createCreateAction(name, createRequest, data) {
     );
 }
 
-export function createDeleteAction(name, deleteRequest, id) {
+export function createDeleteAction(name, deleteRequest, id, form) {
     return requestPromise(
-        () => deleteRequest(id),
+        () => deleteRequest(id, form),
         loading(deleteLoading(name)),
         successfully(deleteSuccessfully(name)),
         failed(deleteFailed(name))

@@ -87,7 +87,11 @@ const DigitCRUD = ({
     backFromUpdatePath,
     backFromDeletePath,
     backFromCreatePath,
-    useKeyTextsInUpperLabel
+    useKeyTextsInUpperLabel,
+    deleteDialogFormComponentData,
+    deleteDialogFormValidationSchema,
+    deleteDialogFormInitialValues,
+    deleteDialogFormKeysOrder
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -110,7 +114,8 @@ const DigitCRUD = ({
         ? () => dispatch(createReadAllAction(name, readAllRequest))
         : null;
     const deleteAction = hasDelete
-        ? id => dispatch(createDeleteAction(name, deleteRequest, id))
+        ? (id, form) =>
+              dispatch(createDeleteAction(name, deleteRequest, id, form))
         : null;
     const updateAction = hasUpdate
         ? (id, data) =>
@@ -202,6 +207,18 @@ const DigitCRUD = ({
                                 readOnePath={readOnePath}
                                 backFromUpdatePath={backFromUpdatePath}
                                 backFromDeletePath={backFromDeletePath}
+                                deleteDialogFormComponentData={
+                                    deleteDialogFormComponentData
+                                }
+                                deleteDialogFormValidationSchema={
+                                    deleteDialogFormValidationSchema
+                                }
+                                deleteDialogFormInitialValues={
+                                    deleteDialogFormInitialValues
+                                }
+                                deleteDialogFormKeysOrder={
+                                    deleteDialogFormKeysOrder
+                                }
                             />
                         )}
                     />
@@ -249,6 +266,18 @@ const DigitCRUD = ({
                                 updatePath={updatePath}
                                 backFromReadOnePath={backFromReadOnePath}
                                 backFromDeletePath={backFromDeletePath}
+                                deleteDialogFormComponentData={
+                                    deleteDialogFormComponentData
+                                }
+                                deleteDialogFormValidationSchema={
+                                    deleteDialogFormValidationSchema
+                                }
+                                deleteDialogFormInitialValues={
+                                    deleteDialogFormInitialValues
+                                }
+                                deleteDialogFormKeysOrder={
+                                    deleteDialogFormKeysOrder
+                                }
                             />
                         )}
                     />
@@ -318,12 +347,25 @@ DigitCRUD.propTypes = {
     ),
     /** See validationSchema in DigitEditData*/
     formValidationSchema: PropTypes.object,
+    /** The initial values for Create form */
+    formInitialValues: PropTypes.object,
+    deleteDialogFormComponentData: PropTypes.objectOf(
+        PropTypes.shape({
+            component: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+                .isRequired,
+            componentProps: PropTypes.object,
+            formatEvent: PropTypes.func,
+            render: PropTypes.func
+        })
+    ),
+    /** (data) => yup schema*/
+    deleteDialogFormValidationSchema: PropTypes.func,
+    deleteDialogFormInitialValues: PropTypes.object,
+    deleteDialogFormKeysOrder: PropTypes.arrayOf(PropTypes.string),
     /** String for create title */
     createTitle: PropTypes.string,
     /** Function to create update title, Args: (data) */
     updateTitle: PropTypes.func,
-    /** The initial values for Create form */
-    formInitialValues: PropTypes.object,
     /** Function to create toast text when creation is successful, Args: (data, response)*/
     toastCreateSuccessful: PropTypes.func,
     /** Function to create toast text when creation failed, Args: (data, error)*/
@@ -418,7 +460,11 @@ DigitCRUD.defaultProps = {
     backFromUpdatePath: null,
     backFromDeletePath: null,
     backFromCreatePath: null,
-    useKeyTextsInUpperLabel: false
+    useKeyTextsInUpperLabel: false,
+    deleteDialogFormComponentData: null,
+    deleteDialogFormValidationSchema: null,
+    deleteDialogFormInitialValues: null,
+    deleteDialogFormKeysOrder: []
 };
 
 export default DigitCRUD;

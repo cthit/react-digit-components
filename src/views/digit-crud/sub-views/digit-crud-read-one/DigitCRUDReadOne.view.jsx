@@ -8,16 +8,12 @@ import {
 } from "../../../../styles/digit-design/DigitDesign.styles";
 import {
     Center,
-    DownRightPosition,
     Padding
 } from "../../../../styles/digit-layout/DigitLayout.styles";
 import { useDispatch, useSelector } from "react-redux";
 import DigitButton from "../../../../elements/digit-button";
 import DigitLoading from "../../../../elements/digit-loading";
-import DigitFAB from "../../../../elements/digit-fab";
-import Delete from "@material-ui/icons/DeleteForever";
-import { digitDialogOpen } from "../../../digit-dialog/DigitDialog.view.action-creator";
-import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
+import DeleteFAB from "../../elements/delete-fab";
 
 const DigitCRUDReadOne = ({
     name,
@@ -49,7 +45,11 @@ const DigitCRUDReadOne = ({
     updatePath,
     readAllPath,
     backFromReadOnePath,
-    backFromDeletePath
+    backFromDeletePath,
+    deleteDialogFormComponentData,
+    deleteDialogFormValidationSchema,
+    deleteDialogFormInitialValues,
+    deleteDialogFormKeysOrder
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -74,6 +74,30 @@ const DigitCRUDReadOne = ({
         .filter(key => !customDetailsRenderKeys.includes(key))
         .forEach(key => (displayData[key] = one[key]));
 
+    const deleteFAB = (
+        <DeleteFAB
+            dialogDeleteCancel={dialogDeleteCancel}
+            dialogDeleteConfirm={dialogDeleteConfirm}
+            dialogDeleteTitle={dialogDeleteTitle}
+            dialogDeleteDescription={dialogDeleteDescription}
+            deleteButtonText={deleteButtonText}
+            toastDeleteFailed={toastDeleteFailed}
+            toastDeleteSuccessful={toastDeleteSuccessful}
+            path={path}
+            backFromDeletePath={
+                backFromDeletePath == null ? readAllPath : backFromDeletePath
+            }
+            deleteAction={deleteAction}
+            history={history}
+            one={one}
+            id={id}
+            deleteDialogFormComponentData={deleteDialogFormComponentData}
+            deleteDialogFormInitialValues={deleteDialogFormInitialValues}
+            deleteDialogFormValidationSchema={deleteDialogFormValidationSchema}
+            deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+        />
+    );
+
     const goBack = () => {
         history.push(
             backFromReadOnePath == null
@@ -84,64 +108,12 @@ const DigitCRUDReadOne = ({
     const goToEdit = () => {
         history.push(path + updatePath.replace(":id", id));
     };
-    var deleteFAB = () => null;
-
-    if (!hasUpdate && deleteAction != null) {
-        deleteFAB = one => (
-            <DownRightPosition>
-                <DigitFAB
-                    text={deleteButtonText(one)}
-                    icon={Delete}
-                    onClick={() => {
-                        dispatch(
-                            digitDialogOpen({
-                                title: dialogDeleteTitle(one),
-                                description: dialogDeleteDescription(one),
-                                cancelButtonText: dialogDeleteCancel(one),
-                                confirmButtonText: dialogDeleteConfirm(one),
-                                onCancel: () => {},
-                                onConfirm: () => {
-                                    deleteAction(id)
-                                        .then(response => {
-                                            dispatch(
-                                                digitToastOpen({
-                                                    text: toastDeleteSuccessful(
-                                                        one,
-                                                        response
-                                                    )
-                                                })
-                                            );
-                                            history.push(
-                                                path +
-                                                    (backFromDeletePath == null
-                                                        ? readAllPath
-                                                        : backFromDeletePath)
-                                            );
-                                        })
-                                        .catch(error => {
-                                            dispatch(
-                                                digitToastOpen({
-                                                    text: toastDeleteFailed(
-                                                        one,
-                                                        error
-                                                    )
-                                                })
-                                            );
-                                        });
-                                }
-                            })
-                        );
-                    }}
-                />
-            </DownRightPosition>
-        );
-    }
 
     if (detailsCustomRender != null) {
         return (
             <>
                 {detailsCustomRender(one, goBack, goToEdit)}
-                {deleteFAB(one)}
+                {deleteFAB}
             </>
         );
     }
@@ -186,7 +158,7 @@ const DigitCRUDReadOne = ({
                     </CardButtons>
                 </Card>
                 {detailsRenderEnd(one)}
-                {deleteFAB(one)}
+                {!hasUpdate && deleteAction != null && deleteFAB}
             </Center>
         </>
     );

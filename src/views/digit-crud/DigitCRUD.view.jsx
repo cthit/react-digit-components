@@ -20,6 +20,24 @@ import createCRUDReducer from "./DigitCRUD.reducer";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 
+function modifyFormComponentData(
+    formComponentData,
+    keysText,
+    useKeyTextsInUpperLabel
+) {
+    const output = { ...formComponentData };
+
+    if (useKeyTextsInUpperLabel) {
+        Object.keys(output).forEach(key => {
+            const currentUpperLabel = output[key].componentProps.upperLabel;
+            output[key].componentProps.upperLabel =
+                currentUpperLabel == null ? keysText[key] : currentUpperLabel;
+        });
+    }
+
+    return output;
+}
+
 const DigitCRUD = ({
     path,
     name,
@@ -68,7 +86,8 @@ const DigitCRUD = ({
     backFromReadOnePath,
     backFromUpdatePath,
     backFromDeletePath,
-    backFromCreatePath
+    backFromCreatePath,
+    useKeyTextsInUpperLabel
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -112,6 +131,12 @@ const DigitCRUD = ({
         return null;
     }
 
+    const modifiedFormComponentData = modifyFormComponentData(
+        formComponentData,
+        keysText,
+        useKeyTextsInUpperLabel
+    );
+
     return (
         <Fill>
             <Switch>
@@ -123,7 +148,7 @@ const DigitCRUD = ({
                             <DigitCRUDCreate
                                 createAction={createAction}
                                 path={path}
-                                formComponentData={formComponentData}
+                                formComponentData={modifiedFormComponentData}
                                 formValidationSchema={formValidationSchema}
                                 formInitialValues={formInitialValues}
                                 keysOrder={keysOrder}
@@ -157,7 +182,7 @@ const DigitCRUD = ({
                                 }
                                 history={props.history}
                                 path={path}
-                                formComponentData={formComponentData}
+                                formComponentData={modifiedFormComponentData}
                                 formValidationSchema={formValidationSchema}
                                 keysOrder={keysOrder}
                                 toastUpdateSuccessful={toastUpdateSuccessful}
@@ -354,7 +379,8 @@ DigitCRUD.propTypes = {
     backFromReadOnePath: PropTypes.string,
     backFromUpdatePath: PropTypes.string,
     backFromDeletePath: PropTypes.string,
-    backFromCreatePath: PropTypes.string
+    backFromCreatePath: PropTypes.string,
+    useKeyTextsInUpperLabel: PropTypes.bool
 };
 
 DigitCRUD.defaultProps = {
@@ -391,7 +417,8 @@ DigitCRUD.defaultProps = {
     backFromReadOnePath: null,
     backFromUpdatePath: null,
     backFromDeletePath: null,
-    backFromCreatePath: null
+    backFromCreatePath: null,
+    useKeyTextsInUpperLabel: false
 };
 
 export default DigitCRUD;

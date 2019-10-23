@@ -16,7 +16,8 @@ const DigitTextArea = ({
     rowsMax,
     outlined,
     filled,
-    maxLength
+    maxLength,
+    onKeyPress
 }) => {
     const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
@@ -47,6 +48,7 @@ const DigitTextArea = ({
             variant={outlined ? "outlined" : filled ? "filled" : "standard"}
             rowsMax={rowsMax}
             multiline
+            onKeyPress={onKeyPress}
         />
     );
 };
@@ -93,7 +95,8 @@ DigitTextArea.propTypes = {
      */
     outlined: PropTypes.bool,
     /** Adds a grey isch background */
-    filled: PropTypes.bool
+    filled: PropTypes.bool,
+    onKeyPress: PropTypes.func
 };
 
 DigitTextArea.defaultProps = {
@@ -108,7 +111,8 @@ DigitTextArea.defaultProps = {
     filled: false,
     rows: 3,
     rowsMax: 6,
-    maxLength: -1
+    maxLength: -1,
+    onKeyPress: () => {}
 };
 
 export default DigitTextArea;

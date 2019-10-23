@@ -37,7 +37,8 @@ const DigitCRUDUpdate = ({
     toastDeleteFailed,
     readOnePath,
     readAllPath,
-    backFromUpdatePath
+    backFromUpdatePath,
+    backFromDeletePath
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -138,7 +139,11 @@ const DigitCRUDUpdate = ({
                                                     })
                                                 );
                                                 history.push(
-                                                    path + readAllPath
+                                                    path +
+                                                        (backFromDeletePath ==
+                                                        null
+                                                            ? readAllPath
+                                                            : backFromDeletePath)
                                                 );
                                             })
                                             .catch(error => {

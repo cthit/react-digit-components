@@ -48,7 +48,8 @@ const DigitCRUDReadOne = ({
     customDetailsRenders,
     updatePath,
     readAllPath,
-    backFromReadOnePath
+    backFromReadOnePath,
+    backFromDeletePath
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -110,7 +111,12 @@ const DigitCRUDReadOne = ({
                                                     )
                                                 })
                                             );
-                                            history.push(path + readAllPath);
+                                            history.push(
+                                                path +
+                                                    (backFromDeletePath == null
+                                                        ? readAllPath
+                                                        : backFromDeletePath)
+                                            );
                                         })
                                         .catch(error => {
                                             dispatch(

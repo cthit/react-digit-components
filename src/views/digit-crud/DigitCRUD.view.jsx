@@ -176,6 +176,7 @@ const DigitCRUD = ({
                                 readAllPath={readAllPath}
                                 readOnePath={readOnePath}
                                 backFromUpdatePath={backFromUpdatePath}
+                                backFromDeletePath={backFromDeletePath}
                             />
                         )}
                     />
@@ -222,6 +223,7 @@ const DigitCRUD = ({
                                 readAllPath={readAllPath}
                                 updatePath={updatePath}
                                 backFromReadOnePath={backFromReadOnePath}
+                                backFromDeletePath={backFromDeletePath}
                             />
                         )}
                     />

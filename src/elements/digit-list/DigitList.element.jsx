@@ -10,8 +10,18 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 
-const DigitList = ({ title, items, onClick, dense, disablePadding }) => {
+const DigitList = ({
+    title,
+    items,
+    onClick,
+    dense,
+    disablePadding,
+    value,
+    onChange
+}) => {
     const [openIndex, setOpenIndex] = useState(null); //index on items
+
+    const selectedIndex = value != null ? value.__index : -1;
 
     return (
         <List
@@ -23,17 +33,27 @@ const DigitList = ({ title, items, onClick, dense, disablePadding }) => {
             {items.map((item, itemIndex) => (
                 <>
                     <ListItem
-                        button={onClick != null}
+                        key={item.text + "-" + itemIndex}
+                        button={onClick != null || onChange != null}
+                        selected={
+                            value != null &&
+                            value.text + "-" + selectedIndex ===
+                                item.text + "-" + itemIndex
+                        }
                         onClick={e => {
                             if (item.items != null) {
-                                console.log(item);
                                 setOpenIndex(
                                     openIndex === itemIndex ? null : itemIndex
                                 );
-                            } else {
+                            } else if (onChange != null) {
+                                onChange({
+                                    target: {
+                                        value: { ...item, __index: itemIndex }
+                                    }
+                                });
+                            } else if (onClick != null) {
                                 onClick(item);
                             }
-                            e.preventDefault();
                         }}
                     >
                         {item.icon != null && (
@@ -78,6 +98,8 @@ const DigitList = ({ title, items, onClick, dense, disablePadding }) => {
                                 <DigitList
                                     items={item.items}
                                     onClick={onClick}
+                                    onChange={onChange}
+                                    value={value}
                                     dense={dense}
                                     disablePadding
                                 />

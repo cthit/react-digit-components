@@ -38,6 +38,7 @@ const DigitSelect = ({
             >
                 <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
                 <StyledSelect
+                    name={name}
                     onBlur={onBlur}
                     onChange={onChange}
                     disabled={disabled}

@@ -97,7 +97,7 @@ const DigitCRUDUpdate = ({
                         key => formComponentData[key] != null
                     )}
                     keysComponentData={formComponentData}
-                    validationSchema={formValidationSchema}
+                    validationSchema={formValidationSchema(one)}
                     isInitialValid={true}
                     extraButton={{
                         outlined: true,

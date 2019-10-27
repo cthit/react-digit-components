@@ -95,7 +95,9 @@ const DigitCRUD = ({
     readAllKeysOrder,
     readOneKeysOrder,
     updateKeysOrder,
-    createKeysOrder
+    createKeysOrder,
+    updateFormValidationSchema,
+    createFormValidationSchema
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -158,7 +160,11 @@ const DigitCRUD = ({
                                 createAction={createAction}
                                 path={path}
                                 formComponentData={modifiedFormComponentData}
-                                formValidationSchema={formValidationSchema}
+                                formValidationSchema={
+                                    createFormValidationSchema != null
+                                        ? createFormValidationSchema
+                                        : formValidationSchema
+                                }
                                 formInitialValues={formInitialValues}
                                 keysOrder={
                                     createKeysOrder != null
@@ -196,7 +202,11 @@ const DigitCRUD = ({
                                 history={props.history}
                                 path={path}
                                 formComponentData={modifiedFormComponentData}
-                                formValidationSchema={formValidationSchema}
+                                formValidationSchema={
+                                    updateFormValidationSchema != null
+                                        ? () => formValidationSchema
+                                        : updateFormValidationSchema
+                                }
                                 keysOrder={
                                     updateKeysOrder != null
                                         ? updateKeysOrder
@@ -446,7 +456,9 @@ DigitCRUD.propTypes = {
     readAllKeysOrder: PropTypes.arrayOf(PropTypes.string),
     readOneKeysOrder: PropTypes.arrayOf(PropTypes.string),
     updateKeysOrder: PropTypes.arrayOf(PropTypes.string),
-    createKeysOrder: PropTypes.arrayOf(PropTypes.string)
+    createKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    updateFormValidationSchema: PropTypes.object,
+    createFormValidationSchema: PropTypes.func
 };
 
 DigitCRUD.defaultProps = {
@@ -492,7 +504,9 @@ DigitCRUD.defaultProps = {
     readAllKeysOrder: null,
     readOneKeysOrder: null,
     updateKeysOrder: null,
-    createKeysOrder: null
+    createKeysOrder: null,
+    updateFormValidationSchema: null,
+    createFormValidationSchema: null
 };
 
 export default DigitCRUD;

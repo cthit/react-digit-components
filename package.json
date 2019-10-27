@@ -19,8 +19,7 @@
     "build-storybook": "build-storybook -o docs",
     "start": "rollup -c -w",
     "storybook": "start-storybook -p 6006",
-    "prepare": "yarn run build",
-    "publish": "npm install && rollup -c && npm publish"
+    "prepare": "yarn && yarn run build",
   },
   "peerDependencies": {
     "react": "^16.10.2",

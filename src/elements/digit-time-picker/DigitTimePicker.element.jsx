@@ -28,7 +28,8 @@ const DigitTimePicker = ({
     cancelLabel,
     clearLabel,
     emptyLabel,
-    invalidLabel
+    invalidLabel,
+    showNowButton
 }) => {
     const [text] = useDigitTranslations(translations);
 
@@ -51,7 +52,7 @@ const DigitTimePicker = ({
             variant={"dialog"}
             views={["hours", "minutes"]}
             clearable
-            showTodayButton
+            showTodayButton={showNowButton}
             label={upperLabel}
             error={error}
             helperText={
@@ -101,7 +102,8 @@ DigitTimePicker.propTypes = {
     filled: PropTypes.bool,
     lowerLabel: PropTypes.string,
     error: PropTypes.bool,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    showNowButton: PropTypes.bool
 };
 
 DigitTimePicker.defaultProps = {

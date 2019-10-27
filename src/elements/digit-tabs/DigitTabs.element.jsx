@@ -31,7 +31,8 @@ const DigitTabs = ({
     onChange,
     titleFont,
     classes,
-    inheritBackground
+    inheritBackground,
+    primaryIndicator
 }) => (
     <Fill>
         <Tabs
@@ -41,13 +42,15 @@ const DigitTabs = ({
             }}
             value={findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
-            fullWidth={fullWidth}
+            variant={fullWidth ? "fullWidth" : "standard"}
             onChange={(event, value) => {
                 onChange(tabs[value].value);
             }}
             scrollable={!centered}
             scrollButtons="on"
             textColor="primary"
+            orientation="vertical"
+            indicatorColor={primaryIndicator ? "primary" : "secondary"}
         >
             {tabs.map(tabs => {
                 return (
@@ -85,15 +88,18 @@ DigitTabs.propTypes = {
     ).isRequired,
     /** If true, then centers the tabs*/
     centered: PropTypes.bool,
-    /** If true, then expands the tabs*/
+    /** If true, then expands the tabs. If DigitTabs are centered, this will not take effect.*/
     fullWidth: PropTypes.bool,
     /** A function with the new selected index as the only argument.
-     * Use this to keep track of the currently selected tab.
+     * Use this to keep track of the currently selected tab. (value) => {}
      */
     onChange: PropTypes.func.isRequired,
     /** If true, then the text uses the DigitText.Title font instead */
     titleFont: PropTypes.bool,
-    inheritBackground: PropTypes.bool
+    /** Will use the background color of the parent */
+    inheritBackground: PropTypes.bool,
+    /** If you want to use the primary color as the indicator instead of secondary */
+    primaryIndicator: PropTypes.bool
 };
 
 DigitTabs.defaultProps = {

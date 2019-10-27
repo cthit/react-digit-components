@@ -2,6 +2,8 @@ import withStyles from "@material-ui/styles/withStyles";
 import { TimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
+import useDigitTranslations from "../../hooks/use-digit-translations";
+import translations from "./DigitTimePicker.element.translations";
 
 const styles = () => ({
     root: {
@@ -13,35 +15,58 @@ const styles = () => ({
 const DigitTimePicker = ({
     value,
     onChange,
-    upperLabel,
-    cancelLabel,
     okLabel,
-    clearLabel,
-    emptyLabel,
-    invalidLabel,
     classes,
     outlined,
     filled,
-    lowerLabel,
     error,
-    errorMessage
-}) => (
-    <TimePicker
-        label={upperLabel}
-        error={error}
-        helperText={error && errorMessage !== "" ? errorMessage : lowerLabel}
-        value={value}
-        onChange={date => onChange({ target: { value: date } })}
-        cancelLabel={cancelLabel}
-        okLabel={okLabel}
-        clearLabel={clearLabel}
-        emptyLabel={emptyLabel}
-        invalidLabel={invalidLabel}
-        className={classes.root}
-        ampm={false}
-        variant={filled ? "filled" : outlined ? "outlined" : "standard"}
-    />
-);
+    errorMessage,
+    disabled,
+    upperLabel,
+    lowerLabel,
+    todayLabel,
+    cancelLabel,
+    clearLabel,
+    emptyLabel,
+    invalidLabel
+}) => {
+    const [text] = useDigitTranslations(translations);
+
+    return (
+        <TimePicker
+            onChange={date => onChange({ target: { value: date } })}
+            value={value}
+            ampm={false}
+            autoOk={false}
+            disabled={disabled}
+            disableToolbar={false}
+            initialFocusedDate={null}
+            inputVariant={
+                filled ? "filled" : outlined ? "outlined" : "standard"
+            }
+            minutesStep={1}
+            openTo={"hours"}
+            orientation={"portrait"}
+            readOnly={false}
+            variant={"dialog"}
+            views={["hours", "minutes"]}
+            clearable
+            showTodayButton
+            label={upperLabel}
+            error={error}
+            helperText={
+                error && errorMessage !== "" ? errorMessage : lowerLabel
+            }
+            className={classes.root}
+            invalidLabel={invalidLabel != null ? invalidLabel : text.invalid}
+            okLabel={okLabel != null ? okLabel : text.ok}
+            cancelLabel={cancelLabel != null ? cancelLabel : text.cancel}
+            clearLabel={clearLabel != null ? clearLabel : text.clear}
+            todayLabel={todayLabel != null ? todayLabel : text.today}
+            emptyLabel={emptyLabel != null ? emptyLabel : text.empty}
+        />
+    );
+};
 
 DigitTimePicker.displayName = "DigitTimePicker";
 DigitTimePicker.propTypes = {
@@ -80,14 +105,9 @@ DigitTimePicker.propTypes = {
 };
 
 DigitTimePicker.defaultProps = {
-    cancelLabel: "Avbryt",
-    okLabel: "Ok",
-    clearLabel: "Rensa",
-    emptyLabel: "Tryck här för tid",
-    invalidLabel: "Ogiltig tid",
-    upperLabel: "",
     outlined: false,
     filled: false,
+    upperLabel: "",
     lowerLabel: ""
 };
 

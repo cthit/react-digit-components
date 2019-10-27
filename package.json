@@ -15,11 +15,11 @@
   "scripts": {
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
-    "build": "rollup -c",
+    "build": "yarn && rollup -c",
     "build-storybook": "build-storybook -o docs",
     "start": "rollup -c -w",
     "storybook": "start-storybook -p 6006",
-    "prepare": "yarn && yarn run build",
+    "prepare": "yarn run build"
   },
   "peerDependencies": {
     "react": "^16.10.2",

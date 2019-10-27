@@ -24,7 +24,7 @@ const DigitTimePicker = ({
     disabled,
     upperLabel,
     lowerLabel,
-    todayLabel,
+    nowLabel,
     cancelLabel,
     clearLabel,
     emptyLabel,
@@ -63,7 +63,7 @@ const DigitTimePicker = ({
             okLabel={okLabel != null ? okLabel : text.ok}
             cancelLabel={cancelLabel != null ? cancelLabel : text.cancel}
             clearLabel={clearLabel != null ? clearLabel : text.clear}
-            todayLabel={todayLabel != null ? todayLabel : text.today}
+            todayLabel={nowLabel != null ? nowLabel : text.today}
             emptyLabel={emptyLabel != null ? emptyLabel : text.empty}
         />
     );

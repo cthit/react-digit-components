@@ -91,7 +91,11 @@ const DigitCRUD = ({
     deleteDialogFormComponentData,
     deleteDialogFormValidationSchema,
     deleteDialogFormInitialValues,
-    deleteDialogFormKeysOrder
+    deleteDialogFormKeysOrder,
+    readAllKeysOrder,
+    readOneKeysOrder,
+    updateKeysOrder,
+    createKeysOrder
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -156,7 +160,11 @@ const DigitCRUD = ({
                                 formComponentData={modifiedFormComponentData}
                                 formValidationSchema={formValidationSchema}
                                 formInitialValues={formInitialValues}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    createKeysOrder != null
+                                        ? createKeysOrder
+                                        : keysOrder
+                                }
                                 createTitle={createTitle}
                                 toastCreateFailed={toastCreateFailed}
                                 toastCreateSuccessful={toastCreateSuccessful}
@@ -189,7 +197,11 @@ const DigitCRUD = ({
                                 path={path}
                                 formComponentData={modifiedFormComponentData}
                                 formValidationSchema={formValidationSchema}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    updateKeysOrder != null
+                                        ? updateKeysOrder
+                                        : keysOrder
+                                }
                                 toastUpdateSuccessful={toastUpdateSuccessful}
                                 toastUpdateFailed={toastUpdateFailed}
                                 backButtonText={backButtonText}
@@ -233,7 +245,11 @@ const DigitCRUD = ({
                                 readOneAction={readOneAction}
                                 clearAction={clearAction}
                                 keysText={keysText}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    readOneKeysOrder != null
+                                        ? readOneKeysOrder
+                                        : keysOrder
+                                }
                                 path={path}
                                 id={
                                     staticId != null
@@ -292,7 +308,11 @@ const DigitCRUD = ({
                                 readAllAction={readAllAction}
                                 clearAction={clearAction}
                                 keysText={keysText}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    readAllKeysOrder != null
+                                        ? readAllKeysOrder
+                                        : keysOrder
+                                }
                                 tableProps={tableProps}
                                 idProp={idProp}
                                 hasReadOne={hasReadOne}
@@ -422,7 +442,11 @@ DigitCRUD.propTypes = {
     backFromUpdatePath: PropTypes.string,
     backFromDeletePath: PropTypes.string,
     backFromCreatePath: PropTypes.string,
-    useKeyTextsInUpperLabel: PropTypes.bool
+    useKeyTextsInUpperLabel: PropTypes.bool,
+    readAllKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    readOneKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    updateKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    createKeysOrder: PropTypes.arrayOf(PropTypes.string)
 };
 
 DigitCRUD.defaultProps = {
@@ -464,7 +488,11 @@ DigitCRUD.defaultProps = {
     deleteDialogFormComponentData: null,
     deleteDialogFormValidationSchema: null,
     deleteDialogFormInitialValues: null,
-    deleteDialogFormKeysOrder: []
+    deleteDialogFormKeysOrder: [],
+    readAllKeysOrder: null,
+    readOneKeysOrder: null,
+    updateKeysOrder: null,
+    createKeysOrder: null
 };
 
 export default DigitCRUD;

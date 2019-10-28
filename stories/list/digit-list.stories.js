@@ -81,7 +81,7 @@ storiesOf("Elements", module)
                                                 icon: Mail,
                                                 items: [
                                                     {
-                                                        text: "Hej"
+                                                        text: "what"
                                                     },
                                                     { text: "då" }
                                                 ]
@@ -89,6 +89,61 @@ storiesOf("Elements", module)
                                             {
                                                 text: "hmm",
                                                 icon: Mail,
+                                                items: [
+                                                    {
+                                                        text: "ååh",
+                                                        items: [
+                                                            {
+                                                                text: "subsub"
+                                                            },
+                                                            {
+                                                                text: "glass"
+                                                            },
+                                                            {
+                                                                text: "gott"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }}
+                        />
+                        <DigitEditData
+                            onSubmit={values => {
+                                console.log(values);
+                            }}
+                            submitText={"Submit"}
+                            validationSchema={yup
+                                .object()
+                                .shape({ list: yup.array() })}
+                            titleText={"Select"}
+                            keysOrder={["list"]}
+                            initialValues={{
+                                list: []
+                            }}
+                            keysComponentData={{
+                                list: {
+                                    component: DigitList,
+                                    componentProps: {
+                                        multipleSelect: true,
+                                        title: "List",
+                                        items: [
+                                            {
+                                                text: "Hej",
+                                                secondaryText:
+                                                    "This is the secondary text",
+                                                items: [
+                                                    {
+                                                        text: "whatwhat"
+                                                    },
+                                                    { text: "då" }
+                                                ]
+                                            },
+                                            {
+                                                text: "hmm",
                                                 items: [
                                                     {
                                                         text: "ååh",

@@ -21,7 +21,10 @@ class DigitProviders extends React.Component {
 
         this.store = createStore(
             createReducer({}),
-            props.preloadedState,
+            {
+                ...props.preloadedState,
+                digitTranslations: { activeLanguage: props.defaultLanguage }
+            },
             applyMiddleware(logger, thunkMiddleware)
         );
 
@@ -104,13 +107,16 @@ DigitProviders.propTypes = {
     /** Starting redux state for your application */
     preloadedState: PropTypes.object,
     /** All redux reducer from your application */
-    rootReducer: PropTypes.object
+    rootReducer: PropTypes.object,
+    /** Default language */
+    defaultLanguage: PropTypes.string
 };
 
 DigitProviders.defaultProps = {
     theme: {},
     preloadedState: {},
-    rootReducer: {}
+    rootReducer: {},
+    defaultLanguage: "en"
 };
 
 export default DigitProviders;

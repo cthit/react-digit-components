@@ -57,7 +57,11 @@ const DigitCRUDReadAll = ({
                             : all
                     }
                     columnsOrder={keysOrder}
-                    headerTexts={{ ...keysText, __link: detailsButtonText }}
+                    headerTexts={
+                        hasReadOne
+                            ? { ...keysText, __link: detailsButtonText }
+                            : { ...keysText }
+                    }
                     idProp={idProp}
                     {...tableProps}
                 />

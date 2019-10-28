@@ -97,7 +97,10 @@ const DigitCRUD = ({
     updateKeysOrder,
     createKeysOrder,
     updateFormValidationSchema,
-    createFormValidationSchema
+    createFormValidationSchema,
+    timeProps,
+    dateProps,
+    dateAndTimeProps
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -304,6 +307,9 @@ const DigitCRUD = ({
                                 deleteDialogFormKeysOrder={
                                     deleteDialogFormKeysOrder
                                 }
+                                timeProps={timeProps}
+                                dateProps={dateProps}
+                                dateAndTimeProps={dateAndTimeProps}
                             />
                         )}
                     />
@@ -333,6 +339,9 @@ const DigitCRUD = ({
                                 history={history}
                                 readOnePath={readOnePath}
                                 createPath={createPath}
+                                timeProps={timeProps}
+                                dateProps={dateProps}
+                                dateAndTimeProps={dateAndTimeProps}
                             />
                         )}
                     />
@@ -458,7 +467,10 @@ DigitCRUD.propTypes = {
     updateKeysOrder: PropTypes.arrayOf(PropTypes.string),
     createKeysOrder: PropTypes.arrayOf(PropTypes.string),
     updateFormValidationSchema: PropTypes.object,
-    createFormValidationSchema: PropTypes.func
+    createFormValidationSchema: PropTypes.func,
+    timeProps: PropTypes.arrayOf(PropTypes.string),
+    dateProps: PropTypes.arrayOf(PropTypes.string),
+    dateAndTimeProps: PropTypes.arrayOf(PropTypes.string)
 };
 
 DigitCRUD.defaultProps = {
@@ -506,7 +518,10 @@ DigitCRUD.defaultProps = {
     updateKeysOrder: null,
     createKeysOrder: null,
     updateFormValidationSchema: null,
-    createFormValidationSchema: null
+    createFormValidationSchema: null,
+    timeProps: [],
+    dateProps: [],
+    dateAndTimeProps: []
 };
 
 export default DigitCRUD;

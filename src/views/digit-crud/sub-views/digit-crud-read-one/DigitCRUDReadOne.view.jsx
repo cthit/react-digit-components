@@ -10,10 +10,61 @@ import {
     Center,
     Padding
 } from "../../../../styles/digit-layout/DigitLayout.styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DigitButton from "../../../../elements/digit-button";
 import DigitLoading from "../../../../elements/digit-loading";
 import DeleteFAB from "../../elements/delete-fab";
+import translations from "./DigitCRUDReadOne.view.translations";
+import useDigitTranslations from "../../../../hooks/use-digit-translations";
+//plz format this. I just want 1.0.0 released...
+function formatDate(date, text, type) {
+    if (date == null) {
+        return "";
+    }
+
+    var monthNames = [
+        text.January,
+        text.February,
+        text.March,
+        text.April,
+        text.May,
+        text.June,
+        text.July,
+        text.August,
+        text.September,
+        text.October,
+        text.November,
+        text.December
+    ];
+
+    date = new Date(date);
+
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    if (type === "date") {
+        return year + " " + monthNames[monthIndex] + " " + day;
+    } else if (type === "date-time") {
+        return (
+            year +
+            " " +
+            monthNames[monthIndex] +
+            " " +
+            day +
+            ", " +
+            hours +
+            ":" +
+            minutes
+        );
+    } else if (type === "time") {
+        return hours + ":" + minutes;
+    } else {
+        return date;
+    }
+}
 
 const DigitCRUDReadOne = ({
     name,
@@ -49,9 +100,12 @@ const DigitCRUDReadOne = ({
     deleteDialogFormComponentData,
     deleteDialogFormValidationSchema,
     deleteDialogFormInitialValues,
-    deleteDialogFormKeysOrder
+    deleteDialogFormKeysOrder,
+    timeProps,
+    dateProps,
+    dateAndTimeProps
 }) => {
-    const dispatch = useDispatch();
+    const [text] = useDigitTranslations(translations);
     const one = useSelector(state => state[name].one);
     const loading = useSelector(state => state[name].loading);
 
@@ -73,6 +127,23 @@ const DigitCRUDReadOne = ({
     Object.keys(one)
         .filter(key => !customDetailsRenderKeys.includes(key))
         .forEach(key => (displayData[key] = one[key]));
+
+    dateProps.forEach(
+        dateProp =>
+            (displayData[dateProp] = formatDate(one[dateProp], text, "date"))
+    );
+    timeProps.forEach(
+        timeProp =>
+            (displayData[timeProp] = formatDate(one[timeProp], text, "time"))
+    );
+    dateAndTimeProps.forEach(
+        dateAndTimeProp =>
+            (displayData[dateAndTimeProp] = formatDate(
+                one[dateAndTimeProp],
+                text,
+                "date-time"
+            ))
+    );
 
     const deleteFAB = (
         <DeleteFAB

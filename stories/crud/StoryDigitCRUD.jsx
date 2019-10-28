@@ -15,7 +15,8 @@ const startData = [
         quote: {
             sv: "Svenska",
             en: "English"
-        }
+        },
+        date: new Date().getTime()
     },
     {
         id: "fdas-fdsafasd",
@@ -24,7 +25,8 @@ const startData = [
         quote: {
             sv: "Svenska",
             en: "English"
-        }
+        },
+        date: new Date().getTime()
     }
 ];
 
@@ -61,11 +63,7 @@ const StoryDigitCRUD = () => {
             } else {
                 resolve({
                     data: {
-                        ...result,
-                        quote: {
-                            sv: "Svenska",
-                            en: "English"
-                        }
+                        ...result
                     }
                 });
             }
@@ -90,8 +88,14 @@ const StoryDigitCRUD = () => {
             resolve({});
         });
 
-    const deleteRequestPromise = id =>
+    const deleteRequestPromise = (id, form) =>
         new Promise((resolve, reject) => {
+            const one = _.find(getData(), { id });
+
+            if (form.nameConfirm !== one.name) {
+                reject();
+            }
+
             const index = _.findIndex(getData(), { id });
             if (index === -1) {
                 reject();
@@ -117,13 +121,15 @@ const StoryDigitCRUD = () => {
                         createRequest={createRequestPromise}
                         path={getStartPath(location.pathname)}
                         name={"users"}
-                        keysOrder={["id", "name", "age", "quote"]}
+                        keysOrder={["id", "name", "age", "quote", "date"]}
                         keysText={{
                             id: "Id",
-                            name: "Namn",
+                            name: "Namn keys",
                             age: "Ålder",
-                            quote: "Citat"
+                            quote: "Citat",
+                            date: "Datum"
                         }}
+                        timeProps={["date"]}
                         idProp="id"
                         tableProps={{
                             titleText: "Användare",
@@ -135,8 +141,8 @@ const StoryDigitCRUD = () => {
                             name: {
                                 component: DigitTextField,
                                 componentProps: {
-                                    outlined: true,
-                                    upperLabel: "Namn"
+                                    outlined: true
+                                    // upperLabel: "Namn"
                                 }
                             },
                             age: {
@@ -187,7 +193,8 @@ const StoryDigitCRUD = () => {
                         dialogDeleteTitle={data => "Är du säker?"}
                         dialogDeleteDescription={data =>
                             "Är du säker på att du vill radera användaren " +
-                            data.name
+                            data.name +
+                            "? Bekräfta genom att skriva in nicket:"
                         }
                         dialogDeleteConfirm={data => "Radera " + data.name}
                         dialogDeleteCancel={data => "Avbryt"}
@@ -203,6 +210,28 @@ const StoryDigitCRUD = () => {
                         detailsRenderStart={() => "details start"}
                         detailsRenderEnd={() => "details end"}
                         detailsRenderCardStart={() => "card start"}
+                        deleteDialogFormComponentData={{
+                            nameConfirm: {
+                                component: DigitTextField,
+                                componentProps: {}
+                            }
+                        }}
+                        deleteDialogFormInitialValues={{
+                            nameConfirm: ""
+                        }}
+                        deleteDialogFormValidationSchema={data =>
+                            yup.object().shape({
+                                nameConfirm: yup
+                                    .mixed()
+                                    .oneOf(
+                                        [data.name],
+                                        "Måste vara lika med namnet på användaren"
+                                    )
+                                    .required("du bekräfta namn")
+                            })
+                        }
+                        deleteDialogFormKeysOrder={["nameConfirm"]}
+                        useKeyTextsInUpperLabel
                     />
                 </>
             )}

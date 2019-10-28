@@ -135,7 +135,9 @@ const DigitAutocompleteSelectMultiple = ({
     errorMessage,
     name,
     selectableValues,
-    disabled
+    disabled,
+    outlined,
+    filled
 }) => {
     const theme = useTheme();
     const [state, setState] = useState({
@@ -200,7 +202,8 @@ const DigitAutocompleteSelectMultiple = ({
                     shrink:
                         (value != null && value.length > 0) ||
                         state.multipleOpen
-                }
+                },
+                variant: outlined ? "outlined" : filled ? "filled" : "standard"
             }}
         />
     );

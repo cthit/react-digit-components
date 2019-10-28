@@ -137,7 +137,9 @@ const DigitAutocompleteSelectSingle = ({
     errorMessage,
     name,
     selectableValues,
-    disabled
+    disabled,
+    filled,
+    outlined
 }) => {
     const [state, setState] = useState({
         menuIsOpen: false
@@ -201,7 +203,8 @@ const DigitAutocompleteSelectSingle = ({
                     error && errorMessage != null ? errorMessage : lowerLabel,
                 InputLabelProps: {
                     shrink: value !== "" || state.singleOpen
-                }
+                },
+                variant: outlined ? "outlined" : filled ? "filled" : "standard"
             }}
         />
     );

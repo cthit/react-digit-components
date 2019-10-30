@@ -206,7 +206,7 @@ const DigitCRUD = ({
                                 path={path}
                                 formComponentData={modifiedFormComponentData}
                                 formValidationSchema={
-                                    updateFormValidationSchema != null
+                                    updateFormValidationSchema == null
                                         ? () => formValidationSchema
                                         : updateFormValidationSchema
                                 }

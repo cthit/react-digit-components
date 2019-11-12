@@ -11,16 +11,16 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         width: "100%",
-        backgroundColor: theme.palette.primary.main
+        backgroundColor: theme.palette.primary.main,
     },
     rootInherit: {
         flexGrow: 1,
         width: "100%",
-        background: "inherit"
+        background: "inherit",
     },
     scrollButtons: {
-        color: "white !important"
-    }
+        color: "white !important",
+    },
 });
 
 const DigitTabs = ({
@@ -31,13 +31,14 @@ const DigitTabs = ({
     titleFont,
     fullWidth,
     classes,
-    inheritBackground
+    inheritBackground,
+    primaryIndicator,
 }) => (
     <Fill>
         <Tabs
             classes={{
                 root: inheritBackground ? classes.rootInherit : classes.root,
-                scrollButtons: classes.scrollButtons
+                scrollButtons: classes.scrollButtons,
             }}
             value={findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
@@ -50,6 +51,8 @@ const DigitTabs = ({
             variant={
                 fullWidth ? "fullWidth" : centered ? "default" : "scrollable"
             }
+            orientation="vertical"
+            indicatorColor={primaryIndicator ? "primary" : "secondary"}
         >
             {tabs.map(tabs => {
                 return (
@@ -82,25 +85,28 @@ DigitTabs.propTypes = {
             text: PropTypes.string.isRequired,
             /** The unique value for the tab */
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-                .isRequired
+                .isRequired,
         })
     ).isRequired,
     /** If true, then centers the tabs*/
     centered: PropTypes.bool,
-    /** If true, then expands the tabs*/
+    /** If true, then expands the tabs. If DigitTabs are centered, this will not take effect.*/
     fullWidth: PropTypes.bool,
     /** A function with the new selected index as the only argument.
-     * Use this to keep track of the currently selected tab.
+     * Use this to keep track of the currently selected tab. (value) => {}
      */
     onChange: PropTypes.func.isRequired,
     /** If true, then the text uses the DigitText.Title font instead */
     titleFont: PropTypes.bool,
-    inheritBackground: PropTypes.bool
+    /** Will use the background color of the parent */
+    inheritBackground: PropTypes.bool,
+    /** If you want to use the primary color as the indicator instead of secondary */
+    primaryIndicator: PropTypes.bool,
 };
 
 DigitTabs.defaultProps = {
     titleFont: false,
-    tabs: []
+    tabs: [],
 };
 
 export { DigitTabs };

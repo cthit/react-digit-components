@@ -15,7 +15,7 @@ class DigitDialog extends React.Component {
 
     componentDidUpdate(prevProps) {
         if (this.state.open !== this.props.options.open) {
-            this.setState({ open: true });
+            this.setState({ open: this.props.options.open });
         }
     }
 

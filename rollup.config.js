@@ -14,29 +14,30 @@ export default {
         {
             file: pkg.main,
             format: "cjs",
-            sourcemap: true
+            sourcemap: true,
         },
         {
             file: pkg.module,
             format: "es",
-            sourcemap: true
-        }
+            sourcemap: true,
+        },
     ],
     plugins: [
         alias({
-            resolve: [".jsx", ".js"]
+            resolve: [".jsx", ".js"],
         }),
         external(["styled-components"]),
         url(),
         svgr(),
         babel({
             exclude: "node_modules/**",
-            plugins: []
+            plugins: [],
         }),
         resolve({
-            extensions: [".js", ".jsx", ".json"]
+            extensions: [".js", ".jsx", ".json"],
         }),
         commonjs({
+            include: "node_modules/**",
             namedExports: {
                 react: [
                     "cloneElement",
@@ -59,7 +60,7 @@ export default {
                     "forwardRef",
                     "memo",
                     "useDebugValue",
-                    "PureComponent"
+                    "PureComponent",
                 ],
                 "prop-types": [
                     "func",
@@ -73,21 +74,24 @@ export default {
                     "number",
                     "instanceOf",
                     "oneOf",
-                    "node"
+                    "node",
+                    "elementType",
                 ],
                 "react-dom": [
-                    "render, findDOMNode",
+                    "render",
+                    "findDOMNode",
                     "unstable_batchedUpdates",
-                    "createPortal"
+                    "createPortal",
                 ],
                 "react-is": [
                     "isElement",
                     "isValidElementType",
                     "ForwardRef",
-                    "isContextConsumer"
-                ]
-            }
+                    "isContextConsumer",
+                ],
+                scheduler: ["unstable_runWithPriority", "LowPriority"],
+            },
         }),
-        json()
-    ]
+        json(),
+    ],
 };

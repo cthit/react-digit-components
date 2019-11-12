@@ -1,10 +1,7 @@
-import FilledInput from "@material-ui/core/FilledInput";
 import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React from "react";
@@ -12,103 +9,78 @@ import ReactDOM from "react-dom";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import styled from "styled-components";
 
-class DigitSelect extends React.Component {
-    render() {
-        const {
-            value,
-            onChange,
-            disabled,
-            valueToTextMap,
-            allowToChooseNone,
-            name,
-            upperLabel,
-            lowerLabel,
-            reverse,
-            filled,
-            outlined,
-            error,
-            errorMessage,
-            onBlur
-        } = this.props;
-        return (
-            <Fill>
-                <StyledFormControl
-                    variant={
-                        filled ? "filled" : outlined ? "outlined" : "standard"
-                    }
-                >
-                    <InputLabel
-                        ref={ref => {
-                            this.labelRef = ReactDOM.findDOMNode(ref);
-                        }}
-                    >
-                        {upperLabel}
-                    </InputLabel>
-                    <StyledSelect
-                        onBlur={onBlur}
-                        onChange={onChange}
-                        disabled={disabled}
-                        displayEmpty={allowToChooseNone}
-                        value={value}
-                        variant={
-                            filled
-                                ? "filled"
-                                : outlined
-                                ? "outlined"
-                                : "standard"
-                        }
-                        input={
-                            filled ? (
-                                <FilledInput />
-                            ) : outlined ? (
-                                <OutlinedInput
-                                    labelWidth={
-                                        this.labelRef
-                                            ? this.labelRef.offsetWidth
-                                            : 0
-                                    }
-                                />
-                            ) : (
-                                <Input />
-                            )
-                        }
-                        inputProps={{
-                            id: "id-" + name,
-                            name: name,
-                            color: "secondary"
-                        }}
-                    >
-                        {allowToChooseNone ? (
-                            <MenuItem value="" name="Nothing">
-                                {""}
-                            </MenuItem>
-                        ) : null}
+const DigitSelect = ({
+    value,
+    onChange,
+    disabled,
+    valueToTextMap,
+    allowToChooseNone,
+    name,
+    upperLabel,
+    lowerLabel,
+    reverse,
+    filled,
+    outlined,
+    error,
+    errorMessage,
+    onBlur
+}) => {
+    const inputLabel = React.useRef(null);
+    const [labelWidth, setLabelWidth] = React.useState(0);
+    React.useEffect(() => {
+        setLabelWidth(inputLabel.current.offsetWidth);
+    }, []);
 
-                        {_getValues(valueToTextMap, reverse).map(value => {
-                            const text = valueToTextMap[value];
-                            return (
-                                <MenuItem
-                                    name={value}
-                                    key={value}
-                                    value={value}
-                                >
-                                    {text}
-                                </MenuItem>
-                            );
-                        })}
-                    </StyledSelect>
-                    {(lowerLabel != null || errorMessage != null) && (
-                        <FormHelperText>
-                            {error && errorMessage != null
-                                ? errorMessage
-                                : lowerLabel}
-                        </FormHelperText>
-                    )}
-                </StyledFormControl>
-            </Fill>
-        );
-    }
-}
+    return (
+        <Fill>
+            <StyledFormControl
+                variant={filled ? "filled" : outlined ? "outlined" : "standard"}
+            >
+                <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
+                <StyledSelect
+                    name={name}
+                    onBlur={onBlur}
+                    onChange={onChange}
+                    disabled={disabled}
+                    displayEmpty={allowToChooseNone}
+                    value={value}
+                    labelWidth={labelWidth}
+                    inputProps={{
+                        name: "age",
+                        id: "outlined-age-simple"
+                    }}
+                >
+                    {allowToChooseNone ? (
+                        <MenuItem value="" name="Nothing" component={"li"}>
+                            <div style={{ height: "24px" }} />
+                        </MenuItem>
+                    ) : null}
+
+                    {_getValues(valueToTextMap, reverse).map(value => {
+                        const text = valueToTextMap[value];
+                        return (
+                            <MenuItem
+                                name={value}
+                                key={value}
+                                value={value}
+                                component={"li"}
+                            >
+                                {text}
+                            </MenuItem>
+                        );
+                    })}
+                </StyledSelect>
+                {(lowerLabel != null || errorMessage != null) && (
+                    <FormHelperText>
+                        {error && errorMessage != null
+                            ? errorMessage
+                            : lowerLabel}
+                    </FormHelperText>
+                )}
+            </StyledFormControl>
+        </Fill>
+    );
+};
 
 function _getValues(valueToTextMap, reverse) {
     var result = Object.keys(valueToTextMap);

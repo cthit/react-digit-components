@@ -42,8 +42,8 @@ const StyledAppBar = styled(AppBar)`
         css`
             /*Medium device (md)*/
             @media (min-width: 960px) {
-                width: calc(100vw - 256px); //241 + 15
-                max-width: calc(100vw - 256px);
+                width: calc(100vw - 241px);
+                max-width: calc(100vw - 241px);
                 margin-left: 241px;
             }
         `};

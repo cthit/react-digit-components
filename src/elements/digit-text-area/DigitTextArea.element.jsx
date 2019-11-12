@@ -1,113 +1,57 @@
-import FilledInput from "@material-ui/core/FilledInput";
-import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import PropTypes from "prop-types";
 import React from "react";
-import ReactDOM from "react-dom";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+import TextField from "@material-ui/core/TextField";
 
-class DigitTextArea extends React.Component {
-    render() {
-        const {
-            value,
-            onChange,
-            onBlur,
-            upperLabel,
-            lowerLabel,
-            name,
-            error,
-            errorMessage,
-            disabled,
-            rows,
-            rowsMax,
-            outlined,
-            filled
-        } = this.props;
-        return (
-            <Fill>
-                <FormControl
-                    variant={
-                        outlined ? "outlined" : filled ? "filled" : "standard"
-                    }
-                    error={error}
-                >
-                    <InputLabel
-                        ref={ref => {
-                            this.labelRef = ReactDOM.findDOMNode(ref);
-                        }}
-                    >
-                        {upperLabel}
-                    </InputLabel>
+const DigitTextArea = ({
+    value,
+    onChange,
+    onBlur,
+    upperLabel,
+    lowerLabel,
+    name,
+    error,
+    errorMessage,
+    disabled,
+    rows,
+    rowsMax,
+    outlined,
+    filled,
+    maxLength,
+    onKeyPress
+}) => {
+    const handleOnChange = (e, maxLength, onChange) => {
+        const newValue = e.target.value;
+        if (maxLength === -1 || newValue.length <= maxLength) {
+            onChange(e);
+        }
+    };
 
-                    <DigitIfElseRendering
-                        test={outlined != null && outlined}
-                        ifRender={() => (
-                            <OutlinedInput
-                                name={name}
-                                labelWidth={
-                                    this.labelRef
-                                        ? this.labelRef.offsetWidth
-                                        : 0
-                                }
-                                value={value || ""}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                disabled={disabled}
-                                rows={rows}
-                                rowsMax={rowsMax}
-                                multiline
-                            />
-                        )}
-                    />
-
-                    <DigitIfElseRendering
-                        test={filled != null && filled}
-                        ifRender={() => (
-                            <FilledInput
-                                name={name}
-                                value={value != null ? value : ""}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                disabled={disabled}
-                                rows={rows}
-                                rowsMax={rowsMax}
-                                multiline
-                            />
-                        )}
-                    />
-
-                    <DigitIfElseRendering
-                        test={!filled && !outlined}
-                        ifRender={() => (
-                            <Input
-                                name={name}
-                                value={value != null ? value : ""}
-                                onChange={onChange}
-                                onBlur={onBlur}
-                                disabled={disabled}
-                                rows={rows}
-                                rowsMax={rowsMax}
-                                multiline
-                            />
-                        )}
-                    />
-
-                    <FormHelperText>
-                        {error && errorMessage != null
-                            ? errorMessage
-                            : lowerLabel != null
-                            ? lowerLabel
-                            : ""}
-                    </FormHelperText>
-                </FormControl>
-            </Fill>
-        );
-    }
-}
+    return (
+        <TextField
+            value={value}
+            onChange={e => handleOnChange(e, maxLength, onChange)}
+            onBlur={onBlur}
+            label={upperLabel}
+            helperText={
+                error && errorMessage != null
+                    ? errorMessage
+                    : maxLength !== -1
+                    ? value.length + "/" + maxLength
+                    : lowerLabel != null
+                    ? lowerLabel
+                    : ""
+            }
+            name={name}
+            error={error}
+            disabled={disabled}
+            rows={rows}
+            variant={outlined ? "outlined" : filled ? "filled" : "standard"}
+            rowsMax={rowsMax}
+            multiline
+            onKeyPress={onKeyPress}
+        />
+    );
+};
 
 DigitTextArea.displayName = "DigitTextArea";
 DigitTextArea.propTypes = {
@@ -151,7 +95,8 @@ DigitTextArea.propTypes = {
      */
     outlined: PropTypes.bool,
     /** Adds a grey isch background */
-    filled: PropTypes.bool
+    filled: PropTypes.bool,
+    onKeyPress: PropTypes.func
 };
 
 DigitTextArea.defaultProps = {
@@ -165,7 +110,9 @@ DigitTextArea.defaultProps = {
     outlined: false,
     filled: false,
     rows: 3,
-    rowsMax: 6
+    rowsMax: 6,
+    maxLength: -1,
+    onKeyPress: () => {}
 };
 
 export default DigitTextArea;

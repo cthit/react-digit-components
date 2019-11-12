@@ -20,6 +20,24 @@ import createCRUDReducer from "./DigitCRUD.reducer";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 
+function modifyFormComponentData(
+    formComponentData,
+    keysText,
+    useKeyTextsInUpperLabel
+) {
+    const output = { ...formComponentData };
+
+    if (useKeyTextsInUpperLabel) {
+        Object.keys(output).forEach(key => {
+            const currentUpperLabel = output[key].componentProps.upperLabel;
+            output[key].componentProps.upperLabel =
+                currentUpperLabel == null ? keysText[key] : currentUpperLabel;
+        });
+    }
+
+    return output;
+}
+
 const DigitCRUD = ({
     path,
     name,
@@ -59,7 +77,30 @@ const DigitCRUD = ({
     detailsRenderEnd,
     detailsCustomRender,
     customDetailsRenders,
-    extractActiveLanguage
+    extractActiveLanguage,
+    createPath,
+    readAllPath,
+    readOnePath,
+    updatePath,
+    staticId,
+    backFromReadOnePath,
+    backFromUpdatePath,
+    backFromDeletePath,
+    backFromCreatePath,
+    useKeyTextsInUpperLabel,
+    deleteDialogFormComponentData,
+    deleteDialogFormValidationSchema,
+    deleteDialogFormInitialValues,
+    deleteDialogFormKeysOrder,
+    readAllKeysOrder,
+    readOneKeysOrder,
+    updateKeysOrder,
+    createKeysOrder,
+    updateFormValidationSchema,
+    createFormValidationSchema,
+    timeProps,
+    dateProps,
+    dateAndTimeProps
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -82,7 +123,8 @@ const DigitCRUD = ({
         ? () => dispatch(createReadAllAction(name, readAllRequest))
         : null;
     const deleteAction = hasDelete
-        ? id => dispatch(createDeleteAction(name, deleteRequest, id))
+        ? (id, form) =>
+              dispatch(createDeleteAction(name, deleteRequest, id, form))
         : null;
     const updateAction = hasUpdate
         ? (id, data) =>
@@ -103,26 +145,42 @@ const DigitCRUD = ({
         return null;
     }
 
+    const modifiedFormComponentData = modifyFormComponentData(
+        formComponentData,
+        keysText,
+        useKeyTextsInUpperLabel
+    );
+
     return (
         <Fill>
             <Switch>
                 {hasCreate && (
                     <Route
                         exact
-                        path={path + "/add"}
+                        path={path + createPath}
                         render={() => (
                             <DigitCRUDCreate
                                 createAction={createAction}
                                 path={path}
-                                formComponentData={formComponentData}
-                                formValidationSchema={formValidationSchema}
+                                formComponentData={modifiedFormComponentData}
+                                formValidationSchema={
+                                    createFormValidationSchema != null
+                                        ? createFormValidationSchema
+                                        : formValidationSchema
+                                }
                                 formInitialValues={formInitialValues}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    createKeysOrder != null
+                                        ? createKeysOrder
+                                        : keysOrder
+                                }
                                 createTitle={createTitle}
                                 toastCreateFailed={toastCreateFailed}
                                 toastCreateSuccessful={toastCreateSuccessful}
                                 createButtonText={createButtonText}
                                 backButtonText={backButtonText}
+                                readAllPath={readAllPath}
+                                backFromCreatePath={backFromCreatePath}
                             />
                         )}
                     />
@@ -130,7 +188,7 @@ const DigitCRUD = ({
                 {hasUpdate && hasReadOne && (
                     <Route
                         exact
-                        path={path + "/:id/edit"}
+                        path={path + updatePath}
                         render={props => (
                             <DigitCRUDUpdate
                                 name={name}
@@ -139,12 +197,24 @@ const DigitCRUD = ({
                                 deleteAction={deleteAction}
                                 clearAction={clearAction}
                                 updateTitle={updateTitle}
-                                id={props.match.params.id}
+                                id={
+                                    staticId != null
+                                        ? staticId
+                                        : props.match.params.id
+                                }
                                 history={props.history}
                                 path={path}
-                                formComponentData={formComponentData}
-                                formValidationSchema={formValidationSchema}
-                                keysOrder={keysOrder}
+                                formComponentData={modifiedFormComponentData}
+                                formValidationSchema={
+                                    updateFormValidationSchema == null
+                                        ? () => formValidationSchema
+                                        : updateFormValidationSchema
+                                }
+                                keysOrder={
+                                    updateKeysOrder != null
+                                        ? updateKeysOrder
+                                        : keysOrder
+                                }
                                 toastUpdateSuccessful={toastUpdateSuccessful}
                                 toastUpdateFailed={toastUpdateFailed}
                                 backButtonText={backButtonText}
@@ -158,6 +228,22 @@ const DigitCRUD = ({
                                 dialogDeleteCancel={dialogDeleteCancel}
                                 toastDeleteSuccessful={toastDeleteSuccessful}
                                 toastDeleteFailed={toastDeleteFailed}
+                                readAllPath={readAllPath}
+                                readOnePath={readOnePath}
+                                backFromUpdatePath={backFromUpdatePath}
+                                backFromDeletePath={backFromDeletePath}
+                                deleteDialogFormComponentData={
+                                    deleteDialogFormComponentData
+                                }
+                                deleteDialogFormValidationSchema={
+                                    deleteDialogFormValidationSchema
+                                }
+                                deleteDialogFormInitialValues={
+                                    deleteDialogFormInitialValues
+                                }
+                                deleteDialogFormKeysOrder={
+                                    deleteDialogFormKeysOrder
+                                }
                             />
                         )}
                     />
@@ -165,16 +251,24 @@ const DigitCRUD = ({
                 {hasReadOne && (
                     <Route
                         exact
-                        path={path + "/:id"}
+                        path={path + readOnePath}
                         render={props => (
                             <DigitCRUDReadOne
                                 name={name}
                                 readOneAction={readOneAction}
                                 clearAction={clearAction}
                                 keysText={keysText}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    readOneKeysOrder != null
+                                        ? readOneKeysOrder
+                                        : keysOrder
+                                }
                                 path={path}
-                                id={props.match.params.id}
+                                id={
+                                    staticId != null
+                                        ? staticId
+                                        : props.match.params.id
+                                }
                                 history={props.history}
                                 hasUpdate={hasUpdate}
                                 backButtonText={backButtonText}
@@ -197,6 +291,25 @@ const DigitCRUD = ({
                                 dialogDeleteCancel={dialogDeleteCancel}
                                 toastDeleteSuccessful={toastDeleteSuccessful}
                                 toastDeleteFailed={toastDeleteFailed}
+                                readAllPath={readAllPath}
+                                updatePath={updatePath}
+                                backFromReadOnePath={backFromReadOnePath}
+                                backFromDeletePath={backFromDeletePath}
+                                deleteDialogFormComponentData={
+                                    deleteDialogFormComponentData
+                                }
+                                deleteDialogFormValidationSchema={
+                                    deleteDialogFormValidationSchema
+                                }
+                                deleteDialogFormInitialValues={
+                                    deleteDialogFormInitialValues
+                                }
+                                deleteDialogFormKeysOrder={
+                                    deleteDialogFormKeysOrder
+                                }
+                                timeProps={timeProps}
+                                dateProps={dateProps}
+                                dateAndTimeProps={dateAndTimeProps}
                             />
                         )}
                     />
@@ -204,14 +317,18 @@ const DigitCRUD = ({
                 {hasReadAll && (
                     <Route
                         exact
-                        path={path}
+                        path={path + readAllPath}
                         render={({ history }) => (
                             <DigitCRUDReadAll
                                 name={name}
                                 readAllAction={readAllAction}
                                 clearAction={clearAction}
                                 keysText={keysText}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    readAllKeysOrder != null
+                                        ? readAllKeysOrder
+                                        : keysOrder
+                                }
                                 tableProps={tableProps}
                                 idProp={idProp}
                                 hasReadOne={hasReadOne}
@@ -220,6 +337,11 @@ const DigitCRUD = ({
                                 createButtonText={createButtonText}
                                 hasCreate={hasCreate}
                                 history={history}
+                                readOnePath={readOnePath}
+                                createPath={createPath}
+                                timeProps={timeProps}
+                                dateProps={dateProps}
+                                dateAndTimeProps={dateAndTimeProps}
                             />
                         )}
                     />
@@ -264,12 +386,25 @@ DigitCRUD.propTypes = {
     ),
     /** See validationSchema in DigitEditData*/
     formValidationSchema: PropTypes.object,
+    /** The initial values for Create form */
+    formInitialValues: PropTypes.object,
+    deleteDialogFormComponentData: PropTypes.objectOf(
+        PropTypes.shape({
+            component: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+                .isRequired,
+            componentProps: PropTypes.object,
+            formatEvent: PropTypes.func,
+            render: PropTypes.func
+        })
+    ),
+    /** (data) => yup schema*/
+    deleteDialogFormValidationSchema: PropTypes.func,
+    deleteDialogFormInitialValues: PropTypes.object,
+    deleteDialogFormKeysOrder: PropTypes.arrayOf(PropTypes.string),
     /** String for create title */
     createTitle: PropTypes.string,
     /** Function to create update title, Args: (data) */
     updateTitle: PropTypes.func,
-    /** The initial values for Create form */
-    formInitialValues: PropTypes.object,
     /** Function to create toast text when creation is successful, Args: (data, response)*/
     toastCreateSuccessful: PropTypes.func,
     /** Function to create toast text when creation failed, Args: (data, error)*/
@@ -315,7 +450,27 @@ DigitCRUD.propTypes = {
     /** If you want a prop not to be rendered by DigitDisplayData in view */
     customDetailsRenders: PropTypes.objectOf(PropTypes.func),
     /** If true, then object that has {sv: "...", en: "..."} will be converted to "" depending on activeLanguage */
-    extractActiveLanguage: PropTypes.bool
+    extractActiveLanguage: PropTypes.bool,
+    createPath: PropTypes.string,
+    readAllPath: PropTypes.string,
+    readOnePath: PropTypes.string,
+    updatePath: PropTypes.string,
+    /**  */
+    staticId: PropTypes.string,
+    backFromReadOnePath: PropTypes.string,
+    backFromUpdatePath: PropTypes.string,
+    backFromDeletePath: PropTypes.string,
+    backFromCreatePath: PropTypes.string,
+    useKeyTextsInUpperLabel: PropTypes.bool,
+    readAllKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    readOneKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    updateKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    createKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    updateFormValidationSchema: PropTypes.object,
+    createFormValidationSchema: PropTypes.func,
+    timeProps: PropTypes.arrayOf(PropTypes.string),
+    dateProps: PropTypes.arrayOf(PropTypes.string),
+    dateAndTimeProps: PropTypes.arrayOf(PropTypes.string)
 };
 
 DigitCRUD.defaultProps = {
@@ -343,7 +498,30 @@ DigitCRUD.defaultProps = {
     detailsRenderCardStart: () => null,
     detailsRenderCardEnd: () => null,
     customDetailsRenders: {},
-    extractActiveLanguage: false
+    extractActiveLanguage: false,
+    createPath: "/add",
+    readAllPath: "/",
+    readOnePath: "/:id",
+    updatePath: "/:id/edit",
+    staticId: null,
+    backFromReadOnePath: null,
+    backFromUpdatePath: null,
+    backFromDeletePath: null,
+    backFromCreatePath: null,
+    useKeyTextsInUpperLabel: false,
+    deleteDialogFormComponentData: null,
+    deleteDialogFormValidationSchema: null,
+    deleteDialogFormInitialValues: null,
+    deleteDialogFormKeysOrder: [],
+    readAllKeysOrder: null,
+    readOneKeysOrder: null,
+    updateKeysOrder: null,
+    createKeysOrder: null,
+    updateFormValidationSchema: null,
+    createFormValidationSchema: null,
+    timeProps: [],
+    dateProps: [],
+    dateAndTimeProps: []
 };
 
 export default DigitCRUD;

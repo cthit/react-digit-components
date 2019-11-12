@@ -3,13 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import DigitEditData from "../../../../elements/digit-edit-data";
 import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
 import DigitLoading from "../../../../elements/digit-loading";
-import {
-    Center,
-    DownRightPosition
-} from "../../../../styles/digit-layout/DigitLayout.styles";
-import DigitFAB from "../../../../elements/digit-fab";
-import Delete from "@material-ui/icons/DeleteForever";
-import { digitDialogOpen } from "../../../digit-dialog/DigitDialog.view.action-creator";
+import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
+import DeleteFAB from "../../elements/delete-fab";
 
 const DigitCRUDUpdate = ({
     name,
@@ -34,7 +29,15 @@ const DigitCRUDUpdate = ({
     dialogDeleteConfirm,
     dialogDeleteCancel,
     toastDeleteSuccessful,
-    toastDeleteFailed
+    toastDeleteFailed,
+    readOnePath,
+    readAllPath,
+    backFromUpdatePath,
+    backFromDeletePath,
+    deleteDialogFormComponentData,
+    deleteDialogFormValidationSchema,
+    deleteDialogFormInitialValues,
+    deleteDialogFormKeysOrder
 }) => {
     const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
@@ -94,60 +97,52 @@ const DigitCRUDUpdate = ({
                         key => formComponentData[key] != null
                     )}
                     keysComponentData={formComponentData}
-                    validationSchema={formValidationSchema}
+                    validationSchema={formValidationSchema(one)}
                     isInitialValid={true}
                     extraButton={{
                         outlined: true,
                         text: backButtonText
                     }}
-                    extraButtonTo={path + "/" + id}
+                    extraButtonTo={
+                        backFromUpdatePath == null
+                            ? path + readOnePath.replace(":id", id)
+                            : backFromUpdatePath
+                    }
                     initialValues={one}
                     submitText={updateButtonText(one)}
                     titleText={updateTitle(one)}
                 />
             </Center>
             {deleteAction != null && (
-                <DownRightPosition>
-                    <DigitFAB
-                        text={deleteButtonText(one)}
-                        icon={Delete}
-                        onClick={() => {
-                            dispatch(
-                                digitDialogOpen({
-                                    title: dialogDeleteTitle(one),
-                                    description: dialogDeleteDescription(one),
-                                    cancelButtonText: dialogDeleteCancel(one),
-                                    confirmButtonText: dialogDeleteConfirm(one),
-                                    onCancel: () => {},
-                                    onConfirm: () => {
-                                        deleteAction(id)
-                                            .then(response => {
-                                                dispatch(
-                                                    digitToastOpen({
-                                                        text: toastDeleteSuccessful(
-                                                            one,
-                                                            response
-                                                        )
-                                                    })
-                                                );
-                                                history.push(path);
-                                            })
-                                            .catch(error => {
-                                                dispatch(
-                                                    digitToastOpen({
-                                                        text: toastDeleteFailed(
-                                                            one,
-                                                            error
-                                                        )
-                                                    })
-                                                );
-                                            });
-                                    }
-                                })
-                            );
-                        }}
-                    />
-                </DownRightPosition>
+                <DeleteFAB
+                    dialogDeleteCancel={dialogDeleteCancel}
+                    dialogDeleteConfirm={dialogDeleteConfirm}
+                    dialogDeleteTitle={dialogDeleteTitle}
+                    dialogDeleteDescription={dialogDeleteDescription}
+                    deleteButtonText={deleteButtonText}
+                    toastDeleteFailed={toastDeleteFailed}
+                    toastDeleteSuccessful={toastDeleteSuccessful}
+                    path={path}
+                    backFromDeletePath={
+                        backFromDeletePath == null
+                            ? readAllPath
+                            : backFromDeletePath
+                    }
+                    deleteAction={deleteAction}
+                    history={history}
+                    one={one}
+                    id={id}
+                    deleteDialogFormValidationSchema={
+                        deleteDialogFormValidationSchema
+                    }
+                    deleteDialogFormInitialValues={
+                        deleteDialogFormInitialValues
+                    }
+                    deleteDialogFormComponentData={
+                        deleteDialogFormComponentData
+                    }
+                    deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+                />
             )}
         </>
     );

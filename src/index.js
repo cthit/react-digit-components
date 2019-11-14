@@ -27,6 +27,7 @@ import DigitAvatar from "./elements/digit-avatar";
 import DigitChip from "./elements/digit-chip";
 import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-single";
 import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
+import DigitCalendar from "./elements/digit-calendar";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -209,6 +210,7 @@ export {
     DigitAvatar,
     DigitAutocompleteSelectSingle,
     DigitAutocompleteSelectMultiple,
+    DigitCalendar,
     /* Views */
     DigitToast,
     DigitDialog,

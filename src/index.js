@@ -27,7 +27,6 @@ import DigitAvatar from "./elements/digit-avatar";
 import DigitChip from "./elements/digit-chip";
 import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-single";
 import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
-import DigitCalendar from "./elements/digit-calendar";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -44,6 +43,7 @@ import DigitDialog from "./views/digit-dialog";
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";
+import DigitCalendar from "./views/digit-calendar";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
 

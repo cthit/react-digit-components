@@ -3,19 +3,19 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { DigitLayout, DigitProviders } from "../../src";
 import { DigitCalendar } from "../../src";
-import DigitCalendarReadme from "../../src/elements/digit-calendar/readme.md";
+import DigitCalendarReadme from "../../src/views/digit-calendar/readme.md";
 import StoryDigitCalendar from "./StoryDigitCalendar";
 import centered from "@storybook/addon-centered/react";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import { withInfo } from "@storybook/addon-info";
 
-storiesOf("Elements", module)
+storiesOf("Views", module)
     .addDecorator(withInfo)
     .addDecorator(DigitProvidersDecorator)
     .addDecorator(centered)
     .addDecorator(withKnobs)
     .add(
-        "Calendar",
+        "DigitCalendar",
         () => {
             return (
                 <DigitLayout.Size absWidth="300px" absHeight="300px">

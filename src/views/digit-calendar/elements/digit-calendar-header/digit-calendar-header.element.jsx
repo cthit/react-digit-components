@@ -1,25 +1,24 @@
 import React from "react";
 import { DigitLayout, DigitIconButton, DigitText } from "../../../../";
-import { HeaderTextWrapper } from "./digit-calendar-header.style";
+import { HeaderTextWrapper, ButtonWrapper } from "./digit-calendar-header.style";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
-export const DigitCalendarHeader = ({month}) =>
-    <DigitLayout.Grid
-        inline
-        fillElement
-        columns={`repeat(7, 1fr)`}
-        margin={`0px`}
-        >
-        <DigitIconButton 
-            icon={ArrowBackIosIcon}
-            inline
-        />
+export const DigitCalendarHeader = ({month, year, onMonthChange}) =>
+    <div>
+        <ButtonWrapper>
+            <DigitIconButton 
+                icon={ArrowBackIosIcon}
+                onClick={() => onMonthChange(-1)}
+            />
+        </ButtonWrapper>
+        <ButtonWrapper>
+            <DigitIconButton
+                icon={ArrowForwardIosIcon}
+                onClick={() => onMonthChange(1)}
+            />
+        </ButtonWrapper>
         <HeaderTextWrapper>
-            <DigitText.Heading5 text={month}/>
+            <DigitText.Heading5 text={`${month} ${year}`}/>
         </HeaderTextWrapper>
-        <DigitIconButton
-            icon={ArrowForwardIosIcon}
-            inline
-        />
-    </DigitLayout.Grid>
+    </div>

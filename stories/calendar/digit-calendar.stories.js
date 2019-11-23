@@ -18,7 +18,7 @@ storiesOf("Views", module)
         "DigitCalendar",
         () => {
             return (
-                <DigitLayout.Size absWidth="300px" absHeight="300px">
+                <DigitLayout.Size absWidth="1200px" absHeight="600px">
                     <StoryDigitCalendar />
                 </DigitLayout.Size>
             );

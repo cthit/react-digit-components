@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { DigitDesign } from "../../../../";
 
-const width = "100px";
-const height = "100px";
+const width = "10rem";
+const height = "7rem";
 
 export const StyledDay = styled.div`
     width: ${width};
@@ -11,6 +11,10 @@ export const StyledDay = styled.div`
     &:hover {
         background-color: #eafcfc;
     }
+    padding: 2px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 1px;
 `
 
 export const NullDay = styled.div`

@@ -15,7 +15,7 @@ export const StyledDay = styled.div`
     border-color: lightgray;
     border-style: solid;
     border-width: 1px;
-`
+`;
 
 export const NullDay = styled.div`
     opacity: 100%;
@@ -27,9 +27,9 @@ export const DayIdWrapper = styled.div`
     padding-left: 4px;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 `;

@@ -97,20 +97,6 @@ DigitCalendar.propTypes = {
     //The date the calendar should start on
     startDate: PropTypes.instanceOf(Date),
 
-    //Array of events which will populate the calendar
-    events: PropTypes.arrayOf(
-        PropTypes.shape({
-            //The title of the event
-            title: PropTypes.string.isRequired,
-            //The background color of the event card
-            color: PropTypes.string,
-            //The date and time when the event starts
-            to: PropTypes.instanceOf(Date).isRequired,
-            //The date and time when the event ends
-            from: PropTypes.instanceOf(Date).isRequired
-        })
-    ),
-
     //Called when a event has been clicked
     onEventClick: PropTypes.func,
     //Called when a day has been clicked

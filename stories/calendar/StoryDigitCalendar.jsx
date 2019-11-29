@@ -19,7 +19,19 @@ const events = [
         color: "blue",
         from: new Date(2019, 10, 22),
         to: new Date(2019, 10, 22)
-    }
+    },
+    {
+        title: "Sp(H)elkväll",
+        color: "#00babe",
+        from: new Date(2019, 10, 22),
+        to: new Date(2019, 10, 22)
+    },
+    {
+        title: "Kod&Vin",
+        color: "pink",
+        from: new Date(2019, 10, 22),
+        to: new Date(2019, 10, 22)
+    },
 ];
 
 const StoryDigitCalendar = () => (

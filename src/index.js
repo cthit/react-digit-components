@@ -46,6 +46,8 @@ import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
+import useGamma from "./hooks/use-gamma";
+import useGammaUser from "./hooks/use-gamma-user";
 
 import {
     digitRedirectTo,
@@ -237,5 +239,7 @@ export {
     DigitDesign,
     DigitText,
     /* Hooks */
-    useDigitTranslations
+    useDigitTranslations,
+    useGamma,
+    useGammaUser
 };

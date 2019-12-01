@@ -1,9 +1,9 @@
 import axios from "axios";
-import useGammaUser from "./useGammaUser";
+import useGammaUser from "./use-gamma-user";
 import _ from "lodash";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { DigitToastActions } from "@cthit/react-digit-components";
+import { digitToastOpen } from "../views/digit-toast/DigitToast.view.action-creator";
 
 function createGammaUserGetLoadingAction() {
     return {
@@ -99,7 +99,7 @@ function useGamma(
         if (error && !loading) {
             sessionStorage.removeItem("auth-" + name);
             dispatch(
-                DigitToastActions.digitToastOpen({
+                digitToastOpen({
                     text: toastSignedOutText,
                     duration: toastDuration,
                     actionText: toastSignBackInText,

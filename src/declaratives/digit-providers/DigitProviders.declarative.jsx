@@ -14,6 +14,7 @@ import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import { redirect } from "../../declaratives/digit-redirect/DigitRedirect.declarative.reducer";
 import { digitTranslations } from "../digit-translations/DigitTranslations.declarative.reducer";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import gammaUser from "../../reducers/GammaUser.reducer";
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -46,6 +47,7 @@ class DigitProviders extends React.Component {
                 dialog,
                 redirect,
                 digitTranslations,
+                gammaUser,
                 ...asyncReducers,
                 ...props.rootReducer
             });

@@ -1,0 +1,85 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitDisplayData } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitDisplayData"
+    component={DigitDisplayData}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitDisplayData
+
+`DigitDisplayData` is a easy way to display two columns of data. The first column is usually the column that for every row has a describing text about the value on the same row. E.g. the first column maybe have the texts ["Firstname", "Surname", "Username"], and the second column has ["Smurf", "Smurfsson", "Coder"]. With the first column you'll need to set the fixedWidth. The second column will however fill.
+
+## DisplayData
+
+<Preview>
+    <Story name="Normal">
+        <DigitDisplayData
+            data={{
+                firstname: "Smurf",
+                surname: "Smurfsson",
+                username: "Coder",
+            }}
+            keysText={{
+                firstname: "Firstname",
+                surname: "Surname",
+                username: "Username",
+            }}
+            keysOrder={["firstname", "surname", "username"]}
+        />
+    </Story>
+    <Story name="Normal 2">
+        <DigitDisplayData
+            data={{
+                firstname: "digIT",
+                surname: "Hackerman",
+                nick: "bestNick",
+            }}
+            keysText={{
+                firstname: "Firstname",
+                surname: "Surname",
+                nick: "Nick",
+            }}
+            keysOrder={["firstname", "surname", "nick"]}
+        />
+    </Story>
+</Preview>
+
+## Change order
+
+<Preview>
+    <Story name="Normal order">
+        <DigitDisplayData
+            data={{
+                firstname: "Smurf",
+                surname: "Smurfsson",
+                username: "Coder",
+            }}
+            keysText={{
+                firstname: "Firstname",
+                surname: "Surname",
+                username: "Username",
+            }}
+            keysOrder={["username", "firstname", "surname"]}
+        />
+    </Story>
+    <Story name="Normal 2 order">
+        <DigitDisplayData
+            data={{
+                firstname: "digIT",
+                surname: "Hackerman",
+                nick: "myNick",
+            }}
+            keysText={{
+                firstname: "Firstname",
+                surname: "Surname",
+                nick: "Nick",
+            }}
+            keysOrder={["firstname", "nick", "surname"]}
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitDisplayData} />

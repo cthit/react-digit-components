@@ -1,8 +1,26 @@
 {
-  "today": ["Today", "Idag"],
-  "cancel": ["Cancel", "Avbryt"],
-  "ok": ["Ok" ,"Ok"],
-  "clear": ["Clear", "Rensa"],
-  "empty": ["No date and time entered", "Inget datum och tid angivet"],
-  "invalid": ["Invalid date and time", "Ogiltigt datum och tid"]
+  "today": [
+    "Today",
+    "Idag"
+  ],
+  "cancel": [
+    "Cancel",
+    "Avbryt"
+  ],
+  "ok": [
+    "Ok",
+    "Ok"
+  ],
+  "clear": [
+    "Clear",
+    "Rensa"
+  ],
+  "empty": [
+    "No date and time entered",
+    "Inget datum och tid angivet"
+  ],
+  "invalid": [
+    "Invalid date and time",
+    "Ogiltigt datum och tid"
+  ]
 }

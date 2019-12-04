@@ -1,8 +1,26 @@
 {
-  "invalid": ["Invalid time format", "Ogiltigt tidsformat"],
-  "today": ["Now", "Nu"],
-  "cancel": ["Cancel", "Avbryt"],
-  "clear": ["Clear", "Rensa"],
-  "empty": ["No time entered", "Ingen tid angiven"],
-  "ok": ["Ok", "Ok"]
+  "invalid": [
+    "Invalid time format",
+    "Ogiltigt tidsformat"
+  ],
+  "today": [
+    "Now",
+    "Nu"
+  ],
+  "cancel": [
+    "Cancel",
+    "Avbryt"
+  ],
+  "clear": [
+    "Clear",
+    "Rensa"
+  ],
+  "empty": [
+    "No time entered",
+    "Ingen tid angiven"
+  ],
+  "ok": [
+    "Ok",
+    "Ok"
+  ]
 }

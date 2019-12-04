@@ -11,16 +11,16 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         width: "100%",
-        backgroundColor: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.main
     },
     rootInherit: {
         flexGrow: 1,
         width: "100%",
-        background: "inherit",
+        background: "inherit"
     },
     scrollButtons: {
-        color: "white !important",
-    },
+        color: "white !important"
+    }
 });
 
 const DigitTabs = ({
@@ -32,13 +32,13 @@ const DigitTabs = ({
     fullWidth,
     classes,
     inheritBackground,
-    primaryIndicator,
+    primaryIndicator
 }) => (
     <Fill>
         <Tabs
             classes={{
                 root: inheritBackground ? classes.rootInherit : classes.root,
-                scrollButtons: classes.scrollButtons,
+                scrollButtons: classes.scrollButtons
             }}
             value={findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
@@ -85,7 +85,7 @@ DigitTabs.propTypes = {
             text: PropTypes.string.isRequired,
             /** The unique value for the tab */
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-                .isRequired,
+                .isRequired
         })
     ).isRequired,
     /** If true, then centers the tabs*/
@@ -101,12 +101,12 @@ DigitTabs.propTypes = {
     /** Will use the background color of the parent */
     inheritBackground: PropTypes.bool,
     /** If you want to use the primary color as the indicator instead of secondary */
-    primaryIndicator: PropTypes.bool,
+    primaryIndicator: PropTypes.bool
 };
 
 DigitTabs.defaultProps = {
     titleFont: false,
-    tabs: [],
+    tabs: []
 };
 
 export { DigitTabs };

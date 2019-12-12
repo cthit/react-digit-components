@@ -12,14 +12,17 @@ const DigitForm = ({
     onSubmit,
     validationSchema,
     render,
-    isInitialValid
+    isInitialValid,
+    name
 }) => (
     <Formik
         isInitialValid={isInitialValid}
         validationSchema={validationSchema}
         initialValues={{ ...initialValues }}
         onSubmit={onSubmit}
-        render={formData => <FullWidthForm>{render(formData)}</FullWidthForm>}
+        render={formData => (
+            <FullWidthForm id={name}>{render(formData)}</FullWidthForm>
+        )}
     />
 );
 

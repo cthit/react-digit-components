@@ -20,6 +20,24 @@ import createCRUDReducer from "./DigitCRUD.reducer";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 
+function modifyFormComponentData(
+    formComponentData,
+    keysText,
+    useKeyTextsInUpperLabel
+) {
+    const output = { ...formComponentData };
+
+    if (useKeyTextsInUpperLabel) {
+        Object.keys(output).forEach(key => {
+            const currentUpperLabel = output[key].componentProps.upperLabel;
+            output[key].componentProps.upperLabel =
+                currentUpperLabel == null ? keysText[key] : currentUpperLabel;
+        });
+    }
+
+    return output;
+}
+
 const DigitCRUD = ({
     path,
     name,
@@ -68,7 +86,21 @@ const DigitCRUD = ({
     backFromReadOnePath,
     backFromUpdatePath,
     backFromDeletePath,
-    backFromCreatePath
+    backFromCreatePath,
+    useKeyTextsInUpperLabel,
+    deleteDialogFormComponentData,
+    deleteDialogFormValidationSchema,
+    deleteDialogFormInitialValues,
+    deleteDialogFormKeysOrder,
+    readAllKeysOrder,
+    readOneKeysOrder,
+    updateKeysOrder,
+    createKeysOrder,
+    updateFormValidationSchema,
+    createFormValidationSchema,
+    timeProps,
+    dateProps,
+    dateAndTimeProps
 }) => {
     const dispatch = useDispatch();
     const store = useStore();
@@ -91,7 +123,8 @@ const DigitCRUD = ({
         ? () => dispatch(createReadAllAction(name, readAllRequest))
         : null;
     const deleteAction = hasDelete
-        ? id => dispatch(createDeleteAction(name, deleteRequest, id))
+        ? (id, form) =>
+              dispatch(createDeleteAction(name, deleteRequest, id, form))
         : null;
     const updateAction = hasUpdate
         ? (id, data) =>
@@ -112,6 +145,12 @@ const DigitCRUD = ({
         return null;
     }
 
+    const modifiedFormComponentData = modifyFormComponentData(
+        formComponentData,
+        keysText,
+        useKeyTextsInUpperLabel
+    );
+
     return (
         <Fill>
             <Switch>
@@ -123,10 +162,18 @@ const DigitCRUD = ({
                             <DigitCRUDCreate
                                 createAction={createAction}
                                 path={path}
-                                formComponentData={formComponentData}
-                                formValidationSchema={formValidationSchema}
+                                formComponentData={modifiedFormComponentData}
+                                formValidationSchema={
+                                    createFormValidationSchema != null
+                                        ? createFormValidationSchema
+                                        : formValidationSchema
+                                }
                                 formInitialValues={formInitialValues}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    createKeysOrder != null
+                                        ? createKeysOrder
+                                        : keysOrder
+                                }
                                 createTitle={createTitle}
                                 toastCreateFailed={toastCreateFailed}
                                 toastCreateSuccessful={toastCreateSuccessful}
@@ -157,9 +204,17 @@ const DigitCRUD = ({
                                 }
                                 history={props.history}
                                 path={path}
-                                formComponentData={formComponentData}
-                                formValidationSchema={formValidationSchema}
-                                keysOrder={keysOrder}
+                                formComponentData={modifiedFormComponentData}
+                                formValidationSchema={
+                                    updateFormValidationSchema == null
+                                        ? () => formValidationSchema
+                                        : updateFormValidationSchema
+                                }
+                                keysOrder={
+                                    updateKeysOrder != null
+                                        ? updateKeysOrder
+                                        : keysOrder
+                                }
                                 toastUpdateSuccessful={toastUpdateSuccessful}
                                 toastUpdateFailed={toastUpdateFailed}
                                 backButtonText={backButtonText}
@@ -176,6 +231,19 @@ const DigitCRUD = ({
                                 readAllPath={readAllPath}
                                 readOnePath={readOnePath}
                                 backFromUpdatePath={backFromUpdatePath}
+                                backFromDeletePath={backFromDeletePath}
+                                deleteDialogFormComponentData={
+                                    deleteDialogFormComponentData
+                                }
+                                deleteDialogFormValidationSchema={
+                                    deleteDialogFormValidationSchema
+                                }
+                                deleteDialogFormInitialValues={
+                                    deleteDialogFormInitialValues
+                                }
+                                deleteDialogFormKeysOrder={
+                                    deleteDialogFormKeysOrder
+                                }
                             />
                         )}
                     />
@@ -190,7 +258,11 @@ const DigitCRUD = ({
                                 readOneAction={readOneAction}
                                 clearAction={clearAction}
                                 keysText={keysText}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    readOneKeysOrder != null
+                                        ? readOneKeysOrder
+                                        : keysOrder
+                                }
                                 path={path}
                                 id={
                                     staticId != null
@@ -222,6 +294,22 @@ const DigitCRUD = ({
                                 readAllPath={readAllPath}
                                 updatePath={updatePath}
                                 backFromReadOnePath={backFromReadOnePath}
+                                backFromDeletePath={backFromDeletePath}
+                                deleteDialogFormComponentData={
+                                    deleteDialogFormComponentData
+                                }
+                                deleteDialogFormValidationSchema={
+                                    deleteDialogFormValidationSchema
+                                }
+                                deleteDialogFormInitialValues={
+                                    deleteDialogFormInitialValues
+                                }
+                                deleteDialogFormKeysOrder={
+                                    deleteDialogFormKeysOrder
+                                }
+                                timeProps={timeProps}
+                                dateProps={dateProps}
+                                dateAndTimeProps={dateAndTimeProps}
                             />
                         )}
                     />
@@ -236,7 +324,11 @@ const DigitCRUD = ({
                                 readAllAction={readAllAction}
                                 clearAction={clearAction}
                                 keysText={keysText}
-                                keysOrder={keysOrder}
+                                keysOrder={
+                                    readAllKeysOrder != null
+                                        ? readAllKeysOrder
+                                        : keysOrder
+                                }
                                 tableProps={tableProps}
                                 idProp={idProp}
                                 hasReadOne={hasReadOne}
@@ -247,6 +339,9 @@ const DigitCRUD = ({
                                 history={history}
                                 readOnePath={readOnePath}
                                 createPath={createPath}
+                                timeProps={timeProps}
+                                dateProps={dateProps}
+                                dateAndTimeProps={dateAndTimeProps}
                             />
                         )}
                     />
@@ -291,12 +386,25 @@ DigitCRUD.propTypes = {
     ),
     /** See validationSchema in DigitEditData*/
     formValidationSchema: PropTypes.object,
+    /** The initial values for Create form */
+    formInitialValues: PropTypes.object,
+    deleteDialogFormComponentData: PropTypes.objectOf(
+        PropTypes.shape({
+            component: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+                .isRequired,
+            componentProps: PropTypes.object,
+            formatEvent: PropTypes.func,
+            render: PropTypes.func
+        })
+    ),
+    /** (data) => yup schema*/
+    deleteDialogFormValidationSchema: PropTypes.func,
+    deleteDialogFormInitialValues: PropTypes.object,
+    deleteDialogFormKeysOrder: PropTypes.arrayOf(PropTypes.string),
     /** String for create title */
     createTitle: PropTypes.string,
     /** Function to create update title, Args: (data) */
     updateTitle: PropTypes.func,
-    /** The initial values for Create form */
-    formInitialValues: PropTypes.object,
     /** Function to create toast text when creation is successful, Args: (data, response)*/
     toastCreateSuccessful: PropTypes.func,
     /** Function to create toast text when creation failed, Args: (data, error)*/
@@ -352,7 +460,17 @@ DigitCRUD.propTypes = {
     backFromReadOnePath: PropTypes.string,
     backFromUpdatePath: PropTypes.string,
     backFromDeletePath: PropTypes.string,
-    backFromCreatePath: PropTypes.string
+    backFromCreatePath: PropTypes.string,
+    useKeyTextsInUpperLabel: PropTypes.bool,
+    readAllKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    readOneKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    updateKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    createKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    updateFormValidationSchema: PropTypes.object,
+    createFormValidationSchema: PropTypes.func,
+    timeProps: PropTypes.arrayOf(PropTypes.string),
+    dateProps: PropTypes.arrayOf(PropTypes.string),
+    dateAndTimeProps: PropTypes.arrayOf(PropTypes.string)
 };
 
 DigitCRUD.defaultProps = {
@@ -389,7 +507,21 @@ DigitCRUD.defaultProps = {
     backFromReadOnePath: null,
     backFromUpdatePath: null,
     backFromDeletePath: null,
-    backFromCreatePath: null
+    backFromCreatePath: null,
+    useKeyTextsInUpperLabel: false,
+    deleteDialogFormComponentData: null,
+    deleteDialogFormValidationSchema: null,
+    deleteDialogFormInitialValues: null,
+    deleteDialogFormKeysOrder: [],
+    readAllKeysOrder: null,
+    readOneKeysOrder: null,
+    updateKeysOrder: null,
+    createKeysOrder: null,
+    updateFormValidationSchema: null,
+    createFormValidationSchema: null,
+    timeProps: [],
+    dateProps: [],
+    dateAndTimeProps: []
 };
 
 export default DigitCRUD;

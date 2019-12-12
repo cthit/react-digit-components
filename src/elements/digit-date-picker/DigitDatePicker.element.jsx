@@ -5,6 +5,8 @@ import Keyboard from "@material-ui/icons/Keyboard";
 import { DatePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
+import translations from "./DigitDatePicker.element.translations";
+import useDigitTranslations from "../../hooks/use-digit-translations";
 
 const styles = () => ({
     root: {
@@ -29,28 +31,78 @@ const DigitDatePicker = ({
     outlined,
     lowerLabel,
     error,
-    errorMessage
-}) => (
-    <DatePicker
-        label={upperLabel}
-        error={error}
-        helperText={error && errorMessage !== "" ? errorMessage : lowerLabel}
-        value={value}
-        onChange={date => onChange({ target: { value: date } })}
-        showTodayButton={showTodayButton}
-        todayLabel={todayLabel}
-        cancelLabel={cancelLabel}
-        okLabel={okLabel}
-        clearLabel={clearLabel}
-        emptyLabel={emptyLabel}
-        invalidLabel={invalidLabel}
-        className={classes.root}
-        keyboardIcon={<Keyboard />}
-        leftArrowIcon={<ChevronLeft />}
-        rightArrowIcon={<ChevronRight />}
-        variant={filled ? "filled" : outlined ? "outlined" : "standard"}
-    />
-);
+    errorMessage,
+    disabled,
+    disableFuture,
+    disablePast,
+    shouldDisableDate,
+    minDate,
+    maxDate,
+    clearable
+}) => {
+    const [text] = useDigitTranslations(translations);
+
+    return (
+        <DatePicker
+            showTodayButton={showTodayButton}
+            keyboardIcon={<Keyboard />}
+            onChange={date => onChange({ target: { value: date } })}
+            value={value}
+            allowKeyboardControl={false}
+            autoOk={false}
+            disabled={disabled}
+            disableFuture={disableFuture}
+            disablePast={disablePast}
+            disableToolbar={false}
+            format={"yyyy-mm-dd"}
+            initialFocusedDate={null}
+            inputVariant={
+                filled ? "filled" : outlined ? "outlined" : "standard"
+            }
+            invalidLabel={invalidLabel != null ? invalidLabel : text.invalid}
+            // labelFunc
+            //leftArrowButtonProps
+            leftArrowIcon={<ChevronLeft />}
+            // loadingIndicator
+            maxDate={maxDate}
+            // maxDateMessage={}
+            minDate={minDate}
+            // minDateMessage={}
+            // onAccept={}
+            // onClose={}
+            // onError={}
+            // onMonthChange={}
+            // onOpen={}
+            // onYearChange={}
+            // open={}
+            openTo={"date"}
+            orientation={"portrait"}
+            // PopoverProps={}
+            readOnly={false}
+            // renderDay={}
+            // rightArrowButtonProps={}
+            rightArrowIcon={<ChevronRight />}
+            shouldDisableDate={shouldDisableDate}
+            strictCompareDates={false}
+            // TextFieldComponent={}
+            // ToolbarComponent={}
+            variant={"dialog"} //kan vara intressant
+            views={["year", "month", "date"]}
+            label={upperLabel}
+            error={error}
+            helperText={
+                error && errorMessage !== "" ? errorMessage : lowerLabel
+            }
+            clearable={clearable}
+            todayLabel={todayLabel != null ? todayLabel : text.today}
+            emptyLabel={emptyLabel != null ? emptyLabel : text.empty}
+            cancelLabel={cancelLabel != null ? cancelLabel : text.cancel}
+            okLabel={okLabel != null ? okLabel : text.ok}
+            clearLabel={clearLabel != null ? clearLabel : text.clear}
+            className={classes.root}
+        />
+    );
+};
 
 DigitDatePicker.displayName = "DigitDatePicker";
 DigitDatePicker.propTypes = {
@@ -99,12 +151,6 @@ DigitDatePicker.defaultProps = {
     upperLabel: "",
     lowerLabel: "",
     showTodayButton: false,
-    todayLabel: "Idag",
-    cancelLabel: "Avbryt",
-    okLabel: "Ok",
-    clearLabel: "Rensa",
-    emptyLabel: "Tryck här för datum",
-    invalidLabel: "Ogiltigt datum",
     filled: false,
     outlined: false,
     error: false,

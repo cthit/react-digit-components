@@ -12,7 +12,8 @@ const DigitFAB = ({
     secondary,
     submit,
     icon,
-    text
+    text,
+    form
 }) => (
     <Fab
         variant={text == null ? "round" : "extended"}
@@ -20,6 +21,7 @@ const DigitFAB = ({
         disabled={disabled}
         onClick={onClick}
         color={primary ? "primary" : secondary ? "secondary" : "inherit"}
+        form={form}
     >
         {React.createElement(icon, null)}
         <DigitIfElseRendering

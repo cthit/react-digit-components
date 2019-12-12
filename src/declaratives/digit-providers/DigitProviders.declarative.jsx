@@ -14,6 +14,7 @@ import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import { redirect } from "../../declaratives/digit-redirect/DigitRedirect.declarative.reducer";
 import { digitTranslations } from "../digit-translations/DigitTranslations.declarative.reducer";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import gammaUser from "../../reducers/GammaUser.reducer";
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -21,7 +22,10 @@ class DigitProviders extends React.Component {
 
         this.store = createStore(
             createReducer({}),
-            props.preloadedState,
+            {
+                ...props.preloadedState,
+                digitTranslations: { activeLanguage: props.defaultLanguage }
+            },
             applyMiddleware(logger, thunkMiddleware)
         );
 
@@ -43,6 +47,7 @@ class DigitProviders extends React.Component {
                 dialog,
                 redirect,
                 digitTranslations,
+                gammaUser,
                 ...asyncReducers,
                 ...props.rootReducer
             });
@@ -104,13 +109,16 @@ DigitProviders.propTypes = {
     /** Starting redux state for your application */
     preloadedState: PropTypes.object,
     /** All redux reducer from your application */
-    rootReducer: PropTypes.object
+    rootReducer: PropTypes.object,
+    /** Default language */
+    defaultLanguage: PropTypes.string
 };
 
 DigitProviders.defaultProps = {
     theme: {},
     preloadedState: {},
-    rootReducer: {}
+    rootReducer: {},
+    defaultLanguage: "en"
 };
 
 export default DigitProviders;

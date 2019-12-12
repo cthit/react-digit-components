@@ -1,0 +1,67 @@
+import { Fragment } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitButton, DigitProviders } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitButton"
+    component={DigitButton}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitButton
+
+A simple button. Use color and style with care, reflect on what button is the most important one in a single page and give that one more color or a differnt style. Do not confuse the user with multiple high priority buttons. The order for priority regarding style is raised, outlined and last flat. The order for priority regarding color is secondary, primary and lastly none.
+
+## Flat buttons
+
+<Preview>
+    <Story name="Primary flat button">
+        <DigitButton primary text="Send" />
+    </Story>
+    <Story name="Secondary flat button">
+        <DigitButton secondary text="Add" />
+    </Story>
+    <Story name="Flat button">
+        <DigitButton disable text="Remove" />
+    </Story>
+    <Story name="Flat disabled button">
+        <DigitButton disabled text="Info" />
+    </Story>
+</Preview>
+
+## Outlined buttons
+
+<Preview>
+    <Story name="Primary outlined button">
+        <DigitButton outlined primary text="Send" />
+    </Story>
+    <Story name="Secondary outlined button">
+        <DigitButton outlined secondary text="Add" />
+    </Story>
+    <Story name="Outlined button">
+        <DigitButton outlined disable text="Remove" />
+    </Story>
+    <Story name="Outlined disabled button">
+        <DigitButton outlined disabled text="Info" />
+    </Story>
+</Preview>
+
+## Raised buttons
+
+<Preview>
+    <Story name="Primary raised button">
+        <DigitButton raised primary text="Send" />
+    </Story>
+    <Story name="Secondary raised button">
+        <DigitButton raised secondary text="Add" />
+    </Story>
+    <Story name="Raised button">
+        <DigitButton raised disable text="Remove" />
+    </Story>
+    <Story name="Raised disabled button">
+        <DigitButton raised disabled text="Info" />
+    </Story>
+</Preview>
+
+<Props of={DigitButton} />

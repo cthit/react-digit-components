@@ -1,0 +1,111 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitTabs, DigitProviders } from "../../src";
+import { DigitTabs as DigitTabsProps } from "../../src/elements/digit-tabs/DigitTabs.element.jsx";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitTabs"
+    component={DigitTabsProps}
+    decorators={[
+        DigitProvidersDecorator,
+        storyFn => <div style={{ maxWidth: "500px" }}>{storyFn()}</div>
+    ]}
+/>
+
+# DigitTabs
+
+A mobile, tablet and desktop friendly way of navigating between multiple panes. Should always be positioned as high on the website as possible. If you want a mobile version of `DigitTabs`, then there's `DigitBottomNavigation`. `
+
+## DigitTabs with fullWidth
+
+<Preview>
+    <Story name="DigitTabs with fullWidth">
+        {() => {
+            const [selected, setSelected] = useState("feed");
+            return (
+                <DigitTabs
+                    onChange={value => setSelected(value)}
+                    selected={selected}
+                    tabs={[
+                        { text: "Home", value: "home" },
+                        { text: "Feed", value: "feed" },
+                        { text: "Settings", value: "settings" }
+                    ]}
+                    fullWidth
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitTabs centered
+
+<Preview>
+    <Story name="DigitTabs centered">
+        {() => {
+            const [selected, setSelected] = useState("feed");
+            return (
+                <DigitTabs
+                    onChange={value => setSelected(value)}
+                    selected={selected}
+                    tabs={[
+                        { text: "Home", value: "home" },
+                        { text: "Feed", value: "feed" },
+                        { text: "Settings", value: "settings" }
+                    ]}
+                    centered
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitTabs that scrolls
+
+<Preview>
+    <Story name="DigitTabs that scrolls">
+        {() => {
+            const [selected, setSelected] = useState("settings");
+            return (
+                <DigitTabs
+                    onChange={value => setSelected(value)}
+                    selected={selected}
+                    tabs={[
+                        { text: "Home", value: "home" },
+                        { text: "Feed", value: "feed" },
+                        { text: "Settings", value: "settings" },
+                        { text: "Account", value: "account" },
+                        { text: "Something", value: "something" },
+                        { text: "Something else", value: "something_else" }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitTabs width titleFont
+
+<Preview>
+    <Story name="DigitTabs with fullWidth and titleFont">
+        {() => {
+            const [selected, setSelected] = useState("feed");
+            return (
+                <DigitTabs
+                    onChange={value => setSelected(value)}
+                    selected={selected}
+                    tabs={[
+                        { text: "Home", value: "home" },
+                        { text: "Feed", value: "feed" },
+                        { text: "Settings", value: "settings" }
+                    ]}
+                    fullWidth
+                    titleFont
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitTabsProps} />

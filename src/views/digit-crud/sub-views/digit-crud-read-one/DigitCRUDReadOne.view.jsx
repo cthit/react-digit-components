@@ -8,16 +8,63 @@ import {
 } from "../../../../styles/digit-design/DigitDesign.styles";
 import {
     Center,
-    DownRightPosition,
     Padding
 } from "../../../../styles/digit-layout/DigitLayout.styles";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DigitButton from "../../../../elements/digit-button";
 import DigitLoading from "../../../../elements/digit-loading";
-import DigitFAB from "../../../../elements/digit-fab";
-import Delete from "@material-ui/icons/DeleteForever";
-import { digitDialogOpen } from "../../../digit-dialog/DigitDialog.view.action-creator";
-import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
+import DeleteFAB from "../../elements/delete-fab";
+import translations from "./DigitCRUDReadOne.view.translations";
+import useDigitTranslations from "../../../../hooks/use-digit-translations";
+//plz format this. I just want 1.0.0 released...
+function formatDate(date, text, type) {
+    if (date == null) {
+        return "";
+    }
+
+    var monthNames = [
+        text.January,
+        text.February,
+        text.March,
+        text.April,
+        text.May,
+        text.June,
+        text.July,
+        text.August,
+        text.September,
+        text.October,
+        text.November,
+        text.December
+    ];
+
+    date = new Date(date);
+
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+
+    if (type === "date") {
+        return year + " " + monthNames[monthIndex] + " " + day;
+    } else if (type === "date-time") {
+        return (
+            year +
+            " " +
+            monthNames[monthIndex] +
+            " " +
+            day +
+            ", " +
+            hours +
+            ":" +
+            minutes
+        );
+    } else if (type === "time") {
+        return hours + ":" + minutes;
+    } else {
+        return date;
+    }
+}
 
 const DigitCRUDReadOne = ({
     name,
@@ -48,9 +95,17 @@ const DigitCRUDReadOne = ({
     customDetailsRenders,
     updatePath,
     readAllPath,
-    backFromReadOnePath
+    backFromReadOnePath,
+    backFromDeletePath,
+    deleteDialogFormComponentData,
+    deleteDialogFormValidationSchema,
+    deleteDialogFormInitialValues,
+    deleteDialogFormKeysOrder,
+    timeProps,
+    dateProps,
+    dateAndTimeProps
 }) => {
-    const dispatch = useDispatch();
+    const [text] = useDigitTranslations(translations);
     const one = useSelector(state => state[name].one);
     const loading = useSelector(state => state[name].loading);
 
@@ -73,6 +128,47 @@ const DigitCRUDReadOne = ({
         .filter(key => !customDetailsRenderKeys.includes(key))
         .forEach(key => (displayData[key] = one[key]));
 
+    dateProps.forEach(
+        dateProp =>
+            (displayData[dateProp] = formatDate(one[dateProp], text, "date"))
+    );
+    timeProps.forEach(
+        timeProp =>
+            (displayData[timeProp] = formatDate(one[timeProp], text, "time"))
+    );
+    dateAndTimeProps.forEach(
+        dateAndTimeProp =>
+            (displayData[dateAndTimeProp] = formatDate(
+                one[dateAndTimeProp],
+                text,
+                "date-time"
+            ))
+    );
+
+    const deleteFAB = (
+        <DeleteFAB
+            dialogDeleteCancel={dialogDeleteCancel}
+            dialogDeleteConfirm={dialogDeleteConfirm}
+            dialogDeleteTitle={dialogDeleteTitle}
+            dialogDeleteDescription={dialogDeleteDescription}
+            deleteButtonText={deleteButtonText}
+            toastDeleteFailed={toastDeleteFailed}
+            toastDeleteSuccessful={toastDeleteSuccessful}
+            path={path}
+            backFromDeletePath={
+                backFromDeletePath == null ? readAllPath : backFromDeletePath
+            }
+            deleteAction={deleteAction}
+            history={history}
+            one={one}
+            id={id}
+            deleteDialogFormComponentData={deleteDialogFormComponentData}
+            deleteDialogFormInitialValues={deleteDialogFormInitialValues}
+            deleteDialogFormValidationSchema={deleteDialogFormValidationSchema}
+            deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+        />
+    );
+
     const goBack = () => {
         history.push(
             backFromReadOnePath == null
@@ -83,59 +179,12 @@ const DigitCRUDReadOne = ({
     const goToEdit = () => {
         history.push(path + updatePath.replace(":id", id));
     };
-    var deleteFAB = () => null;
-
-    if (!hasUpdate && deleteAction != null) {
-        deleteFAB = one => (
-            <DownRightPosition>
-                <DigitFAB
-                    text={deleteButtonText(one)}
-                    icon={Delete}
-                    onClick={() => {
-                        dispatch(
-                            digitDialogOpen({
-                                title: dialogDeleteTitle(one),
-                                description: dialogDeleteDescription(one),
-                                cancelButtonText: dialogDeleteCancel(one),
-                                confirmButtonText: dialogDeleteConfirm(one),
-                                onCancel: () => {},
-                                onConfirm: () => {
-                                    deleteAction(id)
-                                        .then(response => {
-                                            dispatch(
-                                                digitToastOpen({
-                                                    text: toastDeleteSuccessful(
-                                                        one,
-                                                        response
-                                                    )
-                                                })
-                                            );
-                                            history.push(path + readAllPath);
-                                        })
-                                        .catch(error => {
-                                            dispatch(
-                                                digitToastOpen({
-                                                    text: toastDeleteFailed(
-                                                        one,
-                                                        error
-                                                    )
-                                                })
-                                            );
-                                        });
-                                }
-                            })
-                        );
-                    }}
-                />
-            </DownRightPosition>
-        );
-    }
 
     if (detailsCustomRender != null) {
         return (
             <>
                 {detailsCustomRender(one, goBack, goToEdit)}
-                {deleteFAB(one)}
+                {deleteFAB}
             </>
         );
     }
@@ -180,7 +229,7 @@ const DigitCRUDReadOne = ({
                     </CardButtons>
                 </Card>
                 {detailsRenderEnd(one)}
-                {deleteFAB(one)}
+                {!hasUpdate && deleteAction != null && deleteFAB}
             </Center>
         </>
     );

@@ -1,0 +1,120 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitDateAndTimePicker } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitDateAndTimePicker"
+    component={DigitDateAndTimePicker}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitDateAndTimePicker
+
+A modal where you can select the date. Note that `DigitDateAndTimePicker` is uncontrolled, meaning you have to controll the current value of `DigitDateAndTimePicker`. If you are however using `DigitForm`, then you don't have to worry about it.
+
+## DateAndTimePicker
+
+<Preview>
+    <Story name="Normal">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Custom labels
+
+<Preview>
+    <Story name="Custom label cancel">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="Custom cancel and ok label"
+                    lowerLabel="Lower label"
+                    okLabel="Select date"
+                    cancelLabel="Nah, don't want this"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Custom label empty">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="Custom empty label"
+                    lowerLabel="Lower label"
+                    emptyLabel="Pick a date! Quick!"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Today button">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="A 'Today'/'Now' button"
+                    lowerLabel="Lower label"
+                    showTodayButton={true}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Custom now label">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="Custom 'today' label"
+                    lowerLabel="Lower label"
+                    showTodayButton={true}
+                    todayLabel="Bring me to today"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Error
+
+<Preview>
+    <Story name="Normal error">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    error
+                    errorMessage="This is an error"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitDateAndTimePicker} />

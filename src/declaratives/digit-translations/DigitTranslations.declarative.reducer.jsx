@@ -3,7 +3,7 @@ import {
     DIGIT_TRANSLATIONS_SET_COMMON_TRANSLATIONS
 } from "./DigitTranslations.declarative.actions";
 
-export function digitTranslations(state = { activeLanguage: "sv" }, action) {
+export function digitTranslations(state = {}, action) {
     switch (action.type) {
         case DIGIT_TRANSLATIONS_SET_ACTIVE_LANGUAGE:
             return {

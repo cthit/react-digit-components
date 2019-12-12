@@ -27,6 +27,7 @@ import DigitAvatar from "./elements/digit-avatar";
 import DigitChip from "./elements/digit-chip";
 import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-single";
 import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
+import DigitList from "./elements/digit-list";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -46,6 +47,8 @@ import DigitCRUD from "./views/digit-crud";
 import DigitCalendar from "./views/digit-calendar";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
+import useGamma from "./hooks/use-gamma";
+import useGammaUser from "./hooks/use-gamma-user";
 
 import {
     digitRedirectTo,
@@ -211,6 +214,7 @@ export {
     DigitAutocompleteSelectSingle,
     DigitAutocompleteSelectMultiple,
     DigitCalendar,
+    DigitList,
     /* Views */
     DigitToast,
     DigitDialog,
@@ -237,5 +241,7 @@ export {
     DigitDesign,
     DigitText,
     /* Hooks */
-    useDigitTranslations
+    useDigitTranslations,
+    useGamma,
+    useGammaUser
 };

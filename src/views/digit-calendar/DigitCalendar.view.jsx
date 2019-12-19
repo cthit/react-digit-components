@@ -96,7 +96,12 @@ export default DigitCalendar;
 DigitCalendar.propTypes = {
     //The date the calendar should start on
     startDate: PropTypes.instanceOf(Date),
-
+    events: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        color: PropTypes.string,
+        from: PropTypes.instanceOf(Date),
+        to: PropTypes.instanceOf(Date)
+    })),
     //Called when a event has been clicked
     onEventClick: PropTypes.func,
     //Called when a day has been clicked

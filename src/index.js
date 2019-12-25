@@ -6,7 +6,6 @@ import DigitTooltip from "./elements/digit-tooltip";
 import DigitIconButton from "./elements/digit-icon-button";
 import DigitTextArea from "./elements/digit-text-area";
 import DigitSelect from "./elements/digit-select";
-import DigitHeader from "./elements/digit-header";
 import DigitNavLink from "./elements/digit-nav-link";
 import DigitFAB from "./elements/digit-fab";
 import DigitDisplayData from "./elements/digit-display-data";
@@ -44,6 +43,7 @@ import DigitCRUD from "./views/digit-crud";
 import DigitForm from "./views/digit-form";
 import DigitFormField from "./views/digit-form-field";
 import DigitFormFieldArray from "./views/digit-form-field-array";
+import DigitHeader from "./views/digit-header";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
 import useGamma from "./hooks/use-gamma";

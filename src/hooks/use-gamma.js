@@ -109,7 +109,18 @@ function useGamma(
                 })
             );
         }
-    }, [loading, error]);
+    }, [
+        loading,
+        error,
+        dispatch,
+        gammaPath,
+        id,
+        name,
+        redirect,
+        toastDuration,
+        toastSignBackInText,
+        toastSignedOutText
+    ]);
 
     if (!jwtAuth && !error && !loadingMe) {
         setLoadingMe(true);

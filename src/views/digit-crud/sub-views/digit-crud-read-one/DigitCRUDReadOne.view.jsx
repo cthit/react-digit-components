@@ -113,7 +113,7 @@ const DigitCRUDReadOne = ({
     useEffect(() => {
         readOneAction(id);
         return clearAction;
-    }, []);
+    }, [readOneAction, clearAction, id]);
 
     if (loading) {
         return (

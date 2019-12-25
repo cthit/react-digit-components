@@ -88,7 +88,7 @@ const DigitCRUDReadAll = ({
     useEffect(() => {
         readAllAction();
         return clearAction;
-    }, []);
+    }, [readAllAction, clearAction]);
 
     if (loading || all == null) {
         return (

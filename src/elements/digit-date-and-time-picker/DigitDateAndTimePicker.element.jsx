@@ -4,7 +4,7 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import DateRange from "@material-ui/icons/DateRange";
 import Keyboard from "@material-ui/icons/Keyboard";
-import { DatePicker, DateTimePicker } from "@material-ui/pickers";
+import { DateTimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 import translations from "./DigitDateAndTimePicker.element.translations";

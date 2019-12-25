@@ -1,0 +1,34 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitAutocompleteSelectSingle, DigitProviders } from "../../src";
+
+<Meta
+    title="Elements|DigitAutocompleteSelectSingle"
+    component={DigitAutocompleteSelectSingle}
+/>
+
+# DigitAutocompleteSelectSingle
+
+## DigitAutocompleteSelectSingle
+
+<Preview>
+    <Story name="Primary flat button">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark"},
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy" , value: "oldboy"},
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true},
+            ]
+            const [value, setValue] = useState("aliens");
+            return (
+                <DigitAutocompleteSelectSingle filled error errorMessage="hej" disabled upperLabel="what" options={options} value={value} onChange={(e) => {setValue(e.target.value);}}/>        
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitAutocompleteSelectSingle} />

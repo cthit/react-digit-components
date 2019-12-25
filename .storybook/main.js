@@ -9,5 +9,5 @@ module.exports = {
             }
         }
     ],
-    stories: ["../**/*.stories.mdx"]
+    stories: ["../**/*.stories.(mdx)"]
 };

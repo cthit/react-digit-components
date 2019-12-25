@@ -53,6 +53,7 @@ const DigitAutocompleteSelectSingle = ({
                 noOptionsText == null ? text.NoOptions : noOptionsText
             }
             disabled={disabled}
+            onBlur={onBlur}
             renderInput={params => (
                 <TextField
                     {...params}

@@ -6,4 +6,4 @@ addParameters({
     }
 });
 
-configure(require.context("../stories", true, /\.stories\.(mdx)$/), module);
+// configure(require.context("../stories", true, /\.stories\.(mdx)$/), module);

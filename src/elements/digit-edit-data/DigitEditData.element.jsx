@@ -8,9 +8,9 @@ import {
     Link
 } from "../../styles/digit-design/DigitDesign.styles";
 import DigitButton from "../digit-button";
-import DigitForm from "../digit-form";
-import DigitFormField from "../digit-form-field";
-import DigitFormFieldArray from "../digit-form-field-array";
+import DigitForm from "../../views/digit-form";
+import DigitFormField from "../../views/digit-form-field";
+import DigitFormFieldArray from "../../views/digit-form-field-array";
 import {
     Column,
     Padding,

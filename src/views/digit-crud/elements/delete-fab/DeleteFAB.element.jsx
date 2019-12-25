@@ -14,9 +14,9 @@ import {
 import { useDispatch } from "react-redux";
 import DigitButton from "../../../../elements/digit-button";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DigitForm from "../../../../elements/digit-form";
-import DigitFormField from "../../../../elements/digit-form-field";
-import DigitFormFieldArray from "../../../../elements/digit-form-field-array";
+import DigitForm from "../../../../views/digit-form";
+import DigitFormField from "../../../../views/digit-form-field";
+import DigitFormFieldArray from "../../../../views/digit-form-field-array";
 
 const DeleteFAB = ({
     deleteButtonText,

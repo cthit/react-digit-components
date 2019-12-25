@@ -1,8 +1,8 @@
 import { FastField, Field } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import DigitCheckbox from "../digit-checkbox";
-import DigitSwitch from "../digit-switch";
+import DigitCheckbox from "../../elements/digit-checkbox";
+import DigitSwitch from "../../elements/digit-switch";
 
 class DigitFormField extends Component {
     constructor(props) {

@@ -41,6 +41,7 @@ import DigitDialog from "./views/digit-dialog";
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";
+import DigitCalendar from "./views/digit-calendar";
 import DigitForm from "./views/digit-form";
 import DigitFormField from "./views/digit-form-field";
 import DigitFormFieldArray from "./views/digit-form-field-array";
@@ -213,6 +214,7 @@ export {
     DigitAvatar,
     DigitAutocompleteSelectSingle,
     DigitAutocompleteSelectMultiple,
+    DigitCalendar,
     DigitList,
     DigitButtonGroup,
     /* Views */

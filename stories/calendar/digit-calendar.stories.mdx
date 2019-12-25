@@ -1,0 +1,55 @@
+import { Fragment } from "react";
+import { DigitCalendar } from "../../src";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import {events} from "./digit-calendar.data";
+import "./digit-calendar.style.css"
+
+<Meta
+    title="Views|DigitCalendar"
+    component={DigitCalendar}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+## DigitCalendar with several events
+<Preview className="preview">
+    <Story name="DigitCalendar with several events">
+        <DigitCalendar
+        events={events}
+        startDate={new Date(2019,10,23)}
+        onEventClick={e => {
+            console.log("Event clicked: ");
+            console.log(e);
+        }}
+        onDayClick   ={e => console.log("Day clicked: " + e)}
+        onMonthChange={e => console.log("Month change: " + e)}
+    />
+    </Story>
+</Preview>
+
+## DigitCalendar of today with one event
+
+<Preview className="preview">
+    <Story name="DigitCalendar of today with one event">
+        <DigitCalendar
+        events={[
+            {
+                title:"Hello",
+                color: "red",
+                from: new Date(),
+                to: new Date()
+            }
+        ]}
+        onEventClick={e => {
+            console.log("Event clicked: ");
+            console.log(e);
+        }}
+        onDayClick   ={e => console.log("Day clicked: " + e)}
+        onMonthChange={e => console.log("Month change: " + e)}
+    />
+    </Story>
+</Preview>
+
+
+
+<Props of={DigitCalendar} />

@@ -16,14 +16,13 @@ const DigitForm = ({
     name
 }) => (
     <Formik
-        isInitialValid={isInitialValid}
+        validateOnMount={isInitialValid}
         validationSchema={validationSchema}
         initialValues={{ ...initialValues }}
         onSubmit={onSubmit}
-        render={formData => (
-            <FullWidthForm id={name}>{render(formData)}</FullWidthForm>
-        )}
-    />
+    >
+        {props => <FullWidthForm id={name}>{render(props)}</FullWidthForm>}
+    </Formik>
 );
 
 DigitForm.displayName = "DigitForm";

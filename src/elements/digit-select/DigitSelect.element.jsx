@@ -5,7 +5,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React from "react";
-import ReactDOM from "react-dom";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import styled from "styled-components";
 

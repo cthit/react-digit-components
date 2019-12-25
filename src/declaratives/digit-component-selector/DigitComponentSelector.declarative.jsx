@@ -8,19 +8,19 @@ const DigitComponentSelector = ({
     keepAllMounted
 }) => {
     return keepAllMounted ? (
-        <_DigitComponentSelectorMounted
+        <DigitComponentSelectorMounted
             activeComponent={activeComponent}
             components={components}
         />
     ) : (
-        <_DigitComponentSelectorUnmounted
+        <DigitComponentSelectorUnmounted
             activeComponent={activeComponent}
             components={components}
         />
     );
 };
 
-const _DigitComponentSelectorMounted = ({ activeComponent, components }) => {
+const DigitComponentSelectorMounted = ({ activeComponent, components }) => {
     return components.map((component, index) => (
         <Hide hidden={index !== activeComponent} key={index}>
             {React.createElement(component, {})}
@@ -28,7 +28,7 @@ const _DigitComponentSelectorMounted = ({ activeComponent, components }) => {
     ));
 };
 
-const _DigitComponentSelectorUnmounted = ({ activeComponent, components }) => {
+const DigitComponentSelectorUnmounted = ({ activeComponent, components }) => {
     return React.createElement(components[activeComponent], {});
 };
 

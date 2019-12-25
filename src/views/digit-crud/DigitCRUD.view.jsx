@@ -105,7 +105,7 @@ const DigitCRUD = ({
     const dispatch = useDispatch();
     const store = useStore();
     const crudState = useSelector(state => state[name]);
-    const [_, activeLanguage] = useDigitTranslations({});
+    const [, activeLanguage] = useDigitTranslations({});
 
     const hasCreate = createRequest != null;
     const hasReadAll = readAllRequest != null;
@@ -139,7 +139,7 @@ const DigitCRUD = ({
         );
         dispatch({ type: "INIT_" + name + "_REDUCER" });
         return () => store.removeInjectedReducer(name);
-    }, []);
+    }, [activeLanguage, dispatch, extractActiveLanguage, name, store]);
 
     if (crudState == null) {
         return null;

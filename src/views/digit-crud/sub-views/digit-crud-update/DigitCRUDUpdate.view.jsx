@@ -45,7 +45,7 @@ const DigitCRUDUpdate = ({
     useEffect(() => {
         readOneAction(id);
         return clearAction;
-    }, []);
+    }, [readOneAction, clearAction, id]);
 
     if (Object.keys(one).length === 0) {
         return null;

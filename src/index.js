@@ -4,12 +4,8 @@ import DigitTextField from "./elements/digit-text-field";
 import DigitSwitch from "./elements/digit-switch";
 import DigitTooltip from "./elements/digit-tooltip";
 import DigitIconButton from "./elements/digit-icon-button";
-import DigitForm from "./elements/digit-form";
-import DigitFormField from "./elements/digit-form-field";
-import DigitFormFieldArray from "./elements/digit-form-field-array";
 import DigitTextArea from "./elements/digit-text-area";
 import DigitSelect from "./elements/digit-select";
-import DigitHeader from "./elements/digit-header";
 import DigitNavLink from "./elements/digit-nav-link";
 import DigitFAB from "./elements/digit-fab";
 import DigitDisplayData from "./elements/digit-display-data";
@@ -28,6 +24,7 @@ import DigitChip from "./elements/digit-chip";
 import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-single";
 import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
 import DigitList from "./elements/digit-list";
+import DigitButtonGroup from "./elements/digit-button-group";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
@@ -45,6 +42,10 @@ import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";
 import DigitCalendar from "./views/digit-calendar";
+import DigitForm from "./views/digit-form";
+import DigitFormField from "./views/digit-form-field";
+import DigitFormFieldArray from "./views/digit-form-field-array";
+import DigitHeader from "./views/digit-header";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
 import useGamma from "./hooks/use-gamma";
@@ -215,6 +216,7 @@ export {
     DigitAutocompleteSelectMultiple,
     DigitCalendar,
     DigitList,
+    DigitButtonGroup,
     /* Views */
     DigitToast,
     DigitDialog,

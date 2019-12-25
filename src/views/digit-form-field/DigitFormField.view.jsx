@@ -1,8 +1,8 @@
 import { FastField, Field } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import DigitCheckbox from "../digit-checkbox";
-import DigitSwitch from "../digit-switch";
+import DigitCheckbox from "../../elements/digit-checkbox";
+import DigitSwitch from "../../elements/digit-switch";
 
 class DigitFormField extends Component {
     constructor(props) {
@@ -42,24 +42,27 @@ class DigitFormField extends Component {
 
         const tests = [
             this._testFormikValues(
-                newFormikProps.values,
-                oldFormikProps.values,
+                newFormikProps == null ? {} : newFormikProps.values,
+                oldFormikProps == null ? {} : oldFormikProps.values,
                 name
             ),
             this._testFormikErrors(
-                newFormikProps.errors,
-                oldFormikProps.errors,
+                newFormikProps == null ? {} : newFormikProps.errors,
+                oldFormikProps == null ? {} : oldFormikProps.errors,
                 name
             ),
             this._testFormikTouched(
-                newFormikProps.touched,
-                oldFormikProps.touched,
+                newFormikProps == null ? {} : newFormikProps.touched,
+                oldFormikProps == null ? {} : oldFormikProps.touched,
                 name
             ),
-            this._testFormikPropsLength(newFormikProps, oldFormikProps),
+            this._testFormikPropsLength(
+                newFormikProps == null ? {} : newFormikProps,
+                oldFormikProps == null ? {} : oldFormikProps
+            ),
             this._testFormikIsSubmitting(
-                newFormikProps.isSubmitting,
-                oldFormikProps.isSubmitting
+                newFormikProps == null ? {} : newFormikProps.isSubmitting,
+                oldFormikProps == null ? {} : oldFormikProps.isSubmitting
             )
         ];
         let shouldUpdate = this.state.update;
@@ -138,17 +141,17 @@ class DigitFormField extends Component {
                         );
                     }}
                     name={name}
-                    render={props => {
+                >
+                    {props => {
                         const { field, form } = props;
                         const error = form.touched[name] && form.errors[name];
 
                         field.onChange = e => {
                             form.setFieldValue(field.name, _formatEvent(e));
                         };
-
                         return c(error != null, error, field, componentProps);
                     }}
-                />
+                </FastField>
             );
         }
     }

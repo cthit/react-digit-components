@@ -17,7 +17,7 @@ const DigitTextField = ({
     outlined,
     filled,
     maxLength,
-    onKeyPress,
+    onKeyPress
 }) => {
     const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
@@ -91,7 +91,7 @@ DigitTextField.propTypes = {
     filled: PropTypes.bool,
     /** Sets a max length for the textfield */
     maxLength: PropTypes.number,
-    onKeyPress: PropTypes.func,
+    onKeyPress: PropTypes.func
 };
 
 DigitTextField.defaultProps = {
@@ -102,7 +102,7 @@ DigitTextField.defaultProps = {
     outlined: false,
     filled: false,
     maxLength: -1,
-    onKeyPress: () => {},
+    onKeyPress: () => {}
 };
 
 export default DigitTextField;

@@ -14,27 +14,27 @@ export default {
         {
             file: pkg.main,
             format: "cjs",
-            sourcemap: true,
+            sourcemap: true
         },
         {
             file: pkg.module,
             format: "es",
-            sourcemap: true,
-        },
+            sourcemap: true
+        }
     ],
     plugins: [
         alias({
-            resolve: [".jsx", ".js"],
+            resolve: [".jsx", ".js"]
         }),
         external(["styled-components"]),
         url(),
         svgr(),
         babel({
             exclude: "node_modules/**",
-            plugins: [],
+            plugins: []
         }),
         resolve({
-            extensions: [".js", ".jsx", ".json"],
+            extensions: [".js", ".jsx", ".json"]
         }),
         commonjs({
             include: "node_modules/**",
@@ -60,7 +60,7 @@ export default {
                     "forwardRef",
                     "memo",
                     "useDebugValue",
-                    "PureComponent",
+                    "PureComponent"
                 ],
                 "prop-types": [
                     "func",
@@ -75,23 +75,24 @@ export default {
                     "instanceOf",
                     "oneOf",
                     "node",
-                    "elementType",
+                    "elementType"
                 ],
                 "react-dom": [
                     "render",
                     "findDOMNode",
                     "unstable_batchedUpdates",
-                    "createPortal",
+                    "createPortal"
                 ],
                 "react-is": [
                     "isElement",
                     "isValidElementType",
                     "ForwardRef",
                     "isContextConsumer",
+                    "isFragment"
                 ],
-                scheduler: ["unstable_runWithPriority", "LowPriority"],
-            },
+                scheduler: ["unstable_runWithPriority", "LowPriority"]
+            }
         }),
-        json(),
-    ],
+        json()
+    ]
 };

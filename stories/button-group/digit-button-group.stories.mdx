@@ -1,0 +1,25 @@
+import { Fragment } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitButtonGroup, DigitProviders } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitButtonGroup"
+    component={DigitButtonGroup}
+/>
+
+# DigitButtonGroup
+
+## Flat buttons
+
+<Preview>
+    <Story name="Primary flat button">
+        <DigitButtonGroup large buttons={[{text: "Hej"}, {text: "Hej"}, {text: "Hej"}]}/>
+    </Story>
+</Preview>
+
+## Outlined buttons
+
+## Raised buttons
+
+<Props of={DigitButtonGroup} />

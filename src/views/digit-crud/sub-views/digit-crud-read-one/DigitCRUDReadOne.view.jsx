@@ -16,6 +16,7 @@ import DigitLoading from "../../../../elements/digit-loading";
 import DeleteFAB from "../../elements/delete-fab";
 import translations from "./DigitCRUDReadOne.view.translations";
 import useDigitTranslations from "../../../../hooks/use-digit-translations";
+
 //plz format this. I just want 1.0.0 released...
 function formatDate(date, text, type) {
     if (date == null) {

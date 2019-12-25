@@ -1,14 +1,50 @@
 {
-  "January": ["January", "Januari"],
-  "February": ["February", "Februari"],
-  "March": ["March", "Mars"],
-  "April": ["April", "April"],
-  "May": ["May", "Maj"],
-  "June": ["June", "Juni"],
-  "July": ["July", "Juli"],
-  "August": ["August", "Augusti"],
-  "September": ["September", "September"],
-  "October": ["October", "Oktober"],
-  "November": ["November", "November"],
-  "December": ["December", "December"]
+  "January": [
+    "January",
+    "Januari"
+  ],
+  "February": [
+    "February",
+    "Februari"
+  ],
+  "March": [
+    "March",
+    "Mars"
+  ],
+  "April": [
+    "April",
+    "April"
+  ],
+  "May": [
+    "May",
+    "Maj"
+  ],
+  "June": [
+    "June",
+    "Juni"
+  ],
+  "July": [
+    "July",
+    "Juli"
+  ],
+  "August": [
+    "August",
+    "Augusti"
+  ],
+  "September": [
+    "September",
+    "September"
+  ],
+  "October": [
+    "October",
+    "Oktober"
+  ],
+  "November": [
+    "November",
+    "November"
+  ],
+  "December": [
+    "December",
+    "December"
+  ]
 }

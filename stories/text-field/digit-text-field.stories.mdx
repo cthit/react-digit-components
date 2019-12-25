@@ -1,0 +1,361 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitTextField,
+    DigitForm,
+    DigitFormField,
+    DigitEditData,
+    DigitLayout,
+    DigitButton
+} from "../../src";
+import * as yup from "yup";
+
+# DigitTextField
+
+The `DigitTextField` is uncontrolled, meaning you have to manage the value and change the value when the `DigitTextField` recieves change. However, if you use `DigitForm` or `DigitEditData`, you don't have to worry about it.
+
+<Meta title="Elements|DigitTextField" component={DigitTextField} />
+
+## Flat text field
+
+<Preview>
+    <Story name="Flat text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Must be capitalized"
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled flat text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    disabled
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="This is disabled"
+                />
+            );
+        }}
+    </Story>
+    <Story name="Max length flat text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    maxLength={30}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Password flat text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    password
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Password"
+                />
+            );
+        }}
+    </Story>
+    <Story name="Numbers only flat text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    numbersOnly
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Number of things"
+                />
+            );
+        }}
+    </Story>
+    <Story name="Error flat text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    error
+                    errorMessage="Oh no"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Enter your name"
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Outlined text field
+
+<Preview>
+    <Story name="Outlined text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Must be capitalized"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled outlined text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    disabled
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="This is disabled"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Max length outlined text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    maxLength={30}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Password outlined text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    password
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Password"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Numbers outlined text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    numbersOnly
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Number of things"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Error outlined text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    error
+                    errorMessage="Oh no"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Enter your name"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Filled text field
+
+<Preview>
+    <Story name="Filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Must be capitalized"
+                    filled
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    disabled
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="This is disabled"
+                    filled
+                />
+            );
+        }}
+    </Story>
+    <Story name="Max length filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    maxLength={30}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    filled
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Password filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    password
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Password"
+                    filled
+                />
+            );
+        }}
+    </Story>
+    <Story name="Numbers filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    numbersOnly
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Number of things"
+                    filled
+                />
+            );
+        }}
+    </Story>
+    <Story name="Error filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextField
+                    error
+                    errorMessage="Oh no"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Enter your name"
+                    filled
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## How to use with DigitForm
+
+<Preview>
+    <Story name="DigitTextField and DigitForm">
+        <DigitForm
+            render={() => (
+                <DigitLayout.Size width="300px">
+                    <DigitLayout.Column>
+                        <DigitFormField
+                            name="firstName"
+                            component={DigitTextField}
+                            componentProps={{
+                                outlined: true,
+                                upperLabel: "First name"
+                            }}
+                        />
+                        <DigitButton submit text="Send" />
+                    </DigitLayout.Column>
+                </DigitLayout.Size>
+            )}
+            validationSchema={yup.object().shape({
+                firstName: yup.string().required()
+            })}
+            initialValues={{
+                firstName: ""
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+        />
+    </Story>
+</Preview>
+
+## How to use with DigitEditData
+
+<Preview>
+    <Story name="DigitTextField and DigitEditData">
+        <DigitEditData
+            initialValues={{
+                firstName: ""
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstName: yup.string().required()
+            })}
+            keysOrder={["firstName"]}
+            keysComponentData={{
+                firstName: {
+                    component: DigitTextField,
+                    componentProps: {
+                        filled: true,
+                        upperLabel: "Firstname"
+                    }
+                }
+            }}
+            titleText="Your name"
+            submitText="Send"
+        />
+    </Story>
+</Preview>

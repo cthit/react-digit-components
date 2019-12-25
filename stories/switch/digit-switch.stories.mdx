@@ -1,0 +1,112 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitSwitch } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitSwitch"
+    component={DigitSwitch}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitSwitch
+
+Switches should be used to give the user the feeling like they are toggling something, for example a setting or a permission. If the user needs to select multiple things, a checkbox would be prefered. Switches should not be related to each other. They should not be used as a radio button either.
+
+Note that `DigitSwitch` is uncontrolled, meaning you have to manage the state from `DigitSwitch`. If you are using a `DigitForm`, then you don't have to worry about state.
+
+## Switch
+
+<Preview>
+    <Story name="Primary">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSwitch
+                    label="Primary"
+                    primary
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Secondary">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSwitch
+                    label="Secondary"
+                    secondary
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Normal">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSwitch
+                    label="Normal"
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSwitch
+                    label="Disabled"
+                    disabled
+                    value={state}
+                    onChange={e => setState(e.target.checked)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Errors
+
+<Preview>
+    <Story name="Error switches">
+        {() => {
+            const [state, setState] = useState(true);
+            const [state2, setState2] = useState(true);
+            const [error, setError] = useState(true);
+            return (
+                <div>
+                    <DigitSwitch
+                        label="Set error on the switches"
+                        primary
+                        value={error}
+                        onChange={e => setError(e.target.checked)}
+                    />
+                    <DigitSwitch
+                        label="Secondary"
+                        secondary
+                        error={error}
+                        errorMessage="This is an error"
+                        value={state}
+                        onChange={e => setState(e.target.checked)}
+                    />
+                    <DigitSwitch
+                        label="Disabled"
+                        disabled
+                        error={error}
+                        errorMessage="This is also an error"
+                        value={state2}
+                        onChange={e => setState(e.target.checked)}
+                    />
+                </div>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitSwitch} />

@@ -1,0 +1,326 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitSelect } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Elements|DigitSelect"
+    component={DigitSelect}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitSelect
+
+Used to select one of multiple values, e.g. where you are from.
+
+Note that `DigitSelect` is uncontrolled, meaning you have to manage the state from `DigitSelect`. If you are using a `DigitForm`, then you don't have to worry about state.
+
+## Select
+
+<Preview>
+    <Story name="Normal">
+        {() => {
+            const [state, setState] = useState("chocolate");
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Reversed">
+        {() => {
+            const [state, setState] = useState("strawberry");
+            return (
+                <DigitSelect
+                    upperLabel="Reversed"
+                    lowerLabel="Lower label"
+                    reverse
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Other standard value">
+        {() => {
+            const [state, setState] = useState("vanilla");
+            return (
+                <DigitSelect
+                    upperLabel="Other standard value"
+                    lowerLabel="Lower label"
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    disabled
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Select filled
+
+<Preview>
+    <Story name="Normal filled">
+        {() => {
+            const [state, setState] = useState("chocolate");
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    filled
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Reversed filled">
+        {() => {
+            const [state, setState] = useState("strawberry");
+            return (
+                <DigitSelect
+                    upperLabel="Reversed"
+                    lowerLabel="Lower label"
+                    reverse
+                    filled
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Other standard value filled">
+        {() => {
+            const [state, setState] = useState("vanilla");
+            return (
+                <DigitSelect
+                    upperLabel="Other standard value"
+                    lowerLabel="Lower label"
+                    filled
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled filled">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    filled
+                    disabled
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Select outlined
+
+<Preview>
+    <Story name="Normal outlined">
+        {() => {
+            const [state, setState] = useState("chocolate");
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    outlined
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Reversed outlined">
+        {() => {
+            const [state, setState] = useState("strawberry");
+            return (
+                <DigitSelect
+                    upperLabel="Reversed"
+                    lowerLabel="Lower label"
+                    reverse
+                    outlined
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Other standard value outlined">
+        {() => {
+            const [state, setState] = useState("vanilla");
+            return (
+                <DigitSelect
+                    upperLabel="Other standard value"
+                    lowerLabel="Lower label"
+                    outlined
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled outlined">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    outlined
+                    disabled
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Select none
+
+<Preview>
+    <Story name="Normal none">
+        {() => {
+            const [state, setState] = useState("chocolate");
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    allowToChooseNone={true}
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Reversed none">
+        {() => {
+            const [state, setState] = useState("strawberry");
+            return (
+                <DigitSelect
+                    upperLabel="Reversed"
+                    lowerLabel="Lower label"
+                    reverse
+                    allowToChooseNone={true}
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Other standard value none">
+        {() => {
+            const [state, setState] = useState("vanilla");
+            return (
+                <DigitSelect
+                    upperLabel="Other standard value"
+                    lowerLabel="Lower label"
+                    allowToChooseNone={true}
+                    valueToTextMap={{
+                        chocolate: "Chocolate",
+                        vanilla: "Vanilla",
+                        strawberry: "Strawberry"
+                    }}
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled none">
+        {() => {
+            const [state, setState] = useState(true);
+            return (
+                <DigitSelect
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    allowToChooseNone={true}
+                    disabled
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitSelect} />

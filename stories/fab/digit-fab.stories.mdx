@@ -1,0 +1,70 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitFAB } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import CheckIcon from "@material-ui/icons/Check";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+
+<Meta
+    title="Elements|DigitFAB"
+    component={DigitFAB}
+    decorators={[DigitProvidersDecorator]}
+/>
+
+# DigitFAB - IS MISSING submit AND onClick
+
+DigitFAB, also known as Digit Floating Action Button, is a circular button. There should only be one of these buttons showing at a time. A DigitFAB should represent the main action at the given time, e.g. add or editing something. The order for priority regarding color is secondary, primary and lastly none.
+
+## FAB
+
+<Preview>
+    <Story name="Primary">
+        <DigitFAB primary />
+    </Story>
+    <Story name="Secondary">
+        <DigitFAB secondary />
+    </Story>
+    <Story name="Normal">
+        <DigitFAB />
+    </Story>
+    <Story name="Disabled">
+        <DigitFAB disabled />
+    </Story>
+</Preview>
+
+## FAB text
+
+<Preview>
+    <Story name="Primary with text">
+        <DigitFAB primary text="Text" />
+    </Story>
+    <Story name="Secondary with text">
+        <DigitFAB secondary text="Text" />
+    </Story>
+    <Story name="Normal with text">
+        <DigitFAB text="Text" />
+    </Story>
+    <Story name="Disabled with text">
+        <DigitFAB disabled text="Text" />
+    </Story>
+</Preview>
+
+## FAB icon
+
+<Preview>
+    <Story name="Primary with icon">
+        <DigitFAB primary icon={AddIcon} />
+    </Story>
+    <Story name="Secondary with icon">
+        <DigitFAB secondary icon={RemoveIcon} />
+    </Story>
+    <Story name="Normal with icon">
+        <DigitFAB icon={CheckIcon} />
+    </Story>
+    <Story name="Disabled with icon">
+        <DigitFAB disabled icon={FavoriteIcon} />
+    </Story>
+</Preview>
+
+<Props of={DigitFAB} />

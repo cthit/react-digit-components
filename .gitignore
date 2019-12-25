@@ -1,4 +1,6 @@
+package.lock
 yarn-error.log
+yarn.lock
 dist
 node_modules
 lib
@@ -72,3 +74,5 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 *.tgz
+
+package-lock\.json

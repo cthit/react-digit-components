@@ -16,7 +16,7 @@ const DigitForm = ({
     name
 }) => (
     <Formik
-        isInitialValid={isInitialValid}
+        validateOnMount={isInitialValid}
         validationSchema={validationSchema}
         initialValues={{ ...initialValues }}
         onSubmit={onSubmit}

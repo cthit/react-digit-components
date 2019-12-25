@@ -17,6 +17,7 @@ import {
     Size
 } from "../../styles/digit-layout/DigitLayout.styles";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
+import * as yup from "yup";
 
 function isInitialValid(props) {
     if (!props.validationSchema) return true;
@@ -181,7 +182,7 @@ DigitEditData.propTypes = {
 
 DigitEditData.defaultProps = {
     initialValues: {},
-    validationSchema: {},
+    validationSchema: yup.object(),
     titleText: "",
     submitText: "",
     marginVertical: "4px",

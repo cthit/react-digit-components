@@ -12,6 +12,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import find from "lodash/find";
 import findIndex from "lodash/findIndex";
+import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitList = ({
     title,
@@ -21,7 +22,8 @@ const DigitList = ({
     disablePadding,
     value,
     onChange,
-    multipleSelect
+    multipleSelect,
+    parentNodeSelectable
 }) => {
     const [openIndex, setOpenIndex] = useState(null); //index on items
 
@@ -31,7 +33,11 @@ const DigitList = ({
     return (
         <List
             dense={dense}
-            subheader={<ListSubheader component="div">{title}</ListSubheader>}
+            subheader={
+                <ListSubheader component="div">
+                    <Padding>{title}</Padding>
+                </ListSubheader>
+            }
             component={"div"}
             disablePadding={disablePadding}
         >
@@ -63,39 +69,50 @@ const DigitList = ({
                     >
                         {(item.icon || multipleSelect) != null && (
                             <ListItemIcon>
-                                {multipleSelect ? (
-                                    <Checkbox
-                                        edge="start"
-                                        onChange={() => {
-                                            const newValue = [...value];
-                                            const index = findIndex(newValue, {
-                                                __index: itemIndex,
-                                                text: item.text
-                                            });
-                                            if (index === -1) {
-                                                newValue.push({
-                                                    ...item,
-                                                    __index: itemIndex
+                                {multipleSelect &&
+                                    (item.parentNodeSelectable ||
+                                        item.items == null) && (
+                                        <Checkbox
+                                            edge="start"
+                                            onChange={() => {
+                                                const newValue = [...value];
+                                                const index = findIndex(
+                                                    newValue,
+                                                    {
+                                                        __index: itemIndex,
+                                                        text: item.text
+                                                    }
+                                                );
+                                                if (index === -1) {
+                                                    newValue.push({
+                                                        ...item,
+                                                        __index: itemIndex
+                                                    });
+                                                } else {
+                                                    newValue.splice(index);
+                                                }
+                                                onChange({
+                                                    target: { value: newValue }
                                                 });
-                                            } else {
-                                                newValue.splice(index);
+                                            }}
+                                            checked={
+                                                find(value, {
+                                                    __index: itemIndex,
+                                                    text: item.text
+                                                }) != null
                                             }
-                                            onChange({
-                                                target: { value: newValue }
-                                            });
-                                        }}
-                                        checked={
-                                            find(value, {
-                                                __index: itemIndex,
-                                                text: item.text
-                                            }) != null
-                                        }
-                                        tabIndex={-1}
-                                        disableRipple
-                                    />
-                                ) : (
-                                    React.createElement(item.icon, null)
-                                )}
+                                            tabIndex={-1}
+                                            disableRipple
+                                        />
+                                    )}
+
+                                {item.icon != null &&
+                                    !(
+                                        multipleSelect &&
+                                        (item.parentNodeSelectable ||
+                                            item.items == null)
+                                    ) &&
+                                    React.createElement(item.icon, null)}
                             </ListItemIcon>
                         )}
 
@@ -143,6 +160,7 @@ const DigitList = ({
                             in={openIndex === itemIndex}
                         >
                             <div style={{ paddingLeft: "16px" }}>
+                                {console.log(item)}
                                 <DigitList
                                     items={item.items}
                                     onClick={onClick}
@@ -151,6 +169,9 @@ const DigitList = ({
                                     dense={dense}
                                     disablePadding
                                     multipleSelect={multipleSelect}
+                                    parentNodeSelectable={
+                                        item.parentNodeSelectable
+                                    }
                                 />
                             </div>
                         </Collapse>

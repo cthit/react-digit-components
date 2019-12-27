@@ -26,15 +26,8 @@ const DigitAutocompleteSelectSingle = ({
         <Autocomplete
             autoHighlight
             value={value}
-            onInputChange={(event, value, reason) => {
-                if (reason === "clear") {
-                    onChange({ target: { value: "" } });
-                } else {
-                    const obj = find(options, { text: value });
-                    if (obj != null) {
-                        onChange({ target: { value: obj.value } });
-                    }
-                }
+            onChange={(e, value) => {
+                onChange({ target: { value } });
             }}
             getOptionDisabled={value => {
                 const obj = find(options, { value });

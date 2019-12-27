@@ -1,0 +1,174 @@
+import * as yup from "yup";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitList,
+    DigitEditData
+} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import Mail from "@material-ui/icons/Mail";
+import Delete from "@material-ui/icons/Delete";
+
+<Meta
+    title="Elements|DigitList"
+    component={DigitList}
+/>
+
+# DigitList
+
+<Preview>
+    <Story name="1">
+        <DigitList
+            onClick={item => {
+                console.log(item.text);
+            }}
+            dense={false}
+            title={"This is a title"}
+            items={[
+                {
+                    text: "Hej",
+                    secondaryText: "This is the secondary text",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "Hej"
+                        }
+                    ],
+                    actionIcon: Delete,
+                    actionOnClick: item => {
+                        console.log("DELETE ME " + item.text);
+                    }
+                },
+                {
+                    text: "hmm",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "ååh",
+                            items: [
+                                {
+                                    text: "subsub"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]}
+        />
+    </Story>
+    <Story name="2">
+        <DigitEditData
+            onSubmit={values => {
+                console.log(values);
+            }}
+            submitText={"Submit"}
+            validationSchema={yup
+                .object()
+                .shape({ list: yup.object() })}
+            titleText={"Select"}
+            keysOrder={["list"]}
+            keysComponentData={{
+                list: {
+                    component: DigitList,
+                    componentProps: {
+                        title: "List",
+                        items: [
+                            {
+                                text: "Hej",
+                                secondaryText:
+                                    "This is the secondary text",
+                                icon: Mail,
+                                items: [
+                                    {
+                                        text: "what"
+                                    },
+                                    { text: "då" }
+                                ]
+                            },
+                            {
+                                text: "hmm",
+                                icon: Mail,
+                                items: [
+                                    {
+                                        text: "ååh",
+                                        items: [
+                                            {
+                                                text: "subsub"
+                                            },
+                                            {
+                                                text: "glass"
+                                            },
+                                            {
+                                                text: "gott"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }}
+        />
+    </Story>
+    <Story name="3">
+        <DigitEditData
+            onSubmit={values => {
+                console.log(values);
+            }}
+            submitText={"Submit"}
+            validationSchema={yup
+                .object()
+                .shape({ list: yup.array() })}
+            titleText={"Select"}
+            keysOrder={["list"]}
+            initialValues={{
+                list: []
+            }}
+            keysComponentData={{
+                list: {
+                    component: DigitList,
+                    componentProps: {
+                        multipleSelect: true,
+                        title: "List",
+                        parentNodeSelectable: false,
+                        items: [
+                            {
+                                text: "Hej",
+                                secondaryText:
+                                    "This is the secondary text",
+                                items: [
+                                    {
+                                        text: "whatwhat"
+                                    },
+                                    { text: "då" }
+                                ]
+                            },
+                            {
+                                text: "hmm",
+                                items: [
+                                    {
+                                        text: "ååh",
+                                        parentNodeSelectable: true,
+                                        items: [
+                                            {
+                                                text: "subsub"
+                                            },
+                                            {
+                                                text: "glass"
+                                            },
+                                            {
+                                                text: "gott"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }}
+        />        
+    </Story>
+</Preview>
+
+<Props of={DigitList} />

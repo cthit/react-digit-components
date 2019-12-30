@@ -11,6 +11,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import xor from "lodash/xor";
 import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
+import useToggler from "../../hooks/use-toggler";
 
 const DigitList = ({
     title,
@@ -21,17 +22,7 @@ const DigitList = ({
     idProp,
     multipleExpanded
 }) => {
-    const [expanded, setExpanded] = useState([]);
-
-    const toggle = id => {
-        if (multipleExpanded) {
-            setExpanded(xor(expanded, [id]));
-        } else {
-            setExpanded(isExpanded(id) ? [] : [id]);
-        }
-    };
-
-    const isExpanded = id => expanded.includes(id);
+    const [toggle, isExpanded] = useToggler(multipleExpanded);
 
     return (
         <List

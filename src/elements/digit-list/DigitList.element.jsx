@@ -4,14 +4,12 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Checkbox from "@material-ui/core/Checkbox";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ExpandLess from "@material-ui/icons/ExpandLess";
-import find from "lodash/find";
-import findIndex from "lodash/findIndex";
+import xor from "lodash/xor";
 import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitList = ({
@@ -20,15 +18,20 @@ const DigitList = ({
     onClick,
     dense,
     disablePadding,
-    value,
-    onChange,
-    multipleSelect,
-    parentNodeSelectable
+    idProp,
+    multipleExpanded
 }) => {
-    const [openIndex, setOpenIndex] = useState(null); //index on items
+    const [expanded, setExpanded] = useState([]);
 
-    const selectedIndex =
-        value != null && !(value instanceof Array) ? value.__index : -1;
+    const toggle = id => {
+        if (multipleExpanded) {
+            setExpanded(xor(expanded, [id]));
+        } else {
+            setExpanded(isExpanded(id) ? [] : [id]);
+        }
+    };
+
+    const isExpanded = id => expanded.includes(id);
 
     return (
         <List
@@ -41,77 +44,19 @@ const DigitList = ({
             component={"div"}
             disablePadding={disablePadding}
         >
-            {items.map((item, itemIndex) => (
-                <>
+            {items.map(item => (
+                <React.Fragment key={item[idProp]}>
                     <ListItem
-                        key={item.text + "-" + itemIndex}
-                        button={
-                            !multipleSelect &&
-                            (onClick != null || onChange != null)
-                        }
-                        selected={
-                            !multipleSelect &&
-                            value != null &&
-                            value.text + "-" + selectedIndex ===
-                                item.text + "-" + itemIndex
-                        }
+                        button={onClick != null}
                         onClick={e => {
-                            if (!multipleSelect && onChange != null) {
-                                onChange({
-                                    target: {
-                                        value: { ...item, __index: itemIndex }
-                                    }
-                                });
-                            } else if (onClick != null) {
+                            if (onClick != null) {
                                 onClick(item);
                             }
                         }}
                     >
-                        {(item.icon || multipleSelect) != null && (
+                        {item.icon != null && (
                             <ListItemIcon>
-                                {multipleSelect &&
-                                    (item.parentNodeSelectable ||
-                                        item.items == null) && (
-                                        <Checkbox
-                                            edge="start"
-                                            onChange={() => {
-                                                const newValue = [...value];
-                                                const index = findIndex(
-                                                    newValue,
-                                                    {
-                                                        __index: itemIndex,
-                                                        text: item.text
-                                                    }
-                                                );
-                                                if (index === -1) {
-                                                    newValue.push({
-                                                        ...item,
-                                                        __index: itemIndex
-                                                    });
-                                                } else {
-                                                    newValue.splice(index);
-                                                }
-                                                onChange({
-                                                    target: { value: newValue }
-                                                });
-                                            }}
-                                            checked={
-                                                find(value, {
-                                                    __index: itemIndex,
-                                                    text: item.text
-                                                }) != null
-                                            }
-                                            tabIndex={-1}
-                                            disableRipple
-                                        />
-                                    )}
-
                                 {item.icon != null &&
-                                    !(
-                                        multipleSelect &&
-                                        (item.parentNodeSelectable ||
-                                            item.items == null)
-                                    ) &&
                                     React.createElement(item.icon, null)}
                             </ListItemIcon>
                         )}
@@ -127,29 +72,35 @@ const DigitList = ({
 
                         {(item.items != null || item.actionIcon) != null && (
                             <ListItemSecondaryAction>
-                                <IconButton
-                                    edge="end"
-                                    onClick={() => {
-                                        if (item.items != null) {
-                                            setOpenIndex(
-                                                openIndex === itemIndex
-                                                    ? null
-                                                    : itemIndex
-                                            );
-                                        } else {
-                                            item.actionOnClick(item);
-                                        }
-                                    }}
-                                >
-                                    {React.createElement(
-                                        item.items != null
-                                            ? openIndex === itemIndex
+                                {item.actionIcon != null && (
+                                    <IconButton
+                                        edge="end"
+                                        onClick={() => {
+                                            if (item.actionOnClick != null) {
+                                                item.actionOnClick(item);
+                                            }
+                                        }}
+                                    >
+                                        {React.createElement(
+                                            item.actionIcon,
+                                            null
+                                        )}
+                                    </IconButton>
+                                )}
+                                {item.items != null && (
+                                    <IconButton
+                                        edge="end"
+                                        onClick={() => {
+                                            toggle(item[idProp]);
+                                        }}
+                                    >
+                                        {React.createElement(
+                                            isExpanded(item[idProp])
                                                 ? ExpandLess
                                                 : ExpandMore
-                                            : item.actionIcon,
-                                        null
-                                    )}
-                                </IconButton>
+                                        )}
+                                    </IconButton>
+                                )}
                             </ListItemSecondaryAction>
                         )}
                     </ListItem>
@@ -157,31 +108,26 @@ const DigitList = ({
                         <Collapse
                             timeout="auto"
                             unmountOnExit
-                            in={openIndex === itemIndex}
+                            in={isExpanded(item[idProp])}
                         >
                             <div style={{ paddingLeft: "16px" }}>
-                                {console.log(item)}
                                 <DigitList
                                     items={item.items}
                                     onClick={onClick}
-                                    onChange={onChange}
-                                    value={value}
                                     dense={dense}
                                     disablePadding
-                                    multipleSelect={multipleSelect}
-                                    parentNodeSelectable={
-                                        item.parentNodeSelectable
-                                    }
                                 />
                             </div>
                         </Collapse>
                     )}
-                </>
+                </React.Fragment>
             ))}
         </List>
     );
 };
 
-DigitList.defaultProps = {};
+DigitList.defaultProps = {
+    idProp: "text"
+};
 
 export default DigitList;

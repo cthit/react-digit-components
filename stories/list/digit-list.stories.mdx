@@ -18,6 +18,7 @@ import Delete from "@material-ui/icons/Delete";
 <Preview>
     <Story name="1">
         <DigitList
+            multipleExpanded
             onClick={item => {
                 console.log(item.text);
             }}
@@ -54,120 +55,6 @@ import Delete from "@material-ui/icons/Delete";
                 }
             ]}
         />
-    </Story>
-    <Story name="2">
-        <DigitEditData
-            onSubmit={values => {
-                console.log(values);
-            }}
-            submitText={"Submit"}
-            validationSchema={yup
-                .object()
-                .shape({ list: yup.object() })}
-            titleText={"Select"}
-            keysOrder={["list"]}
-            keysComponentData={{
-                list: {
-                    component: DigitList,
-                    componentProps: {
-                        title: "List",
-                        items: [
-                            {
-                                text: "Hej",
-                                secondaryText:
-                                    "This is the secondary text",
-                                icon: Mail,
-                                items: [
-                                    {
-                                        text: "what"
-                                    },
-                                    { text: "då" }
-                                ]
-                            },
-                            {
-                                text: "hmm",
-                                icon: Mail,
-                                items: [
-                                    {
-                                        text: "ååh",
-                                        items: [
-                                            {
-                                                text: "subsub"
-                                            },
-                                            {
-                                                text: "glass"
-                                            },
-                                            {
-                                                text: "gott"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            }}
-        />
-    </Story>
-    <Story name="3">
-        <DigitEditData
-            onSubmit={values => {
-                console.log(values);
-            }}
-            submitText={"Submit"}
-            validationSchema={yup
-                .object()
-                .shape({ list: yup.array() })}
-            titleText={"Select"}
-            keysOrder={["list"]}
-            initialValues={{
-                list: []
-            }}
-            keysComponentData={{
-                list: {
-                    component: DigitList,
-                    componentProps: {
-                        multipleSelect: true,
-                        title: "List",
-                        parentNodeSelectable: false,
-                        items: [
-                            {
-                                text: "Hej",
-                                secondaryText:
-                                    "This is the secondary text",
-                                items: [
-                                    {
-                                        text: "whatwhat"
-                                    },
-                                    { text: "då" }
-                                ]
-                            },
-                            {
-                                text: "hmm",
-                                items: [
-                                    {
-                                        text: "ååh",
-                                        parentNodeSelectable: true,
-                                        items: [
-                                            {
-                                                text: "subsub"
-                                            },
-                                            {
-                                                text: "glass"
-                                            },
-                                            {
-                                                text: "gott"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                }
-            }}
-        />        
     </Story>
 </Preview>
 

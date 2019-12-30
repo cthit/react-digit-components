@@ -1,0 +1,76 @@
+import * as yup from "yup";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitListSelectSingle,
+    DigitEditData
+} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import Mail from "@material-ui/icons/Mail";
+import Delete from "@material-ui/icons/Delete";
+
+<Meta
+    title="Elements|DigitListSelectSingle"
+    component={DigitListSelectSingle}
+/>
+
+# DigitListSelectSingle
+
+<Preview>
+    <Story name="2">
+        <DigitEditData
+            onSubmit={values => {
+                console.log(values);
+            }}
+            submitText={"Submit"}
+            validationSchema={yup
+                .object()
+                .shape({ list: yup.string() })}
+            titleText={"Select"}
+            keysOrder={["list"]}
+            keysComponentData={{
+                list: {
+                    component: DigitListSelectSingle,
+                    componentProps: {
+                        title: "List",
+                        items: [
+                            {
+                                text: "Hej",
+                                secondaryText:
+                                    "This is the secondary text",
+                                icon: Mail,
+                                items: [
+                                    {
+                                        text: "what"
+                                    },
+                                    { text: "då" }
+                                ]
+                            },
+                            {
+                                text: "hmm",
+                                icon: Mail,
+                                items: [
+                                    {
+                                        text: "ååh",
+                                        items: [
+                                            {
+                                                text: "subsub"
+                                            },
+                                            {
+                                                text: "glass"
+                                            },
+                                            {
+                                                text: "gott"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitListSelectSingle} />

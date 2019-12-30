@@ -24,6 +24,7 @@ import DigitChip from "./elements/digit-chip";
 import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-single";
 import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
 import DigitList from "./elements/digit-list";
+import DigitListSelectSingle from "./elements/digit-list-select-single";
 import DigitButtonGroup from "./elements/digit-button-group";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
@@ -216,6 +217,7 @@ export {
     DigitAutocompleteSelectMultiple,
     DigitCalendar,
     DigitList,
+    DigitListSelectSingle,
     DigitButtonGroup,
     /* Views */
     DigitToast,

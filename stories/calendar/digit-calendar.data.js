@@ -22,5 +22,5 @@ export const events = [
         color: "pink",
         from: new Date(2019, 10, 22),
         to: new Date(2019, 10, 22)
-    },
+    }
 ];

@@ -7,7 +7,7 @@ import {
 } from "./digit-calendar-day.style";
 import { DigitText, DigitDesign } from "../../../../";
 import DigitCalendarEvent from "../digit-calendar-event";
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 const inRange = (date, to, from) => {
     var first = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -29,8 +29,9 @@ export const DigitCalendarDay = ({
     onEventClick,
     onDayClick
 }) => {
-    
-    var eventsOfToday = events.filter(e =>inRange(date, new Date(e.to), new Date(e.from)))
+    var eventsOfToday = events.filter(e =>
+        inRange(date, new Date(e.to), new Date(e.from))
+    );
 
     return (
         <DigitDesign.Card>
@@ -38,21 +39,14 @@ export const DigitCalendarDay = ({
                 <DayIdWrapper>
                     <DigitText.Text text={date.getDate()} />
                 </DayIdWrapper>
-                {
-                    eventsOfToday
-                    .slice(0, 3)
-                    .map(e => (
-                        <DigitCalendarEvent
-                            key={e.title}
-                            event={e}
-                            onClick={() => onEventClick(e)}
-                        />
-                    ))
-                }
-                {
-                    eventsOfToday.length <= 3 ? null : 
-                    <MoreHorizIcon />
-                }
+                {eventsOfToday.slice(0, 3).map(e => (
+                    <DigitCalendarEvent
+                        key={e.title}
+                        event={e}
+                        onClick={() => onEventClick(e)}
+                    />
+                ))}
+                {eventsOfToday.length <= 3 ? null : <MoreHorizIcon />}
             </StyledDay>
         </DigitDesign.Card>
     );
@@ -72,4 +66,4 @@ DigitCalendarDay.propTypes = {
             from: PropTypes.instanceOf(Date).isRequired
         })
     )
-}
+};

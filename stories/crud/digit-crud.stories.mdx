@@ -1,0 +1,58 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitCRUD } from "../../src";
+
+<Meta
+    title="Views|DigitCRUD"
+    component={DigitCRUD}
+/>
+
+# DigitDatePicker
+
+## DigitCRUD only readAll
+
+<Preview>
+    <Story name="Normal">
+        {() => {
+            const [data, setData] = useState([
+                {
+                    id: "asdf-fdsafasd",
+                    name: "Theodor",
+                    age: 55,
+                },
+                {
+                    id: "fdas-fdsafasd",
+                    name: "Sven",
+                    age: 99,
+                }
+            ]);
+            const readAllRequestPromise = () =>
+                new Promise(resolve => {
+                    resolve({
+                        data
+                    });
+                });
+            return (
+                <DigitCRUD  path=""
+                            name="readAll" 
+                            readAllRequest={readAllRequestPromise}                         
+                            keysOrder={["id", "name", "age"]}
+                            keysText={{
+                                id: "Id",
+                                name: "Namn keys",
+                                age: "Ålder",
+                            }}
+                            idProp="id"
+                            tableProps={{
+                                titleText: "Användare",
+                                emptyTableText: "Det finns inga användare",
+                                search: true,
+                                startOrderBy: "name"
+                            }}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitCRUD} />

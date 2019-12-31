@@ -20,6 +20,15 @@ const styles = theme => ({
     },
     scrollButtons: {
         color: "white !important"
+    },
+    tabTextColorPrimary: {
+        color: "white !important"
+    },
+    tabSelected: {
+        color: theme.palette.secondary.main + " !important"
+    },
+    indicator: {
+        height: "3px"
     }
 });
 
@@ -38,7 +47,8 @@ const DigitTabs = ({
         <Tabs
             classes={{
                 root: inheritBackground ? classes.rootInherit : classes.root,
-                scrollButtons: classes.scrollButtons
+                scrollButtons: classes.scrollButtons,
+                indicator: classes.indicator
             }}
             value={findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
@@ -53,15 +63,26 @@ const DigitTabs = ({
             orientation="horizontal"
             indicatorColor={primaryIndicator ? "primary" : "secondary"}
         >
-            {tabs.map(tabs => {
+            {tabs.map(tab => {
                 return (
                     <Tab
-                        key={tabs.value}
+                        classes={{
+                            selected: classes.tabSelected,
+                            textColorPrimary: classes.tabTextColorPrimary
+                        }}
+                        disabled={tab.disabled}
+                        key={tab.value}
+                        icon={
+                            tab.icon != null
+                                ? React.createElement(tab.icon, null)
+                                : null
+                        }
+                        textColor={"primary"}
                         label={
                             titleFont ? (
-                                <Title white text={tabs.text} />
+                                <Title white text={tab.text} />
                             ) : (
-                                <Text white text={tabs.text} />
+                                <Text white text={tab.text} />
                             )
                         }
                     />
@@ -81,10 +102,14 @@ DigitTabs.propTypes = {
     tabs: PropTypes.arrayOf(
         PropTypes.shape({
             /** The text that is shown for the tab */
-            text: PropTypes.string.isRequired,
+            text: PropTypes.string,
             /** The unique value for the tab */
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-                .isRequired
+                .isRequired,
+            /** Icon that would be on top of the text */
+            icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+            /** If the tab is disabled */
+            disabled: PropTypes.bool
         })
     ).isRequired,
     /** If true, then centers the tabs*/

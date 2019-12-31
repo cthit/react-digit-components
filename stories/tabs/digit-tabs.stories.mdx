@@ -4,6 +4,10 @@ import { DigitTabs, DigitProviders } from "../../src";
 import { DigitTabs as DigitTabsProps } from "../../src/elements/digit-tabs/DigitTabs.element.jsx";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
+import Home from "@material-ui/icons/Add";
+import Date from "@material-ui/icons/DateRange";
+import Info from "@material-ui/icons/Info";
+
 <Meta
     title="Elements|DigitTabs"
     component={DigitTabsProps}
@@ -52,6 +56,50 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
                         { text: "Home", value: "home" },
                         { text: "Feed", value: "feed" },
                         { text: "Settings", value: "settings" }
+                    ]}
+                    centered
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitTabs scrollable with only icons
+
+<Preview>
+    <Story name="DigitTabs scrolalble with only icons">
+        {() => {
+            const [selected, setSelected] = useState("feed");
+            return (
+                <DigitTabs
+                    onChange={value => setSelected(value)}
+                    selected={selected}
+                    tabs={[
+                        { value: "home", icon: Home },
+                        { value: "feed", icon: Date },
+                        { value: "settings", icon: Info }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+
+## DigitTabs centered with icons and text
+
+<Preview>
+    <Story name="DigitTabs centered with icons">
+        {() => {
+            const [selected, setSelected] = useState("feed");
+            return (
+                <DigitTabs
+                    onChange={value => setSelected(value)}
+                    selected={selected}
+                    tabs={[
+                        { text: "Home", value: "home", icon: Home },
+                        { text: "Feed", value: "feed", icon: Date },
+                        { text: "Settings", value: "settings", icon: Info }
                     ]}
                     centered
                 />

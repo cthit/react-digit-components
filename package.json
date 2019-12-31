@@ -17,7 +17,6 @@
         "test:watch": "react-scripts test --env=jsdom",
         "build": "rollup -c",
         "build-storybook": "build-storybook -o docs",
-        "start": "rollup -c -w",
         "storybook": "start-storybook -p 6006 --docs",
         "prepare": "rollup -c"
     },
@@ -40,7 +39,7 @@
         "@material-ui/pickers": "3.2.8",
         "@material-ui/styles": "4.7.1",
         "date-fns": "2.8.1",
-        "formik": "2.0.8",
+        "formik": "2.0.4",
         "jss": "10.0.0",
         "lodash": "4.17.15",
         "prop-types": "15.7.2",

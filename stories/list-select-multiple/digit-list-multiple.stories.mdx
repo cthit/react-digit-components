@@ -1,0 +1,82 @@
+import * as yup from "yup";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitListSelectMultiple,
+    DigitEditData
+} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import Mail from "@material-ui/icons/Mail";
+import Delete from "@material-ui/icons/Delete";
+
+<Meta
+    title="Elements|DigitListSelectMultiple"
+    component={DigitListSelectMultiple}
+/>
+
+# DigitList
+
+<Preview>
+    <Story name="3">
+        <DigitEditData
+            onSubmit={values => {
+                console.log(values);
+            }}
+            submitText={"Submit"}
+            validationSchema={yup
+                .object()
+                .shape({ list: yup.array() })}
+            titleText={"Select"}
+            keysOrder={["list"]}
+            initialValues={{
+                list: []
+            }}
+            keysComponentData={{
+                list: {
+                    component: DigitListSelectMultiple,
+                    componentProps: {
+                        multipleSelect: true,
+                        title: "List",
+                        parentNodeSelectable: false,
+                        nodeSelectsAllChildren: true,
+                        items: [
+                            {
+                                text: "Hej",
+                                secondaryText:
+                                    "This is the secondary text",
+                                icon: Mail,
+                                items: [
+                                    {
+                                        text: "whatwhat"
+                                    },
+                                    { text: "då" }
+                                ]
+                            },
+                            {
+                                text: "hmm",
+                                items: [
+                                    {
+                                        text: "ååh",
+                                        parentNodeSelectable: true,
+                                        items: [
+                                            {
+                                                text: "subsub"
+                                            },
+                                            {
+                                                text: "glass"
+                                            },
+                                            {
+                                                text: "gott"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }}
+        />        
+    </Story>
+</Preview>
+
+<Props of={DigitListSelectMultiple} />

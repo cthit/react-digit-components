@@ -45,13 +45,12 @@ const DigitTabs = ({
             onChange={(event, value) => {
                 onChange(tabs[value].value);
             }}
-            scrollable={!centered}
             scrollButtons="on"
             textColor="primary"
             variant={
-                fullWidth ? "fullWidth" : centered ? "default" : "scrollable"
+                fullWidth ? "fullWidth" : centered ? "standard" : "scrollable"
             }
-            orientation="vertical"
+            orientation="horizontal"
             indicatorColor={primaryIndicator ? "primary" : "secondary"}
         >
             {tabs.map(tabs => {

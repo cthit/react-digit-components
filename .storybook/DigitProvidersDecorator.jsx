@@ -1,9 +1,13 @@
 import React from "react";
-import { DigitProviders } from "../src";
+import { DigitProviders, DigitToast, DigitDialog } from "../src";
 
 const DigitProvidersDecorator = StoryFn => (
-    <DigitProviders>
-        <StoryFn />
+    <DigitProviders memoryRouter>
+        <>
+            <DigitToast />
+            <DigitDialog />
+            <StoryFn />
+        </>
     </DigitProviders>
 );
 

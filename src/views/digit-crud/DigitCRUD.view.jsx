@@ -405,6 +405,7 @@ DigitCRUD.propTypes = {
     formValidationSchema: PropTypes.object,
     /** The initial values for Create form */
     formInitialValues: PropTypes.object,
+    /** The form component object for the delete dialog form*/
     deleteDialogFormComponentData: PropTypes.objectOf(
         PropTypes.shape({
             component: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
@@ -414,9 +415,11 @@ DigitCRUD.propTypes = {
             render: PropTypes.func
         })
     ),
-    /** (data) => yup schema*/
+    /** validation schema for delete dialog (data) => return yup schema*/
     deleteDialogFormValidationSchema: PropTypes.func,
+    /** The initial values for the delete dialog form*/
     deleteDialogFormInitialValues: PropTypes.object,
+    /** keys order for delete dialog form*/
     deleteDialogFormKeysOrder: PropTypes.arrayOf(PropTypes.string),
     /** String for create title */
     createTitle: PropTypes.string,
@@ -468,11 +471,15 @@ DigitCRUD.propTypes = {
     customDetailsRenders: PropTypes.objectOf(PropTypes.func),
     /** If true, then object that has {sv: "...", en: "..."} will be converted to "" depending on activeLanguage */
     extractActiveLanguage: PropTypes.bool,
+    /** Custom create path for the view representing the createRequest*/
     createPath: PropTypes.string,
+    /** Custom create path for the view representing the readAllRequest*/
     readAllPath: PropTypes.string,
+    /** Custom create path for the view representing the readOneRequest*/
     readOnePath: PropTypes.string,
+    /** Custom create path for the view representing the updateRequest*/
     updatePath: PropTypes.string,
-    /**  */
+    /** */
     staticId: PropTypes.string,
     backFromReadOnePath: PropTypes.string,
     backFromUpdatePath: PropTypes.string,

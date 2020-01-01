@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { Route, Switch } from "react-router-dom";
@@ -113,24 +113,41 @@ const DigitCRUD = ({
     const hasUpdate = updateRequest != null;
     const hasDelete = deleteRequest != null;
 
-    const createAction = hasCreate
-        ? data => dispatch(createCreateAction(name, createRequest, data))
-        : null;
-    const readOneAction = hasReadOne
-        ? id => dispatch(createReadOneAction(name, readOneRequest, id))
-        : null;
-    const readAllAction = hasReadAll
-        ? () => dispatch(createReadAllAction(name, readAllRequest))
-        : null;
-    const deleteAction = hasDelete
-        ? (id, form) =>
-              dispatch(createDeleteAction(name, deleteRequest, id, form))
-        : null;
-    const updateAction = hasUpdate
-        ? (id, data) =>
-              dispatch(createUpdateAction(name, updateRequest, id, data))
-        : null;
-    const clearAction = () => dispatch(createClearAction(name));
+    const createAction = useCallback(
+        hasCreate
+            ? data => dispatch(createCreateAction(name, createRequest, data))
+            : null,
+        [name, createRequest]
+    );
+    const readOneAction = useCallback(
+        hasReadOne
+            ? id => dispatch(createReadOneAction(name, readOneRequest, id))
+            : null,
+        [name, readOneRequest]
+    );
+    const readAllAction = useCallback(
+        hasReadAll
+            ? () => dispatch(createReadAllAction(name, readAllRequest))
+            : null,
+        [name, readAllRequest]
+    );
+    const deleteAction = useCallback(
+        hasDelete
+            ? (id, form) =>
+                  dispatch(createDeleteAction(name, deleteRequest, id, form))
+            : null,
+        [name, deleteRequest]
+    );
+    const updateAction = useCallback(
+        hasUpdate
+            ? (id, data) =>
+                  dispatch(createUpdateAction(name, updateRequest, id, data))
+            : null,
+        [name, updateRequest]
+    );
+    const clearAction = useCallback(() => dispatch(createClearAction(name)), [
+        name
+    ]);
 
     useEffect(() => {
         store.injectReducer(

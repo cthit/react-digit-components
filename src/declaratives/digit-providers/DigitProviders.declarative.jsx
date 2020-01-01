@@ -5,7 +5,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter, MemoryRouter } from "react-router-dom";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import logger from "redux-logger";
 import thunkMiddleware from "redux-thunk";
@@ -82,16 +82,20 @@ class DigitProviders extends React.Component {
     }
 
     render() {
-        const { children } = this.props;
+        const { children, hashRouter, memoryRouter } = this.props;
         return (
             <StylesProvider injectFirst>
                 <ThemeProvider theme={this.theme}>
                     <Provider store={this.store}>
-                        <BrowserRouter>
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                {children}
-                            </MuiPickersUtilsProvider>
-                        </BrowserRouter>
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            {hashRouter ? (
+                                <HashRouter>{children}</HashRouter>
+                            ) : memoryRouter ? (
+                                <MemoryRouter>{children}</MemoryRouter>
+                            ) : (
+                                <BrowserRouter>{children}</BrowserRouter>
+                            )}
+                        </MuiPickersUtilsProvider>
                     </Provider>
                 </ThemeProvider>
             </StylesProvider>

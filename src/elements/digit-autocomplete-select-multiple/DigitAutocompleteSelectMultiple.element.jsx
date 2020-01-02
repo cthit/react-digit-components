@@ -59,11 +59,6 @@ const DigitAutocompleteSelectMultiple = ({
             multiple
             disabled={disabled}
             renderOption={(obj, { selected }) => {
-                // const obj = find(options, { value });
-                // console.log(value);
-                // console.log(obj);
-                // const text = obj == null ? "" : obj.text;
-                // console.log(text);
                 return (
                     <React.Fragment>
                         <Checkbox

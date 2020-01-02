@@ -4,7 +4,18 @@ module.exports = {
             name: "@storybook/addon-docs/preset",
             options: {
                 configureJSX: true,
-                babelOptions: {},
+                babelOptions: {
+                    presets: [],
+                    plugins: [
+                        [
+                            "@babel/plugin-transform-react-jsx",
+                            {
+                                pragmaFrag: "React.Fragment"
+                            },
+                            "storybook-transform-jsx"
+                        ]
+                    ]
+                },
                 sourceLoaderOptions: null
             }
         }

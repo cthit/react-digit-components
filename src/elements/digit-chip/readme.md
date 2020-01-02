@@ -1,5 +1,0 @@
-# DigitChip
-
-```jsx 
-    <DigitChip primary />
-```

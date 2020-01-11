@@ -6,6 +6,7 @@ import { Fill } from "../../../../styles/digit-layout/DigitLayout.styles";
 import { Title } from "../../../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTableToolbar.element.translations.json";
 import styled from "styled-components";
+import useDigitTranslations from "../../../../hooks/use-digit-translations";
 
 const TableTitle = styled(Title)`
     flex: 0 0 auto;

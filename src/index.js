@@ -10,6 +10,7 @@ import DigitNavLink from "./elements/digit-nav-link";
 import DigitFAB from "./elements/digit-fab";
 import DigitDisplayData from "./elements/digit-display-data";
 import DigitEditData from "./elements/digit-edit-data";
+import DigitEditDataCard from "./elements/digit-edit-data-card";
 import DigitMarkdown from "./elements/digit-markdown";
 import DigitTabs from "./elements/digit-tabs";
 import DigitBottomNavigation from "./elements/digit-bottom-navigation";
@@ -25,17 +26,12 @@ import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-
 import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
 import DigitList from "./elements/digit-list";
 import DigitListSelectSingle from "./elements/digit-list-select-single";
+import DigitListSelectMultiple from "./elements/digit-list-select-multiple";
 import DigitButtonGroup from "./elements/digit-button-group";
 
 import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
-import DigitMapStringToValue from "./declaratives/digit-map-string-to-value";
 import DigitTranslations from "./declaratives/digit-translations";
 import DigitProviders from "./declaratives/digit-providers";
-import DigitRedirect from "./declaratives/digit-redirect";
-import DigitRedirectExternal from "./declaratives/digit-redirect-external";
-import DigitComponentSelector from "./declaratives/digit-component-selector";
-import DigitRenderSelector from "./declaratives/digit-render-selector";
-import DigitContainUser from "./declaratives/digit-contain-user";
 
 import DigitToast from "./views/digit-toast";
 import DigitDialog from "./views/digit-dialog";
@@ -51,11 +47,6 @@ import DigitHeader from "./views/digit-header";
 import useDigitTranslations from "./hooks/use-digit-translations";
 import useGamma from "./hooks/use-gamma";
 import useGammaUser from "./hooks/use-gamma-user";
-
-import {
-    digitRedirectTo,
-    redirectFinished
-} from "./declaratives/digit-redirect/DigitRedirect.declarative.action-creator";
 
 import {
     digitDialogClosedCancel,
@@ -120,8 +111,6 @@ import {
     Text,
     Title
 } from "./styles/digit-text/DigitText.styles";
-
-const DigitRedirectActions = { digitRedirectTo, redirectFinished };
 
 const DigitDialogActions = {
     digitDialogOpen,
@@ -204,6 +193,7 @@ export {
     DigitFAB,
     DigitDisplayData,
     DigitEditData,
+    DigitEditDataCard,
     DigitMarkdown,
     DigitLoading,
     DigitDateAndTimePicker,
@@ -217,6 +207,7 @@ export {
     DigitAutocompleteSelectMultiple,
     DigitCalendar,
     DigitList,
+    DigitListSelectMultiple,
     DigitListSelectSingle,
     DigitButtonGroup,
     /* Views */
@@ -227,19 +218,12 @@ export {
     DigitCRUD,
     /* Actions */
     DigitToastActions,
-    DigitRedirectActions,
     DigitDialogActions,
     DigitTranslationsActions,
     /* Declaratives */
     DigitIfElseRendering,
-    DigitMapStringToValue,
     DigitTranslations,
     DigitProviders,
-    DigitRedirect,
-    DigitComponentSelector,
-    DigitRenderSelector,
-    DigitContainUser,
-    DigitRedirectExternal,
     /* Styles */
     DigitLayout,
     DigitDesign,

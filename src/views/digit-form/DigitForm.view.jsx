@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import DigitFormContext from "../../hooks/form/DigitFormContext";
+import DigitFormContext from "../../contexts/DigitFormContext";
 
 const FullWidthForm = styled.form`
     width: 100%;

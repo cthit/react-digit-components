@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 const DigitGammaContext = createContext({});
 
 const GET_USER_LOADING = "get-user-loading";

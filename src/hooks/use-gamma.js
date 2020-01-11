@@ -1,8 +1,7 @@
 import axios from "axios";
 import useGammaUser from "./use-gamma-user";
 import _ from "lodash";
-import { useDispatch } from "react-redux";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { digitToastOpen } from "../views/digit-toast/DigitToast.view.action-creator";
 import DigitGammaContext, {
     GET_USER_FAILED,

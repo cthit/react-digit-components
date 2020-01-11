@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import Fab from "@material-ui/core/Fab";
 import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 

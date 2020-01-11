@@ -1,8 +1,6 @@
 import Toolbar from "@material-ui/core/Toolbar";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
-import DigitTranslations from "../../../../declaratives/digit-translations";
 import DigitTextField from "../../../../elements/digit-text-field";
 import { Fill } from "../../../../styles/digit-layout/DigitLayout.styles";
 import { Title } from "../../../../styles/digit-text/DigitText.styles";

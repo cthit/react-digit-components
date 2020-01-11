@@ -4,7 +4,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
 import { Text } from "../../../../styles/digit-text/DigitText.styles";
 
 const DigitTableHeader = ({

@@ -7,7 +7,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
 import React from "react";
 import styled, { css } from "styled-components";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Title } from "../../styles/digit-text/DigitText.styles";
 import { Column, Row } from "../../styles/digit-layout/DigitLayout.styles";
 import { Link } from "../../styles/digit-design/DigitDesign.styles";

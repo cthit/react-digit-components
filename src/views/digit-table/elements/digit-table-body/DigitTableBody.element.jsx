@@ -4,7 +4,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
 import DigitButton from "../../../../elements/digit-button";
 import { Link } from "../../../../styles/digit-design/DigitDesign.styles";
 import { Text } from "../../../../styles/digit-text/DigitText.styles";

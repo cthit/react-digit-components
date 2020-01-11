@@ -8,9 +8,7 @@ import {
     Link
 } from "../../styles/digit-design/DigitDesign.styles";
 import DigitButton from "../digit-button";
-import DigitForm from "../../views/digit-form";
 import { Padding, Size } from "../../styles/digit-layout/DigitLayout.styles";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import * as yup from "yup";
 import DigitEditData from "../digit-edit-data";
 

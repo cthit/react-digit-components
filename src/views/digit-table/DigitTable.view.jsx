@@ -5,7 +5,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import { Heading5 } from "../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTable.view.translations.json";

@@ -149,40 +149,29 @@ class DigitHeader extends React.Component {
                             height={headerHeight}
                             navigation={(drawer != null).toString()}
                         >
-                            <DigitIfElseRendering
-                                test={drawer != null}
-                                ifRender={() => (
-                                    <StyledMenuButton
-                                        color="inherit"
-                                        aria-label="open drawer"
-                                        onClick={this.handleDrawerToggle}
-                                    >
-                                        <MenuIcon />
-                                    </StyledMenuButton>
-                                )}
-                            />
-
+                            {drawer != null && (
+                                <StyledMenuButton
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    onClick={this.handleDrawerToggle}
+                                >
+                                    <MenuIcon />
+                                </StyledMenuButton>
+                            )}
                             <HorizontalFill>
                                 <Row>
-                                    <DigitIfElseRendering
-                                        test={renderTitle == null}
-                                        ifRender={() =>
-                                            homeLink != null ? (
-                                                <Link to={homeLink}>
-                                                    <DigitTitle
-                                                        text={title}
-                                                        white
-                                                    />
-                                                </Link>
-                                            ) : (
+                                    {renderTitle == null &&
+                                        (homeLink != null ? (
+                                            <Link to={homeLink}>
                                                 <DigitTitle
                                                     text={title}
                                                     white
                                                 />
-                                            )
-                                        }
-                                        elseRender={renderTitle}
-                                    />
+                                            </Link>
+                                        ) : (
+                                            <DigitTitle text={title} white />
+                                        ))}
+                                    {renderTitle != null && renderTitle()}
                                 </Row>
                                 <Row>{renderHeader()}</Row>
                             </HorizontalFill>
@@ -197,31 +186,28 @@ class DigitHeader extends React.Component {
                         {renderFooter()}
                     </StyledMain>
                 </StyledColumn>
-                <DigitIfElseRendering
-                    test={drawer != null}
-                    ifRender={() => (
-                        <React.Fragment>
-                            <Hidden mdUp>
-                                <StyledDrawer
-                                    variant="temporary"
-                                    anchor="left"
-                                    open={mobileOpen}
-                                    onClose={this.handleDrawerToggle}
-                                    ModalProps={{
-                                        keepMounted: true // Better open performance on mobile.
-                                    }}
-                                >
-                                    {drawer}
-                                </StyledDrawer>
-                            </Hidden>
-                            <Hidden smDown implementation="css">
-                                <StyledDrawer variant="permanent" open>
-                                    {drawer}
-                                </StyledDrawer>
-                            </Hidden>
-                        </React.Fragment>
-                    )}
-                />
+                {drawer != null && (
+                    <>
+                        <Hidden mdUp>
+                            <StyledDrawer
+                                variant="temporary"
+                                anchor="left"
+                                open={mobileOpen}
+                                onClose={this.handleDrawerToggle}
+                                ModalProps={{
+                                    keepMounted: true // Better open performance on mobile.
+                                }}
+                            >
+                                {drawer}
+                            </StyledDrawer>
+                        </Hidden>
+                        <Hidden smDown implementation="css">
+                            <StyledDrawer variant="permanent" open>
+                                {drawer}
+                            </StyledDrawer>
+                        </Hidden>
+                    </>
+                )}
             </StyledRoot>
         );
     }

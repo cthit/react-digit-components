@@ -29,7 +29,6 @@ import DigitListSelectSingle from "./elements/digit-list-select-single";
 import DigitListSelectMultiple from "./elements/digit-list-select-multiple";
 import DigitButtonGroup from "./elements/digit-button-group";
 
-import DigitIfElseRendering from "./declaratives/digit-if-else-rendering";
 import DigitTranslations from "./declaratives/digit-translations";
 import DigitProviders from "./declaratives/digit-providers";
 
@@ -221,7 +220,6 @@ export {
     DigitDialogActions,
     DigitTranslationsActions,
     /* Declaratives */
-    DigitIfElseRendering,
     DigitTranslations,
     DigitProviders,
     /* Styles */

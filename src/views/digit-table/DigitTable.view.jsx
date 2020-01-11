@@ -181,40 +181,36 @@ class DigitTable extends React.Component {
                                 rowCount={data.length}
                                 headerTexts={headerTexts}
                             />
-                            <DigitIfElseRendering
-                                test={this.state.data.length > 0}
-                                ifRender={() => (
-                                    <DigitTableBody
-                                        search={this.props.search}
-                                        idProp={this.state.idProp}
-                                        columnsOrder={this.state.columnsOrder}
-                                        page={this.state.page}
-                                        rowsPerPage={this.state.rowsPerPage}
-                                        data={this.state.data}
-                                        isSelected={this.isSelected}
-                                        handleClick={this.handleClick}
-                                        rowShouldBeShown={this.rowShouldBeShown}
-                                        headerTexts={headerTexts}
-                                    />
-                                )}
-                                elseRender={() => (
-                                    <TableBody>
-                                        <tr>
-                                            <td colSpan="100">
-                                                <Center>
-                                                    <Padding>
-                                                        <Heading5
-                                                            text={
-                                                                emptyTableText
-                                                            }
-                                                        />
-                                                    </Padding>
-                                                </Center>
-                                            </td>
-                                        </tr>
-                                    </TableBody>
-                                )}
-                            />
+                            {this.state.data.length > 0 && (
+                                <DigitTableBody
+                                    search={this.props.search}
+                                    idProp={this.state.idProp}
+                                    columnsOrder={this.state.columnsOrder}
+                                    page={this.state.page}
+                                    rowsPerPage={this.state.rowsPerPage}
+                                    data={this.state.data}
+                                    isSelected={this.isSelected}
+                                    handleClick={this.handleClick}
+                                    rowShouldBeShown={this.rowShouldBeShown}
+                                    headerTexts={headerTexts}
+                                />
+                            )}
+
+                            {this.state.data.length === 0 && (
+                                <TableBody>
+                                    <tr>
+                                        <td colSpan="100">
+                                            <Center>
+                                                <Padding>
+                                                    <Heading5
+                                                        text={emptyTableText}
+                                                    />
+                                                </Padding>
+                                            </Center>
+                                        </td>
+                                    </tr>
+                                </TableBody>
+                            )}
                         </StyledTable>
 
                         <StyledTablePagination

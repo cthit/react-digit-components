@@ -91,22 +91,19 @@ const DigitEditDataCard = ({
                         form={formName}
                     />
                     <Padding />
-                    <DigitIfElseRendering
-                        test={extraButton != null}
-                        ifRender={() => (
-                            <DigitIfElseRendering
-                                test={extraButtonTo == null}
-                                ifRender={() => (
+                    {extraButton != null && (
+                        <>
+                            {extraButtonTo == null && (
+                                <DigitButton {...extraButton} />
+                            )}
+
+                            {extraButtonTo != null && (
+                                <Link to={extraButtonTo}>
                                     <DigitButton {...extraButton} />
-                                )}
-                                elseRender={() => (
-                                    <Link to={extraButtonTo}>
-                                        <DigitButton {...extraButton} />
-                                    </Link>
-                                )}
-                            />
-                        )}
-                    />
+                                </Link>
+                            )}
+                        </>
+                    )}
                 </CardButtons>
             </Card>
         </Size>

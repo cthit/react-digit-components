@@ -48,25 +48,19 @@ const DigitTableToolbar = ({
                 />
             </Fill>
             <Fill>
-                <DigitIfElseRendering
-                    test={search}
-                    ifRender={() => (
-                        <SearchInput
-                            upperLabel={
-                                searchText +
-                                (showSearchableProps != null &&
-                                showSearchableProps
-                                    ? " " +
-                                      _getAllPossibleThingsToSearchFor(
-                                          headerTexts
-                                      )
-                                    : "")
-                            }
-                            value={searchInput}
-                            onChange={onSearchInputChange}
-                        />
-                    )}
-                />
+                {search && (
+                    <SearchInput
+                        upperLabel={
+                            searchText +
+                            (showSearchableProps != null && showSearchableProps
+                                ? " " +
+                                  _getAllPossibleThingsToSearchFor(headerTexts)
+                                : "")
+                        }
+                        value={searchInput}
+                        onChange={onSearchInputChange}
+                    />
+                )}
             </Fill>
         </StyledToolbar>
     );

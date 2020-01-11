@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import React from "react";
 import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 
-const DigitLoading = ({ loading, size }) => (
-    <DigitIfElseRendering
-        test={loading}
-        ifRender={() => <CircularProgress size={size} />}
-    />
-);
+const DigitLoading = ({ loading, size }) => {
+    if (!loading) {
+        return null;
+    }
+
+    return <CircularProgress size={size} />;
+};
 
 DigitLoading.displayName = "DigitLoading";
 DigitLoading.propTypes = {

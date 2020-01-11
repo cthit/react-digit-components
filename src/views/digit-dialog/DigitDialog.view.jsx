@@ -40,69 +40,57 @@ class DigitDialog extends React.Component {
 
         const { open } = this.state;
 
+        if (options == null) {
+            return null;
+        }
+
         return (
-            <DigitIfElseRendering
-                test={options != null}
-                ifRender={() => (
-                    <Dialog
-                        open={open}
-                        onClose={this.cancel}
-                        aria-labelledby="alert-dialog-title"
-                        aria-describedby="alert-dialog-description"
-                    >
-                        <DialogTitle id="alert-dialog-title">
-                            {options != null ? options.title : ""}
-                        </DialogTitle>
-                        <DialogContent>
-                            <DigitIfElseRendering
-                                test={custom}
-                                ifRender={options.renderMain}
-                                elseRender={() => (
-                                    <DialogContentText id="alert-dialog-description">
-                                        {options != null
-                                            ? options.description
-                                            : ""}
-                                    </DialogContentText>
-                                )}
-                            />
-                        </DialogContent>
-                        <DialogActions>
-                            <DigitIfElseRendering
-                                test={custom}
-                                ifRender={() =>
-                                    options.renderButtons(
-                                        this.confirm,
-                                        this.cancel
-                                    )
+            <Dialog
+                open={open}
+                onClose={this.cancel}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {options != null ? options.title : ""}
+                </DialogTitle>
+                <DialogContent>
+                    <>
+                        {custom && options.renderMain()}
+                        {!custom && (
+                            <DialogContentText id="alert-dialog-description">
+                                {options != null ? options.description : ""}
+                            </DialogContentText>
+                        )}
+                    </>
+                </DialogContent>
+                <DialogActions>
+                    {custom && options.renderButtons(this.confirm, this.cancel)}
+                    {!custom && (
+                        <>
+                            <DigitButton
+                                onClick={this.cancel}
+                                text={
+                                    options != null
+                                        ? options.cancelButtonText
+                                        : ""
                                 }
-                                elseRender={() => (
-                                    <>
-                                        <DigitButton
-                                            onClick={this.cancel}
-                                            text={
-                                                options != null
-                                                    ? options.cancelButtonText
-                                                    : ""
-                                            }
-                                        />
-                                        <DigitButton
-                                            onClick={this.confirm}
-                                            primary
-                                            autoFocus
-                                            raised
-                                            text={
-                                                options != null
-                                                    ? options.confirmButtonText
-                                                    : ""
-                                            }
-                                        />
-                                    </>
-                                )}
                             />
-                        </DialogActions>
-                    </Dialog>
-                )}
-            />
+                            <DigitButton
+                                onClick={this.confirm}
+                                primary
+                                autoFocus
+                                raised
+                                text={
+                                    options != null
+                                        ? options.confirmButtonText
+                                        : ""
+                                }
+                            />
+                        </>
+                    )}
+                </DialogActions>
+            </Dialog>
         );
     }
 }

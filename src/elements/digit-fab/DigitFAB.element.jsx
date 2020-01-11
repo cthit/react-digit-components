@@ -24,16 +24,13 @@ const DigitFAB = ({
         form={form}
     >
         {React.createElement(icon, null)}
-        <DigitIfElseRendering
-            test={text != null}
-            ifRender={() => (
-                <>
-                    <Padding />
-                    <Text text={text} />
-                    <Padding />
-                </>
-            )}
-        />
+        {text != null && (
+            <>
+                <Padding />
+                <Text text={text} />
+                <Padding />
+            </>
+        )}
     </Fab>
 );
 

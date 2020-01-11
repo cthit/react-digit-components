@@ -4,13 +4,12 @@ import MoreVert from "@material-ui/icons/MoreVert";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitIconButton from "../../elements/digit-icon-button";
-import generateId from "../../utils/generators/id.generator";
 
 class DigitMenu extends React.Component {
     state = {
         open: false,
         anchorElement: null,
-        id: generateId()
+        id: "todo"
     };
 
     _handleClose = () => {

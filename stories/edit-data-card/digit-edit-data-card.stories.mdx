@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import {
-    DigitEditData,
+    DigitEditDataCard,
     DigitTextField,
     DigitCheckbox,
     DigitTextArea,
@@ -10,17 +10,17 @@ import {
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 <Meta
-    title="Elements|DigitEditData"
-    component={DigitEditData}
+    title="Elements|DigitEditDataCard"
+    component={DigitEditDataCard}
 />
 
-# DigitEditData
+# DigitEditDataCard
 
 The easier, but not as customizable way, to create a form as opposed to `DigitForm`. What you will get is a DigitDesign.Card and input component that you specify. You should use `yup` for validation. It's super easy, you can read all about it here: https://github.com/jquense/yup. In the `onSubmit` function, you get two props. `values`, which is the data from the form. `actions` has a bunch cool functions, however, the only useful function is `resetForm`. More information is available here: https://jaredpalmer.com/formik/docs/api/formik.
 
 <Preview>
     <Story name="Normal">
-        <DigitEditData
+        <DigitEditDataCard
             initialValues={{
                 firstname: "",
                 surname: "",
@@ -73,7 +73,7 @@ The easier, but not as customizable way, to create a form as opposed to `DigitFo
         />
     </Story>
     <Story name="Other values">
-        <DigitEditData
+        <DigitEditDataCard
             initialValues={{
                 firstname: "",
                 surname: "",
@@ -127,7 +127,7 @@ The easier, but not as customizable way, to create a form as opposed to `DigitFo
 
 <Preview>
     <Story name="Normal initial">
-        <DigitEditData
+        <DigitEditDataCard
             initialValues={{
                 firstname: "Smurf",
                 surname: "Smurfsson",
@@ -177,7 +177,7 @@ The easier, but not as customizable way, to create a form as opposed to `DigitFo
         />
     </Story>
     <Story name="Other values initial">
-        <DigitEditData
+        <DigitEditDataCard
             initialValues={{
                 name: "digIT 'Smurf' Hackerman",
                 email: "email@email.com",
@@ -224,7 +224,7 @@ The easier, but not as customizable way, to create a form as opposed to `DigitFo
 
 <Preview>
     <Story name="Normal components">
-        <DigitEditData
+        <DigitEditDataCard
             initialValues={{
                 firstname: "",
                 surname: "",
@@ -265,7 +265,7 @@ The easier, but not as customizable way, to create a form as opposed to `DigitFo
         />
     </Story>
     <Story name="Other values components">
-        <DigitEditData
+        <DigitEditDataCard
             initialValues={{
                 firstname: "digIT 'Smurf' Hackerman",
                 email: "email@email.com",
@@ -301,4 +301,4 @@ The easier, but not as customizable way, to create a form as opposed to `DigitFo
     </Story>
 </Preview>
 
-<Props of={DigitEditData} />
+<Props of={DigitEditDataCard} />

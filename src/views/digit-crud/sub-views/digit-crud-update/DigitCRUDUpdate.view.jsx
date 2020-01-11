@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DigitEditData from "../../../../elements/digit-edit-data";
+import DigitEditData from "../../../../elements/digit-edit-data-card";
 import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
 import DigitLoading from "../../../../elements/digit-loading";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";

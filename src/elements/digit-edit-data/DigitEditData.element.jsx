@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { createElement, useMemo } from "react";
 import {
     Card,
     CardBody,
@@ -9,20 +9,29 @@ import {
 } from "../../styles/digit-design/DigitDesign.styles";
 import DigitButton from "../digit-button";
 import DigitForm from "../../views/digit-form";
-import DigitFormField from "../../views/digit-form-field";
-import DigitFormFieldArray from "../../views/digit-form-field-array";
-import {
-    Column,
-    Padding,
-    Size
-} from "../../styles/digit-layout/DigitLayout.styles";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
+import { Size } from "../../styles/digit-layout/DigitLayout.styles";
 import * as yup from "yup";
+import useDigitFormField from "../../hooks/form/use-digit-form-field";
 
 function isInitialValid(props) {
     if (!props.validationSchema) return true;
     return props.validationSchema.isValidSync(props.initialValues);
 }
+
+const DigitEditDataField = ({ name, componentData }) => {
+    const field = useDigitFormField(name);
+    const { component, componentProps } = componentData;
+
+    return useMemo(
+        () =>
+            createElement(component, {
+                ...componentProps,
+                ...field,
+                name
+            }),
+        [JSON.stringify(field), JSON.stringify(componentData)]
+    );
+};
 
 const DigitEditData = ({
     initialValues,
@@ -43,104 +52,38 @@ const DigitEditData = ({
     height,
     extraButton,
     extraButtonTo
-}) => (
-    <Size
-        minWidth={minWidth}
-        maxWidth={maxWidth}
-        minHeight={minHeight}
-        maxHeight={maxHeight}
-        absWidth={absWidth}
-        absHeight={absHeight}
-        width={width}
-        height={height}
-    >
-        <DigitForm
-            validationSchema={validationSchema}
-            initialValues={initialValues}
-            isInitialValid={isInitialValid}
-            onSubmit={onSubmit}
-            render={({ isSubmitting, isValid }) => (
-                <Card
-                    minWidth={minWidth}
-                    maxWidth={maxWidth}
-                    minHeight={minHeight}
-                    maxHeight={maxHeight}
-                    absWidth={absWidth}
-                    absHeight={absHeight}
-                    width={width}
-                    height={height}
-                >
-                    <CardTitle text={titleText} />
-                    <CardBody>
-                        <Column marginVertical={marginVertical}>
-                            {keysOrder.map(key => {
-                                const keyComponentData = keysComponentData[key];
-                                if (!keyComponentData.array) {
-                                    return (
-                                        <DigitFormField
-                                            key={key}
-                                            name={key}
-                                            render={keyComponentData.render}
-                                            component={
-                                                keyComponentData.component
-                                            }
-                                            componentProps={
-                                                keyComponentData.componentProps
-                                            }
-                                            formatEvent={
-                                                keyComponentData.formatEvent
-                                            }
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <DigitFormFieldArray
-                                            key={key}
-                                            name={key}
-                                            render={keyComponentData.render}
-                                            component={
-                                                keyComponentData.component
-                                            }
-                                            componentProps={
-                                                keyComponentData.componentProps
-                                            }
-                                        />
-                                    );
-                                }
-                            })}
-                        </Column>
-                    </CardBody>
-                    <CardButtons reverseDirection>
-                        <DigitButton
-                            disabled={isSubmitting || !isValid} //props.validationSchema.isValidSync(props.initialValues)
-                            submit
-                            text={submitText}
-                            raised
-                            primary
-                        />
-                        <Padding />
-                        <DigitIfElseRendering
-                            test={extraButton != null}
-                            ifRender={() => (
-                                <DigitIfElseRendering
-                                    test={extraButtonTo == null}
-                                    ifRender={() => (
-                                        <DigitButton {...extraButton} />
-                                    )}
-                                    elseRender={() => (
-                                        <Link to={extraButtonTo}>
-                                            <DigitButton {...extraButton} />
-                                        </Link>
-                                    )}
-                                />
-                            )}
-                        />
-                    </CardButtons>
-                </Card>
-            )}
-        />
-    </Size>
-);
+}) => {
+    return (
+        <Size
+            minWidth={minWidth}
+            maxWidth={maxWidth}
+            minHeight={minHeight}
+            maxHeight={maxHeight}
+            absWidth={absWidth}
+            absHeight={absHeight}
+            width={width}
+            height={height}
+        >
+            <DigitForm
+                validationSchema={validationSchema}
+                initialValues={initialValues}
+                isInitialValid={isInitialValid}
+                onSubmit={onSubmit}
+                render={() => (
+                    <>
+                        {keysOrder.map(key => (
+                            <DigitEditDataField
+                                name={key}
+                                componentData={keysComponentData[key]}
+                            />
+                        ))}
+                        <DigitButton text={"Submit"} submit />
+                    </>
+                )}
+            />
+        </Size>
+    );
+};
 
 DigitEditData.displayName = "DigitEditData";
 DigitEditData.propTypes = {

@@ -1,11 +1,22 @@
-import { Form, Formik } from "formik";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
+import DigitFormContext from "../../hooks/form/DigitFormContext";
 
-const FullWidthForm = styled(Form)`
+const FullWidthForm = styled.form`
     width: 100%;
 `;
+
+const yupToFormErrors = yupError => {
+    const errors = {};
+    if (yupError.inner) {
+        for (var i = 0; i < yupError.inner.length; i++) {
+            const fieldError = yupError.inner[i];
+            errors[fieldError.path] = fieldError.message;
+        }
+    }
+    return errors;
+};
 
 const DigitForm = ({
     initialValues,
@@ -14,16 +25,88 @@ const DigitForm = ({
     render,
     isInitialValid,
     name
-}) => (
-    <Formik
-        validateOnMount={isInitialValid}
-        validationSchema={validationSchema}
-        initialValues={{ ...initialValues }}
-        onSubmit={onSubmit}
-    >
-        {props => <FullWidthForm id={name}>{render(props)}</FullWidthForm>}
-    </Formik>
-);
+}) => {
+    const [values, setValues] = useState(initialValues);
+    const [errors, setErrors] = useState({});
+    const [touched, setTouched] = useState({});
+    const handleTouched = useCallback(
+        (value, fieldName) =>
+            setTouched(_touched => {
+                const newTouched = { ..._touched };
+                newTouched[fieldName] = value;
+                return newTouched;
+            }),
+        []
+    );
+    const handleChange = useCallback(
+        (value, fieldName) =>
+            setValues(_values => {
+                const newValues = { ..._values };
+                newValues[fieldName] = value;
+                return newValues;
+            }),
+        []
+    );
+    const handleSubmit = event => {
+        event.preventDefault();
+        onSubmit(values);
+    };
+    const handleReset = event => {};
+
+    useEffect(() => {
+        runValidationSchema(values)
+            .then(res => {
+                setErrors(yupToFormErrors(res));
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, [validationSchema, JSON.stringify(values)]);
+
+    const runValidationSchema = React.useCallback(
+        values => {
+            return new Promise((resolve, reject) => {
+                validationSchema
+                    .validate(values, {
+                        abortEarly: false
+                    })
+                    .then(
+                        () => {
+                            resolve({});
+                        },
+                        err => {
+                            if (err.name === "ValidationError") {
+                                resolve(err);
+                            } else {
+                                reject(err);
+                            }
+                        }
+                    );
+            });
+        },
+        [validationSchema]
+    );
+
+    return (
+        <DigitFormContext.Provider
+            value={{
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleTouched
+            }}
+        >
+            <FullWidthForm
+                onReset={handleReset}
+                onSubmit={handleSubmit}
+                action={"#"}
+            >
+                {render({ values })}
+            </FullWidthForm>
+        </DigitFormContext.Provider>
+    );
+};
 
 DigitForm.displayName = "DigitForm";
 DigitForm.propTypes = {

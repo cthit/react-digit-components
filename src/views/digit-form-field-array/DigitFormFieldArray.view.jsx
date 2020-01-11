@@ -1,24 +1,9 @@
-import { FieldArray } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 
-const DigitFormFieldArray = ({ name, render, component, componentProps }) => (
-    <FieldArray
-        name={name}
-        render={props => {
-            if (component != null) {
-                return React.createElement(component, {
-                    ...componentProps,
-                    ...props
-                });
-            } else {
-                return render({
-                    ...props
-                });
-            }
-        }}
-    />
-);
+const DigitFormFieldArray = ({ name, render, component, componentProps }) => {
+    return null;
+};
 
 DigitFormFieldArray.displayName = "DigitFormFieldArray";
 DigitFormFieldArray.propTypes = {

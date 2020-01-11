@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react";
-import DigitFormContext from "./DigitFormContext";
+import DigitFormContext from "../contexts/DigitFormContext";
 
 const getValue = e => {
     if (e.target != null) {

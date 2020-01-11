@@ -1,4 +1,4 @@
-import DigitFormContext from "./DigitFormContext";
+import DigitFormContext from "../contexts/DigitFormContext";
 import { useCallback } from "react";
 
 const _swap = (value, index1, index2) => {

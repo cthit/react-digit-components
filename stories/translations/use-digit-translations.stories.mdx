@@ -1,0 +1,27 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    useDigitTranslations
+} from "../../src";
+import * as yup from "yup";
+
+# useDigitTranslations
+
+<Meta title="Hooks|useDigitTranslations"/>
+
+## hej
+
+<Preview>
+    <Story name="Standard">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <>
+                    <div>hej</div>
+                </>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={useDigitTranslations} />

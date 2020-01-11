@@ -29,7 +29,6 @@ import DigitListSelectSingle from "./elements/digit-list-select-single";
 import DigitListSelectMultiple from "./elements/digit-list-select-multiple";
 import DigitButtonGroup from "./elements/digit-button-group";
 
-import DigitTranslations from "./declaratives/digit-translations";
 import DigitProviders from "./declaratives/digit-providers";
 
 import DigitToast from "./views/digit-toast";
@@ -55,11 +54,6 @@ import {
 } from "./views/digit-dialog/DigitDialog.view.action-creator";
 
 import { digitToastOpen } from "./views/digit-toast/DigitToast.view.action-creator";
-
-import {
-    setActiveLanguage,
-    setCommonTranslations
-} from "./declaratives/digit-translations/DigitTranslations.declarative.action-creator";
 
 import {
     Center,
@@ -119,8 +113,6 @@ const DigitDialogActions = {
 };
 
 const DigitToastActions = { digitToastOpen };
-
-const DigitTranslationsActions = { setCommonTranslations, setActiveLanguage };
 
 const DigitLayout = {
     Flex,
@@ -218,9 +210,7 @@ export {
     /* Actions */
     DigitToastActions,
     DigitDialogActions,
-    DigitTranslationsActions,
     /* Declaratives */
-    DigitTranslations,
     DigitProviders,
     /* Styles */
     DigitLayout,

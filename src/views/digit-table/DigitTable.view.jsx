@@ -12,7 +12,7 @@ import DigitTableBody from "./elements/digit-table-body";
 import DigitTableHeader from "./elements/digit-table-header";
 import DigitTableToolbar from "./elements/digit-table-toolbar";
 import styled from "styled-components";
-import DigitTranslations from "../../declaratives/digit-translations/DigitTranslations.declarative";
+import useDigitTranslations from "../../hooks/use-digit-translations";
 
 const StyledTablePagination = styled(TablePagination)`
     min-width: 600px;
@@ -26,6 +26,12 @@ const TablePaper = styled(Paper)`
     max-width: 100vw;
     overflow-x: auto;
 `;
+
+//temp fix until DigitTable is rewritten
+const DigitTableTranslations = ({ render }) => {
+    const [text] = useDigitTranslations(translations);
+    return render(text);
+};
 
 class DigitTable extends React.Component {
     constructor(props, context) {
@@ -146,8 +152,7 @@ class DigitTable extends React.Component {
         const { data, order, orderBy, rowsPerPage, page } = this.state;
 
         return (
-            <DigitTranslations
-                translations={translations}
+            <DigitTableTranslations
                 render={text => (
                     <TablePaper>
                         <DigitTableToolbar

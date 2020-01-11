@@ -11,9 +11,9 @@ import logger from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
-import { digitTranslations } from "../digit-translations/DigitTranslations.declarative.reducer";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import gammaUser from "../../reducers/GammaUser.reducer";
+import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitTranslationsContext";
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -22,8 +22,7 @@ class DigitProviders extends React.Component {
         this.store = createStore(
             createReducer({}),
             {
-                ...props.preloadedState,
-                digitTranslations: { activeLanguage: props.defaultLanguage }
+                ...props.preloadedState
             },
             applyMiddleware(logger, thunkMiddleware)
         );
@@ -44,7 +43,6 @@ class DigitProviders extends React.Component {
             return combineReducers({
                 toast,
                 dialog,
-                digitTranslations,
                 gammaUser,
                 ...asyncReducers,
                 ...props.rootReducer
@@ -80,20 +78,29 @@ class DigitProviders extends React.Component {
     }
 
     render() {
-        const { children, hashRouter, memoryRouter } = this.props;
+        const {
+            children,
+            hashRouter,
+            memoryRouter,
+            defaultLanguage
+        } = this.props;
         return (
             <StylesProvider injectFirst>
                 <ThemeProvider theme={this.theme}>
                     <Provider store={this.store}>
-                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            {hashRouter ? (
-                                <HashRouter>{children}</HashRouter>
-                            ) : memoryRouter ? (
-                                <MemoryRouter>{children}</MemoryRouter>
-                            ) : (
-                                <BrowserRouter>{children}</BrowserRouter>
-                            )}
-                        </MuiPickersUtilsProvider>
+                        <DigitTranslationsContextSingletonProvider
+                            defaultLanguage={defaultLanguage}
+                        >
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                {hashRouter ? (
+                                    <HashRouter>{children}</HashRouter>
+                                ) : memoryRouter ? (
+                                    <MemoryRouter>{children}</MemoryRouter>
+                                ) : (
+                                    <BrowserRouter>{children}</BrowserRouter>
+                                )}
+                            </MuiPickersUtilsProvider>
+                        </DigitTranslationsContextSingletonProvider>
                     </Provider>
                 </ThemeProvider>
             </StylesProvider>

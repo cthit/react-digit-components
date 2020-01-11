@@ -2,7 +2,7 @@ import React from "react";
 import { DigitProviders, DigitToast, DigitDialog } from "../src";
 
 const DigitProvidersDecorator = StoryFn => (
-    <DigitProviders memoryRouter>
+    <DigitProviders memoryRouter defaultLanguage={"en"}>
         <>
             <DigitToast />
             <DigitDialog />

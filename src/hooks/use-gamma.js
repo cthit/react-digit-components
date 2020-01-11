@@ -2,44 +2,17 @@ import axios from "axios";
 import useGammaUser from "./use-gamma-user";
 import _ from "lodash";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { digitToastOpen } from "../views/digit-toast/DigitToast.view.action-creator";
-
-function createGammaUserGetLoadingAction() {
-    return {
-        type: "GAMMA_USER_GET_LOADING",
-        error: false
-    };
-}
-
-function createGammaUserGetFailedAction(error) {
-    return {
-        type: "GAMMA_USER_GET_FAILED",
-        error: false,
-        payload: error
-    };
-}
-
-function createGammaUserGetTokenFailedAction(error) {
-    return {
-        type: "GAMMA_USER_GET_TOKEN_FAILED",
-        error: false,
-        payload: error
-    };
-}
-
-function createGammaUserGetSuccessfully(response) {
-    return {
-        type: "GAMMA_USER_GET_SUCCESSFULLY",
-        error: false,
-        payload: {
-            ...response.data
-        }
-    };
-}
+import DigitGammaContext, {
+    GET_USER_FAILED,
+    GET_USER_LOADING,
+    GET_USER_SUCCESSFULLY,
+    GET_USER_TOKEN_FAILED
+} from "../contexts/DigitGammaContext";
 
 function updateMe(gammaPath, dispatch, name) {
-    dispatch(createGammaUserGetLoadingAction());
+    dispatch({ type: GET_USER_LOADING });
     axios
         .get(removeLastSlash(gammaPath) + "/users/me", {
             headers: {
@@ -50,13 +23,15 @@ function updateMe(gammaPath, dispatch, name) {
         .then(response => {
             if (typeof response.data !== "object") {
                 //prob html file that says "plz sign in"
-                dispatch(createGammaUserGetFailedAction(response.data));
+                console.log(response);
+                dispatch({ type: GET_USER_FAILED });
             } else {
-                dispatch(createGammaUserGetSuccessfully(response));
+                dispatch({ type: GET_USER_SUCCESSFULLY, user: response.data });
             }
         })
         .catch(error => {
-            dispatch(createGammaUserGetFailedAction(error));
+            console.log(error);
+            dispatch({ type: GET_USER_FAILED });
         });
 }
 
@@ -89,11 +64,13 @@ function useGamma(
     toastSignBackInText = "Press to sign in",
     toastDuration = 5000
 ) {
-    const dispatch = useDispatch();
+    const [, dispatch] = useContext(DigitGammaContext);
     const [loadingMe, setLoadingMe] = useState(false);
     const [user, loading, error] = useGammaUser();
 
-    const jwtAuth = sessionStorage.getItem("auth-" + name);
+    const jwtAuth = useMemo(() => sessionStorage.getItem("auth-" + name), [
+        name
+    ]);
 
     useEffect(() => {
         if (error && !loading) {
@@ -159,7 +136,8 @@ function useGamma(
                     updateMe(gammaPath, dispatch, name);
                 })
                 .catch(error => {
-                    dispatch(createGammaUserGetTokenFailedAction(error));
+                    console.log(error);
+                    dispatch({ type: GET_USER_TOKEN_FAILED });
                 });
         } else {
             if (forceSignedIn) {

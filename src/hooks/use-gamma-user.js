@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useContext } from "react";
+import DigitGammaContext from "../contexts/DigitGammaContext";
 
 function useGammaUser() {
-    const gammaUser = useSelector(state => state.gammaUser);
-    return [gammaUser.user, gammaUser.loading, gammaUser.error];
+    const gammaContext = useContext(DigitGammaContext);
+    return [gammaContext.user, gammaContext.loading, gammaContext.error];
 }
 
 export default useGammaUser;

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useReducer, useState } from "react";
-import DigitToast from "../views/digit-toast/DigitToast.view";
+import DigitToast from "../elements/digit-toast";
 const DigitToastContext = createContext({});
 
 const QUEUE_TOAST = "queue-toast";

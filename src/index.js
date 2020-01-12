@@ -29,11 +29,11 @@ import DigitListSelectSingle from "./elements/digit-list-select-single";
 import DigitListSelectMultiple from "./elements/digit-list-select-multiple";
 import DigitButtonGroup from "./elements/digit-button-group";
 import DigitCustomDialog from "./elements/digit-custom-dialog";
+import DigitToast from "./elements/digit-toast";
+import DigitDialog from "./elements/digit-dialog";
 
 import DigitProviders from "./declaratives/digit-providers";
 
-import DigitToast from "./views/digit-toast";
-import DigitDialog from "./views/digit-dialog";
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";

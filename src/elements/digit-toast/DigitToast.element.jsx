@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { StyledSnackbar, ToastButton } from "./DigitToast.view.styles";
+import { StyledSnackbar, ToastButton } from "./DigitToast.element.styles";
 
 const DigitToast = ({
     open,

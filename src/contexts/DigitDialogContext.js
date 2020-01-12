@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import DigitDialog from "../views/digit-dialog/DigitDialog.view";
+import DigitDialog from "../elements/digit-dialog";
 import DigitCustomDialog from "../elements/digit-custom-dialog";
 const DigitDialogContext = createContext({});
 

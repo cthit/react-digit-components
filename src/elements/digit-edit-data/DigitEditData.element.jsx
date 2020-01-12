@@ -16,14 +16,14 @@ const DigitEditDataInner = ({
     marginVertical = 8
 }) => {
     return keysOrder.map(key => (
-        <>
-            <div style={{ marginBottom: marginVertical / 2 }} />
+        <React.Fragment key={key}>
+            <div style={{ marginBottom: marginVertical }} />
             <DigitEditDataField
                 name={key}
                 componentData={keysComponentData[key]}
             />
-            <div style={{ marginBottom: marginVertical / 2 }} />
-        </>
+            <div style={{ marginBottom: marginVertical }} />
+        </React.Fragment>
     ));
 };
 
@@ -94,22 +94,6 @@ DigitEditData.propTypes = {
     titleText: PropTypes.string,
     submitText: PropTypes.string,
     marginVertical: PropTypes.string,
-    /** Sets minWidth, maxWidth and width to absWidth */
-    absWidth: PropTypes.string,
-    /** Sets minHeight, maxHeight and height to absHeight */
-    absHeight: PropTypes.string,
-    /** minWidth of the card */
-    minWidth: PropTypes.string,
-    /** minHeight of the card */
-    minHeight: PropTypes.string,
-    /** maxWidth of the card */
-    maxWidth: PropTypes.string,
-    /** maxHeight of the card */
-    maxHeight: PropTypes.string,
-    /** width of the card */
-    width: PropTypes.string,
-    /** height of the card */
-    height: PropTypes.string,
     /** If new data should be force */
     isInitialValid: PropTypes.bool
 };

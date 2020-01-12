@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import DigitDialogContext, {
-    OPEN_CUSTOM_DIALOG
+    CLOSING_DIALOG,
+    OPEN_CUSTOM_DIALOG,
+    UPDATE_DIALOG
 } from "../contexts/DigitDialogContext";
 
 function useDigitCustomDialog(defaultCustomDialogProps) {
@@ -10,6 +12,15 @@ function useDigitCustomDialog(defaultCustomDialogProps) {
             dispatch({
                 type: OPEN_CUSTOM_DIALOG,
                 dialog: { ...defaultCustomDialogProps, ...dialog }
+            }),
+        () =>
+            dispatch({
+                type: CLOSING_DIALOG
+            }),
+        dialog =>
+            dispatch({
+                type: UPDATE_DIALOG,
+                dialog
             })
     ];
 }

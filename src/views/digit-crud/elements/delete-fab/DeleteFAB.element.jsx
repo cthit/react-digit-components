@@ -1,22 +1,70 @@
 import React, { useCallback, useEffect, useState } from "react";
 import DigitFAB from "../../../../elements/digit-fab";
 import Delete from "@material-ui/icons/Delete";
-import {
-    digitDialogClosedConfirm,
-    digitDialogCustomOpen,
-    digitDialogOpen
-} from "../../../digit-dialog/DigitDialog.view.action-creator";
-import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
-import {
-    Column,
-    DownRightPosition
-} from "../../../../styles/digit-layout/DigitLayout.styles";
-import { useDispatch } from "react-redux";
+import { DownRightPosition } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitButton from "../../../../elements/digit-button";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DigitForm from "../../../../views/digit-form";
-import DigitFormField from "../../../../views/digit-form-field";
-import DigitFormFieldArray from "../../../../views/digit-form-field-array";
+import useDigitToast from "../../../../hooks/use-digit-toast";
+import useDigitCustomDialog from "../../../../hooks/use-digit-custom-dialog";
+import DigitEditData from "../../../../elements/digit-edit-data";
+import useDigitDialog from "../../../../hooks/use-digit-dialog";
+
+const DeleteDialogMain = ({
+    dialogDeleteDescription,
+    onSubmit,
+    deleteDialogFormInitialValues,
+    deleteDialogFormValidationSchema,
+    onValidSubmitChange,
+    deleteDialogFormComponentData,
+    deleteDialogFormKeysOrder,
+    one
+}) => (
+    <>
+        <DialogContentText id="alert-dialog-description">
+            {dialogDeleteDescription(one)}
+        </DialogContentText>
+        <DigitEditData
+            onSubmit={onSubmit}
+            formName={"deleteDialogCRUD"}
+            initialValues={deleteDialogFormInitialValues}
+            validationSchema={deleteDialogFormValidationSchema(one)}
+            onValidSubmitChange={onValidSubmitChange}
+            keysComponentData={deleteDialogFormComponentData}
+            keysOrder={deleteDialogFormKeysOrder}
+        />
+    </>
+);
+
+const DeleteDialogButtons = ({
+    confirm,
+    cancel,
+    dialogDeleteCancel,
+    closeCustomDialog,
+    dialogDeleteConfirm,
+    formValid,
+    one
+}) => (
+    <>
+        <DigitButton
+            text={dialogDeleteCancel(one)}
+            onClick={() => {
+                cancel();
+                closeCustomDialog();
+            }}
+        />
+        <DigitButton
+            text={dialogDeleteConfirm(one)}
+            submit
+            raised
+            primary
+            disabled={!formValid}
+            form={"deleteDialogCRUD"}
+            onClick={() => {
+                confirm();
+            }}
+        />
+    </>
+);
 
 const DeleteFAB = ({
     deleteButtonText,
@@ -37,48 +85,59 @@ const DeleteFAB = ({
     deleteDialogFormInitialValues,
     deleteDialogFormKeysOrder
 }) => {
-    const dispatch = useDispatch();
-    const [form, setForm] = useState({});
-    const [confirmed, setConfirmed] = useState(false);
-    const onDelete = useCallback(
-        form => {
-            return deleteAction(id, form)
-                .then(response => {
-                    dispatch(
-                        digitToastOpen({
-                            text: toastDeleteSuccessful(one, response)
-                        })
-                    );
-                    dispatch(digitDialogClosedConfirm());
-                    history.push(path + backFromDeletePath);
-                })
-                .catch(error => {
-                    dispatch(
-                        digitToastOpen({
-                            text: toastDeleteFailed(one, error)
-                        })
-                    );
+    const [formValid, setFormValid] = useState(false);
+    const [queueToast] = useDigitToast();
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [
+        openCustomDialog,
+        closeCustomDialog,
+        updateCustomDialog
+    ] = useDigitCustomDialog();
+    const onDelete = form =>
+        deleteAction(id, form)
+            .then(response => {
+                queueToast({
+                    text: toastDeleteSuccessful(one, response)
                 });
+                closeCustomDialog();
+                history.push(path + backFromDeletePath);
+            })
+            .catch(error => {
+                queueToast({
+                    text: toastDeleteFailed(one, error)
+                });
+            });
+    const [openDialog] = useDigitDialog({
+        title: dialogDeleteTitle(one),
+        description: dialogDeleteDescription(one),
+        cancelButtonText: dialogDeleteCancel(one),
+        confirmButtonText: dialogDeleteConfirm(one),
+        onCancel: () => {},
+        onClose: () => {
+            setDialogOpen(false);
         },
-        [
-            backFromDeletePath,
-            deleteAction,
-            dispatch,
-            history,
-            id,
-            one,
-            path,
-            toastDeleteFailed,
-            toastDeleteSuccessful
-        ]
+        onConfirm: onDelete
+    });
+
+    const renderButtons = (confirm, cancel) => (
+        <DeleteDialogButtons
+            dialogDeleteConfirm={dialogDeleteConfirm}
+            dialogDeleteCancel={dialogDeleteCancel}
+            cancel={cancel}
+            confirm={confirm}
+            closeCustomDialog={closeCustomDialog}
+            formValid={formValid}
+            one={one}
+        />
     );
 
     useEffect(() => {
-        if (confirmed && JSON.stringify(form) !== "{}") {
-            onDelete(form);
-            setConfirmed(false);
+        if (dialogOpen) {
+            updateCustomDialog({
+                renderButtons
+            });
         }
-    }, [onDelete, form, confirmed]);
+    }, [formValid, dialogOpen]);
 
     return (
         <DownRightPosition>
@@ -87,117 +146,38 @@ const DeleteFAB = ({
                 icon={Delete}
                 onClick={() => {
                     if (deleteDialogFormComponentData != null) {
-                        dispatch(
-                            digitDialogCustomOpen({
-                                renderMain: () => (
-                                    <>
-                                        <DialogContentText id="alert-dialog-description">
-                                            {dialogDeleteDescription(one)}
-                                        </DialogContentText>
-                                        <DigitForm
-                                            validationSchema={deleteDialogFormValidationSchema(
-                                                one
-                                            )}
-                                            initialValues={
-                                                deleteDialogFormInitialValues
-                                            }
-                                            onSubmit={values => {
-                                                setForm(values);
-                                            }}
-                                            name={"deleteDialogCRUD"}
-                                            render={() => (
-                                                <Column marginVertical={"4px"}>
-                                                    {deleteDialogFormKeysOrder.map(
-                                                        key => {
-                                                            const keyComponentData =
-                                                                deleteDialogFormComponentData[
-                                                                    key
-                                                                ];
-                                                            if (
-                                                                !keyComponentData.array
-                                                            ) {
-                                                                return (
-                                                                    <DigitFormField
-                                                                        key={
-                                                                            key
-                                                                        }
-                                                                        name={
-                                                                            key
-                                                                        }
-                                                                        render={
-                                                                            keyComponentData.render
-                                                                        }
-                                                                        component={
-                                                                            keyComponentData.component
-                                                                        }
-                                                                        componentProps={
-                                                                            keyComponentData.componentProps
-                                                                        }
-                                                                        formatEvent={
-                                                                            keyComponentData.formatEvent
-                                                                        }
-                                                                    />
-                                                                );
-                                                            } else {
-                                                                return (
-                                                                    <DigitFormFieldArray
-                                                                        key={
-                                                                            key
-                                                                        }
-                                                                        name={
-                                                                            key
-                                                                        }
-                                                                        render={
-                                                                            keyComponentData.render
-                                                                        }
-                                                                        component={
-                                                                            keyComponentData.component
-                                                                        }
-                                                                        componentProps={
-                                                                            keyComponentData.componentProps
-                                                                        }
-                                                                    />
-                                                                );
-                                                            }
-                                                        }
-                                                    )}
-                                                </Column>
-                                            )}
-                                        />
-                                    </>
-                                ),
-                                renderButtons: (confirm, cancel) => (
-                                    <>
-                                        <DigitButton
-                                            text={dialogDeleteCancel(one)}
-                                            onClick={cancel}
-                                        />
-                                        <DigitButton
-                                            text={dialogDeleteConfirm(one)}
-                                            submit
-                                            form={"deleteDialogCRUD"}
-                                            onClick={() => {
-                                                setConfirmed(true);
-                                            }}
-                                        />
-                                    </>
-                                ),
-                                title: dialogDeleteTitle(one),
-                                onConfirm: () => {},
-                                onDelete: () => {}
-                            })
-                        );
+                        setDialogOpen(true);
+                        openCustomDialog({
+                            renderMain: () => (
+                                <DeleteDialogMain
+                                    onSubmit={values => onDelete(values)}
+                                    onValidSubmitChange={valid =>
+                                        setFormValid(valid)
+                                    }
+                                    dialogDeleteDescription={
+                                        dialogDeleteDescription
+                                    }
+                                    deleteDialogFormInitialValues={
+                                        deleteDialogFormInitialValues
+                                    }
+                                    deleteDialogFormValidationSchema={
+                                        deleteDialogFormValidationSchema
+                                    }
+                                    deleteDialogFormComponentData={
+                                        deleteDialogFormComponentData
+                                    }
+                                    deleteDialogFormKeysOrder={
+                                        deleteDialogFormKeysOrder
+                                    }
+                                    one={one}
+                                />
+                            ),
+                            renderButtons,
+                            title: dialogDeleteTitle(one),
+                            preventDefaultClose: true
+                        });
                     } else {
-                        dispatch(
-                            digitDialogOpen({
-                                title: dialogDeleteTitle(one),
-                                description: dialogDeleteDescription(one),
-                                cancelButtonText: dialogDeleteCancel(one),
-                                confirmButtonText: dialogDeleteConfirm(one),
-                                onCancel: () => {},
-                                onConfirm: onDelete
-                            })
-                        );
+                        openDialog();
                     }
                 }}
             />

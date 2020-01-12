@@ -12,10 +12,12 @@ const DigitDialog = ({
     onConfirm,
     cancelButtonText,
     confirmButtonText,
-    description
+    description,
+    onExited
 }) => {
     return (
         <DigitCustomDialog
+            onExited={onExited}
             open={open}
             title={title}
             onCancel={onCancel}

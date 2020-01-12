@@ -11,7 +11,8 @@ const DigitCustomDialog = ({
     onConfirm,
     title,
     renderMain,
-    renderButtons
+    renderButtons,
+    onExited
 }) => {
     const cancel = () => {
         onCancel();
@@ -24,6 +25,7 @@ const DigitCustomDialog = ({
 
     return (
         <Dialog
+            onExited={onExited}
             open={open}
             onClose={cancel}
             aria-labelledby="alert-dialog-title"

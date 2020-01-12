@@ -268,6 +268,9 @@ import xor from "lodash/xor";
                 new Promise((resolve, reject) => {
                     const one = _.find(getData(), { id });
                     if (form.nameConfirm !== one.name) {
+                        console.log(form.nameConfirm);
+                        console.log(form);
+                        console.log(one);
                         reject({error: "Name confirm not correct"});
                     }else{
                         setData(xor(getData(), [one]));

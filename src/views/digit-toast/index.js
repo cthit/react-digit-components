@@ -1,3 +1,3 @@
-import DigitToast from "./DigitToast.view.container";
+import DigitToast from "./DigitToast.view";
 
 export default DigitToast;

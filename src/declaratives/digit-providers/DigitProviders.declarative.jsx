@@ -9,8 +9,6 @@ import { BrowserRouter, HashRouter, MemoryRouter } from "react-router-dom";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import logger from "redux-logger";
 import thunkMiddleware from "redux-thunk";
-import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
-import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitTranslationsContext";
 import { DigitGammaContextSingletonProvider } from "../../contexts/DigitGammaContext";
@@ -43,8 +41,6 @@ class DigitProviders extends React.Component {
 
         function createReducer(asyncReducers) {
             return combineReducers({
-                toast,
-                dialog,
                 ...asyncReducers,
                 ...props.rootReducer
             });

@@ -1,3 +1,3 @@
-import DigitDialog from "./DigitDialog.view.container";
+import DigitDialog from "./DigitDialog.view";
 
 export default DigitDialog;

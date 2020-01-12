@@ -51,15 +51,6 @@ import useDigitFormFieldArray from "./hooks/use-digit-form-field-array";
 import useDigitToast from "./hooks/use-digit-toast";
 
 import {
-    digitDialogClosedCancel,
-    digitDialogClosedConfirm,
-    digitDialogCustomOpen,
-    digitDialogOpen
-} from "./views/digit-dialog/DigitDialog.view.action-creator";
-
-import { digitToastOpen } from "./views/digit-toast/DigitToast.view.action-creator";
-
-import {
     Center,
     Column,
     DownRightPosition,
@@ -108,15 +99,6 @@ import {
     Text,
     Title
 } from "./styles/digit-text/DigitText.styles";
-
-const DigitDialogActions = {
-    digitDialogOpen,
-    digitDialogCustomOpen,
-    digitDialogClosedCancel,
-    digitDialogClosedConfirm
-};
-
-const DigitToastActions = { digitToastOpen };
 
 const DigitLayout = {
     Flex,
@@ -210,9 +192,6 @@ export {
     DigitMenu,
     DigitTable,
     DigitCRUD,
-    /* Actions */
-    DigitToastActions,
-    DigitDialogActions,
     /* Declaratives */
     DigitProviders,
     /* Styles */

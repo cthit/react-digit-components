@@ -45,6 +45,7 @@ import DigitHeader from "./views/digit-header";
 import useDigitTranslations from "./hooks/use-digit-translations";
 import useGamma from "./hooks/use-gamma";
 import useGammaUser from "./hooks/use-gamma-user";
+import useDigitToast from "./hooks/use-digit-toast";
 
 import {
     digitDialogClosedCancel,
@@ -220,4 +221,5 @@ export {
     useDigitTranslations,
     useGamma,
     useGammaUser
+    useDigitToast
 };

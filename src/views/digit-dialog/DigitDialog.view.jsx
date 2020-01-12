@@ -1,129 +1,64 @@
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitButton from "../../elements/digit-button";
+import DigitCustomDialog from "../../elements/digit-custom-dialog";
 
-class DigitDialog extends React.Component {
-    state = {
-        open: false
-    };
-
-    componentDidUpdate(prevProps) {
-        if (this.state.open !== this.props.options.open) {
-            this.setState({ open: this.props.options.open });
-        }
-    }
-
-    cancel = () => {
-        const { options, digitDialogClosedCancel } = this.props;
-        digitDialogClosedCancel();
-        if (options.onCancel != null) {
-            options.onCancel();
-        }
-        this.setState({ open: false });
-    };
-
-    confirm = () => {
-        const { options, digitDialogClosedConfirm } = this.props;
-        digitDialogClosedConfirm();
-        options.onConfirm();
-        this.setState({ open: false });
-    };
-
-    render() {
-        const { options, custom } = this.props;
-
-        const { open } = this.state;
-
-        if (options == null) {
-            return null;
-        }
-
-        return (
-            <Dialog
-                open={open}
-                onClose={this.cancel}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">
-                    {options != null ? options.title : ""}
-                </DialogTitle>
-                <DialogContent>
-                    <>
-                        {custom && options.renderMain()}
-                        {!custom && (
-                            <DialogContentText id="alert-dialog-description">
-                                {options != null ? options.description : ""}
-                            </DialogContentText>
-                        )}
-                    </>
-                </DialogContent>
-                <DialogActions>
-                    {custom && options.renderButtons(this.confirm, this.cancel)}
-                    {!custom && (
-                        <>
-                            <DigitButton
-                                onClick={this.cancel}
-                                text={
-                                    options != null
-                                        ? options.cancelButtonText
-                                        : ""
-                                }
-                            />
-                            <DigitButton
-                                onClick={this.confirm}
-                                primary
-                                autoFocus
-                                raised
-                                text={
-                                    options != null
-                                        ? options.confirmButtonText
-                                        : ""
-                                }
-                            />
-                        </>
-                    )}
-                </DialogActions>
-            </Dialog>
-        );
-    }
-}
+const DigitDialog = ({
+    title,
+    open,
+    onClose,
+    onCancel,
+    onConfirm,
+    cancelButtonText,
+    confirmButtonText,
+    description
+}) => {
+    return (
+        <DigitCustomDialog
+            open={open}
+            title={title}
+            onCancel={onCancel}
+            onClose={onClose}
+            onConfirm={onConfirm}
+            renderMain={() => (
+                <DialogContentText id="alert-dialog-description">
+                    {description}
+                </DialogContentText>
+            )}
+            renderButtons={(confirm, cancel) => (
+                <>
+                    <DigitButton onClick={cancel} text={cancelButtonText} />
+                    <DigitButton
+                        onClick={confirm}
+                        primary
+                        autoFocus
+                        raised
+                        text={confirmButtonText}
+                    />
+                </>
+            )}
+        />
+    );
+};
 
 DigitDialog.displayName = "DigitDialog";
 DigitDialog.propTypes = {
     /** The options for a dialog */
-    options: PropTypes.shape({
-        /** When ok button has been pressed, onConfirm is called */
-        onConfirm: PropTypes.func.isRequired,
-        /** When cancel button has been pressed, onCancel is called */
-        onCancel: PropTypes.func,
-        /** The text for the cancel button */
-        cancelButtonText: PropTypes.string,
-        /** The text for the confirm button */
-        confirmButtonText: PropTypes.string,
-        /** If true, then the dialog opens */
-        open: PropTypes.bool,
-        /** The title of the dialog */
-        title: PropTypes.string,
-        /** The description of the dialog */
-        description: PropTypes.string,
-        /** If custom, you can render custom stuff*/
-        renderMain: PropTypes.func,
-        /** if custom, you can render buttons stuff*/
-        renderButtons: PropTypes.func
-    })
-};
-
-DigitDialog.defaultProps = {
-    options: {
-        renderMain: () => null,
-        renderButtons: () => null
-    }
+    /** When ok button has been pressed, onConfirm is called */
+    onConfirm: PropTypes.func.isRequired,
+    /** When cancel button has been pressed, onCancel is called */
+    onCancel: PropTypes.func,
+    /** The text for the cancel button */
+    cancelButtonText: PropTypes.string,
+    /** The text for the confirm button */
+    confirmButtonText: PropTypes.string,
+    /** If true, then the dialog opens */
+    open: PropTypes.bool,
+    /** The title of the dialog */
+    title: PropTypes.string,
+    /** The description of the dialog */
+    description: PropTypes.string
 };
 
 export default DigitDialog;

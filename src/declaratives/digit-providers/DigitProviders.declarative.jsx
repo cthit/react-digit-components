@@ -14,6 +14,8 @@ import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitTranslationsContext";
 import { DigitGammaContextSingletonProvider } from "../../contexts/DigitGammaContext";
+import { DigitToastContextSingletonProvider } from "../../contexts/DigitToastContext";
+import { DigitDialogContextSingletonProvider } from "../../contexts/DigitDialogContext";
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -91,17 +93,27 @@ class DigitProviders extends React.Component {
                             defaultLanguage={defaultLanguage}
                         >
                             <DigitGammaContextSingletonProvider>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    {hashRouter ? (
-                                        <HashRouter>{children}</HashRouter>
-                                    ) : memoryRouter ? (
-                                        <MemoryRouter>{children}</MemoryRouter>
-                                    ) : (
-                                        <BrowserRouter>
-                                            {children}
-                                        </BrowserRouter>
-                                    )}
-                                </MuiPickersUtilsProvider>
+                                <DigitToastContextSingletonProvider>
+                                    <DigitDialogContextSingletonProvider>
+                                        <MuiPickersUtilsProvider
+                                            utils={DateFnsUtils}
+                                        >
+                                            {hashRouter ? (
+                                                <HashRouter>
+                                                    {children}
+                                                </HashRouter>
+                                            ) : memoryRouter ? (
+                                                <MemoryRouter>
+                                                    {children}
+                                                </MemoryRouter>
+                                            ) : (
+                                                <BrowserRouter>
+                                                    {children}
+                                                </BrowserRouter>
+                                            )}
+                                        </MuiPickersUtilsProvider>
+                                    </DigitDialogContextSingletonProvider>
+                                </DigitToastContextSingletonProvider>
                             </DigitGammaContextSingletonProvider>
                         </DigitTranslationsContextSingletonProvider>
                     </Provider>

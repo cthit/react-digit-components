@@ -1,17 +1,17 @@
 import { useContext } from "react";
 import DigitDialogContext, {
-    OPEN_DIALOG
+    OPEN_CUSTOM_DIALOG
 } from "../contexts/DigitDialogContext";
 
-function useDigitDialog(defaultDialogProps = {}) {
+function useDigitCustomDialog(defaultCustomDialogProps) {
     const [, dispatch] = useContext(DigitDialogContext);
     return [
         dialog =>
             dispatch({
-                type: OPEN_DIALOG,
-                dialog: { ...defaultDialogProps, ...dialog }
+                type: OPEN_CUSTOM_DIALOG,
+                dialog: { ...defaultCustomDialogProps, ...dialog }
             })
     ];
 }
 
-export default useDigitDialog;
+export default useDigitCustomDialog;

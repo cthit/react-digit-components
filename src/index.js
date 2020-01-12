@@ -28,6 +28,7 @@ import DigitList from "./elements/digit-list";
 import DigitListSelectSingle from "./elements/digit-list-select-single";
 import DigitListSelectMultiple from "./elements/digit-list-select-multiple";
 import DigitButtonGroup from "./elements/digit-button-group";
+import DigitCustomDialog from "./elements/digit-custom-dialog";
 
 import DigitProviders from "./declaratives/digit-providers";
 
@@ -45,6 +46,8 @@ import DigitHeader from "./views/digit-header";
 import useDigitTranslations from "./hooks/use-digit-translations";
 import useGamma from "./hooks/use-gamma";
 import useGammaUser from "./hooks/use-gamma-user";
+import useDigitCustomDialog from "./hooks/use-digit-custom-dialog";
+import useDigitDialog from "./hooks/use-digit-dialog";
 import useDigitToast from "./hooks/use-digit-toast";
 
 import {
@@ -205,6 +208,7 @@ export {
     /* Views */
     DigitToast,
     DigitDialog,
+    DigitCustomDialog,
     DigitMenu,
     DigitTable,
     DigitCRUD,
@@ -221,5 +225,7 @@ export {
     useDigitTranslations,
     useGamma,
     useGammaUser
+    useDigitCustomDialog,
+    useDigitDialog,
     useDigitToast
 };

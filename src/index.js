@@ -39,8 +39,6 @@ import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";
 import DigitCalendar from "./views/digit-calendar";
 import DigitForm from "./views/digit-form";
-import DigitFormField from "./views/digit-form-field";
-import DigitFormFieldArray from "./views/digit-form-field-array";
 import DigitHeader from "./views/digit-header";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
@@ -179,8 +177,6 @@ export {
     DigitTooltip,
     DigitIconButton,
     DigitForm,
-    DigitFormField,
-    DigitFormFieldArray,
     DigitBottomNavigation,
     DigitTabs,
     DigitTextArea,

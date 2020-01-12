@@ -16,6 +16,8 @@ const translationsReducer = (state, action) => {
                 ...state,
                 commonTranslations: action.commonTranslations
             };
+        default:
+            return state;
     }
 };
 

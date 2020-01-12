@@ -26,6 +26,8 @@ const gammaContext = (state, action) => {
                 loading: false,
                 error: false
             };
+        default:
+            return state;
     }
 };
 

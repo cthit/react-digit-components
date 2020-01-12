@@ -1,7 +1,7 @@
 import DigitFormContext from "../contexts/DigitFormContext";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 
-const _swap = (value, index1, index2) => {
+const _swap = (value, x, y) => {
     const out = [...value];
     const b = out[y];
     out[y] = out[x];
@@ -15,7 +15,7 @@ const _move = (value, from, to) => {
     return out;
 };
 
-function useDigitFormFieldArray() {
+function useDigitFormFieldArray(name) {
     const form = useContext(DigitFormContext);
     const value = form.values[name];
     const onChange = useCallback(

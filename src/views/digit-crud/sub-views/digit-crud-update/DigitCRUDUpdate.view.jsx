@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import DigitEditData from "../../../../elements/digit-edit-data-card";
-import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
 import DigitLoading from "../../../../elements/digit-loading";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DeleteFAB from "../../elements/delete-fab";
+import useDigitToast from "../../../../hooks/use-digit-toast";
 
 const DigitCRUDUpdate = ({
     name,
@@ -39,9 +39,9 @@ const DigitCRUDUpdate = ({
     deleteDialogFormInitialValues,
     deleteDialogFormKeysOrder
 }) => {
-    const dispatch = useDispatch();
     const one = useSelector(state => state[name].one);
     const loading = useSelector(state => state[name].loading);
+    const [queueToast] = useDigitToast();
     useEffect(() => {
         readOneAction(id);
         return clearAction;
@@ -70,27 +70,23 @@ const DigitCRUDUpdate = ({
                             .then(response => {
                                 readOneAction(id);
                                 actions.setSubmitting(false);
-                                dispatch(
-                                    digitToastOpen({
-                                        text: toastUpdateSuccessful(
-                                            _updated,
-                                            _old,
-                                            response
-                                        )
-                                    })
-                                );
+                                queueToast({
+                                    text: toastUpdateSuccessful(
+                                        _updated,
+                                        _old,
+                                        response
+                                    )
+                                });
                             })
                             .catch(error => {
                                 actions.setSubmitting(false);
-                                dispatch(
-                                    digitToastOpen({
-                                        text: toastUpdateFailed(
-                                            _updated,
-                                            _old,
-                                            error
-                                        )
-                                    })
-                                );
+                                queueToast({
+                                    text: toastUpdateFailed(
+                                        _updated,
+                                        _old,
+                                        error
+                                    )
+                                });
                             });
                     }}
                     keysOrder={keysOrder.filter(

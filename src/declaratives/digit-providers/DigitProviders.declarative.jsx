@@ -12,8 +12,8 @@ import thunkMiddleware from "redux-thunk";
 import { dialog } from "../../views/digit-dialog/DigitDialog.view.reducer";
 import { toast } from "../../views/digit-toast/DigitToast.view.reducer";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import gammaUser from "../../reducers/GammaUser.reducer";
 import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitTranslationsContext";
+import { DigitGammaContextSingletonProvider } from "../../contexts/DigitGammaContext";
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -43,7 +43,6 @@ class DigitProviders extends React.Component {
             return combineReducers({
                 toast,
                 dialog,
-                gammaUser,
                 ...asyncReducers,
                 ...props.rootReducer
             });
@@ -91,15 +90,19 @@ class DigitProviders extends React.Component {
                         <DigitTranslationsContextSingletonProvider
                             defaultLanguage={defaultLanguage}
                         >
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                {hashRouter ? (
-                                    <HashRouter>{children}</HashRouter>
-                                ) : memoryRouter ? (
-                                    <MemoryRouter>{children}</MemoryRouter>
-                                ) : (
-                                    <BrowserRouter>{children}</BrowserRouter>
-                                )}
-                            </MuiPickersUtilsProvider>
+                            <DigitGammaContextSingletonProvider>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    {hashRouter ? (
+                                        <HashRouter>{children}</HashRouter>
+                                    ) : memoryRouter ? (
+                                        <MemoryRouter>{children}</MemoryRouter>
+                                    ) : (
+                                        <BrowserRouter>
+                                            {children}
+                                        </BrowserRouter>
+                                    )}
+                                </MuiPickersUtilsProvider>
+                            </DigitGammaContextSingletonProvider>
                         </DigitTranslationsContextSingletonProvider>
                     </Provider>
                 </ThemeProvider>

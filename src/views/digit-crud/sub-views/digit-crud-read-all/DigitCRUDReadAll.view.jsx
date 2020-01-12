@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useContext, useEffect } from "react";
 import DigitTable from "../../../digit-table";
 import {
     Center,
@@ -10,6 +9,7 @@ import DigitFAB from "../../../../elements/digit-fab";
 import Add from "@material-ui/icons/Add";
 import translations from "./DigitCRUDReadAll.view.translations";
 import useDigitTranslations from "../../../../hooks/use-digit-translations";
+import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
 
 //plz format this. I just want 1.0.0 released...
 function formatDate(date, text, type) {
@@ -82,8 +82,7 @@ const DigitCRUDReadAll = ({
     dateAndTimeProps
 }) => {
     const [text] = useDigitTranslations(translations);
-    const all = useSelector(state => state[name].all);
-    const loading = useSelector(state => state[name].loading);
+    const [{ all, loading }] = useContext(DigitCRUDContext);
 
     useEffect(() => {
         readAllAction();

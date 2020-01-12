@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import DigitDisplayData from "../../../../elements/digit-display-data";
 import {
     Card,
@@ -10,12 +10,12 @@ import {
     Center,
     Padding
 } from "../../../../styles/digit-layout/DigitLayout.styles";
-import { useSelector } from "react-redux";
 import DigitButton from "../../../../elements/digit-button";
 import DigitLoading from "../../../../elements/digit-loading";
 import DeleteFAB from "../../elements/delete-fab";
 import translations from "./DigitCRUDReadOne.view.translations";
 import useDigitTranslations from "../../../../hooks/use-digit-translations";
+import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
 
 //plz format this. I just want 1.0.0 released...
 function formatDate(date, text, type) {
@@ -107,8 +107,7 @@ const DigitCRUDReadOne = ({
     dateAndTimeProps
 }) => {
     const [text] = useDigitTranslations(translations);
-    const one = useSelector(state => state[name].one);
-    const loading = useSelector(state => state[name].loading);
+    const [{ one, loading }] = useContext(DigitCRUDContext);
 
     useEffect(() => {
         readOneAction(id);

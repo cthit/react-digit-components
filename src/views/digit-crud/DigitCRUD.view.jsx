@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { Route, Switch } from "react-router-dom";
@@ -7,7 +7,6 @@ import DigitCRUDCreate from "./sub-views/digit-crud-create";
 import DigitCRUDUpdate from "./sub-views/digit-crud-update";
 import DigitCRUDReadOne from "./sub-views/digit-crud-read-one";
 
-import { useDispatch, useSelector, useStore } from "react-redux";
 import {
     createClearAction,
     createCreateAction,
@@ -18,7 +17,9 @@ import {
 } from "./DigitCRUD.action-creator";
 import createCRUDReducer from "./DigitCRUD.reducer";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
-import useDigitTranslations from "../../hooks/use-digit-translations";
+import DigitCRUDContext, {
+    DigitCRUDContextProvider
+} from "../../contexts/DigitCRUDContext";
 
 function modifyFormComponentData(
     formComponentData,
@@ -38,7 +39,7 @@ function modifyFormComponentData(
     return output;
 }
 
-const DigitCRUD = ({
+const DigitCRUDInner = ({
     path,
     name,
     readOneRequest,
@@ -77,7 +78,6 @@ const DigitCRUD = ({
     detailsRenderEnd,
     detailsCustomRender,
     customDetailsRenders,
-    extractActiveLanguage,
     createPath,
     readAllPath,
     readOnePath,
@@ -102,10 +102,7 @@ const DigitCRUD = ({
     dateProps,
     dateAndTimeProps
 }) => {
-    const dispatch = useDispatch();
-    const store = useStore();
-    const crudState = useSelector(state => state[name]);
-    const [, activeLanguage] = useDigitTranslations({});
+    const [, dispatch] = useContext(DigitCRUDContext);
 
     const hasCreate = createRequest != null;
     const hasReadAll = readAllRequest != null;
@@ -115,52 +112,37 @@ const DigitCRUD = ({
 
     const createAction = useCallback(
         hasCreate
-            ? data => dispatch(createCreateAction(name, createRequest, data))
+            ? data => dispatch(createCreateAction(createRequest, data))
             : null,
-        [name, createRequest]
+        [createRequest]
     );
     const readOneAction = useCallback(
         hasReadOne
-            ? id => dispatch(createReadOneAction(name, readOneRequest, id))
+            ? id => dispatch(createReadOneAction(readOneRequest, id))
             : null,
-        [name, readOneRequest]
+        [readOneRequest]
     );
     const readAllAction = useCallback(
-        hasReadAll
-            ? () => dispatch(createReadAllAction(name, readAllRequest))
-            : null,
-        [name, readAllRequest]
+        hasReadAll ? () => dispatch(createReadAllAction(readAllRequest)) : null,
+        [readAllRequest]
     );
     const deleteAction = useCallback(
         hasDelete
             ? (id, form) =>
-                  dispatch(createDeleteAction(name, deleteRequest, id, form))
+                  dispatch(createDeleteAction(deleteRequest, id, form))
             : null,
-        [name, deleteRequest]
+        [deleteRequest]
     );
     const updateAction = useCallback(
         hasUpdate
             ? (id, data) =>
-                  dispatch(createUpdateAction(name, updateRequest, id, data))
+                  dispatch(createUpdateAction(updateRequest, id, data))
             : null,
-        [name, updateRequest]
+        [updateRequest]
     );
     const clearAction = useCallback(() => dispatch(createClearAction(name)), [
         name
     ]);
-
-    useEffect(() => {
-        store.injectReducer(
-            name,
-            createCRUDReducer(name, extractActiveLanguage, activeLanguage)
-        );
-        dispatch({ type: "INIT_" + name + "_REDUCER" });
-        return () => store.removeInjectedReducer(name);
-    }, [activeLanguage, dispatch, extractActiveLanguage, name, store]);
-
-    if (crudState == null) {
-        return null;
-    }
 
     const modifiedFormComponentData = modifyFormComponentData(
         formComponentData,
@@ -169,202 +151,208 @@ const DigitCRUD = ({
     );
 
     return (
-        <Fill>
-            <Switch>
-                {hasCreate && (
-                    <Route
-                        exact
-                        path={path + createPath}
-                        render={() => (
-                            <DigitCRUDCreate
-                                createAction={createAction}
-                                path={path}
-                                formComponentData={modifiedFormComponentData}
-                                formValidationSchema={
-                                    createFormValidationSchema != null
-                                        ? createFormValidationSchema
-                                        : formValidationSchema
-                                }
-                                formInitialValues={formInitialValues}
-                                keysOrder={
-                                    createKeysOrder != null
-                                        ? createKeysOrder
-                                        : keysOrder
-                                }
-                                createTitle={createTitle}
-                                toastCreateFailed={toastCreateFailed}
-                                toastCreateSuccessful={toastCreateSuccessful}
-                                createButtonText={createButtonText}
-                                backButtonText={backButtonText}
-                                readAllPath={readAllPath}
-                                backFromCreatePath={backFromCreatePath}
-                            />
-                        )}
-                    />
-                )}
-                {hasUpdate && hasReadOne && (
-                    <Route
-                        exact
-                        path={path + updatePath}
-                        render={props => (
-                            <DigitCRUDUpdate
-                                name={name}
-                                readOneAction={readOneAction}
-                                updateAction={updateAction}
-                                deleteAction={deleteAction}
-                                clearAction={clearAction}
-                                updateTitle={updateTitle}
-                                id={
-                                    staticId != null
-                                        ? staticId
-                                        : props.match.params.id
-                                }
-                                history={props.history}
-                                path={path}
-                                formComponentData={modifiedFormComponentData}
-                                formValidationSchema={
-                                    updateFormValidationSchema == null
-                                        ? () => formValidationSchema
-                                        : updateFormValidationSchema
-                                }
-                                keysOrder={
-                                    updateKeysOrder != null
-                                        ? updateKeysOrder
-                                        : keysOrder
-                                }
-                                toastUpdateSuccessful={toastUpdateSuccessful}
-                                toastUpdateFailed={toastUpdateFailed}
-                                backButtonText={backButtonText}
-                                updateButtonText={updateButtonText}
-                                deleteButtonText={deleteButtonText}
-                                dialogDeleteTitle={dialogDeleteTitle}
-                                dialogDeleteDescription={
-                                    dialogDeleteDescription
-                                }
-                                dialogDeleteConfirm={dialogDeleteConfirm}
-                                dialogDeleteCancel={dialogDeleteCancel}
-                                toastDeleteSuccessful={toastDeleteSuccessful}
-                                toastDeleteFailed={toastDeleteFailed}
-                                readAllPath={readAllPath}
-                                readOnePath={readOnePath}
-                                backFromUpdatePath={backFromUpdatePath}
-                                backFromDeletePath={backFromDeletePath}
-                                deleteDialogFormComponentData={
-                                    deleteDialogFormComponentData
-                                }
-                                deleteDialogFormValidationSchema={
-                                    deleteDialogFormValidationSchema
-                                }
-                                deleteDialogFormInitialValues={
-                                    deleteDialogFormInitialValues
-                                }
-                                deleteDialogFormKeysOrder={
-                                    deleteDialogFormKeysOrder
-                                }
-                            />
-                        )}
-                    />
-                )}
-                {hasReadOne && (
-                    <Route
-                        exact
-                        path={path + readOnePath}
-                        render={props => (
-                            <DigitCRUDReadOne
-                                name={name}
-                                readOneAction={readOneAction}
-                                clearAction={clearAction}
-                                keysText={keysText}
-                                keysOrder={
-                                    readOneKeysOrder != null
-                                        ? readOneKeysOrder
-                                        : keysOrder
-                                }
-                                path={path}
-                                id={
-                                    staticId != null
-                                        ? staticId
-                                        : props.match.params.id
-                                }
-                                history={props.history}
-                                hasUpdate={hasUpdate}
-                                backButtonText={backButtonText}
-                                updateButtonText={updateButtonText}
-                                detailsTitle={detailsTitle}
-                                detailsCustomRender={detailsCustomRender}
-                                detailsRenderStart={detailsRenderStart}
-                                detailsRenderEnd={detailsRenderEnd}
-                                detailsRenderCardStart={detailsRenderCardStart}
-                                detailsRenderCardEnd={detailsRenderCardEnd}
-                                customDetailsRenders={customDetailsRenders}
-                                /** Only used if update is null*/
-                                deleteAction={deleteAction}
-                                deleteButtonText={deleteButtonText}
-                                dialogDeleteTitle={dialogDeleteTitle}
-                                dialogDeleteDescription={
-                                    dialogDeleteDescription
-                                }
-                                dialogDeleteConfirm={dialogDeleteConfirm}
-                                dialogDeleteCancel={dialogDeleteCancel}
-                                toastDeleteSuccessful={toastDeleteSuccessful}
-                                toastDeleteFailed={toastDeleteFailed}
-                                readAllPath={readAllPath}
-                                updatePath={updatePath}
-                                backFromReadOnePath={backFromReadOnePath}
-                                backFromDeletePath={backFromDeletePath}
-                                deleteDialogFormComponentData={
-                                    deleteDialogFormComponentData
-                                }
-                                deleteDialogFormValidationSchema={
-                                    deleteDialogFormValidationSchema
-                                }
-                                deleteDialogFormInitialValues={
-                                    deleteDialogFormInitialValues
-                                }
-                                deleteDialogFormKeysOrder={
-                                    deleteDialogFormKeysOrder
-                                }
-                                timeProps={timeProps}
-                                dateProps={dateProps}
-                                dateAndTimeProps={dateAndTimeProps}
-                            />
-                        )}
-                    />
-                )}
-                {hasReadAll && (
-                    <Route
-                        exact
-                        path={path + readAllPath}
-                        render={({ history }) => (
-                            <DigitCRUDReadAll
-                                name={name}
-                                readAllAction={readAllAction}
-                                clearAction={clearAction}
-                                keysText={keysText}
-                                keysOrder={
-                                    readAllKeysOrder != null
-                                        ? readAllKeysOrder
-                                        : keysOrder
-                                }
-                                tableProps={tableProps}
-                                idProp={idProp}
-                                hasReadOne={hasReadOne}
-                                path={path}
-                                detailsButtonText={detailsButtonText}
-                                createButtonText={createButtonText}
-                                hasCreate={hasCreate}
-                                history={history}
-                                readOnePath={readOnePath}
-                                createPath={createPath}
-                                timeProps={timeProps}
-                                dateProps={dateProps}
-                                dateAndTimeProps={dateAndTimeProps}
-                            />
-                        )}
-                    />
-                )}
-            </Switch>
-        </Fill>
+        <Switch>
+            {hasCreate && (
+                <Route
+                    exact
+                    path={path + createPath}
+                    render={() => (
+                        <DigitCRUDCreate
+                            createAction={createAction}
+                            path={path}
+                            formComponentData={modifiedFormComponentData}
+                            formValidationSchema={
+                                createFormValidationSchema != null
+                                    ? createFormValidationSchema
+                                    : formValidationSchema
+                            }
+                            formInitialValues={formInitialValues}
+                            keysOrder={
+                                createKeysOrder != null
+                                    ? createKeysOrder
+                                    : keysOrder
+                            }
+                            createTitle={createTitle}
+                            toastCreateFailed={toastCreateFailed}
+                            toastCreateSuccessful={toastCreateSuccessful}
+                            createButtonText={createButtonText}
+                            backButtonText={backButtonText}
+                            readAllPath={readAllPath}
+                            backFromCreatePath={backFromCreatePath}
+                        />
+                    )}
+                />
+            )}
+            {hasUpdate && hasReadOne && (
+                <Route
+                    exact
+                    path={path + updatePath}
+                    render={props => (
+                        <DigitCRUDUpdate
+                            name={name}
+                            readOneAction={readOneAction}
+                            updateAction={updateAction}
+                            deleteAction={deleteAction}
+                            clearAction={clearAction}
+                            updateTitle={updateTitle}
+                            id={
+                                staticId != null
+                                    ? staticId
+                                    : props.match.params.id
+                            }
+                            history={props.history}
+                            path={path}
+                            formComponentData={modifiedFormComponentData}
+                            formValidationSchema={
+                                updateFormValidationSchema == null
+                                    ? () => formValidationSchema
+                                    : updateFormValidationSchema
+                            }
+                            keysOrder={
+                                updateKeysOrder != null
+                                    ? updateKeysOrder
+                                    : keysOrder
+                            }
+                            toastUpdateSuccessful={toastUpdateSuccessful}
+                            toastUpdateFailed={toastUpdateFailed}
+                            backButtonText={backButtonText}
+                            updateButtonText={updateButtonText}
+                            deleteButtonText={deleteButtonText}
+                            dialogDeleteTitle={dialogDeleteTitle}
+                            dialogDeleteDescription={dialogDeleteDescription}
+                            dialogDeleteConfirm={dialogDeleteConfirm}
+                            dialogDeleteCancel={dialogDeleteCancel}
+                            toastDeleteSuccessful={toastDeleteSuccessful}
+                            toastDeleteFailed={toastDeleteFailed}
+                            readAllPath={readAllPath}
+                            readOnePath={readOnePath}
+                            backFromUpdatePath={backFromUpdatePath}
+                            backFromDeletePath={backFromDeletePath}
+                            deleteDialogFormComponentData={
+                                deleteDialogFormComponentData
+                            }
+                            deleteDialogFormValidationSchema={
+                                deleteDialogFormValidationSchema
+                            }
+                            deleteDialogFormInitialValues={
+                                deleteDialogFormInitialValues
+                            }
+                            deleteDialogFormKeysOrder={
+                                deleteDialogFormKeysOrder
+                            }
+                        />
+                    )}
+                />
+            )}
+            {hasReadOne && (
+                <Route
+                    exact
+                    path={path + readOnePath}
+                    render={props => (
+                        <DigitCRUDReadOne
+                            name={name}
+                            readOneAction={readOneAction}
+                            clearAction={clearAction}
+                            keysText={keysText}
+                            keysOrder={
+                                readOneKeysOrder != null
+                                    ? readOneKeysOrder
+                                    : keysOrder
+                            }
+                            path={path}
+                            id={
+                                staticId != null
+                                    ? staticId
+                                    : props.match.params.id
+                            }
+                            history={props.history}
+                            hasUpdate={hasUpdate}
+                            backButtonText={backButtonText}
+                            updateButtonText={updateButtonText}
+                            detailsTitle={detailsTitle}
+                            detailsCustomRender={detailsCustomRender}
+                            detailsRenderStart={detailsRenderStart}
+                            detailsRenderEnd={detailsRenderEnd}
+                            detailsRenderCardStart={detailsRenderCardStart}
+                            detailsRenderCardEnd={detailsRenderCardEnd}
+                            customDetailsRenders={customDetailsRenders}
+                            /** Only used if update is null*/
+                            deleteAction={deleteAction}
+                            deleteButtonText={deleteButtonText}
+                            dialogDeleteTitle={dialogDeleteTitle}
+                            dialogDeleteDescription={dialogDeleteDescription}
+                            dialogDeleteConfirm={dialogDeleteConfirm}
+                            dialogDeleteCancel={dialogDeleteCancel}
+                            toastDeleteSuccessful={toastDeleteSuccessful}
+                            toastDeleteFailed={toastDeleteFailed}
+                            readAllPath={readAllPath}
+                            updatePath={updatePath}
+                            backFromReadOnePath={backFromReadOnePath}
+                            backFromDeletePath={backFromDeletePath}
+                            deleteDialogFormComponentData={
+                                deleteDialogFormComponentData
+                            }
+                            deleteDialogFormValidationSchema={
+                                deleteDialogFormValidationSchema
+                            }
+                            deleteDialogFormInitialValues={
+                                deleteDialogFormInitialValues
+                            }
+                            deleteDialogFormKeysOrder={
+                                deleteDialogFormKeysOrder
+                            }
+                            timeProps={timeProps}
+                            dateProps={dateProps}
+                            dateAndTimeProps={dateAndTimeProps}
+                        />
+                    )}
+                />
+            )}
+            {hasReadAll && (
+                <Route
+                    exact
+                    path={path + readAllPath}
+                    render={({ history }) => (
+                        <DigitCRUDReadAll
+                            name={name}
+                            readAllAction={readAllAction}
+                            clearAction={clearAction}
+                            keysText={keysText}
+                            keysOrder={
+                                readAllKeysOrder != null
+                                    ? readAllKeysOrder
+                                    : keysOrder
+                            }
+                            tableProps={tableProps}
+                            idProp={idProp}
+                            hasReadOne={hasReadOne}
+                            path={path}
+                            detailsButtonText={detailsButtonText}
+                            createButtonText={createButtonText}
+                            hasCreate={hasCreate}
+                            history={history}
+                            readOnePath={readOnePath}
+                            createPath={createPath}
+                            timeProps={timeProps}
+                            dateProps={dateProps}
+                            dateAndTimeProps={dateAndTimeProps}
+                        />
+                    )}
+                />
+            )}
+        </Switch>
+    );
+};
+
+const DigitCRUD = props => {
+    return (
+        <DigitCRUDContextProvider
+            extractActiveLanguage={props.extractActiveLanguage}
+        >
+            <Fill>
+                <DigitCRUDInner {...props} />
+            </Fill>
+        </DigitCRUDContextProvider>
     );
 };
 

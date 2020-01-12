@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useContext, useEffect } from "react";
 import DigitEditData from "../../../../elements/digit-edit-data-card";
 import DigitLoading from "../../../../elements/digit-loading";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DeleteFAB from "../../elements/delete-fab";
 import useDigitToast from "../../../../hooks/use-digit-toast";
+import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
 
 const DigitCRUDUpdate = ({
     name,
@@ -39,8 +39,8 @@ const DigitCRUDUpdate = ({
     deleteDialogFormInitialValues,
     deleteDialogFormKeysOrder
 }) => {
-    const one = useSelector(state => state[name].one);
-    const loading = useSelector(state => state[name].loading);
+    const [{ one, loading }] = useContext(DigitCRUDContext);
+
     const [queueToast] = useDigitToast();
     useEffect(() => {
         readOneAction(id);

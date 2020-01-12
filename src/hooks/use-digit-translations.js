@@ -19,7 +19,7 @@ function getNewText(translations, commonTranslations, activeLanguage) {
     return newText;
 }
 
-function useDigitTranslations(translations) {
+function useDigitTranslations(translations = {}) {
     const [state, dispatch] = useContext(DigitTranslationsContext);
     const { activeLanguage, commonTranslations } = state;
     const [text, setText] = useState({});

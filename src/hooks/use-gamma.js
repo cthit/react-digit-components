@@ -2,13 +2,13 @@ import axios from "axios";
 import useGammaUser from "./use-gamma-user";
 import _ from "lodash";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { digitToastOpen } from "../views/digit-toast/DigitToast.view.action-creator";
 import DigitGammaContext, {
     GET_USER_FAILED,
     GET_USER_LOADING,
     GET_USER_SUCCESSFULLY,
     GET_USER_TOKEN_FAILED
 } from "../contexts/DigitGammaContext";
+import useDigitToast from "./use-digit-toast";
 
 function updateMe(gammaPath, dispatch, name) {
     dispatch({ type: GET_USER_LOADING });
@@ -66,6 +66,14 @@ function useGamma(
     const [, dispatch] = useContext(DigitGammaContext);
     const [loadingMe, setLoadingMe] = useState(false);
     const [user, loading, error] = useGammaUser();
+    const [queueToast] = useDigitToast({
+        actionHandler: () => {
+            redirectToGamma(gammaPath, redirect, id);
+        },
+        text: toastSignedOutText,
+        duration: toastDuration,
+        actionText: toastSignBackInText
+    });
 
     const jwtAuth = useMemo(() => sessionStorage.getItem("auth-" + name), [
         name
@@ -74,16 +82,7 @@ function useGamma(
     useEffect(() => {
         if (error && !loading) {
             sessionStorage.removeItem("auth-" + name);
-            dispatch(
-                digitToastOpen({
-                    text: toastSignedOutText,
-                    duration: toastDuration,
-                    actionText: toastSignBackInText,
-                    actionHandler: () => {
-                        redirectToGamma(gammaPath, redirect, id);
-                    }
-                })
-            );
+            queueToast();
         }
     }, [
         loading,

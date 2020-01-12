@@ -32,12 +32,8 @@ const DigitEditDataCard = ({
     extraButton,
     extraButtonTo
 }) => {
-    const formName = useMemo(() => JSON.stringify(keysComponentData));
-    // console.log(formName);
-    const [formValues, setFormValues] = useState({
-        isSubmitting: false,
-        isValid: false
-    });
+    const formName = useMemo(() => JSON.stringify(keysComponentData).trim());
+    const [submitValid, setSubmitValid] = useState(false);
     return (
         <Size
             minWidth={minWidth}
@@ -69,19 +65,14 @@ const DigitEditDataCard = ({
                         validationSchema={validationSchema}
                         marginVertical={marginVertical}
                         formName={formName}
-                        onFormikChange={formik => {
-                            setFormValues({
-                                isSubmitting: formik.isSubmitting,
-                                isValid: formik.isValid
-                            });
-                        }}
+                        onValidSubmitChange={submitValid =>
+                            setSubmitValid(submitValid)
+                        }
                     />
                 </CardBody>
                 <CardButtons reverseDirection>
                     <DigitButton
-                        disabled={
-                            formValues.isSubmitting || !formValues.isValid
-                        } //props.validationSchema.isValidSync(props.initialValues)
+                        disabled={!submitValid}
                         submit
                         text={submitText}
                         raised

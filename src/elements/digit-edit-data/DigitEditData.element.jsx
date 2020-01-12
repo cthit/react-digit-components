@@ -2,14 +2,30 @@ import PropTypes from "prop-types";
 import React, { createElement, useMemo } from "react";
 import DigitButton from "../digit-button";
 import DigitForm from "../../views/digit-form";
-import { Size } from "../../styles/digit-layout/DigitLayout.styles";
+import {
+    Column,
+    Padding,
+    Row
+} from "../../styles/digit-layout/DigitLayout.styles";
 import * as yup from "yup";
 import useDigitFormField from "../../hooks/use-digit-form-field";
 
-function isInitialValid(props) {
-    if (!props.validationSchema) return true;
-    return props.validationSchema.isValidSync(props.initialValues);
-}
+const DigitEditDataInner = ({
+    keysOrder,
+    keysComponentData,
+    marginVertical = 8
+}) => {
+    return keysOrder.map(key => (
+        <>
+            <div style={{ marginBottom: marginVertical / 2 }} />
+            <DigitEditDataField
+                name={key}
+                componentData={keysComponentData[key]}
+            />
+            <div style={{ marginBottom: marginVertical / 2 }} />
+        </>
+    ));
+};
 
 const DigitEditDataField = ({ name, componentData }) => {
     const field = useDigitFormField(name);
@@ -32,49 +48,31 @@ const DigitEditData = ({
     onSubmit,
     keysOrder,
     keysComponentData,
-    titleText,
-    submitText,
     marginVertical,
-    absWidth,
-    absHeight,
-    minWidth,
-    minHeight,
-    maxWidth,
-    maxHeight,
-    width,
-    height,
-    extraButton,
-    extraButtonTo
+    hasButtons,
+    renderButtons,
+    formName,
+    onValidSubmitChange
 }) => {
     return (
-        <Size
-            minWidth={minWidth}
-            maxWidth={maxWidth}
-            minHeight={minHeight}
-            maxHeight={maxHeight}
-            absWidth={absWidth}
-            absHeight={absHeight}
-            width={width}
-            height={height}
-        >
-            <DigitForm
-                validationSchema={validationSchema}
-                initialValues={initialValues}
-                isInitialValid={isInitialValid}
-                onSubmit={onSubmit}
-                render={() => (
-                    <>
-                        {keysOrder.map(key => (
-                            <DigitEditDataField
-                                name={key}
-                                componentData={keysComponentData[key]}
-                            />
-                        ))}
-                        <DigitButton text={"Submit"} submit />
-                    </>
-                )}
-            />
-        </Size>
+        <DigitForm
+            formName={formName}
+            validationSchema={validationSchema}
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            onValidSubmitChange={onValidSubmitChange}
+            render={form => (
+                <Column>
+                    <DigitEditDataInner
+                        marginVertical={marginVertical}
+                        keysOrder={keysOrder}
+                        keysComponentData={keysComponentData}
+                    />
+                    <Padding />
+                    {hasButtons && <Row reverse>{renderButtons(form)}</Row>}
+                </Column>
+            )}
+        />
     );
 };
 
@@ -127,7 +125,17 @@ DigitEditData.defaultProps = {
     minWidth: "300px",
     maxWidth: "300px",
     keysOrder: [],
-    isInitialValid: false
+    isInitialValid: false,
+    hasButtons: false,
+    renderButtons: form => (
+        <DigitButton
+            disabled={form.isSubmitting || !form.isValid}
+            text={"Submit"}
+            submit
+            raised
+            primary
+        />
+    )
 };
 
 export default DigitEditData;

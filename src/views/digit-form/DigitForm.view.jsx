@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import DigitFormContext from "../../contexts/DigitFormContext";
-
-const FullWidthForm = styled.form`
-    width: 100%;
-`;
 
 const yupToFormErrors = yupError => {
     const errors = {};
@@ -23,9 +19,11 @@ const DigitForm = ({
     onSubmit,
     validationSchema,
     render,
-    isInitialValid,
-    name
+    formName,
+    forceChange,
+    onValidSubmitChange
 }) => {
+    const [isSubmitting, setSubmitting] = useState(false);
     const [values, setValues] = useState(initialValues);
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
@@ -47,23 +45,18 @@ const DigitForm = ({
             }),
         []
     );
-    const handleSubmit = event => {
-        event.preventDefault();
-        onSubmit(values);
-    };
-    const handleReset = event => {};
 
-    useEffect(() => {
-        runValidationSchema(values)
-            .then(res => {
-                setErrors(yupToFormErrors(res));
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }, [validationSchema, JSON.stringify(values)]);
+    const handleReset = useCallback(() => {
+        resetForm();
+    }, []);
 
-    const runValidationSchema = React.useCallback(
+    const resetForm = useCallback(() => {
+        setSubmitting(false);
+        setValues(initialValues);
+        setTouched({});
+    }, []);
+
+    const runValidationSchema = useCallback(
         values => {
             return new Promise((resolve, reject) => {
                 validationSchema
@@ -87,23 +80,58 @@ const DigitForm = ({
         [validationSchema]
     );
 
+    useEffect(() => {
+        runValidationSchema(values)
+            .then(res => {
+                setErrors(yupToFormErrors(res));
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, [validationSchema, JSON.stringify(values)]);
+
+    const isValid = useMemo(() => Object.keys(errors).length === 0, [
+        Object.keys(errors).length
+    ]);
+
+    const form = {
+        values,
+        errors,
+        touched,
+        handleChange,
+        handleTouched,
+        isValid,
+        isSubmitting
+    };
+
+    const actions = {
+        setSubmitting,
+        resetForm
+    };
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        onSubmit(values, actions);
+    };
+
+    useEffect(() => {
+        if (onValidSubmitChange != null) {
+            onValidSubmitChange(!isSubmitting && isValid);
+        }
+    }, [isValid, isSubmitting]);
+
+    //todo implement forceChange
+
     return (
-        <DigitFormContext.Provider
-            value={{
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleTouched
-            }}
-        >
-            <FullWidthForm
+        <DigitFormContext.Provider value={form}>
+            <form
+                id={formName}
                 onReset={handleReset}
                 onSubmit={handleSubmit}
                 action={"#"}
             >
-                {render({ values })}
-            </FullWidthForm>
+                {render(form)}
+            </form>
         </DigitFormContext.Provider>
     );
 };
@@ -123,7 +151,11 @@ DigitForm.propTypes = {
     /** A render prop. See https://jaredpalmer.com/formik/docs/api/formik#render-props-formikprops-values-reactnode.
      * See examples in digit-form/readme.md for examples.
      */
-    render: PropTypes.func.isRequired
+    render: PropTypes.func.isRequired,
+    /**
+     * A unique name for the form
+     */
+    name: PropTypes.string
 };
 
 DigitForm.defaultProps = {

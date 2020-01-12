@@ -1,0 +1,30 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    useDigitCustomDialog,
+    DigitButton
+} from "../../src";
+import * as yup from "yup";
+
+# useDigitCustomDialog
+
+<Meta title="Hooks|useDigitCustomDialog" decorators={[(StoryFn) => <div style={{height: "500px"}}><StoryFn/></div>]}/>
+
+## hej
+
+<Preview>
+    <Story name="dialog">
+        {() => {
+            const [openDialog] = useDigitCustomDialog({
+                title: "Oh"
+            });
+            return (
+                <>
+                    <DigitButton raised primary onClick={() => openDialog({renderMain: () => <div style={{backgroundColor: "red", width: "50px", height: "50px"}}>what</div>})} text="Open dialog"/>
+                </>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={useDigitCustomDialog} />

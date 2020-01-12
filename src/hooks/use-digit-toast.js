@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import DigitToastContext, { SHOW_TOAST } from "../contexts/DigitToastContext";
+import DigitToastContext, { QUEUE_TOAST } from "../contexts/DigitToastContext";
 
 /**
  * {
@@ -19,7 +19,7 @@ function useDigitToast(
     return [
         toast =>
             dispatch({
-                type: SHOW_TOAST,
+                type: QUEUE_TOAST,
                 toast: { ...defaultToastProps, ...toast }
             })
     ];

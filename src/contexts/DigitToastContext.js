@@ -2,12 +2,12 @@ import React, { createContext, useEffect, useReducer, useState } from "react";
 import DigitToast from "../views/digit-toast/DigitToast.view";
 const DigitToastContext = createContext({});
 
-const SHOW_TOAST = "show-toast";
+const QUEUE_TOAST = "queue-toast";
 const POP_TOAST = "pop-toast";
 
 const toastReducer = (state, action) => {
     switch (action.type) {
-        case SHOW_TOAST:
+        case QUEUE_TOAST:
             return [...state, { ...action.toast }];
         case POP_TOAST:
             const newState = [...state];
@@ -60,5 +60,5 @@ const DigitToastContextSingletonProvider = ({ children }) => {
     );
 };
 
-export { DigitToastContextSingletonProvider, SHOW_TOAST };
+export { DigitToastContextSingletonProvider, QUEUE_TOAST };
 export default DigitToastContext;

@@ -15,14 +15,14 @@ import * as yup from "yup";
 <Preview>
     <Story name="Standard">
         {() => {
-            const [openToast] = useDigitToast({
+            const [queueToast] = useDigitToast({
                 duration: 3000,
                 actionText: "hej",
                 actionHandler: () => {}
             });
             return (
                 <>
-                    <DigitButton raised primary onClick={() => openToast({text: "Hej: " + (new Date().getTime()/24)})}/>
+                    <DigitButton raised primary onClick={() => queueToast({text: "Hej: " + (new Date().getTime()/24)})}/>
                 </>
             );
         }}

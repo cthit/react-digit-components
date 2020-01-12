@@ -48,6 +48,8 @@ import useGamma from "./hooks/use-gamma";
 import useGammaUser from "./hooks/use-gamma-user";
 import useDigitCustomDialog from "./hooks/use-digit-custom-dialog";
 import useDigitDialog from "./hooks/use-digit-dialog";
+import useDigitFormField from "./hooks/use-digit-form-field";
+import useDigitFormFieldArray from "./hooks/use-digit-form-field-array";
 import useDigitToast from "./hooks/use-digit-toast";
 
 import {
@@ -224,8 +226,10 @@ export {
     /* Hooks */
     useDigitTranslations,
     useGamma,
-    useGammaUser
+    useGammaUser,
     useDigitCustomDialog,
     useDigitDialog,
+    useDigitFormField,
+    useDigitFormFieldArray,
     useDigitToast
 };

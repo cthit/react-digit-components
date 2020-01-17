@@ -2,8 +2,6 @@ import { Fragment, useState } from "react";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import {
     DigitTextArea,
-    DigitForm,
-    DigitFormField,
     DigitEditData,
     DigitLayout,
     DigitButton
@@ -306,67 +304,53 @@ The `DigitTextArea` is uncontrolled, meaning you have to manage the value and ch
     </Story>
 </Preview>
 
-## How to use with DigitForm
-
-<Preview>
-    <Story name="DigitTextArea and DigitForm">
-        <DigitForm
-            render={() => (
-                <DigitLayout.Size width="300px">
-                    <DigitLayout.Column>
-                        <DigitFormField
-                            name="firstName"
-                            component={DigitTextArea}
-                            componentProps={{
-                                outlined: true,
-                                upperLabel: "First name"
-                            }}
-                        />
-                        <DigitButton submit text="Send" />
-                    </DigitLayout.Column>
-                </DigitLayout.Size>
-            )}
-            validationSchema={yup.object().shape({
-                firstName: yup.string().required()
-            })}
-            initialValues={{
-                firstName: ""
-            }}
-            onSubmit={(values, actions) => {
-                console.log(values);
-                actions.resetForm();
-            }}
-        />
-    </Story>
-</Preview>
-
 ## How to use with DigitEditData
 
 <Preview>
-    <Story name="DigitTextArea and DigitEditData">
+    <Story name="Text field with EditData">
         <DigitEditData
+            hasButtons
             initialValues={{
-                firstName: ""
+                firstname: "",
+                surname: "",
+                other: ""
             }}
             onSubmit={(values, actions) => {
                 console.log(values);
                 actions.resetForm();
             }}
             validationSchema={yup.object().shape({
-                firstName: yup.string().required()
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                other: yup.string().required()
             })}
-            keysOrder={["firstName"]}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "other"]}
             keysComponentData={{
-                firstName: {
+                firstname: {
                     component: DigitTextArea,
                     componentProps: {
-                        filled: true,
                         upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextArea,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                other: {
+                    component: DigitTextArea,
+                    componentProps: {
+                        upperLabel: "Other",
+                        outlined: true
                     }
                 }
             }}
-            titleText="Your name"
-            submitText="Send"
+            submitButton={{    
+                text: "Skicka",
+            }}
         />
     </Story>
 </Preview>

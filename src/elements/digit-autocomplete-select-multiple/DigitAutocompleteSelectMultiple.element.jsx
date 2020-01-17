@@ -25,7 +25,9 @@ const DigitAutocompleteSelectMultiple = ({
     disabled,
     outlined,
     filled,
-    chipOutlined
+    chipOutlined,
+    checkboxPrimary,
+    checkboxSecondary
 }) => {
     const [text] = useDigitTranslations(translations);
 
@@ -66,6 +68,13 @@ const DigitAutocompleteSelectMultiple = ({
                             checkedIcon={checkedIcon}
                             style={{ marginRight: 8 }}
                             checked={selected}
+                            color={
+                                checkboxPrimary
+                                    ? "primary"
+                                    : checkboxSecondary
+                                    ? "secondary"
+                                    : "default"
+                            }
                         />
                         {obj.text}
                     </React.Fragment>

@@ -24,9 +24,6 @@ const styles = theme => ({
     tabTextColorPrimary: {
         color: "white !important"
     },
-    tabSelected: {
-        color: theme.palette.secondary.main + " !important"
-    },
     indicator: {
         height: "3px"
     }
@@ -67,7 +64,6 @@ const DigitTabs = ({
                 return (
                     <Tab
                         classes={{
-                            selected: classes.tabSelected,
                             textColorPrimary: classes.tabTextColorPrimary
                         }}
                         disabled={tab.disabled}

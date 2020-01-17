@@ -16,7 +16,7 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 # DigitEditData
 
-The easier, but not as customizable way, to create a form as opposed to `DigitForm`. What you will get is a DigitDesign.Card and input component that you specify. You should use `yup` for validation. It's super easy, you can read all about it here: https://github.com/jquense/yup. In the `onSubmit` function, you get two props. `values`, which is the data from the form. `actions` has a bunch cool functions, however, the only useful function is `resetForm`. More information is available here: https://jaredpalmer.com/formik/docs/api/formik.
+The easier and optimized way to handle forms. This is a single component where you create everything via objects. `DigitForm`, along with `useDigitFormField` and `useDigitFormFieldArray` gives more control, but this gets you up and running faster. 
 
 <Preview>
     <Story name="Normal">

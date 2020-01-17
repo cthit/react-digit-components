@@ -41,7 +41,6 @@ function modifyFormComponentData(
 
 const DigitCRUDInner = ({
     path,
-    name,
     readOneRequest,
     readAllRequest,
     updateRequest,
@@ -140,9 +139,7 @@ const DigitCRUDInner = ({
             : null,
         [updateRequest]
     );
-    const clearAction = useCallback(() => dispatch(createClearAction(name)), [
-        name
-    ]);
+    const clearAction = useCallback(() => dispatch(createClearAction()));
 
     const modifiedFormComponentData = modifyFormComponentData(
         formComponentData,
@@ -189,7 +186,6 @@ const DigitCRUDInner = ({
                     path={path + updatePath}
                     render={props => (
                         <DigitCRUDUpdate
-                            name={name}
                             readOneAction={readOneAction}
                             updateAction={updateAction}
                             deleteAction={deleteAction}
@@ -250,7 +246,6 @@ const DigitCRUDInner = ({
                     path={path + readOnePath}
                     render={props => (
                         <DigitCRUDReadOne
-                            name={name}
                             readOneAction={readOneAction}
                             clearAction={clearAction}
                             keysText={keysText}
@@ -314,7 +309,6 @@ const DigitCRUDInner = ({
                     path={path + readAllPath}
                     render={({ history }) => (
                         <DigitCRUDReadAll
-                            name={name}
                             readAllAction={readAllAction}
                             clearAction={clearAction}
                             keysText={keysText}
@@ -359,8 +353,6 @@ const DigitCRUD = props => {
 DigitCRUD.propTypes = {
     /** Under what path this CRUD will be under */
     path: PropTypes.string.isRequired,
-    /** The name of the CRUD. Will be the name of the reducer */
-    name: PropTypes.string.isRequired,
     /** A function GET request that returns a promise. Args: (id), resolve: {data: {...}}, reject: {error}*/
     readOneRequest: PropTypes.func,
     /** A function GET request that returns a promise. Args: (), resolve: {data: {...}}, reject: {error}*/

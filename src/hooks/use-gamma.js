@@ -84,18 +84,7 @@ function useGamma(
             sessionStorage.removeItem("auth-" + name);
             queueToast();
         }
-    }, [
-        loading,
-        error,
-        dispatch,
-        gammaPath,
-        id,
-        name,
-        redirect,
-        toastDuration,
-        toastSignBackInText,
-        toastSignedOutText
-    ]);
+    }, [loading, error, name, queueToast]);
 
     if (!jwtAuth && !error && !loadingMe) {
         setLoadingMe(true);

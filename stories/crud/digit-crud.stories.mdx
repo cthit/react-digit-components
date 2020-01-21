@@ -41,7 +41,6 @@ import xor from "lodash/xor";
             const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
             return (
                 <DigitCRUD  path=""
-                            name="users" 
                             readAllRequest={readAllRequestCallback}                         
                             keysOrder={["id", "name", "age"]}
                             keysText={{
@@ -98,7 +97,6 @@ import xor from "lodash/xor";
             const createRequestCallback = useCallback(createRequestPromise, [data]);
             return (
                 <DigitCRUD  path=""
-                            name="users2" 
                             readAllRequest={readAllRequestCallback}       
                             createRequest={createRequestCallback}                  
                             keysOrder={["id", "name", "age"]}
@@ -199,7 +197,6 @@ import xor from "lodash/xor";
             const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
             return (
                 <DigitCRUD  path=""
-                            name="users3" 
                             readAllRequest={readAllRequestCallback}       
                             readOneRequest={readOneRequestCallback}
                             keysOrder={["id", "name", "age"]}
@@ -282,7 +279,6 @@ import xor from "lodash/xor";
             const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
             return (
                 <DigitCRUD  path=""
-                            name="users4" 
                             readAllRequest={readAllRequestCallback}       
                             readOneRequest={readOneRequestCallback}
                             deleteRequest={deleteRequestCallback}
@@ -398,7 +394,6 @@ import xor from "lodash/xor";
             const updateRequestCallback = useCallback(updateRequestPromise, [data]);
             return (
                 <DigitCRUD  path=""
-                            name="users5" 
                             readAllRequest={readAllRequestCallback}       
                             readOneRequest={readOneRequestCallback}
                             updateRequest={updateRequestCallback}
@@ -523,7 +518,6 @@ import xor from "lodash/xor";
             const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
             return (
                 <DigitCRUD  path=""
-                            name="users6" 
                             readAllRequest={readAllRequestCallback}       
                             readOneRequest={readOneRequestCallback}
                             updateRequest={updateRequestCallback}
@@ -663,7 +657,6 @@ import xor from "lodash/xor";
             const createRequestCallback = useCallback(createRequestPromise, [data]);
             return (
                 <DigitCRUD  path=""
-                            name="users7" 
                             readAllRequest={readAllRequestCallback}       
                             readOneRequest={readOneRequestCallback}
                             updateRequest={updateRequestCallback}

@@ -46,9 +46,8 @@ const DigitDialog = ({
 
 DigitDialog.displayName = "DigitDialog";
 DigitDialog.propTypes = {
-    /** The options for a dialog */
     /** When ok button has been pressed, onConfirm is called */
-    onConfirm: PropTypes.func.isRequired,
+    onConfirm: PropTypes.func,
     /** When cancel button has been pressed, onCancel is called */
     onCancel: PropTypes.func,
     /** The text for the cancel button */

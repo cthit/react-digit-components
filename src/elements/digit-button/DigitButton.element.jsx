@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const DigitButton = ({
-    text = "Button",
+    text,
     onClick,
     primary,
     secondary,
@@ -68,7 +68,8 @@ DigitButton.defaultProps = {
     submit: false,
     deleteDialogForm: "",
     startIcon: null,
-    endIcon: null
+    endIcon: null,
+    text: "Button"
 };
 
 export default DigitButton;

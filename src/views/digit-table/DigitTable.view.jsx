@@ -283,9 +283,9 @@ DigitTable.propTypes = {
 DigitTable.defaultProps = {
     search: false,
     showSearchableProps: false,
-    searchText: "Sök",
+    searchText: "Search",
     titleText: "",
-    emptyTableText: "Tabellen är tom"
+    emptyTableText: "The table is empty"
 };
 
 export default DigitTable;

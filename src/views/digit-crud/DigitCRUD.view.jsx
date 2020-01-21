@@ -15,7 +15,6 @@ import {
     createReadOneAction,
     createUpdateAction
 } from "./DigitCRUD.action-creator";
-import createCRUDReducer from "./DigitCRUD.reducer";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import DigitCRUDContext, {
     DigitCRUDContextProvider

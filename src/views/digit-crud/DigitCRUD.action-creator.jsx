@@ -1,19 +1,4 @@
 import {
-    clear,
-    createFailed,
-    createLoading,
-    createSuccessfully,
-    deleteFailed,
-    deleteLoading,
-    deleteSuccessfully,
-    readAllFailed,
-    readAllLoading,
-    readAllSuccessfully,
-    updateFailed,
-    updateLoading,
-    updateSuccessfully
-} from "./DigitCRUD.actions";
-import {
     CREATE_FAILED,
     CREATE_LOADING,
     CREATE_SUCCESSFULLY,

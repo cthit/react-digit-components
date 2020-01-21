@@ -138,7 +138,7 @@ const DigitCRUDInner = ({
             : null,
         [updateRequest]
     );
-    const clearAction = useCallback(() => dispatch(createClearAction()));
+    const clearAction = useCallback(() => dispatch(createClearAction()), []);
 
     const modifiedFormComponentData = modifyFormComponentData(
         formComponentData,

@@ -9,20 +9,20 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 # DigitTooltip
 
-A tooltip should be used as often as possible.
+Used to give more context to an action or some type of information.
 
 ## Tool tip
 
 <Preview>
     <Story name="Tooltip">
-        <DigitTooltip text="This is a tooltip">
+        <DigitTooltip text="This is a tooltip" render={() => (
             <DigitButton text="Hover me" />
-        </DigitTooltip>
+        )}/>
     </Story>
     <Story name="Tooltip text">
-        <DigitTooltip text="You can change the text">
+        <DigitTooltip text="You can change the text" render={() => (
             <DigitButton text="Hover me too" />
-        </DigitTooltip>
+        )}/>
     </Story>
 </Preview>
 

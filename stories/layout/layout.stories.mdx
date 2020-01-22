@@ -4,7 +4,7 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import DummyItem from "./DummyItem";
 
 <Meta
-    title="Styles|DigitLayout"
+    title="Others/DigitLayout"
     component={DigitLayout}
 />
 
@@ -72,4 +72,33 @@ A divider to split up parts of the page.
     </Story>
 </Preview>
 
-<Props of={DigitLayout.Column} />
+## Order
+
+<Preview>
+    <Story name="Order">
+        {() => {
+            const orderBlue = 4;
+            const orderYellow = 1;
+            const orderGreen = 3;
+            const orderRed = 2;
+            return (
+                <DigitLayout.Row center fillElement padding="8px">
+                    <DigitLayout.Order order={orderBlue}>
+                        <DummyItem text="1" color="blue" />
+                    </DigitLayout.Order>
+                    <DigitLayout.Order order={orderYellow}>
+                        <DummyItem text="2" color="yellow" />
+                    </DigitLayout.Order>
+                    <DigitLayout.Order order={orderGreen}>
+                        <DummyItem text="3" color="green" />
+                    </DigitLayout.Order>
+                    <DigitLayout.Order order={orderRed}>
+                        <DummyItem text="4" color="red" />
+                    </DigitLayout.Order>
+                </DigitLayout.Row>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitLayout} />

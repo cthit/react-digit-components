@@ -1,0 +1,22 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitMenu } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Views/DigitMenu"
+    component={DigitMenu}
+/>
+
+# DigitMenu
+
+A menu.
+
+## Menu
+
+<Preview>
+    <Story name="Size 20 loading">
+        <DigitMenu valueToTextMap={["Menu option 1","Menu option 2"]}/>
+    </Story>
+</Preview>
+
+<Props of={DigitMenu} />

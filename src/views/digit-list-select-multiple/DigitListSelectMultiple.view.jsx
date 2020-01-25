@@ -16,13 +16,24 @@ import Checkbox from "@material-ui/core/Checkbox";
 import xor from "lodash/xor";
 import uniq from "lodash/uniq";
 
-const allItemsChecked = (item, checkedLeaves, idProp) => {
-    return item.items == null //if leaf
+//Can be optimized to fail fast.
+const hasAtLeastOneItemChecked = (item, checkedLeaves, idProp) =>
+    item.items == null //if leaf
         ? checkedLeaves.includes(item[idProp])
         : item.items.reduce(
-              (acc, next) => acc && allItemsChecked(next, checkedLeaves, idProp)
+              (acc, next) =>
+                  acc || allItemsChecked(next, checkedLeaves, idProp),
+              false
           );
-};
+
+const allItemsChecked = (item, checkedLeaves, idProp) =>
+    item.items == null //if leaf
+        ? checkedLeaves.includes(item[idProp])
+        : item.items.reduce(
+              (acc, next) =>
+                  acc && allItemsChecked(next, checkedLeaves, idProp),
+              false
+          );
 
 const getCheckedNodes = (checkedLeaves, all, idProp) =>
     all
@@ -99,11 +110,17 @@ const DigitListSelectMultiple = ({
     };
 
     const addAllValuesAs = (ids, bol) => {
+        console.log(ids);
+        console.log(
+            bol
+                ? [...ids, ...innerValue]
+                : innerValue.filter(v => !ids.includes(v))
+        );
         handleChange({
             target: {
                 value: bol
                     ? [...ids, ...innerValue]
-                    : [...innerValue].filter(v => !ids.includes(v))
+                    : innerValue.filter(v => !ids.includes(v))
             }
         });
     };
@@ -170,6 +187,17 @@ const DigitListSelectMultiple = ({
                                                 : "secondary"
                                         }
                                         disabled={item.disabled}
+                                        indeterminate={
+                                            item.items != null &&
+                                            !innerValue.includes(
+                                                item[idProp]
+                                            ) &&
+                                            hasAtLeastOneItemChecked(
+                                                item,
+                                                innerValue,
+                                                idProp
+                                            )
+                                        }
                                     />
                                 )}
                                 {item.icon != null &&

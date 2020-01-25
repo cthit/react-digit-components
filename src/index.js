@@ -26,7 +26,6 @@ import DigitAutocompleteSelectSingle from "./elements/digit-autocomplete-select-
 import DigitAutocompleteSelectMultiple from "./elements/digit-autocomplete-select-multiple";
 import DigitList from "./elements/digit-list";
 import DigitListSelectSingle from "./elements/digit-list-select-single";
-import DigitListSelectMultiple from "./elements/digit-list-select-multiple";
 import DigitButtonGroup from "./elements/digit-button-group";
 import DigitCustomDialog from "./elements/digit-custom-dialog";
 import DigitToast from "./elements/digit-toast";
@@ -39,6 +38,7 @@ import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";
 import DigitForm from "./views/digit-form";
 import DigitHeader from "./views/digit-header";
+import DigitListSelectMultiple from "./views/digit-list-select-multiple";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
 import useGamma from "./hooks/use-gamma";

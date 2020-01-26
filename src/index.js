@@ -37,7 +37,6 @@ import DigitProviders from "./declaratives/digit-providers";
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
 import DigitCRUD from "./views/digit-crud";
-import DigitCalendar from "./views/digit-calendar";
 import DigitForm from "./views/digit-form";
 import DigitHeader from "./views/digit-header";
 
@@ -180,7 +179,6 @@ export {
     DigitAvatar,
     DigitAutocompleteSelectSingle,
     DigitAutocompleteSelectMultiple,
-    DigitCalendar,
     DigitList,
     DigitListSelectMultiple,
     DigitListSelectSingle,

@@ -5,6 +5,7 @@ import {
     CardBody,
     CardButtons,
     CardTitle,
+    CardSubTitle,
     Link
 } from "../../styles/digit-design/DigitDesign.styles";
 import DigitButton from "../digit-button";
@@ -19,6 +20,7 @@ const DigitEditDataCard = ({
     keysOrder,
     keysComponentData,
     titleText,
+    subtitleText,
     submitText,
     marginVertical,
     absWidth,
@@ -54,8 +56,10 @@ const DigitEditDataCard = ({
                 absHeight={absHeight}
                 width={width}
                 height={height}
+                hasSubTitle={subtitleText}
             >
                 <CardTitle text={titleText} />
+                {subtitleText && <CardSubTitle text={subtitleText} />}
                 <CardBody>
                     <DigitEditData
                         onSubmit={onSubmit}

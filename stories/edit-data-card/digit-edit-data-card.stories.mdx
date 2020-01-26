@@ -176,7 +176,7 @@ Just like DigitEditData, but with a `DigitDesign.Card` around it.
             }}
         />
     </Story>
-    <Story name="Other values initial">
+    <Story name="Other values initial with subtitle">
         <DigitEditDataCard
             initialValues={{
                 name: "digIT 'Smurf' Hackerman",
@@ -193,6 +193,7 @@ Just like DigitEditData, but with a `DigitDesign.Card` around it.
                 agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
             })}
             titleText={"Title"}
+            subtitleText={"This can be a rather long subtitle, if you for example would like to give some background to why this form exists and what it's used for. "}
             submitText={"Send"}
             keysOrder={["name", "email", "agreement"]}
             keysComponentData={{

@@ -172,7 +172,7 @@ Title.propTypes = {
 };
 
 export const Subtitle = styled(({ text, white, ...rest }) => (
-    <Typography {...rest} variant="subtitle">
+    <Typography {...rest} variant="subtitle1">
         {text}
     </Typography>
 ))`

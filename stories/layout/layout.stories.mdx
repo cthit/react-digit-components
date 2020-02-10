@@ -1,0 +1,104 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitLayout, DigitText} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import DummyItem from "./DummyItem";
+
+<Meta
+    title="Styles/DigitLayout"
+    component={DigitLayout}
+/>
+
+# DigitLayout
+
+Different ways of structuring content.
+
+## Column
+
+<Preview>
+    <Story name="Column">
+        <DigitLayout.Column>
+            <DummyItem text="1" color="blue" />
+            <DummyItem text="2" color="yellow" />
+            <DummyItem text="3" color="green" />
+            <DummyItem text="4" color="red" />
+        </DigitLayout.Column>
+    </Story>
+</Preview>
+
+## Row
+
+<Preview>
+    <Story name="Row">
+        <DigitLayout.Row>
+            <DummyItem text="1" color="blue" />
+            <DummyItem text="2" color="yellow" />
+            <DummyItem text="3" color="green" />
+            <DummyItem text="4" color="red" />
+        </DigitLayout.Row>
+    </Story>
+</Preview>
+
+## Grid
+
+<Preview>
+    <Story name="Grid">
+        <DigitLayout.Grid columns={`repeat(${3}, 1fr)`}>
+            <DummyItem text="1" color="blue" />
+            <DummyItem text="2" color="yellow" />
+            <DummyItem text="3" color="green" />
+            <DummyItem text="4" color="red" />
+            <DummyItem text="5" color="blue" />
+            <DummyItem text="6" color="yellow" />
+            <DummyItem text="7" color="green" />
+            <DummyItem text="8" color="red" />
+        </DigitLayout.Grid>
+    </Story>
+</Preview>
+
+## UniformGrid
+
+<Preview>
+    <Story name="UniformGrid">
+        <DigitLayout.UniformGrid margin="30px" minItemWidth="150px">
+            <DummyItem text="1" color="blue" />
+            <DummyItem text="2" color="yellow" />
+            <DummyItem text="3" color="green" />
+            <DummyItem text="4" color="red" />
+            <DummyItem text="5" color="blue" />
+            <DummyItem text="6" color="yellow" />
+            <DummyItem text="7" color="green" />
+            <DummyItem text="8" color="red" />
+        </DigitLayout.UniformGrid>
+    </Story>
+</Preview>
+
+## Order
+
+<Preview>
+    <Story name="Order">
+        {() => {
+            const orderBlue = 4;
+            const orderYellow = 1;
+            const orderGreen = 3;
+            const orderRed = 2;
+            return (
+                <DigitLayout.Row center fillElement padding="8px">
+                    <DigitLayout.Order order={orderBlue}>
+                        <DummyItem text="1" color="blue" />
+                    </DigitLayout.Order>
+                    <DigitLayout.Order order={orderYellow}>
+                        <DummyItem text="2" color="yellow" />
+                    </DigitLayout.Order>
+                    <DigitLayout.Order order={orderGreen}>
+                        <DummyItem text="3" color="green" />
+                    </DigitLayout.Order>
+                    <DigitLayout.Order order={orderRed}>
+                        <DummyItem text="4" color="red" />
+                    </DigitLayout.Order>
+                </DigitLayout.Row>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitLayout} />

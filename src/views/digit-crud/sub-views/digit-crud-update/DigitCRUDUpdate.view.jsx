@@ -1,15 +1,10 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import DigitEditData from "../../../../elements/digit-edit-data";
-import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
+import React, { useContext, useEffect } from "react";
+import DigitEditData from "../../../../elements/digit-edit-data-card";
 import DigitLoading from "../../../../elements/digit-loading";
-import {
-    Center,
-    DownRightPosition
-} from "../../../../styles/digit-layout/DigitLayout.styles";
-import DigitFAB from "../../../../elements/digit-fab";
-import Delete from "@material-ui/icons/DeleteForever";
-import { digitDialogOpen } from "../../../digit-dialog/DigitDialog.view.action-creator";
+import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
+import DeleteFAB from "../../elements/delete-fab";
+import useDigitToast from "../../../../hooks/use-digit-toast";
+import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
 
 const DigitCRUDUpdate = ({
     name,
@@ -37,15 +32,20 @@ const DigitCRUDUpdate = ({
     toastDeleteFailed,
     readOnePath,
     readAllPath,
-    backFromUpdatePath
+    backFromUpdatePath,
+    backFromDeletePath,
+    deleteDialogFormComponentData,
+    deleteDialogFormValidationSchema,
+    deleteDialogFormInitialValues,
+    deleteDialogFormKeysOrder
 }) => {
-    const dispatch = useDispatch();
-    const one = useSelector(state => state[name].one);
-    const loading = useSelector(state => state[name].loading);
+    const [{ one, loading }] = useContext(DigitCRUDContext);
+
+    const [queueToast] = useDigitToast();
     useEffect(() => {
         readOneAction(id);
         return clearAction;
-    }, []);
+    }, [readOneAction, clearAction, id]);
 
     if (Object.keys(one).length === 0) {
         return null;
@@ -70,34 +70,30 @@ const DigitCRUDUpdate = ({
                             .then(response => {
                                 readOneAction(id);
                                 actions.setSubmitting(false);
-                                dispatch(
-                                    digitToastOpen({
-                                        text: toastUpdateSuccessful(
-                                            _updated,
-                                            _old,
-                                            response
-                                        )
-                                    })
-                                );
+                                queueToast({
+                                    text: toastUpdateSuccessful(
+                                        _updated,
+                                        _old,
+                                        response
+                                    )
+                                });
                             })
                             .catch(error => {
                                 actions.setSubmitting(false);
-                                dispatch(
-                                    digitToastOpen({
-                                        text: toastUpdateFailed(
-                                            _updated,
-                                            _old,
-                                            error
-                                        )
-                                    })
-                                );
+                                queueToast({
+                                    text: toastUpdateFailed(
+                                        _updated,
+                                        _old,
+                                        error
+                                    )
+                                });
                             });
                     }}
                     keysOrder={keysOrder.filter(
                         key => formComponentData[key] != null
                     )}
                     keysComponentData={formComponentData}
-                    validationSchema={formValidationSchema}
+                    validationSchema={formValidationSchema(one)}
                     isInitialValid={true}
                     extraButton={{
                         outlined: true,
@@ -114,49 +110,35 @@ const DigitCRUDUpdate = ({
                 />
             </Center>
             {deleteAction != null && (
-                <DownRightPosition>
-                    <DigitFAB
-                        text={deleteButtonText(one)}
-                        icon={Delete}
-                        onClick={() => {
-                            dispatch(
-                                digitDialogOpen({
-                                    title: dialogDeleteTitle(one),
-                                    description: dialogDeleteDescription(one),
-                                    cancelButtonText: dialogDeleteCancel(one),
-                                    confirmButtonText: dialogDeleteConfirm(one),
-                                    onCancel: () => {},
-                                    onConfirm: () => {
-                                        deleteAction(id)
-                                            .then(response => {
-                                                dispatch(
-                                                    digitToastOpen({
-                                                        text: toastDeleteSuccessful(
-                                                            one,
-                                                            response
-                                                        )
-                                                    })
-                                                );
-                                                history.push(
-                                                    path + readAllPath
-                                                );
-                                            })
-                                            .catch(error => {
-                                                dispatch(
-                                                    digitToastOpen({
-                                                        text: toastDeleteFailed(
-                                                            one,
-                                                            error
-                                                        )
-                                                    })
-                                                );
-                                            });
-                                    }
-                                })
-                            );
-                        }}
-                    />
-                </DownRightPosition>
+                <DeleteFAB
+                    dialogDeleteCancel={dialogDeleteCancel}
+                    dialogDeleteConfirm={dialogDeleteConfirm}
+                    dialogDeleteTitle={dialogDeleteTitle}
+                    dialogDeleteDescription={dialogDeleteDescription}
+                    deleteButtonText={deleteButtonText}
+                    toastDeleteFailed={toastDeleteFailed}
+                    toastDeleteSuccessful={toastDeleteSuccessful}
+                    path={path}
+                    backFromDeletePath={
+                        backFromDeletePath == null
+                            ? readAllPath
+                            : backFromDeletePath
+                    }
+                    deleteAction={deleteAction}
+                    history={history}
+                    one={one}
+                    id={id}
+                    deleteDialogFormValidationSchema={
+                        deleteDialogFormValidationSchema
+                    }
+                    deleteDialogFormInitialValues={
+                        deleteDialogFormInitialValues
+                    }
+                    deleteDialogFormComponentData={
+                        deleteDialogFormComponentData
+                    }
+                    deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+                />
             )}
         </>
     );

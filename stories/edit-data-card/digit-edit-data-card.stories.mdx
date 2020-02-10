@@ -1,0 +1,305 @@
+import * as yup from "yup";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitEditDataCard,
+    DigitTextField,
+    DigitCheckbox,
+    DigitTextArea,
+    DigitDatePicker
+} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Inputs/Forms/DigitEditDataCard"
+    component={DigitEditDataCard}
+/>
+
+# DigitEditDataCard
+
+Just like DigitEditData, but with a `DigitDesign.Card` around it. 
+
+<Preview>
+    <Story name="Normal">
+        <DigitEditDataCard
+            initialValues={{
+                firstname: "",
+                surname: "",
+                email: "",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+            submitButton={{    
+                text: "Skicka",
+            }}
+        />
+    </Story>
+    <Story name="Other values">
+        <DigitEditDataCard
+            initialValues={{
+                firstname: "",
+                surname: "",
+                email: "",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Other title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+## Initial values
+
+<Preview>
+    <Story name="Normal initial">
+        <DigitEditDataCard
+            initialValues={{
+                firstname: "Smurf",
+                surname: "Smurfsson",
+                email: "email@email.com",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+        />
+    </Story>
+    <Story name="Other values initial with subtitle">
+        <DigitEditDataCard
+            initialValues={{
+                name: "digIT 'Smurf' Hackerman",
+                email: "email@email.com",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                name: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Title"}
+            subtitleText={"This can be a rather long subtitle, if you for example would like to give some background to why this form exists and what it's used for. "}
+            submitText={"Send"}
+            keysOrder={["name", "email", "agreement"]}
+            keysComponentData={{
+                name: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname 'Nick' Lastname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "GDPR"
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+## Other components
+
+<Preview>
+    <Story name="Normal components">
+        <DigitEditDataCard
+            initialValues={{
+                firstname: "",
+                surname: "",
+                date: ""
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                date: yup.string().required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "date"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                date: {
+                    component: DigitDatePicker,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                }
+            }}
+        />
+    </Story>
+    <Story name="Other values components">
+        <DigitEditDataCard
+            initialValues={{
+                firstname: "digIT 'Smurf' Hackerman",
+                email: "email@email.com",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                other: yup.string().required()
+            })}
+            titleText={"Title"}
+            submitText={"Send"}
+            keysOrder={["firstname", "other"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname 'Nick' Lastname"
+                    }
+                },
+                other: {
+                    component: DigitTextArea,
+                    componentProps: {
+                        upperLabel: "Other",
+                        rows: "6"
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitEditDataCard} />

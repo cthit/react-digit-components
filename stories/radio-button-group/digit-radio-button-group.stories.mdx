@@ -1,0 +1,209 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitRadioButtonGroup } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Inputs/DigitRadioButtonGroup"
+    component={DigitRadioButtonGroup}
+/>
+
+# DigitRadioButtonGroup
+
+Should be used when only one of multiple options can be made. You create the actual radio buttons by using the radioButtons prop. It needs an array of objects, where the object are the information for each radio button, e.g. label and id. 
+
+## Radio button group
+
+<Preview>
+    <Story name="Radio buttons">
+        {() => {
+            const [state, setState] = useState("5000");
+            return (
+                <DigitRadioButtonGroup
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    radioButtons={[
+                        {
+                            id: "5000",
+                            primary: true,
+                            label: "Primary"
+                        },
+                        {
+                            id: "4000",
+                            secondary: true,
+                            label: "Secondary"
+                        },
+                        {
+                            id: "3000",
+                            label: "Default"
+                        },
+                        {
+                            id: "2000",
+                            disabled: true,
+                            label: "Disabled"
+                        }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Radio buttons again">
+        {() => {
+            const [state, setState] = useState("5000");
+            return (
+                <DigitRadioButtonGroup
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    radioButtons={[
+                        {
+                            id: "5000",
+                            primary: true,
+                            label: "Primary"
+                        },
+                        {
+                            id: "4000",
+                            secondary: true,
+                            label: "Secondary"
+                        },
+                        {
+                            id: "3000",
+                            label: "Default"
+                        },
+                        {
+                            id: "2000",
+                            disabled: true,
+                            label: "Disabled"
+                        }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Two radio buttons">
+        {() => {
+            const [state, setState] = useState("1000");
+            return (
+                <DigitRadioButtonGroup
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    radioButtons={[
+                        {
+                            id: "1000",
+                            primary: true,
+                            label: "Primary"
+                        },
+                        {
+                            id: "2000",
+                            secondary: true,
+                            label: "Secondary"
+                        }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Errors
+
+<Preview>
+    <Story name="Radio buttons error">
+        {() => {
+            const [state, setState] = useState("5000");
+            return (
+                <DigitRadioButtonGroup
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    error
+                    errorMessage="Error message"
+                    radioButtons={[
+                        {
+                            id: "5000",
+                            primary: true,
+                            label: "Primary"
+                        },
+                        {
+                            id: "4000",
+                            secondary: true,
+                            label: "Secondary"
+                        },
+                        {
+                            id: "3000",
+                            label: "Default"
+                        },
+                        {
+                            id: "2000",
+                            disabled: true,
+                            label: "Disabled"
+                        }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Radio buttons again error">
+        {() => {
+            const [state, setState] = useState("5000");
+            return (
+                <DigitRadioButtonGroup
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    error
+                    errorMessage="Error message"
+                    radioButtons={[
+                        {
+                            id: "5000",
+                            primary: true,
+                            label: "Primary"
+                        },
+                        {
+                            id: "4000",
+                            secondary: true,
+                            label: "Secondary"
+                        },
+                        {
+                            id: "3000",
+                            label: "Default"
+                        },
+                        {
+                            id: "2000",
+                            disabled: true,
+                            label: "Disabled"
+                        }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Two radio buttons error">
+        {() => {
+            const [state, setState] = useState("1000");
+            return (
+                <DigitRadioButtonGroup
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    error
+                    errorMessage="Error message"
+                    radioButtons={[
+                        {
+                            id: "1000",
+                            primary: true,
+                            label: "Primary"
+                        },
+                        {
+                            id: "2000",
+                            secondary: true,
+                            label: "Secondary"
+                        }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitRadioButtonGroup} />

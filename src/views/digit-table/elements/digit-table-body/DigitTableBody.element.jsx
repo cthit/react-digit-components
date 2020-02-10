@@ -4,7 +4,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
 import DigitButton from "../../../../elements/digit-button";
 import { Link } from "../../../../styles/digit-design/DigitDesign.styles";
 import { Text } from "../../../../styles/digit-text/DigitText.styles";
@@ -57,19 +56,16 @@ const DigitTableBody = ({
                         tabIndex={-1}
                         selected={selected}
                     >
-                        <DigitIfElseRendering
-                            test={headerTexts.__checkbox != null}
-                            ifRender={() => (
-                                <StyledTableCell>
-                                    <StyledCheckbox
-                                        onClick={event =>
-                                            handleClick(event, n[idProp])
-                                        }
-                                        checked={selected}
-                                    />
-                                </StyledTableCell>
-                            )}
-                        />
+                        {headerTexts.__checkbox != null && (
+                            <StyledTableCell>
+                                <StyledCheckbox
+                                    onClick={event =>
+                                        handleClick(event, n[idProp])
+                                    }
+                                    checked={selected}
+                                />
+                            </StyledTableCell>
+                        )}
 
                         {columnsOrder.map(column => (
                             <StyledTableCell
@@ -80,27 +76,17 @@ const DigitTableBody = ({
                             </StyledTableCell>
                         ))}
 
-                        <DigitIfElseRendering
-                            test={headerTexts.__link != null}
-                            ifRender={() => (
-                                <DigitIfElseRendering
-                                    test={n.__link != null}
-                                    ifRender={() => (
-                                        <StyledTableCell
-                                            datatitle={headerTexts.__link}
-                                        >
-                                            <Link to={n.__link}>
-                                                <DigitButton
-                                                    text={headerTexts.__link}
-                                                    raised
-                                                />
-                                            </Link>
-                                        </StyledTableCell>
-                                    )}
-                                    elseRender={() => <StyledTableCell />}
-                                />
-                            )}
-                        />
+                        {headerTexts.__link != null && (
+                            <StyledTableCell datatitle={headerTexts.__link}>
+                                <Link to={n.__link}>
+                                    <DigitButton
+                                        text={headerTexts.__link}
+                                        raised
+                                    />
+                                </Link>
+                            </StyledTableCell>
+                        )}
+                        {headerTexts.__link == null && <StyledTableCell />}
                     </StyledTableRow>
                 );
             })}

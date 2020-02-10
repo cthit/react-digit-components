@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import Fab from "@material-ui/core/Fab";
 import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 
@@ -12,7 +11,8 @@ const DigitFAB = ({
     secondary,
     submit,
     icon,
-    text
+    text,
+    form
 }) => (
     <Fab
         variant={text == null ? "round" : "extended"}
@@ -20,18 +20,16 @@ const DigitFAB = ({
         disabled={disabled}
         onClick={onClick}
         color={primary ? "primary" : secondary ? "secondary" : "inherit"}
+        form={form}
     >
         {React.createElement(icon, null)}
-        <DigitIfElseRendering
-            test={text != null}
-            ifRender={() => (
-                <>
-                    <Padding />
-                    <Text text={text} />
-                    <Padding />
-                </>
-            )}
-        />
+        {text != null && (
+            <>
+                <Padding />
+                <Text text={text} />
+                <Padding />
+            </>
+        )}
     </Fab>
 );
 

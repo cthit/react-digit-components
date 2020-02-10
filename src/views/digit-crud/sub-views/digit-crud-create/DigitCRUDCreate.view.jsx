@@ -1,8 +1,7 @@
 import React from "react";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
-import DigitEditData from "../../../../elements/digit-edit-data";
-import { digitToastOpen } from "../../../digit-toast/DigitToast.view.action-creator";
-import { useDispatch } from "react-redux";
+import DigitEditData from "../../../../elements/digit-edit-data-card";
+import useDigitToast from "../../../../hooks/use-digit-toast";
 
 const DigitCRUDCreate = ({
     createAction,
@@ -19,7 +18,7 @@ const DigitCRUDCreate = ({
     readAllPath,
     backFromCreatePath
 }) => {
-    const dispatch = useDispatch();
+    const [queueToast] = useDigitToast();
 
     return (
         <Center>
@@ -29,19 +28,15 @@ const DigitCRUDCreate = ({
                     createAction(_new)
                         .then(response => {
                             actions.resetForm();
-                            dispatch(
-                                digitToastOpen({
-                                    text: toastCreateSuccessful(_new, response)
-                                })
-                            );
+                            queueToast({
+                                text: toastCreateSuccessful(_new, response)
+                            });
                         })
                         .catch(error => {
                             actions.setSubmitting(false);
-                            dispatch(
-                                digitToastOpen({
-                                    text: toastCreateFailed(_new, error)
-                                })
-                            );
+                            queueToast({
+                                text: toastCreateFailed(_new, error)
+                            });
                         });
                 }}
                 keysOrder={keysOrder.filter(

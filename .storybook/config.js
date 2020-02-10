@@ -1,17 +1,10 @@
-import { addDecorator } from "@storybook/react/dist/client/preview";
-import { withInfo } from "@storybook/addon-info";
-import { setDefaults } from "@storybook/addon-info";
-import PropTypesTable from "./PropTypesTable";
-import { configure } from "@storybook/react";
+import { addDecorator, addParameters } from "@storybook/react";
+import DigitProvidersDecorator from "./DigitProvidersDecorator";
 
-// automatically import all files ending in *.stories.js
-function loadStories() {
-    const req = require.context("../stories", true, /.stories.js$/);
-    req.keys().forEach(filename => req(filename));
-}
+addDecorator(DigitProvidersDecorator);
 
-setDefaults({
-    TableComponent: PropTypesTable // Override the component used to render the props table
+addParameters({
+    options: {
+        isToolshown: false
+    }
 });
-
-configure(loadStories, module);

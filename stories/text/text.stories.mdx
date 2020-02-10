@@ -1,0 +1,100 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitText } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Styles/DigitText"
+    component={DigitText}
+/>
+
+# DigitText
+
+Some text.
+
+## Text
+
+<Preview>
+    <Story name="Text">
+        <>
+            <DigitText.Heading1 text="Heading1"/>
+            <DigitText.Heading2 text="Heading2"/>
+            <DigitText.Heading3 text="Heading3"/>
+            <DigitText.Heading4 text="Heading4"/>
+            <DigitText.Heading5 text="Heading5"/>
+            <DigitText.Heading6 text="Heading6"/>
+            <DigitText.Title text="Title"/>
+            <DigitText.Subtitle text="Subtitle"/>
+            <DigitText.Subtitle2 text="Subtitle2"/>
+            <DigitText.Text text="Text"/>
+        </>
+    </Story>
+</Preview>
+
+## Bold
+
+<Preview>
+    <Story name="Bold">
+        <>
+            <DigitText.Text text="Text" bold/>
+        </>
+    </Story>
+</Preview>
+
+## White
+
+<Preview>
+    <Story name="White">
+        <>
+            <DigitText.Heading1 text="Heading1" white/>
+            <DigitText.Heading2 text="Heading2" white/>
+            <DigitText.Heading3 text="Heading3" white/>
+            <DigitText.Heading4 text="Heading4" white/>
+            <DigitText.Heading5 text="Heading5" white/>
+            <DigitText.Heading6 text="Heading6" white/>
+            <DigitText.Title text="Title" white/>
+            <DigitText.Subtitle text="Subtitle" white/>
+            <DigitText.Subtitle2 text="Subtitle2" white/>
+            <DigitText.Text text="Text" white/>
+        </>
+    </Story>
+</Preview>
+
+## Center
+
+<Preview>
+    <Story name="Center">
+        <>
+            <DigitText.Heading1 text="Heading1" alignCenter/>
+            <DigitText.Heading2 text="Heading2" alignCenter/>
+            <DigitText.Heading3 text="Heading3" alignCenter/>
+            <DigitText.Heading4 text="Heading4" alignCenter/>
+            <DigitText.Heading5 text="Heading5" alignCenter/>
+            <DigitText.Heading6 text="Heading6" alignCenter/>
+            <DigitText.Title text="Title" alignCenter/>
+            <DigitText.Subtitle text="Subtitle" alignCenter/>
+            <DigitText.Subtitle2 text="Subtitle2" alignCenter/>
+            <DigitText.Text text="Text" alignCenter/>
+        </>
+    </Story>
+</Preview>
+
+## Right
+
+<Preview>
+    <Story name="Right">
+        <>
+            <DigitText.Heading1 text="Heading1" alignRight/>
+            <DigitText.Heading2 text="Heading2" alignRight/>
+            <DigitText.Heading3 text="Heading3" alignRight/>
+            <DigitText.Heading4 text="Heading4" alignRight/>
+            <DigitText.Heading5 text="Heading5" alignRight/>
+            <DigitText.Heading6 text="Heading6" alignRight/>
+            <DigitText.Title text="Title" alignRight/>
+            <DigitText.Subtitle text="Subtitle" alignRight/>
+            <DigitText.Subtitle2 text="Subtitle2" alignRight/>
+            <DigitText.Text text="Text" alignRight/>
+        </>
+    </Story>
+</Preview>
+
+<Props of={DigitText} />

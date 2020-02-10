@@ -1,13 +1,12 @@
 import Toolbar from "@material-ui/core/Toolbar";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
-import DigitTranslations from "../../../../declaratives/digit-translations";
 import DigitTextField from "../../../../elements/digit-text-field";
 import { Fill } from "../../../../styles/digit-layout/DigitLayout.styles";
 import { Title } from "../../../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTableToolbar.element.translations.json";
 import styled from "styled-components";
+import useDigitTranslations from "../../../../hooks/use-digit-translations";
 
 const TableTitle = styled(Title)`
     flex: 0 0 auto;
@@ -33,46 +32,38 @@ const DigitTableToolbar = ({
     titleText,
     searchText,
     search
-}) => (
-    <DigitTranslations
-        translations={translations}
-        uniquePath="DigitTableToolbar"
-        render={text => (
-            <StyledToolbar>
-                <Fill>
-                    <TableTitle
-                        text={
-                            numSelected > 0
-                                ? numSelected + " " + text.Selected
-                                : titleText
+}) => {
+    const [text] = useDigitTranslations(translations);
+
+    return (
+        <StyledToolbar>
+            <Fill>
+                <TableTitle
+                    text={
+                        numSelected > 0
+                            ? numSelected + " " + text.Selected
+                            : titleText
+                    }
+                />
+            </Fill>
+            <Fill>
+                {search && (
+                    <SearchInput
+                        upperLabel={
+                            searchText +
+                            (showSearchableProps != null && showSearchableProps
+                                ? " " +
+                                  _getAllPossibleThingsToSearchFor(headerTexts)
+                                : "")
                         }
+                        value={searchInput}
+                        onChange={onSearchInputChange}
                     />
-                </Fill>
-                <Fill>
-                    <DigitIfElseRendering
-                        test={search}
-                        ifRender={() => (
-                            <SearchInput
-                                upperLabel={
-                                    searchText +
-                                    (showSearchableProps != null &&
-                                    showSearchableProps
-                                        ? " " +
-                                          _getAllPossibleThingsToSearchFor(
-                                              headerTexts
-                                          )
-                                        : "")
-                                }
-                                value={searchInput}
-                                onChange={onSearchInputChange}
-                            />
-                        )}
-                    />
-                </Fill>
-            </StyledToolbar>
-        )}
-    />
-);
+                )}
+            </Fill>
+        </StyledToolbar>
+    );
+};
 
 DigitTableToolbar.propTypes = {
     numSelected: PropTypes.number.isRequired,

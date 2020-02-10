@@ -1,0 +1,356 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitTextArea,
+    DigitEditData,
+    DigitLayout,
+    DigitButton
+} from "../../src";
+import * as yup from "yup";
+
+# DigitTextArea
+
+Like `DigitTextField`, but has the possibility of multiple rows.
+
+<Meta title="Inputs/DigitTextArea" component={DigitTextArea} />
+
+## Flat text area
+
+<Preview>
+    <Story name="Flat text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Must be capitalized"
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled flat text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    disabled
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="This is disabled"
+                />
+            );
+        }}
+    </Story>
+    <Story name="Max length flat text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    maxLength={30}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Password flat text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    password
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Password"
+                />
+            );
+        }}
+    </Story>
+    <Story name="Error flat text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    error
+                    errorMessage="Oh no"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Enter your name"
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Outlined text area
+
+<Preview>
+    <Story name="Outlined text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Must be capitalized"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled outlined text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    disabled
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="This is disabled"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Max length outlined text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    maxLength={30}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Password outlined text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    password
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Password"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Error outlined text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    error
+                    errorMessage="Oh no"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Enter your name"
+                    outlined
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Filled text area
+
+<Preview>
+    <Story name="Filled text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Must be capitalized"
+                    filled
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled filled text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    disabled
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="This is disabled"
+                    filled
+                />
+            );
+        }}
+    </Story>
+    <Story name="Max length filled text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    maxLength={30}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    filled
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Password filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    password
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Password"
+                    filled
+                />
+            );
+        }}
+    </Story>
+    <Story name="Error filled text field">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    error
+                    errorMessage="Oh no"
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Name"
+                    lowerLabel="Enter your name"
+                    filled
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Rows
+
+<Preview>
+    <Story name="One row text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="One row"
+                    lowerLabel="Must be capitalized"
+                    rows={1}
+                /> 
+            );
+        }}
+    </Story>
+    <Story name="Max three rows text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    maxLength={30}
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Two rows"
+                    lowerLabel="Maximum three rows"
+                    rows={2}
+                    rowsMax={3}
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Six rows text area">
+        {() => {
+            const [text, setText] = useState("");
+            return (
+                <DigitTextArea
+                    value={text}
+                    onChange={e => setText(e.target.value)}
+                    upperLabel="Six rows"
+                    rows={6}
+                    filled
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## How to use with DigitEditData
+
+<Preview>
+    <Story name="Text field with EditData">
+        <DigitEditData
+            hasButtons
+            initialValues={{
+                firstname: "",
+                surname: "",
+                other: ""
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                other: yup.string().required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "other"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextArea,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextArea,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                other: {
+                    component: DigitTextArea,
+                    componentProps: {
+                        upperLabel: "Other",
+                        outlined: true
+                    }
+                }
+            }}
+            submitButton={{    
+                text: "Skicka",
+            }}
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitTextArea} />

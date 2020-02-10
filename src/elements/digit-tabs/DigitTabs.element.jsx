@@ -19,7 +19,13 @@ const styles = theme => ({
         background: "inherit"
     },
     scrollButtons: {
-        color: "white"
+        color: "white !important"
+    },
+    tabTextColorPrimary: {
+        color: "white !important"
+    },
+    indicator: {
+        height: "3px"
     }
 });
 
@@ -27,37 +33,52 @@ const DigitTabs = ({
     selected,
     tabs,
     centered,
-    fullWidth,
     onChange,
     titleFont,
+    fullWidth,
     classes,
-    inheritBackground
+    inheritBackground,
+    primaryIndicator
 }) => (
     <Fill>
         <Tabs
             classes={{
                 root: inheritBackground ? classes.rootInherit : classes.root,
-                scrollButtons: classes.scrollButtons
+                scrollButtons: classes.scrollButtons,
+                indicator: classes.indicator
             }}
             value={findIndex(tabs, tab => tab.value === selected)}
             centered={centered}
-            fullWidth={fullWidth}
             onChange={(event, value) => {
                 onChange(tabs[value].value);
             }}
-            scrollable={!centered}
             scrollButtons="on"
             textColor="primary"
+            variant={
+                fullWidth ? "fullWidth" : centered ? "standard" : "scrollable"
+            }
+            orientation="horizontal"
+            indicatorColor={primaryIndicator ? "primary" : "secondary"}
         >
-            {tabs.map(tabs => {
+            {tabs.map(tab => {
                 return (
                     <Tab
-                        key={tabs.value}
+                        classes={{
+                            textColorPrimary: classes.tabTextColorPrimary
+                        }}
+                        disabled={tab.disabled}
+                        key={tab.value}
+                        icon={
+                            tab.icon != null
+                                ? React.createElement(tab.icon, null)
+                                : null
+                        }
+                        textColor={"primary"}
                         label={
                             titleFont ? (
-                                <Title white text={tabs.text} />
+                                <Title white text={tab.text} />
                             ) : (
-                                <Text white text={tabs.text} />
+                                <Text white text={tab.text} />
                             )
                         }
                     />
@@ -77,23 +98,30 @@ DigitTabs.propTypes = {
     tabs: PropTypes.arrayOf(
         PropTypes.shape({
             /** The text that is shown for the tab */
-            text: PropTypes.string.isRequired,
+            text: PropTypes.string,
             /** The unique value for the tab */
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-                .isRequired
+                .isRequired,
+            /** Icon that would be on top of the text */
+            icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+            /** If the tab is disabled */
+            disabled: PropTypes.bool
         })
     ).isRequired,
     /** If true, then centers the tabs*/
     centered: PropTypes.bool,
-    /** If true, then expands the tabs*/
+    /** If true, then expands the tabs. If DigitTabs are centered, this will not take effect.*/
     fullWidth: PropTypes.bool,
     /** A function with the new selected index as the only argument.
-     * Use this to keep track of the currently selected tab.
+     * Use this to keep track of the currently selected tab. (value) => {}
      */
     onChange: PropTypes.func.isRequired,
     /** If true, then the text uses the DigitText.Title font instead */
     titleFont: PropTypes.bool,
-    inheritBackground: PropTypes.bool
+    /** Will use the background color of the parent */
+    inheritBackground: PropTypes.bool,
+    /** If you want to use the primary color as the indicator instead of secondary */
+    primaryIndicator: PropTypes.bool
 };
 
 DigitTabs.defaultProps = {

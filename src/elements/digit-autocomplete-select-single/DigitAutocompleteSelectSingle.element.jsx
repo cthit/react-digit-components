@@ -1,214 +1,129 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Select from "react-select";
-import useTheme from "@material-ui/styles/useTheme";
-import withStyles from "@material-ui/styles/withStyles";
+import React from "react";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
-import Paper from "@material-ui/core/Paper";
-import MenuItem from "@material-ui/core/MenuItem";
-import CancelIcon from "@material-ui/icons/Cancel";
-import DigitChip from "../digit-chip";
-import { Text } from "../../styles/digit-text/DigitText.styles";
 import find from "lodash/find";
-
-const styles = {
-    container: {
-        display: "flex",
-        height: 250
-    },
-    input: {
-        display: "flex",
-        flex: "1 1 auto",
-        height: "100%",
-        minWidth: "250px"
-    },
-    valueContainer: {
-        display: "flex",
-        flexWrap: "wrap",
-        flex: 1,
-        alignItems: "center",
-        overflow: "hidden"
-    },
-    noOptionsMessage: {
-        padding: `4px 4px`
-    },
-    paper: {
-        position: "absolute",
-        zIndex: 1000,
-        top: "66%",
-        bottom: "auto"
-    }
-};
-
-function NoOptionsMessage(props) {
-    return <Text text={props.children} />;
-}
-
-function inputComponent({ inputRef, ...props }) {
-    return <div ref={inputRef} {...props} />;
-}
-
-function Control(props) {
-    return (
-        <TextField
-            fullWidth
-            InputProps={{
-                inputComponent,
-                inputProps: {
-                    className: props.selectProps.classes.input,
-                    inputRef: props.innerRef,
-                    children: props.children,
-                    ...props.innerProps
-                }
-            }}
-            {...props.selectProps.textFieldProps}
-            placeholder=""
-        />
-    );
-}
-
-function Option(props) {
-    return (
-        <MenuItem
-            buttonRef={props.innerRef}
-            selected={props.isFocused}
-            component="div"
-            style={{
-                fontWeight: props.isSelected ? 500 : 400
-            }}
-            {...props.innerProps}
-        >
-            {props.children}
-        </MenuItem>
-    );
-}
-
-function SingleValue(props) {
-    return <Text text={props.children} />;
-}
-
-function ValueContainer(props) {
-    return (
-        <div className={props.selectProps.classes.valueContainer}>
-            {props.children}
-        </div>
-    );
-}
-
-function MultiValue(props) {
-    return (
-        <DigitChip
-            label={props.children}
-            onDelete={!props.isDisabled ? props.removeProps.onClick : null}
-            deleteIcon={<CancelIcon {...props.removeProps} />}
-        />
-    );
-}
-
-function Menu(props) {
-    return (
-        <Paper
-            square
-            className={props.selectProps.classes.paper}
-            {...props.innerProps}
-        >
-            {props.children}
-        </Paper>
-    );
-}
-
-const components = {
-    Control,
-    Menu,
-    MultiValue,
-    NoOptionsMessage,
-    Option,
-    SingleValue,
-    ValueContainer
-};
+import translations from "./DigitAutocompleteSelectSingle.element.translations";
+import useDigitTranslations from "../../hooks/use-digit-translations";
+import PropTypes from "prop-types";
 
 const DigitAutocompleteSelectSingle = ({
-    classes,
+    options,
     value,
     onChange,
+    noOptionsText,
+    onBlur,
     upperLabel,
     lowerLabel,
+    name,
     error,
     errorMessage,
-    name,
-    selectableValues,
-    disabled
+    disabled,
+    outlined,
+    filled
 }) => {
-    const [state, setState] = useState({
-        menuIsOpen: false
-    });
-    const theme = useTheme();
-
-    function onMenuIsOpenChange(open) {
-        setState({
-            menuIsOpen: open
-        });
-    }
-
-    const { menuIsOpen } = state;
-
-    const selectStyles = {
-        container: () => ({
-            display: "flex",
-            flex: 1
-        }),
-        input: base => ({
-            ...base,
-            color: theme.palette.text.primary
-        })
-    };
-
-    const selectedValue = find(selectableValues, { value });
-    var selectedValueLabel = null;
-
-    if (selectedValue != null) {
-        selectedValueLabel = selectedValue.label;
-    }
+    const [text] = useDigitTranslations(translations);
 
     return (
-        <Select
-            name={name}
-            classes={classes}
-            styles={selectStyles}
-            options={selectableValues}
-            components={components}
-            placeholder=""
-            value={
-                selectedValueLabel == null
-                    ? null
-                    : { value, label: selectedValueLabel }
-            }
-            onChange={e => {
-                onChange({ target: { value: e.value } });
+        <Autocomplete
+            autoHighlight
+            value={value}
+            onChange={(e, value) => {
+                onChange({ target: { value } });
             }}
-            menuIsOpen={menuIsOpen}
-            onMenuOpen={() => {
-                onMenuIsOpenChange(true);
+            getOptionDisabled={value => {
+                const obj = find(options, { value });
+                return obj == null || obj.disabled;
             }}
-            onMenuClose={() => {
-                onMenuIsOpenChange(false);
-            }}
-            textFieldProps={{
-                label: upperLabel,
-                error: error,
-                disabled: disabled,
-                helperText:
-                    error && errorMessage != null ? errorMessage : lowerLabel,
-                InputLabelProps: {
-                    shrink: value !== "" || state.singleOpen
+            options={options.map(option => option.value)}
+            getOptionLabel={value => {
+                const obj = find(options, { value });
+                if (obj == null) {
+                    return "";
+                } else {
+                    return obj.text;
                 }
             }}
+            noOptionsText={
+                noOptionsText == null ? text.NoOptions : noOptionsText
+            }
+            disabled={disabled}
+            onBlur={onBlur}
+            renderInput={params => (
+                <TextField
+                    {...params}
+                    fullWidth
+                    name={name}
+                    error={error}
+                    label={upperLabel}
+                    variant={
+                        outlined ? "outlined" : filled ? "filled" : "standard"
+                    }
+                    helperText={
+                        error && errorMessage != null
+                            ? errorMessage
+                            : lowerLabel != null
+                            ? lowerLabel
+                            : ""
+                    }
+                />
+            )}
         />
     );
+};
+
+DigitAutocompleteSelectSingle.defaultProps = {
+    options: [],
+    value: "",
+    onChange: () => {},
+    noOptionsText: null,
+    onBlur: () => {},
+    upperLabel: null,
+    lowerLabel: null,
+    name: null,
+    error: false,
+    errorMessage: null,
+    disabled: false,
+    outlined: false,
+    filled: false
 };
 
 DigitAutocompleteSelectSingle.propTypes = {
-    classes: PropTypes.object.isRequired
+    /** The selectable options */
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            /** The selected values of the autocompleted */
+            value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+                .isRequired,
+            /** The text that represents the value */
+            text: PropTypes.string.isRequired,
+            /** If you should be able to select the given value. Will still show up in the autocomplete */
+            disabled: PropTypes.bool
+        })
+    ),
+    /** The selected value */
+    value: PropTypes.oneOfType(PropTypes.number, PropTypes.string).isRequired,
+    /** Gets called something in selected changes. */
+    onChange: PropTypes.func.isRequired,
+    /** text displayed when there are no options*/
+    noOptionsText: PropTypes.string,
+    /** Gets called when the component loses focus*/
+    onBlur: PropTypes.func,
+    /** The text label over the component */
+    upperLabel: PropTypes.string,
+    /** The text label over the component */
+    lowerLabel: PropTypes.string,
+    /** The name for the component in a form */
+    name: PropTypes.string,
+    /** If true, then errorMessage will be shown instead of lowerLabel */
+    error: PropTypes.bool,
+    /** If error is true, then this errorMessage will be shown instead of lowerLabel */
+    errorMessage: PropTypes.string,
+    /** If true, then you can't select any options */
+    disabled: PropTypes.bool,
+    /** Adds an outline around the component. Either this or filled.*/
+    outlined: PropTypes.bool,
+    /** Adds a grey isch background around the component. Either this or outlined. */
+    filled: PropTypes.bool
 };
 
-export default withStyles(styles)(DigitAutocompleteSelectSingle);
+export default DigitAutocompleteSelectSingle;

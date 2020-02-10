@@ -1,0 +1,304 @@
+import { Fragment } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitChip, DigitAvatar } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Others/DigitChip"
+    component={DigitChip}
+/>
+
+# DigitChip
+
+Small elements that has labels. With the possibility of icon and delete icon. Can be used when listing a list of elements. For example pizza toppings. 
+
+## DigitChip with label
+
+<Preview>
+    <Story name="DigitChip with label">
+        <DigitChip primary label="Hej" />
+    </Story>
+    <Story name="DigitChip secondary with label">
+        <DigitChip secondary label="Hej" />
+    </Story>
+    <Story name="DigitChip default with label">
+        <DigitChip label="Hej" />
+    </Story>
+</Preview>
+
+## DigitChip outlined with label
+
+<Preview>
+    <Story name="DigitChip primary outlined with label">
+        <DigitChip primary outlined label="Hej" />
+    </Story>
+    <Story name="DigitChip secondary outlined with label">
+        <DigitChip secondary outlined label="Hej" />
+    </Story>
+    <Story name="DigitChip default outlined with label">
+        <DigitChip outlined label="Hej" />
+    </Story>
+</Preview>
+
+## DigitChip with label and delete
+
+<Preview>
+    <Story name="DigitChip primary with label and delete">
+        <DigitChip
+            primary
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip secondary with label and delete">
+        <DigitChip
+            secondary
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip default with label and delete">
+        <DigitChip
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+</Preview>
+
+## DigitChip outlined with label and delete
+
+<Preview>
+    <Story name="DigitChip primary outlined with label and delete">
+        <DigitChip
+            primary
+            outlined
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip secondary outlined with label and delete">
+        <DigitChip
+            secondary
+            outlined
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip default outlined with label and delete">
+        <DigitChip
+            outlined
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+</Preview>
+
+## DigitChip filled with avatar and delete
+
+<Preview>
+    <Story name="DigitChip primary with avatar and delete">
+        <DigitChip
+            primary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip secondary with avatar and delete">
+        <DigitChip
+            secondary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip default with avatar and delete">
+        <DigitChip
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+</Preview>
+
+## DigitChip outlined with avatar and delete
+
+<Preview>
+    <Story name="DigitChip outlined primary with avatar and delete">
+        <DigitChip
+            outlined
+            primary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip outlined secondary with avatar and delete">
+        <DigitChip
+            outlined
+            secondary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip outlined default with avatar and delete">
+        <DigitChip
+            outlined
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+</Preview>
+
+## DigitChip filled with label, avatar and delete
+
+<Preview>
+    <Story name="DigitChip primary with label, avatar and delete">
+        <DigitChip
+            primary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip secondary with label, avatar and delete">
+        <DigitChip
+            secondary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip default with label, avatar and delete">
+        <DigitChip
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+</Preview>
+
+## DigitChip outlined with label, avatar and delete
+
+<Preview>
+    <Story name="DigitChip outlined primary with label, avatar and delete">
+        <DigitChip
+            outlined
+            primary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip outlined secondary with label, avatar and delete">
+        <DigitChip
+            outlined
+            secondary
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+    <Story name="DigitChip outlined default with label, avatar and delete">
+        <DigitChip
+            outlined
+            avatar={
+                <DigitAvatar
+                    alt="Hej"
+                    imageSrc="https://i.imgur.com/G8lFDH1.jpg"
+                />
+            }
+            label="Hej"
+            onDelete={() => {
+                alert("Delete");
+            }}
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitChip} />

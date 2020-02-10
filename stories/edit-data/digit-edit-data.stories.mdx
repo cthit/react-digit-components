@@ -1,0 +1,310 @@
+import * as yup from "yup";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitEditData,
+    DigitTextField,
+    DigitCheckbox,
+    DigitTextArea,
+    DigitDatePicker
+} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Inputs/Forms/DigitEditData"
+    component={DigitEditData}
+/>
+
+# DigitEditData
+
+The easier and optimized way to handle forms. This is a single component where you create everything via objects. `DigitForm`, along with `useDigitFormField` and `useDigitFormFieldArray` gives more control, but this gets you up and running faster. 
+
+<Preview>
+    <Story name="Normal">
+        <DigitEditData
+            hasButtons
+            initialValues={{
+                firstname: "",
+                surname: "",
+                email: "",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+            submitButton={{    
+                text: "Skicka",
+            }}
+        />
+    </Story>
+    <Story name="Other values">
+        <DigitEditData
+            hasButtons
+            initialValues={{
+                firstname: "",
+                surname: "",
+                email: "",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Other title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+## Initial values
+
+<Preview>
+    <Story name="Normal initial">
+        <DigitEditData
+            hasButtons
+            initialValues={{
+                firstname: "Smurf",
+                surname: "Smurfsson",
+                email: "email@email.com",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+        />
+    </Story>
+    <Story name="Other values initial">
+        <DigitEditData 
+            hasButtons
+            initialValues={{
+                name: "digIT 'Smurf' Hackerman",
+                email: "email@email.com",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                name: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Title"}
+            submitText={"Send"}
+            keysOrder={["name", "email", "agreement"]}
+            keysComponentData={{
+                name: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname 'Nick' Lastname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "GDPR"
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+## Other components
+
+<Preview>
+    <Story name="Normal components">
+        <DigitEditData
+            hasButtons
+            initialValues={{
+                firstname: "",
+                surname: "",
+                date: ""
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                date: yup.string().required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "date"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                date: {
+                    component: DigitDatePicker,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                }
+            }}
+        />
+    </Story>
+    <Story name="Other values components">
+        <DigitEditData
+            hasButtons
+            initialValues={{
+                firstname: "digIT 'Smurf' Hackerman",
+                email: "email@email.com",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                other: yup.string().required()
+            })}
+            titleText={"Title"}
+            submitText={"Send"}
+            keysOrder={["firstname", "other"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname 'Nick' Lastname"
+                    }
+                },
+                other: {
+                    component: DigitTextArea,
+                    componentProps: {
+                        upperLabel: "Other",
+                        rows: 6
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitEditData} />

@@ -1,0 +1,32 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    useDigitToast,
+    DigitButton
+} from "../../src";
+import * as yup from "yup";
+
+# useDigitToast
+
+<Meta title="Hooks/useDigitToast" decorators={[(StoryFn) => <div style={{height: "500px"}}><StoryFn/></div>]}/>
+
+## hej
+
+<Preview>
+    <Story name="Standard">
+        {() => {
+            const [queueToast] = useDigitToast({
+                duration: 3000,
+                actionText: "hej",
+                actionHandler: () => {}
+            });
+            return (
+                <>
+                    <DigitButton raised primary onClick={() => queueToast({text: "Hej: " + (new Date().getTime()/24)})}/>
+                </>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={useDigitToast} />

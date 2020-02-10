@@ -87,8 +87,10 @@ export default {
                     "isElement",
                     "isValidElementType",
                     "ForwardRef",
-                    "isContextConsumer"
-                ]
+                    "isContextConsumer",
+                    "isFragment"
+                ],
+                scheduler: ["unstable_runWithPriority", "LowPriority"]
             }
         }),
         json()

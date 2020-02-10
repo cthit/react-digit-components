@@ -1,0 +1,119 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitDatePicker } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Inputs/DigitDatePicker"
+    component={DigitDatePicker}
+/>
+
+# DigitDatePicker
+
+A input field with a dialog popup where you can select the date. 
+
+## DatePicker
+
+<Preview>
+    <Story name="Normal">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Custom labels
+
+<Preview>
+    <Story name="Custom label cancel">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="Custom cancel and ok label"
+                    lowerLabel="Lower label"
+                    okLabel="Select date"
+                    cancelLabel="Nah, don't want this"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Custom label empty">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="Custom empty label"
+                    lowerLabel="Lower label"
+                    emptyLabel="Pick a date! Quick!"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="Today button">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="A 'Today' button"
+                    lowerLabel="Lower label"
+                    showTodayButton={true}
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Custom today label">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="Custom 'today' label"
+                    lowerLabel="Lower label"
+                    showTodayButton={true}
+                    todayLabel="Bring me to today"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Error
+
+<Preview>
+    <Story name="Normal error">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    error
+                    errorMessage="This is an error"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitDatePicker} />

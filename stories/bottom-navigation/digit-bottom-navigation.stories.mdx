@@ -1,0 +1,65 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitBottomNavigation } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+import Home from "@material-ui/icons/Add";
+import Date from "@material-ui/icons/DateRange";
+import Info from "@material-ui/icons/Info";
+
+<Meta
+    title="Navigation/DigitBottomNavigation"
+    component={DigitBottomNavigation}
+    decorators={[
+        storyFn => <div style={{ height: "50px", maxWidth: "500px" }}>{storyFn()}</div>
+    ]}
+/>
+
+# DigitBottomNavigation
+
+Mobile navigation, with tabs that has icons and labels. This should only be used for mobile. If you want similar tabs on desktop or tablet, use `DigitTabs`.
+
+## DigitBottomNavigation without labels
+
+<Preview>
+    <Story name="DigitBottomNavigation without labels">
+        {() => {
+            const [selected, setSelected] = useState(0);
+            return (
+                <DigitBottomNavigation
+                    tabs={[
+                        {label: "Home", icon: <Home/>},
+                        {label: "Calendar", icon: <Date/>},
+                        {label: "Information", icon: <Info/>},
+                    ]}
+                    onChange={n => setSelected(n)}
+                    selected={selected}
+                    showLabels={false}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitBottomNavigation with labels
+
+<Preview>
+    <Story name="DigitBottomNavigation with labels">
+        {() => {
+            const [selected, setSelected] = useState(0);
+            return (
+                <DigitBottomNavigation
+                    tabs={[
+                        {label: "Home", icon: <Home/>},
+                        {label: "Calendar", icon: <Date/>},
+                        {label: "Information", icon: <Info/>},
+                    ]}
+                    onChange={n => setSelected(n)}
+                    selected={selected}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitBottomNavigation} />

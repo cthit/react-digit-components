@@ -3,14 +3,17 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const DigitButton = ({
-    text = "Button",
+    text,
     onClick,
     primary,
     secondary,
     raised,
     disabled,
     submit,
-    outlined
+    outlined,
+    form,
+    startIcon,
+    endIcon
 }) => (
     <Button
         type={submit ? "submit" : "button"}
@@ -18,6 +21,9 @@ const DigitButton = ({
         disabled={disabled}
         color={primary ? "primary" : secondary ? "secondary" : "inherit"}
         variant={raised ? "contained" : outlined ? "outlined" : "text"}
+        form={form}
+        startIcon={startIcon}
+        endIcon={endIcon}
     >
         {text}
     </Button>
@@ -48,7 +54,8 @@ DigitButton.propTypes = {
     /** If true, then forms will be called if you press this button. No need to use onClick.
      * This can be useful for e.g. DigitForm.
      */
-    submit: PropTypes.bool
+    submit: PropTypes.bool,
+    form: PropTypes.string
 };
 
 DigitButton.defaultProps = {
@@ -58,7 +65,11 @@ DigitButton.defaultProps = {
     raised: false,
     outlined: false,
     disabled: false,
-    submit: false
+    submit: false,
+    deleteDialogForm: "",
+    startIcon: null,
+    endIcon: null,
+    text: "Button"
 };
 
 export default DigitButton;

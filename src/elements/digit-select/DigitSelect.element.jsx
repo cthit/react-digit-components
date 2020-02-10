@@ -5,7 +5,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React from "react";
-import ReactDOM from "react-dom";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import styled from "styled-components";
 
@@ -23,7 +22,8 @@ const DigitSelect = ({
     outlined,
     error,
     errorMessage,
-    onBlur
+    onBlur,
+    selectNothingText
 }) => {
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
@@ -38,6 +38,7 @@ const DigitSelect = ({
             >
                 <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
                 <StyledSelect
+                    name={name}
                     onBlur={onBlur}
                     onChange={onChange}
                     disabled={disabled}
@@ -50,7 +51,11 @@ const DigitSelect = ({
                     }}
                 >
                     {allowToChooseNone ? (
-                        <MenuItem value="" name="Nothing" component={"li"}>
+                        <MenuItem
+                            value=""
+                            name={selectNothingText}
+                            component={"li"}
+                        >
                             <div style={{ height: "24px" }} />
                         </MenuItem>
                     ) : null}
@@ -136,7 +141,8 @@ DigitSelect.defaultProps = {
     filled: false,
     name: "",
     value: "",
-    valueToTextMap: {}
+    valueToTextMap: {},
+    selectNothingText: "Nothing"
 };
 
 const StyledFormControl = styled(FormControl)`

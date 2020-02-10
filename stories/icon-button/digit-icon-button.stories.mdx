@@ -1,0 +1,139 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitIconButton } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+import CheckIcon from "@material-ui/icons/Check";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+
+<Meta
+    title="Buttons/DigitIconButton"
+    component={DigitIconButton}
+/>
+
+# DigitIconButton
+
+A small circular button with only a icon. Only use IconButton when the icon can 100 % without any doubt symbolize the action that the button do. It's recommended to use the icons from @material-ui/icons.
+
+## IconButton
+
+<Preview>
+    <Story name="Primary">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    primary
+                    onClick={() => {
+                        console.log("Primary");
+                    }}
+                    icon={AddIcon}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Secondary">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    secondary
+                    onClick={() => {
+                        console.log("Secondary");
+                    }}
+                    icon={AddIcon}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Normal">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    onClick={() => {
+                        console.log("Normal");
+                    }}
+                    icon={AddIcon}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    disabled
+                    onClick={() => {
+                        console.log("Disabled");
+                    }}
+                    icon={AddIcon}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Icon
+
+<Preview>
+    <Story name="Primary icon">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    primary
+                    onClick={() => {
+                        console.log("Primary");
+                    }}
+                    icon={AddIcon}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Secondary icon">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    secondary
+                    onClick={() => {
+                        console.log("Secondary");
+                    }}
+                    icon={RemoveIcon}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Normal icon">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    onClick={() => {
+                        console.log("Normal");
+                    }}
+                    icon={CheckIcon}
+                />
+            );
+        }}
+    </Story>
+    <Story name="Disabled icon">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitIconButton
+                    disabled
+                    onClick={() => {
+                        console.log("Disabled");
+                    }}
+                    icon={FavoriteIcon}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitIconButton} />

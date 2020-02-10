@@ -1,27 +1,46 @@
 import PropTypes from "prop-types";
-import React from "react";
-import {
-    Card,
-    CardBody,
-    CardButtons,
-    CardTitle,
-    Link
-} from "../../styles/digit-design/DigitDesign.styles";
+import React, { createElement, useMemo } from "react";
 import DigitButton from "../digit-button";
-import DigitForm from "../digit-form";
-import DigitFormField from "../digit-form-field";
-import DigitFormFieldArray from "../digit-form-field-array";
+import DigitForm from "../../views/digit-form";
 import {
     Column,
     Padding,
-    Size
+    Row
 } from "../../styles/digit-layout/DigitLayout.styles";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
+import * as yup from "yup";
+import useDigitFormField from "../../hooks/use-digit-form-field";
 
-function isInitialValid(props) {
-    if (!props.validationSchema) return true;
-    return props.validationSchema.isValidSync(props.initialValues);
-}
+const DigitEditDataInner = ({
+    keysOrder,
+    keysComponentData,
+    marginVertical = 8
+}) => {
+    return keysOrder.map(key => (
+        <React.Fragment key={key}>
+            <div style={{ marginBottom: marginVertical }} />
+            <DigitEditDataField
+                name={key}
+                componentData={keysComponentData[key]}
+            />
+            <div style={{ marginBottom: marginVertical }} />
+        </React.Fragment>
+    ));
+};
+
+const DigitEditDataField = ({ name, componentData }) => {
+    const field = useDigitFormField(name);
+    const { component, componentProps } = componentData;
+
+    return useMemo(
+        () =>
+            createElement(component, {
+                ...componentProps,
+                ...field,
+                name
+            }),
+        [JSON.stringify(field), JSON.stringify(componentData)]
+    );
+};
 
 const DigitEditData = ({
     initialValues,
@@ -29,117 +48,33 @@ const DigitEditData = ({
     onSubmit,
     keysOrder,
     keysComponentData,
-    titleText,
-    submitText,
     marginVertical,
-    absWidth,
-    absHeight,
-    minWidth,
-    minHeight,
-    maxWidth,
-    maxHeight,
-    width,
-    height,
-    extraButton,
-    extraButtonTo
-}) => (
-    <Size
-        minWidth={minWidth}
-        maxWidth={maxWidth}
-        minHeight={minHeight}
-        maxHeight={maxHeight}
-        absWidth={absWidth}
-        absHeight={absHeight}
-        width={width}
-        height={height}
-    >
+    hasButtons,
+    renderButtons,
+    formName,
+    onValidSubmitChange
+}) => {
+    return (
         <DigitForm
+            formName={formName}
             validationSchema={validationSchema}
             initialValues={initialValues}
-            isInitialValid={isInitialValid}
             onSubmit={onSubmit}
-            render={({ isSubmitting, isValid }) => (
-                <Card
-                    minWidth={minWidth}
-                    maxWidth={maxWidth}
-                    minHeight={minHeight}
-                    maxHeight={maxHeight}
-                    absWidth={absWidth}
-                    absHeight={absHeight}
-                    width={width}
-                    height={height}
-                >
-                    <CardTitle text={titleText} />
-                    <CardBody>
-                        <Column marginVertical={marginVertical}>
-                            {keysOrder.map(key => {
-                                const keyComponentData = keysComponentData[key];
-                                if (!keyComponentData.array) {
-                                    return (
-                                        <DigitFormField
-                                            key={key}
-                                            name={key}
-                                            render={keyComponentData.render}
-                                            component={
-                                                keyComponentData.component
-                                            }
-                                            componentProps={
-                                                keyComponentData.componentProps
-                                            }
-                                            formatEvent={
-                                                keyComponentData.formatEvent
-                                            }
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <DigitFormFieldArray
-                                            key={key}
-                                            name={key}
-                                            render={keyComponentData.render}
-                                            component={
-                                                keyComponentData.component
-                                            }
-                                            componentProps={
-                                                keyComponentData.componentProps
-                                            }
-                                        />
-                                    );
-                                }
-                            })}
-                        </Column>
-                    </CardBody>
-                    <CardButtons reverseDirection>
-                        <DigitButton
-                            disabled={isSubmitting || !isValid} //props.validationSchema.isValidSync(props.initialValues)
-                            submit
-                            text={submitText}
-                            raised
-                            primary
-                        />
-                        <Padding />
-                        <DigitIfElseRendering
-                            test={extraButton != null}
-                            ifRender={() => (
-                                <DigitIfElseRendering
-                                    test={extraButtonTo == null}
-                                    ifRender={() => (
-                                        <DigitButton {...extraButton} />
-                                    )}
-                                    elseRender={() => (
-                                        <Link to={extraButtonTo}>
-                                            <DigitButton {...extraButton} />
-                                        </Link>
-                                    )}
-                                />
-                            )}
-                        />
-                    </CardButtons>
-                </Card>
+            onValidSubmitChange={onValidSubmitChange}
+            render={form => (
+                <Column>
+                    <DigitEditDataInner
+                        marginVertical={marginVertical}
+                        keysOrder={keysOrder}
+                        keysComponentData={keysComponentData}
+                    />
+                    <Padding />
+                    {hasButtons && <Row reverse>{renderButtons(form)}</Row>}
+                </Column>
             )}
         />
-    </Size>
-);
+    );
+};
 
 DigitEditData.displayName = "DigitEditData";
 DigitEditData.propTypes = {
@@ -159,29 +94,13 @@ DigitEditData.propTypes = {
     titleText: PropTypes.string,
     submitText: PropTypes.string,
     marginVertical: PropTypes.string,
-    /** Sets minWidth, maxWidth and width to absWidth */
-    absWidth: PropTypes.string,
-    /** Sets minHeight, maxHeight and height to absHeight */
-    absHeight: PropTypes.string,
-    /** minWidth of the card */
-    minWidth: PropTypes.string,
-    /** minHeight of the card */
-    minHeight: PropTypes.string,
-    /** maxWidth of the card */
-    maxWidth: PropTypes.string,
-    /** maxHeight of the card */
-    maxHeight: PropTypes.string,
-    /** width of the card */
-    width: PropTypes.string,
-    /** height of the card */
-    height: PropTypes.string,
     /** If new data should be force */
     isInitialValid: PropTypes.bool
 };
 
 DigitEditData.defaultProps = {
     initialValues: {},
-    validationSchema: {},
+    validationSchema: yup.object(),
     titleText: "",
     submitText: "",
     marginVertical: "4px",
@@ -190,7 +109,17 @@ DigitEditData.defaultProps = {
     minWidth: "300px",
     maxWidth: "300px",
     keysOrder: [],
-    isInitialValid: false
+    isInitialValid: false,
+    hasButtons: false,
+    renderButtons: form => (
+        <DigitButton
+            disabled={form.isSubmitting || !form.isValid}
+            text={"Submit"}
+            submit
+            raised
+            primary
+        />
+    )
 };
 
 export default DigitEditData;

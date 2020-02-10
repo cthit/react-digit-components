@@ -4,7 +4,6 @@ import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../../../declaratives/digit-if-else-rendering";
 import { Text } from "../../../../styles/digit-text/DigitText.styles";
 
 const DigitTableHeader = ({
@@ -13,50 +12,45 @@ const DigitTableHeader = ({
     headerTexts,
     columnsOrder,
     onRequestSort
-}) => (
-    <DigitIfElseRendering
-        test={headerTexts != null}
-        ifRender={() => (
-            <TableHead>
-                <TableRow>
-                    <DigitIfElseRendering
-                        test={headerTexts.__checkbox != null}
-                        ifRender={() => (
-                            <TableCell>
-                                <Text bold text={headerTexts.__checkbox} />
-                            </TableCell>
-                        )}
-                    />
+}) => {
+    if (headerTexts == null) {
+        return null;
+    }
 
-                    {columnsOrder.map(column => (
-                        <TableCell
-                            key={column}
-                            column={column}
-                            sortDirection={orderBy === column ? order : false}
+    return (
+        <TableHead>
+            <TableRow>
+                {headerTexts.__checkbox != null && (
+                    <TableCell>
+                        <Text bold text={headerTexts.__checkbox} />
+                    </TableCell>
+                )}
+
+                {columnsOrder.map(column => (
+                    <TableCell
+                        key={column}
+                        column={column}
+                        sortDirection={orderBy === column ? order : false}
+                    >
+                        <TableSortLabel
+                            active={orderBy === column}
+                            direction={order}
+                            onClick={event => onRequestSort(event, column)}
                         >
-                            <TableSortLabel
-                                active={orderBy === column}
-                                direction={order}
-                                onClick={event => onRequestSort(event, column)}
-                            >
-                                <Text bold text={headerTexts[column]} />
-                            </TableSortLabel>
-                        </TableCell>
-                    ))}
+                            <Text bold text={headerTexts[column]} />
+                        </TableSortLabel>
+                    </TableCell>
+                ))}
 
-                    <DigitIfElseRendering
-                        test={headerTexts.__link != null}
-                        ifRender={() => (
-                            <TableCell>
-                                <Text bold text={headerTexts.__link} />
-                            </TableCell>
-                        )}
-                    />
-                </TableRow>
-            </TableHead>
-        )}
-    />
-);
+                {headerTexts.__link != null && (
+                    <TableCell>
+                        <Text bold text={headerTexts.__link} />
+                    </TableCell>
+                )}
+            </TableRow>
+        </TableHead>
+    );
+};
 
 DigitTableHeader.propTypes = {
     numSelected: PropTypes.number.isRequired,

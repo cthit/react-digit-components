@@ -7,6 +7,8 @@ import Keyboard from "@material-ui/icons/Keyboard";
 import { DateTimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
+import translations from "./DigitDateAndTimePicker.element.translations";
+import useDigitTranslations from "../../hooks/use-digit-translations";
 
 const styles = () => ({
     root: {
@@ -27,39 +29,58 @@ const DigitDateAndTimePicker = ({
     emptyLabel,
     invalidLabel,
     showTodayButton,
+    disabled,
+    disableFuture,
     disablePast,
     clearable,
     filled,
     outlined,
     lowerLabel,
     error,
-    errorMessage
-}) => (
-    <DateTimePicker
-        value={value}
-        onChange={date => onChange({ target: { value: date } })}
-        label={upperLabel}
-        error={error}
-        helperText={error & (errorMessage !== "") ? errorMessage : lowerLabel}
-        showTodayButton={showTodayButton}
-        todayLabel={todayLabel}
-        cancelLabel={cancelLabel}
-        okLabel={okLabel}
-        clearLabel={clearLabel}
-        emptyLabel={emptyLabel}
-        invalidLabel={invalidLabel}
-        dateRangeIcon={<DateRange />}
-        keyboardIcon={<Keyboard />}
-        leftArrowIcon={<ChevronLeft />}
-        rightArrowIcon={<ChevronRight />}
-        timeIcon={<AccessTime />}
-        disablePast={disablePast}
-        clearable={clearable}
-        ampm={false}
-        className={classes.root}
-        variant={filled ? "filled" : outlined ? "outlined" : "standard"}
-    />
-);
+    errorMessage,
+    minDate,
+    maxDate,
+    shouldDisableDate
+}) => {
+    const [text] = useDigitTranslations(translations);
+
+    return (
+        <DateTimePicker
+            value={value}
+            onChange={date => onChange({ target: { value: date } })}
+            label={upperLabel}
+            error={error}
+            helperText={
+                error && errorMessage !== "" ? errorMessage : lowerLabel
+            }
+            showTodayButton={showTodayButton}
+            invalidLabel={invalidLabel}
+            dateRangeIcon={<DateRange />}
+            keyboardIcon={<Keyboard />}
+            leftArrowIcon={<ChevronLeft />}
+            rightArrowIcon={<ChevronRight />}
+            timeIcon={<AccessTime />}
+            disabled={disabled}
+            disableFuture={disableFuture}
+            disablePast={disablePast}
+            clearable={clearable}
+            ampm={false}
+            className={classes.root}
+            inputVariant={
+                filled ? "filled" : outlined ? "outlined" : "standard"
+            }
+            todayLabel={todayLabel != null ? todayLabel : text.today}
+            emptyLabel={emptyLabel != null ? emptyLabel : text.empty}
+            cancelLabel={cancelLabel != null ? cancelLabel : text.cancel}
+            okLabel={okLabel != null ? okLabel : text.ok}
+            clearLabel={clearLabel != null ? clearLabel : text.clear}
+            maxDate={maxDate}
+            minDate={minDate}
+            shouldDisableDate={shouldDisableDate}
+            format={"yyyy-mm-dd hh:mm"}
+        />
+    );
+};
 
 DigitDateAndTimePicker.displayName = "DigitDateAndTimePicker";
 DigitDateAndTimePicker.propTypes = {
@@ -111,12 +132,6 @@ DigitDateAndTimePicker.defaultProps = {
     value: null,
     clearable: false,
     disablePast: false,
-    invalidLabel: "Ogiltigt tid och datum",
-    emptyLabel: "Tryck här för tid och datum",
-    clearLabel: "Rensa",
-    okLabel: "Ok",
-    cancelLabel: "Avbryt",
-    todayLabel: "Idag",
     upperLabel: "",
     lowerLabel: "",
     showTodayButton: false,

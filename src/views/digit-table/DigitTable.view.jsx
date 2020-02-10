@@ -5,7 +5,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
-import DigitIfElseRendering from "../../declaratives/digit-if-else-rendering";
 import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import { Heading5 } from "../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTable.view.translations.json";
@@ -13,7 +12,7 @@ import DigitTableBody from "./elements/digit-table-body";
 import DigitTableHeader from "./elements/digit-table-header";
 import DigitTableToolbar from "./elements/digit-table-toolbar";
 import styled from "styled-components";
-import DigitTranslations from "../../declaratives/digit-translations/DigitTranslations.declarative";
+import useDigitTranslations from "../../hooks/use-digit-translations";
 
 const StyledTablePagination = styled(TablePagination)`
     min-width: 600px;
@@ -27,6 +26,12 @@ const TablePaper = styled(Paper)`
     max-width: 100vw;
     overflow-x: auto;
 `;
+
+//temp fix until DigitTable is rewritten
+const DigitTableTranslations = ({ render }) => {
+    const [text] = useDigitTranslations(translations);
+    return render(text);
+};
 
 class DigitTable extends React.Component {
     constructor(props, context) {
@@ -147,8 +152,7 @@ class DigitTable extends React.Component {
         const { data, order, orderBy, rowsPerPage, page } = this.state;
 
         return (
-            <DigitTranslations
-                translations={translations}
+            <DigitTableTranslations
                 render={text => (
                     <TablePaper>
                         <DigitTableToolbar
@@ -181,40 +185,36 @@ class DigitTable extends React.Component {
                                 rowCount={data.length}
                                 headerTexts={headerTexts}
                             />
-                            <DigitIfElseRendering
-                                test={this.state.data.length > 0}
-                                ifRender={() => (
-                                    <DigitTableBody
-                                        search={this.props.search}
-                                        idProp={this.state.idProp}
-                                        columnsOrder={this.state.columnsOrder}
-                                        page={this.state.page}
-                                        rowsPerPage={this.state.rowsPerPage}
-                                        data={this.state.data}
-                                        isSelected={this.isSelected}
-                                        handleClick={this.handleClick}
-                                        rowShouldBeShown={this.rowShouldBeShown}
-                                        headerTexts={headerTexts}
-                                    />
-                                )}
-                                elseRender={() => (
-                                    <TableBody>
-                                        <tr>
-                                            <td colSpan="100">
-                                                <Center>
-                                                    <Padding>
-                                                        <Heading5
-                                                            text={
-                                                                emptyTableText
-                                                            }
-                                                        />
-                                                    </Padding>
-                                                </Center>
-                                            </td>
-                                        </tr>
-                                    </TableBody>
-                                )}
-                            />
+                            {this.state.data.length > 0 && (
+                                <DigitTableBody
+                                    search={this.props.search}
+                                    idProp={this.state.idProp}
+                                    columnsOrder={this.state.columnsOrder}
+                                    page={this.state.page}
+                                    rowsPerPage={this.state.rowsPerPage}
+                                    data={this.state.data}
+                                    isSelected={this.isSelected}
+                                    handleClick={this.handleClick}
+                                    rowShouldBeShown={this.rowShouldBeShown}
+                                    headerTexts={headerTexts}
+                                />
+                            )}
+
+                            {this.state.data.length === 0 && (
+                                <TableBody>
+                                    <tr>
+                                        <td colSpan="100">
+                                            <Center>
+                                                <Padding>
+                                                    <Heading5
+                                                        text={emptyTableText}
+                                                    />
+                                                </Padding>
+                                            </Center>
+                                        </td>
+                                    </tr>
+                                </TableBody>
+                            )}
                         </StyledTable>
 
                         <StyledTablePagination
@@ -283,9 +283,9 @@ DigitTable.propTypes = {
 DigitTable.defaultProps = {
     search: false,
     showSearchableProps: false,
-    searchText: "Sök",
+    searchText: "Search",
     titleText: "",
-    emptyTableText: "Tabellen är tom"
+    emptyTableText: "The table is empty"
 };
 
 export default DigitTable;

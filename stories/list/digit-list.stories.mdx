@@ -1,0 +1,61 @@
+import * as yup from "yup";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    DigitList,
+    DigitEditData
+} from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import Mail from "@material-ui/icons/Mail";
+import Delete from "@material-ui/icons/Delete";
+
+<Meta
+    title="Display data/DigitList"
+    component={DigitList}
+/>
+
+# DigitList
+
+<Preview>
+    <Story name="1">
+        <DigitList
+            multipleExpanded
+            onClick={item => {
+                console.log(item.text);
+            }}
+            dense={false}
+            title={"This is a title"}
+            items={[
+                {
+                    text: "Hej",
+                    secondaryText: "This is the secondary text",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "Hej"
+                        }
+                    ],
+                    actionIcon: Delete,
+                    actionOnClick: item => {
+                        console.log("DELETE ME " + item.text);
+                    }
+                },
+                {
+                    text: "hmm",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "ååh",
+                            items: [
+                                {
+                                    text: "subsub"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]}
+        />
+    </Story>
+</Preview>
+
+<Props of={DigitList} />

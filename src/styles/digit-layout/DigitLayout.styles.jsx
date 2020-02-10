@@ -308,6 +308,7 @@ export const Column = styled(
         fillElement,
         children,
         scroll,
+        flexWrap,
         ...rest
     }) => (
         <Flex
@@ -315,6 +316,7 @@ export const Column = styled(
             {...flexCenterVertical(center || centerVertical)}
             {...flexAlignLeftOrTop(topAlign, bottomAlign, reverse)}
             {...flexAlignRightOrBottom(topAlign, bottomAlign, reverse)}
+            flexWrap={flexWrap}
             {...rest}
         >
             {children}
@@ -418,6 +420,7 @@ export const Row = styled(
         children,
         scroll,
         marginHorizontal,
+        flexWrap,
         ...rest
     }) => (
         <Flex
@@ -425,6 +428,7 @@ export const Row = styled(
             {...flexCenterVertical(center || centerHorizontal)}
             {...flexAlignLeftOrTop(leftAlign, rightAlign, reverse)}
             {...flexAlignRightOrBottom(leftAlign, rightAlign, reverse)}
+            flexWrap={flexWrap}
             {...rest}
         >
             {children}
@@ -517,7 +521,7 @@ Row.defaultProps = {
 };
 
 export const DownRightPosition = styled.div`
-    position: absolute;
+    position: fixed;
     right: 16px;
     bottom: 16px;
 `;

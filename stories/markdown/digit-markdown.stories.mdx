@@ -1,0 +1,22 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitMarkdown } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Others/DigitMarkdown"
+    component={DigitMarkdown}
+/>
+
+# DigitMarkdown
+
+Renders markdown with react-digit-components tags, e.g. heading comes from `DigitText` and the table is from `DigitTable`.
+
+## Markdown
+
+<Preview>
+    <Story name="Size 20 loading">
+        <DigitMarkdown markdownSource="Hello, **this** is *markdown*." />
+    </Story>
+</Preview>
+
+<Props of={DigitMarkdown} />

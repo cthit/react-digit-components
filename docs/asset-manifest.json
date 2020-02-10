@@ -1,15 +1,19 @@
 {
   "files": {
-    "main.js": "/cthit/react-digit-components/main.d6dd4c2e3e5cbfe3a36f.bundle.js",
-    "main.js.map": "/cthit/react-digit-components/main.d6dd4c2e3e5cbfe3a36f.bundle.js.map",
-    "runtime~main.js": "/cthit/react-digit-components/runtime~main.d6dd4c2e3e5cbfe3a36f.bundle.js",
-    "runtime~main.js.map": "/cthit/react-digit-components/runtime~main.d6dd4c2e3e5cbfe3a36f.bundle.js.map",
-    "vendors~main.css": "/cthit/react-digit-components/vendors~main.css",
-    "vendors~main.js": "/cthit/react-digit-components/vendors~main.d6dd4c2e3e5cbfe3a36f.bundle.js",
-    "vendors~main.css.map": "/cthit/react-digit-components/vendors~main.css.map",
-    "vendors~main.js.map": "/cthit/react-digit-components/vendors~main.d6dd4c2e3e5cbfe3a36f.bundle.js.map",
+    "main.js": "/cthit/react-digit-components/main.f83ad833d5a47e84bf07.bundle.js",
+    "main.js.map": "/cthit/react-digit-components/main.f83ad833d5a47e84bf07.bundle.js.map",
+    "runtime~main.js": "/cthit/react-digit-components/runtime~main.f83ad833d5a47e84bf07.bundle.js",
+    "runtime~main.js.map": "/cthit/react-digit-components/runtime~main.f83ad833d5a47e84bf07.bundle.js.map",
+    "vendors~main.js": "/cthit/react-digit-components/vendors~main.f83ad833d5a47e84bf07.bundle.js",
+    "vendors~main.js.map": "/cthit/react-digit-components/vendors~main.f83ad833d5a47e84bf07.bundle.js.map",
     "iframe.html": "/cthit/react-digit-components/iframe.html",
-    "precache-manifest.c9799aa5e06f2ef43c579c674820644a.js": "/cthit/react-digit-components/precache-manifest.c9799aa5e06f2ef43c579c674820644a.js",
-    "service-worker.js": "/cthit/react-digit-components/service-worker.js"
-  }
+    "precache-manifest.628f3cfd2394c662f5105cf87c58b0fe.js": "/cthit/react-digit-components/precache-manifest.628f3cfd2394c662f5105cf87c58b0fe.js",
+    "service-worker.js": "/cthit/react-digit-components/service-worker.js",
+    "vendors~main.f83ad833d5a47e84bf07.bundle.js.LICENSE": "/cthit/react-digit-components/vendors~main.f83ad833d5a47e84bf07.bundle.js.LICENSE"
+  },
+  "entrypoints": [
+    "runtime~main.f83ad833d5a47e84bf07.bundle.js",
+    "vendors~main.f83ad833d5a47e84bf07.bundle.js",
+    "main.f83ad833d5a47e84bf07.bundle.js"
+  ]
 }

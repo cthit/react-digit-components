@@ -1,58 +1,19 @@
 import axios from "axios";
 import useGammaUser from "./use-gamma-user";
-import _ from "lodash";
 import { useContext, useEffect, useMemo, useState } from "react";
 import DigitGammaContext, {
-    GET_USER_FAILED,
-    GET_USER_LOADING,
-    GET_USER_SUCCESSFULLY,
-    GET_USER_TOKEN_FAILED
+    GET_USER_TOKEN_FAILED,
+    UPDATE_GAMMA_OPTIONS
 } from "../contexts/DigitGammaContext";
+import { updateMe } from "./use-gamma-invalidate-me";
+import { signIn } from "./use-gamma-sign-in";
+import trimEnd from "lodash/trimEnd";
+import useGammaStatus from "./use-gamma-status";
+import { signOut } from "./use-gamma-sign-out";
+import { useHistory } from "react-router";
 import useDigitToast from "./use-digit-toast";
 
-function updateMe(gammaPath, dispatch, name) {
-    dispatch({ type: GET_USER_LOADING });
-    axios
-        .get(removeLastSlash(gammaPath) + "/users/me", {
-            headers: {
-                Authorization:
-                    "Bearer " + sessionStorage.getItem("auth-" + name)
-            }
-        })
-        .then(response => {
-            if (typeof response.data !== "object") {
-                //prob html file that says "plz sign in"
-                console.log(response);
-                dispatch({ type: GET_USER_FAILED });
-            } else {
-                dispatch({ type: GET_USER_SUCCESSFULLY, user: response.data });
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            dispatch({ type: GET_USER_FAILED });
-        });
-}
-
-function removeLastSlash(path) {
-    return _.trimEnd(path, "/");
-}
-
-function redirectToGamma(gammaPath, redirect, id) {
-    const baseUrl = removeLastSlash(gammaPath) + "/oauth/authorize";
-    const responseType = "response_type=code";
-    const clientId = "client_id=" + id;
-    const redirectUri = "redirect_uri=" + redirect;
-    window.location.href =
-        baseUrl + "?" + responseType + "&" + clientId + "&" + redirectUri;
-}
-
-function signOut(name) {
-    sessionStorage.removeItem("auth-" + name);
-    window.location.href = "/";
-}
-
-function useGamma(
+function useGamma({
     name = "MyApp",
     id = "id",
     secret = "secret",
@@ -61,30 +22,71 @@ function useGamma(
     forceSignedIn = true,
     toastSignedOutText = "You're signed out",
     toastSignBackInText = "Press to sign in",
-    toastDuration = 5000
-) {
-    const [, dispatch] = useContext(DigitGammaContext);
+    toastDuration = 5000,
+    redirectToOnLogin = "/",
+    signOutFromGamma = false,
+    signOutTo = "/"
+}) {
+    const history = useHistory();
+    const [state, dispatch] = useContext(DigitGammaContext);
+    const [queueToast] = useDigitToast();
+
     const [loadingMe, setLoadingMe] = useState(false);
-    const [user, loading, error] = useGammaUser();
-    const [queueToast] = useDigitToast({
-        actionHandler: () => {
-            redirectToGamma(gammaPath, redirect, id);
-        },
-        text: toastSignedOutText,
-        duration: toastDuration,
-        actionText: toastSignBackInText
-    });
+    const user = useGammaUser();
+    const [loading, error] = useGammaStatus();
 
     const jwtAuth = useMemo(() => sessionStorage.getItem("auth-" + name), [
         name
     ]);
 
     useEffect(() => {
-        if (error && !loading) {
-            sessionStorage.removeItem("auth-" + name);
-            queueToast();
+        dispatch({
+            type: UPDATE_GAMMA_OPTIONS,
+            options: {
+                name,
+                id,
+                secret,
+                redirect,
+                gammaPath,
+                forceSignedIn,
+                toastSignedOutText,
+                toastSignBackInText,
+                toastDuration,
+                signOutFromGamma,
+                signOutTo
+            }
+        });
+    }, [
+        name,
+        id,
+        secret,
+        redirect,
+        gammaPath,
+        forceSignedIn,
+        toastSignedOutText,
+        toastSignBackInText,
+        toastDuration,
+        signOutFromGamma,
+        signOutTo
+    ]);
+
+    useEffect(() => {
+        if (!loading && error) {
+            signOut(
+                name,
+                queueToast,
+                dispatch,
+                () => signIn(gammaPath, redirect, id),
+                toastSignedOutText,
+                toastDuration,
+                toastSignBackInText,
+                gammaPath,
+                forceSignedIn && signOutFromGamma,
+                signOutTo,
+                history
+            );
         }
-    }, [loading, error, name, queueToast]);
+    }, [loading, error]);
 
     if (!jwtAuth && !error && !loadingMe) {
         setLoadingMe(true);
@@ -102,7 +104,7 @@ function useGamma(
 
             axios
                 .post(
-                    removeLastSlash(gammaPath) +
+                    trimEnd(gammaPath, "/") +
                         "/oauth/token?" +
                         params.toString(),
                     null,
@@ -114,13 +116,13 @@ function useGamma(
                     }
                 )
                 .then(response => {
-                    window.location.href = "/";
+                    history.push(redirectToOnLogin);
                     sessionStorage.setItem(
                         "auth-" + name,
                         response.data.access_token
                     );
                     setLoadingMe(true);
-                    updateMe(gammaPath, dispatch, name);
+                    updateMe(dispatch, gammaPath, name);
                 })
                 .catch(error => {
                     console.log(error);
@@ -128,19 +130,13 @@ function useGamma(
                 });
         } else {
             if (forceSignedIn) {
-                redirectToGamma(gammaPath, redirect, id);
+                signIn(gammaPath, redirect, id);
             }
         }
     } else if (!user && !loadingMe) {
         setLoadingMe(true);
-        updateMe(gammaPath, dispatch, name);
+        updateMe(dispatch, gammaPath, name);
     }
-    return [
-        loading,
-        error,
-        () => redirectToGamma(gammaPath, redirect, id),
-        () => signOut(name)
-    ];
 }
 
 export default useGamma;

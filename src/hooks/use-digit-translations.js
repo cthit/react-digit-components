@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 
 import merge from "lodash/merge";
 import DigitTranslationsContext, {
-    SET_ACTIVE_LANGUAGE
+    SET_ACTIVE_LANGUAGE,
+    SET_COMMON_TRANSLATIONS
 } from "../contexts/DigitTranslationsContext";
 
 function getNewText(translations, commonTranslations, activeLanguage) {
@@ -36,7 +37,9 @@ function useDigitTranslations(translations = {}) {
     return [
         text,
         activeLanguage,
-        lang => dispatch({ type: SET_ACTIVE_LANGUAGE, activeLanguage: lang })
+        lang => dispatch({ type: SET_ACTIVE_LANGUAGE, activeLanguage: lang }),
+        commonTranslations =>
+            dispatch({ type: SET_COMMON_TRANSLATIONS, commonTranslations })
     ];
 }
 

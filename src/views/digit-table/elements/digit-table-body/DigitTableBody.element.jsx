@@ -86,7 +86,7 @@ const DigitTableBody = ({
                                 </Link>
                             </StyledTableCell>
                         )}
-                        {headerTexts.__link == null && <StyledTableCell />}
+                        {headerTexts.__link == null && null}
                     </StyledTableRow>
                 );
             })}

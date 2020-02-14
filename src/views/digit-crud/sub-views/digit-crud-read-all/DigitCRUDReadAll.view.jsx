@@ -2,7 +2,9 @@ import React, { useContext, useEffect } from "react";
 import DigitTable from "../../../digit-table";
 import {
     Center,
-    DownRightPosition
+    DownRightPosition,
+    DownRightTablePosition,
+    Fill
 } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitLoading from "../../../../elements/digit-loading";
 import DigitFAB from "../../../../elements/digit-fab";
@@ -125,7 +127,7 @@ const DigitCRUDReadAll = ({
 
     return (
         <>
-            <Center>
+            <Fill>
                 <DigitTable
                     data={
                         hasReadOne
@@ -145,18 +147,24 @@ const DigitCRUDReadAll = ({
                     }
                     idProp={idProp}
                     {...tableProps}
+                    _renderPaginationLeft={
+                        hasCreate
+                            ? () => (
+                                  <Center>
+                                      <DigitFAB
+                                          primary
+                                          text={createButtonText}
+                                          icon={Add}
+                                          onClick={() =>
+                                              history.push(path + createPath)
+                                          }
+                                      />
+                                  </Center>
+                              )
+                            : null
+                    }
                 />
-            </Center>
-            {hasCreate && (
-                <DownRightPosition>
-                    <DigitFAB
-                        primary
-                        text={createButtonText}
-                        icon={Add}
-                        onClick={() => history.push(path + createPath)}
-                    />
-                </DownRightPosition>
-            )}
+            </Fill>
         </>
     );
 };

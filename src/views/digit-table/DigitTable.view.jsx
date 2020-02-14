@@ -5,7 +5,11 @@ import TablePagination from "@material-ui/core/TablePagination";
 import isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
-import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
+import {
+    Center,
+    Padding,
+    Row
+} from "../../styles/digit-layout/DigitLayout.styles";
 import { Heading5 } from "../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTable.view.translations.json";
 import DigitTableBody from "./elements/digit-table-body";
@@ -14,9 +18,7 @@ import DigitTableToolbar from "./elements/digit-table-toolbar";
 import styled from "styled-components";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 
-const StyledTablePagination = styled(TablePagination)`
-    min-width: 600px;
-`;
+const StyledTablePagination = styled(TablePagination)``;
 
 const StyledTable = styled(Table)`
     min-width: 632px;
@@ -148,7 +150,12 @@ class DigitTable extends React.Component {
         ).length > 0; //Can be optimized, escape if one result is found
 
     render() {
-        const { selected, emptyTableText, headerTexts } = this.props;
+        const {
+            selected,
+            emptyTableText,
+            headerTexts,
+            _renderPaginationLeft
+        } = this.props;
         const { data, order, orderBy, rowsPerPage, page } = this.state;
 
         return (
@@ -217,24 +224,37 @@ class DigitTable extends React.Component {
                             )}
                         </StyledTable>
 
-                        <StyledTablePagination
-                            component="div"
-                            count={
-                                data.filter(n => this.rowShouldBeShown(n))
-                                    .length
-                            } //TODO OPTIMIZE
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            backIconButtonProps={{
-                                "aria-label": text.PreviousPage
-                            }}
-                            nextIconButtonProps={{
-                                "aria-label": text.NextPage
-                            }}
-                            onChangePage={this.handleChangePage}
-                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                            labelRowsPerPage={text.RowsPerPage}
-                        />
+                        <Row
+                            justifyContent={
+                                _renderPaginationLeft == null
+                                    ? "flex-end"
+                                    : "space-between"
+                            }
+                        >
+                            {_renderPaginationLeft != null &&
+                                _renderPaginationLeft()}
+                            <StyledTablePagination
+                                component="div"
+                                count={
+                                    data.filter(n => this.rowShouldBeShown(n))
+                                        .length
+                                } //TODO OPTIMIZE
+                                rowsPerPage={rowsPerPage}
+                                page={page}
+                                backIconButtonProps={{
+                                    "aria-label": text.PreviousPage
+                                }}
+                                nextIconButtonProps={{
+                                    "aria-label": text.NextPage
+                                }}
+                                onChangePage={this.handleChangePage}
+                                onChangeRowsPerPage={
+                                    this.handleChangeRowsPerPage
+                                }
+                                labelRowsPerPage={text.RowsPerPage}
+                                _renderPaginationLeft={_renderPaginationLeft}
+                            />
+                        </Row>
                     </TablePaper>
                 )}
             />

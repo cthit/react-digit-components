@@ -83,7 +83,8 @@ const DeleteFAB = ({
     deleteDialogFormComponentData,
     deleteDialogFormValidationSchema,
     deleteDialogFormInitialValues,
-    deleteDialogFormKeysOrder
+    deleteDialogFormKeysOrder,
+    onDelete
 }) => {
     const [formValid, setFormValid] = useState(false);
     const [queueToast] = useDigitToast();
@@ -93,7 +94,7 @@ const DeleteFAB = ({
         closeCustomDialog,
         updateCustomDialog
     ] = useDigitCustomDialog();
-    const onDelete = form =>
+    const onDeleteInternal = form =>
         deleteAction(id, form)
             .then(response => {
                 queueToast({
@@ -101,6 +102,7 @@ const DeleteFAB = ({
                 });
                 closeCustomDialog();
                 history.push(path + backFromDeletePath);
+                onDelete(response);
             })
             .catch(error => {
                 queueToast({
@@ -116,7 +118,7 @@ const DeleteFAB = ({
         onClose: () => {
             setDialogOpen(false);
         },
-        onConfirm: onDelete
+        onConfirm: onDeleteInternal
     });
 
     const renderButtons = (confirm, cancel) => (
@@ -150,7 +152,9 @@ const DeleteFAB = ({
                         openCustomDialog({
                             renderMain: () => (
                                 <DeleteDialogMain
-                                    onSubmit={values => onDelete(values)}
+                                    onSubmit={values =>
+                                        onDeleteInternal(values)
+                                    }
                                     onValidSubmitChange={valid =>
                                         setFormValid(valid)
                                     }

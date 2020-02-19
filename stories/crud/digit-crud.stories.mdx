@@ -147,6 +147,7 @@ import xor from "lodash/xor";
                             }
                             backButtonText={"Tillbaka"}
                             useKeyTextsInUpperLabel
+                            onCreate={response => console.log("CREATED")}
                 />
             );
         }}
@@ -331,6 +332,7 @@ import xor from "lodash/xor";
                             }
                             deleteDialogFormKeysOrder={["nameConfirm"]}
                             useKeyTextsInUpperLabel
+                            onDelete={response => console.log("DELETED")}
                 />
             );
         }}
@@ -447,7 +449,8 @@ import xor from "lodash/xor";
                             }
                             toastUpdateFailed={(updated, old, error) =>
                                 "Användare " + updated.name + " har inte uppdateras"
-                            }    
+                            }
+                            onUpdate={response => console.log("UPDATED")}
                 />
             );
         }}
@@ -581,6 +584,8 @@ import xor from "lodash/xor";
                                 data.name +
                                 " misslyckades"
                             }
+                            onUpdate={response => console.log("UPDATE")}
+                            onDelete={response => console.log("DELETED")}
                 />
             );
         }}
@@ -726,6 +731,9 @@ import xor from "lodash/xor";
                             toastCreateFailed={(data, error) =>
                                 "Användaren " + data.name + " raderad"
                             }
+                            onUpdate={response => console.log("UPDATE")}
+                            onDelete={response => console.log("DELETED")}
+                            onCreate={response => console.log("CREATE")}
                 />
             );
         }}

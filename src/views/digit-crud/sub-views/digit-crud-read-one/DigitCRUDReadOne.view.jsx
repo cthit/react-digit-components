@@ -104,7 +104,8 @@ const DigitCRUDReadOne = ({
     deleteDialogFormKeysOrder,
     timeProps,
     dateProps,
-    dateAndTimeProps
+    dateAndTimeProps,
+    onDelete
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
@@ -166,6 +167,7 @@ const DigitCRUDReadOne = ({
             deleteDialogFormInitialValues={deleteDialogFormInitialValues}
             deleteDialogFormValidationSchema={deleteDialogFormValidationSchema}
             deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+            onDelete={onDelete}
         />
     );
 

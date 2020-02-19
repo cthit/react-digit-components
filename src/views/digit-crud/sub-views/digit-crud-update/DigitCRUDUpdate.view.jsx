@@ -37,7 +37,9 @@ const DigitCRUDUpdate = ({
     deleteDialogFormComponentData,
     deleteDialogFormValidationSchema,
     deleteDialogFormInitialValues,
-    deleteDialogFormKeysOrder
+    deleteDialogFormKeysOrder,
+    onUpdate,
+    onDelete
 }) => {
     const [{ one, loading }] = useContext(DigitCRUDContext);
 
@@ -77,6 +79,7 @@ const DigitCRUDUpdate = ({
                                         response
                                     )
                                 });
+                                onUpdate(response);
                             })
                             .catch(error => {
                                 actions.setSubmitting(false);
@@ -138,6 +141,7 @@ const DigitCRUDUpdate = ({
                         deleteDialogFormComponentData
                     }
                     deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+                    onDelete={onDelete}
                 />
             )}
         </>

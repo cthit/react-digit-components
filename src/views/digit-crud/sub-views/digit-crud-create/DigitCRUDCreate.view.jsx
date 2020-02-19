@@ -16,7 +16,8 @@ const DigitCRUDCreate = ({
     backButtonText,
     createButtonText,
     readAllPath,
-    backFromCreatePath
+    backFromCreatePath,
+    onCreate
 }) => {
     const [queueToast] = useDigitToast();
 
@@ -31,6 +32,7 @@ const DigitCRUDCreate = ({
                             queueToast({
                                 text: toastCreateSuccessful(_new, response)
                             });
+                            onCreate(response);
                         })
                         .catch(error => {
                             actions.setSubmitting(false);

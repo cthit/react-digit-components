@@ -98,7 +98,10 @@ const DigitCRUDInner = ({
     createFormValidationSchema,
     timeProps,
     dateProps,
-    dateAndTimeProps
+    dateAndTimeProps,
+    onCreate,
+    onUpdate,
+    onDelete
 }) => {
     const [, dispatch] = useContext(DigitCRUDContext);
 
@@ -175,6 +178,7 @@ const DigitCRUDInner = ({
                             backButtonText={backButtonText}
                             readAllPath={readAllPath}
                             backFromCreatePath={backFromCreatePath}
+                            onCreate={onCreate}
                         />
                     )}
                 />
@@ -235,6 +239,8 @@ const DigitCRUDInner = ({
                             deleteDialogFormKeysOrder={
                                 deleteDialogFormKeysOrder
                             }
+                            onUpdate={onUpdate}
+                            onDelete={onDelete}
                         />
                     )}
                 />
@@ -298,6 +304,7 @@ const DigitCRUDInner = ({
                             timeProps={timeProps}
                             dateProps={dateProps}
                             dateAndTimeProps={dateAndTimeProps}
+                            onDelete={onDelete}
                         />
                     )}
                 />
@@ -473,7 +480,10 @@ DigitCRUD.propTypes = {
     createFormValidationSchema: PropTypes.func,
     timeProps: PropTypes.arrayOf(PropTypes.string),
     dateProps: PropTypes.arrayOf(PropTypes.string),
-    dateAndTimeProps: PropTypes.arrayOf(PropTypes.string)
+    dateAndTimeProps: PropTypes.arrayOf(PropTypes.string),
+    onCreate: PropTypes.func,
+    onUpdate: PropTypes.func,
+    onDelete: PropTypes.func
 };
 
 DigitCRUD.defaultProps = {
@@ -524,7 +534,10 @@ DigitCRUD.defaultProps = {
     createFormValidationSchema: null,
     timeProps: [],
     dateProps: [],
-    dateAndTimeProps: []
+    dateAndTimeProps: [],
+    onCreate: () => {},
+    onUpdate: () => {},
+    onDelete: () => {}
 };
 
 export default DigitCRUD;

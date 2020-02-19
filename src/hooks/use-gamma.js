@@ -2,6 +2,7 @@ import axios from "axios";
 import { useCallback, useContext, useEffect, useState } from "react";
 import DigitGammaContext, {
     GET_USER_TOKEN_FAILED,
+    NOT_SIGNED_IN,
     UPDATE_GAMMA_OPTIONS
 } from "../contexts/DigitGammaContext";
 import useGammaInvalidateMe from "./use-gamma-invalidate-me";
@@ -150,7 +151,7 @@ function useGamma(props) {
             if (forceSignedIn) {
                 signIn();
             } else {
-                signOut();
+                dispatch({ type: NOT_SIGNED_IN });
             }
         }
     }

@@ -17,15 +17,12 @@ function signOut(
     signOutFromGamma,
     signOutTo,
     history,
-    toast,
-    forceSignedIn
+    toast
 ) {
     sessionStorage.removeItem("auth-" + name);
 
-    if (signOutFromGamma && forceSignedIn) {
+    if (signOutFromGamma) {
         window.location.href = trimEnd(gammaPath, "/") + "/logout";
-    } else if (forceSignedIn) {
-        window.location.href = signOutTo;
     } else {
         history.push(signOutTo);
         dispatch({ type: SIGN_OUT });
@@ -58,8 +55,7 @@ function useGammaSignOut() {
         gammaPath,
         signOutFromGamma,
         signOutTo,
-        toast,
-        forceSignedIn
+        toast
     } = state.options;
 
     const signOutCB = useCallback(() => {
@@ -75,8 +71,7 @@ function useGammaSignOut() {
             signOutFromGamma,
             signOutTo,
             history,
-            toast,
-            forceSignedIn
+            toast
         );
     }, [JSON.stringify(state.options)]);
     return signOutCB;

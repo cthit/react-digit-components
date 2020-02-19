@@ -87,6 +87,7 @@ export {
     GET_USER_TOKEN_FAILED,
     UPDATE_GAMMA_OPTIONS,
     SIGN_OUT,
-    REFRESH_USER_LOADING
+    REFRESH_USER_LOADING,
+    NOT_SIGNED_IN
 };
 export default DigitGammaContext;

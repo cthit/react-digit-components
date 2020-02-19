@@ -47,6 +47,8 @@ import useGammaInvalidateMe from "./hooks/use-gamma-invalidate-me";
 import useGammaSignIn from "./hooks/use-gamma-sign-in";
 import useGammaSignOut from "./hooks/use-gamma-sign-out";
 import useGammaStatus from "./hooks/use-gamma-status";
+import useGammaIs from "./hooks/use-gamma-is";
+import useGammaIsAdmin from "./hooks/use-gamma-is-admin";
 import useDigitCustomDialog from "./hooks/use-digit-custom-dialog";
 import useDigitDialog from "./hooks/use-digit-dialog";
 import useDigitFormField from "./hooks/use-digit-form-field";
@@ -208,6 +210,8 @@ export {
     useGammaSignIn,
     useGammaSignOut,
     useGammaStatus,
+    useGammaIs,
+    useGammaIsAdmin,
     useDigitCustomDialog,
     useDigitDialog,
     useDigitFormField,

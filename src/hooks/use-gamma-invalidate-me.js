@@ -2,13 +2,15 @@ import { useCallback, useContext } from "react";
 import DigitGammaContext, {
     GET_USER_FAILED,
     GET_USER_LOADING,
-    GET_USER_SUCCESSFULLY
+    GET_USER_SUCCESSFULLY,
+    REFRESH_USER_LOADING
 } from "../contexts/DigitGammaContext";
 import trimEnd from "lodash/trimEnd";
 import axios from "axios";
+import useGammaUser from "./use-gamma-user";
 
-export function updateMe(dispatch, gammaPath, name) {
-    dispatch({ type: GET_USER_LOADING });
+function updateMe(user, dispatch, gammaPath, name) {
+    dispatch({ type: user == null ? GET_USER_LOADING : REFRESH_USER_LOADING });
     return new Promise((resolve, reject) => {
         axios
             .get(trimEnd(gammaPath, "/") + "/users/me", {
@@ -38,12 +40,12 @@ export function updateMe(dispatch, gammaPath, name) {
 }
 
 function useGammaInvalidateMe() {
+    const user = useGammaUser();
     const [state, dispatch] = useContext(DigitGammaContext);
     const { gammaPath, name } = state.options;
-    const invalidateMe = useCallback(() => {
-        return updateMe(dispatch, gammaPath, name);
-    }, [gammaPath, dispatch, name]);
-    return invalidateMe;
+    return useCallback(() => {
+        return updateMe(user, dispatch, gammaPath, name);
+    }, [user, gammaPath, dispatch, name]);
 }
 
 export default useGammaInvalidateMe;

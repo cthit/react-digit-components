@@ -5,7 +5,7 @@ import useGammaSignIn from "./use-gamma-sign-in";
 import { useHistory } from "react-router";
 import trimEnd from "lodash/trimEnd";
 
-export function signOut(
+function signOut(
     name,
     queueToast,
     dispatch,
@@ -16,25 +16,31 @@ export function signOut(
     gammaPath,
     signOutFromGamma,
     signOutTo,
-    history
+    history,
+    toast,
+    forceSignedIn
 ) {
     sessionStorage.removeItem("auth-" + name);
 
-    if (signOutFromGamma) {
+    if (signOutFromGamma && forceSignedIn) {
         window.location.href = trimEnd(gammaPath, "/") + "/logout";
+    } else if (forceSignedIn) {
+        window.location.href = signOutTo;
     } else {
         history.push(signOutTo);
-        dispatch({ SIGN_OUT });
+        dispatch({ type: SIGN_OUT });
     }
 
-    queueToast({
-        actionHandler: () => {
-            signIn();
-        },
-        text: toastSignedOutText,
-        duration: toastDuration,
-        actionText: toastSignBackInText
-    });
+    if (toast) {
+        queueToast({
+            actionHandler: () => {
+                signIn();
+            },
+            text: toastSignedOutText,
+            duration: toastDuration,
+            actionText: toastSignBackInText
+        });
+    }
 }
 
 function useGammaSignOut() {
@@ -51,7 +57,9 @@ function useGammaSignOut() {
         toastSignBackInText,
         gammaPath,
         signOutFromGamma,
-        signOutTo
+        signOutTo,
+        toast,
+        forceSignedIn
     } = state.options;
 
     const signOutCB = useCallback(() => {
@@ -66,20 +74,11 @@ function useGammaSignOut() {
             gammaPath,
             signOutFromGamma,
             signOutTo,
-            history
+            history,
+            toast,
+            forceSignedIn
         );
-    }, [
-        name,
-        queueToast,
-        dispatch,
-        signIn,
-        toastSignedOutText,
-        toastDuration,
-        toastSignBackInText,
-        gammaPath,
-        signOutFromGamma,
-        signOutTo
-    ]);
+    }, [JSON.stringify(state.options)]);
     return signOutCB;
 }
 

@@ -1,7 +1,9 @@
 import React, { createContext, useReducer } from "react";
 const DigitGammaContext = createContext({});
 
+const NOT_SIGNED_IN = "no-user";
 const GET_USER_LOADING = "get-user-loading";
+const REFRESH_USER_LOADING = "refresh-user-loading";
 const GET_USER_FAILED = "get-user-failed";
 const GET_USER_TOKEN_FAILED = "get-user-token-failed";
 const GET_USER_SUCCESSFULLY = "get-user-successfully";
@@ -9,7 +11,14 @@ const UPDATE_GAMMA_OPTIONS = "update-gamma-options";
 const SIGN_OUT = "sign-out";
 
 const gammaContext = (state, action) => {
+    console.log(action.type + "!");
     switch (action.type) {
+        case REFRESH_USER_LOADING:
+            return {
+                ...state,
+                loading: true,
+                error: false
+            };
         case GET_USER_LOADING:
             return {
                 ...state,
@@ -37,10 +46,12 @@ const gammaContext = (state, action) => {
         case UPDATE_GAMMA_OPTIONS:
             return {
                 ...state,
+                ready: true,
                 options: {
                     ...action.options
                 }
             };
+        case NOT_SIGNED_IN:
         case SIGN_OUT:
             return {
                 ...state,
@@ -75,6 +86,7 @@ export {
     GET_USER_LOADING,
     GET_USER_TOKEN_FAILED,
     UPDATE_GAMMA_OPTIONS,
-    SIGN_OUT
+    SIGN_OUT,
+    REFRESH_USER_LOADING
 };
 export default DigitGammaContext;

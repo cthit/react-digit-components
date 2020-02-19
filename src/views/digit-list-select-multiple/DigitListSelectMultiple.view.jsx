@@ -110,12 +110,6 @@ const DigitListSelectMultiple = ({
     };
 
     const addAllValuesAs = (ids, bol) => {
-        console.log(ids);
-        console.log(
-            bol
-                ? [...ids, ...innerValue]
-                : innerValue.filter(v => !ids.includes(v))
-        );
         handleChange({
             target: {
                 value: bol

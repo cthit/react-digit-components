@@ -11,7 +11,6 @@ const UPDATE_GAMMA_OPTIONS = "update-gamma-options";
 const SIGN_OUT = "sign-out";
 
 const gammaContext = (state, action) => {
-    console.log(action.type + "!");
     switch (action.type) {
         case REFRESH_USER_LOADING:
             return {

@@ -77,8 +77,6 @@ function useGamma(props) {
     const [loading, error] = useGammaStatus();
     const invalidateMe = useGammaInvalidateMe();
 
-    console.log("loading: " + loading + "; error: " + error);
-
     useEffect(() => {
         setRan(false);
         dispatch({
@@ -91,16 +89,13 @@ function useGamma(props) {
     }, [JSON.stringify(props)]);
 
     const onFocus = useCallback(() => {
-        console.log("FOCUS");
         if (document.visibilityState === "visible") {
-            console.log("HE");
             setRan(false);
         }
     }, []);
 
     useEffect(() => {
         if (refreshOnFocus) {
-            console.log("Add listener");
             window.addEventListener("visibilitychange", onFocus);
         }
         return () =>
@@ -108,9 +103,6 @@ function useGamma(props) {
                 ? window.removeEventListener("visibilitychange", onFocus)
                 : null;
     }, [refreshOnFocus]);
-
-    console.log(state);
-    console.log("ran: " + ran);
 
     if (!state.ready || ran) {
         return;

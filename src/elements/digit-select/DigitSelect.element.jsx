@@ -112,7 +112,7 @@ DigitSelect.propTypes = {
     /** If true, then you can't select a new value. */
     disabled: PropTypes.bool,
     /** A string to string map, the pretty text to render. */
-    valueToTextMap: PropTypes.objectOf(PropTypes.string).isRequired,
+    valueToTextMap: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
     /** If true, then the user can select nothing. */
     allowToChooseNone: PropTypes.bool,
     /** The text label over the DigitSelect */

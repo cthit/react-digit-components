@@ -1,0 +1,95 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    useDigitTranslations,
+    useDigitFormFieldArray,
+    DigitForm,
+    DigitText,
+    DigitTextField,
+    DigitButton,
+    DigitLayout,
+    DigitChip,
+    DigitIconButton,
+    DigitCheckbox
+} from "../../src";
+import * as yup from "yup";
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+
+
+# useDigitFormFieldArray
+
+<Meta title="Hooks/useDigitFormFieldArray"/>
+
+## a
+
+<Preview>
+    <Story name="Standard">
+        {() => {
+            const Field = () => {
+                const { value, push, swap, move, insert, unshift, remove, pop, replace } = useDigitFormFieldArray("cars");
+                const [carName, setCarName] = useState("");
+                return (<>
+                    <DigitLayout.Row justifyContent="flex-start">
+                        <DigitTextField outlined upperLabel="Car name" value={carName} onChange={e => setCarName(e.target.value)}/>
+                        <DigitButton raised primary disabled={carName.length === 0} text={"Push"} onClick={() => {
+                            push({name: carName});
+                            setCarName("");
+                        }}/>
+                        <DigitButton raised primary disabled={carName.length === 0} text={"Unshift"} onClick={() => {
+                            unshift({name: carName});
+                            setCarName("");
+                        }}/>
+                    </DigitLayout.Row>
+                    <hr/>
+                    {value.map((car, i) => (
+                        <DigitLayout.Row justifyContent="flex-start">
+                            <div style={{width: "150px"}}><DigitChip key={car.name} label={car.name} onDelete={() => remove(i)}/></div>
+                            <DigitIconButton icon={ArrowDownwardIcon} onClick={() => swap(i, (i + 1) % value.length)}/>
+                            <DigitIconButton icon={ArrowUpwardIcon} onClick={() => swap(i == 0 ? value.length - 1 : i - 1, i)}/>
+                            <DigitButton disabled={carName === ""} text="Replace here" onClick={() => {
+                                replace(i, {name: carName});
+                                setCarName("");
+                            }}/>
+                            <DigitButton disabled={carName === ""} text="Insert before this" onClick={() => {
+                                insert(i, {name: carName});
+                                setCarName("");
+                            }}/>
+                            <DigitButton disabled={value.length <= 1} text="Move to random" onClick={() => {
+                                const possibleIndices = [];
+                                for(var j = 0; j < value.length; j++){
+                                    if(i !== j){
+                                        possibleIndices.push(j);
+                                    }
+                                }
+                                move(i, Math.floor(Math.random() * value.length));
+                                setCarName("");
+                            }}/>
+                        </DigitLayout.Row>
+                    ))}
+                    <DigitButton raised secondary disabled={value.length === 0} text="Pop" onClick={() => alert(pop().name)}/>
+                </>);
+            }
+            return (
+                <DigitForm initialValues={{cars: [{name: "Ferrari"}, {name: "Ford"}, {name: "Volvo"}]}} 
+                           onSubmit={(values) => {
+                               console.log(values);
+                           }}
+                           render={() => (
+                               <DigitLayout.Column justifyContent="flex-start">
+                                    <Field />
+                                    <hr/>
+                                    <DigitButton submit onSubmit={(values) => console.log(values)} text="Submit" />
+                               </DigitLayout.Column>
+                           )}
+                           validationSchema={yup.object().shape({
+                               cars: yup.array()
+                           })}
+                           >
+                </DigitForm>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={useDigitTranslations} />

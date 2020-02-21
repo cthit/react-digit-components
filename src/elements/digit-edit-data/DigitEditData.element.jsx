@@ -9,6 +9,7 @@ import {
 } from "../../styles/digit-layout/DigitLayout.styles";
 import * as yup from "yup";
 import useDigitFormField from "../../hooks/use-digit-form-field";
+import useDigitFormFieldArray from "../../hooks/use-digit-form-field-array";
 
 const DigitEditDataInner = ({
     keysOrder,
@@ -18,10 +19,18 @@ const DigitEditDataInner = ({
     return keysOrder.map(key => (
         <React.Fragment key={key}>
             <div style={{ marginBottom: marginVertical }} />
-            <DigitEditDataField
-                name={key}
-                componentData={keysComponentData[key]}
-            />
+            {keysComponentData[key].array && (
+                <DigitEditDataFieldArray
+                    name={key}
+                    componentData={keysComponentData[key]}
+                />
+            )}
+            {!keysComponentData[key].array && (
+                <DigitEditDataField
+                    name={key}
+                    componentData={keysComponentData[key]}
+                />
+            )}
             <div style={{ marginBottom: marginVertical }} />
         </React.Fragment>
     ));
@@ -29,6 +38,21 @@ const DigitEditDataInner = ({
 
 const DigitEditDataField = ({ name, componentData }) => {
     const field = useDigitFormField(name);
+    const { component, componentProps } = componentData;
+
+    return useMemo(
+        () =>
+            createElement(component, {
+                ...componentProps,
+                ...field,
+                name
+            }),
+        [JSON.stringify(field), JSON.stringify(componentData)]
+    );
+};
+
+const DigitEditDataFieldArray = ({ name, componentData }) => {
+    const field = useDigitFormFieldArray(name);
     const { component, componentProps } = componentData;
 
     return useMemo(

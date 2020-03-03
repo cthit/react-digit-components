@@ -154,7 +154,7 @@ class DigitTable extends React.Component {
             selected,
             emptyTableText,
             headerTexts,
-            _renderPaginationLeft
+            renderPaginationLeft //Plz don't use this. It will probably be removed.
         } = this.props;
         const { data, order, orderBy, rowsPerPage, page } = this.state;
 
@@ -226,13 +226,13 @@ class DigitTable extends React.Component {
 
                         <Row
                             justifyContent={
-                                _renderPaginationLeft == null
+                                renderPaginationLeft == null
                                     ? "flex-end"
                                     : "space-between"
                             }
                         >
-                            {_renderPaginationLeft != null &&
-                                _renderPaginationLeft()}
+                            {renderPaginationLeft != null &&
+                                renderPaginationLeft()}
                             <StyledTablePagination
                                 component="div"
                                 count={
@@ -252,7 +252,7 @@ class DigitTable extends React.Component {
                                     this.handleChangeRowsPerPage
                                 }
                                 labelRowsPerPage={text.RowsPerPage}
-                                _renderPaginationLeft={_renderPaginationLeft}
+                                renderPaginationLeft={renderPaginationLeft}
                             />
                         </Row>
                     </TablePaper>

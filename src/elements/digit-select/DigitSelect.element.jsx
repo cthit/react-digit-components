@@ -6,7 +6,6 @@ import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React from "react";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
-import styled from "styled-components";
 
 const DigitSelect = ({
     value,
@@ -29,19 +28,19 @@ const DigitSelect = ({
     const [labelWidth, setLabelWidth] = React.useState(0);
     React.useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
-    }, []);
+    }, [inputLabel.ref, upperLabel]);
 
     return (
         <Fill>
-            <StyledFormControl
+            <FormControl
+                disabled={disabled}
                 variant={filled ? "filled" : outlined ? "outlined" : "standard"}
             >
                 <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
-                <StyledSelect
+                <Select
                     name={name}
                     onBlur={onBlur}
                     onChange={onChange}
-                    disabled={disabled}
                     displayEmpty={allowToChooseNone}
                     value={value}
                     labelWidth={labelWidth}
@@ -73,7 +72,7 @@ const DigitSelect = ({
                             </MenuItem>
                         );
                     })}
-                </StyledSelect>
+                </Select>
                 {(lowerLabel != null || errorMessage != null) && (
                     <FormHelperText>
                         {error && errorMessage != null
@@ -81,7 +80,7 @@ const DigitSelect = ({
                             : lowerLabel}
                     </FormHelperText>
                 )}
-            </StyledFormControl>
+            </FormControl>
         </Fill>
     );
 };
@@ -112,7 +111,9 @@ DigitSelect.propTypes = {
     /** If true, then you can't select a new value. */
     disabled: PropTypes.bool,
     /** A string to string map, the pretty text to render. */
-    valueToTextMap: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired,
+    valueToTextMap: PropTypes.objectOf(
+        PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ).isRequired,
     /** If true, then the user can select nothing. */
     allowToChooseNone: PropTypes.bool,
     /** The text label over the DigitSelect */
@@ -144,13 +145,5 @@ DigitSelect.defaultProps = {
     valueToTextMap: {},
     selectNothingText: "Nothing"
 };
-
-const StyledFormControl = styled(FormControl)`
-    display: flex;
-`;
-
-const StyledSelect = styled(Select)`
-    flex: 1;
-`;
 
 export default DigitSelect;

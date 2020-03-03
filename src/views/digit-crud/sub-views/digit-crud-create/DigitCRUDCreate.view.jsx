@@ -2,6 +2,7 @@ import React from "react";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitEditData from "../../../../elements/digit-edit-data-card";
 import useDigitToast from "../../../../hooks/use-digit-toast";
+import { useHistory } from "react-router";
 
 const DigitCRUDCreate = ({
     createAction,
@@ -17,9 +18,11 @@ const DigitCRUDCreate = ({
     createButtonText,
     readAllPath,
     backFromCreatePath,
-    onCreate
+    onCreate,
+    useHistoryGoBackOnBack
 }) => {
     const [queueToast] = useDigitToast();
+    const history = useHistory();
 
     return (
         <Center>
@@ -48,10 +51,14 @@ const DigitCRUDCreate = ({
                 validationSchema={formValidationSchema}
                 extraButton={{
                     outlined: true,
-                    text: backButtonText
+                    text: backButtonText,
+                    onClick: () =>
+                        useHistoryGoBackOnBack ? history.goBack() : null
                 }}
                 extraButtonTo={
-                    backFromCreatePath() == null
+                    useHistoryGoBackOnBack
+                        ? null
+                        : backFromCreatePath() == null
                         ? path + readAllPath
                         : backFromCreatePath()
                 }

@@ -105,7 +105,8 @@ const DigitCRUDReadOne = ({
     timeProps,
     dateProps,
     dateAndTimeProps,
-    onDelete
+    onDelete,
+    useHistoryGoBackOnBack
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
@@ -174,11 +175,15 @@ const DigitCRUDReadOne = ({
     );
 
     const goBack = () => {
-        history.push(
-            backFromReadOnePath(one) == null
-                ? path + readAllPath
-                : backFromReadOnePath(one)
-        );
+        if (useHistoryGoBackOnBack) {
+            history.goBack();
+        } else {
+            history.push(
+                backFromReadOnePath(one) == null
+                    ? path + readAllPath
+                    : backFromReadOnePath(one)
+            );
+        }
     };
     const goToEdit = () => {
         history.push(path + updatePath.replace(":id", id));

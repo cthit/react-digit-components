@@ -85,7 +85,8 @@ const DeleteFAB = ({
     deleteDialogFormValidationSchema,
     deleteDialogFormInitialValues,
     deleteDialogFormKeysOrder,
-    onDelete
+    onDelete,
+    useHistoryGoBackOnBack
 }) => {
     const [formValid, setFormValid] = useState(false);
     const [queueToast] = useDigitToast();
@@ -102,7 +103,11 @@ const DeleteFAB = ({
                     text: toastDeleteSuccessful(one, response)
                 });
                 closeCustomDialog();
-                history.push(path + backFromDeletePath);
+                if (useHistoryGoBackOnBack) {
+                    history.goBack();
+                } else {
+                    history.push(path + backFromDeletePath);
+                }
                 onDelete(response);
             })
             .catch(error => {

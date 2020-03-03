@@ -39,7 +39,8 @@ const DigitCRUDUpdate = ({
     deleteDialogFormInitialValues,
     deleteDialogFormKeysOrder,
     onUpdate,
-    onDelete
+    onDelete,
+    useHistoryGoBackOnBack
 }) => {
     const [{ one, loading }] = useContext(DigitCRUDContext);
 
@@ -100,10 +101,14 @@ const DigitCRUDUpdate = ({
                     isInitialValid={true}
                     extraButton={{
                         outlined: true,
-                        text: backButtonText
+                        text: backButtonText,
+                        onClick: () =>
+                            useHistoryGoBackOnBack ? history.goBack() : null
                     }}
                     extraButtonTo={
-                        backFromUpdatePath(one) == null
+                        useHistoryGoBackOnBack
+                            ? null
+                            : backFromUpdatePath(one) == null
                             ? path + readOnePath.replace(":id", id)
                             : backFromUpdatePath(one)
                     }

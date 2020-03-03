@@ -101,7 +101,8 @@ const DigitCRUDInner = ({
     dateAndTimeProps,
     onCreate,
     onUpdate,
-    onDelete
+    onDelete,
+    useHistoryGoBackOnBack
 }) => {
     const [, dispatch] = useContext(DigitCRUDContext);
 
@@ -179,6 +180,7 @@ const DigitCRUDInner = ({
                             readAllPath={readAllPath}
                             backFromCreatePath={backFromCreatePath}
                             onCreate={onCreate}
+                            useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
                 />
@@ -241,6 +243,7 @@ const DigitCRUDInner = ({
                             }
                             onUpdate={onUpdate}
                             onDelete={onDelete}
+                            useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
                 />
@@ -305,6 +308,7 @@ const DigitCRUDInner = ({
                             dateProps={dateProps}
                             dateAndTimeProps={dateAndTimeProps}
                             onDelete={onDelete}
+                            useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
                 />

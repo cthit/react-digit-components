@@ -147,7 +147,7 @@ const DigitCRUDReadAll = ({
                     }
                     idProp={idProp}
                     {...tableProps}
-                    _renderPaginationLeft={
+                    renderPaginationLeft={
                         hasCreate
                             ? () => (
                                   <Center>

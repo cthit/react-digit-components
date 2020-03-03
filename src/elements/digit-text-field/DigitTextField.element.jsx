@@ -20,8 +20,12 @@ const DigitTextField = ({
     onKeyPress
 }) => {
     const handleOnChange = (e, maxLength, onChange) => {
-        const newValue = e.target.value;
+        var newValue = e.target.value;
         if (maxLength === -1 || newValue.length <= maxLength) {
+            if (numbersOnly) {
+                newValue = newValue.replace(/[^0-9]/g, "");
+            }
+
             onChange(e);
         }
     };

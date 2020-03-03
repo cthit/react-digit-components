@@ -44,7 +44,7 @@ const DigitTableHeader = ({
 
                 {headerTexts.__link != null && (
                     <TableCell>
-                        <Text bold text={headerTexts.__link} />
+                        <Text alignRight bold text={headerTexts.__link} />
                     </TableCell>
                 )}
             </TableRow>

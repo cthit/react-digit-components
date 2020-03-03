@@ -27,6 +27,14 @@ const StyledTableCell = styled(TableCell)`
     border-bottom: 1px solid rgba(244, 244, 244, 1);
 `;
 
+const RightAlignedStyledTableCell = styled(TableCell)`
+    display: table-cell;
+    padding: 20px 24px;
+    font-size: 14px;
+    text-align: right;
+    border-bottom: 1px solid rgba(244, 244, 244, 1);
+`;
+
 const DigitTableBody = ({
     page,
     rowsPerPage,
@@ -77,14 +85,16 @@ const DigitTableBody = ({
                         ))}
 
                         {headerTexts.__link != null && (
-                            <StyledTableCell datatitle={headerTexts.__link}>
+                            <RightAlignedStyledTableCell
+                                datatitle={headerTexts.__link}
+                            >
                                 <Link to={n.__link}>
                                     <DigitButton
                                         text={headerTexts.__link}
                                         raised
                                     />
                                 </Link>
-                            </StyledTableCell>
+                            </RightAlignedStyledTableCell>
                         )}
                         {headerTexts.__link == null && null}
                     </StyledTableRow>

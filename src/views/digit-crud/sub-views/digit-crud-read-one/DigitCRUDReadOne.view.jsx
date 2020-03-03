@@ -157,7 +157,9 @@ const DigitCRUDReadOne = ({
             toastDeleteSuccessful={toastDeleteSuccessful}
             path={path}
             backFromDeletePath={
-                backFromDeletePath == null ? readAllPath : backFromDeletePath
+                backFromDeletePath(one) == null
+                    ? readAllPath
+                    : backFromDeletePath(one)
             }
             deleteAction={deleteAction}
             history={history}
@@ -173,9 +175,9 @@ const DigitCRUDReadOne = ({
 
     const goBack = () => {
         history.push(
-            backFromReadOnePath == null
+            backFromReadOnePath(one) == null
                 ? path + readAllPath
-                : backFromReadOnePath
+                : backFromReadOnePath(one)
         );
     };
     const goToEdit = () => {

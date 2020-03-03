@@ -467,10 +467,10 @@ DigitCRUD.propTypes = {
     updatePath: PropTypes.string,
     /** */
     staticId: PropTypes.string,
-    backFromReadOnePath: PropTypes.string,
-    backFromUpdatePath: PropTypes.string,
-    backFromDeletePath: PropTypes.string,
-    backFromCreatePath: PropTypes.string,
+    backFromReadOnePath: PropTypes.func,
+    backFromUpdatePath: PropTypes.func,
+    backFromDeletePath: PropTypes.func,
+    backFromCreatePath: PropTypes.func,
     useKeyTextsInUpperLabel: PropTypes.bool,
     readAllKeysOrder: PropTypes.arrayOf(PropTypes.string),
     readOneKeysOrder: PropTypes.arrayOf(PropTypes.string),
@@ -483,7 +483,8 @@ DigitCRUD.propTypes = {
     dateAndTimeProps: PropTypes.arrayOf(PropTypes.string),
     onCreate: PropTypes.func,
     onUpdate: PropTypes.func,
-    onDelete: PropTypes.func
+    onDelete: PropTypes.func,
+    useHistoryGoBackOnBack: PropTypes.bool
 };
 
 DigitCRUD.defaultProps = {
@@ -517,10 +518,10 @@ DigitCRUD.defaultProps = {
     readOnePath: "/:id",
     updatePath: "/:id/edit",
     staticId: null,
-    backFromReadOnePath: null,
-    backFromUpdatePath: null,
-    backFromDeletePath: null,
-    backFromCreatePath: null,
+    backFromReadOnePath: () => null,
+    backFromUpdatePath: () => null,
+    backFromDeletePath: () => null,
+    backFromCreatePath: () => null,
     useKeyTextsInUpperLabel: false,
     deleteDialogFormComponentData: null,
     deleteDialogFormValidationSchema: null,
@@ -537,7 +538,8 @@ DigitCRUD.defaultProps = {
     dateAndTimeProps: [],
     onCreate: () => {},
     onUpdate: () => {},
-    onDelete: () => {}
+    onDelete: () => {},
+    useHistoryGoBackOnBack: true
 };
 
 export default DigitCRUD;

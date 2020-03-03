@@ -51,9 +51,9 @@ const DigitCRUDCreate = ({
                     text: backButtonText
                 }}
                 extraButtonTo={
-                    backFromCreatePath == null
+                    backFromCreatePath() == null
                         ? path + readAllPath
-                        : backFromCreatePath
+                        : backFromCreatePath()
                 }
                 initialValues={formInitialValues}
                 submitText={createButtonText}

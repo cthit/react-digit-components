@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import DigitFAB from "../../../../elements/digit-fab";
 import Delete from "@material-ui/icons/Delete";
 import { DownRightPosition } from "../../../../styles/digit-layout/DigitLayout.styles";
@@ -187,6 +188,10 @@ const DeleteFAB = ({
             />
         </DownRightPosition>
     );
+};
+
+DeleteFAB.propTypes = {
+    backFromDeletePath: PropTypes.string
 };
 
 export default DeleteFAB;

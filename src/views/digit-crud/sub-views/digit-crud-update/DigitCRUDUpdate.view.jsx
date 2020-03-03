@@ -103,9 +103,9 @@ const DigitCRUDUpdate = ({
                         text: backButtonText
                     }}
                     extraButtonTo={
-                        backFromUpdatePath == null
+                        backFromUpdatePath(one) == null
                             ? path + readOnePath.replace(":id", id)
-                            : backFromUpdatePath
+                            : backFromUpdatePath(one)
                     }
                     initialValues={one}
                     submitText={updateButtonText(one)}
@@ -123,9 +123,9 @@ const DigitCRUDUpdate = ({
                     toastDeleteSuccessful={toastDeleteSuccessful}
                     path={path}
                     backFromDeletePath={
-                        backFromDeletePath == null
+                        backFromDeletePath(one) == null
                             ? readAllPath
-                            : backFromDeletePath
+                            : backFromDeletePath(one)
                     }
                     deleteAction={deleteAction}
                     history={history}

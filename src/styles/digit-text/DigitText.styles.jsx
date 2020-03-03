@@ -218,7 +218,7 @@ Subtitle2.propTypes = {
 };
 
 export const Text = styled(
-    ({ text, white, bold, alignCenter, alignRight, ...rest }) => (
+    ({ text, white, bold, italic, alignCenter, alignRight, ...rest }) => (
         <Typography {...rest} variant="body1">
             {text}
         </Typography>
@@ -227,6 +227,7 @@ export const Text = styled(
     font-size: 1rem;
     color: ${props => (props.white ? "white" : "")} !important;
     font-weight: ${props => (props.bold ? "900" : "inherit")};
+    font-style: ${props => (props.italic ? "italic" : "normal")};
     text-align: ${props =>
         props.alignCenter ? "center" : props.alignRight ? "right" : "left"};
 `;

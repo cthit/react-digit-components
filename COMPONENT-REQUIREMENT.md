@@ -12,3 +12,5 @@ These are the rules for every component in react-digit-component:
   * Inputs should have a value and an onChange prop. 
 * Try not to add new dependencies to react-digit-components with your component
   * There must be a really, **really** good reason to add a new dependency.
+* Only add HTML elements that actively contributes to the semantics.  
+  * Avoid having divs that wraps around components that only applies CSS for example.

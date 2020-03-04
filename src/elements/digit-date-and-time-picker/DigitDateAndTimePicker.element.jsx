@@ -77,7 +77,7 @@ const DigitDateAndTimePicker = ({
             maxDate={maxDate}
             minDate={minDate}
             shouldDisableDate={shouldDisableDate}
-            format={"yyyy-mm-dd hh:mm"}
+            format={"yyyy-MM-dd hh:mm"}
         />
     );
 };

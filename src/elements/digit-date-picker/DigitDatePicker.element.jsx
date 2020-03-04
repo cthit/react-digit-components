@@ -54,7 +54,7 @@ const DigitDatePicker = ({
             disableFuture={disableFuture}
             disablePast={disablePast}
             disableToolbar={false}
-            format={"yyyy-mm-dd"}
+            format={"yyyy-MM-dd"}
             initialFocusedDate={null}
             inputVariant={
                 filled ? "filled" : outlined ? "outlined" : "standard"

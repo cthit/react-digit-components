@@ -11,6 +11,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import useToggler from "../../hooks/use-toggler";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitList = ({
     title,
@@ -19,12 +20,17 @@ const DigitList = ({
     dense,
     disablePadding,
     idProp,
-    multipleExpanded
+    multipleExpanded,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const [toggle, isExpanded] = useToggler(multipleExpanded);
 
     return (
         <List
+            classes={classes}
             dense={dense}
             subheader={
                 <ListSubheader component="div">

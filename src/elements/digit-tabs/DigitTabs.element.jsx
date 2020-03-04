@@ -3,19 +3,15 @@ import Tabs from "@material-ui/core/Tabs";
 import withStyles from "@material-ui/styles/withStyles";
 import PropTypes from "prop-types";
 import React from "react";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text, Title } from "../../styles/digit-text/DigitText.styles";
 import findIndex from "lodash/findIndex";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        width: "100%",
+const styles = ({ inheritBackground, ...theme }) => ({
+    backgroundPrimary: {
         backgroundColor: theme.palette.primary.main
     },
-    rootInherit: {
-        flexGrow: 1,
-        width: "100%",
+    backgroundInherit: {
         background: "inherit"
     },
     scrollButtons: {
@@ -37,13 +33,25 @@ const DigitTabs = ({
     titleFont,
     fullWidth,
     classes,
+    primaryIndicator,
     inheritBackground,
-    primaryIndicator
-}) => (
-    <Fill>
+    size,
+    alignSelf,
+    flex
+}) => {
+    const layoutClasses = useLayoutMaterialUi({ flex, alignSelf, size });
+    console.log();
+
+    return (
         <Tabs
             classes={{
-                root: inheritBackground ? classes.rootInherit : classes.root,
+                root:
+                    layoutClasses.root +
+                    " " +
+                    (inheritBackground
+                        ? classes.backgroundInherit
+                        : classes.backgroundPrimary),
+
                 scrollButtons: classes.scrollButtons,
                 indicator: classes.indicator
             }}
@@ -86,8 +94,8 @@ const DigitTabs = ({
             })}
             ;
         </Tabs>
-    </Fill>
-);
+    );
+};
 
 DigitTabs.displayName = "DigitTabs";
 DigitTabs.propTypes = {
@@ -126,7 +134,8 @@ DigitTabs.propTypes = {
 
 DigitTabs.defaultProps = {
     titleFont: false,
-    tabs: []
+    tabs: [],
+    size: {}
 };
 
 export { DigitTabs };

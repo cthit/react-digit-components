@@ -127,44 +127,41 @@ const DigitCRUDReadAll = ({
 
     return (
         <>
-            <Fill>
-                <DigitTable
-                    data={
-                        hasReadOne
-                            ? all.map(one => ({
-                                  ...one,
-                                  __link:
-                                      path +
-                                      readOnePath.replace(":id", one[idProp])
-                              }))
-                            : all
-                    }
-                    columnsOrder={keysOrder}
-                    headerTexts={
-                        hasReadOne
-                            ? { ...keysText, __link: detailsButtonText }
-                            : { ...keysText }
-                    }
-                    idProp={idProp}
-                    {...tableProps}
-                    renderPaginationLeft={
-                        hasCreate
-                            ? () => (
-                                  <Center>
-                                      <DigitFAB
-                                          primary
-                                          text={createButtonText}
-                                          icon={Add}
-                                          onClick={() =>
-                                              history.push(path + createPath)
-                                          }
-                                      />
-                                  </Center>
-                              )
-                            : null
-                    }
-                />
-            </Fill>
+            <DigitTable
+                data={
+                    hasReadOne
+                        ? all.map(one => ({
+                              ...one,
+                              __link:
+                                  path + readOnePath.replace(":id", one[idProp])
+                          }))
+                        : all
+                }
+                columnsOrder={keysOrder}
+                headerTexts={
+                    hasReadOne
+                        ? { ...keysText, __link: detailsButtonText }
+                        : { ...keysText }
+                }
+                idProp={idProp}
+                {...tableProps}
+                renderPaginationLeft={
+                    hasCreate
+                        ? () => (
+                              <Center>
+                                  <DigitFAB
+                                      primary
+                                      text={createButtonText}
+                                      icon={Add}
+                                      onClick={() =>
+                                          history.push(path + createPath)
+                                      }
+                                  />
+                              </Center>
+                          )
+                        : null
+                }
+            />
         </>
     );
 };

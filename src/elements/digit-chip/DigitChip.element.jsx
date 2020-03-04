@@ -2,6 +2,7 @@ import React from "react";
 import Chip from "@material-ui/core/Chip";
 import Close from "@material-ui/icons/Close";
 import PropTypes from "prop-types";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitChip = ({
     avatar,
@@ -10,19 +11,29 @@ const DigitChip = ({
     secondary,
     outlined,
     onDelete,
-    deleteIcon
-}) => (
-    <Chip
-        deleteIcon={
-            deleteIcon != null ? React.createElement(deleteIcon, null) : null
-        }
-        onDelete={onDelete}
-        avatar={avatar}
-        label={label}
-        variant={outlined ? "outlined" : "default"}
-        color={primary ? "primary" : secondary ? "secondary" : "default"}
-    />
-);
+    deleteIcon,
+    flex,
+    alignSelf,
+    size
+}) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <Chip
+            classes={classes}
+            deleteIcon={
+                deleteIcon != null
+                    ? React.createElement(deleteIcon, null)
+                    : null
+            }
+            onDelete={onDelete}
+            avatar={avatar}
+            label={label}
+            variant={outlined ? "outlined" : "default"}
+            color={primary ? "primary" : secondary ? "secondary" : "default"}
+        />
+    );
+};
 
 DigitChip.propTypes = {
     /** Usually a DigitAvatar. An image for the chip. */

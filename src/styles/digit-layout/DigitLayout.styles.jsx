@@ -17,6 +17,18 @@ export const Flex = styled.div`
     align-items: ${props => (props.alignItems != null ? props.alignItems : "")};
     align-content: ${props =>
         props.alignContent != null ? props.alignContent : ""};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+
+    max-width: ${props => props.maxWidth || "none"};
+    max-height: ${props => props.maxHeight || "none"};
+
+    min-width: ${props => props.minWidth || 0};
+    min-height: ${props => props.minHeight || 0};
 `;
 
 Flex.displayName = "Flex";
@@ -104,7 +116,18 @@ export const Grid = styled.div`
     grid-auto-columns: ${props => props.autoColumns || ""};
     grid-auto-rows: ${props => props.autoRows || ""};
     grid-auto-flow: ${props => props.autoFlow || ""};
-    flex: ${props => (props.fillElement ? "1" : "")};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+
+    max-width: ${props => props.maxWidth || "none"};
+    max-height: ${props => props.maxHeight || "none"};
+
+    min-width: ${props => props.minWidth || 0};
+    min-height: ${props => props.minHeight || 0};
 `;
 
 Grid.displayName = "Grid";
@@ -170,7 +193,17 @@ export const GridItem = styled.div`
   grid-row-start: ${props => props.rowStart || ""}
   grid-row-end: ${props => props.rowEnd || ""}
   justify-self: ${props => props.justifySelf || ""};
-  align-self: ${props => props.alignSelf || ""};
+  flex: ${props => props.flex || "0 1 auto"};
+  align-self: ${props => props.alignSelf || "auto"};
+
+  width: ${props => props.width || "auto"};
+  height: ${props => props.height || "auto"};
+
+  max-width: ${props => props.maxWidth || "none"};
+  max-height: ${props => props.maxHeight || "none"};
+
+  min-width: ${props => props.minWidth || 0};
+  min-height: ${props => props.minHeight || 0};
 `;
 
 GridItem.displayName = "GridItem";
@@ -204,7 +237,10 @@ export const UniformGrid = styled(
         justifyContent,
         alignContent,
         autoFlow,
-        fillElement
+        fillElement,
+        flex,
+        alignSelf,
+        size
     }) => (
         <Grid
             columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`}
@@ -220,6 +256,9 @@ export const UniformGrid = styled(
             alignContent={alignContent}
             autoFlow={autoFlow}
             fillElement={fillElement}
+            flex={flex}
+            alignSelf={alignSelf}
+            size={size}
         >
             {children}
         </Grid>
@@ -305,7 +344,6 @@ export const Column = styled(
         bottomAlign,
         reverse,
         marginVertical,
-        fillElement,
         children,
         scroll,
         flexWrap,
@@ -328,8 +366,19 @@ export const Column = styled(
         margin-top: ${props => props.marginVertical};
         margin-bottom: ${props => props.marginVertical};
     }
-    flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+
+    max-width: ${props => props.maxWidth || "none"};
+    max-height: ${props => props.maxHeight || "none"};
+
+    min-width: ${props => props.minWidth || 0};
+    min-height: ${props => props.minHeight || 0};
 `;
 
 Column.displayName = "Column";
@@ -346,8 +395,6 @@ Column.propTypes = {
     bottomAlign: PropTypes.bool,
     /** If true, then reverses the order */
     reverse: PropTypes.bool,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool,
     /** All the children */
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
@@ -440,8 +487,19 @@ export const Row = styled(
         margin-right: ${props => props.marginHorizontal};
         margin-left: ${props => props.marginHorizontal};
     }
-    flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+
+    max-width: ${props => props.maxWidth || "none"};
+    max-height: ${props => props.maxHeight || "none"};
+
+    min-width: ${props => props.minWidth || 0};
+    min-height: ${props => props.minHeight || 0};
 `;
 
 Row.displayName = "Row";
@@ -458,8 +516,6 @@ Row.propTypes = {
     rightAlign: PropTypes.bool,
     /** If true, reverses the order of the children*/
     reverse: PropTypes.bool,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool,
     /** All the children */
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
@@ -528,18 +584,6 @@ export const DownRightPosition = styled.div`
 
 DownRightPosition.displayName = "DownRightPosition";
 
-export const Fill = styled.div`
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 1;
-
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-`;
-
-Fill.displayName = "Fill";
-
 export const MarginTop = styled(Fill)`
     margin-top: 8px;
 `;
@@ -585,26 +629,28 @@ export const Padding = styled(Fill)`
 Padding.displayName = "Padding";
 
 export const Center = styled.div`
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 1;
-
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     justify-content: center;
     align-content: center;
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+
+    max-width: ${props => props.maxWidth || "none"};
+    max-height: ${props => props.maxHeight || "none"};
+
+    min-width: ${props => props.minWidth || 0};
+    min-height: ${props => props.minHeight || 0};
 `;
 
 Center.displayName = "Center";
-
-export const HideFill = styled(Fill)`
-    display: ${props => (props.hidden ? "none" : "inherit")};
-`;
-
-HideFill.displayName = "HideFill";
-HideFill.propTypes = {
-    hidden: PropTypes.bool
+Center.defaultProps = {
+    flex: "1"
 };
 
 export const Hide = styled.div`
@@ -614,44 +660,6 @@ export const Hide = styled.div`
 Hide.displayName = "Hide";
 Hide.propTypes = {
     hidden: PropTypes.bool
-};
-
-export const Size = styled(Flex)`
-    width: ${props => (props.absWidth != null ? props.absWidth : props.width)};
-    height: ${props =>
-        props.absHeight != null ? props.absHeight : props.height};
-
-    max-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.maxWidth};
-    max-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.maxHeight};
-
-    min-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.minWidth};
-    min-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.minHeight};
-
-    overflow: ${props => (props.autoScroll ? "auto" : "visible")};
-`;
-
-Size.displayName = "Size";
-Size.propTypes = {
-    /** Sets minWidth, maxWidth and width to absWidth */
-    absWidth: PropTypes.string,
-    /** Sets minHeight, maxHeight and height to absHeight */
-    absHeight: PropTypes.string,
-    /** minWidth of the child */
-    minWidth: PropTypes.string,
-    /** minHeight of the child */
-    minHeight: PropTypes.string,
-    /** maxWidth of the child */
-    maxWidth: PropTypes.string,
-    /** maxHeight of the child */
-    maxHeight: PropTypes.string,
-    /** width of the child */
-    width: PropTypes.string,
-    /** height of the child */
-    height: PropTypes.string
 };
 
 export const Order = styled(Flex)`

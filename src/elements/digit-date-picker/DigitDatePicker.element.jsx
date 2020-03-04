@@ -7,13 +7,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import translations from "./DigitDatePicker.element.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
-
-const styles = () => ({
-    root: {
-        flex: 1,
-        width: "100%"
-    }
-});
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitDatePicker = ({
     value,
@@ -26,7 +20,6 @@ const DigitDatePicker = ({
     clearLabel,
     emptyLabel,
     invalidLabel,
-    classes,
     filled,
     outlined,
     lowerLabel,
@@ -38,12 +31,17 @@ const DigitDatePicker = ({
     shouldDisableDate,
     minDate,
     maxDate,
-    clearable
+    clearable,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const [text] = useDigitTranslations(translations);
 
     return (
         <DatePicker
+            classes={classes}
             showTodayButton={showTodayButton}
             keyboardIcon={<Keyboard />}
             onChange={date => onChange({ target: { value: date } })}
@@ -99,7 +97,6 @@ const DigitDatePicker = ({
             cancelLabel={cancelLabel != null ? cancelLabel : text.cancel}
             okLabel={okLabel != null ? okLabel : text.ok}
             clearLabel={clearLabel != null ? clearLabel : text.clear}
-            className={classes.root}
         />
     );
 };
@@ -157,7 +154,4 @@ DigitDatePicker.defaultProps = {
     errorMessage: ""
 };
 
-/** This is a temp solution to get the correct prop types from StoryBook. */
-export { DigitDatePicker };
-
-export default withStyles(styles)(DigitDatePicker);
+export default DigitDatePicker;

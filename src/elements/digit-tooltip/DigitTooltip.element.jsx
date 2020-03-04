@@ -1,12 +1,9 @@
 import Tooltip from "@material-ui/core/Tooltip";
 import PropTypes from "prop-types";
 import React from "react";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 
 const DigitTooltip = ({ render, text }) => (
-    <Tooltip title={text}>
-        <Fill>{render()}</Fill>
-    </Tooltip>
+    <Tooltip title={text}>{render()}</Tooltip>
 );
 
 DigitTooltip.displayName = "DigitTooltip";

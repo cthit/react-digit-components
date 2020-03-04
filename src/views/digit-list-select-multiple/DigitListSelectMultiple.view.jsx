@@ -15,6 +15,7 @@ import List from "@material-ui/core/List";
 import Checkbox from "@material-ui/core/Checkbox";
 import xor from "lodash/xor";
 import uniq from "lodash/uniq";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 //Can be optimized to fail fast.
 const hasAtLeastOneItemChecked = (item, checkedLeaves, idProp) =>
@@ -58,8 +59,12 @@ const DigitListSelectMultiple = ({
     onChange,
     nodeSelectsAllChildren,
     includeNodeValue,
-    root
+    root,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const [toggle, isExpanded] = useToggler(multipleExpanded);
     const [innerValue, setValue] = useState(value);
 
@@ -139,6 +144,7 @@ const DigitListSelectMultiple = ({
 
     return (
         <List
+            classes={classes}
             dense={dense}
             subheader={
                 <ListSubheader component="div">

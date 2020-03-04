@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitTextArea = ({
     value,
@@ -17,8 +18,14 @@ const DigitTextArea = ({
     outlined,
     filled,
     maxLength,
-    onKeyPress
+    onKeyPress,
+    flex,
+    alignSelf,
+    size,
+    autoFocus
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
     const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
         if (maxLength === -1 || newValue.length <= maxLength) {
@@ -28,6 +35,8 @@ const DigitTextArea = ({
 
     return (
         <TextField
+            classes={classes}
+            autoFocus={autoFocus}
             value={value}
             onChange={e => handleOnChange(e, maxLength, onChange)}
             onBlur={onBlur}
@@ -96,7 +105,8 @@ DigitTextArea.propTypes = {
     outlined: PropTypes.bool,
     /** Adds a grey isch background */
     filled: PropTypes.bool,
-    onKeyPress: PropTypes.func
+    onKeyPress: PropTypes.func,
+    autoFocus: PropTypes.bool
 };
 
 DigitTextArea.defaultProps = {
@@ -112,7 +122,8 @@ DigitTextArea.defaultProps = {
     rows: 3,
     rowsMax: 6,
     maxLength: -1,
-    onKeyPress: () => {}
+    onKeyPress: () => {},
+    autoFocus: false
 };
 
 export default DigitTextArea;

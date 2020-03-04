@@ -1,13 +1,16 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PropTypes from "prop-types";
 import React from "react";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitLoading = ({ loading, size }) => {
+const DigitLoading = ({ loading, size, flex, alignSelf }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf });
+
     if (!loading) {
         return null;
     }
 
-    return <CircularProgress size={size} />;
+    return <CircularProgress classes={classes} size={size} />;
 };
 
 DigitLoading.displayName = "DigitLoading";

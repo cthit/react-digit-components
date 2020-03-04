@@ -4,13 +4,13 @@ import { Heading5 } from "../../src/styles/digit-text/DigitText.styles";
 import BackgroundColor from "./BackgroundColor";
 
 const DummyItem = ({ text, color }) => (
-    <Size absWidth="100px" absHeight="100px">
+    <div style={{ width: "100px", height: "100px" }}>
         <BackgroundColor color={color}>
             <Center>
                 <Heading5 text={text} />
             </Center>
         </BackgroundColor>
-    </Size>
+    </div>
 );
 
 export default DummyItem;

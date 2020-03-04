@@ -3,26 +3,44 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 import { StyledBottomNavigation } from "./DigitBottomNavigation.styles.element";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitBottomNavigation = ({ selected, tabs, showLabels, onChange }) => (
-    <StyledBottomNavigation
-        value={selected}
-        showLabels={showLabels}
-        onChange={(event, selected) => {
-            onChange(selected);
-        }}
-    >
-        {tabs.map((tab, index) => {
-            return (
-                <BottomNavigationAction
-                    key={tab.label}
-                    label={<Text text={tab.label} />}
-                    icon={tab.icon}
-                />
-            );
-        })}
-    </StyledBottomNavigation>
-);
+const DigitBottomNavigation = ({
+    selected,
+    tabs,
+    showLabels,
+    onChange,
+    flex,
+    alignSelf,
+    size
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size: { height: "64px", width: "100%", ...size }
+    });
+
+    return (
+        <StyledBottomNavigation
+            classes={classes}
+            value={selected}
+            showLabels={showLabels}
+            onChange={(event, selected) => {
+                onChange(selected);
+            }}
+        >
+            {tabs.map(tab => {
+                return (
+                    <BottomNavigationAction
+                        key={tab.label}
+                        label={<Text text={tab.label} />}
+                        icon={tab.icon}
+                    />
+                );
+            })}
+        </StyledBottomNavigation>
+    );
+};
 
 DigitBottomNavigation.displayName = "DigitBottomNavigation";
 DigitBottomNavigation.propTypes = {

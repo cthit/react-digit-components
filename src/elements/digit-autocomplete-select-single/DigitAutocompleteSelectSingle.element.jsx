@@ -5,6 +5,7 @@ import find from "lodash/find";
 import translations from "./DigitAutocompleteSelectSingle.element.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 import PropTypes from "prop-types";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitAutocompleteSelectSingle = ({
     options,
@@ -19,8 +20,12 @@ const DigitAutocompleteSelectSingle = ({
     errorMessage,
     disabled,
     outlined,
-    filled
+    filled,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const [text] = useDigitTranslations(translations);
 
     return (
@@ -51,7 +56,7 @@ const DigitAutocompleteSelectSingle = ({
             renderInput={params => (
                 <TextField
                     {...params}
-                    fullWidth
+                    classes={classes}
                     name={name}
                     error={error}
                     label={upperLabel}

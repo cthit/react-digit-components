@@ -9,6 +9,7 @@ import Chip from "@material-ui/core/Chip";
 import Checkbox from "@material-ui/core/Checkbox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -28,8 +29,12 @@ const DigitAutocompleteSelectMultiple = ({
     filled,
     chipOutlined,
     checkboxPrimary,
-    checkboxSecondary
+    checkboxSecondary,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const [text] = useDigitTranslations(translations);
 
     return (
@@ -93,7 +98,7 @@ const DigitAutocompleteSelectMultiple = ({
             renderInput={params => (
                 <TextField
                     {...params}
-                    fullWidth
+                    classes={classes}
                     name={name}
                     error={error}
                     label={upperLabel}

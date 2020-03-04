@@ -5,64 +5,30 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Subtitle, Title } from "../digit-text/DigitText.styles";
 
-/** Props:
- * width, height, maxWidth, maxHeight, minWidth, minHeight
- * absWidth, absHeight: If size, max and min will be the same.
- */
 export const Card = styled(
-    ({
-        absWidth,
-        absHeight,
-        minWidth,
-        minHeight,
-        maxWidth,
-        maxHeight,
-        hasSubTitle,
-        hasIcon,
-        width,
-        height,
-        ...rest
-    }) => <Paper {...rest} />
+    ({ hasSubTitle, hasIcon, flex, alignSelf, size, ...rest }) => (
+        <Paper {...rest} />
+    )
 )`
     display: flex;
     flex-direction: column;
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
 
-    width: ${props => (props.absWidth != null ? props.absWidth : props.width)};
-    height: ${props =>
-        props.absHeight != null ? props.absHeight : props.height};
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
 
-    max-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.maxWidth};
-    max-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.maxHeight};
+    max-width: ${props => props.maxWidth || "none"};
+    max-height: ${props => props.maxHeight || "none"};
 
-    min-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.minWidth};
-    min-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.minHeight};
+    min-width: ${props => props.minWidth || 0};
+    min-height: ${props => props.minHeight || 0};
 
     background-color: white;
 `;
 
 Card.displayName = "Card";
-Card.propTypes = {
-    /** Sets minWidth, maxWidth and width to absWidth */
-    absWidth: PropTypes.string,
-    /** Sets minHeight, maxHeight and height to absHeight */
-    absHeight: PropTypes.string,
-    /** minWidth of the card */
-    minWidth: PropTypes.string,
-    /** minHeight of the card */
-    minHeight: PropTypes.string,
-    /** maxWidth of the card */
-    maxWidth: PropTypes.string,
-    /** maxHeight of the card */
-    maxHeight: PropTypes.string,
-    /** width of the card */
-    width: PropTypes.string,
-    /** height of the card */
-    height: PropTypes.string
-};
+
 /**
  * use this hasSubTitle and hasIcon must be true if you have them inside your Card.
  */

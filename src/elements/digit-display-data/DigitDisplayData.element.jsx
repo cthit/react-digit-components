@@ -2,19 +2,31 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Grid } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../styles/digit-text/DigitText.styles";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitDisplayData = ({ data, keysText, keysOrder }) => (
-    <Grid columns={`auto 1fr`} margin={"4px"}>
-        {keysOrder
-            .filter(keyOrder => Object.keys(data).includes(keyOrder))
-            .map(keyOrder => (
-                <React.Fragment key={keyOrder}>
-                    <Text alignRight bold text={keysText[keyOrder]} />
-                    <Text text={data[keyOrder]} />
-                </React.Fragment>
-            ))}
-    </Grid>
-);
+const DigitDisplayData = ({
+    data,
+    keysText,
+    keysOrder,
+    flex,
+    alignSelf,
+    size
+}) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <Grid columns={`auto 1fr`} margin={"4px"} classes={classes}>
+            {keysOrder
+                .filter(keyOrder => Object.keys(data).includes(keyOrder))
+                .map(keyOrder => (
+                    <React.Fragment key={keyOrder}>
+                        <Text alignRight bold text={keysText[keyOrder]} />
+                        <Text text={data[keyOrder]} />
+                    </React.Fragment>
+                ))}
+        </Grid>
+    );
+};
 
 DigitDisplayData.displayName = "DigitDisplayData";
 DigitDisplayData.propTypes = {

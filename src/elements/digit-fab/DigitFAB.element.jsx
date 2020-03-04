@@ -3,6 +3,7 @@ import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 import Fab from "@material-ui/core/Fab";
 import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitFAB = ({
     onClick,
@@ -12,26 +13,34 @@ const DigitFAB = ({
     submit,
     icon,
     text,
-    form
-}) => (
-    <Fab
-        variant={text == null ? "round" : "extended"}
-        type={submit ? "submit" : "button"}
-        disabled={disabled}
-        onClick={onClick}
-        color={primary ? "primary" : secondary ? "secondary" : "inherit"}
-        form={form}
-    >
-        {React.createElement(icon, null)}
-        {text != null && (
-            <>
-                <Padding />
-                <Text text={text} />
-                <Padding />
-            </>
-        )}
-    </Fab>
-);
+    form,
+    flex,
+    alignSelf,
+    size
+}) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <Fab
+            classes={classes}
+            variant={text == null ? "round" : "extended"}
+            type={submit ? "submit" : "button"}
+            disabled={disabled}
+            onClick={onClick}
+            color={primary ? "primary" : secondary ? "secondary" : "inherit"}
+            form={form}
+        >
+            {React.createElement(icon, null)}
+            {text != null && (
+                <>
+                    <Padding />
+                    <Text text={text} />
+                    <Padding />
+                </>
+            )}
+        </Fab>
+    );
+};
 
 DigitFAB.displayName = "DigitFAB";
 DigitFAB.propTypes = {

@@ -1,6 +1,7 @@
 import IconButton from "@material-ui/core/IconButton";
 import PropTypes from "prop-types";
 import React from "react";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitIconButton = ({
     disabled,
@@ -8,18 +9,25 @@ const DigitIconButton = ({
     onClick,
     primary,
     secondary,
-    icon
-}) => (
-    <IconButton
-        disabled={disabled}
-        onClick={onClick}
-        onBlur={onBlur}
-        color={primary ? "primary" : secondary ? "secondary" : "inherit"}
-    >
-        {React.createElement(icon, null)}
-    </IconButton>
-);
+    icon,
+    flex,
+    alignSelf,
+    size
+}) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
 
+    return (
+        <IconButton
+            classes={classes}
+            disabled={disabled}
+            onClick={onClick}
+            onBlur={onBlur}
+            color={primary ? "primary" : secondary ? "secondary" : "inherit"}
+        >
+            {React.createElement(icon, null)}
+        </IconButton>
+    );
+};
 DigitIconButton.displayName = "DigitIconButton";
 DigitIconButton.propTypes = {
     /** The function which will be called when the button is clicked. */

@@ -14,6 +14,7 @@ import useDigitFormFieldArray from "../../hooks/use-digit-form-field-array";
 const DigitEditDataInner = ({
     keysOrder,
     keysComponentData,
+    centerFields,
     marginVertical = 8
 }) => {
     return keysOrder.map(key => (
@@ -23,12 +24,14 @@ const DigitEditDataInner = ({
                 <DigitEditDataFieldArray
                     name={key}
                     componentData={keysComponentData[key]}
+                    alignSelfCenter={centerFields}
                 />
             )}
             {!keysComponentData[key].array && (
                 <DigitEditDataField
                     name={key}
                     componentData={keysComponentData[key]}
+                    alignSelfCenter={centerFields}
                 />
             )}
             <div style={{ marginBottom: marginVertical }} />
@@ -36,14 +39,17 @@ const DigitEditDataInner = ({
     ));
 };
 
-const DigitEditDataField = ({ name, componentData }) => {
+const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
     const field = useDigitFormField(name);
     const { component, componentProps } = componentData;
 
     return useMemo(
         () =>
             createElement(component, {
-                ...componentProps,
+                ...{
+                    alignSelf: alignSelfCenter ? "center" : "auto",
+                    ...componentProps
+                },
                 ...field,
                 name
             }),
@@ -51,14 +57,17 @@ const DigitEditDataField = ({ name, componentData }) => {
     );
 };
 
-const DigitEditDataFieldArray = ({ name, componentData }) => {
+const DigitEditDataFieldArray = ({ name, componentData, alignSelfCenter }) => {
     const field = useDigitFormFieldArray(name);
     const { component, componentProps } = componentData;
 
     return useMemo(
         () =>
             createElement(component, {
-                ...componentProps,
+                ...{
+                    alignSelf: alignSelfCenter ? "center" : "auto",
+                    ...componentProps
+                },
                 ...field,
                 name
             }),
@@ -76,7 +85,8 @@ const DigitEditData = ({
     hasButtons,
     renderButtons,
     formName,
-    onValidSubmitChange
+    onValidSubmitChange,
+    centerFields
 }) => {
     return (
         <DigitForm
@@ -91,6 +101,7 @@ const DigitEditData = ({
                         marginVertical={marginVertical}
                         keysOrder={keysOrder}
                         keysComponentData={keysComponentData}
+                        centerFields={centerFields}
                     />
                     <Padding />
                     {hasButtons && <Row reverse>{renderButtons(form)}</Row>}
@@ -128,8 +139,6 @@ DigitEditData.defaultProps = {
     titleText: "",
     submitText: "",
     marginVertical: "4px",
-    absWidth: null,
-    absHeight: null,
     minWidth: "300px",
     maxWidth: "300px",
     keysOrder: [],

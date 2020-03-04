@@ -1,12 +1,17 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import PropTypes from "prop-types";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitAvatar = ({ icon, imageSrc, imageAlt }) => (
-    <Avatar alt={imageAlt} src={imageSrc}>
-        {icon != null ? React.createElement(icon, null) : null}
-    </Avatar>
-);
+const DigitAvatar = ({ icon, imageSrc, imageAlt, flex, alignSelf, size }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <Avatar classes={classes} alt={imageAlt} src={imageSrc}>
+            {icon != null ? React.createElement(icon, null) : null}
+        </Avatar>
+    );
+};
 
 DigitAvatar.propTypes = {
     /** The icon of the FAB. Use @material-ui/icons.  */

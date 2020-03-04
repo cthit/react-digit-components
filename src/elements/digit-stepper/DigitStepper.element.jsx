@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
-import { Column } from "../../styles/digit-layout/DigitLayout.styles";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitStepper = ({ activeStep, steps }) => (
-    <Column>
-        <Stepper activeStep={activeStep} alternativeLabel>
+const DigitStepper = ({ activeStep, steps, flex, alignSelf, size }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <Stepper classes={classes} activeStep={activeStep} alternativeLabel>
             {steps.map(stepData => {
                 return (
                     <Step key={stepData.text}>
@@ -16,8 +18,8 @@ const DigitStepper = ({ activeStep, steps }) => (
                 );
             })}
         </Stepper>
-    </Column>
-);
+    );
+};
 
 DigitStepper.defaultProps = {
     steps: [],

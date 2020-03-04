@@ -2,6 +2,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitCheckbox = ({
     name,
@@ -13,25 +14,37 @@ const DigitCheckbox = ({
     disabled,
     label,
     error,
-    errorMessage
-}) => (
-    <DigitControlLabelWithError
-        error={error}
-        label={error ? errorMessage : label}
-        disabled={disabled}
-        control={
-            <Checkbox
-                color={
-                    primary ? "primary" : secondary ? "secondary" : "default"
-                }
-                checked={value}
-                onChange={onChange}
-                onBlur={onBlur}
-                name={name}
-            />
-        }
-    />
-);
+    errorMessage,
+    flex,
+    alignSelf,
+    size
+}) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <DigitControlLabelWithError
+            classes={classes}
+            error={error}
+            label={error ? errorMessage : label}
+            disabled={disabled}
+            control={
+                <Checkbox
+                    color={
+                        primary
+                            ? "primary"
+                            : secondary
+                            ? "secondary"
+                            : "default"
+                    }
+                    checked={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    name={name}
+                />
+            }
+        />
+    );
+};
 
 DigitCheckbox.displayName = "DigitCheckbox";
 DigitCheckbox.propTypes = {

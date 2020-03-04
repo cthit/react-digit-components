@@ -37,30 +37,26 @@ const DigitTableToolbar = ({
 
     return (
         <StyledToolbar>
-            <Fill>
-                <TableTitle
-                    text={
-                        numSelected > 0
-                            ? numSelected + " " + text.Selected
-                            : titleText
+            <TableTitle
+                text={
+                    numSelected > 0
+                        ? numSelected + " " + text.Selected
+                        : titleText
+                }
+            />
+            {search && (
+                <SearchInput
+                    upperLabel={
+                        searchText +
+                        (showSearchableProps != null && showSearchableProps
+                            ? " " +
+                              _getAllPossibleThingsToSearchFor(headerTexts)
+                            : "")
                     }
+                    value={searchInput}
+                    onChange={onSearchInputChange}
                 />
-            </Fill>
-            <Fill>
-                {search && (
-                    <SearchInput
-                        upperLabel={
-                            searchText +
-                            (showSearchableProps != null && showSearchableProps
-                                ? " " +
-                                  _getAllPossibleThingsToSearchFor(headerTexts)
-                                : "")
-                        }
-                        value={searchInput}
-                        onChange={onSearchInputChange}
-                    />
-                )}
-            </Fill>
+            )}
         </StyledToolbar>
     );
 };

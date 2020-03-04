@@ -28,11 +28,14 @@ class DigitMenu extends React.Component {
     render() {
         const { open, id, anchorElement } = this.state;
 
-        const { valueToTextMap, onClick } = this.props;
+        const { valueToTextMap, onClick, flex, alignSelf, size } = this.props;
 
         return (
-            <div>
+            <>
                 <DigitIconButton
+                    flex={flex}
+                    alignSelf={alignSelf}
+                    size={size}
                     onClick={this._handleClick}
                     aria-label="More"
                     aria-owns={open ? id : null}
@@ -60,7 +63,7 @@ class DigitMenu extends React.Component {
                         );
                     })}
                 </Menu>
-            </div>
+            </>
         );
     }
 }

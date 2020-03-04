@@ -6,6 +6,7 @@ import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React from "react";
 import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitSelect = ({
     value,
@@ -22,8 +23,12 @@ const DigitSelect = ({
     error,
     errorMessage,
     onBlur,
-    selectNothingText
+    selectNothingText,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
     React.useEffect(() => {
@@ -31,57 +36,54 @@ const DigitSelect = ({
     }, [inputLabel.ref, upperLabel]);
 
     return (
-        <Fill>
-            <FormControl
-                disabled={disabled}
-                variant={filled ? "filled" : outlined ? "outlined" : "standard"}
+        <FormControl
+            classes={classes}
+            disabled={disabled}
+            variant={filled ? "filled" : outlined ? "outlined" : "standard"}
+        >
+            <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
+            <Select
+                name={name}
+                onBlur={onBlur}
+                onChange={onChange}
+                displayEmpty={allowToChooseNone}
+                value={value}
+                labelWidth={labelWidth}
+                inputProps={{
+                    name: "age",
+                    id: "outlined-age-simple"
+                }}
             >
-                <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
-                <Select
-                    name={name}
-                    onBlur={onBlur}
-                    onChange={onChange}
-                    displayEmpty={allowToChooseNone}
-                    value={value}
-                    labelWidth={labelWidth}
-                    inputProps={{
-                        name: "age",
-                        id: "outlined-age-simple"
-                    }}
-                >
-                    {allowToChooseNone ? (
+                {allowToChooseNone ? (
+                    <MenuItem
+                        value=""
+                        name={selectNothingText}
+                        component={"li"}
+                    >
+                        <div style={{ height: "24px" }} />
+                    </MenuItem>
+                ) : null}
+
+                {_getValues(valueToTextMap, reverse).map(value => {
+                    const text = valueToTextMap[value];
+                    return (
                         <MenuItem
-                            value=""
-                            name={selectNothingText}
+                            name={value}
+                            key={value}
+                            value={value}
                             component={"li"}
                         >
-                            <div style={{ height: "24px" }} />
+                            {text}
                         </MenuItem>
-                    ) : null}
-
-                    {_getValues(valueToTextMap, reverse).map(value => {
-                        const text = valueToTextMap[value];
-                        return (
-                            <MenuItem
-                                name={value}
-                                key={value}
-                                value={value}
-                                component={"li"}
-                            >
-                                {text}
-                            </MenuItem>
-                        );
-                    })}
-                </Select>
-                {(lowerLabel != null || errorMessage != null) && (
-                    <FormHelperText>
-                        {error && errorMessage != null
-                            ? errorMessage
-                            : lowerLabel}
-                    </FormHelperText>
-                )}
-            </FormControl>
-        </Fill>
+                    );
+                })}
+            </Select>
+            {(lowerLabel != null || errorMessage != null) && (
+                <FormHelperText>
+                    {error && errorMessage != null ? errorMessage : lowerLabel}
+                </FormHelperText>
+            )}
+        </FormControl>
     );
 };
 
@@ -143,7 +145,10 @@ DigitSelect.defaultProps = {
     name: "",
     value: "",
     valueToTextMap: {},
-    selectNothingText: "Nothing"
+    selectNothingText: "Nothing",
+    size: {
+        width: "224px"
+    }
 };
 
 export default DigitSelect;

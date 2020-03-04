@@ -5,15 +5,22 @@ import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitNavLink = ({ text, link, onClick, icon }) => (
-    <Link to={link}>
-        <ListItem button>
-            {icon && <ListItemIcon>{React.createElement(icon)}</ListItemIcon>}
-            <ListItemText onClick={onClick}>{text}</ListItemText>
-        </ListItem>
-    </Link>
-);
+const DigitNavLink = ({ text, link, onClick, icon, flex, alignSelf, size }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <Link classes={classes} to={link}>
+            <ListItem button>
+                {icon && (
+                    <ListItemIcon>{React.createElement(icon)}</ListItemIcon>
+                )}
+                <ListItemText onClick={onClick}>{text}</ListItemText>
+            </ListItem>
+        </Link>
+    );
+};
 
 const Link = styled(NavLink)`
     text-decoration: none;

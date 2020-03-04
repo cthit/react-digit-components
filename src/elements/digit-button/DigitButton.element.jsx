@@ -1,6 +1,7 @@
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import React from "react";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitButton = ({
     text,
@@ -13,21 +14,29 @@ const DigitButton = ({
     outlined,
     form,
     startIcon,
-    endIcon
-}) => (
-    <Button
-        type={submit ? "submit" : "button"}
-        onClick={onClick}
-        disabled={disabled}
-        color={primary ? "primary" : secondary ? "secondary" : "inherit"}
-        variant={raised ? "contained" : outlined ? "outlined" : "text"}
-        form={form}
-        startIcon={startIcon}
-        endIcon={endIcon}
-    >
-        {text}
-    </Button>
-);
+    endIcon,
+    flex,
+    alignSelf,
+    size
+}) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
+    return (
+        <Button
+            classes={classes}
+            type={submit ? "submit" : "button"}
+            onClick={onClick}
+            disabled={disabled}
+            color={primary ? "primary" : secondary ? "secondary" : "inherit"}
+            variant={raised ? "contained" : outlined ? "outlined" : "text"}
+            form={form}
+            startIcon={startIcon}
+            endIcon={endIcon}
+        >
+            {text}
+        </Button>
+    );
+};
 
 DigitButton.displayName = "DigitButton";
 DigitButton.propTypes = {

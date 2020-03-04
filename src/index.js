@@ -59,12 +59,10 @@ import {
     Center,
     Column,
     DownRightPosition,
-    Fill,
     Flex,
     Grid,
     GridItem,
     Hide,
-    HideFill,
     Margin,
     MarginBottom,
     MarginLeft,
@@ -73,7 +71,6 @@ import {
     Order,
     Padding,
     Row,
-    Size,
     Spacing,
     UniformGrid
 } from "./styles/digit-layout/DigitLayout.styles";
@@ -113,7 +110,6 @@ const DigitLayout = {
     Column,
     Row,
     DownRightPosition,
-    Fill,
     MarginTop,
     MarginBottom,
     MarginLeft,
@@ -121,9 +117,7 @@ const DigitLayout = {
     Margin,
     Padding,
     Center,
-    HideFill,
     Hide,
-    Size,
     Order,
     Spacing
 };

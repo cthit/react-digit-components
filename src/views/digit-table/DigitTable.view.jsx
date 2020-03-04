@@ -25,8 +25,19 @@ const StyledTable = styled(Table)`
 `;
 
 const TablePaper = styled(Paper)`
-    max-width: 100vw;
     overflow-x: auto;
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.width || "auto"};
+    height: ${props => props.height || "auto"};
+
+    max-width: ${props => props.maxWidth || "none"};
+    max-height: ${props => props.maxHeight || "none"};
+
+    min-width: ${props => props.minWidth || 0};
+    min-height: ${props => props.minHeight || 0};
 `;
 
 //temp fix until DigitTable is rewritten
@@ -154,6 +165,9 @@ class DigitTable extends React.Component {
             selected,
             emptyTableText,
             headerTexts,
+            flex,
+            alignSelf,
+            size,
             renderPaginationLeft //Plz don't use this. It will probably be removed.
         } = this.props;
         const { data, order, orderBy, rowsPerPage, page } = this.state;
@@ -305,7 +319,8 @@ DigitTable.defaultProps = {
     showSearchableProps: false,
     searchText: "Search",
     titleText: "",
-    emptyTableText: "The table is empty"
+    emptyTableText: "The table is empty",
+    size: {}
 };
 
 export default DigitTable;

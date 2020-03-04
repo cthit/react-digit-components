@@ -4,19 +4,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 import translations from "./DigitTimePicker.element.translations";
-
-const styles = () => ({
-    root: {
-        flex: 1,
-        width: "100%"
-    }
-});
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitTimePicker = ({
     value,
     onChange,
     okLabel,
-    classes,
     outlined,
     filled,
     error,
@@ -29,12 +22,17 @@ const DigitTimePicker = ({
     clearLabel,
     emptyLabel,
     invalidLabel,
-    showNowButton
+    showNowButton,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const [text] = useDigitTranslations(translations);
 
     return (
         <TimePicker
+            classes={classes}
             onChange={date => onChange({ target: { value: date } })}
             value={value}
             ampm={false}
@@ -113,7 +111,4 @@ DigitTimePicker.defaultProps = {
     lowerLabel: ""
 };
 
-/** This is a temp solution to get the correct prop types from StoryBook. */
-export { DigitTimePicker };
-
-export default withStyles(styles)(DigitTimePicker);
+export default DigitTimePicker;

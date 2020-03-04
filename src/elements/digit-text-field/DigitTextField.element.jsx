@@ -1,6 +1,11 @@
 import PropTypes from "prop-types";
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import {
+    Fill,
+    FlexComponent
+} from "../../styles/digit-layout/DigitLayout.styles";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitTextField = ({
     value = "",
@@ -17,13 +22,20 @@ const DigitTextField = ({
     outlined,
     filled,
     maxLength,
-    onKeyPress
+    onKeyPress,
+    flex,
+    alignSelf,
+    size,
+    autoFocus
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+
     const handleOnChange = (e, maxLength, onChange) => {
         var newValue = e.target.value;
         if (maxLength === -1 || newValue.length <= maxLength) {
             if (numbersOnly) {
                 newValue = newValue.replace(/[^0-9]/g, "");
+                e.target.value = newValue;
             }
 
             onChange(e);
@@ -32,11 +44,13 @@ const DigitTextField = ({
 
     return (
         <TextField
+            classes={classes}
+            autoFocus={autoFocus}
             onKeyPress={onKeyPress}
             name={name}
             error={error}
             label={upperLabel}
-            value={value || ""}
+            value={value == null ? "" : value}
             helperText={
                 error && errorMessage != null
                     ? errorMessage
@@ -95,7 +109,22 @@ DigitTextField.propTypes = {
     filled: PropTypes.bool,
     /** Sets a max length for the textfield */
     maxLength: PropTypes.number,
-    onKeyPress: PropTypes.func
+    onKeyPress: PropTypes.func,
+    flex: PropTypes.string,
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "flex-start",
+        "flex-end",
+        "center",
+        "baseline",
+        "stretch"
+    ]),
+    /**   */
+    justifyContent: PropTypes.oneOf(["flex-start", "flex-end", "center"]),
+    /** If true, then display: inline-flex */
+    inlineFlex: PropTypes.bool,
+    /** autoFocus */
+    autoFocus: PropTypes.bool
 };
 
 DigitTextField.defaultProps = {
@@ -106,7 +135,8 @@ DigitTextField.defaultProps = {
     outlined: false,
     filled: false,
     maxLength: -1,
-    onKeyPress: () => {}
+    onKeyPress: () => {},
+    autoFocus: false
 };
 
 export default DigitTextField;

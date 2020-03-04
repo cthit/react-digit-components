@@ -353,9 +353,7 @@ const DigitCRUD = props => {
         <DigitCRUDContextProvider
             extractActiveLanguage={props.extractActiveLanguage}
         >
-            <Fill>
-                <DigitCRUDInner {...props} />
-            </Fill>
+            <DigitCRUDInner {...props} />
         </DigitCRUDContextProvider>
     );
 };

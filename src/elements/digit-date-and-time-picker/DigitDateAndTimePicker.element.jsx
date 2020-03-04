@@ -9,19 +9,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import translations from "./DigitDateAndTimePicker.element.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
-
-const styles = () => ({
-    root: {
-        flex: 1,
-        width: "100%"
-    }
-});
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitDateAndTimePicker = ({
     value,
     upperLabel,
     onChange,
-    classes,
     todayLabel,
     cancelLabel,
     okLabel,
@@ -40,12 +33,17 @@ const DigitDateAndTimePicker = ({
     errorMessage,
     minDate,
     maxDate,
-    shouldDisableDate
+    shouldDisableDate,
+    flex,
+    alignSelf,
+    size
 }) => {
+    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const [text] = useDigitTranslations(translations);
 
     return (
         <DateTimePicker
+            classes={classes}
             value={value}
             onChange={date => onChange({ target: { value: date } })}
             label={upperLabel}
@@ -65,7 +63,6 @@ const DigitDateAndTimePicker = ({
             disablePast={disablePast}
             clearable={clearable}
             ampm={false}
-            className={classes.root}
             inputVariant={
                 filled ? "filled" : outlined ? "outlined" : "standard"
             }
@@ -141,7 +138,4 @@ DigitDateAndTimePicker.defaultProps = {
     errorMessage: ""
 };
 
-/** This is a temp solution to get the correct prop types from StoryBook. */
-export { DigitDateAndTimePicker };
-
-export default withStyles(styles)(DigitDateAndTimePicker);
+export default DigitDateAndTimePicker;

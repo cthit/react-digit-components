@@ -12,6 +12,7 @@ import DigitButton from "../digit-button";
 import { Padding, Size } from "../../styles/digit-layout/DigitLayout.styles";
 import * as yup from "yup";
 import DigitEditData from "../digit-edit-data";
+import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitEditDataCard = ({
     initialValues,
@@ -23,83 +24,65 @@ const DigitEditDataCard = ({
     subtitleText,
     submitText,
     marginVertical,
-    absWidth,
-    absHeight,
-    minWidth,
-    minHeight,
-    maxWidth,
-    maxHeight,
-    width,
-    height,
     extraButton,
-    extraButtonTo
+    extraButtonTo,
+    centerFields,
+    flex,
+    alignSelf,
+    size
 }) => {
     const formName = useMemo(() => JSON.stringify(keysComponentData).trim());
     const [submitValid, setSubmitValid] = useState(false);
-    return (
-        <Size
-            minWidth={minWidth}
-            maxWidth={maxWidth}
-            minHeight={minHeight}
-            maxHeight={maxHeight}
-            absWidth={absWidth}
-            absHeight={absHeight}
-            width={width}
-            height={height}
-        >
-            <Card
-                minWidth={minWidth}
-                maxWidth={maxWidth}
-                minHeight={minHeight}
-                maxHeight={maxHeight}
-                absWidth={absWidth}
-                absHeight={absHeight}
-                width={width}
-                height={height}
-                hasSubTitle={subtitleText}
-            >
-                <CardTitle text={titleText} />
-                {subtitleText && <CardSubTitle text={subtitleText} />}
-                <CardBody>
-                    <DigitEditData
-                        onSubmit={onSubmit}
-                        initialValues={initialValues}
-                        keysOrder={keysOrder}
-                        keysComponentData={keysComponentData}
-                        validationSchema={validationSchema}
-                        marginVertical={marginVertical}
-                        formName={formName}
-                        onValidSubmitChange={submitValid =>
-                            setSubmitValid(submitValid)
-                        }
-                    />
-                </CardBody>
-                <CardButtons reverseDirection>
-                    <DigitButton
-                        disabled={!submitValid}
-                        submit
-                        text={submitText}
-                        raised
-                        primary
-                        form={formName}
-                    />
-                    <Padding />
-                    {extraButton != null && (
-                        <>
-                            {extraButtonTo == null && (
-                                <DigitButton {...extraButton} />
-                            )}
 
-                            {extraButtonTo != null && (
-                                <Link to={extraButtonTo}>
-                                    <DigitButton {...extraButton} />
-                                </Link>
-                            )}
-                        </>
-                    )}
-                </CardButtons>
-            </Card>
-        </Size>
+    return (
+        <Card
+            flex={flex}
+            alignSelf={alignSelf}
+            size={size}
+            hasSubTitle={subtitleText}
+        >
+            <CardTitle text={titleText} />
+            {subtitleText && <CardSubTitle text={subtitleText} />}
+            <CardBody>
+                <DigitEditData
+                    onSubmit={onSubmit}
+                    initialValues={initialValues}
+                    keysOrder={keysOrder}
+                    keysComponentData={keysComponentData}
+                    validationSchema={validationSchema}
+                    marginVertical={marginVertical}
+                    formName={formName}
+                    onValidSubmitChange={submitValid =>
+                        setSubmitValid(submitValid)
+                    }
+                    centerFields={centerFields}
+                />
+            </CardBody>
+            <CardButtons reverseDirection>
+                <DigitButton
+                    disabled={!submitValid}
+                    submit
+                    text={submitText}
+                    raised
+                    primary
+                    form={formName}
+                />
+                <Padding />
+                {extraButton != null && (
+                    <>
+                        {extraButtonTo == null && (
+                            <DigitButton {...extraButton} />
+                        )}
+
+                        {extraButtonTo != null && (
+                            <Link to={extraButtonTo}>
+                                <DigitButton {...extraButton} />
+                            </Link>
+                        )}
+                    </>
+                )}
+            </CardButtons>
+        </Card>
     );
 };
 
@@ -121,22 +104,6 @@ DigitEditDataCard.propTypes = {
     titleText: PropTypes.string,
     submitText: PropTypes.string,
     marginVertical: PropTypes.string,
-    /** Sets minWidth, maxWidth and width to absWidth */
-    absWidth: PropTypes.string,
-    /** Sets minHeight, maxHeight and height to absHeight */
-    absHeight: PropTypes.string,
-    /** minWidth of the card */
-    minWidth: PropTypes.string,
-    /** minHeight of the card */
-    minHeight: PropTypes.string,
-    /** maxWidth of the card */
-    maxWidth: PropTypes.string,
-    /** maxHeight of the card */
-    maxHeight: PropTypes.string,
-    /** width of the card */
-    width: PropTypes.string,
-    /** height of the card */
-    height: PropTypes.string,
     /** If new data should be force */
     isInitialValid: PropTypes.bool
 };
@@ -147,10 +114,6 @@ DigitEditDataCard.defaultProps = {
     titleText: "",
     submitText: "",
     marginVertical: "4px",
-    absWidth: null,
-    absHeight: null,
-    minWidth: "300px",
-    maxWidth: "300px",
     keysOrder: [],
     isInitialValid: false
 };

@@ -29,7 +29,13 @@ const DigitSelect = ({
     padding,
     margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
     React.useEffect(() => {

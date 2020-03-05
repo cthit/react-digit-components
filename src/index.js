@@ -30,6 +30,7 @@ import DigitButtonGroup from "./elements/digit-button-group";
 import DigitCustomDialog from "./elements/digit-custom-dialog";
 import DigitToast from "./elements/digit-toast";
 import DigitDialog from "./elements/digit-dialog";
+import DigitSelectFile from "./elements/digit-select-file";
 
 import DigitProviders from "./declaratives/digit-providers";
 
@@ -183,6 +184,7 @@ export {
     DigitListSelectMultiple,
     DigitListSelectSingle,
     DigitButtonGroup,
+    DigitSelectFile,
     /* Views */
     DigitToast,
     DigitDialog,

@@ -22,7 +22,9 @@ const DigitTextArea = ({
     flex,
     alignSelf,
     size,
-    autoFocus
+    autoFocus,
+    padding,
+    margin
 }) => {
     const classes = useLayoutMaterialUi({ flex, alignSelf, size });
 

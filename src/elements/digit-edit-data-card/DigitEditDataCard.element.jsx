@@ -12,7 +12,6 @@ import DigitButton from "../digit-button";
 import { Padding, Size } from "../../styles/digit-layout/DigitLayout.styles";
 import * as yup from "yup";
 import DigitEditData from "../digit-edit-data";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitEditDataCard = ({
     initialValues,
@@ -29,7 +28,9 @@ const DigitEditDataCard = ({
     centerFields,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
     const formName = useMemo(() => JSON.stringify(keysComponentData).trim());
     const [submitValid, setSubmitValid] = useState(false);
@@ -39,6 +40,8 @@ const DigitEditDataCard = ({
             flex={flex}
             alignSelf={alignSelf}
             size={size}
+            padding={padding}
+            margin={margin}
             hasSubTitle={subtitleText}
         >
             <CardTitle text={titleText} />
@@ -67,7 +70,6 @@ const DigitEditDataCard = ({
                     primary
                     form={formName}
                 />
-                <Padding />
                 {extraButton != null && (
                     <>
                         {extraButtonTo == null && (

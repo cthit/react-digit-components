@@ -5,7 +5,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React from "react";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitSelect = ({
@@ -26,7 +25,9 @@ const DigitSelect = ({
     selectNothingText,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
     const classes = useLayoutMaterialUi({ flex, alignSelf, size });
     const inputLabel = React.useRef(null);

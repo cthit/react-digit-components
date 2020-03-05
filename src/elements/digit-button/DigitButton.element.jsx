@@ -17,7 +17,9 @@ const DigitButton = ({
     endIcon,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
     const classes = useLayoutMaterialUi({ flex, alignSelf, size });
 

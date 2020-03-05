@@ -37,9 +37,17 @@ const DigitTabs = ({
     inheritBackground,
     size,
     alignSelf,
-    flex
+    flex,
+    padding,
+    margin
 }) => {
-    const layoutClasses = useLayoutMaterialUi({ flex, alignSelf, size });
+    const layoutClasses = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     console.log();
 
     return (

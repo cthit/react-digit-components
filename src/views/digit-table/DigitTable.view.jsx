@@ -38,6 +38,28 @@ const TablePaper = styled(Paper)`
 
     min-width: ${props => props.minWidth || 0};
     min-height: ${props => props.minHeight || 0};
+
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 //temp fix until DigitTable is rewritten
@@ -168,6 +190,8 @@ class DigitTable extends React.Component {
             flex,
             alignSelf,
             size,
+            padding,
+            margin,
             renderPaginationLeft //Plz don't use this. It will probably be removed.
         } = this.props;
         const { data, order, orderBy, rowsPerPage, page } = this.state;
@@ -175,7 +199,13 @@ class DigitTable extends React.Component {
         return (
             <DigitTableTranslations
                 render={text => (
-                    <TablePaper>
+                    <TablePaper
+                        flex={flex}
+                        alignSelf={alignSelf}
+                        size={size}
+                        padding={padding}
+                        margin={margin}
+                    >
                         <DigitTableToolbar
                             numSelected={
                                 selected == null ? -1 : selected.length
@@ -226,11 +256,9 @@ class DigitTable extends React.Component {
                                     <tr>
                                         <td colSpan="100">
                                             <Center>
-                                                <Padding>
-                                                    <Heading5
-                                                        text={emptyTableText}
-                                                    />
-                                                </Padding>
+                                                <Heading5
+                                                    text={emptyTableText}
+                                                />
                                             </Center>
                                         </td>
                                     </tr>

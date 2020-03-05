@@ -25,10 +25,41 @@ const StyledReactMarkdown = styled(ReactMarkdown)`
 
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
+
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
-const DigitMarkdown = ({ markdownSource, flex, alignSelf, size }) => (
+const DigitMarkdown = ({
+    markdownSource,
+    flex,
+    alignSelf,
+    size,
+    margin,
+    padding
+}) => (
     <StyledReactMarkdown
+        margin={margin}
+        padding={padding}
         flex={flex}
         alignSelf={alignSelf}
         size={size}

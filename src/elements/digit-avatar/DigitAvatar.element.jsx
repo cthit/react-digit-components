@@ -3,8 +3,23 @@ import Avatar from "@material-ui/core/Avatar";
 import PropTypes from "prop-types";
 import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitAvatar = ({ icon, imageSrc, imageAlt, flex, alignSelf, size }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+const DigitAvatar = ({
+    icon,
+    imageSrc,
+    imageAlt,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
     return (
         <Avatar classes={classes} alt={imageAlt} src={imageSrc}>

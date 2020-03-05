@@ -34,9 +34,17 @@ const DigitDatePicker = ({
     clearable,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [text] = useDigitTranslations(translations);
 
     return (

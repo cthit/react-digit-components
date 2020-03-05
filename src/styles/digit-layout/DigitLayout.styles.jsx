@@ -29,6 +29,28 @@ export const Flex = styled.div`
 
     min-width: ${props => props.minWidth || 0};
     min-height: ${props => props.minHeight || 0};
+
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Flex.displayName = "Flex";
@@ -128,6 +150,28 @@ export const Grid = styled.div`
 
     min-width: ${props => props.minWidth || 0};
     min-height: ${props => props.minHeight || 0};
+
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Grid.displayName = "Grid";
@@ -204,6 +248,28 @@ export const GridItem = styled.div`
 
   min-width: ${props => props.minWidth || 0};
   min-height: ${props => props.minHeight || 0};
+  
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 GridItem.displayName = "GridItem";
@@ -240,11 +306,11 @@ export const UniformGrid = styled(
         fillElement,
         flex,
         alignSelf,
-        size
+        size,
+        padding
     }) => (
         <Grid
             columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`}
-            margin={margin}
             inline={inline}
             rows={rows}
             areas={areas}
@@ -259,6 +325,8 @@ export const UniformGrid = styled(
             flex={flex}
             alignSelf={alignSelf}
             size={size}
+            margin={margin}
+            padding={padding}
         >
             {children}
         </Grid>
@@ -379,6 +447,28 @@ export const Column = styled(
 
     min-width: ${props => props.minWidth || 0};
     min-height: ${props => props.minHeight || 0};
+
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Column.displayName = "Column";
@@ -500,6 +590,28 @@ export const Row = styled(
 
     min-width: ${props => props.minWidth || 0};
     min-height: ${props => props.minHeight || 0};
+
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Row.displayName = "Row";
@@ -584,36 +696,6 @@ export const DownRightPosition = styled.div`
 
 DownRightPosition.displayName = "DownRightPosition";
 
-export const MarginTop = styled(Fill)`
-    margin-top: 8px;
-`;
-
-MarginTop.displayName = "MarginTop";
-
-export const MarginBottom = styled(Fill)`
-    margin-bottom: 8px;
-`;
-
-MarginBottom.displayName = "MarginBottom";
-
-export const MarginLeft = styled(Fill)`
-    margin-left: 8px;
-`;
-
-MarginLeft.displayName = "MarginLeft";
-
-export const MarginRight = styled(Fill)`
-    margin-right: 8px;
-`;
-
-MarginRight.displayName = "MarginRight";
-
-export const Margin = styled(Fill)`
-    margin: 4px;
-`;
-
-Margin.displayName = "Margin";
-
 export const Spacing = styled.div`
     display: block;
     width: 8px;
@@ -621,12 +703,6 @@ export const Spacing = styled.div`
 `;
 
 Spacing.displayName = "Spacing";
-
-export const Padding = styled(Fill)`
-    padding: 4px;
-`;
-
-Padding.displayName = "Padding";
 
 export const Center = styled.div`
     display: grid;
@@ -646,6 +722,28 @@ export const Center = styled.div`
 
     min-width: ${props => props.minWidth || 0};
     min-height: ${props => props.minHeight || 0};
+
+    padding: ${({ padding = "0px" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "4px" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Center.displayName = "Center";

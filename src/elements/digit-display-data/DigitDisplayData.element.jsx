@@ -10,9 +10,17 @@ const DigitDisplayData = ({
     keysOrder,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
     return (
         <Grid columns={`auto 1fr`} margin={"4px"} classes={classes}>

@@ -6,10 +6,7 @@ import {
     CardButtons,
     CardTitle
 } from "../../../../styles/digit-design/DigitDesign.styles";
-import {
-    Center,
-    Padding
-} from "../../../../styles/digit-layout/DigitLayout.styles";
+import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitButton from "../../../../elements/digit-button";
 import DigitLoading from "../../../../elements/digit-loading";
 import DeleteFAB from "../../elements/delete-fab";
@@ -226,7 +223,6 @@ const DigitCRUDReadOne = ({
                         />
                         {hasUpdate && (
                             <>
-                                <Padding />
                                 <DigitButton
                                     primary
                                     raised

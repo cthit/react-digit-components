@@ -12,12 +12,16 @@ const DigitBottomNavigation = ({
     onChange,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
     const classes = useLayoutMaterialUi({
         flex,
         alignSelf,
-        size: { height: "64px", width: "100%", ...size }
+        size: { height: "64px", width: "100%", ...size },
+        padding,
+        margin
     });
 
     return (

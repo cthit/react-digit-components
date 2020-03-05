@@ -25,20 +25,24 @@ const DigitListSelectSingle = ({
     onChange,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [toggle, isExpanded] = useToggler(multipleExpanded);
 
     return (
         <List
             classes={classes}
             dense={dense}
-            subheader={
-                <ListSubheader component="div">
-                    <Padding>{title}</Padding>
-                </ListSubheader>
-            }
+            subheader={<ListSubheader component="div">{title}</ListSubheader>}
             component={"div"}
             disablePadding={disablePadding}
         >

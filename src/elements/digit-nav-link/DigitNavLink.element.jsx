@@ -7,7 +7,17 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitNavLink = ({ text, link, onClick, icon, flex, alignSelf, size }) => {
+const DigitNavLink = ({
+    text,
+    link,
+    onClick,
+    icon,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
     const classes = useLayoutMaterialUi({ flex, alignSelf, size });
 
     return (

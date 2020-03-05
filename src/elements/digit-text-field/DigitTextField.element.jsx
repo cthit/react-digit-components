@@ -26,9 +26,17 @@ const DigitTextField = ({
     flex,
     alignSelf,
     size,
-    autoFocus
+    autoFocus,
+    padding,
+    margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
     const handleOnChange = (e, maxLength, onChange) => {
         var newValue = e.target.value;

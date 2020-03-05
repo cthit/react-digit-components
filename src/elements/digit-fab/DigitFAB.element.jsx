@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 import Fab from "@material-ui/core/Fab";
-import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitFAB = ({
@@ -16,9 +15,17 @@ const DigitFAB = ({
     form,
     flex,
     alignSelf,
-    size
+    size,
+    padding,
+    margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
     return (
         <Fab
@@ -33,9 +40,7 @@ const DigitFAB = ({
             {React.createElement(icon, null)}
             {text != null && (
                 <>
-                    <Padding />
                     <Text text={text} />
-                    <Padding />
                 </>
             )}
         </Fab>

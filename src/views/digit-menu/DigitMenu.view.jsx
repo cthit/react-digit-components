@@ -28,7 +28,15 @@ class DigitMenu extends React.Component {
     render() {
         const { open, id, anchorElement } = this.state;
 
-        const { valueToTextMap, onClick, flex, alignSelf, size } = this.props;
+        const {
+            valueToTextMap,
+            onClick,
+            flex,
+            alignSelf,
+            size,
+            padding,
+            margin
+        } = this.props;
 
         return (
             <>
@@ -36,6 +44,8 @@ class DigitMenu extends React.Component {
                     flex={flex}
                     alignSelf={alignSelf}
                     size={size}
+                    padding={padding}
+                    margin={margin}
                     onClick={this._handleClick}
                     aria-label="More"
                     aria-owns={open ? id : null}

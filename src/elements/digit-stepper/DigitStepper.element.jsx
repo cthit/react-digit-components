@@ -5,8 +5,22 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
 import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
-const DigitStepper = ({ activeStep, steps, flex, alignSelf, size }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+const DigitStepper = ({
+    activeStep,
+    steps,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
     return (
         <Stepper classes={classes} activeStep={activeStep} alternativeLabel>

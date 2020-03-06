@@ -129,6 +129,16 @@ const DigitList = ({
 };
 
 DigitList.propTypes = {
+    title: PropTypes.string,
+    /** Array of list items. Can be nested. */
+    items: PropTypes.array,
+    /** The function which will be called when the button has been pressed.*/
+    onClick: PropTypes.func,
+    dense: PropTypes.bool,
+    disablePadding: PropTypes.bool,
+    idProp: PropTypes.string,
+    multipleExpanded: PropTypes.bool,
+    flex: PropTypes.bool,
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",
@@ -140,17 +150,7 @@ DigitList.propTypes = {
         "initial",
         "inherit"
     ]),
-    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
-     * and width/height via an object
-     */
-    size: PropTypes.shape({
-        width: PropTypes.string,
-        height: PropTypes.string,
-        minWidth: PropTypes.string,
-        minHeight: PropTypes.string,
-        maxWidth: PropTypes.string,
-        maxHeight: PropTypes.string
-    }),
+    size: PropTypes.bool,
     /** Padding property for the most outer element in this component.
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
@@ -180,7 +180,18 @@ DigitList.propTypes = {
 };
 
 DigitList.defaultProps = {
-    idProp: "text"
+    title: "",
+    items: [],
+    onClick: () => {},
+    dense: false,
+    disablePadding: false,
+    idProp: "text",
+    multipleExpanded: "",
+    flex: "",
+    alignSelf: "",
+    size: "",
+    padding: "",
+    margin: ""
 };
 
 export default DigitList;

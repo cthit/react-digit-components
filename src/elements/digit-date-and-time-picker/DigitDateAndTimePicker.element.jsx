@@ -94,8 +94,8 @@ DigitDateAndTimePicker.propTypes = {
     disabled: PropTypes.bool,
     disableFuture: PropTypes.bool,
     lowerLabel: PropTypes.string,
-    minDate: PropTypes.date,
-    maxDate: PropTypes.date,
+    minDate: PropTypes.string,
+    maxDate: PropTypes.string,
     shouldDisableDate: PropTypes.bool,
     flex: PropTypes.string,
     /** If true, then a button will exists to let the user clear the date. */

@@ -115,8 +115,8 @@ DigitDatePicker.propTypes = {
     disableFuture: PropTypes.bool,
     disablePast: PropTypes.bool,
     shouldDisableDate: PropTypes.bool,
-    minDate: PropTypes.date,
-    maxDate: PropTypes.date,
+    minDate: PropTypes.string,
+    maxDate: PropTypes.string,
     clearable: PropTypes.bool,
     flex: PropTypes.bool,
     /** The current value. This component is uncontrolled, meaning that

@@ -111,6 +111,14 @@ const DigitDatePicker = ({
 
 DigitDatePicker.displayName = "DigitDatePicker";
 DigitDatePicker.propTypes = {
+    disabled: PropTypes.bool,
+    disableFuture: PropTypes.bool,
+    disablePast: PropTypes.bool,
+    shouldDisableDate: PropTypes.bool,
+    minDate: PropTypes.string,
+    maxDate: PropTypes.string,
+    clearable: PropTypes.bool,
+    flex: PropTypes.bool,
     /** The current value. This component is uncontrolled, meaning that
      * you have to store the value and react on changes using
      * the onChange function.

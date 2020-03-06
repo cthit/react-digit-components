@@ -156,7 +156,7 @@ Input to select a single value via autocomplete when searching for the option.
     <Story name="AutocompleteSingle noOption">
         {() => {
             const options = [];
-            const [value, setValue] = useState("aliens");
+            const [value, setValue] = useState();
             return (
                 <DigitAutocompleteSelectSingle
                     size={{width: "224px"}}

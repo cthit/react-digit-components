@@ -148,6 +148,15 @@ const DigitListSelectSingle = ({
 };
 
 DigitListSelectSingle.propTypes = {
+    title: PropTypes.string,
+    items: PropTypes.array,
+    dense: PropTypes.bool,
+    disablePadding: PropTypes.bool,
+    idProp: PropTypes.string,
+    multipleExpanded: PropTypes.bool,
+    value: PropTypes.array,
+    onChange: PropTypes.func,
+    flex: PropTypes.bool,
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",
@@ -158,8 +167,7 @@ DigitListSelectSingle.propTypes = {
         "baseline",
         "initial",
         "inherit"
-    ]),
-    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+    ]),/** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
      * and width/height via an object
      */
     size: PropTypes.shape({

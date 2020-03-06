@@ -110,6 +110,10 @@ DigitTimePicker.propTypes = {
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
     showNowButton: PropTypes.bool,
+    disabled: PropTypes.bool,
+    nowLabel: PropTypes.string,
+    invalidLabel: PropTypes.string,
+    flex: PropTypes.bool,
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",

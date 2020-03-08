@@ -163,7 +163,7 @@ DigitAutocompleteSelectMultiple.propTypes = {
     ),
     /** Value of the select options */
     value: PropTypes.arrayOf(
-        PropTypes.oneOfType(PropTypes.number, PropTypes.string)
+        PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ).isRequired,
     /** Gets called something in selected changes. */
     onChange: PropTypes.func.isRequired,

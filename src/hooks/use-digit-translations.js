@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 import merge from "lodash/merge";
 import DigitTranslationsContext, {
@@ -34,12 +34,22 @@ function useDigitTranslations(translations = {}) {
         JSON.stringify(commonTranslations)
     ]);
 
+    const setActiveLanguageCallback = useCallback(
+        lang => dispatch({ type: SET_ACTIVE_LANGUAGE, activeLanguage: lang }),
+        [dispatch]
+    );
+
+    const setCommonTranslationsCallback = useCallback(
+        commonTranslations =>
+            dispatch({ type: SET_COMMON_TRANSLATIONS, commonTranslations }),
+        [dispatch]
+    );
+
     return [
         text,
         activeLanguage,
-        lang => dispatch({ type: SET_ACTIVE_LANGUAGE, activeLanguage: lang }),
-        commonTranslations =>
-            dispatch({ type: SET_COMMON_TRANSLATIONS, commonTranslations })
+        setActiveLanguageCallback,
+        setCommonTranslationsCallback
     ];
 }
 

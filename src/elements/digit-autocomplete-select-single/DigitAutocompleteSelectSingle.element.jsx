@@ -114,7 +114,7 @@ DigitAutocompleteSelectSingle.propTypes = {
         })
     ),
     /** The selected value */
-    value: PropTypes.oneOfType(PropTypes.number, PropTypes.string).isRequired,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     /** Gets called something in selected changes. */
     onChange: PropTypes.func.isRequired,
     /** text displayed when there are no options*/

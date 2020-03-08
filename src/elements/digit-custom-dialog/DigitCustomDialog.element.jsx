@@ -32,7 +32,7 @@ const DigitCustomDialog = ({
         <Dialog
             classes={classes}
             onExited={onExited}
-            open={open}
+            open={open || false}
             onClose={cancel}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"

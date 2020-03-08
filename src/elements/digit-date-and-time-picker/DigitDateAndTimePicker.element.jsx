@@ -89,6 +89,15 @@ const DigitDateAndTimePicker = ({
 
 DigitDateAndTimePicker.displayName = "DigitDateAndTimePicker";
 DigitDateAndTimePicker.propTypes = {
+    value: PropTypes.array,
+    invalidLabel: PropTypes.string,
+    disabled: PropTypes.bool,
+    disableFuture: PropTypes.bool,
+    lowerLabel: PropTypes.string,
+    minDate: PropTypes.string,
+    maxDate: PropTypes.string,
+    shouldDisableDate: PropTypes.bool,
+    flex: PropTypes.string,
     /** If true, then a button will exists to let the user clear the date. */
     clearable: PropTypes.bool,
     /** If true, then the user can't select a date past now. */

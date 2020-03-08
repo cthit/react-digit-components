@@ -9,23 +9,180 @@ import { DigitAutocompleteSelectSingle, DigitProviders } from "../../src";
 
 # DigitAutocompleteSelectSingle
 
-Input to select a single value via autocomplete when searching for the option. 
+Input to select a single value via autocomplete when searching for the option.
+
+## AutocompleteSingle
 
 <Preview>
-    <Story name="Autocomplete single">
+    <Story name="AutocompleteSingle normal">
         {() => {
             const options = [
-                { text: "The Dark Knight Rises", value: "the_dark"},
+                { text: "The Dark Knight Rises", value: "the_dark" },
                 { text: "Princess Mononoke", value: "princess" },
                 { text: "Aliens", value: "aliens" },
-                { text: "Oldboy" , value: "oldboy"},
+                { text: "Oldboy", value: "oldboy" },
                 { text: "Once Upon a Time in America", value: "once" },
                 { text: "Witness for the Prosecution", value: "Witness" },
-                { text: "Das Boot", value: "das", disabled: true},
-            ]
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
             const [value, setValue] = useState("aliens");
             return (
-                <DigitAutocompleteSelectSingle filled error errorMessage="hej" disabled upperLabel="what" options={options} value={value} onChange={(e) => {setValue(e.target.value);}}/>        
+                <DigitAutocompleteSelectSingle
+                    size={{width: "224px"}}
+                    upperLabel="upperlabel"
+                    lowerLabel="lowerlabel"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteSingle filled">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState("aliens");
+            return (
+                <DigitAutocompleteSelectSingle
+                    size={{width: "224px"}}
+                    filled
+                    upperLabel="Filled"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteSingle outlined">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState("aliens");
+            return (
+                <DigitAutocompleteSelectSingle
+                    size={{width: "224px"}}
+                    outlined
+                    upperLabel="Outlined"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="AutocompleteSingle disabled">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState("aliens");
+            return (
+                <DigitAutocompleteSelectSingle
+                    size={{width: "224px"}}
+                    disabled
+                    upperLabel="Disabled"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteSingle error">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState("aliens");
+            return (
+                <DigitAutocompleteSelectSingle
+                    size={{width: "224px"}}
+                    error
+                    errorMessage="Error message"
+                    upperLabel="Disabled"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## noOptionText
+
+<Preview>
+    <Story name="AutocompleteSingle noOption">
+        {() => {
+            const options = [];
+            const [value, setValue] = useState();
+            return (
+                <DigitAutocompleteSelectSingle
+                    size={{width: "224px"}}
+                    upperLabel="No option upperlabel"
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteSingle noOptionText">
+        {() => {
+            const options = [];
+            const [value, setValue] = useState();
+            return (
+                <DigitAutocompleteSelectSingle
+                    size={{width: "224px"}}
+                    upperLabel="No options custom"
+                    noOptionsText="No options :("
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
             );
         }}
     </Story>

@@ -118,7 +118,8 @@ DigitDatePicker.propTypes = {
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     clearable: PropTypes.bool,
-    flex: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
     /** The current value. This component is uncontrolled, meaning that
      * you have to store the value and react on changes using
      * the onChange function.
@@ -183,7 +184,7 @@ DigitDatePicker.propTypes = {
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    padding: PropTypes.oneOf([
+    padding: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -196,7 +197,7 @@ DigitDatePicker.propTypes = {
      * It can either be a string, using the margin shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    margin: PropTypes.oneOf([
+    margin: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,

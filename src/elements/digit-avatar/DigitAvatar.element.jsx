@@ -35,6 +35,9 @@ DigitAvatar.propTypes = {
     imageSrc: PropTypes.string,
     /** Alternative text for the image, used if for example the image isn't loaded. */
     imageAlt: PropTypes.string,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",
@@ -61,7 +64,7 @@ DigitAvatar.propTypes = {
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    padding: PropTypes.oneOf([
+    padding: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -74,7 +77,7 @@ DigitAvatar.propTypes = {
      * It can either be a string, using the margin shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    margin: PropTypes.oneOf([
+    margin: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,

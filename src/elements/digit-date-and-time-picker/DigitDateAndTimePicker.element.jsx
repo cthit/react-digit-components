@@ -89,15 +89,11 @@ const DigitDateAndTimePicker = ({
 
 DigitDateAndTimePicker.displayName = "DigitDateAndTimePicker";
 DigitDateAndTimePicker.propTypes = {
-    value: PropTypes.array,
-    invalidLabel: PropTypes.string,
     disabled: PropTypes.bool,
     disableFuture: PropTypes.bool,
-    lowerLabel: PropTypes.string,
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     shouldDisableDate: PropTypes.bool,
-    flex: PropTypes.string,
     /** If true, then a button will exists to let the user clear the date. */
     clearable: PropTypes.bool,
     /** If true, then the user can't select a date past now. */
@@ -140,6 +136,8 @@ DigitDateAndTimePicker.propTypes = {
     lowerLabel: PropTypes.string,
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",
@@ -166,7 +164,7 @@ DigitDateAndTimePicker.propTypes = {
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    padding: PropTypes.oneOf([
+    padding: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -179,7 +177,7 @@ DigitDateAndTimePicker.propTypes = {
      * It can either be a string, using the margin shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    margin: PropTypes.oneOf([
+    margin: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,

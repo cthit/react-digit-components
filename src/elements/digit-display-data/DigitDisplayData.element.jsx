@@ -44,6 +44,8 @@ DigitDisplayData.propTypes = {
     keysText: PropTypes.objectOf(PropTypes.string),
     /** The order of the keys. An array of keys.  */
     keysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",
@@ -70,7 +72,7 @@ DigitDisplayData.propTypes = {
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    padding: PropTypes.oneOf([
+    padding: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -83,7 +85,7 @@ DigitDisplayData.propTypes = {
      * It can either be a string, using the margin shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    margin: PropTypes.oneOf([
+    margin: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -97,7 +99,9 @@ DigitDisplayData.propTypes = {
 DigitDisplayData.defaultProps = {
     data: {},
     keysText: {},
-    keysOrder: []
+    keysOrder: [],
+    margin: "4px",
+    justifyContent: "center"
 };
 
 export default DigitDisplayData;

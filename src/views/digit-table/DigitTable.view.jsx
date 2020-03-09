@@ -5,11 +5,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
-import {
-    Center,
-    Padding,
-    Row
-} from "../../styles/digit-layout/DigitLayout.styles";
+import { Center } from "../../styles/digit-layout/DigitLayout.styles";
 import { Heading5 } from "../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTable.view.translations.json";
 import DigitTableBody from "./elements/digit-table-body";
@@ -18,26 +14,24 @@ import DigitTableToolbar from "./elements/digit-table-toolbar";
 import styled from "styled-components";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 
-const StyledTablePagination = styled(TablePagination)``;
-
-const StyledTable = styled(Table)`
-    min-width: 632px;
+const StyledTablePagination = styled(TablePagination)`
+    overflow: visible;
 `;
 
 const TablePaper = styled(Paper)`
     overflow-x: auto;
 
     flex: ${props => props.flex || "0 1 auto"};
-    align-self: ${props => props.alignSelf || "auto"};
+    align-self: ${props => props.alignself || "auto"};
 
-    width: ${props => props.width || "auto"};
-    height: ${props => props.height || "auto"};
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
 
-    max-width: ${props => props.maxWidth || "none"};
-    max-height: ${props => props.maxHeight || "none"};
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
 
-    min-width: ${props => props.minWidth || 0};
-    min-height: ${props => props.minHeight || 0};
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
 
     padding: ${({ padding = "0px" }) =>
         (typeof padding === "string"
@@ -74,7 +68,7 @@ class DigitTable extends React.Component {
 
         this.state = {
             searchInput: "",
-            order: "asc",
+            order: props.startOrderByDirection,
             orderBy: props.startOrderBy,
             page: 0,
             rowsPerPage: 10,
@@ -191,8 +185,7 @@ class DigitTable extends React.Component {
             alignSelf,
             size,
             padding,
-            margin,
-            renderPaginationLeft //Plz don't use this. It will probably be removed.
+            margin
         } = this.props;
         const { data, order, orderBy, rowsPerPage, page } = this.state;
 
@@ -201,7 +194,7 @@ class DigitTable extends React.Component {
                 render={text => (
                     <TablePaper
                         flex={flex}
-                        alignSelf={alignSelf}
+                        alignself={alignSelf}
                         size={size}
                         padding={padding}
                         margin={margin}
@@ -219,7 +212,7 @@ class DigitTable extends React.Component {
                             search={this.props.search}
                         />
 
-                        <StyledTable aria-labelledby="tableTitle">
+                        <Table aria-labelledby="tableTitle">
                             <DigitTableHeader
                                 numSelected={
                                     selected == null
@@ -264,39 +257,25 @@ class DigitTable extends React.Component {
                                     </tr>
                                 </TableBody>
                             )}
-                        </StyledTable>
-
-                        <Row
-                            justifyContent={
-                                renderPaginationLeft == null
-                                    ? "flex-end"
-                                    : "space-between"
-                            }
-                        >
-                            {renderPaginationLeft != null &&
-                                renderPaginationLeft()}
-                            <StyledTablePagination
-                                component="div"
-                                count={
-                                    data.filter(n => this.rowShouldBeShown(n))
-                                        .length
-                                } //TODO OPTIMIZE
-                                rowsPerPage={rowsPerPage}
-                                page={page}
-                                backIconButtonProps={{
-                                    "aria-label": text.PreviousPage
-                                }}
-                                nextIconButtonProps={{
-                                    "aria-label": text.NextPage
-                                }}
-                                onChangePage={this.handleChangePage}
-                                onChangeRowsPerPage={
-                                    this.handleChangeRowsPerPage
-                                }
-                                labelRowsPerPage={text.RowsPerPage}
-                                renderPaginationLeft={renderPaginationLeft}
-                            />
-                        </Row>
+                        </Table>
+                        <StyledTablePagination
+                            component="div"
+                            count={
+                                data.filter(n => this.rowShouldBeShown(n))
+                                    .length
+                            } //TODO OPTIMIZE
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            backIconButtonProps={{
+                                "aria-label": text.PreviousPage
+                            }}
+                            nextIconButtonProps={{
+                                "aria-label": text.NextPage
+                            }}
+                            onChangePage={this.handleChangePage}
+                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                            labelRowsPerPage={text.RowsPerPage}
+                        />
                     </TablePaper>
                 )}
             />
@@ -308,6 +287,8 @@ DigitTable.displayName = "DigitTable";
 DigitTable.propTypes = {
     /** The starting column to order rows by */
     startOrderBy: PropTypes.string.isRequired,
+    /** In what direction the start order should be */
+    startOrderByDirection: PropTypes.oneOf(["desc", "asc"]),
     /** The specified order of the columns. */
     columnsOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
     /** The column that has the id. */
@@ -366,7 +347,7 @@ DigitTable.propTypes = {
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    padding: PropTypes.oneOf([
+    padding: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -379,7 +360,7 @@ DigitTable.propTypes = {
      * It can either be a string, using the margin shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    margin: PropTypes.oneOf([
+    margin: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -387,7 +368,11 @@ DigitTable.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Function for rendering stuff to the left of the pagination controls */
+    renderPaginationLeft: PropTypes.func
 };
 
 DigitTable.defaultProps = {
@@ -396,7 +381,10 @@ DigitTable.defaultProps = {
     searchText: "Search",
     titleText: "",
     emptyTableText: "The table is empty",
-    size: {}
+    size: {
+        minWidth: "300px"
+    },
+    startOrderByDirection: "desc"
 };
 
 export default DigitTable;

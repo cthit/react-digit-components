@@ -2,7 +2,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitTextField from "../../../../elements/digit-text-field";
-import { Fill } from "../../../../styles/digit-layout/DigitLayout.styles";
 import { Title } from "../../../../styles/digit-text/DigitText.styles";
 import translations from "./DigitTableToolbar.element.translations.json";
 import styled from "styled-components";
@@ -12,15 +11,12 @@ const TableTitle = styled(Title)`
     flex: 0 0 auto;
 `;
 
-const SearchInput = styled(DigitTextField)`
-    width: 400px;
-    min-width: 400px !important;
-`;
-
 const StyledToolbar = styled(Toolbar)`
-    min-width: 600px;
+    padding-top: 8px;
+    min-width: 300px;
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 `;
 
 const DigitTableToolbar = ({
@@ -45,7 +41,15 @@ const DigitTableToolbar = ({
                 }
             />
             {search && (
-                <SearchInput
+                <DigitTextField
+                    margin={{
+                        left: "8px"
+                    }}
+                    flex={"1"}
+                    size={{
+                        maxWidth: "400px"
+                    }}
+                    outlined
                     upperLabel={
                         searchText +
                         (showSearchableProps != null && showSearchableProps

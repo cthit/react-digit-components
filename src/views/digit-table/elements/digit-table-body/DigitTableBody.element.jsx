@@ -84,19 +84,19 @@ const DigitTableBody = ({
                             </StyledTableCell>
                         ))}
 
-                        {headerTexts.__link != null && (
+                        {n.__link != null && (
                             <RightAlignedStyledTableCell
                                 datatitle={headerTexts.__link}
                             >
                                 <Link to={n.__link}>
                                     <DigitButton
                                         text={headerTexts.__link}
-                                        raised
+                                        outlined
                                     />
                                 </Link>
                             </RightAlignedStyledTableCell>
                         )}
-                        {headerTexts.__link == null && null}
+                        {n.__link == null && <StyledTableCell />}
                     </StyledTableRow>
                 );
             })}

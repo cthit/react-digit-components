@@ -64,7 +64,6 @@ function formatDate(date, text, type) {
 }
 
 const DigitCRUDReadAll = ({
-    name,
     readAllAction,
     clearAction,
     keysText,
@@ -81,7 +80,8 @@ const DigitCRUDReadAll = ({
     createPath,
     timeProps,
     dateProps,
-    dateAndTimeProps
+    dateAndTimeProps,
+    canReadOne
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ all, loading }] = useContext(DigitCRUDContext);
@@ -128,13 +128,22 @@ const DigitCRUDReadAll = ({
     return (
         <>
             <DigitTable
+                flex={"1"}
                 data={
                     hasReadOne
-                        ? all.map(one => ({
-                              ...one,
-                              __link:
-                                  path + readOnePath.replace(":id", one[idProp])
-                          }))
+                        ? all.map(one =>
+                              canReadOne(one)
+                                  ? {
+                                        ...one,
+                                        __link:
+                                            path +
+                                            readOnePath.replace(
+                                                ":id",
+                                                one[idProp]
+                                            )
+                                    }
+                                  : one
+                          )
                         : all
                 }
                 columnsOrder={keysOrder}
@@ -145,23 +154,24 @@ const DigitCRUDReadAll = ({
                 }
                 idProp={idProp}
                 {...tableProps}
-                renderPaginationLeft={
-                    hasCreate
-                        ? () => (
-                              <Center>
-                                  <DigitFAB
-                                      primary
-                                      text={createButtonText}
-                                      icon={Add}
-                                      onClick={() =>
-                                          history.push(path + createPath)
-                                      }
-                                  />
-                              </Center>
-                          )
-                        : null
-                }
             />
+            {hasCreate && (
+                <>
+                    <DownRightPosition>
+                        <DigitFAB
+                            primary
+                            text={createButtonText}
+                            icon={Add}
+                            onClick={() => history.push(path + createPath)}
+                        />
+                    </DownRightPosition>
+                    <div //To let the user scroll all the way down, so that the FAB isn't in the way
+                        style={{
+                            height: "80px"
+                        }}
+                    />
+                </>
+            )}
         </>
     );
 };

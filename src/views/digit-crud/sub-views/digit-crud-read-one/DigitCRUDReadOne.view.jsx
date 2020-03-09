@@ -4,6 +4,8 @@ import {
     Card,
     CardBody,
     CardButtons,
+    CardHeader,
+    CardSubtitle,
     CardTitle
 } from "../../../../styles/digit-design/DigitDesign.styles";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
@@ -65,7 +67,6 @@ function formatDate(date, text, type) {
 }
 
 const DigitCRUDReadOne = ({
-    name,
     readOneAction,
     clearAction,
     keysText,
@@ -103,7 +104,10 @@ const DigitCRUDReadOne = ({
     dateProps,
     dateAndTimeProps,
     onDelete,
-    useHistoryGoBackOnBack
+    useHistoryGoBackOnBack,
+    detailsSubtitle,
+    canDelete,
+    canUpdate
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
@@ -199,11 +203,27 @@ const DigitCRUDReadOne = ({
         <>
             <Center>
                 {detailsRenderStart(one)}
-                <Card>
-                    <CardTitle text={detailsTitle(one) + ""} />
-                    <CardBody>
+                <Card
+                    size={{
+                        minWidth: "280px",
+                        minHeight: "280px"
+                    }}
+                >
+                    <CardHeader
+                        hasSubtitle={
+                            detailsSubtitle != null &&
+                            detailsSubtitle(one) !== ""
+                        }
+                    >
+                        <CardTitle text={detailsTitle(one) + ""} />
+                        {detailsSubtitle != null && (
+                            <CardSubtitle text={detailsSubtitle(one)} />
+                        )}
+                    </CardHeader>
+                    <CardBody justifyContent={"center"}>
                         {detailsRenderCardStart(one)}
                         <DigitDisplayData
+                            alignSelf={"center"}
                             keysText={keysText}
                             keysOrder={keysOrder}
                             data={displayData}
@@ -215,13 +235,13 @@ const DigitCRUDReadOne = ({
                             .map(key => customDetailsRenders[key](one))}
                         {detailsRenderCardEnd(one)}
                     </CardBody>
-                    <CardButtons>
+                    <CardButtons leftRight>
                         <DigitButton
                             text={backButtonText}
                             outlined
                             onClick={goBack}
                         />
-                        {hasUpdate && (
+                        {hasUpdate && canUpdate(one) && (
                             <>
                                 <DigitButton
                                     primary
@@ -234,7 +254,10 @@ const DigitCRUDReadOne = ({
                     </CardButtons>
                 </Card>
                 {detailsRenderEnd(one)}
-                {!hasUpdate && deleteAction != null && deleteFAB}
+                {!hasUpdate &&
+                    deleteAction != null &&
+                    canDelete(one) &&
+                    deleteFAB}
             </Center>
         </>
     );

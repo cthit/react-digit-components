@@ -19,7 +19,8 @@ const DigitCRUDCreate = ({
     readAllPath,
     backFromCreatePath,
     onCreate,
-    useHistoryGoBackOnBack
+    useHistoryGoBackOnBack,
+    createSubtitle
 }) => {
     const [queueToast] = useDigitToast();
     const history = useHistory();
@@ -27,6 +28,10 @@ const DigitCRUDCreate = ({
     return (
         <Center>
             <DigitEditData
+                size={{
+                    minWidth: "280px",
+                    minHeight: "280px"
+                }}
                 onSubmit={(values, actions) => {
                     const _new = values;
                     createAction(_new)
@@ -65,6 +70,7 @@ const DigitCRUDCreate = ({
                 initialValues={formInitialValues}
                 submitText={createButtonText}
                 titleText={createTitle}
+                subtitleText={createSubtitle}
             />
         </Center>
     );

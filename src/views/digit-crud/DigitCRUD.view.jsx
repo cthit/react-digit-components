@@ -102,7 +102,13 @@ const DigitCRUDInner = ({
     onCreate,
     onUpdate,
     onDelete,
-    useHistoryGoBackOnBack
+    useHistoryGoBackOnBack,
+    canUpdate,
+    canDelete,
+    canReadOne,
+    createSubtitle,
+    updateSubtitle,
+    detailsSubtitle
 }) => {
     const [, dispatch] = useContext(DigitCRUDContext);
 
@@ -173,6 +179,7 @@ const DigitCRUDInner = ({
                                     : keysOrder
                             }
                             createTitle={createTitle}
+                            createSubtitle={createSubtitle}
                             toastCreateFailed={toastCreateFailed}
                             toastCreateSuccessful={toastCreateSuccessful}
                             createButtonText={createButtonText}
@@ -196,6 +203,7 @@ const DigitCRUDInner = ({
                             deleteAction={deleteAction}
                             clearAction={clearAction}
                             updateTitle={updateTitle}
+                            updateSubtitle={updateSubtitle}
                             id={
                                 staticId != null
                                     ? staticId
@@ -243,6 +251,7 @@ const DigitCRUDInner = ({
                             }
                             onUpdate={onUpdate}
                             onDelete={onDelete}
+                            canDelete={canDelete}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
@@ -273,6 +282,7 @@ const DigitCRUDInner = ({
                             backButtonText={backButtonText}
                             updateButtonText={updateButtonText}
                             detailsTitle={detailsTitle}
+                            detailsSubtitle={detailsSubtitle}
                             detailsCustomRender={detailsCustomRender}
                             detailsRenderStart={detailsRenderStart}
                             detailsRenderEnd={detailsRenderEnd}
@@ -308,6 +318,8 @@ const DigitCRUDInner = ({
                             dateProps={dateProps}
                             dateAndTimeProps={dateAndTimeProps}
                             onDelete={onDelete}
+                            canUpdate={canUpdate}
+                            canDelete={canDelete}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
@@ -340,6 +352,7 @@ const DigitCRUDInner = ({
                             timeProps={timeProps}
                             dateProps={dateProps}
                             dateAndTimeProps={dateAndTimeProps}
+                            canReadOne={canReadOne}
                         />
                     )}
                 />
@@ -411,8 +424,12 @@ DigitCRUD.propTypes = {
     deleteDialogFormKeysOrder: PropTypes.arrayOf(PropTypes.string),
     /** String for create title */
     createTitle: PropTypes.string,
+    /** String for create subtitle */
+    createSubtitle: PropTypes.string,
     /** Function to create update title, Args: (data) */
     updateTitle: PropTypes.func,
+    /** Function to create update subtitle, Args: (data) */
+    updateSubtitle: PropTypes.func,
     /** Function to create toast text when creation is successful, Args: (data, response)*/
     toastCreateSuccessful: PropTypes.func,
     /** Function to create toast text when creation failed, Args: (data, error)*/
@@ -445,6 +462,8 @@ DigitCRUD.propTypes = {
     detailsButtonText: PropTypes.string,
     /** Details title (data) => string*/
     detailsTitle: PropTypes.func,
+    /** Details subtitle (data) => string*/
+    detailsSubtitle: PropTypes.func,
     /** Overwrites the default DigitDisplayData behavior. (data, goBack, goToEdit) */
     detailsCustomRender: PropTypes.func,
     /** Renders before card in details (data) */
@@ -486,11 +505,15 @@ DigitCRUD.propTypes = {
     onCreate: PropTypes.func,
     onUpdate: PropTypes.func,
     onDelete: PropTypes.func,
-    useHistoryGoBackOnBack: PropTypes.bool
+    useHistoryGoBackOnBack: PropTypes.bool,
+    canUpdate: PropTypes.func,
+    canReadOne: PropTypes.func,
+    canDelete: PropTypes.func
 };
 
 DigitCRUD.defaultProps = {
     updateTitle: () => "Update",
+    updateSubtitle: null,
     toastUpdateSuccessful: () => "Update successful",
     toastUpdateFailed: () => "Update failed",
     backButtonText: "Back",
@@ -507,7 +530,9 @@ DigitCRUD.defaultProps = {
     createButtonText: "Create",
     detailsButtonText: "Details",
     createTitle: "Create",
+    createSubtitle: null,
     detailsTitle: () => "",
+    detailsSubtitle: () => "",
     detailsCustomRender: null,
     detailsRenderStart: () => null,
     detailsRenderEnd: () => null,
@@ -541,7 +566,10 @@ DigitCRUD.defaultProps = {
     onCreate: () => {},
     onUpdate: () => {},
     onDelete: () => {},
-    useHistoryGoBackOnBack: true
+    useHistoryGoBackOnBack: true,
+    canUpdate: () => true,
+    canDelete: () => true,
+    canReadOne: () => true
 };
 
 export default DigitCRUD;

@@ -7,7 +7,6 @@ import useDigitToast from "../../../../hooks/use-digit-toast";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
 
 const DigitCRUDUpdate = ({
-    name,
     readOneAction,
     updateAction,
     deleteAction,
@@ -40,7 +39,9 @@ const DigitCRUDUpdate = ({
     deleteDialogFormKeysOrder,
     onUpdate,
     onDelete,
-    useHistoryGoBackOnBack
+    useHistoryGoBackOnBack,
+    updateSubtitle,
+    canDelete
 }) => {
     const [{ one, loading }] = useContext(DigitCRUDContext);
 
@@ -115,9 +116,12 @@ const DigitCRUDUpdate = ({
                     initialValues={one}
                     submitText={updateButtonText(one)}
                     titleText={updateTitle(one)}
+                    updateSubtitle={
+                        updateSubtitle == null ? null : updateSubtitle(one)
+                    }
                 />
             </Center>
-            {deleteAction != null && (
+            {deleteAction != null && canDelete(one) && (
                 <DeleteFAB
                     dialogDeleteCancel={dialogDeleteCancel}
                     dialogDeleteConfirm={dialogDeleteConfirm}

@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Grid } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../styles/digit-text/DigitText.styles";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
 
 const DigitDisplayData = ({
     data,
@@ -13,28 +12,25 @@ const DigitDisplayData = ({
     size,
     padding,
     margin
-}) => {
-    const classes = useLayoutMaterialUi({
-        flex,
-        alignSelf,
-        size,
-        padding,
-        margin
-    });
-
-    return (
-        <Grid columns={`auto 1fr`} margin={"4px"} classes={classes}>
-            {keysOrder
-                .filter(keyOrder => Object.keys(data).includes(keyOrder))
-                .map(keyOrder => (
-                    <React.Fragment key={keyOrder}>
-                        <Text alignRight bold text={keysText[keyOrder]} />
-                        <Text text={data[keyOrder]} />
-                    </React.Fragment>
-                ))}
-        </Grid>
-    );
-};
+}) => (
+    <Grid
+        columns={`auto 1fr`}
+        alignSelf={alignSelf}
+        flex={flex}
+        size={size}
+        padding={padding}
+        margin={margin}
+    >
+        {keysOrder
+            .filter(keyOrder => Object.keys(data).includes(keyOrder))
+            .map(keyOrder => (
+                <React.Fragment key={keyOrder}>
+                    <Text alignRight bold text={keysText[keyOrder]} />
+                    <Text text={data[keyOrder]} />
+                </React.Fragment>
+            ))}
+    </Grid>
+);
 
 DigitDisplayData.displayName = "DigitDisplayData";
 DigitDisplayData.propTypes = {

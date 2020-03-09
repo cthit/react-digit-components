@@ -156,7 +156,8 @@ DigitListSelectSingle.propTypes = {
     multipleExpanded: PropTypes.bool,
     value: PropTypes.array,
     onChange: PropTypes.func,
-    flex: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",
@@ -167,10 +168,10 @@ DigitListSelectSingle.propTypes = {
         "baseline",
         "initial",
         "inherit"
-    ]),/** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
      * and width/height via an object
-     */
-    size: PropTypes.shape({
+     */ size: PropTypes.shape({
         width: PropTypes.string,
         height: PropTypes.string,
         minWidth: PropTypes.string,
@@ -182,7 +183,7 @@ DigitListSelectSingle.propTypes = {
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    padding: PropTypes.oneOf([
+    padding: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -195,7 +196,7 @@ DigitListSelectSingle.propTypes = {
      * It can either be a string, using the margin shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    margin: PropTypes.oneOf([
+    margin: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,

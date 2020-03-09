@@ -69,6 +69,8 @@ DigitFAB.propTypes = {
      * If provided, the fab will become an extended fab
      */
     text: PropTypes.string,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",
@@ -95,7 +97,7 @@ DigitFAB.propTypes = {
      * It can either be a string, using the padding shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    padding: PropTypes.oneOf([
+    padding: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,
@@ -108,7 +110,7 @@ DigitFAB.propTypes = {
      * It can either be a string, using the margin shorthand, or it can be an
      * object to control top/right/bottom/left
      */
-    margin: PropTypes.oneOf([
+    margin: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             top: PropTypes.string,

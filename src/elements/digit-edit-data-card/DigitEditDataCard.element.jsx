@@ -5,11 +5,11 @@ import {
     CardBody,
     CardButtons,
     CardTitle,
-    CardSubTitle,
-    Link
+    CardSubtitle,
+    Link,
+    CardHeader
 } from "../../styles/digit-design/DigitDesign.styles";
 import DigitButton from "../digit-button";
-import { Padding, Size } from "../../styles/digit-layout/DigitLayout.styles";
 import * as yup from "yup";
 import DigitEditData from "../digit-edit-data";
 
@@ -42,10 +42,12 @@ const DigitEditDataCard = ({
             size={size}
             padding={padding}
             margin={margin}
-            hasSubTitle={subtitleText}
+            hasSubtitle={subtitleText}
         >
-            <CardTitle text={titleText} />
-            {subtitleText && <CardSubTitle text={subtitleText} />}
+            <CardHeader hasSubtitle={submitText}>
+                <CardTitle text={titleText} />
+                {subtitleText && <CardSubtitle text={subtitleText} />}
+            </CardHeader>
             <CardBody>
                 <DigitEditData
                     onSubmit={onSubmit}
@@ -61,7 +63,7 @@ const DigitEditDataCard = ({
                     centerFields={centerFields}
                 />
             </CardBody>
-            <CardButtons reverseDirection>
+            <CardButtons reverseDirection leftRight={extraButton != null}>
                 <DigitButton
                     disabled={!submitValid}
                     submit

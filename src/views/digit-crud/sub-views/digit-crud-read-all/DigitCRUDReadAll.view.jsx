@@ -128,6 +128,8 @@ const DigitCRUDReadAll = ({
     return (
         <>
             <DigitTable
+                alignSelf={"flex-start"}
+                padding={"8px"}
                 flex={"1"}
                 data={
                     hasReadOne

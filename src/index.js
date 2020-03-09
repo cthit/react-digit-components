@@ -78,7 +78,7 @@ import {
     CardHeaderImage,
     CardIcon,
     CardMenuContainer,
-    CardSubTitle,
+    CardSubtitle,
     CardTitle,
     Divider,
     Link
@@ -118,7 +118,7 @@ const DigitDesign = {
     CardIcon,
     CardMenuContainer,
     CardTitle,
-    CardSubTitle,
+    CardSubtitle,
     CardBody,
     CardButtons,
     Divider,

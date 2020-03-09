@@ -21,14 +21,14 @@ export const Flex = styled.div`
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
 
-    width: ${props => props.width || "auto"};
-    height: ${props => props.height || "auto"};
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
 
-    max-width: ${props => props.maxWidth || "none"};
-    max-height: ${props => props.maxHeight || "none"};
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
 
-    min-width: ${props => props.minWidth || 0};
-    min-height: ${props => props.minHeight || 0};
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
 
     padding: ${({ padding = "0px" }) =>
         (typeof padding === "string"
@@ -86,6 +86,9 @@ Flex.propTypes = {
         "stretch"
     ])
 };
+Flex.defaultProps = {
+    size: {}
+};
 
 function flexAlignLeftOrTop(leftOrTopAlign, rightOrBottomAlign, reverse) {
     if (reverse ? rightOrBottomAlign : leftOrTopAlign) {
@@ -142,14 +145,14 @@ export const Grid = styled.div`
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
 
-    width: ${props => props.width || "auto"};
-    height: ${props => props.height || "auto"};
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
 
-    max-width: ${props => props.maxWidth || "none"};
-    max-height: ${props => props.maxHeight || "none"};
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
 
-    min-width: ${props => props.minWidth || 0};
-    min-height: ${props => props.minHeight || 0};
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
 
     padding: ${({ padding = "0px" }) =>
         (typeof padding === "string"
@@ -226,9 +229,10 @@ Grid.propTypes = {
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
     autoRows: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-25 */
-    autoFlow: PropTypes.string,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool
+    autoFlow: PropTypes.string
+};
+Grid.defaultProps = {
+    size: {}
 };
 
 export const GridItem = styled.div`
@@ -287,6 +291,9 @@ GridItem.propTypes = {
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-31 */
     alignSelf: PropTypes.string
 };
+GridItem.defaultProps = {
+    size: {}
+};
 
 export const UniformGrid = styled(
     ({
@@ -303,7 +310,6 @@ export const UniformGrid = styled(
         justifyContent,
         alignContent,
         autoFlow,
-        fillElement,
         flex,
         alignSelf,
         size,
@@ -321,7 +327,6 @@ export const UniformGrid = styled(
             justifyContent={justifyContent}
             alignContent={alignContent}
             autoFlow={autoFlow}
-            fillElement={fillElement}
             flex={flex}
             alignSelf={alignSelf}
             size={size}
@@ -398,9 +403,11 @@ UniformGrid.propTypes = {
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
     autoRows: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-25 */
-    autoFlow: PropTypes.string,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool
+    autoFlow: PropTypes.string
+};
+
+UniformGrid.defaultProps = {
+    size: {}
 };
 
 export const Column = styled(
@@ -439,14 +446,14 @@ export const Column = styled(
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
 
-    width: ${props => props.width || "auto"};
-    height: ${props => props.height || "auto"};
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
 
-    max-width: ${props => props.maxWidth || "none"};
-    max-height: ${props => props.maxHeight || "none"};
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
 
-    min-width: ${props => props.minWidth || 0};
-    min-height: ${props => props.minHeight || 0};
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
 
     padding: ${({ padding = "0px" }) =>
         (typeof padding === "string"
@@ -542,7 +549,8 @@ Column.propTypes = {
 Column.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginVertical: "4px"
+    marginVertical: "4px",
+    size: {}
 };
 
 export const Row = styled(
@@ -553,7 +561,6 @@ export const Row = styled(
         leftAlign,
         rightAlign,
         reverse,
-        fillElement,
         children,
         scroll,
         marginHorizontal,
@@ -582,14 +589,14 @@ export const Row = styled(
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
 
-    width: ${props => props.width || "auto"};
-    height: ${props => props.height || "auto"};
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
 
-    max-width: ${props => props.maxWidth || "none"};
-    max-height: ${props => props.maxHeight || "none"};
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
 
-    min-width: ${props => props.minWidth || 0};
-    min-height: ${props => props.minHeight || 0};
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
 
     padding: ${({ padding = "0px" }) =>
         (typeof padding === "string"
@@ -685,7 +692,8 @@ Row.propTypes = {
 Row.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginHorizontal: "4px"
+    marginHorizontal: "4px",
+    size: {}
 };
 
 export const DownRightPosition = styled.div`
@@ -714,14 +722,14 @@ export const Center = styled.div`
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
 
-    width: ${props => props.width || "auto"};
-    height: ${props => props.height || "auto"};
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
 
-    max-width: ${props => props.maxWidth || "none"};
-    max-height: ${props => props.maxHeight || "none"};
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
 
-    min-width: ${props => props.minWidth || 0};
-    min-height: ${props => props.minHeight || 0};
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
 
     padding: ${({ padding = "0px" }) =>
         (typeof padding === "string"
@@ -748,7 +756,8 @@ export const Center = styled.div`
 
 Center.displayName = "Center";
 Center.defaultProps = {
-    flex: "1"
+    flex: "1",
+    size: {}
 };
 
 export const Hide = styled.div`

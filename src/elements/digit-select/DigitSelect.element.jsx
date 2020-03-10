@@ -5,7 +5,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React from "react";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
+import useFormControlStyles from "../../styles/material-ui/use-form-control-styles";
 
 const DigitSelect = ({
     value,
@@ -32,10 +33,9 @@ const DigitSelect = ({
     const classes = useLayoutMaterialUi({
         flex,
         alignSelf,
-        size,
-        padding,
-        margin
+        size
     });
+    const formClasses = useFormControlStyles({ padding, margin });
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
     React.useEffect(() => {
@@ -44,12 +44,13 @@ const DigitSelect = ({
 
     return (
         <FormControl
-            classes={classes}
+            classes={{ root: formClasses.root + " " + classes.root }}
             disabled={disabled}
             variant={filled ? "filled" : outlined ? "outlined" : "standard"}
         >
             <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
             <Select
+                classes={classes}
                 name={name}
                 onBlur={onBlur}
                 onChange={onChange}

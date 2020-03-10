@@ -132,16 +132,14 @@ class DigitTable extends React.Component {
 
     handleSelectAllClick = (event, checked) => {
         if (checked) {
-            this.props.onSelectedUpdated(
-                this.state.data.map(n => n[this.state.idProp])
-            );
+            this.props.onChange(this.state.data.map(n => n[this.state.idProp]));
             return;
         }
-        this.props.onSelectedUpdated([]);
+        this.props.onChange([]);
     };
 
     handleClick = (event, id) => {
-        var newSelected = this.props.selected.slice();
+        var newSelected = this.props.value.slice();
         const selectedIndex = newSelected.indexOf(id);
 
         if (selectedIndex === -1) {
@@ -150,7 +148,7 @@ class DigitTable extends React.Component {
             newSelected.splice(selectedIndex, 1);
         }
 
-        this.props.onSelectedUpdated(newSelected);
+        this.props.onChange(newSelected);
     };
 
     handleChangePage = (event, page) => {
@@ -162,9 +160,7 @@ class DigitTable extends React.Component {
     };
 
     isSelected = id =>
-        this.props.selected == null
-            ? false
-            : this.props.selected.indexOf(id) !== -1;
+        this.props.value == null ? false : this.props.value.indexOf(id) !== -1;
 
     rowShouldBeShown = row =>
         row != null &&
@@ -178,7 +174,7 @@ class DigitTable extends React.Component {
 
     render() {
         const {
-            selected,
+            value,
             emptyTableText,
             headerTexts,
             flex,
@@ -200,9 +196,7 @@ class DigitTable extends React.Component {
                         margin={margin}
                     >
                         <DigitTableToolbar
-                            numSelected={
-                                selected == null ? -1 : selected.length
-                            }
+                            numSelected={value == null ? -1 : value.length}
                             searchInput={this.state.searchInput}
                             onSearchInputChange={this.onSearchInputChange}
                             titleText={this.props.titleText}
@@ -215,9 +209,9 @@ class DigitTable extends React.Component {
                         <Table aria-labelledby="tableTitle">
                             <DigitTableHeader
                                 numSelected={
-                                    selected == null
+                                    value == null
                                         ? -1
-                                        : selected.filter(n =>
+                                        : value.filter(n =>
                                               this.rowShouldBeShown(n)
                                           ).length ///TODO OPTIMIZE
                                 }
@@ -301,10 +295,10 @@ DigitTable.propTypes = {
      * the current array of selected rows. You need to keep
      * selected updated yourself.
      */
-    onSelectedUpdated: PropTypes.func,
-    /** An array of selected. When onSelectedUpdated is called,
+    onChange: PropTypes.func,
+    /** An array of selected. When onChange is called,
      * you need to save the selected rows.*/
-    selected: PropTypes.array,
+    value: PropTypes.array,
     /** A key to text map, where the key are the column
      * and the text is what the user sees.s
      */

@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
 import React from "react";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitButton = ({
     text,
@@ -21,7 +21,13 @@ const DigitButton = ({
     padding,
     margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
     return (
         <Button

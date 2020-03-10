@@ -42,9 +42,8 @@ const DigitEditDataCard = ({
             size={size}
             padding={padding}
             margin={margin}
-            hasSubtitle={subtitleText}
         >
-            <CardHeader hasSubtitle={submitText}>
+            <CardHeader hasSubtitle={subtitleText}>
                 <CardTitle text={titleText} />
                 {subtitleText && <CardSubtitle text={subtitleText} />}
             </CardHeader>

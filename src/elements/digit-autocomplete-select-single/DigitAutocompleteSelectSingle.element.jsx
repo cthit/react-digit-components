@@ -5,7 +5,7 @@ import find from "lodash/find";
 import translations from "./DigitAutocompleteSelectSingle.element.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 import PropTypes from "prop-types";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitAutocompleteSelectSingle = ({
     options,
@@ -64,6 +64,7 @@ const DigitAutocompleteSelectSingle = ({
             renderInput={params => (
                 <TextField
                     {...params}
+                    fullWidth={false}
                     classes={classes}
                     name={name}
                     error={error}
@@ -97,7 +98,8 @@ DigitAutocompleteSelectSingle.defaultProps = {
     errorMessage: null,
     disabled: false,
     outlined: false,
-    filled: false
+    filled: false,
+    size: { width: "224px" }
 };
 
 DigitAutocompleteSelectSingle.propTypes = {

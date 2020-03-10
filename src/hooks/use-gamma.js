@@ -74,7 +74,6 @@ function useGamma(props) {
     const signOut = useGammaSignOut();
 
     const [ran, setRan] = useState(false);
-    const [loading, error] = useGammaStatus();
     const invalidateMe = useGammaInvalidateMe();
 
     useEffect(() => {

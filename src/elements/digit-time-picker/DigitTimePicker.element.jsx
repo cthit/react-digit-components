@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 import translations from "./DigitTimePicker.element.translations";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitTimePicker = ({
     value,
@@ -168,7 +168,8 @@ DigitTimePicker.defaultProps = {
     outlined: false,
     filled: false,
     upperLabel: "",
-    lowerLabel: ""
+    lowerLabel: "",
+    size: { width: "224px" }
 };
 
 export default DigitTimePicker;

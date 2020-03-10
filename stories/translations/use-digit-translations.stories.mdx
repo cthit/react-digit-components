@@ -1,27 +1,65 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import {
-    useDigitTranslations
+    useDigitTranslations,
+    DigitSelect,
+    DigitText
 } from "../../src";
 import * as yup from "yup";
 
 # useDigitTranslations
 
-<Meta title="Hooks/useDigitTranslations"/>
+<Meta title="Others/useDigitTranslations"/>
 
-## hej
+A really easy way of presenting english and swedish strings throughout your application. Powered by a context that you don't have to worry about (it's given via `DigitProviders`). 
+
+Using `setCommonTranslations` should really only be done once in for example your `App.jsx`.
 
 <Preview>
     <Story name="Standard">
         {() => {
-            const [text, setText] = useState("");
+            const commonTranslations = {
+                Yes: ["Yes", "Ja"],
+                No: ["No", "Nej"]
+            };
+            const translations = {
+                Bread: ["Bread", "Bröd"]
+            };
+            const [text, activeLanguage, setActiveLanguage, setCommonTranslations] = useDigitTranslations(translations);
+            useEffect(() => {
+                setCommonTranslations(commonTranslations);
+            }, [JSON.stringify(commonTranslations)]);
             return (
                 <>
-                    <div>hej</div>
+                    <DigitSelect value={activeLanguage} onChange={e => setActiveLanguage(e.target.value)} filled valueToTextMap={{sv: "Swedish", en: "English"}} upperLabel="Language"/>
+                    <DigitText.Text text={text.Bread}/>
+                    <DigitText.Text text={text.Yes}/>
+                    <DigitText.Text text={text.No}/>
                 </>
             );
         }}
     </Story>
 </Preview>
 
-<Props of={useDigitTranslations} />
+## Translations structure
+
+```
+{
+    "String": ["My english translations", "Svenska???"]
+}
+```
+
+## Props
+
+It only has one property and that's `translations`. Look above on how it's supposed to look. This should be loaded in from a .json file to prevent clutter in your .jsx file.
+
+## Return
+
+The hook returns an array of four properties. They are in order:
+
+| **Name**                  	| **Type** 	| **Description**                                                                              	|
+|---------------------------	|----------	|----------------------------------------------------------------------------------------------	|
+| **text**                  	| *object* 	| Object of your available strings in the current activeLanguage                               	|
+| **activeLanguage**        	| *string* 	| The active language. Either "sv" or "en".                                                    	|
+| **setActiveLanguage**     	| *func*   	| Sets the active language. Automatically updates all text objects throughout your application 	|
+| **setCommonTranslations** 	| *func*   	| Sets the common translations.                                                                	|

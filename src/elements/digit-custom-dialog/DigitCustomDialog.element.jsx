@@ -4,7 +4,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitCustomDialog = ({
     open,
@@ -58,7 +58,9 @@ DigitCustomDialog.propTypes = {
     /** When cancel button has been pressed, onCancel is called */
     onCancel: PropTypes.func,
     /** If true, then the dialog is open */
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    /** Title of the dialog */
+    title: PropTypes.string
 };
 
 DigitCustomDialog.defaultProps = {

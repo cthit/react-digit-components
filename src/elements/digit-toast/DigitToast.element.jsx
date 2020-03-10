@@ -47,7 +47,7 @@ DigitToast.displayName = "DigitToast";
 DigitToast.propTypes = {
     /** The text inside the toast */
     text: PropTypes.string,
-    /** The duration in miliseconds of the toast */
+    /** The duration in milliseconds of the toast */
     duration: PropTypes.number,
     /** Callback function when you press the button on a toast */
     actionHandler: PropTypes.func,

@@ -1,7 +1,7 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import PropTypes from "prop-types";
 import React from "react";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitLoading = ({ loading, size, flex, alignSelf, padding, margin }) => {
     const classes = useLayoutMaterialUi({ flex, alignSelf, padding, margin });

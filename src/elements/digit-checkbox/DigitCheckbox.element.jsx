@@ -2,7 +2,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitCheckbox = ({
     name,

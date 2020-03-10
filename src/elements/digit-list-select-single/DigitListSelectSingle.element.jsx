@@ -13,7 +13,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
 import Radio from "@material-ui/core/Radio";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitListSelectSingle = ({
     title,

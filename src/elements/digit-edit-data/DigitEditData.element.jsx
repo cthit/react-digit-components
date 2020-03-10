@@ -49,7 +49,7 @@ const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
                 ...field,
                 name
             }),
-        [JSON.stringify(field), JSON.stringify(componentData)]
+        [JSON.stringify(field), JSON.stringify(componentData), alignSelfCenter]
     );
 };
 

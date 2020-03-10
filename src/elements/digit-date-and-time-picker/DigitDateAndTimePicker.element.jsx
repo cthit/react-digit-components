@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import translations from "./DigitDateAndTimePicker.element.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitDateAndTimePicker = ({
     value,
@@ -198,7 +198,8 @@ DigitDateAndTimePicker.defaultProps = {
     filled: false,
     outlined: false,
     error: false,
-    errorMessage: ""
+    errorMessage: "",
+    size: { width: "224px" }
 };
 
 export default DigitDateAndTimePicker;

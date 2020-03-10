@@ -2,7 +2,7 @@ import React from "react";
 import Chip from "@material-ui/core/Chip";
 import Close from "@material-ui/icons/Close";
 import PropTypes from "prop-types";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitChip = ({
     avatar,

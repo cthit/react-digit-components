@@ -1,0 +1,72 @@
+import { Fragment, useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import {
+    useDigitFormField,
+    DigitForm,
+    DigitTextField,
+    DigitLayout,
+    DigitButton,
+    DigitSelect
+} from "../../src";
+import * as yup from "yup";
+
+<Meta title="Forms/useDigitFormField"/>
+
+# useDigitFormField
+
+Used to be hooked up with a `DigitForm`. It handles `value`/`onChange` behavior for you. The hook returns the following object:
+
+| **Name**         	| **Type** 	| **Description**                                                          	|
+|------------------	|----------	|--------------------------------------------------------------------------	|
+| **value**        	| *any*    	| The value of the form field                                              	|
+| **onChange**     	| *func*   	| The function that is needed to update value in the form field            	|
+| **onBlur**       	| *func*   	| Called when then input loses focus                                       	|
+| **error**        	| *bool*   	| True if something is incorrect in the form field                         	|
+| **errorMessage** 	| *string* 	| The error message. Specified in the yup validation schema in `DigitForm` 	|
+
+It's often easier, as seen with the example, to just spread the values directly into your input.
+
+<Preview>
+    <Story name="example">
+        {() => {
+            const TextField = () => {
+                const fieldValues = useDigitFormField("name");
+                return (
+                    <DigitTextField {...fieldValues} upperLabel="Your name" filled/>
+                );
+            };
+            const SelectField = () => {
+                const fieldValues = useDigitFormField("language");
+                return (
+                    <DigitSelect {...fieldValues} filled valueToTextMap={{sv: "Swedish", en: "English"}} upperLabel="Language"/>
+                );
+            }
+            return (
+                <DigitForm initialValues={{name: "Theodor", language: "sv"}} 
+                           onSubmit={(values) => {
+                               console.log(values);
+                           }}
+                           render={() => (
+                               <DigitLayout.Column size={{width: "320px"}}>
+                                    <TextField />
+                                    <SelectField />
+                                    <DigitButton raised submit onSubmit={(values) => console.log(values)} text="Submit" />
+                               </DigitLayout.Column>
+                           )}
+                           validationSchema={yup.object().shape({
+                               name: yup.string()
+                           })}
+                           >
+                </DigitForm>
+            );
+        }}
+    </Story>
+</Preview>
+
+## Props
+
+| **Name**              	| **Type** 	| **Default value**                                     	| **Description**                                                               	|
+|-----------------------	|----------	|-------------------------------------------------------	|-------------------------------------------------------------------------------	|
+| **name**              	| *string* 	|                                                       	| The name for the field                                                        	|
+| **valueFieldName**    	| *string* 	| "value"                                               	| The prop name for value (e.g. value, checked)                                 	|
+| **getValueFromEvent** 	| *func*   	| func that gets value or checked value from e.target.* 	| A function to extract a value from a onChange function to the actually value. 	|

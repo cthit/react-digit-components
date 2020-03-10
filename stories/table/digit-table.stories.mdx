@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useMemo } from "react";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import { DigitTable, DigitProviders } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
@@ -7,6 +7,10 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
     title="Display data/DigitTable"
     component={DigitTable}
 />
+
+# DigitTable
+
+Table is a great way of displaying and filtering large amount of data. It's however not so kind for the phone user. `DigitList` could in some cases maybe be better for those scenarios. 
 
 ## Simple table
 
@@ -19,9 +23,9 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
             columnsOrder={["id", "firstName", "lastName", "age"]}
             headerTexts={{
                 id: "Id",
-                firstName: "Förnamn",
-                lastName: "Efternamn",
-                age: "Ålder"
+                firstName: "First name",
+                lastName: "Last name",
+                age: "Age"
             }}
             data={[
                     {
@@ -70,7 +74,6 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
         />
     </Story>
 </Preview>
-
 
 ## Table with search
 
@@ -85,9 +88,9 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
             columnsOrder={["id", "firstName", "lastName", "age"]}
             headerTexts={{
                 id: "Id",
-                firstName: "Förnamn",
-                lastName: "Efternamn",
-                age: "Ålder"
+                firstName: "First name",
+                lastName: "Last name",
+                age: "Age"
             }}
             data={[
                     {
@@ -137,13 +140,206 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
     </Story>
 </Preview>
 
-
 ## Table with details buttons
 
-## Table with some details buttons
+<Preview>
+    <Story name="table with details buttons">
+        <DigitTable
+            titleText="Humans"
+            search
+            searchText="Search for a human"
+            idProp="id"
+            startOrderBy="firstName"
+            columnsOrder={["id", "firstName", "lastName", "age"]}
+            headerTexts={{
+                id: "Id",
+                firstName: "First name",
+                lastName: "Last name",
+                age: "Age",
+                __link: "Details"
+            }}
+            data={[
+                    {
+                        id: "1337",
+                        firstName: "Asdf",
+                        lastName: "Asdfsson",
+                        age: 33,
+                        __link: "/1337"
+                    },
+                    {
+                        id: "4444",
+                        firstName: "Glass",
+                        lastName: "Glasssson",
+                        age: 50,
+                        __link: "/4444"
+                    },
+                    {
+                        id: "4324",
+                        firstName: "Jeremy",
+                        lastName: "Clarkson",
+                        age: 50
+                    },
+                    {
+                        id: "1234",
+                        firstName: "James",
+                        lastName: "May",
+                        age: 99
+                    },
+                    {
+                        id: "4321",
+                        firstName: "Richard",
+                        lastName: "Hammond",
+                        age: 18
+                    },
+                    {
+                        id: "9999",
+                        firstName: "The",
+                        lastName: "Stig",
+                        age: 55,
+                        __link: "/9999"
+                    },
+                    {
+                        id: "2244",
+                        firstName: "Henrik",
+                        lastName: "Lundqvist",
+                        age: 30
+                    }
+            ]}
+        />
+    </Story>
+</Preview>
 
 ## Table with checkboxes
 
+<Preview>
+    <Story name="table with checkboxes">
+        {() => {
+            const [selected, setSelected] = useState(["1337"])
+            return (
+                <DigitTable
+                    value={selected}
+                    onChange={setSelected}
+                    titleText="Humans"
+                    search
+                    searchText="Search for a human"
+                    idProp="id"
+                    startOrderBy="firstName"
+                    columnsOrder={["id", "firstName", "lastName", "age"]}
+                    headerTexts={{
+                        id: "Id",
+                        firstName: "First name",
+                        lastName: "Last name",
+                        age: "Age",
+                        __checkbox: "Choose"
+                    }}
+                    data={[
+                            {
+                                id: "1337",
+                                firstName: "Asdf",
+                                lastName: "Asdfsson",
+                                age: 33
+                            },
+                            {
+                                id: "4444",
+                                firstName: "Glass",
+                                lastName: "Glasssson",
+                                age: 50
+                            },
+                            {
+                                id: "4324",
+                                firstName: "Jeremy",
+                                lastName: "Clarkson",
+                                age: 50
+                            },
+                            {
+                                id: "1234",
+                                firstName: "James",
+                                lastName: "May",
+                                age: 99
+                            },
+                            {
+                                id: "4321",
+                                firstName: "Richard",
+                                lastName: "Hammond",
+                                age: 18
+                            },
+                            {
+                                id: "9999",
+                                firstName: "The",
+                                lastName: "Stig",
+                                age: 55
+                            },
+                            {
+                                id: "2244",
+                                firstName: "Henrik",
+                                lastName: "Lundqvist",
+                                age: 30
+                            }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Large table
+
+
+<Preview>
+    <Story name="large table">
+        {() => {
+            const data = useMemo(() => {
+                const firstNames = ["Adam", "Anders", "Alf", "Amanda", "Anna"];
+                const lastNames = ["Adamsson", "Andersson", "Alfsson", "Amandadotter", "Annadotter"]
+                const output = [];
+                for(let i = 0; i < 500; i++){
+                    output.push({
+                        id: Math.random() + "",
+                        firstName: firstNames[Math.floor(Math.random() * 4)],
+                        lastName: lastNames[Math.floor(Math.random() * 4)],
+                        age: Math.random() * 90
+                    })
+                }
+                return output;
+            })
+            return (
+                <DigitTable
+                    titleText="Humans"
+                    idProp="id"
+                    startOrderBy="id"
+                    columnsOrder={["id", "firstName", "lastName", "age"]}
+                    headerTexts={{
+                        id: "Id",
+                        firstName: "First name",
+                        lastName: "Last name",
+                        age: "Age"
+                    }}
+                    data={data}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
 ## Empty table
+
+<Preview>
+    <Story name="empty table">
+        <DigitTable
+            titleText="Humans"
+            idProp="id"
+            startOrderBy="firstName"
+            columnsOrder={["id", "firstName", "lastName", "age"]}
+            headerTexts={{
+                id: "Id",
+                firstName: "First name",
+                lastName: "Last name",
+                age: "Age"
+            }}
+            data={[]}
+            emptyTableText="Empty table :("
+        />
+    </Story>
+</Preview>
 
 <Props of={DigitTable} />

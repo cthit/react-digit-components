@@ -30,7 +30,7 @@ export const Flex = styled.div`
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
 
-    padding: ${({ padding = "0px" }) =>
+    padding: ${({ padding = "" }) =>
         (typeof padding === "string"
             ? padding
             : (padding.top || "0px") +
@@ -41,7 +41,7 @@ export const Flex = styled.div`
               " " +
               (padding.left || "0px")) + " !important"};
 
-    margin: ${({ margin = "4px" }) =>
+    margin: ${({ margin = "" }) =>
         (typeof margin === "string"
             ? margin
             : (margin.top || "0px") +
@@ -154,7 +154,7 @@ export const Grid = styled.div`
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
 
-    padding: ${({ padding = "0px" }) =>
+    padding: ${({ padding = "" }) =>
         (typeof padding === "string"
             ? padding
             : (padding.top || "0px") +
@@ -165,7 +165,7 @@ export const Grid = styled.div`
               " " +
               (padding.left || "0px")) + " !important"};
 
-    margin: ${({ margin = "4px" }) =>
+    margin: ${({ margin = "" }) =>
         (typeof margin === "string"
             ? margin
             : (margin.top || "0px") +
@@ -253,7 +253,7 @@ export const GridItem = styled.div`
   min-width: ${props => props.minWidth || 0};
   min-height: ${props => props.minHeight || 0};
   
-    padding: ${({ padding = "0px" }) =>
+    padding: ${({ padding = "" }) =>
         (typeof padding === "string"
             ? padding
             : (padding.top || "0px") +
@@ -264,7 +264,7 @@ export const GridItem = styled.div`
               " " +
               (padding.left || "0px")) + " !important"};
 
-    margin: ${({ margin = "4px" }) =>
+    margin: ${({ margin = "" }) =>
         (typeof margin === "string"
             ? margin
             : (margin.top || "0px") +
@@ -455,7 +455,7 @@ export const Column = styled(
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
 
-    padding: ${({ padding = "0px" }) =>
+    padding: ${({ padding = "" }) =>
         (typeof padding === "string"
             ? padding
             : (padding.top || "0px") +
@@ -466,7 +466,7 @@ export const Column = styled(
               " " +
               (padding.left || "0px")) + " !important"};
 
-    margin: ${({ margin = "4px" }) =>
+    margin: ${({ margin = "" }) =>
         (typeof margin === "string"
             ? margin
             : (margin.top || "0px") +
@@ -598,7 +598,7 @@ export const Row = styled(
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
 
-    padding: ${({ padding = "0px" }) =>
+    padding: ${({ padding = "" }) =>
         (typeof padding === "string"
             ? padding
             : (padding.top || "0px") +
@@ -609,7 +609,7 @@ export const Row = styled(
               " " +
               (padding.left || "0px")) + " !important"};
 
-    margin: ${({ margin = "4px" }) =>
+    margin: ${({ margin = "" }) =>
         (typeof margin === "string"
             ? margin
             : (margin.top || "0px") +
@@ -731,7 +731,7 @@ export const Center = styled.div`
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
 
-    padding: ${({ padding = "0px" }) =>
+    padding: ${({ padding = "" }) =>
         (typeof padding === "string"
             ? padding
             : (padding.top || "0px") +
@@ -742,7 +742,7 @@ export const Center = styled.div`
               " " +
               (padding.left || "0px")) + " !important"};
 
-    margin: ${({ margin = "4px" }) =>
+    margin: ${({ margin = "" }) =>
         (typeof margin === "string"
             ? margin
             : (margin.top || "0px") +

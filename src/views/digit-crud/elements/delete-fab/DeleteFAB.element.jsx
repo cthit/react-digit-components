@@ -148,50 +148,57 @@ const DeleteFAB = ({
     }, [formValid, dialogOpen]);
 
     return (
-        <DownRightPosition>
-            <DigitFAB
-                text={deleteButtonText(one)}
-                icon={Delete}
-                onClick={() => {
-                    if (deleteDialogFormComponentData != null) {
-                        setDialogOpen(true);
-                        openCustomDialog({
-                            renderMain: () => (
-                                <DeleteDialogMain
-                                    onSubmit={values =>
-                                        onDeleteInternal(values)
-                                    }
-                                    onValidSubmitChange={valid =>
-                                        setFormValid(valid)
-                                    }
-                                    dialogDeleteDescription={
-                                        dialogDeleteDescription
-                                    }
-                                    deleteDialogFormInitialValues={
-                                        deleteDialogFormInitialValues
-                                    }
-                                    deleteDialogFormValidationSchema={
-                                        deleteDialogFormValidationSchema
-                                    }
-                                    deleteDialogFormComponentData={
-                                        deleteDialogFormComponentData
-                                    }
-                                    deleteDialogFormKeysOrder={
-                                        deleteDialogFormKeysOrder
-                                    }
-                                    one={one}
-                                />
-                            ),
-                            renderButtons,
-                            title: dialogDeleteTitle(one),
-                            preventDefaultClose: true
-                        });
-                    } else {
-                        openDialog();
-                    }
+        <>
+            <DownRightPosition>
+                <DigitFAB
+                    text={deleteButtonText(one)}
+                    icon={Delete}
+                    onClick={() => {
+                        if (deleteDialogFormComponentData != null) {
+                            setDialogOpen(true);
+                            openCustomDialog({
+                                renderMain: () => (
+                                    <DeleteDialogMain
+                                        onSubmit={values =>
+                                            onDeleteInternal(values)
+                                        }
+                                        onValidSubmitChange={valid =>
+                                            setFormValid(valid)
+                                        }
+                                        dialogDeleteDescription={
+                                            dialogDeleteDescription
+                                        }
+                                        deleteDialogFormInitialValues={
+                                            deleteDialogFormInitialValues
+                                        }
+                                        deleteDialogFormValidationSchema={
+                                            deleteDialogFormValidationSchema
+                                        }
+                                        deleteDialogFormComponentData={
+                                            deleteDialogFormComponentData
+                                        }
+                                        deleteDialogFormKeysOrder={
+                                            deleteDialogFormKeysOrder
+                                        }
+                                        one={one}
+                                    />
+                                ),
+                                renderButtons,
+                                title: dialogDeleteTitle(one),
+                                preventDefaultClose: true
+                            });
+                        } else {
+                            openDialog();
+                        }
+                    }}
+                />
+            </DownRightPosition>
+            <div //To let the user scroll all the way down, so that the FAB isn't in the way
+                style={{
+                    height: "80px"
                 }}
             />
-        </DownRightPosition>
+        </>
     );
 };
 

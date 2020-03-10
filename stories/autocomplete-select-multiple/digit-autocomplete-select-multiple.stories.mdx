@@ -29,7 +29,6 @@ Input to select multiple values via autocomplete when searching for options.
             const [value, setValue] = useState(["aliens"]);
             return (
                 <DigitAutocompleteSelectMultiple
-                    size={{width: "224px"}}
                     upperLabel="upperlabel"
                     lowerLabel="lowerlabel"
                     options={options}
@@ -55,7 +54,6 @@ Input to select multiple values via autocomplete when searching for options.
             const [value, setValue] = useState(["aliens"]);
             return (
                 <DigitAutocompleteSelectMultiple
-                    size={{width: "224px"}}
                     filled
                     upperLabel="Filled"
                     options={options}
@@ -81,7 +79,6 @@ Input to select multiple values via autocomplete when searching for options.
             const [value, setValue] = useState(["aliens"]);
             return (
                 <DigitAutocompleteSelectMultiple
-                    size={{width: "224px"}}
                     outlined
                     upperLabel="Outlined"
                     options={options}
@@ -136,7 +133,6 @@ Input to select multiple values via autocomplete when searching for options.
             const [value, setValue] = useState(["aliens"]);
             return (
                 <DigitAutocompleteSelectMultiple
-                    size={{width: "224px"}}
                     error
                     errorMessage="Error message"
                     upperLabel="Disabled"
@@ -160,7 +156,6 @@ Input to select multiple values via autocomplete when searching for options.
             const [value, setValue] = useState([]);
             return (
                 <DigitAutocompleteSelectMultiple
-                    size={{width: "224px"}}
                     upperLabel="No option upperlabel"
                     value={value}
                     onChange={e => {
@@ -176,7 +171,6 @@ Input to select multiple values via autocomplete when searching for options.
             const [value, setValue] = useState([]);
             return (
                 <DigitAutocompleteSelectMultiple
-                    size={{width: "224px"}}
                     upperLabel="No options custom"
                     noOptionsText="No options :("
                     value={value}

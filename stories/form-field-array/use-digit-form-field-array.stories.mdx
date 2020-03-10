@@ -16,13 +16,28 @@ import * as yup from "yup";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
+<Meta title="Forms/useDigitFormFieldArray"/>
 
 # useDigitFormFieldArray
 
-<Meta title="Hooks/useDigitFormFieldArray"/>
+Used to be hooked up with a `DigitForm`. Utils for managing a list of values, often objects, inside a form. The hook returns an object full with helper method used to modify the array. Here are all the props that is returned:
+
+| **Name**    	| **Type** 	| **Parameters**             	| **Returns**   	| **Description**                                              	|
+|-------------	|----------	|----------------------------	|---------------	|--------------------------------------------------------------	|
+| **value**   	| *array*  	|                            	|               	| The array of values                                          	|
+| **push**    	| *func*   	| (val: any)                 	|               	| Adds an item to the end of value                             	|
+| **swap**    	| *func*   	| (index1: int, index2: int) 	|               	| Swaps the value of index1 and index2                         	|
+| **move**    	| *func*   	| (from: int, to: int)       	|               	| move value from given index to the given index               	|
+| **insert**  	| *func*   	| (index: int, val: any)     	| new value     	| inserts item at the given index of the new value array       	|
+| **unshift** 	| *func*   	| (val: any)                 	|               	| Adds an item to the start of the value                       	|
+| **remove**  	| *func*   	| (index: int)               	| removed value 	| Removes and returns the item at the given index              	|
+| **pop**     	| *func*   	| ()                         	| popped value  	| Pops value                                                   	|
+| **replace** 	| *func*   	| (index: int, val: any)     	| new value     	| Replaces the item at the given index with the given new item 	|
+
+## Full example of useDigitFormFieldArray
 
 <Preview>
-    <Story name="Standard">
+    <Story name="full example">
         {() => {
             const Field = () => {
                 const { value, push, swap, move, insert, unshift, remove, pop, replace } = useDigitFormFieldArray("cars");
@@ -90,4 +105,8 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
     </Story>
 </Preview>
 
-<Props of={useDigitTranslations} />
+## Props
+
+| **Name** 	| **Type** 	| **Description**        	|
+|----------	|----------	|------------------------	|
+| **name** 	| *string* 	| The name for the field 	|

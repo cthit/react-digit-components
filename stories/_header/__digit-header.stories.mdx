@@ -1,0 +1,33 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitHeader } from "../../src";
+
+<Meta
+    title="DigitHeader"
+    component={DigitHeader}
+/>
+
+# DigitHeader
+
+<Preview>
+    <Story name="Primary">
+        {() => {
+            return (
+                <DigitHeader 
+                    title="hej" 
+                    renderDrawer={() => (
+                        <div>
+                            hej
+                        </div>
+                    )} 
+                    renderMain={() => (
+                        <div>
+                          då
+                        </div>
+                    )}/>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitHeader} />

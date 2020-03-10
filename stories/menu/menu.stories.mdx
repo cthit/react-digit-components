@@ -3,7 +3,7 @@ import { DigitMenu } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 <Meta
-    title="Views/DigitMenu"
+    title="Buttons/DigitMenu"
     component={DigitMenu}
 />
 
@@ -15,7 +15,14 @@ A menu.
 
 <Preview>
     <Story name="Menu">
-        <DigitMenu valueToTextMap={["Menu option 1","Menu option 2"]}/>
+        <DigitMenu 
+            valueToTextMap={{
+                icecream: "Icecream",
+                candy: "Candy",
+                soda: "Soda"
+            }} 
+            onClick={(r) => console.log(r)}
+        />
     </Story>
 </Preview>
 

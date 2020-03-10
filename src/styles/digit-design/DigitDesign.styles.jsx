@@ -21,7 +21,7 @@ export const Card = styled(props => <Paper {...props} />)`
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
 
-    padding: ${({ padding = "0px" }) =>
+    padding: ${({ padding = "" }) =>
         (typeof padding === "string"
             ? padding
             : (padding.top || "0px") +
@@ -32,7 +32,7 @@ export const Card = styled(props => <Paper {...props} />)`
               " " +
               (padding.left || "0px")) + " !important"};
 
-    margin: ${({ margin = "4px" }) =>
+    margin: ${({ margin = "" }) =>
         (typeof margin === "string"
             ? margin
             : (margin.top || "0px") +
@@ -55,16 +55,16 @@ Card.defaultProps = {
  * use this hasSubtitle and hasIcon must be true if you have them inside your Card.
  */
 export const CardHeader = styled.div`
-  padding-top: 4px;
-  padding-left: 4px;
-  padding-right: 4px;
-  display: grid;
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: grid;
 
-  grid-template-columns: ${props =>
-      props.hasIcon ? "40px auto 32px" : "0px auto 32px"}
+    grid-template-columns: ${props =>
+        props.hasIcon ? "40px auto 32px" : "0px auto 32px"};
 
-  grid-template-rows: ${props =>
-      props.hasSubtitle ? "33px 25px auto" : "33px 0px auto"};
+    grid-template-rows: ${props =>
+        props.hasSubtitle ? "33px auto auto" : "33px 0px auto"};
 `;
 
 CardHeader.displayName = "CardHeader";
@@ -114,11 +114,6 @@ export const CardTitle = styled(Title)`
     font-size: 20px;
     line-height: 33px;
 
-    margin: 0;
-    margin-top: 8px;
-    margin-left: 8px;
-    margin-right: 8px;
-
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
@@ -130,10 +125,6 @@ CardTitle.displayName = "CardTitle";
 export const CardSubtitle = styled(Subtitle)`
     font-size: 15px;
     line-height: 25px;
-
-    margin: 0;
-    margin-left: 8px;
-    margin-right: 8px;
 
     grid-column-start: 2;
     grid-column-end: 4;
@@ -150,13 +141,13 @@ export const CardBody = styled(Flex)`
 
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 16px !important;
 `;
 
 CardBody.displayName = "CardBody";
 
 export const CardButtons = styled.div`
-    padding: 8px;
+    padding: 16px;
     min-height: 50px;
     height: 50px;
     max-height: 50px;

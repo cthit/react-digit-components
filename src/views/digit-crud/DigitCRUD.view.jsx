@@ -486,28 +486,49 @@ DigitCRUD.propTypes = {
     readOnePath: PropTypes.string,
     /** Custom create path for the view representing the updateRequest*/
     updatePath: PropTypes.string,
-    /** */
+    /** A constant id everywhere. Used when readAll is ignored. */
     staticId: PropTypes.string,
+    /** Path for back button from read one screen */
     backFromReadOnePath: PropTypes.func,
+    /** Path for back button from update screen */
     backFromUpdatePath: PropTypes.func,
+    /** Path for back button after deleting something*/
     backFromDeletePath: PropTypes.func,
+    /** Path for back button from create screen */
     backFromCreatePath: PropTypes.func,
+    /** Uses keysText in upperLabel for forms */
     useKeyTextsInUpperLabel: PropTypes.bool,
+    /** Overrides keysOrder for readAll screen */
     readAllKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides keysOrder for readOne screen */
     readOneKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides keysOrder for update screen */
     updateKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides keysOrder for create screen */
     createKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides formValidationSchema for update screen */
     updateFormValidationSchema: PropTypes.object,
+    /** Overrides formValidationSchema for create screen */
     createFormValidationSchema: PropTypes.func,
+    /** Be able to specify props to formatted as a time */
     timeProps: PropTypes.arrayOf(PropTypes.string),
+    /** Be able to specify props to formatted as a date */
     dateProps: PropTypes.arrayOf(PropTypes.string),
+    /** Be able to specify props to formatted as a date and time */
     dateAndTimeProps: PropTypes.arrayOf(PropTypes.string),
+    /** Gets called after a successful creation. Args: (response) */
     onCreate: PropTypes.func,
+    /** Gets called after a successful update. Args: (response) */
     onUpdate: PropTypes.func,
+    /** Gets called after a successful deletion. Args: (response) */
     onDelete: PropTypes.func,
+    /** Overrides backFromReadOnePath, backFromUpdatePath, backFromDeletePath, backFromCreatePath to instead use history.goBack when pressing a back button */
     useHistoryGoBackOnBack: PropTypes.bool,
+    /** If a specific row can be updated by the client. (one) => bool */
     canUpdate: PropTypes.func,
+    /** If a specific row can be read in detail by the client. (one) => bool */
     canReadOne: PropTypes.func,
+    /** If a specific row can be deleted. (one) => bool */
     canDelete: PropTypes.func
 };
 

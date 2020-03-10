@@ -4,8 +4,9 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import PropTypes from "prop-types";
 import React from "react";
 import { Lowerlabel, UpperLabel } from "./DigitRadioButtonGroup.element.styles";
-import useLayoutMaterialUi from "../../hooks/use-layout-material-ui";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 import FormControl from "@material-ui/core/FormControl";
+import useFormControlStyles from "../../styles/material-ui/use-form-control-styles";
 
 const DigitRadioButtonGroup = ({
     value,
@@ -26,15 +27,15 @@ const DigitRadioButtonGroup = ({
     const classes = useLayoutMaterialUi({
         flex,
         alignSelf,
-        size,
-        padding,
-        margin
+        size
     });
+    const formClasses = useFormControlStyles({ padding, margin });
 
     return (
-        <FormControl classes={classes} component="fieldset">
+        <FormControl classes={formClasses} component="fieldset">
             <UpperLabel component="legend">{upperLabel}</UpperLabel>
             <RadioGroup
+                classes={classes}
                 value={value}
                 name={name}
                 onBlur={onBlur}

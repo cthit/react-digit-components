@@ -2,9 +2,7 @@ import React, { useContext, useEffect } from "react";
 import DigitTable from "../../../digit-table";
 import {
     Center,
-    DownRightPosition,
-    DownRightTablePosition,
-    Fill
+    DownRightPosition
 } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitLoading from "../../../../elements/digit-loading";
 import DigitFAB from "../../../../elements/digit-fab";

@@ -50,6 +50,12 @@ or
 then add required dependencies that can be found under peer dependencies in react-digit-components `package.json`. To
 reduces possible bugs, stick the with exact version that are defined in RDC. https://github.com/cthit/react-digit-components/blob/master/package.json
 
+Here's the font that you'll need for react-digit-components, you can add it in the `<head></head>` in public/index.html:
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+```
+
 Then, add the following code in your App.jsx:
 ```jsx
 import { DigitProviders, DigitHeader, DigitButton } from "@cthit/react-digit-components"

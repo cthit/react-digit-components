@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { DigitHeader } from "../../src";
+import { DigitHeader, DigitDesign, DigitLayout, DigitText } from "../../src";
 
 <Meta
     title="DigitHeader"
@@ -9,9 +9,24 @@ import { DigitHeader } from "../../src";
 
 # DigitHeader
 
+Note that the drawer is always extended if it fits, change the size of your window to force the drawer to be hidden.
+
+## Simple DigitHeader
+
+Only has `title`, `renderDrawer` and `renderMain`
+
 <Preview>
-    <Story name="Primary">
+    <Story name="simple-header">
         {() => {
+            const MyCard = () => (
+                <DigitLayout.Center>
+                    <DigitDesign.Card size={{width: "200px", height: "200px"}}>  
+                        <DigitLayout.Center>
+                            <DigitText.Text bold text={"This is a card"} />
+                        </DigitLayout.Center>
+                    </DigitDesign.Card>
+                </DigitLayout.Center>
+            );
             return (
                 <DigitHeader 
                     title="hej" 
@@ -21,9 +36,33 @@ import { DigitHeader } from "../../src";
                         </div>
                     )} 
                     renderMain={() => (
-                        <div>
-                          då
-                        </div>
+                        <MyCard />
+                    )}/>
+            );
+        }}
+    </Story>
+</Preview>
+
+## Header without drawer
+
+
+<Preview>
+    <Story name="no drawer header">
+        {() => {
+            const MyCard = () => (
+                <DigitLayout.Center>
+                    <DigitDesign.Card size={{width: "200px", height: "200px"}}>  
+                        <DigitLayout.Center>
+                            <DigitText.Text bold text={"This is a card"} />
+                        </DigitLayout.Center>
+                    </DigitDesign.Card>
+                </DigitLayout.Center>
+            );
+            return (
+                <DigitHeader 
+                    title="hej" 
+                    renderMain={() => (
+                        <MyCard />
                     )}/>
             );
         }}

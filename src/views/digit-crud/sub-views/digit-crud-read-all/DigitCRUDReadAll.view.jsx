@@ -124,11 +124,10 @@ const DigitCRUDReadAll = ({
     }
 
     return (
-        <>
+        <Center>
             <DigitTable
                 alignSelf={"flex-start"}
                 padding={"8px"}
-                flex={"1"}
                 data={
                     hasReadOne
                         ? all.map(one =>
@@ -172,7 +171,7 @@ const DigitCRUDReadAll = ({
                     />
                 </>
             )}
-        </>
+        </Center>
     );
 };
 

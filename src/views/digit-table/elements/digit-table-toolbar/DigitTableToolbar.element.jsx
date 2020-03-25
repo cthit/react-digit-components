@@ -43,7 +43,7 @@ const DigitTableToolbar = ({
             {search && (
                 <DigitTextField
                     margin={{
-                        left: "8px"
+                        left: "24px"
                     }}
                     flex={"1"}
                     size={{

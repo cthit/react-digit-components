@@ -200,66 +200,58 @@ const DigitCRUDReadOne = ({
     }
 
     return (
-        <>
-            <Center>
-                {detailsRenderStart(one)}
-                <Card
-                    size={{
-                        minWidth: "280px",
-                        minHeight: "280px"
-                    }}
+        <Center>
+            {detailsRenderStart(one)}
+            <Card
+                size={{
+                    minWidth: "280px",
+                    minHeight: "280px"
+                }}
+            >
+                <CardHeader
+                    hasSubtitle={
+                        detailsSubtitle != null && detailsSubtitle(one) !== ""
+                    }
                 >
-                    <CardHeader
-                        hasSubtitle={
-                            detailsSubtitle != null &&
-                            detailsSubtitle(one) !== ""
-                        }
-                    >
-                        <CardTitle text={detailsTitle(one) + ""} />
-                        {detailsSubtitle != null && (
-                            <CardSubtitle text={detailsSubtitle(one)} />
-                        )}
-                    </CardHeader>
-                    <CardBody justifyContent={"center"}>
-                        {detailsRenderCardStart(one)}
-                        <DigitDisplayData
-                            alignSelf={"center"}
-                            keysText={keysText}
-                            keysOrder={keysOrder}
-                            data={displayData}
-                        />
-                        {keysOrder
-                            .filter(key =>
-                                customDetailsRenderKeys.includes(key)
-                            )
-                            .map(key => customDetailsRenders[key](one))}
-                        {detailsRenderCardEnd(one)}
-                    </CardBody>
-                    <CardButtons leftRight>
-                        <DigitButton
-                            text={backButtonText}
-                            outlined
-                            onClick={goBack}
-                        />
-                        {hasUpdate && canUpdate(one) && (
-                            <>
-                                <DigitButton
-                                    primary
-                                    raised
-                                    text={updateButtonText(one)}
-                                    onClick={goToEdit}
-                                />
-                            </>
-                        )}
-                    </CardButtons>
-                </Card>
-                {detailsRenderEnd(one)}
-                {!hasUpdate &&
-                    deleteAction != null &&
-                    canDelete(one) &&
-                    deleteFAB}
-            </Center>
-        </>
+                    <CardTitle text={detailsTitle(one) + ""} />
+                    {detailsSubtitle != null && (
+                        <CardSubtitle text={detailsSubtitle(one)} />
+                    )}
+                </CardHeader>
+                <CardBody justifyContent={"center"}>
+                    {detailsRenderCardStart(one)}
+                    <DigitDisplayData
+                        alignSelf={"center"}
+                        keysText={keysText}
+                        keysOrder={keysOrder}
+                        data={displayData}
+                    />
+                    {keysOrder
+                        .filter(key => customDetailsRenderKeys.includes(key))
+                        .map(key => customDetailsRenders[key](one))}
+                    {detailsRenderCardEnd(one)}
+                </CardBody>
+                <CardButtons leftRight>
+                    <DigitButton
+                        text={backButtonText}
+                        outlined
+                        onClick={goBack}
+                    />
+                    {hasUpdate && canUpdate(one) && (
+                        <>
+                            <DigitButton
+                                primary
+                                raised
+                                text={updateButtonText(one)}
+                                onClick={goToEdit}
+                            />
+                        </>
+                    )}
+                </CardButtons>
+            </Card>
+            {detailsRenderEnd(one)}
+            {!hasUpdate && deleteAction != null && canDelete(one) && deleteFAB}
+        </Center>
     );
 };
 

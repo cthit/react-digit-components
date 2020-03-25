@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState, useMemo } from "react";
 import styled, { css } from "styled-components";
 import { Title } from "../../styles/digit-text/DigitText.styles";
 import { Column, Row } from "../../styles/digit-layout/DigitLayout.styles";
@@ -105,112 +105,98 @@ const StyledColumn = styled(Column)`
     width: 100vw;
 `;
 
-class DigitHeader extends React.Component {
-    state = {
-        mobileOpen: false
+const DigitHeader = ({
+    renderMain,
+    renderDrawer,
+    renderHeader,
+    renderFooter,
+    title,
+    headerHeight,
+    renderToolbar,
+    cssImageString,
+    renderTitle,
+    homeLink
+}) => {
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(mobileOpen => !mobileOpen);
     };
 
-    handleDrawerToggle = () => {
-        this.setState({ mobileOpen: !this.state.mobileOpen });
-    };
+    const drawer = useMemo(() => renderDrawer(() => setMobileOpen(false)), [
+        renderDrawer
+    ]);
 
-    render() {
-        const {
-            renderMain,
-            renderDrawer,
-            renderHeader,
-            renderFooter,
-            title,
-            headerHeight,
-            renderToolbar,
-            cssImageString,
-            renderTitle,
-            homeLink
-        } = this.props;
-        const { mobileOpen } = this.state;
-
-        var drawer = null;
-
-        if (renderDrawer != null) {
-            drawer = renderDrawer(() => {
-                this.setState({ mobileOpen: false });
-            });
-        }
-
-        return (
-            <StyledRoot>
-                <StyledColumn marginVertical={"0px"}>
-                    <StyledAppBar
-                        cssimagestring={cssImageString}
+    return (
+        <StyledRoot>
+            <StyledColumn marginVertical={"0px"}>
+                <StyledAppBar
+                    cssimagestring={cssImageString}
+                    navigation={(drawer != null).toString()}
+                >
+                    <StyledToolbar
+                        height={headerHeight}
                         navigation={(drawer != null).toString()}
                     >
-                        <StyledToolbar
-                            height={headerHeight}
-                            navigation={(drawer != null).toString()}
-                        >
-                            {drawer != null && (
-                                <StyledMenuButton
-                                    color="inherit"
-                                    aria-label="open drawer"
-                                    onClick={this.handleDrawerToggle}
-                                >
-                                    <MenuIcon />
-                                </StyledMenuButton>
-                            )}
-                            <HorizontalFill>
-                                <Row>
-                                    {renderTitle == null &&
-                                        (homeLink != null ? (
-                                            <Link to={homeLink}>
-                                                <DigitTitle
-                                                    text={title}
-                                                    white
-                                                />
-                                            </Link>
-                                        ) : (
-                                            <DigitTitle text={title} white />
-                                        ))}
-                                    {renderTitle != null && renderTitle()}
-                                </Row>
-                                <Row>{renderHeader()}</Row>
-                            </HorizontalFill>
-                        </StyledToolbar>
-                        {renderToolbar()}
-                    </StyledAppBar>
-                    <StyledMain
-                        headerHeight={headerHeight}
-                        navigation={(drawer != null).toString()}
-                    >
-                        {renderMain()}
-                        {renderFooter()}
-                    </StyledMain>
-                </StyledColumn>
-                {drawer != null && (
-                    <>
-                        <Hidden mdUp>
-                            <StyledDrawer
-                                variant="temporary"
-                                anchor="left"
-                                open={mobileOpen}
-                                onClose={this.handleDrawerToggle}
-                                ModalProps={{
-                                    keepMounted: true // Better open performance on mobile.
-                                }}
+                        {drawer != null && (
+                            <StyledMenuButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={handleDrawerToggle}
                             >
-                                {drawer}
-                            </StyledDrawer>
-                        </Hidden>
-                        <Hidden smDown implementation="css">
-                            <StyledDrawer variant="permanent" open>
-                                {drawer}
-                            </StyledDrawer>
-                        </Hidden>
-                    </>
-                )}
-            </StyledRoot>
-        );
-    }
-}
+                                <MenuIcon />
+                            </StyledMenuButton>
+                        )}
+                        <HorizontalFill>
+                            <Row>
+                                {renderTitle == null &&
+                                    (homeLink != null ? (
+                                        <Link to={homeLink}>
+                                            <DigitTitle text={title} white />
+                                        </Link>
+                                    ) : (
+                                        <DigitTitle text={title} white />
+                                    ))}
+                                {renderTitle != null && renderTitle()}
+                            </Row>
+                            <Row>{renderHeader()}</Row>
+                        </HorizontalFill>
+                    </StyledToolbar>
+                    {renderToolbar()}
+                </StyledAppBar>
+                <StyledMain
+                    headerHeight={headerHeight}
+                    navigation={(drawer != null).toString()}
+                >
+                    {renderMain()}
+                    {renderFooter()}
+                </StyledMain>
+            </StyledColumn>
+            {drawer != null && (
+                <>
+                    <Hidden mdUp>
+                        <StyledDrawer
+                            variant="temporary"
+                            anchor="left"
+                            open={mobileOpen}
+                            onClose={handleDrawerToggle}
+                            ModalProps={{
+                                keepMounted: true // Better open performance on mobile.
+                            }}
+                        >
+                            {drawer}
+                        </StyledDrawer>
+                    </Hidden>
+                    <Hidden smDown implementation="css">
+                        <StyledDrawer variant="permanent" open>
+                            {drawer}
+                        </StyledDrawer>
+                    </Hidden>
+                </>
+            )}
+        </StyledRoot>
+    );
+};
 
 DigitHeader.displayName = "DigitHeader";
 DigitHeader.propTypes = {
@@ -236,11 +222,11 @@ DigitHeader.propTypes = {
 
 DigitHeader.defaultProps = {
     headerHeight: "64px",
-    renderDrawer: null,
     renderHeader: () => null,
     renderToolbar: () => null,
     renderFooter: () => null,
     renderMain: () => null,
+    renderDrawer: () => null,
     renderTitle: null,
     title: "My website",
     homeLink: null

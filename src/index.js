@@ -42,14 +42,6 @@ import DigitHeader from "./views/digit-header";
 import DigitListSelectMultiple from "./views/digit-list-select-multiple";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
-import useGamma from "./hooks/use-gamma";
-import useGammaUser from "./hooks/use-gamma-user";
-import useGammaInvalidateMe from "./hooks/use-gamma-invalidate-me";
-import useGammaSignIn from "./hooks/use-gamma-sign-in";
-import useGammaSignOut from "./hooks/use-gamma-sign-out";
-import useGammaStatus from "./hooks/use-gamma-status";
-import useGammaIs from "./hooks/use-gamma-is";
-import useGammaIsAdmin from "./hooks/use-gamma-is-admin";
 import useDigitCustomDialog from "./hooks/use-digit-custom-dialog";
 import useDigitDialog from "./hooks/use-digit-dialog";
 import useDigitFormField from "./hooks/use-digit-form-field";
@@ -188,14 +180,6 @@ export {
     DigitText,
     /* Hooks */
     useDigitTranslations,
-    useGamma,
-    useGammaUser,
-    useGammaInvalidateMe,
-    useGammaSignIn,
-    useGammaSignOut,
-    useGammaStatus,
-    useGammaIs,
-    useGammaIsAdmin,
     useDigitCustomDialog,
     useDigitDialog,
     useDigitFormField,

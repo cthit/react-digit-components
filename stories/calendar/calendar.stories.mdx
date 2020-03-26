@@ -1,0 +1,34 @@
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitDesign, DigitText, DigitButton, DigitCalendar } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+import {events} from "./calendar.data.js";
+
+<Meta
+    title="Display data/DigitCalendar"
+    component={DigitCalendar}
+/>
+
+# DigitCard
+
+DigitCard is used differencing data points, e.g. different restaurants or maybe different users.
+
+## Size variation
+
+<Preview>
+    <Story name="Size one">
+        <>
+            <DigitCalendar
+        events={events}
+        startDate={new Date(2019,10,23)}
+        onEventClick={e => {
+            console.log("Event clicked: ");
+            console.log(e);
+        }}
+        onDayClick   ={e => console.log("Day clicked: " + e)}
+        onMonthChange={e => console.log("Month change: " + e)}
+    />
+        </>
+    </Story>
+</Preview>
+
+<Props of={DigitCalendar} />

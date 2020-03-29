@@ -10,5 +10,8 @@
   "RowsPerPage": [
     "Rows per page",
     "Rader per sida"
+  ],
+  "SearchText": [
+    "Search", "Sök"
   ]
 }

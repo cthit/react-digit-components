@@ -9,6 +9,7 @@ import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitTranslationsContext";
 import { DigitToastContextSingletonProvider } from "../../contexts/DigitToastContext";
 import { DigitDialogContextSingletonProvider } from "../../contexts/DigitDialogContext";
+import { DigitGammaContextSingletonProvider } from "../../contexts/DigitGammaContext";
 
 class DigitProviders extends React.Component {
     constructor(props) {
@@ -57,17 +58,23 @@ class DigitProviders extends React.Component {
                     >
                         <DigitToastContextSingletonProvider>
                             <DigitDialogContextSingletonProvider>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    {hashRouter ? (
-                                        <HashRouter>{children}</HashRouter>
-                                    ) : memoryRouter ? (
-                                        <MemoryRouter>{children}</MemoryRouter>
-                                    ) : (
-                                        <BrowserRouter>
-                                            {children}
-                                        </BrowserRouter>
-                                    )}
-                                </MuiPickersUtilsProvider>
+                                <DigitGammaContextSingletonProvider>
+                                    <MuiPickersUtilsProvider
+                                        utils={DateFnsUtils}
+                                    >
+                                        {hashRouter ? (
+                                            <HashRouter>{children}</HashRouter>
+                                        ) : memoryRouter ? (
+                                            <MemoryRouter>
+                                                {children}
+                                            </MemoryRouter>
+                                        ) : (
+                                            <BrowserRouter>
+                                                {children}
+                                            </BrowserRouter>
+                                        )}
+                                    </MuiPickersUtilsProvider>
+                                </DigitGammaContextSingletonProvider>
                             </DigitDialogContextSingletonProvider>
                         </DigitToastContextSingletonProvider>
                     </DigitTranslationsContextSingletonProvider>

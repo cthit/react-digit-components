@@ -31,6 +31,8 @@ import DigitCustomDialog from "./elements/digit-custom-dialog";
 import DigitToast from "./elements/digit-toast";
 import DigitDialog from "./elements/digit-dialog";
 import DigitSelectFile from "./elements/digit-select-file";
+import DigitGammaActions from "./elements/digit-gamma-actions";
+import { DigitGammaActionsDummy } from "./elements/digit-gamma-actions/DigitGammaActions.element";
 
 import DigitProviders from "./declaratives/digit-providers";
 
@@ -48,6 +50,8 @@ import useDigitDialog from "./hooks/use-digit-dialog";
 import useDigitFormField from "./hooks/use-digit-form-field";
 import useDigitFormFieldArray from "./hooks/use-digit-form-field-array";
 import useDigitToast from "./hooks/use-digit-toast";
+import useGamma from "./hooks/use-gamma";
+import useGammaMe from "./hooks/use-gamma-me";
 
 import {
     Center,
@@ -166,6 +170,8 @@ export {
     DigitListSelectSingle,
     DigitButtonGroup,
     DigitSelectFile,
+    DigitGammaActions,
+    DigitGammaActionsDummy,
     /* Views */
     DigitToast,
     DigitDialog,
@@ -186,5 +192,7 @@ export {
     useDigitDialog,
     useDigitFormField,
     useDigitFormFieldArray,
-    useDigitToast
+    useDigitToast,
+    useGamma,
+    useGammaMe
 };

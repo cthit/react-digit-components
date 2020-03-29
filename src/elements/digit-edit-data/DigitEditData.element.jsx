@@ -37,7 +37,7 @@ const DigitEditDataInner = ({
 
 const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
     const field = useDigitFormField(name);
-    const { component, componentProps } = componentData;
+    const { component, componentProps = {} } = componentData;
 
     return useMemo(
         () =>

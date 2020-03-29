@@ -36,6 +36,7 @@ import DigitProviders from "./declaratives/digit-providers";
 
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
+import DigitSelectMultipleTable from "./views/digit-select-multiple-table";
 import DigitCRUD from "./views/digit-crud";
 import DigitForm from "./views/digit-form";
 import DigitHeader from "./views/digit-header";
@@ -171,6 +172,7 @@ export {
     DigitCustomDialog,
     DigitMenu,
     DigitTable,
+    DigitSelectMultipleTable,
     DigitCRUD,
     /* Declaratives */
     DigitProviders,

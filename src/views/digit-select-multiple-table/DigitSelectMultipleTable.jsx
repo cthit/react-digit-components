@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useMemo, useState } from "react";
-import translations from "./DigitTable.view.translations.json";
+import translations from "./DigitSelectMultipleTable.view.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -14,11 +14,16 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import DigitTextField from "../../elements/digit-text-field";
+import Checkbox from "@material-ui/core/Checkbox";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import { Heading5, Text } from "../../styles/digit-text/DigitText.styles";
+import DigitTextField from "../../elements/digit-text-field";
 import { Center } from "../../styles/digit-layout/DigitLayout.styles";
-import DigitButton from "../../elements/digit-button";
 import { Link } from "../../styles/digit-design/DigitDesign.styles";
+import DigitButton from "../../elements/digit-button";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 function descendingComparator(a, b, orderBy) {
@@ -37,9 +42,20 @@ function getComparator(order, orderBy) {
         : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function stableSort(array, comparator) {
+function stableSort(array, comparator, selected, idProp) {
     const stabilizedThis = array.map((el, index) => [el, index]);
     stabilizedThis.sort((a, b) => {
+        const aSelected = selected.indexOf(a[0][idProp]);
+        const bSelected = selected.indexOf(b[0][idProp]);
+
+        if (aSelected !== -1 && bSelected !== -1) {
+            return a[1] - b[1];
+        } else if (aSelected !== -1) {
+            return -1;
+        } else if (bSelected !== -1) {
+            return 1;
+        }
+
         const order = comparator(a[0], b[0]);
         if (order !== 0) return order;
         return a[1] - b[1];
@@ -47,10 +63,13 @@ function stableSort(array, comparator) {
     return stabilizedThis.map(el => el[0]);
 }
 
-const DigitTableHead = ({
+const DigitSelectMultipleTableHead = ({
     classes,
+    onSelectAllClick,
     order,
     orderBy,
+    numSelected,
+    rowCount,
     onRequestSort,
     headerTexts,
     columnsOrder
@@ -62,6 +81,16 @@ const DigitTableHead = ({
     return (
         <TableHead>
             <TableRow>
+                <TableCell padding="checkbox">
+                    <Checkbox
+                        indeterminate={
+                            numSelected > 0 && numSelected < rowCount
+                        }
+                        checked={rowCount > 0 && numSelected === rowCount}
+                        onChange={onSelectAllClick}
+                        inputProps={{ "aria-label": "select all desserts" }}
+                    />
+                </TableCell>
                 {columnsOrder.map(column => (
                     <TableCell
                         key={column}
@@ -94,32 +123,45 @@ const DigitTableHead = ({
     );
 };
 
-const useToolbarStyles = makeStyles(() => ({
+const useToolbarStyles = makeStyles(theme => ({
     root: {
         justifyContent: "space-between"
     }
 }));
 
-const DigitTableToolbar = ({
+const DigitSelectMultipleTableToolbar = ({
     titleText,
     search,
     searchText,
     text,
     searchValue,
-    onSearchUpdated
+    onSearchUpdated,
+    numSelected
 }) => {
     const classes = useToolbarStyles();
 
     return (
         <Toolbar className={classes.root}>
-            <Typography
-                className={classes.title}
-                variant="h6"
-                id="tableTitle"
-                component="div"
-            >
-                {titleText}
-            </Typography>
+            {numSelected > 0 ? (
+                <Typography
+                    className={classes.title}
+                    color="inherit"
+                    variant="h6"
+                    component="div"
+                >
+                    {numSelected + " " + text.Selected}
+                </Typography>
+            ) : (
+                <Typography
+                    className={classes.title}
+                    variant="h6"
+                    id="tableTitle"
+                    component="div"
+                >
+                    {titleText}
+                </Typography>
+            )}
+
             {search && (
                 <DigitTextField
                     margin={{
@@ -141,6 +183,10 @@ const DigitTableToolbar = ({
     );
 };
 
+DigitSelectMultipleTableToolbar.propTypes = {
+    numSelected: PropTypes.number.isRequired
+};
+
 const useStyles = makeStyles(theme => ({
     visuallyHidden: {
         border: 0,
@@ -155,7 +201,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const DigitTable = ({
+const DigitSelectMultipleTable = ({
     data,
     headerTexts,
     columnsOrder,
@@ -172,7 +218,9 @@ const DigitTable = ({
     size,
     padding,
     margin,
-    flex
+    flex,
+    value,
+    onChange
 }) => {
     const classes = useStyles();
     const [order, setOrder] = useState(startOrderByDirection);
@@ -189,12 +237,39 @@ const DigitTable = ({
         margin
     });
 
-    const header = titleText != null || search;
-
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === "asc";
         setOrder(isAsc ? "desc" : "asc");
         setOrderBy(property);
+    };
+
+    const handleSelectAllClick = event => {
+        if (event.target.checked) {
+            const newSelecteds = data.map(n => n[idProp]);
+            onChange(newSelecteds);
+            return;
+        }
+        onChange([]);
+    };
+
+    const handleClick = (event, id) => {
+        const selectedIndex = value.indexOf(id);
+        let newSelected = [];
+
+        if (selectedIndex === -1) {
+            newSelected = newSelected.concat(value, id);
+        } else if (selectedIndex === 0) {
+            newSelected = newSelected.concat(value.slice(1));
+        } else if (selectedIndex === value.length - 1) {
+            newSelected = newSelected.concat(value.slice(0, -1));
+        } else if (selectedIndex > 0) {
+            newSelected = newSelected.concat(
+                value.slice(0, selectedIndex),
+                value.slice(selectedIndex + 1)
+            );
+        }
+
+        onChange(newSelected);
     };
 
     const handleChangePage = (event, newPage) => {
@@ -206,9 +281,12 @@ const DigitTable = ({
         setPage(0);
     };
 
+    const isSelected = id => value.indexOf(id) !== -1;
+
     const emptyRows =
         rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
+    //sort on selected always being selected on top
     const sortedData = useMemo(() => {
         const s = searchValue.trim();
         const filteredData =
@@ -223,31 +301,34 @@ const DigitTable = ({
                       return false;
                   });
 
-        return stableSort(filteredData, getComparator(order, orderBy)).slice(
-            page * rowsPerPage,
-            page * rowsPerPage + rowsPerPage
-        );
+        return stableSort(
+            filteredData,
+            getComparator(order, orderBy),
+            value,
+            idProp
+        ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
     }, [data, searchValue, page, rowsPerPage, order, orderBy]);
 
     return (
         <Paper classes={layoutClasses}>
-            {header && (
-                <DigitTableToolbar
-                    titleText={titleText}
-                    search={search}
-                    searchText={searchText}
-                    text={text}
-                    searchValue={searchValue}
-                    onSearchUpdated={setSearchValue}
-                />
-            )}
+            <DigitSelectMultipleTableToolbar
+                numSelected={value.length}
+                titleText={titleText}
+                search={search}
+                searchText={searchText}
+                text={text}
+                searchValue={searchValue}
+                onSearchUpdated={setSearchValue}
+            />
             <TableContainer>
                 <Table
                     aria-labelledby="tableTitle"
                     size={dense ? "small" : "medium"}
                     aria-label="enhanced table"
                 >
-                    <DigitTableHead
+                    <DigitSelectMultipleTableHead
+                        numSelected={value.length}
+                        onSelectAllClick={handleSelectAllClick}
                         classes={classes}
                         order={order}
                         orderBy={orderBy}
@@ -268,32 +349,54 @@ const DigitTable = ({
                         )}
                         {sortedData.length > 0 && (
                             <>
-                                {sortedData.map(row => (
-                                    <TableRow
-                                        hover
-                                        tabIndex={-1}
-                                        key={row[idProp]}
-                                    >
-                                        {columnsOrder.map(column => (
-                                            <TableCell key={row[column]}>
-                                                {row[column]}
+                                {sortedData.map((row, index) => {
+                                    const isItemSelected = isSelected(
+                                        row[idProp]
+                                    );
+                                    const labelId = `enhanced-table-checkbox-${index}`;
+
+                                    return (
+                                        <TableRow
+                                            hover
+                                            tabIndex={-1}
+                                            key={row[idProp]}
+                                            onClick={event =>
+                                                handleClick(event, row[idProp])
+                                            }
+                                            selected={isItemSelected}
+                                            role="checkbox"
+                                        >
+                                            <TableCell padding="checkbox">
+                                                <Checkbox
+                                                    checked={isItemSelected}
+                                                    inputProps={{
+                                                        "aria-labelledby": labelId
+                                                    }}
+                                                />
                                             </TableCell>
-                                        ))}
-                                        {row.__link != null && (
-                                            <TableCell align={"right"}>
-                                                <Link to={row.__link}>
-                                                    <DigitButton
-                                                        text={
-                                                            headerTexts.__link
-                                                        }
-                                                        outlined
-                                                    />
-                                                </Link>
-                                            </TableCell>
-                                        )}
-                                        {row.__link == null && <TableCell />}
-                                    </TableRow>
-                                ))}
+                                            {columnsOrder.map(column => (
+                                                <TableCell key={row[column]}>
+                                                    {row[column]}
+                                                </TableCell>
+                                            ))}
+                                            {row.__link != null && (
+                                                <TableCell align={"right"}>
+                                                    <Link to={row.__link}>
+                                                        <DigitButton
+                                                            text={
+                                                                headerTexts.__link
+                                                            }
+                                                            outlined
+                                                        />
+                                                    </Link>
+                                                </TableCell>
+                                            )}
+                                            {row.__link == null && (
+                                                <TableCell />
+                                            )}
+                                        </TableRow>
+                                    );
+                                })}
                                 {emptyRows > 0 && (
                                     <TableRow
                                         style={{
@@ -324,8 +427,8 @@ const DigitTable = ({
     );
 };
 
-DigitTable.displayName = "DigitTable";
-DigitTable.propTypes = {
+DigitSelectMultipleTable.displayName = "DigitTable";
+DigitSelectMultipleTable.propTypes = {
     /** The starting column to order rows by */
     startOrderBy: PropTypes.string.isRequired,
     /** In what direction the start order should be */
@@ -340,6 +443,14 @@ DigitTable.propTypes = {
      * has the keys specified in headerTexts.
      */
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    /** When the selected rows has been updated. The first argument is
+     * the current array of selected rows. You need to keep
+     * selected updated yourself.
+     */
+    onChange: PropTypes.func,
+    /** An array of selected. When onChange is called,
+     * you need to save the selected rows.*/
+    value: PropTypes.array,
     /** A key to text map, where the key are the column
      * and the text is what the user sees.s
      */
@@ -348,7 +459,7 @@ DigitTable.propTypes = {
     emptyTableText: PropTypes.string,
     /** The text of the title. */
     titleText: PropTypes.string,
-    /** The text to show in the search bar.  Default is "Search" / "Sök"*/
+    /** The text to show in the searchbar. */
     searchText: PropTypes.string,
     /** If true, then there's a search input field. */
     search: PropTypes.bool,
@@ -401,14 +512,10 @@ DigitTable.propTypes = {
         })
     ]),
     /** Controls the flex property for the most outer element in this component.*/
-    flex: PropTypes.string,
-    /**
-     * If the padding should be less between the rows and columns
-     */
-    dense: PropTypes.bool
+    flex: PropTypes.string
 };
 
-DigitTable.defaultProps = {
+DigitSelectMultipleTable.defaultProps = {
     search: false,
     showSearchableProps: false,
     searchText: "Search",
@@ -419,7 +526,9 @@ DigitTable.defaultProps = {
         minWidth: "300px"
     },
     startOrderByDirection: "desc",
+    value: [],
+    onChange: () => {},
     startRowsPerPage: 5
 };
 
-export default DigitTable;
+export default DigitSelectMultipleTable;

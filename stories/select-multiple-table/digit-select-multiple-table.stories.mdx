@@ -1,0 +1,238 @@
+import { Fragment, useState, useMemo } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitSelectMultipleTable, DigitProviders } from "../../src";
+import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
+
+<Meta
+    title="Inputs/DigitSelectMultipleTable"
+    component={DigitSelectMultipleTable}
+/>
+
+# DigitSelectMultipleTable
+
+A way to select multiple rows from a table. Has the standard value/onChange.
+
+## Select
+
+<Preview>
+    <Story name="table with checkboxes">
+        {() => {
+            const [selected, setSelected] = useState(["1337"])
+            return (
+                <DigitSelectMultipleTable
+                    value={selected}
+                    onChange={setSelected}
+                    titleText="Humans"
+                    search
+                    searchText="Search for a human"
+                    idProp="id"
+                    startOrderBy="firstName"
+                    columnsOrder={["id", "firstName", "lastName", "age"]}
+                    headerTexts={{
+                        id: "Id",
+                        firstName: "First name",
+                        lastName: "Last name",
+                        age: "Age",
+                    }}
+                    data={[
+                            {
+                                id: "1337",
+                                firstName: "Asdf",
+                                lastName: "Asdfsson",
+                                age: 33
+                            },
+                            {
+                                id: "4444",
+                                firstName: "Glass",
+                                lastName: "Glasssson",
+                                age: 50
+                            },
+                            {
+                                id: "4324",
+                                firstName: "Jeremy",
+                                lastName: "Clarkson",
+                                age: 50
+                            },
+                            {
+                                id: "1234",
+                                firstName: "James",
+                                lastName: "May",
+                                age: 99
+                            },
+                            {
+                                id: "4321",
+                                firstName: "Richard",
+                                lastName: "Hammond",
+                                age: 18
+                            },
+                            {
+                                id: "9999",
+                                firstName: "The",
+                                lastName: "Stig",
+                                age: 55
+                            },
+                            {
+                                id: "2244",
+                                firstName: "Henrik",
+                                lastName: "Lundqvist",
+                                age: 30
+                            }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+
+## Dense select
+
+<Preview>
+    <Story name="dense table with checkboxes">
+        {() => {
+            const [selected, setSelected] = useState(["1337"])
+            return (
+                <DigitSelectMultipleTable
+                    dense
+                    value={selected}
+                    onChange={setSelected}
+                    titleText="Humans"
+                    search
+                    searchText="Search for a human"
+                    idProp="id"
+                    startOrderBy="firstName"
+                    columnsOrder={["id", "firstName", "lastName", "age"]}
+                    headerTexts={{
+                        id: "Id",
+                        firstName: "First name",
+                        lastName: "Last name",
+                        age: "Age",
+                    }}
+                    data={[
+                            {
+                                id: "1337",
+                                firstName: "Asdf",
+                                lastName: "Asdfsson",
+                                age: 33
+                            },
+                            {
+                                id: "4444",
+                                firstName: "Glass",
+                                lastName: "Glasssson",
+                                age: 50
+                            },
+                            {
+                                id: "4324",
+                                firstName: "Jeremy",
+                                lastName: "Clarkson",
+                                age: 50
+                            },
+                            {
+                                id: "1234",
+                                firstName: "James",
+                                lastName: "May",
+                                age: 99
+                            },
+                            {
+                                id: "4321",
+                                firstName: "Richard",
+                                lastName: "Hammond",
+                                age: 18
+                            },
+                            {
+                                id: "9999",
+                                firstName: "The",
+                                lastName: "Stig",
+                                age: 55
+                            },
+                            {
+                                id: "2244",
+                                firstName: "Henrik",
+                                lastName: "Lundqvist",
+                                age: 30
+                            }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## Select and link
+
+A way to select multiple rows from a table. Has the standard value/onChange.
+
+<Preview>
+    <Story name="table with checkboxes and link">
+        {() => {
+            const [selected, setSelected] = useState(["1337"])
+            return (
+                <DigitSelectMultipleTable
+                    value={selected}
+                    onChange={setSelected}
+                    titleText="Humans"
+                    search
+                    searchText="Search for a human"
+                    idProp="id"
+                    startOrderBy="firstName"
+                    columnsOrder={["id", "firstName", "lastName", "age"]}
+                    headerTexts={{
+                        id: "Id",
+                        firstName: "First name",
+                        lastName: "Last name",
+                        age: "Age",
+                        __link: "Details"
+                    }}
+                    data={[
+                            {
+                                id: "1337",
+                                firstName: "Asdf",
+                                lastName: "Asdfsson",
+                                age: 33,
+                                __link: "/"
+                            },
+                            {
+                                id: "4444",
+                                firstName: "Glass",
+                                lastName: "Glasssson",
+                                age: 50,
+                                __link: "/"
+                            },
+                            {
+                                id: "4324",
+                                firstName: "Jeremy",
+                                lastName: "Clarkson",
+                                age: 50
+                            },
+                            {
+                                id: "1234",
+                                firstName: "James",
+                                lastName: "May",
+                                age: 99
+                            },
+                            {
+                                id: "4321",
+                                firstName: "Richard",
+                                lastName: "Hammond",
+                                age: 18
+                            },
+                            {
+                                id: "9999",
+                                firstName: "The",
+                                lastName: "Stig",
+                                age: 55
+                            },
+                            {
+                                id: "2244",
+                                firstName: "Henrik",
+                                lastName: "Lundqvist",
+                                age: 30
+                            }
+                    ]}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitSelectMultipleTable} />

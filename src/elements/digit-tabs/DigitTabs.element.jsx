@@ -192,7 +192,9 @@ DigitTabs.propTypes = {
 DigitTabs.defaultProps = {
     titleFont: false,
     tabs: [],
-    size: {}
+    size: {},
+    margin: "0px",
+    flex: "1"
 };
 
 export { DigitTabs };

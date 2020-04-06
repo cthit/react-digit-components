@@ -76,7 +76,6 @@ DigitButton.propTypes = {
     form: PropTypes.string,
     /** Controls the flex property for the most outer element in this component.*/
     flex: PropTypes.string,
-
     /** Controls the alignSelf property for the most outer element in this component.*/
     alignSelf: PropTypes.oneOf([
         "auto",

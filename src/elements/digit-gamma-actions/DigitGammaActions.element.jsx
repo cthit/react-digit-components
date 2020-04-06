@@ -11,12 +11,29 @@ import DigitAvatar from "../digit-avatar";
 const DigitGammaActionsLayout = ({
     me = {},
     frontendUrl = "http://localhost:3000",
-    backendUrl = "http://localhost:8081/api"
+    backendUrl = "http://localhost:8081/api",
+    flex,
+    alignSelf,
+    size = {},
+    padding,
+    margin
 }) => {
     const [text] = useDigitTranslations(translations);
 
     return (
-        <Row alignItems={"center"}>
+        <Row
+            alignItems={"center"}
+            size={{
+                height: "60px",
+                minHeight: "60px",
+                maxHeight: "60px",
+                ...size
+            }}
+            flex={flex}
+            alignSelf={alignSelf}
+            padding={padding}
+            margin={margin}
+        >
             <DigitAvatar
                 imageAlt={"Avatar"}
                 imageSrc={me.avatarUrl}
@@ -45,12 +62,33 @@ const DigitGammaActionsLayout = ({
     );
 };
 
-const DigitGammaActionsDummy = ({ nick = "Sven", avatarUrl = null }) => {
-    return <DigitGammaActionsLayout me={{ nick, avatarUrl }} />;
+const DigitGammaActionsDummy = ({
+    nick = "Sven",
+    avatarUrl = null,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    return (
+        <DigitGammaActionsLayout
+            me={{ nick, avatarUrl }}
+            flex={flex}
+            alignSelf={alignSelf}
+            size={size}
+            padding={padding}
+            margin={margin}
+        />
+    );
 };
 
 const DigitGammaActions = () => {
     const me = useGammaMe();
+    if (me == null) {
+        console.log("Not logged in, not rendering any DigitGammaActions...");
+        return null;
+    }
     return <DigitGammaActionsLayout me={me} />;
 };
 

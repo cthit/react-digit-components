@@ -3,7 +3,7 @@ import ThemeProvider from "@material-ui/styles/ThemeProvider";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useMemo } from "react";
 import { BrowserRouter, HashRouter, MemoryRouter } from "react-router-dom";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitTranslationsContext";
@@ -11,11 +11,15 @@ import { DigitToastContextSingletonProvider } from "../../contexts/DigitToastCon
 import { DigitDialogContextSingletonProvider } from "../../contexts/DigitDialogContext";
 import { DigitGammaContextSingletonProvider } from "../../contexts/DigitGammaContext";
 
-class DigitProviders extends React.Component {
-    constructor(props) {
-        super();
-
-        this.theme = createMuiTheme({
+const DigitProviders = ({
+    children,
+    hashRouter,
+    memoryRouter,
+    defaultLanguage,
+    ...props
+}) => {
+    const theme = useMemo(() => {
+        return createMuiTheme({
             typography: {
                 useNextVariants: true,
                 fontSize: 16
@@ -41,48 +45,36 @@ class DigitProviders extends React.Component {
             },
             ...props.theme
         });
-    }
+    }, [props]);
 
-    render() {
-        const {
-            children,
-            hashRouter,
-            memoryRouter,
-            defaultLanguage
-        } = this.props;
-        return (
-            <StylesProvider injectFirst>
-                <ThemeProvider theme={this.theme}>
-                    <DigitTranslationsContextSingletonProvider
-                        defaultLanguage={defaultLanguage}
-                    >
-                        <DigitToastContextSingletonProvider>
-                            <DigitDialogContextSingletonProvider>
-                                <DigitGammaContextSingletonProvider>
-                                    <MuiPickersUtilsProvider
-                                        utils={DateFnsUtils}
-                                    >
-                                        {hashRouter ? (
-                                            <HashRouter>{children}</HashRouter>
-                                        ) : memoryRouter ? (
-                                            <MemoryRouter>
-                                                {children}
-                                            </MemoryRouter>
-                                        ) : (
-                                            <BrowserRouter>
-                                                {children}
-                                            </BrowserRouter>
-                                        )}
-                                    </MuiPickersUtilsProvider>
-                                </DigitGammaContextSingletonProvider>
-                            </DigitDialogContextSingletonProvider>
-                        </DigitToastContextSingletonProvider>
-                    </DigitTranslationsContextSingletonProvider>
-                </ThemeProvider>
-            </StylesProvider>
-        );
-    }
-}
+    return (
+        <StylesProvider injectFirst>
+            <ThemeProvider theme={theme}>
+                <DigitTranslationsContextSingletonProvider
+                    defaultLanguage={defaultLanguage}
+                >
+                    <DigitToastContextSingletonProvider>
+                        <DigitDialogContextSingletonProvider>
+                            <DigitGammaContextSingletonProvider>
+                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                    {hashRouter ? (
+                                        <HashRouter>{children}</HashRouter>
+                                    ) : memoryRouter ? (
+                                        <MemoryRouter>{children}</MemoryRouter>
+                                    ) : (
+                                        <BrowserRouter>
+                                            {children}
+                                        </BrowserRouter>
+                                    )}
+                                </MuiPickersUtilsProvider>
+                            </DigitGammaContextSingletonProvider>
+                        </DigitDialogContextSingletonProvider>
+                    </DigitToastContextSingletonProvider>
+                </DigitTranslationsContextSingletonProvider>
+            </ThemeProvider>
+        </StylesProvider>
+    );
+};
 
 DigitProviders.displayName = "DigitProviders";
 DigitProviders.propTypes = {

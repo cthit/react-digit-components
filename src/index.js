@@ -32,6 +32,7 @@ import DigitToast from "./elements/digit-toast";
 import DigitDialog from "./elements/digit-dialog";
 import DigitSelectFile from "./elements/digit-select-file";
 import DigitGammaActions from "./elements/digit-gamma-actions";
+import DigitHeader from "./elements/digit-header";
 import { DigitGammaActionsDummy } from "./elements/digit-gamma-actions/DigitGammaActions.element";
 
 import DigitProviders from "./declaratives/digit-providers";
@@ -41,7 +42,7 @@ import DigitTable from "./views/digit-table";
 import DigitSelectMultipleTable from "./views/digit-select-multiple-table";
 import DigitCRUD from "./views/digit-crud";
 import DigitForm from "./views/digit-form";
-import DigitHeader from "./views/digit-header";
+import DigitHeaderDrawer from "./views/digit-header-drawer";
 import DigitListSelectMultiple from "./views/digit-list-select-multiple";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
@@ -180,6 +181,7 @@ export {
     DigitTable,
     DigitSelectMultipleTable,
     DigitCRUD,
+    DigitHeaderDrawer,
     /* Declaratives */
     DigitProviders,
     /* Styles */

@@ -1,6 +1,6 @@
 {
     "name": "@cthit/react-digit-components",
-    "version": "1.0.0-rc.38",
+    "version": "1.0.0-rc.42",
     "description": "A collection of components that digIT uses in their websites. Uses libraries like material-ui and yup.",
     "author": "digIT",
     "license": "ISC",
@@ -50,7 +50,6 @@
         "@babel/preset-react": "7.8.3",
         "@babel/preset-stage-0": "7.8.3",
         "@storybook/addon-docs": "5.3.14",
-        "@storybook/addon-viewport": "^5.3.14",
         "@storybook/preset-create-react-app": "2.0.0",
         "@storybook/react": "5.3.14",
         "@svgr/rollup": "5.2.0",

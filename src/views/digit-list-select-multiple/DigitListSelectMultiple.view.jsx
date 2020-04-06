@@ -52,7 +52,6 @@ const DigitListSelectMultiple = ({
     title,
     items,
     dense,
-    disablePadding,
     idProp,
     multipleExpanded,
     value,
@@ -156,7 +155,6 @@ const DigitListSelectMultiple = ({
             dense={dense}
             subheader={<ListSubheader component="div">{title}</ListSubheader>}
             component={"div"}
-            disablePadding={disablePadding}
         >
             {items.map(item => (
                 <React.Fragment key={item[idProp]}>
@@ -263,7 +261,6 @@ const DigitListSelectMultiple = ({
                                     items={item.items}
                                     multipleExpanded={item.multipleExpanded}
                                     dense={dense}
-                                    disablePadding
                                     value={innerValue}
                                     onChange={handleChange}
                                     idProp={idProp}

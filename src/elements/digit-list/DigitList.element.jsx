@@ -18,7 +18,6 @@ const DigitList = ({
     items,
     onClick,
     dense,
-    disablePadding,
     idProp,
     multipleExpanded,
     flex,
@@ -42,7 +41,6 @@ const DigitList = ({
             dense={dense}
             subheader={<ListSubheader component="div">{title}</ListSubheader>}
             component={"div"}
-            disablePadding={disablePadding}
         >
             {items.map(item => (
                 <React.Fragment key={item[idProp]}>
@@ -115,7 +113,6 @@ const DigitList = ({
                                     items={item.items}
                                     onClick={onClick}
                                     dense={dense}
-                                    disablePadding
                                     multipleExpanded={multipleExpanded}
                                     idProp={idProp}
                                 />
@@ -129,14 +126,17 @@ const DigitList = ({
 };
 
 DigitList.propTypes = {
+    /** A title above the list */
     title: PropTypes.string,
     /** Array of list items. Can be nested. */
     items: PropTypes.array,
     /** The function which will be called when the button has been pressed.*/
     onClick: PropTypes.func,
+    /** If true, lessens the padding */
     dense: PropTypes.bool,
-    disablePadding: PropTypes.bool,
+    /** The prop that represents a unique key for each item */
     idProp: PropTypes.string,
+    /** If true, then multiple sub lists can be expanded at once. */
     multipleExpanded: PropTypes.bool,
     /** Controls the flex property for the most outer element in this component.*/
     flex: PropTypes.string,
@@ -151,6 +151,9 @@ DigitList.propTypes = {
         "initial",
         "inherit"
     ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
     size: PropTypes.bool,
     /** Padding property for the most outer element in this component.
      * It can either be a string, using the padding shorthand, or it can be an

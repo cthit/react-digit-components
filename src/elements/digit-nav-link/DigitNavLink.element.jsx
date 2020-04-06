@@ -3,9 +3,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import PropTypes from "prop-types";
 import React from "react";
-import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
+import NavLink from "react-router-dom/NavLink";
 
 const DigitNavLink = ({
     text,
@@ -111,7 +111,8 @@ DigitNavLink.propTypes = {
 };
 
 DigitNavLink.defaultProps = {
-    onClick: () => {}
+    onClick: () => {},
+    link: "/"
 };
 
 export default DigitNavLink;

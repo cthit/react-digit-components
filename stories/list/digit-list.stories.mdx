@@ -104,104 +104,16 @@ List of items.
     </Story>
 </Preview>
 
-## DisablePadding
+## Multiple expanded
 
 <Preview>
-    <Story name="DisablePadding">
+    <Story name="Multiple expanded">
         <DigitList
-            disablePadding
+            multipleExpanded
             onClick={item => {
                 console.log(item.text);
             }}
-            title={"This is list without padding"}
-            items={[
-                {
-                    text: "Hello",
-                    secondaryText: "This is the secondary text",
-                    icon: Mail,
-                    items: [
-                        {
-                            text: "Hi"
-                        }
-                    ],
-                    actionIcon: Delete,
-                    actionOnClick: item => {
-                        console.log("DELETE ME " + item.text);
-                    }
-                },
-                {
-                    text: "hmm",
-                    icon: Mail,
-                    items: [
-                        {
-                            text: "mmh",
-                            items: [
-                                {
-                                    text: "subsub"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]}
-        />
-    </Story>
-</Preview>
-
-## Padding
-
-<Preview>
-    <Story name="Padding">
-        <DigitList
-            padding="50px"
-            onClick={item => {
-                console.log(item.text);
-            }}
-            title={"This is list with 50px padding"}
-            items={[
-                {
-                    text: "Hello",
-                    secondaryText: "This is the secondary text",
-                    icon: Mail,
-                    items: [
-                        {
-                            text: "Hi"
-                        }
-                    ],
-                    actionIcon: Delete,
-                    actionOnClick: item => {
-                        console.log("DELETE ME " + item.text);
-                    }
-                },
-                {
-                    text: "hmm",
-                    icon: Mail,
-                    items: [
-                        {
-                            text: "mmh",
-                            items: [
-                                {
-                                    text: "subsub"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]}
-        />
-    </Story>
-</Preview>
-
-## Margin
-
-<Preview>
-    <Story name="Margin">
-        <DigitList
-            margin="50px"
-            onClick={item => {
-                console.log(item.text);
-            }}
-            title={"This is list with 50px margin"}
+            title={"This is dense list"}
             items={[
                 {
                     text: "Hello",

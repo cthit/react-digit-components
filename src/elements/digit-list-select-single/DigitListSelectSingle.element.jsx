@@ -19,7 +19,6 @@ const DigitListSelectSingle = ({
     title,
     items,
     dense,
-    disablePadding,
     idProp,
     multipleExpanded,
     value,
@@ -45,7 +44,6 @@ const DigitListSelectSingle = ({
             dense={dense}
             subheader={<ListSubheader component="div">{title}</ListSubheader>}
             component={"div"}
-            disablePadding={disablePadding}
         >
             {items.map(item => (
                 <React.Fragment key={item[idProp]}>
@@ -148,13 +146,19 @@ const DigitListSelectSingle = ({
 };
 
 DigitListSelectSingle.propTypes = {
+    /** A title above the list */
     title: PropTypes.string,
+    /** Array of list items. Can be nested. */
     items: PropTypes.array,
+    /** If true, lessens the padding */
     dense: PropTypes.bool,
-    disablePadding: PropTypes.bool,
+    /** The prop that represents a unique key for each item */
     idProp: PropTypes.string,
+    /** If true, then multiple sub lists can be expanded at once. */
     multipleExpanded: PropTypes.bool,
+    /** The id that's selected */
     value: PropTypes.array,
+    /** Function with the new selected value. */
     onChange: PropTypes.func,
     /** Controls the flex property for the most outer element in this component.*/
     flex: PropTypes.string,
@@ -171,7 +175,8 @@ DigitListSelectSingle.propTypes = {
     ]),
     /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
      * and width/height via an object
-     */ size: PropTypes.shape({
+     */
+    size: PropTypes.shape({
         width: PropTypes.string,
         height: PropTypes.string,
         minWidth: PropTypes.string,

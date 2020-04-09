@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import {
     Card,
     CardBody,
@@ -32,7 +32,7 @@ const DigitEditDataCard = ({
     padding,
     margin
 }) => {
-    const formName = useMemo(() => JSON.stringify(keysComponentData).trim());
+    const formName = JSON.stringify(keysComponentData);
     const [submitValid, setSubmitValid] = useState(false);
 
     return (
@@ -43,7 +43,7 @@ const DigitEditDataCard = ({
             padding={padding}
             margin={margin}
         >
-            <CardHeader hasSubtitle={subtitleText}>
+            <CardHeader hasSubtitle={subtitleText != null}>
                 <CardTitle text={titleText} />
                 {subtitleText && <CardSubtitle text={subtitleText} />}
             </CardHeader>

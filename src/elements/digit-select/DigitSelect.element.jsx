@@ -4,7 +4,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 import useFormControlStyles from "../../styles/material-ui/use-form-control-styles";
 
@@ -38,7 +38,7 @@ const DigitSelect = ({
     const formClasses = useFormControlStyles({ padding, margin });
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
-    React.useEffect(() => {
+    useEffect(() => {
         setLabelWidth(inputLabel.current.offsetWidth);
     }, [inputLabel.ref, upperLabel]);
 
@@ -58,29 +58,23 @@ const DigitSelect = ({
                 value={value}
                 labelWidth={labelWidth}
                 inputProps={{
-                    name: "age",
-                    id: "outlined-age-simple"
+                    name
                 }}
             >
-                {allowToChooseNone ? (
+                {allowToChooseNone && (
                     <MenuItem
                         value=""
                         name={selectNothingText}
                         component={"li"}
                     >
-                        <div style={{ height: "24px" }} />
+                        <li style={{ height: "24px" }} />
                     </MenuItem>
-                ) : null}
+                )}
 
-                {_getValues(valueToTextMap, reverse).map(value => {
-                    const text = valueToTextMap[value];
+                {_getValues(valueToTextMap, reverse).map(v => {
+                    const text = valueToTextMap[v];
                     return (
-                        <MenuItem
-                            name={value}
-                            key={value}
-                            value={value}
-                            component={"li"}
-                        >
+                        <MenuItem key={v} value={v} component={"li"}>
                             {text}
                         </MenuItem>
                     );

@@ -1,9 +1,7 @@
-import withStyles from "@material-ui/styles/withStyles";
 import AccessTime from "@material-ui/icons/AccessTime";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import DateRange from "@material-ui/icons/DateRange";
-import Keyboard from "@material-ui/icons/Keyboard";
 import { DateTimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
@@ -62,7 +60,6 @@ const DigitDateAndTimePicker = ({
             showTodayButton={showTodayButton}
             invalidLabel={invalidLabel}
             dateRangeIcon={<DateRange />}
-            keyboardIcon={<Keyboard />}
             leftArrowIcon={<ChevronLeft />}
             rightArrowIcon={<ChevronRight />}
             timeIcon={<AccessTime />}

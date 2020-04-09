@@ -11,6 +11,8 @@ function useDigitDialog(defaultDialogProps = {}) {
                 type: OPEN_DIALOG,
                 dialog: { ...defaultDialogProps, ...dialog }
             }),
+        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [JSON.stringify(defaultDialogProps), dispatch]
     );
 

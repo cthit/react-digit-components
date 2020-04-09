@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
-import NavLink from "react-router-dom/NavLink";
+import { NavLink } from "react-router-dom";
 
 const DigitNavLink = ({
     text,

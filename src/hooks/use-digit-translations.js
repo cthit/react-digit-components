@@ -25,14 +25,20 @@ function useDigitTranslations(translations = {}) {
     const { activeLanguage, commonTranslations } = state;
     const [text, setText] = useState({});
 
+    const check =
+        JSON.stringify(translations) + JSON.stringify(commonTranslations);
+
     //Calculates text
-    useEffect(() => {
-        setText(getNewText(translations, commonTranslations, activeLanguage));
-    }, [
-        activeLanguage,
-        JSON.stringify(translations),
-        JSON.stringify(commonTranslations)
-    ]);
+    useEffect(
+        () => {
+            setText(
+                getNewText(translations, commonTranslations, activeLanguage)
+            );
+        },
+        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [activeLanguage, check]
+    );
 
     const setActiveLanguageCallback = useCallback(
         lang => dispatch({ type: SET_ACTIVE_LANGUAGE, activeLanguage: lang }),

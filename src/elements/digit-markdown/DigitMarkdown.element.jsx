@@ -7,13 +7,14 @@ import {
     Heading3,
     Heading4,
     Heading5,
-    Heading6,
-    Text
+    Heading6
 } from "../../styles/digit-text/DigitText.styles";
 import DigitTable from "../../views/digit-table";
 import styled from "styled-components";
 
 const StyledReactMarkdown = styled(ReactMarkdown)`
+    font-family: "Roboto", serif;
+
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
 
@@ -130,16 +131,6 @@ const DigitMarkdown = ({
                     default:
                         return null;
                 }
-            },
-            paragraph: data => {
-                return <Text text={data.children} />;
-            },
-            listItem: data => {
-                return (
-                    <li>
-                        <Text text={data.children} />
-                    </li>
-                );
             }
         }}
     />

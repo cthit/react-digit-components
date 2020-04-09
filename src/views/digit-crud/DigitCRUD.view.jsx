@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import PropTypes from "prop-types";
 
 import { Route, Switch } from "react-router-dom";
@@ -15,7 +15,6 @@ import {
     createReadOneAction,
     createUpdateAction
 } from "./DigitCRUD.action-creator";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import DigitCRUDContext, {
     DigitCRUDContextProvider
 } from "../../contexts/DigitCRUDContext";
@@ -148,7 +147,9 @@ const DigitCRUDInner = ({
             : null,
         [updateRequest]
     );
-    const clearAction = useCallback(() => dispatch(createClearAction()), []);
+    const clearAction = useCallback(() => dispatch(createClearAction()), [
+        dispatch
+    ]);
 
     const modifiedFormComponentData = modifyFormComponentData(
         formComponentData,

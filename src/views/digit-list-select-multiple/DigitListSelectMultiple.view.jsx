@@ -48,6 +48,15 @@ const getCheckedNodes = (checkedLeaves, all, idProp) =>
         )
         .map(node => node[idProp]);
 
+const getAllSubItems = item => {
+    return [
+        item,
+        ...(item.items != null
+            ? item.items.reduce((a, i) => a.concat(getAllSubItems(i)), [])
+            : [])
+    ];
+};
+
 const DigitListSelectMultiple = ({
     title,
     items,
@@ -74,28 +83,6 @@ const DigitListSelectMultiple = ({
     });
     const [toggle, isExpanded] = useToggler(multipleExpanded);
     const [innerValue, setValue] = useState(value);
-
-    //recalculates innerValue
-    useEffect(() => {
-        if (root && !includeNodeValue) {
-            const all = items.reduce((a, i) => a.concat(getAllSubItems(i)), []);
-            const newInnerValue = [
-                ...value,
-                ...getCheckedNodes(value, all, idProp)
-            ];
-
-            newInnerValue.sort();
-            const innerValueCopy = [...innerValue].sort();
-
-            if (
-                JSON.stringify(newInnerValue) !== JSON.stringify(innerValueCopy)
-            ) {
-                setValue(newInnerValue);
-            }
-        } else {
-            setValue(value);
-        }
-    }, [value, root, includeNodeValue]);
 
     const handleChange = e => {
         const e2 = {
@@ -131,15 +118,6 @@ const DigitListSelectMultiple = ({
         });
     };
 
-    const getAllSubItems = item => {
-        return [
-            item,
-            ...(item.items != null
-                ? item.items.reduce((a, i) => a.concat(getAllSubItems(i)), [])
-                : [])
-        ];
-    };
-
     const getAllSubItemIds = item => {
         return [
             item[idProp],
@@ -148,6 +126,28 @@ const DigitListSelectMultiple = ({
                 : [])
         ];
     };
+
+    //recalculates innerValue
+    useEffect(() => {
+        if (root && !includeNodeValue) {
+            const all = items.reduce((a, i) => a.concat(getAllSubItems(i)), []);
+            const newInnerValue = [
+                ...value,
+                ...getCheckedNodes(value, all, idProp)
+            ];
+
+            newInnerValue.sort();
+            const innerValueCopy = [...innerValue].sort();
+
+            if (
+                JSON.stringify(newInnerValue) !== JSON.stringify(innerValueCopy)
+            ) {
+                setValue(newInnerValue);
+            }
+        } else {
+            setValue(value);
+        }
+    }, [value, root, includeNodeValue, idProp, innerValue, items]);
 
     return (
         <List

@@ -19,7 +19,13 @@ const DigitButtonGroup = ({
     padding,
     margin
 }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, size });
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
     return (
         <ButtonGroup
@@ -31,6 +37,7 @@ const DigitButtonGroup = ({
         >
             {buttons.map(button => (
                 <Button
+                    key={button.text}
                     disabled={button.disabled}
                     startIcon={button.startIcon}
                     endIcon={button.endIcon}

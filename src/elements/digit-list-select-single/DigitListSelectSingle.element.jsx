@@ -213,7 +213,8 @@ DigitListSelectSingle.propTypes = {
 };
 
 DigitListSelectSingle.defaultProps = {
-    idProp: "text"
+    idProp: "text",
+    multipleExpanded: false
 };
 
 export default DigitListSelectSingle;

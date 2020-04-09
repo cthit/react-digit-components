@@ -20,7 +20,7 @@ function useDigitFormFieldArray(name) {
     const value = form.values[name];
     const onChange = useCallback(
         newValue => form.handleChange(newValue, name),
-        [name]
+        [name, form]
     );
     const remove = index => {
         const newValue = [...value];

@@ -130,7 +130,7 @@ const DigitCRUDContextProvider = ({
         }
 
         return dispatch(action);
-    });
+    }, []);
 
     return (
         <DigitCRUDContext.Provider

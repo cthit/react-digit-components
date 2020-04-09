@@ -21,9 +21,12 @@ function useDigitFormField(
     const form = useContext(DigitFormContext);
     const onChange = useCallback(
         e => form.handleChange(getValueFromEvent(e), name),
-        [name]
+        [name, getValueFromEvent, form]
     );
-    const onBlur = useCallback(() => form.handleTouched(true, name), [name]);
+    const onBlur = useCallback(() => form.handleTouched(true, name), [
+        name,
+        form
+    ]);
     const error =
         form.errors[name] != null &&
         form.touched[name] != null &&

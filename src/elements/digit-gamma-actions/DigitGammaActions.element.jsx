@@ -50,6 +50,8 @@ const DigitGammaActionsLayout = ({
                         case "signOut":
                             window.location.href = backendUrl + "/logout"; //i.e. gamma.chalmers.it/api/logout
                             break;
+                        default:
+                            break;
                     }
                 }}
                 valueToTextMap={{

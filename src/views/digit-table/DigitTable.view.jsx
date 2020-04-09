@@ -227,7 +227,7 @@ const DigitTable = ({
             page * rowsPerPage,
             page * rowsPerPage + rowsPerPage
         );
-    }, [data, searchValue, page, rowsPerPage, order, orderBy]);
+    }, [data, searchValue, page, rowsPerPage, order, orderBy, columnsOrder]);
 
     return (
         <Paper classes={layoutClasses}>

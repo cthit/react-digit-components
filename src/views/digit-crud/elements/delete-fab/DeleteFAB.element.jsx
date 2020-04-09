@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import DigitFAB from "../../../../elements/digit-fab";
 import Delete from "@material-ui/icons/Delete";
@@ -127,16 +127,25 @@ const DeleteFAB = ({
         onConfirm: onDeleteInternal
     });
 
-    const renderButtons = (confirm, cancel) => (
-        <DeleteDialogButtons
-            dialogDeleteConfirm={dialogDeleteConfirm}
-            dialogDeleteCancel={dialogDeleteCancel}
-            cancel={cancel}
-            confirm={confirm}
-            closeCustomDialog={closeCustomDialog}
-            formValid={formValid}
-            one={one}
-        />
+    const renderButtons = useMemo(
+        (confirm, cancel) => (
+            <DeleteDialogButtons
+                dialogDeleteConfirm={dialogDeleteConfirm}
+                dialogDeleteCancel={dialogDeleteCancel}
+                cancel={cancel}
+                confirm={confirm}
+                closeCustomDialog={closeCustomDialog}
+                formValid={formValid}
+                one={one}
+            />
+        ),
+        [
+            closeCustomDialog,
+            dialogDeleteCancel,
+            dialogDeleteConfirm,
+            formValid,
+            one
+        ]
     );
 
     useEffect(() => {
@@ -145,7 +154,7 @@ const DeleteFAB = ({
                 renderButtons
             });
         }
-    }, [formValid, dialogOpen]);
+    }, [renderButtons, updateCustomDialog, dialogOpen]);
 
     return (
         <>

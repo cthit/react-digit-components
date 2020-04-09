@@ -39,6 +39,8 @@ const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
     const field = useDigitFormField(name);
     const { component, componentProps = {} } = componentData;
 
+    const check = JSON.stringify(field) + JSON.stringify(componentProps);
+
     return useMemo(
         () =>
             createElement(component, {
@@ -49,7 +51,9 @@ const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
                 ...field,
                 name
             }),
-        [JSON.stringify(field), JSON.stringify(componentData), alignSelfCenter]
+        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [check, component, name, alignSelfCenter]
     );
 };
 
@@ -57,6 +61,8 @@ const DigitEditDataFieldArray = ({ name, componentData, alignSelfCenter }) => {
     const field = useDigitFormFieldArray(name);
     const { component, componentProps } = componentData;
 
+    const check = JSON.stringify(field) + JSON.stringify(componentData);
+
     return useMemo(
         () =>
             createElement(component, {
@@ -67,7 +73,9 @@ const DigitEditDataFieldArray = ({ name, componentData, alignSelfCenter }) => {
                 ...field,
                 name
             }),
-        [JSON.stringify(field), JSON.stringify(componentData)]
+        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [check, component, name, alignSelfCenter]
     );
 };
 

@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { Subtitle, Title } from "../digit-text/DigitText.styles";
 import { Flex } from "../digit-layout/DigitLayout.styles";
 
-export const Card = styled(props => <Paper {...props} />)`
+export const Card = styled(({ alignSelf, ...rest }) => <Paper {...rest} />)`
     display: flex;
     flex-direction: column;
     flex: ${props => props.flex || "0 1 auto"};
@@ -54,7 +54,9 @@ Card.defaultProps = {
 /**
  * use this hasSubtitle and hasIcon must be true if you have them inside your Card.
  */
-export const CardHeader = styled.div`
+export const CardHeader = styled(({ hasSubtitle, hasIcon, ...rest }) => (
+    <div {...rest} />
+))`
     padding-top: 16px;
     padding-left: 16px;
     padding-right: 16px;

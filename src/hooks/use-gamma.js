@@ -33,7 +33,7 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
     const code = useMemo(() => {
         const paramsResponse = new URLSearchParams(window.location.search);
         return paramsResponse.get("code");
-    }, [window.location.search]);
+    }, []);
 
     useEffect(() => {
         if (code) {
@@ -48,7 +48,7 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
                     console.log(error);
                 });
         }
-    }, [window.location.search]);
+    }, [code, history, postCodeUrl, queueToast, text.SomethingWhenWrong]);
 
     useEffect(() => {
         if (loading && me == null && code == null) {
@@ -61,7 +61,7 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
                     window.location.href = err.response.data;
                 });
         }
-    }, [loading, me, code]);
+    }, [loading, me, code, dispatch, getMeUrl]);
 
     return [loading, error];
 }

@@ -1,0 +1,7 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Inputs/Inputs README"/>
+
+# Inputs
+
+Inputs in react-digit-components are quite simple. They all have the properties `value` and `onChange`. They are all uncontrolled, meaning that you have to manage and supply the `value` to the component. But with for example `DigitEditData` and `useDigitFormField` you don't have to do this. Note that when there's multiple values, for example `value` is represented by an array, then it's always some sort of `id` or similar values that should be used. No objects.

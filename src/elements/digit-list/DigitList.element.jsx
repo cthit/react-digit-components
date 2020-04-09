@@ -190,12 +190,7 @@ DigitList.defaultProps = {
     dense: false,
     disablePadding: false,
     idProp: "text",
-    multipleExpanded: "",
-    flex: "",
-    alignSelf: "",
-    size: "",
-    padding: "",
-    margin: ""
+    multipleExpanded: false
 };
 
 export default DigitList;

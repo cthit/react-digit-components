@@ -1,7 +1,6 @@
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import { DigitLayout, DigitText} from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
-import DummyItem from "./DummyItem";
 
 <Meta
     title="Styles/DigitLayout"
@@ -17,10 +16,11 @@ Different ways of structuring content.
 <Preview>
     <Story name="Column">
         <DigitLayout.Column>
-            <DummyItem text="1" color="blue" />
-            <DummyItem text="2" color="yellow" />
-            <DummyItem text="3" color="green" />
-            <DummyItem text="4" color="red" />
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
         </DigitLayout.Column>
     </Story>
 </Preview>
@@ -30,10 +30,11 @@ Different ways of structuring content.
 <Preview>
     <Story name="Row">
         <DigitLayout.Row>
-            <DummyItem text="1" color="blue" />
-            <DummyItem text="2" color="yellow" />
-            <DummyItem text="3" color="green" />
-            <DummyItem text="4" color="red" />
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
         </DigitLayout.Row>
     </Story>
 </Preview>
@@ -43,14 +44,11 @@ Different ways of structuring content.
 <Preview>
     <Story name="Grid">
         <DigitLayout.Grid columns={`repeat(${3}, 1fr)`}>
-            <DummyItem text="1" color="blue" />
-            <DummyItem text="2" color="yellow" />
-            <DummyItem text="3" color="green" />
-            <DummyItem text="4" color="red" />
-            <DummyItem text="5" color="blue" />
-            <DummyItem text="6" color="yellow" />
-            <DummyItem text="7" color="green" />
-            <DummyItem text="8" color="red" />
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
         </DigitLayout.Grid>
     </Story>
 </Preview>
@@ -60,14 +58,11 @@ Different ways of structuring content.
 <Preview>
     <Story name="UniformGrid">
         <DigitLayout.UniformGrid margin="30px" minItemWidth="150px">
-            <DummyItem text="1" color="blue" />
-            <DummyItem text="2" color="yellow" />
-            <DummyItem text="3" color="green" />
-            <DummyItem text="4" color="red" />
-            <DummyItem text="5" color="blue" />
-            <DummyItem text="6" color="yellow" />
-            <DummyItem text="7" color="green" />
-            <DummyItem text="8" color="red" />
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+            <div>4</div>
+            <div>5</div>
         </DigitLayout.UniformGrid>
     </Story>
 </Preview>
@@ -84,16 +79,16 @@ Different ways of structuring content.
             return (
                 <DigitLayout.Row center fillElement padding="8px">
                     <DigitLayout.Order order={orderBlue}>
-                        <DummyItem text="1" color="blue" />
+                        <div>1</div>
                     </DigitLayout.Order>
                     <DigitLayout.Order order={orderYellow}>
-                        <DummyItem text="2" color="yellow" />
+                        <div>2</div>
                     </DigitLayout.Order>
                     <DigitLayout.Order order={orderGreen}>
-                        <DummyItem text="3" color="green" />
+                        <div>3</div>
                     </DigitLayout.Order>
                     <DigitLayout.Order order={orderRed}>
-                        <DummyItem text="4" color="red" />
+                        <div>4</div>
                     </DigitLayout.Order>
                 </DigitLayout.Row>
             );

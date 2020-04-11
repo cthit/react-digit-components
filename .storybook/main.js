@@ -1,11 +1,11 @@
 module.exports = {
-    presets: [
+    addons: [
+        "@storybook/preset-create-react-app",
         {
             name: "@storybook/addon-docs/preset",
             options: {
                 configureJSX: true,
                 babelOptions: {
-                    presets: [],
                     plugins: [
                         [
                             "@babel/plugin-transform-react-jsx",

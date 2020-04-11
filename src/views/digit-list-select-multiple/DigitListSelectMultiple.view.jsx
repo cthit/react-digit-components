@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useToggler from "../../hooks/use-toggler";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import { Padding, Row } from "../../styles/digit-layout/DigitLayout.styles";
+import { Row } from "../../styles/digit-layout/DigitLayout.styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -15,6 +15,7 @@ import List from "@material-ui/core/List";
 import Checkbox from "@material-ui/core/Checkbox";
 import xor from "lodash/xor";
 import uniq from "lodash/uniq";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 //Can be optimized to fail fast.
 const hasAtLeastOneItemChecked = (item, checkedLeaves, idProp) =>
@@ -47,43 +48,41 @@ const getCheckedNodes = (checkedLeaves, all, idProp) =>
         )
         .map(node => node[idProp]);
 
+const getAllSubItems = item => {
+    return [
+        item,
+        ...(item.items != null
+            ? item.items.reduce((a, i) => a.concat(getAllSubItems(i)), [])
+            : [])
+    ];
+};
+
 const DigitListSelectMultiple = ({
     title,
     items,
     dense,
-    disablePadding,
     idProp,
     multipleExpanded,
     value,
     onChange,
     nodeSelectsAllChildren,
     includeNodeValue,
-    root
+    root,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [toggle, isExpanded] = useToggler(multipleExpanded);
     const [innerValue, setValue] = useState(value);
-
-    //recalculates innerValue
-    useEffect(() => {
-        if (root && !includeNodeValue) {
-            const all = items.reduce((a, i) => a.concat(getAllSubItems(i)), []);
-            const newInnerValue = [
-                ...value,
-                ...getCheckedNodes(value, all, idProp)
-            ];
-
-            newInnerValue.sort();
-            const innerValueCopy = [...innerValue].sort();
-
-            if (
-                JSON.stringify(newInnerValue) !== JSON.stringify(innerValueCopy)
-            ) {
-                setValue(newInnerValue);
-            }
-        } else {
-            setValue(value);
-        }
-    }, [value, root, includeNodeValue]);
 
     const handleChange = e => {
         const e2 = {
@@ -110,12 +109,6 @@ const DigitListSelectMultiple = ({
     };
 
     const addAllValuesAs = (ids, bol) => {
-        console.log(ids);
-        console.log(
-            bol
-                ? [...ids, ...innerValue]
-                : innerValue.filter(v => !ids.includes(v))
-        );
         handleChange({
             target: {
                 value: bol
@@ -123,15 +116,6 @@ const DigitListSelectMultiple = ({
                     : innerValue.filter(v => !ids.includes(v))
             }
         });
-    };
-
-    const getAllSubItems = item => {
-        return [
-            item,
-            ...(item.items != null
-                ? item.items.reduce((a, i) => a.concat(getAllSubItems(i)), [])
-                : [])
-        ];
     };
 
     const getAllSubItemIds = item => {
@@ -143,16 +127,34 @@ const DigitListSelectMultiple = ({
         ];
     };
 
+    //recalculates innerValue
+    useEffect(() => {
+        if (root && !includeNodeValue) {
+            const all = items.reduce((a, i) => a.concat(getAllSubItems(i)), []);
+            const newInnerValue = [
+                ...value,
+                ...getCheckedNodes(value, all, idProp)
+            ];
+
+            newInnerValue.sort();
+            const innerValueCopy = [...innerValue].sort();
+
+            if (
+                JSON.stringify(newInnerValue) !== JSON.stringify(innerValueCopy)
+            ) {
+                setValue(newInnerValue);
+            }
+        } else {
+            setValue(value);
+        }
+    }, [value, root, includeNodeValue, idProp, innerValue, items]);
+
     return (
         <List
+            classes={classes}
             dense={dense}
-            subheader={
-                <ListSubheader component="div">
-                    <Padding>{title}</Padding>
-                </ListSubheader>
-            }
+            subheader={<ListSubheader component="div">{title}</ListSubheader>}
             component={"div"}
-            disablePadding={disablePadding}
         >
             {items.map(item => (
                 <React.Fragment key={item[idProp]}>
@@ -259,7 +261,6 @@ const DigitListSelectMultiple = ({
                                     items={item.items}
                                     multipleExpanded={item.multipleExpanded}
                                     dense={dense}
-                                    disablePadding
                                     value={innerValue}
                                     onChange={handleChange}
                                     idProp={idProp}
@@ -279,7 +280,57 @@ const DigitListSelectMultiple = ({
 
 DigitListSelectMultiple.propTypes = {
     /** If true, then node values will be excluded from onChange */
-    includeNodeValue: PropTypes.bool
+    includeNodeValue: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitListSelectMultiple.defaultProps = {

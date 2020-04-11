@@ -2,43 +2,80 @@ import PropTypes from "prop-types";
 import React, { createElement, useMemo } from "react";
 import DigitButton from "../digit-button";
 import DigitForm from "../../views/digit-form";
-import {
-    Column,
-    Padding,
-    Row
-} from "../../styles/digit-layout/DigitLayout.styles";
+import { Column, Row } from "../../styles/digit-layout/DigitLayout.styles";
 import * as yup from "yup";
 import useDigitFormField from "../../hooks/use-digit-form-field";
+import useDigitFormFieldArray from "../../hooks/use-digit-form-field-array";
 
 const DigitEditDataInner = ({
     keysOrder,
     keysComponentData,
+    centerFields,
     marginVertical = 8
 }) => {
     return keysOrder.map(key => (
         <React.Fragment key={key}>
             <div style={{ marginBottom: marginVertical }} />
-            <DigitEditDataField
-                name={key}
-                componentData={keysComponentData[key]}
-            />
+            {keysComponentData[key].array && (
+                <DigitEditDataFieldArray
+                    name={key}
+                    componentData={keysComponentData[key]}
+                    alignSelfCenter={centerFields}
+                />
+            )}
+            {!keysComponentData[key].array && (
+                <DigitEditDataField
+                    name={key}
+                    componentData={keysComponentData[key]}
+                    alignSelfCenter={centerFields}
+                />
+            )}
             <div style={{ marginBottom: marginVertical }} />
         </React.Fragment>
     ));
 };
 
-const DigitEditDataField = ({ name, componentData }) => {
+const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
     const field = useDigitFormField(name);
-    const { component, componentProps } = componentData;
+    const { component, componentProps = {} } = componentData;
+
+    const check = JSON.stringify(field) + JSON.stringify(componentProps);
 
     return useMemo(
         () =>
             createElement(component, {
-                ...componentProps,
+                ...{
+                    alignSelf: alignSelfCenter ? "center" : "auto",
+                    ...componentProps
+                },
                 ...field,
                 name
             }),
-        [JSON.stringify(field), JSON.stringify(componentData)]
+        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [check, component, name, alignSelfCenter]
+    );
+};
+
+const DigitEditDataFieldArray = ({ name, componentData, alignSelfCenter }) => {
+    const field = useDigitFormFieldArray(name);
+    const { component, componentProps } = componentData;
+
+    const check = JSON.stringify(field) + JSON.stringify(componentData);
+
+    return useMemo(
+        () =>
+            createElement(component, {
+                ...{
+                    alignSelf: alignSelfCenter ? "center" : "auto",
+                    ...componentProps
+                },
+                ...field,
+                name
+            }),
+        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [check, component, name, alignSelfCenter]
     );
 };
 
@@ -52,7 +89,8 @@ const DigitEditData = ({
     hasButtons,
     renderButtons,
     formName,
-    onValidSubmitChange
+    onValidSubmitChange,
+    centerFields
 }) => {
     return (
         <DigitForm
@@ -67,8 +105,8 @@ const DigitEditData = ({
                         marginVertical={marginVertical}
                         keysOrder={keysOrder}
                         keysComponentData={keysComponentData}
+                        centerFields={centerFields}
                     />
-                    <Padding />
                     {hasButtons && <Row reverse>{renderButtons(form)}</Row>}
                 </Column>
             )}
@@ -104,8 +142,6 @@ DigitEditData.defaultProps = {
     titleText: "",
     submitText: "",
     marginVertical: "4px",
-    absWidth: null,
-    absHeight: null,
     minWidth: "300px",
     maxWidth: "300px",
     keysOrder: [],

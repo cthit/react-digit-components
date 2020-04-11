@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
 import {
     useDigitDialog,
     DigitButton
@@ -8,15 +8,19 @@ import * as yup from "yup";
 
 # useDigitDialog
 
-<Meta title="Hooks/useDigitDialog" decorators={[(StoryFn) => <div style={{height: "500px"}}><StoryFn/></div>]}/>
+A hook that can be used to open a dialog window, `DigitDialog`, that blocks further actions on the website until resolved. `useDigtiDialog` closes automatically when the cancel or confirm buttons is pressed. It is possible to use `DigitDialog` inline, but it's not recommended. A `DigitDialog` has six props that can be viewed at the end of this page. If you need more customization for the dialog, more than just a title and description, then `useDigitCustomDialog` can be used. It's however more complicated.
 
-## hej
+<Meta title="Dialog/useDigitDialog" />
 
 <Preview>
     <Story name="dialog">
         {() => {
             const [openDialog] = useDigitDialog({
-                title: "Oh"
+                title: "Oh",
+                confirmButtonText: "Confirm",
+                cancelButtonText: "Cancel",
+                onConfirm: () => console.log("Confirm"),
+                onCancel: () => console.log("Cancel")
             });
             return (
                 <>
@@ -27,4 +31,15 @@ import * as yup from "yup";
     </Story>
 </Preview>
 
-<Props of={useDigitDialog} />
+## Props
+
+These are the props for the object given as the first and only argument in the hook `useDigitDialog`. `useDigitDialog` returns an array with one function called `openDialog`. It takes in the same object as the hook does, but overrides if there's any conflicts between the two objects.
+
+| **Name**              	| **Type**   	| **Description**                             	|
+|-----------------------	|------------	|---------------------------------------------	|
+| **title**             	| *string*   	| The title text in bold of the dialog        	|
+| **description**       	| *string*   	| The description text of the dialog          	|
+| **confirmButtonText** 	| *string*   	| The text for the confirm button             	|
+| **cancelButtonText**  	| *string*   	| The text for the cancel button              	|
+| **onConfirm**         	| *function* 	| Called when confirm button has been clicked 	|
+| **onCancel**          	| *function* 	| Called when cancel button has been clicked  	|

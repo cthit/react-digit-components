@@ -1,146 +1,69 @@
+import { useMemo, useContext, useEffect } from "react";
 import axios from "axios";
-import useGammaUser from "./use-gamma-user";
-import _ from "lodash";
-import { useContext, useEffect, useMemo, useState } from "react";
 import DigitGammaContext, {
-    GET_USER_FAILED,
-    GET_USER_LOADING,
-    GET_USER_SUCCESSFULLY,
-    GET_USER_TOKEN_FAILED
+    GET_ME_SUCCESSFUL
 } from "../contexts/DigitGammaContext";
 import useDigitToast from "./use-digit-toast";
+import useDigitTranslations from "./use-digit-translations";
+import trimEnd from "lodash/trimEnd";
+import { useHistory } from "react-router";
 
-function updateMe(gammaPath, dispatch, name) {
-    dispatch({ type: GET_USER_LOADING });
-    axios
-        .get(removeLastSlash(gammaPath) + "/users/me", {
-            headers: {
-                Authorization:
-                    "Bearer " + sessionStorage.getItem("auth-" + name)
-            }
-        })
-        .then(response => {
-            if (typeof response.data !== "object") {
-                //prob html file that says "plz sign in"
-                console.log(response);
-                dispatch({ type: GET_USER_FAILED });
-            } else {
-                dispatch({ type: GET_USER_SUCCESSFULLY, user: response.data });
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            dispatch({ type: GET_USER_FAILED });
-        });
-}
+const translations = {
+    SomethingWentWrong: [
+        "Something went wrong when trying to sign in",
+        "Någonting gick fel med inloggningen"
+    ]
+};
+
+const getRequest = endpoint => axios.get(removeLastSlash(endpoint));
+
+const postRequest = (endpoint, data) =>
+    axios.post(removeLastSlash(endpoint), data);
 
 function removeLastSlash(path) {
-    return _.trimEnd(path, "/");
+    return trimEnd(path, "/");
 }
 
-function redirectToGamma(gammaPath, redirect, id) {
-    const baseUrl = removeLastSlash(gammaPath) + "/oauth/authorize";
-    const responseType = "response_type=code";
-    const clientId = "client_id=" + id;
-    const redirectUri = "redirect_uri=" + redirect;
-    window.location.href =
-        baseUrl + "?" + responseType + "&" + clientId + "&" + redirectUri;
-}
+function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
+    const [text] = useDigitTranslations(translations);
+    const [{ loading, error, me }, dispatch] = useContext(DigitGammaContext);
+    const [queueToast] = useDigitToast();
+    const history = useHistory();
 
-function signOut(name) {
-    sessionStorage.removeItem("auth-" + name);
-    window.location.href = "/";
-}
-
-function useGamma(
-    name = "MyApp",
-    id = "id",
-    secret = "secret",
-    redirect = "http://localhost:3001/auth/account/callback",
-    gammaPath = "http://localhost:8081/api",
-    forceSignedIn = true,
-    toastSignedOutText = "You're signed out",
-    toastSignBackInText = "Press to sign in",
-    toastDuration = 5000
-) {
-    const [, dispatch] = useContext(DigitGammaContext);
-    const [loadingMe, setLoadingMe] = useState(false);
-    const [user, loading, error] = useGammaUser();
-    const [queueToast] = useDigitToast({
-        actionHandler: () => {
-            redirectToGamma(gammaPath, redirect, id);
-        },
-        text: toastSignedOutText,
-        duration: toastDuration,
-        actionText: toastSignBackInText
-    });
-
-    const jwtAuth = useMemo(() => sessionStorage.getItem("auth-" + name), [
-        name
-    ]);
+    const code = useMemo(() => {
+        const paramsResponse = new URLSearchParams(window.location.search);
+        return paramsResponse.get("code");
+    }, []);
 
     useEffect(() => {
-        if (error && !loading) {
-            sessionStorage.removeItem("auth-" + name);
-            queueToast();
-        }
-    }, [loading, error, name, queueToast]);
-
-    if (!jwtAuth && !error && !loadingMe) {
-        setLoadingMe(true);
-        const paramsResponse = new URLSearchParams(window.location.search);
-        const code = paramsResponse.get("code");
-        //check if just signed in:
         if (code) {
-            const params = new URLSearchParams();
-            params.append("grant_type", "authorization_code");
-            params.append("client_id", id);
-            params.append("redirect_uri", redirect);
-            params.append("code", code);
-
-            const c = Buffer.from(id + ":" + secret).toString("base64");
-
-            axios
-                .post(
-                    removeLastSlash(gammaPath) +
-                        "/oauth/token?" +
-                        params.toString(),
-                    null,
-                    {
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                            Authorization: "Basic " + c
-                        }
-                    }
-                )
-                .then(response => {
-                    window.location.href = "/";
-                    sessionStorage.setItem(
-                        "auth-" + name,
-                        response.data.access_token
-                    );
-                    setLoadingMe(true);
-                    updateMe(gammaPath, dispatch, name);
+            postRequest(postCodeUrl, { code })
+                .then(() => {
+                    history.push("/");
                 })
                 .catch(error => {
+                    history.push("/");
+                    queueToast({ text: text.SomethingWhenWrong });
+                    console.log("Something went wrong...");
                     console.log(error);
-                    dispatch({ type: GET_USER_TOKEN_FAILED });
                 });
-        } else {
-            if (forceSignedIn) {
-                redirectToGamma(gammaPath, redirect, id);
-            }
         }
-    } else if (!user && !loadingMe) {
-        setLoadingMe(true);
-        updateMe(gammaPath, dispatch, name);
-    }
-    return [
-        loading,
-        error,
-        () => redirectToGamma(gammaPath, redirect, id),
-        () => signOut(name)
-    ];
+    }, [code, history, postCodeUrl, queueToast, text.SomethingWhenWrong]);
+
+    useEffect(() => {
+        if (loading && me == null && code == null) {
+            getRequest(getMeUrl)
+                .then(response => {
+                    dispatch({ type: GET_ME_SUCCESSFUL, me: response.data });
+                })
+                .catch(err => {
+                    //If failed to login, then redirect to the url provided.
+                    window.location.href = err.response.data;
+                });
+        }
+    }, [loading, me, code, dispatch, getMeUrl]);
+
+    return [loading, error];
 }
 
 export default useGamma;

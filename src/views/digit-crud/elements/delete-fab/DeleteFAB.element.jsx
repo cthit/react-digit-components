@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import DigitFAB from "../../../../elements/digit-fab";
 import Delete from "@material-ui/icons/Delete";
 import { DownRightPosition } from "../../../../styles/digit-layout/DigitLayout.styles";
@@ -83,7 +84,9 @@ const DeleteFAB = ({
     deleteDialogFormComponentData,
     deleteDialogFormValidationSchema,
     deleteDialogFormInitialValues,
-    deleteDialogFormKeysOrder
+    deleteDialogFormKeysOrder,
+    onDelete,
+    useHistoryGoBackOnBack
 }) => {
     const [formValid, setFormValid] = useState(false);
     const [queueToast] = useDigitToast();
@@ -93,14 +96,19 @@ const DeleteFAB = ({
         closeCustomDialog,
         updateCustomDialog
     ] = useDigitCustomDialog();
-    const onDelete = form =>
+    const onDeleteInternal = form =>
         deleteAction(id, form)
             .then(response => {
                 queueToast({
                     text: toastDeleteSuccessful(one, response)
                 });
                 closeCustomDialog();
-                history.push(path + backFromDeletePath);
+                if (useHistoryGoBackOnBack) {
+                    history.goBack();
+                } else {
+                    history.push(path + backFromDeletePath);
+                }
+                onDelete(response);
             })
             .catch(error => {
                 queueToast({
@@ -116,19 +124,28 @@ const DeleteFAB = ({
         onClose: () => {
             setDialogOpen(false);
         },
-        onConfirm: onDelete
+        onConfirm: onDeleteInternal
     });
 
-    const renderButtons = (confirm, cancel) => (
-        <DeleteDialogButtons
-            dialogDeleteConfirm={dialogDeleteConfirm}
-            dialogDeleteCancel={dialogDeleteCancel}
-            cancel={cancel}
-            confirm={confirm}
-            closeCustomDialog={closeCustomDialog}
-            formValid={formValid}
-            one={one}
-        />
+    const renderButtons = useMemo(
+        (confirm, cancel) => (
+            <DeleteDialogButtons
+                dialogDeleteConfirm={dialogDeleteConfirm}
+                dialogDeleteCancel={dialogDeleteCancel}
+                cancel={cancel}
+                confirm={confirm}
+                closeCustomDialog={closeCustomDialog}
+                formValid={formValid}
+                one={one}
+            />
+        ),
+        [
+            closeCustomDialog,
+            dialogDeleteCancel,
+            dialogDeleteConfirm,
+            formValid,
+            one
+        ]
     );
 
     useEffect(() => {
@@ -137,52 +154,65 @@ const DeleteFAB = ({
                 renderButtons
             });
         }
-    }, [formValid, dialogOpen]);
+    }, [renderButtons, updateCustomDialog, dialogOpen]);
 
     return (
-        <DownRightPosition>
-            <DigitFAB
-                text={deleteButtonText(one)}
-                icon={Delete}
-                onClick={() => {
-                    if (deleteDialogFormComponentData != null) {
-                        setDialogOpen(true);
-                        openCustomDialog({
-                            renderMain: () => (
-                                <DeleteDialogMain
-                                    onSubmit={values => onDelete(values)}
-                                    onValidSubmitChange={valid =>
-                                        setFormValid(valid)
-                                    }
-                                    dialogDeleteDescription={
-                                        dialogDeleteDescription
-                                    }
-                                    deleteDialogFormInitialValues={
-                                        deleteDialogFormInitialValues
-                                    }
-                                    deleteDialogFormValidationSchema={
-                                        deleteDialogFormValidationSchema
-                                    }
-                                    deleteDialogFormComponentData={
-                                        deleteDialogFormComponentData
-                                    }
-                                    deleteDialogFormKeysOrder={
-                                        deleteDialogFormKeysOrder
-                                    }
-                                    one={one}
-                                />
-                            ),
-                            renderButtons,
-                            title: dialogDeleteTitle(one),
-                            preventDefaultClose: true
-                        });
-                    } else {
-                        openDialog();
-                    }
+        <>
+            <DownRightPosition>
+                <DigitFAB
+                    text={deleteButtonText(one)}
+                    icon={Delete}
+                    onClick={() => {
+                        if (deleteDialogFormComponentData != null) {
+                            setDialogOpen(true);
+                            openCustomDialog({
+                                renderMain: () => (
+                                    <DeleteDialogMain
+                                        onSubmit={values =>
+                                            onDeleteInternal(values)
+                                        }
+                                        onValidSubmitChange={valid =>
+                                            setFormValid(valid)
+                                        }
+                                        dialogDeleteDescription={
+                                            dialogDeleteDescription
+                                        }
+                                        deleteDialogFormInitialValues={
+                                            deleteDialogFormInitialValues
+                                        }
+                                        deleteDialogFormValidationSchema={
+                                            deleteDialogFormValidationSchema
+                                        }
+                                        deleteDialogFormComponentData={
+                                            deleteDialogFormComponentData
+                                        }
+                                        deleteDialogFormKeysOrder={
+                                            deleteDialogFormKeysOrder
+                                        }
+                                        one={one}
+                                    />
+                                ),
+                                renderButtons,
+                                title: dialogDeleteTitle(one),
+                                preventDefaultClose: true
+                            });
+                        } else {
+                            openDialog();
+                        }
+                    }}
+                />
+            </DownRightPosition>
+            <div //To let the user scroll all the way down, so that the FAB isn't in the way
+                style={{
+                    height: "80px"
                 }}
             />
-        </DownRightPosition>
+        </>
     );
+};
+
+DeleteFAB.propTypes = {
+    backFromDeletePath: PropTypes.string
 };
 
 export default DeleteFAB;

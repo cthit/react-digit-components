@@ -2,6 +2,7 @@ import React from "react";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Button from "@material-ui/core/Button";
 import PropTypes from "prop-types";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitButtonGroup = ({
     buttons,
@@ -11,27 +12,43 @@ const DigitButtonGroup = ({
     secondary,
     disabled,
     small,
-    large
-}) => (
-    <ButtonGroup
-        variant={raised ? "contained" : outlined ? "outlined" : "text"}
-        color={primary ? "primary" : secondary ? "secondary" : "inherit"}
-        disabled={disabled}
-        size={small ? "small" : large ? "large" : "medium"}
-    >
-        {buttons.map(button => (
-            <Button
-                disabled={button.disabled}
-                startIcon={button.startIcon}
-                endIcon={button.endIcon}
-                onClick={button.onClick}
-            >
-                {button.text}
-            </Button>
-        ))}
-    </ButtonGroup>
-);
+    large,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
+    return (
+        <ButtonGroup
+            classes={classes}
+            variant={raised ? "contained" : outlined ? "outlined" : "text"}
+            color={primary ? "primary" : secondary ? "secondary" : "inherit"}
+            disabled={disabled}
+            size={small ? "small" : large ? "large" : "medium"}
+        >
+            {buttons.map(button => (
+                <Button
+                    key={button.text}
+                    disabled={button.disabled}
+                    startIcon={button.startIcon}
+                    endIcon={button.endIcon}
+                    onClick={button.onClick}
+                >
+                    {button.text}
+                </Button>
+            ))}
+        </ButtonGroup>
+    );
+};
 
 DigitButtonGroup.displayName = "DigitButtonGroup";
 DigitButtonGroup.propTypes = {
@@ -41,7 +58,7 @@ DigitButtonGroup.propTypes = {
     primary: PropTypes.bool,
     /** Sets the color to the secondary one. This has precedence over the normal button. */
     secondary: PropTypes.bool,
-    /** Makes the primary color, secondary or gray the background color. 
+    /** Makes the primary color, secondary or gray the background color.
      * Also gives it a "depth" feeling.
      * */
     raised: PropTypes.bool,
@@ -52,7 +69,58 @@ DigitButtonGroup.propTypes = {
     /** If true, then the buttons will be slightly samller. */
     small: PropTypes.bool,
     /** If true, then the buttons will be slightly larger. */
-    large: PropTypes.bool
+    large: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitButtonGroup.defaultProps = {

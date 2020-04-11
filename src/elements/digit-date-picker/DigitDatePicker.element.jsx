@@ -1,19 +1,11 @@
-import withStyles from "@material-ui/styles/withStyles";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
-import Keyboard from "@material-ui/icons/Keyboard";
 import { DatePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 import translations from "./DigitDatePicker.element.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
-
-const styles = () => ({
-    root: {
-        flex: 1,
-        width: "100%"
-    }
-});
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitDatePicker = ({
     value,
@@ -26,7 +18,6 @@ const DigitDatePicker = ({
     clearLabel,
     emptyLabel,
     invalidLabel,
-    classes,
     filled,
     outlined,
     lowerLabel,
@@ -38,14 +29,26 @@ const DigitDatePicker = ({
     shouldDisableDate,
     minDate,
     maxDate,
-    clearable
+    clearable,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [text] = useDigitTranslations(translations);
 
     return (
         <DatePicker
+            classes={classes}
             showTodayButton={showTodayButton}
-            keyboardIcon={<Keyboard />}
             onChange={date => onChange({ target: { value: date } })}
             value={value}
             allowKeyboardControl={false}
@@ -54,7 +57,7 @@ const DigitDatePicker = ({
             disableFuture={disableFuture}
             disablePast={disablePast}
             disableToolbar={false}
-            format={"yyyy-mm-dd"}
+            format={"yyyy-MM-dd"}
             initialFocusedDate={null}
             inputVariant={
                 filled ? "filled" : outlined ? "outlined" : "standard"
@@ -99,13 +102,21 @@ const DigitDatePicker = ({
             cancelLabel={cancelLabel != null ? cancelLabel : text.cancel}
             okLabel={okLabel != null ? okLabel : text.ok}
             clearLabel={clearLabel != null ? clearLabel : text.clear}
-            className={classes.root}
         />
     );
 };
 
 DigitDatePicker.displayName = "DigitDatePicker";
 DigitDatePicker.propTypes = {
+    disabled: PropTypes.bool,
+    disableFuture: PropTypes.bool,
+    disablePast: PropTypes.bool,
+    shouldDisableDate: PropTypes.bool,
+    minDate: PropTypes.string,
+    maxDate: PropTypes.string,
+    clearable: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
     /** The current value. This component is uncontrolled, meaning that
      * you have to store the value and react on changes using
      * the onChange function.
@@ -143,7 +154,55 @@ DigitDatePicker.propTypes = {
     filled: PropTypes.bool,
     lowerLabel: PropTypes.string,
     error: PropTypes.bool,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitDatePicker.defaultProps = {
@@ -154,10 +213,8 @@ DigitDatePicker.defaultProps = {
     filled: false,
     outlined: false,
     error: false,
-    errorMessage: ""
+    errorMessage: "",
+    size: { width: "224px" }
 };
 
-/** This is a temp solution to get the correct prop types from StoryBook. */
-export { DigitDatePicker };
-
-export default withStyles(styles)(DigitDatePicker);
+export default DigitDatePicker;

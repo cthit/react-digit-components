@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import useToggler from "../../hooks/use-toggler";
 import ListSubheader from "@material-ui/core/ListSubheader";
-import { Padding, Row } from "../../styles/digit-layout/DigitLayout.styles";
+import { Row } from "../../styles/digit-layout/DigitLayout.styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -12,29 +13,37 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import Collapse from "@material-ui/core/Collapse";
 import List from "@material-ui/core/List";
 import Radio from "@material-ui/core/Radio";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitListSelectSingle = ({
     title,
     items,
     dense,
-    disablePadding,
     idProp,
     multipleExpanded,
     value,
-    onChange
+    onChange,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [toggle, isExpanded] = useToggler(multipleExpanded);
 
     return (
         <List
+            classes={classes}
             dense={dense}
-            subheader={
-                <ListSubheader component="div">
-                    <Padding>{title}</Padding>
-                </ListSubheader>
-            }
+            subheader={<ListSubheader component="div">{title}</ListSubheader>}
             component={"div"}
-            disablePadding={disablePadding}
         >
             {items.map(item => (
                 <React.Fragment key={item[idProp]}>
@@ -136,8 +145,76 @@ const DigitListSelectSingle = ({
     );
 };
 
+DigitListSelectSingle.propTypes = {
+    /** A title above the list */
+    title: PropTypes.string,
+    /** Array of list items. Can be nested. */
+    items: PropTypes.array,
+    /** If true, lessens the padding */
+    dense: PropTypes.bool,
+    /** The prop that represents a unique key for each item */
+    idProp: PropTypes.string,
+    /** If true, then multiple sub lists can be expanded at once. */
+    multipleExpanded: PropTypes.bool,
+    /** The id that's selected */
+    value: PropTypes.array,
+    /** Function with the new selected value. */
+    onChange: PropTypes.func,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
+};
+
 DigitListSelectSingle.defaultProps = {
-    idProp: "text"
+    idProp: "text",
+    multipleExpanded: false
 };
 
 export default DigitListSelectSingle;

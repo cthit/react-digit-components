@@ -1,0 +1,24 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="DigitProviders"/>
+
+# What is `DigitProviders`?
+`DigitProviders` provides every component in react-digit-components with neccessary styling and functionality. This is done via lots of contextes. 
+
+# Must I use `DigitProviders`?
+**Yes**. For proper styles and functionality `DigitProviders` are needed.
+
+# How do I use `DigitProviders`?
+Easy, just wrap your `App` component with `DigitProviders`. This can for example be done in your main `index.js` file:
+
+First importing `DigitProviders`:
+```jsx
+import { DigitProviders } from "@cthit/react-digit-components";
+```
+
+Then, in your main 'index.js` file:
+```jsx
+<DigitProviders> 
+    <App />
+</DigitProviders>
+```

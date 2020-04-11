@@ -17,6 +17,40 @@ export const Flex = styled.div`
     align-items: ${props => (props.alignItems != null ? props.alignItems : "")};
     align-content: ${props =>
         props.alignContent != null ? props.alignContent : ""};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
+
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
+
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
+
+    padding: ${({ padding = "" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Flex.displayName = "Flex";
@@ -51,6 +85,9 @@ Flex.propTypes = {
         "space-around",
         "stretch"
     ])
+};
+Flex.defaultProps = {
+    size: {}
 };
 
 function flexAlignLeftOrTop(leftOrTopAlign, rightOrBottomAlign, reverse) {
@@ -104,7 +141,40 @@ export const Grid = styled.div`
     grid-auto-columns: ${props => props.autoColumns || ""};
     grid-auto-rows: ${props => props.autoRows || ""};
     grid-auto-flow: ${props => props.autoFlow || ""};
-    flex: ${props => (props.fillElement ? "1" : "")};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
+
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
+
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
+
+    padding: ${({ padding = "" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Grid.displayName = "Grid";
@@ -159,9 +229,10 @@ Grid.propTypes = {
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
     autoRows: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-25 */
-    autoFlow: PropTypes.string,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool
+    autoFlow: PropTypes.string
+};
+Grid.defaultProps = {
+    size: {}
 };
 
 export const GridItem = styled.div`
@@ -170,7 +241,39 @@ export const GridItem = styled.div`
   grid-row-start: ${props => props.rowStart || ""}
   grid-row-end: ${props => props.rowEnd || ""}
   justify-self: ${props => props.justifySelf || ""};
-  align-self: ${props => props.alignSelf || ""};
+  flex: ${props => props.flex || "0 1 auto"};
+  align-self: ${props => props.alignSelf || "auto"};
+
+  width: ${props => props.width || "auto"};
+  height: ${props => props.height || "auto"};
+
+  max-width: ${props => props.maxWidth || "none"};
+  max-height: ${props => props.maxHeight || "none"};
+
+  min-width: ${props => props.minWidth || 0};
+  min-height: ${props => props.minHeight || 0};
+  
+    padding: ${({ padding = "" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 GridItem.displayName = "GridItem";
@@ -188,6 +291,9 @@ GridItem.propTypes = {
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-31 */
     alignSelf: PropTypes.string
 };
+GridItem.defaultProps = {
+    size: {}
+};
 
 export const UniformGrid = styled(
     ({
@@ -204,11 +310,13 @@ export const UniformGrid = styled(
         justifyContent,
         alignContent,
         autoFlow,
-        fillElement
+        flex,
+        alignSelf,
+        size,
+        padding
     }) => (
         <Grid
             columns={`repeat(auto-fit, minmax(${minItemWidth}, 1fr));`}
-            margin={margin}
             inline={inline}
             rows={rows}
             areas={areas}
@@ -219,7 +327,11 @@ export const UniformGrid = styled(
             justifyContent={justifyContent}
             alignContent={alignContent}
             autoFlow={autoFlow}
-            fillElement={fillElement}
+            flex={flex}
+            alignSelf={alignSelf}
+            size={size}
+            margin={margin}
+            padding={padding}
         >
             {children}
         </Grid>
@@ -291,9 +403,11 @@ UniformGrid.propTypes = {
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
     autoRows: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-25 */
-    autoFlow: PropTypes.string,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool
+    autoFlow: PropTypes.string
+};
+
+UniformGrid.defaultProps = {
+    size: {}
 };
 
 export const Column = styled(
@@ -305,10 +419,14 @@ export const Column = styled(
         bottomAlign,
         reverse,
         marginVertical,
-        fillElement,
         children,
         scroll,
         flexWrap,
+        size,
+        margin,
+        padding,
+        flex,
+        alignSelf,
         ...rest
     }) => (
         <Flex
@@ -328,8 +446,41 @@ export const Column = styled(
         margin-top: ${props => props.marginVertical};
         margin-bottom: ${props => props.marginVertical};
     }
-    flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
+
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
+
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
+
+    padding: ${({ padding = "" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Column.displayName = "Column";
@@ -346,8 +497,6 @@ Column.propTypes = {
     bottomAlign: PropTypes.bool,
     /** If true, then reverses the order */
     reverse: PropTypes.bool,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool,
     /** All the children */
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
@@ -399,13 +548,64 @@ Column.propTypes = {
         "stretch"
     ]),
     /** If true, then overflow will show a scrollbar. */
-    scroll: PropTypes.bool
+    scroll: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 Column.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginVertical: "4px"
+    marginVertical: "4px",
+    size: {}
 };
 
 export const Row = styled(
@@ -416,11 +616,15 @@ export const Row = styled(
         leftAlign,
         rightAlign,
         reverse,
-        fillElement,
         children,
         scroll,
         marginHorizontal,
         flexWrap,
+        size,
+        margin,
+        padding,
+        flex,
+        alignSelf,
         ...rest
     }) => (
         <Flex
@@ -440,8 +644,41 @@ export const Row = styled(
         margin-right: ${props => props.marginHorizontal};
         margin-left: ${props => props.marginHorizontal};
     }
-    flex: ${props => (props.fillElement ? "1" : "")};
     overflow: ${props => (props.scroll ? "scroll" : "visible")};
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
+
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
+
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
+
+    padding: ${({ padding = "" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Row.displayName = "Row";
@@ -458,8 +695,6 @@ Row.propTypes = {
     rightAlign: PropTypes.bool,
     /** If true, reverses the order of the children*/
     reverse: PropTypes.bool,
-    /** Fill available layout with flex. */
-    fillElement: PropTypes.bool,
     /** All the children */
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
@@ -511,13 +746,64 @@ Row.propTypes = {
         "stretch"
     ]),
     /** If true, then overflow will show a scrollbar. */
-    scroll: PropTypes.bool
+    scroll: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 Row.defaultProps = {
     flexWrap: "nowrap",
     margin: "0px",
-    marginHorizontal: "4px"
+    marginHorizontal: "4px",
+    size: {}
 };
 
 export const DownRightPosition = styled.div`
@@ -528,48 +814,6 @@ export const DownRightPosition = styled.div`
 
 DownRightPosition.displayName = "DownRightPosition";
 
-export const Fill = styled.div`
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 1;
-
-    display: flex;
-    flex-direction: column;
-    padding: 0px;
-`;
-
-Fill.displayName = "Fill";
-
-export const MarginTop = styled(Fill)`
-    margin-top: 8px;
-`;
-
-MarginTop.displayName = "MarginTop";
-
-export const MarginBottom = styled(Fill)`
-    margin-bottom: 8px;
-`;
-
-MarginBottom.displayName = "MarginBottom";
-
-export const MarginLeft = styled(Fill)`
-    margin-left: 8px;
-`;
-
-MarginLeft.displayName = "MarginLeft";
-
-export const MarginRight = styled(Fill)`
-    margin-right: 8px;
-`;
-
-MarginRight.displayName = "MarginRight";
-
-export const Margin = styled(Fill)`
-    margin: 4px;
-`;
-
-Margin.displayName = "Margin";
-
 export const Spacing = styled.div`
     display: block;
     width: 8px;
@@ -578,33 +822,52 @@ export const Spacing = styled.div`
 
 Spacing.displayName = "Spacing";
 
-export const Padding = styled(Fill)`
-    padding: 4px;
-`;
-
-Padding.displayName = "Padding";
-
 export const Center = styled.div`
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 1;
-
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto;
     justify-content: center;
     align-content: center;
+
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
+
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
+
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
+
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
+
+    padding: ${({ padding = "" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 `;
 
 Center.displayName = "Center";
-
-export const HideFill = styled(Fill)`
-    display: ${props => (props.hidden ? "none" : "inherit")};
-`;
-
-HideFill.displayName = "HideFill";
-HideFill.propTypes = {
-    hidden: PropTypes.bool
+Center.defaultProps = {
+    flex: "1",
+    size: {}
 };
 
 export const Hide = styled.div`
@@ -614,44 +877,6 @@ export const Hide = styled.div`
 Hide.displayName = "Hide";
 Hide.propTypes = {
     hidden: PropTypes.bool
-};
-
-export const Size = styled(Flex)`
-    width: ${props => (props.absWidth != null ? props.absWidth : props.width)};
-    height: ${props =>
-        props.absHeight != null ? props.absHeight : props.height};
-
-    max-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.maxWidth};
-    max-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.maxHeight};
-
-    min-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.minWidth};
-    min-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.minHeight};
-
-    overflow: ${props => (props.autoScroll ? "auto" : "visible")};
-`;
-
-Size.displayName = "Size";
-Size.propTypes = {
-    /** Sets minWidth, maxWidth and width to absWidth */
-    absWidth: PropTypes.string,
-    /** Sets minHeight, maxHeight and height to absHeight */
-    absHeight: PropTypes.string,
-    /** minWidth of the child */
-    minWidth: PropTypes.string,
-    /** minHeight of the child */
-    minHeight: PropTypes.string,
-    /** maxWidth of the child */
-    maxWidth: PropTypes.string,
-    /** maxHeight of the child */
-    maxHeight: PropTypes.string,
-    /** width of the child */
-    width: PropTypes.string,
-    /** height of the child */
-    height: PropTypes.string
 };
 
 export const Order = styled(Flex)`

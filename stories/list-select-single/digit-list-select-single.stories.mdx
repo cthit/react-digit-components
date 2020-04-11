@@ -15,8 +15,10 @@ import Delete from "@material-ui/icons/Delete";
 
 # DigitListSelectSingle
 
+A way to select a single item from a `DigitList` via radio buttons.
+
 <Preview>
-    <Story name="2">
+    <Story name="list">
         <DigitEditData
             onSubmit={values => {
                 console.log(values);
@@ -31,6 +33,67 @@ import Delete from "@material-ui/icons/Delete";
                 list: {
                     component: DigitListSelectSingle,
                     componentProps: {
+                        title: "List",
+                        items: [
+                            {
+                                text: "Hej",
+                                secondaryText:
+                                    "This is the secondary text",
+                                icon: Mail,
+                                items: [
+                                    {
+                                        text: "what"
+                                    },
+                                    { text: "då" }
+                                ]
+                            },
+                            {
+                                text: "hmm",
+                                icon: Mail,
+                                items: [
+                                    {
+                                        text: "ååh",
+                                        items: [
+                                            {
+                                                text: "subsub"
+                                            },
+                                            {
+                                                text: "glass"
+                                            },
+                                            {
+                                                text: "gott"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
+## Multiple expanded with the same list
+
+<Preview>
+    <Story name="multiple expanded">
+        <DigitEditData
+            onSubmit={values => {
+                console.log(values);
+            }}
+            submitText={"Submit"}
+            validationSchema={yup
+                .object()
+                .shape({ list: yup.string() })}
+            titleText={"Select"}
+            keysOrder={["list"]}
+            keysComponentData={{
+                list: {
+                    component: DigitListSelectSingle,
+                    componentProps: {
+                        multipleExpanded: true,
                         title: "List",
                         items: [
                             {

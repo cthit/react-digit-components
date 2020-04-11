@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import List from "@material-ui/core/List";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import ListItem from "@material-ui/core/ListItem";
@@ -9,30 +10,37 @@ import IconButton from "@material-ui/core/IconButton";
 import Collapse from "@material-ui/core/Collapse";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import ExpandLess from "@material-ui/icons/ExpandLess";
-import { Padding } from "../../styles/digit-layout/DigitLayout.styles";
 import useToggler from "../../hooks/use-toggler";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitList = ({
     title,
     items,
     onClick,
     dense,
-    disablePadding,
     idProp,
-    multipleExpanded
+    multipleExpanded,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [toggle, isExpanded] = useToggler(multipleExpanded);
 
     return (
         <List
+            classes={classes}
             dense={dense}
-            subheader={
-                <ListSubheader component="div">
-                    <Padding>{title}</Padding>
-                </ListSubheader>
-            }
+            subheader={<ListSubheader component="div">{title}</ListSubheader>}
             component={"div"}
-            disablePadding={disablePadding}
         >
             {items.map(item => (
                 <React.Fragment key={item[idProp]}>
@@ -105,7 +113,6 @@ const DigitList = ({
                                     items={item.items}
                                     onClick={onClick}
                                     dense={dense}
-                                    disablePadding
                                     multipleExpanded={multipleExpanded}
                                     idProp={idProp}
                                 />
@@ -118,8 +125,72 @@ const DigitList = ({
     );
 };
 
+DigitList.propTypes = {
+    /** A title above the list */
+    title: PropTypes.string,
+    /** Array of list items. Can be nested. */
+    items: PropTypes.array,
+    /** The function which will be called when the button has been pressed.*/
+    onClick: PropTypes.func,
+    /** If true, lessens the padding */
+    dense: PropTypes.bool,
+    /** The prop that represents a unique key for each item */
+    idProp: PropTypes.string,
+    /** If true, then multiple sub lists can be expanded at once. */
+    multipleExpanded: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.bool,
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
+};
+
 DigitList.defaultProps = {
-    idProp: "text"
+    title: "",
+    items: [],
+    onClick: () => {},
+    dense: false,
+    disablePadding: false,
+    idProp: "text",
+    multipleExpanded: false
 };
 
 export default DigitList;

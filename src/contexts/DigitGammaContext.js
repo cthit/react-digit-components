@@ -1,28 +1,29 @@
 import React, { createContext, useReducer } from "react";
 const DigitGammaContext = createContext({});
 
-const GET_USER_LOADING = "get-user-loading";
-const GET_USER_FAILED = "get-user-failed";
-const GET_USER_TOKEN_FAILED = "get-user-token-failed";
-const GET_USER_SUCCESSFULLY = "get-user-successfully";
+const GET_ME_LOADING = "get-me-loading";
+const GET_ME_FAILED = "get-me-failed";
+const GET_ME_SUCCESSFUL = "get-me-successful";
 
-const gammaContext = (state, action) => {
+const defaultState = {
+    me: null,
+    loading: true,
+    error: false
+};
+
+const gammaReducer = (state, action) => {
     switch (action.type) {
-        case GET_USER_LOADING:
+        case GET_ME_LOADING:
+            return { ...defaultState };
+        case GET_ME_FAILED:
             return {
-                loading: true
-            };
-        case GET_USER_TOKEN_FAILED:
-        case GET_USER_FAILED:
-            return {
+                me: null,
                 loading: false,
                 error: true
             };
-        case GET_USER_SUCCESSFULLY:
+        case GET_ME_SUCCESSFUL:
             return {
-                user: {
-                    ...action.user
-                },
+                me: action.me,
                 loading: false,
                 error: false
             };
@@ -32,11 +33,7 @@ const gammaContext = (state, action) => {
 };
 
 const DigitGammaContextSingletonProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(gammaContext, {
-        user: null,
-        loading: true,
-        error: false
-    });
+    const [state, dispatch] = useReducer(gammaReducer, { ...defaultState });
 
     return (
         <DigitGammaContext.Provider value={[state, dispatch]}>
@@ -47,9 +44,9 @@ const DigitGammaContextSingletonProvider = ({ children }) => {
 
 export {
     DigitGammaContextSingletonProvider,
-    GET_USER_SUCCESSFULLY,
-    GET_USER_FAILED,
-    GET_USER_LOADING,
-    GET_USER_TOKEN_FAILED
+    GET_ME_LOADING,
+    GET_ME_FAILED,
+    GET_ME_SUCCESSFUL
 };
+
 export default DigitGammaContext;

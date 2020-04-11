@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import TextField from "@material-ui/core/TextField";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitTextArea = ({
     value,
@@ -17,8 +18,22 @@ const DigitTextArea = ({
     outlined,
     filled,
     maxLength,
-    onKeyPress
+    onKeyPress,
+    flex,
+    alignSelf,
+    size,
+    autoFocus,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
+
     const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
         if (maxLength === -1 || newValue.length <= maxLength) {
@@ -28,6 +43,8 @@ const DigitTextArea = ({
 
     return (
         <TextField
+            classes={classes}
+            autoFocus={autoFocus}
             value={value}
             onChange={e => handleOnChange(e, maxLength, onChange)}
             onBlur={onBlur}
@@ -96,7 +113,58 @@ DigitTextArea.propTypes = {
     outlined: PropTypes.bool,
     /** Adds a grey isch background */
     filled: PropTypes.bool,
-    onKeyPress: PropTypes.func
+    onKeyPress: PropTypes.func,
+    autoFocus: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitTextArea.defaultProps = {
@@ -112,7 +180,8 @@ DigitTextArea.defaultProps = {
     rows: 3,
     rowsMax: 6,
     maxLength: -1,
-    onKeyPress: () => {}
+    onKeyPress: () => {},
+    autoFocus: false
 };
 
 export default DigitTextArea;

@@ -7,7 +7,6 @@ import useDigitToast from "../../../../hooks/use-digit-toast";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
 
 const DigitCRUDUpdate = ({
-    name,
     readOneAction,
     updateAction,
     deleteAction,
@@ -37,7 +36,12 @@ const DigitCRUDUpdate = ({
     deleteDialogFormComponentData,
     deleteDialogFormValidationSchema,
     deleteDialogFormInitialValues,
-    deleteDialogFormKeysOrder
+    deleteDialogFormKeysOrder,
+    onUpdate,
+    onDelete,
+    useHistoryGoBackOnBack,
+    updateSubtitle,
+    canDelete
 }) => {
     const [{ one, loading }] = useContext(DigitCRUDContext);
 
@@ -77,6 +81,7 @@ const DigitCRUDUpdate = ({
                                         response
                                     )
                                 });
+                                onUpdate(response);
                             })
                             .catch(error => {
                                 actions.setSubmitting(false);
@@ -97,19 +102,26 @@ const DigitCRUDUpdate = ({
                     isInitialValid={true}
                     extraButton={{
                         outlined: true,
-                        text: backButtonText
+                        text: backButtonText,
+                        onClick: () =>
+                            useHistoryGoBackOnBack ? history.goBack() : null
                     }}
                     extraButtonTo={
-                        backFromUpdatePath == null
+                        useHistoryGoBackOnBack
+                            ? null
+                            : backFromUpdatePath(one) == null
                             ? path + readOnePath.replace(":id", id)
-                            : backFromUpdatePath
+                            : backFromUpdatePath(one)
                     }
                     initialValues={one}
                     submitText={updateButtonText(one)}
                     titleText={updateTitle(one)}
+                    updateSubtitle={
+                        updateSubtitle == null ? null : updateSubtitle(one)
+                    }
                 />
             </Center>
-            {deleteAction != null && (
+            {deleteAction != null && canDelete(one) && (
                 <DeleteFAB
                     dialogDeleteCancel={dialogDeleteCancel}
                     dialogDeleteConfirm={dialogDeleteConfirm}
@@ -120,9 +132,9 @@ const DigitCRUDUpdate = ({
                     toastDeleteSuccessful={toastDeleteSuccessful}
                     path={path}
                     backFromDeletePath={
-                        backFromDeletePath == null
+                        backFromDeletePath(one) == null
                             ? readAllPath
-                            : backFromDeletePath
+                            : backFromDeletePath(one)
                     }
                     deleteAction={deleteAction}
                     history={history}
@@ -138,6 +150,7 @@ const DigitCRUDUpdate = ({
                         deleteDialogFormComponentData
                     }
                     deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+                    onDelete={onDelete}
                 />
             )}
         </>

@@ -1,4 +1,3 @@
-import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormLabel from "@material-ui/core/FormLabel";
 import styled from "styled-components";
@@ -11,5 +10,3 @@ export const UpperLabel = styled(FormLabel)`
 export const Lowerlabel = styled(FormHelperText)`
     color: ${props => (props.error ? "#F44336" : "inherit")};
 `;
-
-export const StyledFormControl = styled(FormControl)``;

@@ -9,6 +9,7 @@ import Chip from "@material-ui/core/Chip";
 import Checkbox from "@material-ui/core/Checkbox";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
@@ -28,8 +29,20 @@ const DigitAutocompleteSelectMultiple = ({
     filled,
     chipOutlined,
     checkboxPrimary,
-    checkboxSecondary
+    checkboxSecondary,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [text] = useDigitTranslations(translations);
 
     return (
@@ -93,7 +106,8 @@ const DigitAutocompleteSelectMultiple = ({
             renderInput={params => (
                 <TextField
                     {...params}
-                    fullWidth
+                    fullWidth={false}
+                    classes={classes}
                     name={name}
                     error={error}
                     label={upperLabel}
@@ -126,7 +140,8 @@ DigitAutocompleteSelectMultiple.defaultProps = {
     errorMessage: null,
     disabled: false,
     outlined: false,
-    filled: false
+    filled: false,
+    size: { width: "224px" }
 };
 
 DigitAutocompleteSelectMultiple.propTypes = {
@@ -150,7 +165,7 @@ DigitAutocompleteSelectMultiple.propTypes = {
     ),
     /** Value of the select options */
     value: PropTypes.arrayOf(
-        PropTypes.oneOfType(PropTypes.number, PropTypes.string)
+        PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ).isRequired,
     /** Gets called something in selected changes. */
     onChange: PropTypes.func.isRequired,
@@ -179,7 +194,57 @@ DigitAutocompleteSelectMultiple.propTypes = {
     /** Sets checkbox color to primary */
     checkboxPrimary: PropTypes.bool,
     /** Sets checkbox color to secondary */
-    checkboxSecondary: PropTypes.bool
+    checkboxSecondary: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 export default DigitAutocompleteSelectMultiple;

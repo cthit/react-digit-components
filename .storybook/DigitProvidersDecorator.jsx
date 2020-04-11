@@ -3,11 +3,7 @@ import { DigitProviders, DigitToast, DigitDialog } from "../src";
 
 const DigitProvidersDecorator = StoryFn => (
     <DigitProviders memoryRouter defaultLanguage={"en"}>
-        <>
-            <DigitToast />
-            <DigitDialog />
-            <StoryFn />
-        </>
+        <StoryFn />
     </DigitProviders>
 );
 

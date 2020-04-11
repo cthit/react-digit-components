@@ -10,7 +10,7 @@ import {
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 <Meta
-    title="Inputs/Forms/DigitEditDataCard"
+    title="Forms/DigitEditDataCard"
     component={DigitEditDataCard}
 />
 
@@ -229,7 +229,7 @@ Just like DigitEditData, but with a `DigitDesign.Card` around it.
             initialValues={{
                 firstname: "",
                 surname: "",
-                date: ""
+                date: null
             }}
             onSubmit={(values, actions) => {
                 console.log(values);
@@ -294,7 +294,7 @@ Just like DigitEditData, but with a `DigitDesign.Card` around it.
                     component: DigitTextArea,
                     componentProps: {
                         upperLabel: "Other",
-                        rows: "6"
+                        rows: 6
                     }
                 }
             }}

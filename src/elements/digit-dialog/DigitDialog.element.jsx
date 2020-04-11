@@ -54,7 +54,7 @@ DigitDialog.propTypes = {
     cancelButtonText: PropTypes.string,
     /** The text for the confirm button */
     confirmButtonText: PropTypes.string,
-    /** If true, then the dialog opens */
+    /** If true, then the dialog is open */
     open: PropTypes.bool,
     /** The title of the dialog */
     title: PropTypes.string,

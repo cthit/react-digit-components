@@ -1,0 +1,17 @@
+{
+  "SelectFile": [
+    "Select file", "Välj fil"
+  ],
+  "SelectImage": [
+    "Select image",
+    "Välj bild"
+  ],
+  "NoFileChosen": [
+    "No file chosen",
+    "Ingen fil vald"
+  ],
+  "NoImageChosen": [
+    "No image chosen",
+    "Ingen bild vald"
+  ]
+}

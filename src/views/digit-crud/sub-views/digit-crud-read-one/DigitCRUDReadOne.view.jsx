@@ -4,12 +4,11 @@ import {
     Card,
     CardBody,
     CardButtons,
+    CardHeader,
+    CardSubtitle,
     CardTitle
 } from "../../../../styles/digit-design/DigitDesign.styles";
-import {
-    Center,
-    Padding
-} from "../../../../styles/digit-layout/DigitLayout.styles";
+import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitButton from "../../../../elements/digit-button";
 import DigitLoading from "../../../../elements/digit-loading";
 import DeleteFAB from "../../elements/delete-fab";
@@ -68,7 +67,6 @@ function formatDate(date, text, type) {
 }
 
 const DigitCRUDReadOne = ({
-    name,
     readOneAction,
     clearAction,
     keysText,
@@ -104,7 +102,12 @@ const DigitCRUDReadOne = ({
     deleteDialogFormKeysOrder,
     timeProps,
     dateProps,
-    dateAndTimeProps
+    dateAndTimeProps,
+    onDelete,
+    useHistoryGoBackOnBack,
+    detailsSubtitle,
+    canDelete,
+    canUpdate
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
@@ -156,7 +159,9 @@ const DigitCRUDReadOne = ({
             toastDeleteSuccessful={toastDeleteSuccessful}
             path={path}
             backFromDeletePath={
-                backFromDeletePath == null ? readAllPath : backFromDeletePath
+                backFromDeletePath(one) == null
+                    ? readAllPath
+                    : backFromDeletePath(one)
             }
             deleteAction={deleteAction}
             history={history}
@@ -166,15 +171,20 @@ const DigitCRUDReadOne = ({
             deleteDialogFormInitialValues={deleteDialogFormInitialValues}
             deleteDialogFormValidationSchema={deleteDialogFormValidationSchema}
             deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
+            onDelete={onDelete}
         />
     );
 
     const goBack = () => {
-        history.push(
-            backFromReadOnePath == null
-                ? path + readAllPath
-                : backFromReadOnePath
-        );
+        if (useHistoryGoBackOnBack) {
+            history.goBack();
+        } else {
+            history.push(
+                backFromReadOnePath(one) == null
+                    ? path + readAllPath
+                    : backFromReadOnePath(one)
+            );
+        }
     };
     const goToEdit = () => {
         history.push(path + updatePath.replace(":id", id));
@@ -190,48 +200,58 @@ const DigitCRUDReadOne = ({
     }
 
     return (
-        <>
-            <Center>
-                {detailsRenderStart(one)}
-                <Card>
+        <Center>
+            {detailsRenderStart(one)}
+            <Card
+                size={{
+                    minWidth: "280px",
+                    minHeight: "280px"
+                }}
+            >
+                <CardHeader
+                    hasSubtitle={
+                        detailsSubtitle != null && detailsSubtitle(one) !== ""
+                    }
+                >
                     <CardTitle text={detailsTitle(one) + ""} />
-                    <CardBody>
-                        {detailsRenderCardStart(one)}
-                        <DigitDisplayData
-                            keysText={keysText}
-                            keysOrder={keysOrder}
-                            data={displayData}
-                        />
-                        {keysOrder
-                            .filter(key =>
-                                customDetailsRenderKeys.includes(key)
-                            )
-                            .map(key => customDetailsRenders[key](one))}
-                        {detailsRenderCardEnd(one)}
-                    </CardBody>
-                    <CardButtons>
-                        <DigitButton
-                            text={backButtonText}
-                            outlined
-                            onClick={goBack}
-                        />
-                        {hasUpdate && (
-                            <>
-                                <Padding />
-                                <DigitButton
-                                    primary
-                                    raised
-                                    text={updateButtonText(one)}
-                                    onClick={goToEdit}
-                                />
-                            </>
-                        )}
-                    </CardButtons>
-                </Card>
-                {detailsRenderEnd(one)}
-                {!hasUpdate && deleteAction != null && deleteFAB}
-            </Center>
-        </>
+                    {detailsSubtitle != null && (
+                        <CardSubtitle text={detailsSubtitle(one)} />
+                    )}
+                </CardHeader>
+                <CardBody justifyContent={"center"}>
+                    {detailsRenderCardStart(one)}
+                    <DigitDisplayData
+                        alignSelf={"center"}
+                        keysText={keysText}
+                        keysOrder={keysOrder}
+                        data={displayData}
+                    />
+                    {keysOrder
+                        .filter(key => customDetailsRenderKeys.includes(key))
+                        .map(key => customDetailsRenders[key](one))}
+                    {detailsRenderCardEnd(one)}
+                </CardBody>
+                <CardButtons leftRight>
+                    <DigitButton
+                        text={backButtonText}
+                        outlined
+                        onClick={goBack}
+                    />
+                    {hasUpdate && canUpdate(one) && (
+                        <>
+                            <DigitButton
+                                primary
+                                raised
+                                text={updateButtonText(one)}
+                                onClick={goToEdit}
+                            />
+                        </>
+                    )}
+                </CardButtons>
+            </Card>
+            {detailsRenderEnd(one)}
+            {!hasUpdate && deleteAction != null && canDelete(one) && deleteFAB}
+        </Center>
     );
 };
 

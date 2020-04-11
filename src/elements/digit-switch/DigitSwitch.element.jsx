@@ -2,6 +2,7 @@ import Switch from "@material-ui/core/Switch";
 import PropTypes from "prop-types";
 import React from "react";
 import DigitControlLabelWithError from "../utils/digit-control-label-with-error";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitSwitch = ({
     onChange,
@@ -13,25 +14,45 @@ const DigitSwitch = ({
     primary,
     secondary,
     label,
-    name
-}) => (
-    <DigitControlLabelWithError
-        error={error}
-        label={error ? errorMessage : label}
-        control={
-            <Switch
-                checked={value}
-                disabled={disabled}
-                color={
-                    primary ? "primary" : secondary ? "secondary" : "default"
-                }
-                onChange={onChange}
-                name={name}
-                onBlur={onBlur}
-            />
-        }
-    />
-);
+    name,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
+
+    return (
+        <DigitControlLabelWithError
+            classes={classes}
+            error={error}
+            label={error ? errorMessage : label}
+            control={
+                <Switch
+                    checked={value}
+                    disabled={disabled}
+                    color={
+                        primary
+                            ? "primary"
+                            : secondary
+                            ? "secondary"
+                            : "default"
+                    }
+                    onChange={onChange}
+                    name={name}
+                    onBlur={onBlur}
+                />
+            }
+        />
+    );
+};
 
 DigitSwitch.displayName = "DigitSwitch";
 DigitSwitch.propTypes = {
@@ -61,7 +82,57 @@ DigitSwitch.propTypes = {
     /** A label that is to the right of the switch. */
     label: PropTypes.string,
     /** A unique name relative to a form. e.g. acceptedTerms or pizza.*/
-    name: PropTypes.string
+    name: PropTypes.string,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitSwitch.defaultProps = {

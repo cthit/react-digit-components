@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from "react";
+import React, { useCallback, useContext } from "react";
 import PropTypes from "prop-types";
 
 import { Route, Switch } from "react-router-dom";
@@ -15,7 +15,6 @@ import {
     createReadOneAction,
     createUpdateAction
 } from "./DigitCRUD.action-creator";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import DigitCRUDContext, {
     DigitCRUDContextProvider
 } from "../../contexts/DigitCRUDContext";
@@ -98,7 +97,17 @@ const DigitCRUDInner = ({
     createFormValidationSchema,
     timeProps,
     dateProps,
-    dateAndTimeProps
+    dateAndTimeProps,
+    onCreate,
+    onUpdate,
+    onDelete,
+    useHistoryGoBackOnBack,
+    canUpdate,
+    canDelete,
+    canReadOne,
+    createSubtitle,
+    updateSubtitle,
+    detailsSubtitle
 }) => {
     const [, dispatch] = useContext(DigitCRUDContext);
 
@@ -138,7 +147,9 @@ const DigitCRUDInner = ({
             : null,
         [updateRequest]
     );
-    const clearAction = useCallback(() => dispatch(createClearAction()), []);
+    const clearAction = useCallback(() => dispatch(createClearAction()), [
+        dispatch
+    ]);
 
     const modifiedFormComponentData = modifyFormComponentData(
         formComponentData,
@@ -169,12 +180,15 @@ const DigitCRUDInner = ({
                                     : keysOrder
                             }
                             createTitle={createTitle}
+                            createSubtitle={createSubtitle}
                             toastCreateFailed={toastCreateFailed}
                             toastCreateSuccessful={toastCreateSuccessful}
                             createButtonText={createButtonText}
                             backButtonText={backButtonText}
                             readAllPath={readAllPath}
                             backFromCreatePath={backFromCreatePath}
+                            onCreate={onCreate}
+                            useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
                 />
@@ -190,6 +204,7 @@ const DigitCRUDInner = ({
                             deleteAction={deleteAction}
                             clearAction={clearAction}
                             updateTitle={updateTitle}
+                            updateSubtitle={updateSubtitle}
                             id={
                                 staticId != null
                                     ? staticId
@@ -235,6 +250,10 @@ const DigitCRUDInner = ({
                             deleteDialogFormKeysOrder={
                                 deleteDialogFormKeysOrder
                             }
+                            onUpdate={onUpdate}
+                            onDelete={onDelete}
+                            canDelete={canDelete}
+                            useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
                 />
@@ -264,6 +283,7 @@ const DigitCRUDInner = ({
                             backButtonText={backButtonText}
                             updateButtonText={updateButtonText}
                             detailsTitle={detailsTitle}
+                            detailsSubtitle={detailsSubtitle}
                             detailsCustomRender={detailsCustomRender}
                             detailsRenderStart={detailsRenderStart}
                             detailsRenderEnd={detailsRenderEnd}
@@ -298,6 +318,10 @@ const DigitCRUDInner = ({
                             timeProps={timeProps}
                             dateProps={dateProps}
                             dateAndTimeProps={dateAndTimeProps}
+                            onDelete={onDelete}
+                            canUpdate={canUpdate}
+                            canDelete={canDelete}
+                            useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                         />
                     )}
                 />
@@ -329,6 +353,7 @@ const DigitCRUDInner = ({
                             timeProps={timeProps}
                             dateProps={dateProps}
                             dateAndTimeProps={dateAndTimeProps}
+                            canReadOne={canReadOne}
                         />
                     )}
                 />
@@ -342,9 +367,7 @@ const DigitCRUD = props => {
         <DigitCRUDContextProvider
             extractActiveLanguage={props.extractActiveLanguage}
         >
-            <Fill>
-                <DigitCRUDInner {...props} />
-            </Fill>
+            <DigitCRUDInner {...props} />
         </DigitCRUDContextProvider>
     );
 };
@@ -402,8 +425,12 @@ DigitCRUD.propTypes = {
     deleteDialogFormKeysOrder: PropTypes.arrayOf(PropTypes.string),
     /** String for create title */
     createTitle: PropTypes.string,
+    /** String for create subtitle */
+    createSubtitle: PropTypes.string,
     /** Function to create update title, Args: (data) */
     updateTitle: PropTypes.func,
+    /** Function to create update subtitle, Args: (data) */
+    updateSubtitle: PropTypes.func,
     /** Function to create toast text when creation is successful, Args: (data, response)*/
     toastCreateSuccessful: PropTypes.func,
     /** Function to create toast text when creation failed, Args: (data, error)*/
@@ -436,6 +463,8 @@ DigitCRUD.propTypes = {
     detailsButtonText: PropTypes.string,
     /** Details title (data) => string*/
     detailsTitle: PropTypes.func,
+    /** Details subtitle (data) => string*/
+    detailsSubtitle: PropTypes.func,
     /** Overwrites the default DigitDisplayData behavior. (data, goBack, goToEdit) */
     detailsCustomRender: PropTypes.func,
     /** Renders before card in details (data) */
@@ -458,26 +487,55 @@ DigitCRUD.propTypes = {
     readOnePath: PropTypes.string,
     /** Custom create path for the view representing the updateRequest*/
     updatePath: PropTypes.string,
-    /** */
+    /** A constant id everywhere. Used when readAll is ignored. */
     staticId: PropTypes.string,
-    backFromReadOnePath: PropTypes.string,
-    backFromUpdatePath: PropTypes.string,
-    backFromDeletePath: PropTypes.string,
-    backFromCreatePath: PropTypes.string,
+    /** Path for back button from read one screen */
+    backFromReadOnePath: PropTypes.func,
+    /** Path for back button from update screen */
+    backFromUpdatePath: PropTypes.func,
+    /** Path for back button after deleting something*/
+    backFromDeletePath: PropTypes.func,
+    /** Path for back button from create screen */
+    backFromCreatePath: PropTypes.func,
+    /** Uses keysText in upperLabel for forms */
     useKeyTextsInUpperLabel: PropTypes.bool,
+    /** Overrides keysOrder for readAll screen */
     readAllKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides keysOrder for readOne screen */
     readOneKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides keysOrder for update screen */
     updateKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides keysOrder for create screen */
     createKeysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Overrides formValidationSchema for update screen */
     updateFormValidationSchema: PropTypes.object,
+    /** Overrides formValidationSchema for create screen */
     createFormValidationSchema: PropTypes.func,
+    /** Be able to specify props to formatted as a time */
     timeProps: PropTypes.arrayOf(PropTypes.string),
+    /** Be able to specify props to formatted as a date */
     dateProps: PropTypes.arrayOf(PropTypes.string),
-    dateAndTimeProps: PropTypes.arrayOf(PropTypes.string)
+    /** Be able to specify props to formatted as a date and time */
+    dateAndTimeProps: PropTypes.arrayOf(PropTypes.string),
+    /** Gets called after a successful creation. Args: (response) */
+    onCreate: PropTypes.func,
+    /** Gets called after a successful update. Args: (response) */
+    onUpdate: PropTypes.func,
+    /** Gets called after a successful deletion. Args: (response) */
+    onDelete: PropTypes.func,
+    /** Overrides backFromReadOnePath, backFromUpdatePath, backFromDeletePath, backFromCreatePath to instead use history.goBack when pressing a back button */
+    useHistoryGoBackOnBack: PropTypes.bool,
+    /** If a specific row can be updated by the client. (one) => bool */
+    canUpdate: PropTypes.func,
+    /** If a specific row can be read in detail by the client. (one) => bool */
+    canReadOne: PropTypes.func,
+    /** If a specific row can be deleted. (one) => bool */
+    canDelete: PropTypes.func
 };
 
 DigitCRUD.defaultProps = {
     updateTitle: () => "Update",
+    updateSubtitle: null,
     toastUpdateSuccessful: () => "Update successful",
     toastUpdateFailed: () => "Update failed",
     backButtonText: "Back",
@@ -494,7 +552,9 @@ DigitCRUD.defaultProps = {
     createButtonText: "Create",
     detailsButtonText: "Details",
     createTitle: "Create",
+    createSubtitle: null,
     detailsTitle: () => "",
+    detailsSubtitle: () => "",
     detailsCustomRender: null,
     detailsRenderStart: () => null,
     detailsRenderEnd: () => null,
@@ -507,10 +567,10 @@ DigitCRUD.defaultProps = {
     readOnePath: "/:id",
     updatePath: "/:id/edit",
     staticId: null,
-    backFromReadOnePath: null,
-    backFromUpdatePath: null,
-    backFromDeletePath: null,
-    backFromCreatePath: null,
+    backFromReadOnePath: () => null,
+    backFromUpdatePath: () => null,
+    backFromDeletePath: () => null,
+    backFromCreatePath: () => null,
     useKeyTextsInUpperLabel: false,
     deleteDialogFormComponentData: null,
     deleteDialogFormValidationSchema: null,
@@ -524,7 +584,14 @@ DigitCRUD.defaultProps = {
     createFormValidationSchema: null,
     timeProps: [],
     dateProps: [],
-    dateAndTimeProps: []
+    dateAndTimeProps: [],
+    onCreate: () => {},
+    onUpdate: () => {},
+    onDelete: () => {},
+    useHistoryGoBackOnBack: true,
+    canUpdate: () => true,
+    canDelete: () => true,
+    canReadOne: () => true
 };
 
 export default DigitCRUD;

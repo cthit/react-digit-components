@@ -3,11 +3,27 @@ import PropTypes from "prop-types";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Stepper from "@material-ui/core/Stepper";
-import { Column } from "../../styles/digit-layout/DigitLayout.styles";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
-const DigitStepper = ({ activeStep, steps }) => (
-    <Column>
-        <Stepper activeStep={activeStep} alternativeLabel>
+const DigitStepper = ({
+    activeStep,
+    steps,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
+
+    return (
+        <Stepper classes={classes} activeStep={activeStep} alternativeLabel>
             {steps.map(stepData => {
                 return (
                     <Step key={stepData.text}>
@@ -16,8 +32,8 @@ const DigitStepper = ({ activeStep, steps }) => (
                 );
             })}
         </Stepper>
-    </Column>
-);
+    );
+};
 
 DigitStepper.defaultProps = {
     steps: [],
@@ -30,7 +46,57 @@ DigitStepper.propTypes = {
             text: PropTypes.string.isRequired
         })
     ).isRequired,
-    activeStep: PropTypes.number.isRequired
+    activeStep: PropTypes.number.isRequired,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 export default DigitStepper;

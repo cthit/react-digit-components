@@ -3,26 +3,48 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 import { StyledBottomNavigation } from "./DigitBottomNavigation.styles.element";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
-const DigitBottomNavigation = ({ selected, tabs, showLabels, onChange }) => (
-    <StyledBottomNavigation
-        value={selected}
-        showLabels={showLabels}
-        onChange={(event, selected) => {
-            onChange(selected);
-        }}
-    >
-        {tabs.map((tab, index) => {
-            return (
-                <BottomNavigationAction
-                    key={tab.label}
-                    label={<Text text={tab.label} />}
-                    icon={tab.icon}
-                />
-            );
-        })}
-    </StyledBottomNavigation>
-);
+const DigitBottomNavigation = ({
+    selected,
+    tabs,
+    showLabels,
+    onChange,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size: { height: "64px", width: "100%", ...size },
+        padding,
+        margin
+    });
+
+    return (
+        <StyledBottomNavigation
+            classes={classes}
+            value={selected}
+            showLabels={showLabels}
+            onChange={(event, selected) => {
+                onChange(selected);
+            }}
+        >
+            {tabs.map(tab => {
+                return (
+                    <BottomNavigationAction
+                        key={tab.label}
+                        label={<Text text={tab.label} />}
+                        icon={tab.icon}
+                    />
+                );
+            })}
+        </StyledBottomNavigation>
+    );
+};
 
 DigitBottomNavigation.displayName = "DigitBottomNavigation";
 DigitBottomNavigation.propTypes = {
@@ -47,7 +69,58 @@ DigitBottomNavigation.propTypes = {
     /** A function with the new selected index as the only argument.
      * Use this to keep track of the currently selected tab.
      */
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitBottomNavigation.defaultProps = {

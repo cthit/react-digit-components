@@ -1,9 +1,10 @@
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import { DigitMenu } from "../../src";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 <Meta
-    title="Views/DigitMenu"
+    title="Buttons/DigitMenu"
     component={DigitMenu}
 />
 
@@ -11,12 +12,31 @@ import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 A menu.
 
-## Menu
-
 <Preview>
     <Story name="Menu">
-        <DigitMenu valueToTextMap={["Menu option 1","Menu option 2"]}/>
+        <DigitMenu 
+            valueToTextMap={{
+                icecream: "Icecream",
+                candy: "Candy",
+                soda: "Soda"
+            }} 
+            order={["icecream", "candy", "soda"]}
+            onClick={(r) => console.log(r)}
+        />
+    </Story>
+    <Story name="Menu ExpandMore icon">
+        <DigitMenu 
+            icon={ExpandMore}
+            valueToTextMap={{
+                icecream: "Icecream",
+                candy: "Candy",
+                soda: "Soda"
+            }} 
+            order={["icecream", "candy", "soda"]}
+            onClick={(r) => console.log(r)}
+        />
     </Story>
 </Preview>
+
 
 <Props of={DigitMenu} />

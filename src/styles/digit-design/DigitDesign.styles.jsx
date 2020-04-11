@@ -4,83 +4,75 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Subtitle, Title } from "../digit-text/DigitText.styles";
+import { Flex } from "../digit-layout/DigitLayout.styles";
 
-/** Props:
- * width, height, maxWidth, maxHeight, minWidth, minHeight
- * absWidth, absHeight: If size, max and min will be the same.
- */
-export const Card = styled(
-    ({
-        absWidth,
-        absHeight,
-        minWidth,
-        minHeight,
-        maxWidth,
-        maxHeight,
-        hasSubTitle,
-        hasIcon,
-        width,
-        height,
-        ...rest
-    }) => <Paper {...rest} />
-)`
+export const Card = styled(({ alignSelf, ...rest }) => <Paper {...rest} />)`
     display: flex;
     flex-direction: column;
+    flex: ${props => props.flex || "0 1 auto"};
+    align-self: ${props => props.alignSelf || "auto"};
 
-    width: ${props => (props.absWidth != null ? props.absWidth : props.width)};
-    height: ${props =>
-        props.absHeight != null ? props.absHeight : props.height};
+    width: ${props => props.size.width || "auto"};
+    height: ${props => props.size.height || "auto"};
 
-    max-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.maxWidth};
-    max-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.maxHeight};
+    max-width: ${props => props.size.maxWidth || "none"};
+    max-height: ${props => props.size.maxHeight || "none"};
 
-    min-width: ${props =>
-        props.absWidth != null ? props.absWidth : props.minWidth};
-    min-height: ${props =>
-        props.absHeight != null ? props.absHeight : props.minHeight};
+    min-width: ${props => props.size.minWidth || 0};
+    min-height: ${props => props.size.minHeight || 0};
+
+    padding: ${({ padding = "" }) =>
+        (typeof padding === "string"
+            ? padding
+            : (padding.top || "0px") +
+              " " +
+              (padding.right || "0px") +
+              " " +
+              (padding.bottom || "0px") +
+              " " +
+              (padding.left || "0px")) + " !important"};
+
+    margin: ${({ margin = "" }) =>
+        (typeof margin === "string"
+            ? margin
+            : (margin.top || "0px") +
+              " " +
+              (margin.right || "0px") +
+              " " +
+              (margin.bottom || "0px") +
+              " " +
+              (margin.left || "0px")) + " !important"};
 
     background-color: white;
 `;
 
 Card.displayName = "Card";
-Card.propTypes = {
-    /** Sets minWidth, maxWidth and width to absWidth */
-    absWidth: PropTypes.string,
-    /** Sets minHeight, maxHeight and height to absHeight */
-    absHeight: PropTypes.string,
-    /** minWidth of the card */
-    minWidth: PropTypes.string,
-    /** minHeight of the card */
-    minHeight: PropTypes.string,
-    /** maxWidth of the card */
-    maxWidth: PropTypes.string,
-    /** maxHeight of the card */
-    maxHeight: PropTypes.string,
-    /** width of the card */
-    width: PropTypes.string,
-    /** height of the card */
-    height: PropTypes.string
+Card.defaultProps = {
+    size: {}
 };
+
 /**
- * use this hasSubTitle and hasIcon must be true if you have them inside your Card.
+ * use this hasSubtitle and hasIcon must be true if you have them inside your Card.
  */
-export const CardHeader = styled.div`
-  padding: 8px;
-  display: grid;
+export const CardHeader = styled(({ hasSubtitle, hasIcon, ...rest }) => (
+    <div {...rest} />
+))`
+    padding-top: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    display: grid;
 
-  grid-template-columns: ${props =>
-      props.hasIcon ? "40px auto 32px" : "0px auto 32px"}
+    grid-template-columns: ${props =>
+        props.hasIcon ? "40px auto 32px" : "0px auto 32px"};
 
-  grid-template-rows: ${props =>
-      props.hasSubTitle ? "33px 25px auto" : "33px 0px auto"};
+    grid-template-rows: ${props =>
+        props.hasSubtitle ? "33px auto auto" : "33px 0px auto"};
 `;
 
 CardHeader.displayName = "CardHeader";
 CardHeader.propTypes = {
     /** If you want to have a sub title, set this to true */
-    hasSubTitle: PropTypes.bool,
+    hasSubtitle: PropTypes.bool,
     /** If you want to have a icon, set this to true */
     hasIcon: PropTypes.bool
 };
@@ -124,11 +116,6 @@ export const CardTitle = styled(Title)`
     font-size: 20px;
     line-height: 33px;
 
-    margin: 0;
-    margin-top: 8px;
-    margin-left: 8px;
-    margin-right: 8px;
-
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
@@ -137,13 +124,9 @@ export const CardTitle = styled(Title)`
 
 CardTitle.displayName = "CardTitle";
 
-export const CardSubTitle = styled(Subtitle)`
+export const CardSubtitle = styled(Subtitle)`
     font-size: 15px;
     line-height: 25px;
-
-    margin: 0;
-    margin-left: 8px;
-    margin-right: 8px;
 
     grid-column-start: 2;
     grid-column-end: 4;
@@ -153,20 +136,20 @@ export const CardSubTitle = styled(Subtitle)`
     color: ${({ theme }) => theme.textColorSecondary};
 `;
 
-CardSubTitle.displayName = "CardSubTitle";
+CardSubtitle.displayName = "CardSubtitle";
 
-export const CardBody = styled.div`
+export const CardBody = styled(Flex)`
     flex: 1;
 
     display: flex;
     flex-direction: column;
-    padding: 8px;
+    padding: 16px !important;
 `;
 
 CardBody.displayName = "CardBody";
 
 export const CardButtons = styled.div`
-    padding: 8px;
+    padding: 16px;
     min-height: 50px;
     height: 50px;
     max-height: 50px;

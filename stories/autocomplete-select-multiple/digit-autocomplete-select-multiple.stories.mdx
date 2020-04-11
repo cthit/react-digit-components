@@ -9,23 +9,175 @@ import { DigitAutocompleteSelectMultiple, DigitProviders } from "../../src";
 
 # DigitAutocompleteSelectMultiple
 
-Input to select multiple values via autocomplete when searching for options. 
+Input to select multiple values via autocomplete when searching for options.
+
+
+## AutocompleteMultiple
 
 <Preview>
-    <Story name="Autocomplete multiple">
+    <Story name="AutocompleteMultiple normal">
         {() => {
             const options = [
-                { text: "The Dark Knight Rises", value: "the_dark"},
+                { text: "The Dark Knight Rises", value: "the_dark" },
                 { text: "Princess Mononoke", value: "princess" },
                 { text: "Aliens", value: "aliens" },
-                { text: "Oldboy" , value: "oldboy"},
+                { text: "Oldboy", value: "oldboy" },
                 { text: "Once Upon a Time in America", value: "once" },
-                { text: "Witness for the Prosecution", value: "witness" },
-                { text: "Das Boot", value: "das", disabled: true},
-            ]
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
             const [value, setValue] = useState(["aliens"]);
             return (
-                <DigitAutocompleteSelectMultiple outlinedupperLabel="what" options={options} value={value} onChange={(e) => {setValue(e.target.value);}}/>        
+                <DigitAutocompleteSelectMultiple
+                    upperLabel="upperlabel"
+                    lowerLabel="lowerlabel"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteMultiple filled">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState(["aliens"]);
+            return (
+                <DigitAutocompleteSelectMultiple
+                    filled
+                    upperLabel="Filled"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteMultiple outlined">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState(["aliens"]);
+            return (
+                <DigitAutocompleteSelectMultiple
+                    outlined
+                    upperLabel="Outlined"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Preview>
+    <Story name="AutocompleteMultiple disabled">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState(["aliens"]);
+            return (
+                <DigitAutocompleteSelectMultiple
+                    size={{width: "224px"}}
+                    disabled
+                    upperLabel="Disabled"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteMultiple error">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState(["aliens"]);
+            return (
+                <DigitAutocompleteSelectMultiple
+                    error
+                    errorMessage="Error message"
+                    upperLabel="Disabled"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## noOptionText
+
+<Preview>
+    <Story name="AutocompleteMultiple noOption">
+        {() => {
+            const options = [];
+            const [value, setValue] = useState([]);
+            return (
+                <DigitAutocompleteSelectMultiple
+                    upperLabel="No option upperlabel"
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+    <Story name="AutocompleteMultiple noOptionText">
+        {() => {
+            const options = [];
+            const [value, setValue] = useState([]);
+            return (
+                <DigitAutocompleteSelectMultiple
+                    upperLabel="No options custom"
+                    noOptionsText="No options :("
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
             );
         }}
     </Story>

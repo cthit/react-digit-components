@@ -62,7 +62,6 @@ function formatDate(date, text, type) {
 }
 
 const DigitCRUDReadAll = ({
-    name,
     readAllAction,
     clearAction,
     keysText,
@@ -79,7 +78,8 @@ const DigitCRUDReadAll = ({
     createPath,
     timeProps,
     dateProps,
-    dateAndTimeProps
+    dateAndTimeProps,
+    canReadOne
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ all, loading }] = useContext(DigitCRUDContext);
@@ -124,40 +124,54 @@ const DigitCRUDReadAll = ({
     }
 
     return (
-        <>
-            <Center>
-                <DigitTable
-                    data={
-                        hasReadOne
-                            ? all.map(one => ({
-                                  ...one,
-                                  __link:
-                                      path +
-                                      readOnePath.replace(":id", one[idProp])
-                              }))
-                            : all
-                    }
-                    columnsOrder={keysOrder}
-                    headerTexts={
-                        hasReadOne
-                            ? { ...keysText, __link: detailsButtonText }
-                            : { ...keysText }
-                    }
-                    idProp={idProp}
-                    {...tableProps}
-                />
-            </Center>
+        <Center>
+            <DigitTable
+                alignSelf={"flex-start"}
+                padding={"8px"}
+                data={
+                    hasReadOne
+                        ? all.map(one =>
+                              canReadOne(one)
+                                  ? {
+                                        ...one,
+                                        __link:
+                                            path +
+                                            readOnePath.replace(
+                                                ":id",
+                                                one[idProp]
+                                            )
+                                    }
+                                  : one
+                          )
+                        : all
+                }
+                columnsOrder={keysOrder}
+                headerTexts={
+                    hasReadOne
+                        ? { ...keysText, __link: detailsButtonText }
+                        : { ...keysText }
+                }
+                idProp={idProp}
+                {...tableProps}
+            />
             {hasCreate && (
-                <DownRightPosition>
-                    <DigitFAB
-                        primary
-                        text={createButtonText}
-                        icon={Add}
-                        onClick={() => history.push(path + createPath)}
+                <>
+                    <DownRightPosition>
+                        <DigitFAB
+                            primary
+                            text={createButtonText}
+                            icon={Add}
+                            onClick={() => history.push(path + createPath)}
+                        />
+                    </DownRightPosition>
+                    <div //To let the user scroll all the way down, so that the FAB isn't in the way
+                        style={{
+                            height: "80px"
+                        }}
                     />
-                </DownRightPosition>
+                </>
             )}
-        </>
+        </Center>
     );
 };
 

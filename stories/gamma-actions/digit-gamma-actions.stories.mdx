@@ -1,0 +1,25 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitGammaActionsDummy, DigitGammaActions } from "../../src";
+
+<Meta
+    title="Others/DigitGammaActions"
+    component={DigitGammaActions}
+/>
+
+# DigitGammaActions
+An easy way of displaying the signed in user aswell as actions to view the users profile in gamma as well as signing out. This should be placed in `DigitHeader` on the right for consistency.
+
+Please note that `nick` and `avatarUrl` can't be controlled with `DigitGammaActions`, but can instead be used with `DigitGammaActionsDummy` if you haven't integrated with gamma but still want the look and feel. When you're actually using `DigitGammaActions`, you don't need to give any props. Note that though it assumes that `useGamma` is used and has been set up.
+
+<Preview>
+    <Story name="gamma actions no avatar">
+        <DigitGammaActionsDummy nick="Sven"/>
+    </Story>
+    <Story name="gamma actions avatar">
+        <DigitGammaActionsDummy nick="Portals" avatarUrl="https://i.imgur.com/RWTnpiq.gif"/>
+    </Story>
+</Preview>
+
+
+<Props of={DigitGammaActions} />

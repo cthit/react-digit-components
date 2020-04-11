@@ -8,9 +8,9 @@ import * as yup from "yup";
 
 # useDigitCustomDialog
 
-<Meta title="Hooks/useDigitCustomDialog" decorators={[(StoryFn) => <div style={{height: "500px"}}><StoryFn/></div>]}/>
+Used when you need more customization then `useDigitDialog`. You're able to provide different kinds of renders for your dialog. 
 
-## hej
+<Meta title="Dialog/useDigitCustomDialog"/>
 
 <Preview>
     <Story name="dialog">
@@ -27,4 +27,16 @@ import * as yup from "yup";
     </Story>
 </Preview>
 
-<Props of={useDigitCustomDialog} />
+## Props
+
+These are the props for the object given as the first and only argument in the hook `useDigitCustomDialog`. `useDigitCustomDialog` returns an array with one function called `openDialog`. It takes in the same object as the hook does, but overrides if there's any conflicts between the two objects.
+
+| **Name**          	| **Type** 	| **Description**                                                                                                                                                        	|
+|-------------------	|----------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
+| **onClose**       	| *func*   	| Called either when confirm or cancel function from renderButtons has been called. Is called after onConfirm.                                                           	|
+| **onCancel**      	| *func*   	| When cancel button has been pressed, onCancel is called                                                                                                                	|
+| **onConfirm**     	| *func*   	| When ok button has been pressed, onConfirm is called                                                                                                                   	|
+| **title**         	| *string* 	| Title of the dialog                                                                                                                                                    	|
+| **renderMain**    	| *func*   	| Render for the main area of the dialog.                                                                                                                                	|
+| **renderButtons** 	| *func*   	| Render for the bottom area of the dialog. Has two arguments, (confirm, cancel). Both functions that should be called when a confirm or cancel button has been clicked. 	|
+| **size**          	| *object* 	| Standard size object                                                                                                                                                   	|

@@ -3,11 +3,10 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import PropTypes from "prop-types";
 import React from "react";
-import {
-    Lowerlabel,
-    StyledFormControl,
-    UpperLabel
-} from "./DigitRadioButtonGroup.element.styles";
+import { Lowerlabel, UpperLabel } from "./DigitRadioButtonGroup.element.styles";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
+import FormControl from "@material-ui/core/FormControl";
+import useFormControlStyles from "../../styles/material-ui/use-form-control-styles";
 
 const DigitRadioButtonGroup = ({
     value,
@@ -18,45 +17,59 @@ const DigitRadioButtonGroup = ({
     lowerLabel,
     radioButtons,
     error,
-    errorMessage
-}) => (
-    <StyledFormControl component="fieldset">
-        <UpperLabel component="legend">{upperLabel}</UpperLabel>
-        <RadioGroup
-            value={value}
-            name={name}
-            onBlur={onBlur}
-            onChange={onChange}
-        >
-            {radioButtons.map(value => {
-                const { id, label, disabled, primary, secondary } = value;
-                return (
-                    <FormControlLabel
-                        key={id}
-                        value={id}
-                        label={label}
-                        disabled={disabled}
-                        control={
-                            <Radio
-                                color={
-                                    primary
-                                        ? "primary"
-                                        : secondary
-                                        ? "secondary"
-                                        : "default"
-                                }
-                            />
-                        }
-                    />
-                );
-            })}
-        </RadioGroup>
-        <Lowerlabel error={error}>
-            {error && errorMessage != null ? errorMessage : lowerLabel}
-        </Lowerlabel>
-    </StyledFormControl>
-);
+    errorMessage,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size
+    });
+    const formClasses = useFormControlStyles({ padding, margin });
 
+    return (
+        <FormControl classes={formClasses} component="fieldset">
+            <UpperLabel component="legend">{upperLabel}</UpperLabel>
+            <RadioGroup
+                classes={classes}
+                value={value}
+                name={name}
+                onBlur={onBlur}
+                onChange={onChange}
+            >
+                {radioButtons.map(value => {
+                    const { id, label, disabled, primary, secondary } = value;
+                    return (
+                        <FormControlLabel
+                            key={id}
+                            value={id}
+                            label={label}
+                            disabled={disabled}
+                            control={
+                                <Radio
+                                    color={
+                                        primary
+                                            ? "primary"
+                                            : secondary
+                                            ? "secondary"
+                                            : "default"
+                                    }
+                                />
+                            }
+                        />
+                    );
+                })}
+            </RadioGroup>
+            <Lowerlabel error={error}>
+                {error && errorMessage != null ? errorMessage : lowerLabel}
+            </Lowerlabel>
+        </FormControl>
+    );
+};
 DigitRadioButtonGroup.displayName = "DigitRadioButtonGroup";
 DigitRadioButtonGroup.propTypes = {
     /** The chosen value of the radio buttons. The value must be one of
@@ -96,7 +109,57 @@ DigitRadioButtonGroup.propTypes = {
      */
     error: PropTypes.bool,
     /** Will replace lowerLabel if error is true.  */
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitRadioButtonGroup.defaultProps = {

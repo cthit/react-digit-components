@@ -3,19 +3,15 @@ import Tabs from "@material-ui/core/Tabs";
 import withStyles from "@material-ui/styles/withStyles";
 import PropTypes from "prop-types";
 import React from "react";
-import { Fill } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text, Title } from "../../styles/digit-text/DigitText.styles";
 import findIndex from "lodash/findIndex";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
-const styles = theme => ({
-    root: {
-        flexGrow: 1,
-        width: "100%",
+const styles = ({ inheritBackground, ...theme }) => ({
+    backgroundPrimary: {
         backgroundColor: theme.palette.primary.main
     },
-    rootInherit: {
-        flexGrow: 1,
-        width: "100%",
+    backgroundInherit: {
         background: "inherit"
     },
     scrollButtons: {
@@ -37,13 +33,32 @@ const DigitTabs = ({
     titleFont,
     fullWidth,
     classes,
+    primaryIndicator,
     inheritBackground,
-    primaryIndicator
-}) => (
-    <Fill>
+    size,
+    alignSelf,
+    flex,
+    padding,
+    margin
+}) => {
+    const layoutClasses = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
+
+    return (
         <Tabs
             classes={{
-                root: inheritBackground ? classes.rootInherit : classes.root,
+                root:
+                    layoutClasses.root +
+                    " " +
+                    (inheritBackground
+                        ? classes.backgroundInherit
+                        : classes.backgroundPrimary),
+
                 scrollButtons: classes.scrollButtons,
                 indicator: classes.indicator
             }}
@@ -86,8 +101,8 @@ const DigitTabs = ({
             })}
             ;
         </Tabs>
-    </Fill>
-);
+    );
+};
 
 DigitTabs.displayName = "DigitTabs";
 DigitTabs.propTypes = {
@@ -121,12 +136,65 @@ DigitTabs.propTypes = {
     /** Will use the background color of the parent */
     inheritBackground: PropTypes.bool,
     /** If you want to use the primary color as the indicator instead of secondary */
-    primaryIndicator: PropTypes.bool
+    primaryIndicator: PropTypes.bool,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitTabs.defaultProps = {
     titleFont: false,
-    tabs: []
+    tabs: [],
+    size: {},
+    margin: "0px",
+    flex: "1"
 };
 
 export { DigitTabs };

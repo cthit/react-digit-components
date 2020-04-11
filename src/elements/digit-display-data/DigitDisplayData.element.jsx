@@ -3,8 +3,24 @@ import React from "react";
 import { Grid } from "../../styles/digit-layout/DigitLayout.styles";
 import { Text } from "../../styles/digit-text/DigitText.styles";
 
-const DigitDisplayData = ({ data, keysText, keysOrder }) => (
-    <Grid columns={`auto 1fr`} margin={"4px"}>
+const DigitDisplayData = ({
+    data,
+    keysText,
+    keysOrder,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
+}) => (
+    <Grid
+        columns={`auto 1fr`}
+        alignSelf={alignSelf}
+        flex={flex}
+        size={size}
+        padding={padding}
+        margin={margin}
+    >
         {keysOrder
             .filter(keyOrder => Object.keys(data).includes(keyOrder))
             .map(keyOrder => (
@@ -23,13 +39,65 @@ DigitDisplayData.propTypes = {
     /** The pretty text of the keys to display.  */
     keysText: PropTypes.objectOf(PropTypes.string),
     /** The order of the keys. An array of keys.  */
-    keysOrder: PropTypes.arrayOf(PropTypes.string)
+    keysOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitDisplayData.defaultProps = {
     data: {},
     keysText: {},
-    keysOrder: []
+    keysOrder: [],
+    margin: "4px",
+    justifyContent: "center"
 };
 
 export default DigitDisplayData;

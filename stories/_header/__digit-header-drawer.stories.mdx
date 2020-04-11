@@ -1,0 +1,86 @@
+import { useState, useRef } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitHeaderDrawer, DigitDesign, DigitLayout, DigitText, DigitNavLink, DigitGammaActionsDummy } from "../../src";
+
+<Meta
+    title="DigitHeaderDrawer"
+    component={DigitHeaderDrawer}
+    decorators={[
+        storyFn => <div style={{ height: "600px", maxHeight: "600px", overflow: "auto" }}>{storyFn()}</div>
+    ]}
+/>
+
+# DigitHeaderDrawer
+
+DigitHeaderDrawer is just the same as `DigitHeader`, but it has support for a drawer. This should really only be used if you have a lot of navigation. Try to instead use `DigitTabs` if there's minimal navigation. 
+
+This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you should use `DigitGammaActions` instead.
+
+<Preview>
+    <Story name="simple-header">
+        {() => {
+            const containerRef = useRef(null);
+            const MyCard = () => (
+                <DigitDesign.Card size={{width: "200px", height: "200px"}}>  
+                    <DigitLayout.Center>
+                        <DigitText.Text bold text={"This is a card"} />
+                    </DigitLayout.Center>
+                </DigitDesign.Card>
+            );
+            return (
+                <DigitHeaderDrawer 
+                    title="BookIT" 
+                    renderDrawer={() => (
+                        <>
+                            <DigitGammaActionsDummy 
+                                alignSelf="center"
+                                nick="Portals" 
+                                avatarUrl="https://i.imgur.com/RWTnpiq.gif"
+                            />  
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                        </>
+                    )} 
+                    renderMain={() => (
+                        <DigitLayout.Column>
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                        </DigitLayout.Column>
+                    )}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitHeaderDrawer} />

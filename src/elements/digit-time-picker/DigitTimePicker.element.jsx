@@ -1,22 +1,14 @@
-import withStyles from "@material-ui/styles/withStyles";
 import { TimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 import useDigitTranslations from "../../hooks/use-digit-translations";
 import translations from "./DigitTimePicker.element.translations";
-
-const styles = () => ({
-    root: {
-        flex: 1,
-        width: "100%"
-    }
-});
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitTimePicker = ({
     value,
     onChange,
     okLabel,
-    classes,
     outlined,
     filled,
     error,
@@ -29,12 +21,25 @@ const DigitTimePicker = ({
     clearLabel,
     emptyLabel,
     invalidLabel,
-    showNowButton
+    showNowButton,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [text] = useDigitTranslations(translations);
 
     return (
         <TimePicker
+            classes={classes}
             onChange={date => onChange({ target: { value: date } })}
             value={value}
             ampm={false}
@@ -103,17 +108,67 @@ DigitTimePicker.propTypes = {
     lowerLabel: PropTypes.string,
     error: PropTypes.bool,
     errorMessage: PropTypes.string,
-    showNowButton: PropTypes.bool
+    showNowButton: PropTypes.bool,
+    disabled: PropTypes.bool,
+    nowLabel: PropTypes.string,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitTimePicker.defaultProps = {
     outlined: false,
     filled: false,
     upperLabel: "",
-    lowerLabel: ""
+    lowerLabel: "",
+    size: { width: "224px" }
 };
 
-/** This is a temp solution to get the correct prop types from StoryBook. */
-export { DigitTimePicker };
-
-export default withStyles(styles)(DigitTimePicker);
+export default DigitTimePicker;

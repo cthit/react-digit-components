@@ -1,27 +1,18 @@
-import withStyles from "@material-ui/styles/withStyles";
 import AccessTime from "@material-ui/icons/AccessTime";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import DateRange from "@material-ui/icons/DateRange";
-import Keyboard from "@material-ui/icons/Keyboard";
 import { DateTimePicker } from "@material-ui/pickers";
 import PropTypes from "prop-types";
 import React from "react";
 import translations from "./DigitDateAndTimePicker.element.translations";
 import useDigitTranslations from "../../hooks/use-digit-translations";
-
-const styles = () => ({
-    root: {
-        flex: 1,
-        width: "100%"
-    }
-});
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
 const DigitDateAndTimePicker = ({
     value,
     upperLabel,
     onChange,
-    classes,
     todayLabel,
     cancelLabel,
     okLabel,
@@ -40,12 +31,25 @@ const DigitDateAndTimePicker = ({
     errorMessage,
     minDate,
     maxDate,
-    shouldDisableDate
+    shouldDisableDate,
+    flex,
+    alignSelf,
+    size,
+    padding,
+    margin
 }) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
     const [text] = useDigitTranslations(translations);
 
     return (
         <DateTimePicker
+            classes={classes}
             value={value}
             onChange={date => onChange({ target: { value: date } })}
             label={upperLabel}
@@ -56,7 +60,6 @@ const DigitDateAndTimePicker = ({
             showTodayButton={showTodayButton}
             invalidLabel={invalidLabel}
             dateRangeIcon={<DateRange />}
-            keyboardIcon={<Keyboard />}
             leftArrowIcon={<ChevronLeft />}
             rightArrowIcon={<ChevronRight />}
             timeIcon={<AccessTime />}
@@ -65,7 +68,6 @@ const DigitDateAndTimePicker = ({
             disablePast={disablePast}
             clearable={clearable}
             ampm={false}
-            className={classes.root}
             inputVariant={
                 filled ? "filled" : outlined ? "outlined" : "standard"
             }
@@ -77,13 +79,18 @@ const DigitDateAndTimePicker = ({
             maxDate={maxDate}
             minDate={minDate}
             shouldDisableDate={shouldDisableDate}
-            format={"yyyy-mm-dd hh:mm"}
+            format={"yyyy-MM-dd hh:mm"}
         />
     );
 };
 
 DigitDateAndTimePicker.displayName = "DigitDateAndTimePicker";
 DigitDateAndTimePicker.propTypes = {
+    disabled: PropTypes.bool,
+    disableFuture: PropTypes.bool,
+    minDate: PropTypes.string,
+    maxDate: PropTypes.string,
+    shouldDisableDate: PropTypes.bool,
     /** If true, then a button will exists to let the user clear the date. */
     clearable: PropTypes.bool,
     /** If true, then the user can't select a date past now. */
@@ -125,7 +132,57 @@ DigitDateAndTimePicker.propTypes = {
     filled: PropTypes.bool,
     lowerLabel: PropTypes.string,
     error: PropTypes.bool,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ])
 };
 
 DigitDateAndTimePicker.defaultProps = {
@@ -138,10 +195,8 @@ DigitDateAndTimePicker.defaultProps = {
     filled: false,
     outlined: false,
     error: false,
-    errorMessage: ""
+    errorMessage: "",
+    size: { width: "224px" }
 };
 
-/** This is a temp solution to get the correct prop types from StoryBook. */
-export { DigitDateAndTimePicker };
-
-export default withStyles(styles)(DigitDateAndTimePicker);
+export default DigitDateAndTimePicker;

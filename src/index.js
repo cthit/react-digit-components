@@ -30,44 +30,40 @@ import DigitButtonGroup from "./elements/digit-button-group";
 import DigitCustomDialog from "./elements/digit-custom-dialog";
 import DigitToast from "./elements/digit-toast";
 import DigitDialog from "./elements/digit-dialog";
+import DigitSelectFile from "./elements/digit-select-file";
+import DigitGammaActions from "./elements/digit-gamma-actions";
+import DigitHeader from "./elements/digit-header";
+import { DigitGammaActionsDummy } from "./elements/digit-gamma-actions/DigitGammaActions.element";
 
 import DigitProviders from "./declaratives/digit-providers";
 
 import DigitMenu from "./views/digit-menu";
 import DigitTable from "./views/digit-table";
+import DigitSelectMultipleTable from "./views/digit-select-multiple-table";
 import DigitCRUD from "./views/digit-crud";
 import DigitForm from "./views/digit-form";
-import DigitHeader from "./views/digit-header";
+import DigitHeaderDrawer from "./views/digit-header-drawer";
 import DigitListSelectMultiple from "./views/digit-list-select-multiple";
 
 import useDigitTranslations from "./hooks/use-digit-translations";
-import useGamma from "./hooks/use-gamma";
-import useGammaUser from "./hooks/use-gamma-user";
 import useDigitCustomDialog from "./hooks/use-digit-custom-dialog";
 import useDigitDialog from "./hooks/use-digit-dialog";
 import useDigitFormField from "./hooks/use-digit-form-field";
 import useDigitFormFieldArray from "./hooks/use-digit-form-field-array";
 import useDigitToast from "./hooks/use-digit-toast";
+import useGamma from "./hooks/use-gamma";
+import useGammaMe from "./hooks/use-gamma-me";
 
 import {
     Center,
     Column,
     DownRightPosition,
-    Fill,
     Flex,
     Grid,
     GridItem,
     Hide,
-    HideFill,
-    Margin,
-    MarginBottom,
-    MarginLeft,
-    MarginRight,
-    MarginTop,
     Order,
-    Padding,
     Row,
-    Size,
     Spacing,
     UniformGrid
 } from "./styles/digit-layout/DigitLayout.styles";
@@ -80,7 +76,7 @@ import {
     CardHeaderImage,
     CardIcon,
     CardMenuContainer,
-    CardSubTitle,
+    CardSubtitle,
     CardTitle,
     Divider,
     Link
@@ -107,17 +103,8 @@ const DigitLayout = {
     Column,
     Row,
     DownRightPosition,
-    Fill,
-    MarginTop,
-    MarginBottom,
-    MarginLeft,
-    MarginRight,
-    Margin,
-    Padding,
     Center,
-    HideFill,
     Hide,
-    Size,
     Order,
     Spacing
 };
@@ -129,7 +116,7 @@ const DigitDesign = {
     CardIcon,
     CardMenuContainer,
     CardTitle,
-    CardSubTitle,
+    CardSubtitle,
     CardBody,
     CardButtons,
     Divider,
@@ -183,13 +170,18 @@ export {
     DigitListSelectMultiple,
     DigitListSelectSingle,
     DigitButtonGroup,
+    DigitSelectFile,
+    DigitGammaActions,
+    DigitGammaActionsDummy,
     /* Views */
     DigitToast,
     DigitDialog,
     DigitCustomDialog,
     DigitMenu,
     DigitTable,
+    DigitSelectMultipleTable,
     DigitCRUD,
+    DigitHeaderDrawer,
     /* Declaratives */
     DigitProviders,
     /* Styles */
@@ -198,11 +190,11 @@ export {
     DigitText,
     /* Hooks */
     useDigitTranslations,
-    useGamma,
-    useGammaUser,
     useDigitCustomDialog,
     useDigitDialog,
     useDigitFormField,
     useDigitFormFieldArray,
-    useDigitToast
+    useDigitToast,
+    useGamma,
+    useGammaMe
 };

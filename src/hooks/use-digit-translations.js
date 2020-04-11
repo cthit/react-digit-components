@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 import merge from "lodash/merge";
 import DigitTranslationsContext, {
-    SET_ACTIVE_LANGUAGE
+    SET_ACTIVE_LANGUAGE,
+    SET_COMMON_TRANSLATIONS
 } from "../contexts/DigitTranslationsContext";
 
 function getNewText(translations, commonTranslations, activeLanguage) {
@@ -24,19 +25,37 @@ function useDigitTranslations(translations = {}) {
     const { activeLanguage, commonTranslations } = state;
     const [text, setText] = useState({});
 
+    const check =
+        JSON.stringify(translations) + JSON.stringify(commonTranslations);
+
     //Calculates text
-    useEffect(() => {
-        setText(getNewText(translations, commonTranslations, activeLanguage));
-    }, [
-        activeLanguage,
-        JSON.stringify(translations),
-        JSON.stringify(commonTranslations)
-    ]);
+    useEffect(
+        () => {
+            setText(
+                getNewText(translations, commonTranslations, activeLanguage)
+            );
+        },
+        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [activeLanguage, check]
+    );
+
+    const setActiveLanguageCallback = useCallback(
+        lang => dispatch({ type: SET_ACTIVE_LANGUAGE, activeLanguage: lang }),
+        [dispatch]
+    );
+
+    const setCommonTranslationsCallback = useCallback(
+        commonTranslations =>
+            dispatch({ type: SET_COMMON_TRANSLATIONS, commonTranslations }),
+        [dispatch]
+    );
 
     return [
         text,
         activeLanguage,
-        lang => dispatch({ type: SET_ACTIVE_LANGUAGE, activeLanguage: lang })
+        setActiveLanguageCallback,
+        setCommonTranslationsCallback
     ];
 }
 

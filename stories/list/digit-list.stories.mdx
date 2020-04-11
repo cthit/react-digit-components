@@ -15,23 +15,25 @@ import Delete from "@material-ui/icons/Delete";
 
 # DigitList
 
+List of items.
+
+## List
+
 <Preview>
-    <Story name="1">
+    <Story name="List">
         <DigitList
-            multipleExpanded
             onClick={item => {
                 console.log(item.text);
             }}
-            dense={false}
             title={"This is a title"}
             items={[
                 {
-                    text: "Hej",
+                    text: "Hello",
                     secondaryText: "This is the secondary text",
                     icon: Mail,
                     items: [
                         {
-                            text: "Hej"
+                            text: "Hi"
                         }
                     ],
                     actionIcon: Delete,
@@ -44,7 +46,95 @@ import Delete from "@material-ui/icons/Delete";
                     icon: Mail,
                     items: [
                         {
-                            text: "ååh",
+                            text: "mmh",
+                            items: [
+                                {
+                                    text: "subsub"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]}
+        />
+    </Story>
+</Preview>
+
+## Dense
+
+<Preview>
+    <Story name="Dense">
+        <DigitList
+            dense
+            onClick={item => {
+                console.log(item.text);
+            }}
+            title={"This is dense list"}
+            items={[
+                {
+                    text: "Hello",
+                    secondaryText: "This is the secondary text",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "Hi"
+                        }
+                    ],
+                    actionIcon: Delete,
+                    actionOnClick: item => {
+                        console.log("DELETE ME " + item.text);
+                    }
+                },
+                {
+                    text: "hmm",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "mmh",
+                            items: [
+                                {
+                                    text: "subsub"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]}
+        />
+    </Story>
+</Preview>
+
+## Multiple expanded
+
+<Preview>
+    <Story name="Multiple expanded">
+        <DigitList
+            multipleExpanded
+            onClick={item => {
+                console.log(item.text);
+            }}
+            title={"This is dense list"}
+            items={[
+                {
+                    text: "Hello",
+                    secondaryText: "This is the secondary text",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "Hi"
+                        }
+                    ],
+                    actionIcon: Delete,
+                    actionOnClick: item => {
+                        console.log("DELETE ME " + item.text);
+                    }
+                },
+                {
+                    text: "hmm",
+                    icon: Mail,
+                    items: [
+                        {
+                            text: "mmh",
                             items: [
                                 {
                                     text: "subsub"

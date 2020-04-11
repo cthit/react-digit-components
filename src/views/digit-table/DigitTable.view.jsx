@@ -1,251 +1,337 @@
-import Paper from "@material-ui/core/Paper";
+import PropTypes from "prop-types";
+import React, { useMemo, useState } from "react";
+import translations from "./DigitTable.view.translations.json";
+import useDigitTranslations from "../../hooks/use-digit-translations";
+import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
-import isEqual from "lodash/isEqual";
-import PropTypes from "prop-types";
-import React from "react";
-import { Center, Padding } from "../../styles/digit-layout/DigitLayout.styles";
-import { Heading5 } from "../../styles/digit-text/DigitText.styles";
-import translations from "./DigitTable.view.translations.json";
-import DigitTableBody from "./elements/digit-table-body";
-import DigitTableHeader from "./elements/digit-table-header";
-import DigitTableToolbar from "./elements/digit-table-toolbar";
-import styled from "styled-components";
-import useDigitTranslations from "../../hooks/use-digit-translations";
+import TableRow from "@material-ui/core/TableRow";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import DigitTextField from "../../elements/digit-text-field";
+import { Heading5, Text } from "../../styles/digit-text/DigitText.styles";
+import { Center } from "../../styles/digit-layout/DigitLayout.styles";
+import DigitButton from "../../elements/digit-button";
+import { Link } from "../../styles/digit-design/DigitDesign.styles";
+import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
-const StyledTablePagination = styled(TablePagination)`
-    min-width: 600px;
-`;
+function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+        return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+        return 1;
+    }
+    return 0;
+}
 
-const StyledTable = styled(Table)`
-    min-width: 632px;
-`;
+function getComparator(order, orderBy) {
+    return order === "desc"
+        ? (a, b) => descendingComparator(a, b, orderBy)
+        : (a, b) => -descendingComparator(a, b, orderBy);
+}
 
-const TablePaper = styled(Paper)`
-    max-width: 100vw;
-    overflow-x: auto;
-`;
+function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+        const order = comparator(a[0], b[0]);
+        if (order !== 0) return order;
+        return a[1] - b[1];
+    });
+    return stabilizedThis.map(el => el[0]);
+}
 
-//temp fix until DigitTable is rewritten
-const DigitTableTranslations = ({ render }) => {
-    const [text] = useDigitTranslations(translations);
-    return render(text);
+const DigitTableHead = ({
+    classes,
+    order,
+    orderBy,
+    onRequestSort,
+    headerTexts,
+    columnsOrder
+}) => {
+    const createSortHandler = property => event => {
+        onRequestSort(event, property);
+    };
+
+    return (
+        <TableHead>
+            <TableRow>
+                {columnsOrder.map(column => (
+                    <TableCell
+                        key={column}
+                        align={"left"}
+                        sortDirection={orderBy === column ? order : false}
+                    >
+                        <TableSortLabel
+                            active={orderBy === column}
+                            direction={orderBy === column ? order : "asc"}
+                            onClick={createSortHandler(column)}
+                        >
+                            {headerTexts[column]}
+                            {orderBy === column ? (
+                                <span className={classes.visuallyHidden}>
+                                    {order === "desc"
+                                        ? "sorted descending"
+                                        : "sorted ascending"}
+                                </span>
+                            ) : null}
+                        </TableSortLabel>
+                    </TableCell>
+                ))}
+                <TableCell>
+                    {headerTexts.__link != null && (
+                        <Text alignRight text={headerTexts.__link} />
+                    )}
+                </TableCell>
+            </TableRow>
+        </TableHead>
+    );
 };
 
-class DigitTable extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-
-        this.state = {
-            searchInput: "",
-            order: "asc",
-            orderBy: props.startOrderBy,
-            page: 0,
-            rowsPerPage: 10,
-
-            data: [],
-            columnsOrder: props.columnsOrder,
-            idProp: props.idProp
-        };
+const useToolbarStyles = makeStyles(() => ({
+    root: {
+        justifyContent: "space-between"
     }
+}));
 
-    componentDidMount() {
-        if (this.props.data != null) {
-            this.updateData();
-        }
+const DigitTableToolbar = ({
+    titleText,
+    search,
+    searchText,
+    text,
+    searchValue,
+    onSearchUpdated
+}) => {
+    const classes = useToolbarStyles();
+
+    return (
+        <Toolbar className={classes.root}>
+            <Typography
+                className={classes.title}
+                variant="h6"
+                id="tableTitle"
+                component="div"
+            >
+                {titleText}
+            </Typography>
+            {search && (
+                <DigitTextField
+                    margin={{
+                        left: "24px"
+                    }}
+                    flex={"1"}
+                    size={{
+                        maxWidth: "400px"
+                    }}
+                    outlined
+                    upperLabel={
+                        searchText == null ? text.Searchtext : searchText
+                    }
+                    value={searchValue}
+                    onChange={e => onSearchUpdated(e.target.value)}
+                />
+            )}
+        </Toolbar>
+    );
+};
+
+const useStyles = makeStyles(theme => ({
+    visuallyHidden: {
+        border: 0,
+        clip: "rect(0 0 0 0)",
+        height: 1,
+        margin: -1,
+        overflow: "hidden",
+        padding: 0,
+        position: "absolute",
+        top: 20,
+        width: 1
     }
+}));
 
-    componentDidUpdate(prevProps) {
-        if (
-            !isEqual(
-                prevProps.data.slice().sort(),
-                this.props.data.slice().sort()
-            )
-        ) {
-            this.updateData();
-        }
-    }
+const DigitTable = ({
+    data,
+    headerTexts,
+    columnsOrder,
+    idProp,
+    titleText,
+    dense,
+    startOrderBy,
+    startOrderByDirection,
+    emptyTableText,
+    searchText,
+    search,
+    startRowsPerPage,
+    alignSelf,
+    size,
+    padding,
+    margin,
+    flex
+}) => {
+    const classes = useStyles();
+    const [order, setOrder] = useState(startOrderByDirection);
+    const [orderBy, setOrderBy] = useState(startOrderBy);
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(startRowsPerPage);
+    const [text] = useDigitTranslations(translations);
+    const [searchValue, setSearchValue] = useState("");
+    const layoutClasses = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        size,
+        padding,
+        margin
+    });
 
-    updateData() {
-        this.setState({
-            data: this.props.data.sort((a, b) =>
-                a[this.state.orderBy] < b[this.state.orderBy] ? -1 : 1
-            )
-        });
-    }
+    const header = titleText != null || search;
 
-    onSearchInputChange = e => {
-        this.setState({
-            searchInput: e.target.value
-        });
+    const handleRequestSort = (event, property) => {
+        const isAsc = orderBy === property && order === "asc";
+        setOrder(isAsc ? "desc" : "asc");
+        setOrderBy(property);
     };
 
-    handleRequestSort = (event, property) => {
-        const orderBy = property;
-        var order = "desc";
-
-        if (this.state.orderBy === property && this.state.order === "desc") {
-            order = "asc";
-        }
-
-        const data =
-            order === "desc"
-                ? this.state.data.sort((a, b) =>
-                      b[orderBy] < a[orderBy] ? -1 : 1
-                  )
-                : this.state.data.sort((a, b) =>
-                      a[orderBy] < b[orderBy] ? -1 : 1
-                  );
-
-        this.setState({ data, order, orderBy });
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
     };
 
-    handleSelectAllClick = (event, checked) => {
-        if (checked) {
-            this.props.onSelectedUpdated(
-                this.state.data.map(n => n[this.state.idProp])
-            );
-            return;
-        }
-        this.props.onSelectedUpdated([]);
+    const handleChangeRowsPerPage = event => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
     };
 
-    handleClick = (event, id) => {
-        var newSelected = this.props.selected.slice();
-        const selectedIndex = newSelected.indexOf(id);
+    const emptyRows =
+        rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
-        if (selectedIndex === -1) {
-            newSelected.push(id);
-        } else {
-            newSelected.splice(selectedIndex, 1);
-        }
+    const sortedData = useMemo(() => {
+        const s = searchValue.trim();
+        const filteredData =
+            s === ""
+                ? data
+                : data.filter(row => {
+                      for (var column of columnsOrder) {
+                          if ((row[column] + "").toLowerCase().includes(s)) {
+                              return true;
+                          }
+                      }
+                      return false;
+                  });
 
-        this.props.onSelectedUpdated(newSelected);
-    };
-
-    handleChangePage = (event, page) => {
-        this.setState({ page });
-    };
-
-    handleChangeRowsPerPage = event => {
-        this.setState({ rowsPerPage: event.target.value });
-    };
-
-    isSelected = id =>
-        this.props.selected == null
-            ? false
-            : this.props.selected.indexOf(id) !== -1;
-
-    rowShouldBeShown = row =>
-        row != null &&
-        Object.keys(this.props.headerTexts).filter(
-            key =>
-                row[key] != null &&
-                (row[key] + "")
-                    .toLowerCase()
-                    .includes(this.state.searchInput.toLowerCase())
-        ).length > 0; //Can be optimized, escape if one result is found
-
-    render() {
-        const { selected, emptyTableText, headerTexts } = this.props;
-        const { data, order, orderBy, rowsPerPage, page } = this.state;
-
-        return (
-            <DigitTableTranslations
-                render={text => (
-                    <TablePaper>
-                        <DigitTableToolbar
-                            numSelected={
-                                selected == null ? -1 : selected.length
-                            }
-                            searchInput={this.state.searchInput}
-                            onSearchInputChange={this.onSearchInputChange}
-                            titleText={this.props.titleText}
-                            searchText={this.props.searchText}
-                            headerTexts={this.props.headerTexts}
-                            showSearchableProps={this.props.showSearchableProps}
-                            search={this.props.search}
-                        />
-
-                        <StyledTable aria-labelledby="tableTitle">
-                            <DigitTableHeader
-                                numSelected={
-                                    selected == null
-                                        ? -1
-                                        : selected.filter(n =>
-                                              this.rowShouldBeShown(n)
-                                          ).length ///TODO OPTIMIZE
-                                }
-                                columnsOrder={this.state.columnsOrder}
-                                order={order}
-                                orderBy={orderBy}
-                                onSelectAllClick={this.handleSelectAllClick}
-                                onRequestSort={this.handleRequestSort}
-                                rowCount={data.length}
-                                headerTexts={headerTexts}
-                            />
-                            {this.state.data.length > 0 && (
-                                <DigitTableBody
-                                    search={this.props.search}
-                                    idProp={this.state.idProp}
-                                    columnsOrder={this.state.columnsOrder}
-                                    page={this.state.page}
-                                    rowsPerPage={this.state.rowsPerPage}
-                                    data={this.state.data}
-                                    isSelected={this.isSelected}
-                                    handleClick={this.handleClick}
-                                    rowShouldBeShown={this.rowShouldBeShown}
-                                    headerTexts={headerTexts}
-                                />
-                            )}
-
-                            {this.state.data.length === 0 && (
-                                <TableBody>
-                                    <tr>
-                                        <td colSpan="100">
-                                            <Center>
-                                                <Padding>
-                                                    <Heading5
-                                                        text={emptyTableText}
-                                                    />
-                                                </Padding>
-                                            </Center>
-                                        </td>
-                                    </tr>
-                                </TableBody>
-                            )}
-                        </StyledTable>
-
-                        <StyledTablePagination
-                            component="div"
-                            count={
-                                data.filter(n => this.rowShouldBeShown(n))
-                                    .length
-                            } //TODO OPTIMIZE
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            backIconButtonProps={{
-                                "aria-label": text.PreviousPage
-                            }}
-                            nextIconButtonProps={{
-                                "aria-label": text.NextPage
-                            }}
-                            onChangePage={this.handleChangePage}
-                            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-                            labelRowsPerPage={text.RowsPerPage}
-                        />
-                    </TablePaper>
-                )}
-            />
+        return stableSort(filteredData, getComparator(order, orderBy)).slice(
+            page * rowsPerPage,
+            page * rowsPerPage + rowsPerPage
         );
-    }
-}
+    }, [data, searchValue, page, rowsPerPage, order, orderBy, columnsOrder]);
+
+    return (
+        <Paper classes={layoutClasses}>
+            {header && (
+                <DigitTableToolbar
+                    titleText={titleText}
+                    search={search}
+                    searchText={searchText}
+                    text={text}
+                    searchValue={searchValue}
+                    onSearchUpdated={setSearchValue}
+                />
+            )}
+            <TableContainer>
+                <Table
+                    aria-labelledby="tableTitle"
+                    size={dense ? "small" : "medium"}
+                    aria-label="enhanced table"
+                >
+                    <DigitTableHead
+                        classes={classes}
+                        order={order}
+                        orderBy={orderBy}
+                        onRequestSort={handleRequestSort}
+                        rowCount={data.length}
+                        headerTexts={headerTexts}
+                        columnsOrder={columnsOrder}
+                    />
+                    <TableBody>
+                        {sortedData.length === 0 && (
+                            <tr>
+                                <td colSpan="100">
+                                    <Center size={{ height: "250px" }}>
+                                        <Heading5 text={emptyTableText} />
+                                    </Center>
+                                </td>
+                            </tr>
+                        )}
+                        {sortedData.length > 0 && (
+                            <>
+                                {sortedData.map(row => (
+                                    <TableRow
+                                        hover
+                                        tabIndex={-1}
+                                        key={row[idProp]}
+                                    >
+                                        {columnsOrder.map(column => (
+                                            <TableCell key={row[column]}>
+                                                {row[column]}
+                                            </TableCell>
+                                        ))}
+                                        {row.__link != null && (
+                                            <TableCell align={"right"}>
+                                                <Link to={row.__link}>
+                                                    <DigitButton
+                                                        text={
+                                                            headerTexts.__link
+                                                        }
+                                                        outlined
+                                                    />
+                                                </Link>
+                                            </TableCell>
+                                        )}
+                                        {row.__link == null && <TableCell />}
+                                    </TableRow>
+                                ))}
+                                {emptyRows > 0 && (
+                                    <TableRow
+                                        style={{
+                                            height:
+                                                (dense ? 33 : 53) * emptyRows
+                                        }}
+                                    >
+                                        <TableCell
+                                            colSpan={columnsOrder.length}
+                                        />
+                                    </TableRow>
+                                )}
+                            </>
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={data.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+        </Paper>
+    );
+};
 
 DigitTable.displayName = "DigitTable";
 DigitTable.propTypes = {
     /** The starting column to order rows by */
     startOrderBy: PropTypes.string.isRequired,
+    /** In what direction the start order should be */
+    startOrderByDirection: PropTypes.oneOf(["desc", "asc"]),
+    /** How many rows that the table starts with */
+    startRowsPerPage: PropTypes.oneOf([5, 10, 25]),
     /** The specified order of the columns. */
     columnsOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
     /** The column that has the id. */
@@ -254,14 +340,6 @@ DigitTable.propTypes = {
      * has the keys specified in headerTexts.
      */
     data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    /** When the selected rows has been updated. The first argument is
-     * the current array of selected rows. You need to keep
-     * selected updated yourself.
-     */
-    onSelectedUpdated: PropTypes.func,
-    /** An array of selected. When onSelectedUpdated is called,
-     * you need to save the selected rows.*/
-    selected: PropTypes.array,
     /** A key to text map, where the key are the column
      * and the text is what the user sees.s
      */
@@ -270,14 +348,64 @@ DigitTable.propTypes = {
     emptyTableText: PropTypes.string,
     /** The text of the title. */
     titleText: PropTypes.string,
-    /** The text to show in the searchbar. */
+    /** The text to show in the search bar.  Default is "Search" / "Sök"*/
     searchText: PropTypes.string,
-    /** If true, then all the different props you can search for is
-     * added to the search input field.
-     */
-    showSearchableProps: PropTypes.bool,
     /** If true, then there's a search input field. */
-    search: PropTypes.bool
+    search: PropTypes.bool,
+    /** Controls the alignSelf property for the most outer element in this component.*/
+    alignSelf: PropTypes.oneOf([
+        "auto",
+        "stretch",
+        "center",
+        "flex-start",
+        "flex-end",
+        "baseline",
+        "initial",
+        "inherit"
+    ]),
+    /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
+     * and width/height via an object
+     */
+    size: PropTypes.shape({
+        width: PropTypes.string,
+        height: PropTypes.string,
+        minWidth: PropTypes.string,
+        minHeight: PropTypes.string,
+        maxWidth: PropTypes.string,
+        maxHeight: PropTypes.string
+    }),
+    /** Padding property for the most outer element in this component.
+     * It can either be a string, using the padding shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    padding: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Margin property for the most outer element in this component.
+     * It can either be a string, using the margin shorthand, or it can be an
+     * object to control top/right/bottom/left
+     */
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            top: PropTypes.string,
+            right: PropTypes.string,
+            bottom: PropTypes.string,
+            left: PropTypes.string
+        })
+    ]),
+    /** Controls the flex property for the most outer element in this component.*/
+    flex: PropTypes.string,
+    /**
+     * If the padding should be less between the rows and columns
+     */
+    dense: PropTypes.bool
 };
 
 DigitTable.defaultProps = {
@@ -285,7 +413,13 @@ DigitTable.defaultProps = {
     showSearchableProps: false,
     searchText: "Search",
     titleText: "",
-    emptyTableText: "The table is empty"
+    emptyTableText: "The table is empty",
+    size: {
+        width: "100%",
+        minWidth: "300px"
+    },
+    startOrderByDirection: "desc",
+    startRowsPerPage: 5
 };
 
 export default DigitTable;

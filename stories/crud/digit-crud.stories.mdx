@@ -138,6 +138,7 @@ import xor from "lodash/xor";
                                 age: 18
                             }}
                             createTitle={"Skapa användare"}
+                            createSubtitle={"Here you can create your user!!"}
                             createButtonText={"Skapa"}
                             toastCreateSuccessful={(data, response) =>
                                 "Användaren " + data.name + " skapad"
@@ -147,6 +148,7 @@ import xor from "lodash/xor";
                             }
                             backButtonText={"Tillbaka"}
                             useKeyTextsInUpperLabel
+                            onCreate={response => console.log("CREATED")}
                 />
             );
         }}
@@ -331,6 +333,7 @@ import xor from "lodash/xor";
                             }
                             deleteDialogFormKeysOrder={["nameConfirm"]}
                             useKeyTextsInUpperLabel
+                            onDelete={response => console.log("DELETED")}
                 />
             );
         }}
@@ -447,7 +450,8 @@ import xor from "lodash/xor";
                             }
                             toastUpdateFailed={(updated, old, error) =>
                                 "Användare " + updated.name + " har inte uppdateras"
-                            }    
+                            }
+                            onUpdate={response => console.log("UPDATED")}
                 />
             );
         }}
@@ -581,6 +585,8 @@ import xor from "lodash/xor";
                                 data.name +
                                 " misslyckades"
                             }
+                            onUpdate={response => console.log("UPDATE")}
+                            onDelete={response => console.log("DELETED")}
                 />
             );
         }}
@@ -661,6 +667,7 @@ import xor from "lodash/xor";
                             readOneRequest={readOneRequestCallback}
                             updateRequest={updateRequestCallback}
                             deleteRequest={deleteRequestCallback}
+                            createRequest={createRequestCallback}                  
                             keysOrder={["id", "name", "age"]}
                             keysText={{
                                 id: "Id",
@@ -726,6 +733,319 @@ import xor from "lodash/xor";
                             toastCreateFailed={(data, error) =>
                                 "Användaren " + data.name + " raderad"
                             }
+                            onUpdate={response => console.log("UPDATE")}
+                            onDelete={response => console.log("DELETED")}
+                            onCreate={response => console.log("CREATE")}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitCRUD with readAll, readOne and canReadOne specific
+You can only read details of the user with the id `fdas-fdsafasd`.
+
+<Preview>
+    <Story name="readAll, readOne and canReadOne specific">
+        {() => {
+            const data = useRef([
+                {
+                    id: "asdf-fdsafasd",
+                    name: "Theodor",
+                    age: 55,
+                },
+                {
+                    id: "fdas-fdsafasd",
+                    name: "Sven",
+                    age: 99,
+                }
+            ]);
+            const getData = () => data.current;
+            const setData = newData => {
+                data.current = newData;
+            };
+            const readAllRequestPromise = () =>
+                new Promise(resolve => {
+                    resolve({
+                        data: getData()
+                    });
+                });
+            const readOneRequestPromise = id =>
+                new Promise((resolve, reject) => {
+                    const result = _.find(getData(), { id });
+                    if (result == null) {
+                        reject({error: "Can't find anything with the id: " + id});
+                    } else {
+                        resolve({
+                            data: {
+                                ...result
+                            }
+                        });
+                    }
+                });
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
+            return (
+                <DigitCRUD  path=""
+                            readAllRequest={readAllRequestCallback}       
+                            readOneRequest={readOneRequestCallback}
+                            keysOrder={["id", "name", "age"]}
+                            keysText={{
+                                id: "Id",
+                                name: "Namn",
+                                age: "Ålder",
+                            }}
+                            idProp="id"
+                            tableProps={{
+                                titleText: "Användare",
+                                emptyTableText: "Det finns inga användare",
+                                search: true,
+                                startOrderBy: "name"
+                            }}
+                            backButtonText={"Tillbaka"}
+                            detailsButtonText={"Details"}
+                            detailsTitle={(data) => data.name}
+                            detailsSubtitle={data => "This is a subtitle"}
+                            canReadOne={user => user.id === "asdf-fdsafasd"}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitCRUD with readAll, readOne and canUpdate specific
+You can only update the user with the id `fdas-fdsafasd`.
+
+<Preview>
+    <Story name="readAll, readOne and canUpdate specific">
+        {() => {
+            const data = useRef([
+                {
+                    id: "asdf-fdsafasd",
+                    name: "Theodor",
+                    age: 55,
+                },
+                {
+                    id: "fdas-fdsafasd",
+                    name: "Sven",
+                    age: 99,
+                }
+            ]);
+            const getData = () => data.current;
+            const setData = newData => {
+                data.current = newData;
+            };
+            const readAllRequestPromise = () =>
+                new Promise(resolve => {
+                    resolve({
+                        data: getData()
+                    });
+                });
+            const readOneRequestPromise = id =>
+                new Promise((resolve, reject) => {
+                    const result = _.find(getData(), { id });
+                    if (result == null) {
+                        reject({error: "Can't find anything with the id: " + id});
+                    } else {
+                        resolve({
+                            data: {
+                                ...result
+                            }
+                        });
+                    }
+                });
+            const updateRequestPromise = (id, newUser) =>
+                new Promise((resolve, reject) => {
+                    const index = _.findIndex(getData(), { id });
+                    if (index === -1) {
+                        reject();
+                    } else {
+                        const newData = [...getData()];
+                        newData[index] = { id, ...newUser };
+                        setData(newData);
+                        resolve({});
+                    }
+                });
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
+            const updateRequestCallback = useCallback(updateRequestPromise, [data]);
+            return (
+                <DigitCRUD  path=""
+                            readAllRequest={readAllRequestCallback}       
+                            readOneRequest={readOneRequestCallback}
+                            updateRequest={updateRequestCallback}
+                            keysOrder={["id", "name", "age"]}
+                            keysText={{
+                                id: "Id",
+                                name: "Namn",
+                                age: "Ålder",
+                            }}
+                            idProp="id"
+                            tableProps={{
+                                titleText: "Användare",
+                                emptyTableText: "Det finns inga användare",
+                                search: true,
+                                startOrderBy: "name"
+                            }}
+                            backButtonText={"Tillbaka"}
+                            detailsButtonText={"Details"}
+                            detailsTitle={(data) => data.name}
+                            useKeyTextsInUpperLabel
+                            formComponentData={{
+                                name: {
+                                    component: DigitTextField,
+                                    componentProps: {
+                                        outlined: true
+                                        // upperLabel: "Namn"
+                                    }
+                                },
+                                age: {
+                                    component: DigitTextField,
+                                    componentProps: {
+                                        numbersOnly: true,
+                                        outlined: true,
+                                        upperLabel: "Ålder"
+                                    }
+                                }
+                            }}
+                            formValidationSchema={yup.object().shape({
+                                name: yup.string().required(),
+                                age: yup.number().required()
+                            })}
+                            formInitialValues={{
+                                name: "",
+                                age: 18
+                            }}
+                            updateTitle={data =>
+                                "Uppdatera " + data.name + " användare"
+                            }
+                            toastUpdateSuccessful={(updated, old, response) =>
+                                "Användare " + updated.name + " har uppdateras"
+                            }
+                            toastUpdateFailed={(updated, old, error) =>
+                                "Användare " + updated.name + " har inte uppdateras"
+                            }
+                            onUpdate={response => console.log("UPDATED")}
+                            canUpdate={user => user.id === "asdf-fdsafasd"}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+## DigitCRUD with readAll, readOne, deleteOne and canDelete specific
+You can only delete the user with the id `fdas-fdsafasd`.
+
+<Preview>
+    <Story name="readAll, readOne, deleteOne and canDelete">
+        {() => {
+            const data = useRef([
+                {
+                    id: "asdf-fdsafasd",
+                    name: "Theodor",
+                    age: 55,
+                },
+                {
+                    id: "fdas-fdsafasd",
+                    name: "Sven",
+                    age: 99,
+                }
+            ]);
+            const getData = () => data.current;
+            const setData = newData => {
+                data.current = newData;
+            };
+            const readAllRequestPromise = () =>
+                new Promise(resolve => {
+                    resolve({
+                        data: getData()
+                    });
+                });
+            const readOneRequestPromise = id =>
+                new Promise((resolve, reject) => {
+                    const result = _.find(getData(), { id });
+                    if (result == null) {
+                        reject({error: "Can't find anything with the id: " + id});
+                    } else {
+                        resolve({
+                            data: {
+                                ...result
+                            }
+                        });
+                    }
+                });
+            const deleteRequestPromise = (id, form) =>
+                new Promise((resolve, reject) => {
+                    const one = _.find(getData(), { id });
+                    if (form.nameConfirm !== one.name) {
+                        console.log(form.nameConfirm);
+                        console.log(form);
+                        console.log(one);
+                        reject({error: "Name confirm not correct"});
+                    }else{
+                        setData(xor(getData(), [one]));
+                        resolve({});
+                    }
+                });
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
+            const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
+            return (
+                <DigitCRUD  path=""
+                            readAllRequest={readAllRequestCallback}       
+                            readOneRequest={readOneRequestCallback}
+                            deleteRequest={deleteRequestCallback}
+                            keysOrder={["id", "name", "age"]}
+                            keysText={{
+                                id: "Id",
+                                name: "Namn",
+                                age: "Ålder",
+                            }}
+                            idProp="id"
+                            tableProps={{
+                                titleText: "Användare",
+                                emptyTableText: "Det finns inga användare",
+                                search: true,
+                                startOrderBy: "name"
+                            }}
+                            backButtonText={"Tillbaka"}
+                            detailsButtonText={"Details"}
+                            detailsTitle={(data) => data.name}
+                            toastDeleteSuccessful={(data, response) =>
+                                "Användare " + data.name + " har raderats"
+                            }
+                            toastDeleteFailed={(data, error) =>
+                                "Radering av användare " +
+                                data.name +
+                                " misslyckades"
+                            }
+                            deleteDialogFormComponentData={{
+                                nameConfirm: {
+                                    component: DigitTextField,
+                                    componentProps: {
+                                        upperLabel: "Bekräfta namnet",
+                                        outlined: true
+                                    }
+                                }
+                            }}
+                            deleteDialogFormInitialValues={{
+                                nameConfirm: ""
+                            }}
+                            deleteDialogFormValidationSchema={data =>
+                                yup.object().shape({
+                                    nameConfirm: yup
+                                        .mixed()
+                                        .oneOf(
+                                            [data.name],
+                                            "Måste vara lika med namnet på användaren"
+                                        )
+                                        .required("du bekräfta namn")
+                                })
+                            }
+                            deleteDialogFormKeysOrder={["nameConfirm"]}
+                            useKeyTextsInUpperLabel
+                            onDelete={response => console.log("DELETED")}
+                            canDelete={user => user.id === "asdf-fdsafasd"}
                 />
             );
         }}

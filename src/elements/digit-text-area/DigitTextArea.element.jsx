@@ -63,7 +63,7 @@ const DigitTextArea = ({
             disabled={disabled}
             rows={rows}
             variant={outlined ? "outlined" : filled ? "filled" : "standard"}
-            rowsMax={rowsMax}
+            rowsMax={rowsMax < rows ? rows : rowsMax}
             multiline
             onKeyPress={onKeyPress}
             inputProps={{style: size}}

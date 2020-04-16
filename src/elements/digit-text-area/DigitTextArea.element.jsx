@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
@@ -66,6 +66,7 @@ const DigitTextArea = ({
             rowsMax={rowsMax}
             multiline
             onKeyPress={onKeyPress}
+            inputProps={{style: size}}
         />
     );
 };

@@ -124,7 +124,7 @@ const DigitCRUDReadAll = ({
     }
 
     return (
-        <Center>
+        <>
             <DigitTable
                 alignSelf={"flex-start"}
                 padding={"8px"}
@@ -171,7 +171,7 @@ const DigitCRUDReadAll = ({
                     />
                 </>
             )}
-        </Center>
+        </>
     );
 };
 

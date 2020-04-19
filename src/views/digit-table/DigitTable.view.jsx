@@ -206,9 +206,6 @@ const DigitTable = ({
         setPage(0);
     };
 
-    const emptyRows =
-        rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-
     const sortedData = useMemo(() => {
         const s = searchValue.trim();
         const filteredData =
@@ -223,11 +220,12 @@ const DigitTable = ({
                       return false;
                   });
 
-        return stableSort(filteredData, getComparator(order, orderBy)).slice(
-            page * rowsPerPage,
-            page * rowsPerPage + rowsPerPage
-        );
-    }, [data, searchValue, page, rowsPerPage, order, orderBy, columnsOrder]);
+        return stableSort(filteredData, getComparator(order, orderBy));
+    }, [data, searchValue, order, orderBy, columnsOrder]);
+
+    const emptyRows =
+        rowsPerPage -
+        Math.min(rowsPerPage, sortedData.length - page * rowsPerPage);
 
     return (
         <Paper classes={layoutClasses}>
@@ -238,7 +236,10 @@ const DigitTable = ({
                     searchText={searchText}
                     text={text}
                     searchValue={searchValue}
-                    onSearchUpdated={setSearchValue}
+                    onSearchUpdated={val => {
+                        setSearchValue(val);
+                        setPage(0);
+                    }}
                 />
             )}
             <TableContainer>
@@ -252,7 +253,7 @@ const DigitTable = ({
                         order={order}
                         orderBy={orderBy}
                         onRequestSort={handleRequestSort}
-                        rowCount={data.length}
+                        rowCount={sortedData.length}
                         headerTexts={headerTexts}
                         columnsOrder={columnsOrder}
                     />
@@ -268,37 +269,45 @@ const DigitTable = ({
                         )}
                         {sortedData.length > 0 && (
                             <>
-                                {sortedData.map(row => (
-                                    <TableRow
-                                        hover
-                                        tabIndex={-1}
-                                        key={row[idProp]}
-                                    >
-                                        {columnsOrder.map(column => (
-                                            <TableCell key={row[column]}>
-                                                {row[column]}
-                                            </TableCell>
-                                        ))}
-                                        {row.__link != null && (
-                                            <TableCell align={"right"}>
-                                                <Link to={row.__link}>
-                                                    <DigitButton
-                                                        text={
-                                                            headerTexts.__link
-                                                        }
-                                                        outlined
-                                                    />
-                                                </Link>
-                                            </TableCell>
-                                        )}
-                                        {row.__link == null && <TableCell />}
-                                    </TableRow>
-                                ))}
+                                {sortedData
+                                    .slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map(row => (
+                                        <TableRow
+                                            hover
+                                            tabIndex={-1}
+                                            key={row[idProp]}
+                                        >
+                                            {columnsOrder.map(column => (
+                                                <TableCell key={row[column]}>
+                                                    {row[column]}
+                                                </TableCell>
+                                            ))}
+                                            {row.__link != null && (
+                                                <TableCell align={"right"}>
+                                                    <Link to={row.__link}>
+                                                        <DigitButton
+                                                            text={
+                                                                headerTexts.__link
+                                                            }
+                                                            outlined
+                                                        />
+                                                    </Link>
+                                                </TableCell>
+                                            )}
+                                            {row.__link == null && (
+                                                <TableCell />
+                                            )}
+                                        </TableRow>
+                                    ))}
                                 {emptyRows > 0 && (
                                     <TableRow
                                         style={{
                                             height:
-                                                (dense ? 33 : 53) * emptyRows
+                                                (dense ? 34.55 : 54.55) *
+                                                emptyRows
                                         }}
                                     >
                                         <TableCell
@@ -314,7 +323,7 @@ const DigitTable = ({
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={data.length}
+                count={sortedData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

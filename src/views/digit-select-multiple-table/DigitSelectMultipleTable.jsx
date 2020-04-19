@@ -302,18 +302,8 @@ const DigitSelectMultipleTable = ({
             getComparator(order, orderBy),
             value,
             idProp
-        ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-    }, [
-        data,
-        searchValue,
-        page,
-        rowsPerPage,
-        order,
-        orderBy,
-        columnsOrder,
-        idProp,
-        value
-    ]);
+        );
+    }, [data, searchValue, order, orderBy, columnsOrder, idProp, value]);
 
     return (
         <Paper classes={layoutClasses}>
@@ -324,7 +314,10 @@ const DigitSelectMultipleTable = ({
                 searchText={searchText}
                 text={text}
                 searchValue={searchValue}
-                onSearchUpdated={setSearchValue}
+                onSearchUpdated={val => {
+                    setSearchValue(val);
+                    setPage(0);
+                }}
             />
             <TableContainer>
                 <Table
@@ -339,7 +332,7 @@ const DigitSelectMultipleTable = ({
                         order={order}
                         orderBy={orderBy}
                         onRequestSort={handleRequestSort}
-                        rowCount={data.length}
+                        rowCount={sortedData.length}
                         headerTexts={headerTexts}
                         columnsOrder={columnsOrder}
                     />
@@ -355,59 +348,70 @@ const DigitSelectMultipleTable = ({
                         )}
                         {sortedData.length > 0 && (
                             <>
-                                {sortedData.map((row, index) => {
-                                    const isItemSelected = isSelected(
-                                        row[idProp]
-                                    );
-                                    const labelId = `enhanced-table-checkbox-${index}`;
+                                {sortedData
+                                    .slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map((row, index) => {
+                                        const isItemSelected = isSelected(
+                                            row[idProp]
+                                        );
+                                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                                    return (
-                                        <TableRow
-                                            hover
-                                            tabIndex={-1}
-                                            key={row[idProp]}
-                                            onClick={event =>
-                                                handleClick(event, row[idProp])
-                                            }
-                                            selected={isItemSelected}
-                                            role="checkbox"
-                                        >
-                                            <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    checked={isItemSelected}
-                                                    inputProps={{
-                                                        "aria-labelledby": labelId
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            {columnsOrder.map(column => (
-                                                <TableCell key={row[column]}>
-                                                    {row[column]}
+                                        return (
+                                            <TableRow
+                                                hover
+                                                tabIndex={-1}
+                                                key={row[idProp]}
+                                                onClick={event =>
+                                                    handleClick(
+                                                        event,
+                                                        row[idProp]
+                                                    )
+                                                }
+                                                selected={isItemSelected}
+                                                role="checkbox"
+                                            >
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        checked={isItemSelected}
+                                                        inputProps={{
+                                                            "aria-labelledby": labelId
+                                                        }}
+                                                    />
                                                 </TableCell>
-                                            ))}
-                                            {row.__link != null && (
-                                                <TableCell align={"right"}>
-                                                    <Link to={row.__link}>
-                                                        <DigitButton
-                                                            text={
-                                                                headerTexts.__link
-                                                            }
-                                                            outlined
-                                                        />
-                                                    </Link>
-                                                </TableCell>
-                                            )}
-                                            {row.__link == null && (
-                                                <TableCell />
-                                            )}
-                                        </TableRow>
-                                    );
-                                })}
+                                                {columnsOrder.map(column => (
+                                                    <TableCell
+                                                        key={row[column]}
+                                                    >
+                                                        {row[column]}
+                                                    </TableCell>
+                                                ))}
+                                                {row.__link != null && (
+                                                    <TableCell align={"right"}>
+                                                        <Link to={row.__link}>
+                                                            <DigitButton
+                                                                text={
+                                                                    headerTexts.__link
+                                                                }
+                                                                outlined
+                                                            />
+                                                        </Link>
+                                                    </TableCell>
+                                                )}
+                                                {row.__link == null && (
+                                                    <TableCell />
+                                                )}
+                                            </TableRow>
+                                        );
+                                    })}
                                 {emptyRows > 0 && (
                                     <TableRow
                                         style={{
                                             height:
-                                                (dense ? 33 : 53) * emptyRows
+                                                (dense ? 34.55 : 54.55) *
+                                                emptyRows
                                         }}
                                     >
                                         <TableCell
@@ -423,7 +427,7 @@ const DigitSelectMultipleTable = ({
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={data.length}
+                count={sortedData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

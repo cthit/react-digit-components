@@ -538,7 +538,6 @@ DigitSelectMultipleTable.defaultProps = {
     titleText: "",
     emptyTableText: "The table is empty",
     size: {
-        width: "100%",
         minWidth: "300px"
     },
     startOrderByDirection: "desc",

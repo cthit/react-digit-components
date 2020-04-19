@@ -67,6 +67,7 @@ const DigitCRUDUpdate = ({
         <>
             <Center>
                 <DigitEditData
+                    centerFields
                     onSubmit={(values, actions) => {
                         const _old = one;
                         const _updated = values;

@@ -28,6 +28,7 @@ const DigitCRUDCreate = ({
     return (
         <Center>
             <DigitEditData
+                centerFields
                 size={{
                     minWidth: "280px",
                     minHeight: "280px"

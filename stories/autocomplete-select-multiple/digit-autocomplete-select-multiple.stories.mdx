@@ -183,4 +183,35 @@ Input to select multiple values via autocomplete when searching for options.
     </Story>
 </Preview>
 
+## `disableClearable`
+
+<Preview>
+    <Story name="AutocompleteMultiple disableClearable">
+        {() => {
+            const options = [
+                { text: "The Dark Knight Rises", value: "the_dark" },
+                { text: "Princess Mononoke", value: "princess" },
+                { text: "Aliens", value: "aliens" },
+                { text: "Oldboy", value: "oldboy" },
+                { text: "Once Upon a Time in America", value: "once" },
+                { text: "Witness for the Prosecution", value: "Witness" },
+                { text: "Das Boot", value: "das", disabled: true }
+            ];
+            const [value, setValue] = useState(["aliens"]);
+            return (
+                <DigitAutocompleteSelectMultiple
+                    disableClearable
+                    upperLabel="upperlabel"
+                    lowerLabel="lowerlabel"
+                    options={options}
+                    value={value}
+                    onChange={e => {
+                        setValue(e.target.value);
+                    }}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
 <Props of={DigitAutocompleteSelectMultiple} />

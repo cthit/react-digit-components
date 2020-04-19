@@ -34,7 +34,8 @@ const DigitAutocompleteSelectMultiple = ({
     alignSelf,
     size,
     padding,
-    margin
+    margin,
+    disableClearable
 }) => {
     const classes = useLayoutMaterialUi({
         flex,
@@ -47,6 +48,7 @@ const DigitAutocompleteSelectMultiple = ({
 
     return (
         <Autocomplete
+            disableClearable={disableClearable}
             autoHighlight
             //To keep consistency throughout rdc, only the value is used to
             //control what becomes selected. this might become really slow.
@@ -244,7 +246,9 @@ DigitAutocompleteSelectMultiple.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** If true, then there's no clearable button */
+    disableClearable: PropTypes.bool
 };
 
 export default DigitAutocompleteSelectMultiple;

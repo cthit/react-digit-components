@@ -177,7 +177,10 @@ DigitTextField.defaultProps = {
     filled: false,
     maxLength: -1,
     onKeyPress: () => {},
-    autoFocus: false
+    autoFocus: false,
+    size: {
+        width: "224px"
+    }
 };
 
 export default DigitTextField;

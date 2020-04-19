@@ -393,7 +393,10 @@ const DigitSelectMultipleTable = ({
                                                     </TableCell>
                                                 ))}
                                                 {row.__link != null && (
-                                                    <TableCell align={"right"}>
+                                                    <TableCell
+                                                        align={"right"}
+                                                        padding={"none"}
+                                                    >
                                                         <Link to={row.__link}>
                                                             <DigitButton
                                                                 text={

@@ -68,7 +68,8 @@ const DigitSelectMultipleTableHead = ({
     rowCount,
     onRequestSort,
     headerTexts,
-    columnsOrder
+    columnsOrder,
+    disableSelectAll
 }) => {
     const createSortHandler = property => event => {
         onRequestSort(event, property);
@@ -78,14 +79,15 @@ const DigitSelectMultipleTableHead = ({
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
-                    <Checkbox
-                        indeterminate={
-                            numSelected > 0 && numSelected < rowCount
-                        }
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{ "aria-label": "select all desserts" }}
-                    />
+                    {!disableSelectAll && (
+                        <Checkbox
+                            indeterminate={
+                                numSelected > 0 && numSelected < rowCount
+                            }
+                            checked={rowCount > 0 && numSelected === rowCount}
+                            onChange={onSelectAllClick}
+                        />
+                    )}
                 </TableCell>
                 {columnsOrder.map(column => (
                     <TableCell
@@ -216,7 +218,8 @@ const DigitSelectMultipleTable = ({
     margin,
     flex,
     value,
-    onChange
+    onChange,
+    disableSelectAll
 }) => {
     const classes = useStyles();
     const [order, setOrder] = useState(startOrderByDirection);
@@ -335,6 +338,7 @@ const DigitSelectMultipleTable = ({
                         rowCount={sortedData.length}
                         headerTexts={headerTexts}
                         columnsOrder={columnsOrder}
+                        disableSelectAll={disableSelectAll}
                     />
                     <TableBody>
                         {sortedData.length === 0 && (
@@ -522,7 +526,9 @@ DigitSelectMultipleTable.propTypes = {
         })
     ]),
     /** Controls the flex property for the most outer element in this component.*/
-    flex: PropTypes.string
+    flex: PropTypes.string,
+    /** Disable select all checkbox */
+    disableSelectAll: PropTypes.bool
 };
 
 DigitSelectMultipleTable.defaultProps = {

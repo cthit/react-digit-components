@@ -189,7 +189,8 @@ DigitTextArea.defaultProps = {
     rowsMax: 6,
     maxLength: -1,
     onKeyPress: () => {},
-    autoFocus: false
+    autoFocus: false,
+    size: { width: "224px" }
 };
 
 export default DigitTextArea;

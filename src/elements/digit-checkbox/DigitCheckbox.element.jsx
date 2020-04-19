@@ -144,7 +144,8 @@ DigitCheckbox.defaultProps = {
     secondary: false,
     disabled: false,
     error: false,
-    errorMessage: null
+    errorMessage: null,
+    size: { width: "224px" }
 };
 
 export default DigitCheckbox;

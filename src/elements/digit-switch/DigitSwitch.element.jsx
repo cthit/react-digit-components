@@ -144,7 +144,8 @@ DigitSwitch.defaultProps = {
     primary: false,
     secondary: false,
     label: "",
-    name: ""
+    name: "",
+    size: { width: "224px" }
 };
 
 export default DigitSwitch;

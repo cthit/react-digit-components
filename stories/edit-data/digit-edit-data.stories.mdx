@@ -307,4 +307,115 @@ The easier and optimized way to handle forms. This is a single component where y
     </Story>
 </Preview>
 
+## `centerFields`
+
+<Preview>
+    <Story name="Normal centerFields">
+        <DigitEditData
+            centerFields
+            hasButtons
+            initialValues={{
+                firstname: "",
+                surname: "",
+                email: "",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                surname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+            submitButton={{    
+                text: "Skicka",
+            }}
+        />
+    </Story>
+    <Story name="Other values centerFields">
+        <DigitEditData
+            centerFields
+            hasButtons
+            initialValues={{
+                firstname: "",
+                surname: "",
+                email: "",
+                agreement: false
+            }}
+            onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+            }}
+            validationSchema={yup.object().shape({
+                firstname: yup.string().required(),
+                email: yup.string().required(),
+                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+            })}
+            titleText={"Other title"}
+            submitText={"Submit"}
+            keysOrder={["firstname", "surname", "email", "agreement"]}
+            keysComponentData={{
+                firstname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Firstname"
+                    }
+                },
+                surname: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Surname"
+                    }
+                },
+                email: {
+                    component: DigitTextField,
+                    componentProps: {
+                        upperLabel: "Email"
+                    }
+                },
+                agreement: {
+                    component: DigitCheckbox,
+                    componentProps: {
+                        primary: true,
+                        label: "Agreement"
+                    }
+                }
+            }}
+        />
+    </Story>
+</Preview>
+
 <Props of={DigitEditData} />

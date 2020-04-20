@@ -2,7 +2,7 @@ import React from "react";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitEditData from "../../../../elements/digit-edit-data-card";
 import useDigitToast from "../../../../hooks/use-digit-toast";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 const DigitCRUDCreate = ({
     createAction,

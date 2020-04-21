@@ -23,9 +23,9 @@ A hook that can be used to open a dialog window, `DigitDialog`, that blocks furt
                 onCancel: () => console.log("Cancel")
             });
             return (
-                <>
+                <React.Fragment>
                     <DigitButton raised primary onClick={() => openDialog({description: "Look!"})} text="Open dialog"/>
-                </>
+                </React.Fragment>
             );
         }}
     </Story>

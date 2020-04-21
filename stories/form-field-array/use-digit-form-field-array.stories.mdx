@@ -42,7 +42,7 @@ Used to be hooked up with a `DigitForm`. Utils for managing a list of values, of
             const Field = () => {
                 const { value, push, swap, move, insert, unshift, remove, pop, replace } = useDigitFormFieldArray("cars");
                 const [carName, setCarName] = useState("");
-                return (<>
+                return (<React.Fragment>
                     <DigitLayout.Row justifyContent="flex-start">
                         <DigitTextField outlined upperLabel="Car name" value={carName} onChange={e => setCarName(e.target.value)}/>
                         <DigitButton raised primary disabled={carName.length === 0} text={"Push"} onClick={() => {
@@ -81,7 +81,7 @@ Used to be hooked up with a `DigitForm`. Utils for managing a list of values, of
                         </DigitLayout.Row>
                     ))}
                     <DigitButton raised secondary disabled={value.length === 0} text="Pop" onClick={() => alert(pop().name)}/>
-                </>);
+                </React.Fragment>);
             }
             return (
                 <DigitForm initialValues={{cars: [{name: "Ferrari"}, {name: "Ford"}, {name: "Volvo"}]}} 

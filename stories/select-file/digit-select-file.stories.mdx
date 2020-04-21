@@ -19,14 +19,14 @@ Select a file a la rdc style.
         {() => {
             const [file, setFile] = useState(null);
             return (
-                <>
+                <React.Fragment>
                     <DigitSelectFile
                         selectedFileName={file != null ? file.name : null}
                         onSelectFile={setFile}
                         buttonProps={{raised: true}}
                     />
                     <DigitButton disabled={file == null} primary raised onClick={() => console.log(file)} text="Upload" />
-                </>
+                </React.Fragment>
             );
         }}
     </Story>

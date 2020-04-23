@@ -213,7 +213,11 @@ const DigitTable = ({
                 ? data
                 : data.filter(row => {
                       for (var column of columnsOrder) {
-                          if ((row[column] + "").toLowerCase().includes(s)) {
+                          if (
+                              (row[column] + "")
+                                  .toLowerCase()
+                                  .includes(s.toLowerCase())
+                          ) {
                               return true;
                           }
                       }

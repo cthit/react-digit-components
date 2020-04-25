@@ -1099,7 +1099,7 @@ They all basically just works the same, but this just shows how 401 are handled.
                                 startOrderBy: "name"
                             }}
                             on401={() => console.log("401 nope")}
-                            render401={() => <div>oh no</div>}
+                            render401={(error, reset) => <div style={{height: "200px"}}>{error != null && error.response.status} - <DigitButton text="reset" onClick={reset}/></div>}
                 />
             );
         }}

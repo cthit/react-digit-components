@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import DigitDisplayData from "../../../../elements/digit-display-data";
 import {
     Card,
@@ -107,15 +107,59 @@ const DigitCRUDReadOne = ({
     useHistoryGoBackOnBack,
     detailsSubtitle,
     canDelete,
-    canUpdate
+    canUpdate,
+    errorCodes
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
+    const [statusRender, setStatusRender] = useState(-1);
+    const [error, setError] = useState(null);
+
+    const { on401, on404, on500, render401, render404, render500 } = errorCodes;
+
+    const reset = useCallback(() => {
+        setStatusRender(-1);
+        setError(null);
+    }, [setStatusRender, setError]);
 
     useEffect(() => {
-        readOneAction(id);
+        readOneAction(id).catch(error => {
+            var status = -1;
+            if (error.response != null) {
+                status = error.response.status;
+            }
+
+            if (status === 401) {
+                on401(error);
+
+                if (render401 != null) {
+                    setStatusRender(401);
+                }
+            }
+
+            if (status === 404) {
+                on404(error);
+
+                if (render404 != null) {
+                    setStatusRender(404);
+                }
+            }
+
+            if (status === 500) {
+                on500(error);
+
+                if (render500 != null) {
+                    setStatusRender(500);
+                }
+            }
+
+            setError(error);
+        });
         return clearAction;
-    }, [readOneAction, clearAction, id]);
+        // Ignoring the different on* and render* since they would mean that
+        // readAllAction would continuously be refreshed.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [readOneAction, clearAction, id, error]);
 
     if (loading) {
         return (
@@ -123,6 +167,18 @@ const DigitCRUDReadOne = ({
                 <DigitLoading loading />
             </Center>
         );
+    }
+
+    if (statusRender === 401) {
+        return render401(error, reset);
+    }
+
+    if (statusRender === 404) {
+        return render404(error, reset);
+    }
+
+    if (statusRender === 500) {
+        return render500(error, reset);
     }
 
     const displayData = {};
@@ -172,6 +228,9 @@ const DigitCRUDReadOne = ({
             deleteDialogFormValidationSchema={deleteDialogFormValidationSchema}
             deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
             onDelete={onDelete}
+            errorCodes={errorCodes}
+            setError={setError}
+            setStatusRender={setStatusRender}
         />
     );
 

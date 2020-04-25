@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import DigitFAB from "../../../../elements/digit-fab";
 import Delete from "@material-ui/icons/Delete";
@@ -86,7 +86,10 @@ const DeleteFAB = ({
     deleteDialogFormInitialValues,
     deleteDialogFormKeysOrder,
     onDelete,
-    useHistoryGoBackOnBack
+    useHistoryGoBackOnBack,
+    errorCodes,
+    setStatusRender,
+    setError
 }) => {
     const [formValid, setFormValid] = useState(false);
     const [queueToast] = useDigitToast();
@@ -96,6 +99,9 @@ const DeleteFAB = ({
         closeCustomDialog,
         updateCustomDialog
     ] = useDigitCustomDialog();
+
+    const { on401, on404, on500, render401, render404, render500 } = errorCodes;
+
     const onDeleteInternal = form =>
         deleteAction(id, form)
             .then(response => {
@@ -111,6 +117,39 @@ const DeleteFAB = ({
                 onDelete(response);
             })
             .catch(error => {
+                var status = -1;
+                if (error.response != null) {
+                    status = error.response.status;
+                }
+
+                if (status === 401) {
+                    on401(error);
+
+                    if (render401 != null) {
+                        setStatusRender(401);
+                        closeCustomDialog();
+                    }
+                }
+
+                if (status === 404) {
+                    on404(error);
+
+                    if (render404 != null) {
+                        setStatusRender(404);
+                        closeCustomDialog();
+                    }
+                }
+
+                if (status === 500) {
+                    on500(error);
+
+                    if (render500 != null) {
+                        setStatusRender(500);
+                        closeCustomDialog();
+                    }
+                }
+
+                setError(error);
                 queueToast({
                     text: toastDeleteFailed(one, error)
                 });
@@ -127,7 +166,7 @@ const DeleteFAB = ({
         onConfirm: onDeleteInternal
     });
 
-    const renderButtons = useMemo(
+    const renderButtons = useCallback(
         (confirm, cancel) => (
             <DeleteDialogButtons
                 dialogDeleteConfirm={dialogDeleteConfirm}

@@ -107,7 +107,13 @@ const DigitCRUDInner = ({
     canReadOne,
     createSubtitle,
     updateSubtitle,
-    detailsSubtitle
+    detailsSubtitle,
+    on401,
+    on404,
+    on500,
+    render401,
+    render404,
+    render500
 }) => {
     const [, dispatch] = useContext(DigitCRUDContext);
 
@@ -157,6 +163,8 @@ const DigitCRUDInner = ({
         useKeyTextsInUpperLabel
     );
 
+    const errorCodes = { on401, on404, on500, render401, render404, render500 };
+
     return (
         <Switch>
             {hasCreate && (
@@ -165,6 +173,7 @@ const DigitCRUDInner = ({
                     path={path + createPath}
                     render={() => (
                         <DigitCRUDCreate
+                            errorCodes={errorCodes}
                             createAction={createAction}
                             path={path}
                             formComponentData={modifiedFormComponentData}
@@ -199,6 +208,7 @@ const DigitCRUDInner = ({
                     path={path + updatePath}
                     render={props => (
                         <DigitCRUDUpdate
+                            errorCodes={errorCodes}
                             readOneAction={readOneAction}
                             updateAction={updateAction}
                             deleteAction={deleteAction}
@@ -264,6 +274,7 @@ const DigitCRUDInner = ({
                     path={path + readOnePath}
                     render={props => (
                         <DigitCRUDReadOne
+                            errorCodes={errorCodes}
                             readOneAction={readOneAction}
                             clearAction={clearAction}
                             keysText={keysText}
@@ -332,6 +343,7 @@ const DigitCRUDInner = ({
                     path={path + readAllPath}
                     render={({ history }) => (
                         <DigitCRUDReadAll
+                            errorCodes={errorCodes}
                             readAllAction={readAllAction}
                             clearAction={clearAction}
                             keysText={keysText}
@@ -530,7 +542,19 @@ DigitCRUD.propTypes = {
     /** If a specific row can be read in detail by the client. (one) => bool */
     canReadOne: PropTypes.func,
     /** If a specific row can be deleted. (one) => bool */
-    canDelete: PropTypes.func
+    canDelete: PropTypes.func,
+    /** Callback when a request returns a 401 */
+    on401: PropTypes.func,
+    /** Callback when a request returns a 404 */
+    on404: PropTypes.func,
+    /** Callback when a request returns a 500 */
+    on500: PropTypes.func,
+    /** Full screen render on 401. If null then a error will be showed as toast */
+    render401: PropTypes.func,
+    /** Full screen render on 404. If null then a error will be showed as toast */
+    render404: PropTypes.func,
+    /** Full screen render on 500. If null then a error will be showed as toast */
+    render500: PropTypes.func
 };
 
 DigitCRUD.defaultProps = {
@@ -591,7 +615,10 @@ DigitCRUD.defaultProps = {
     useHistoryGoBackOnBack: true,
     canUpdate: () => true,
     canDelete: () => true,
-    canReadOne: () => true
+    canReadOne: () => true,
+    on401: () => {},
+    on404: () => {},
+    on500: () => {}
 };
 
 export default DigitCRUD;

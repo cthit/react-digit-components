@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import DigitTable from "../../../digit-table";
 import {
     Center,
@@ -79,15 +79,59 @@ const DigitCRUDReadAll = ({
     timeProps,
     dateProps,
     dateAndTimeProps,
-    canReadOne
+    canReadOne,
+    errorCodes
 }) => {
     const [text] = useDigitTranslations(translations);
+    const [statusRender, setStatusRender] = useState(-1);
+    const [error, setError] = useState(null);
     const [{ all, loading }] = useContext(DigitCRUDContext);
 
+    const { on401, on404, on500, render401, render404, render500 } = errorCodes;
+
+    const reset = useCallback(() => {
+        setStatusRender(-1);
+        setError(null);
+    }, [setStatusRender, setError]);
+
     useEffect(() => {
-        readAllAction();
+        readAllAction().catch(error => {
+            var status = -1;
+            if (error.response != null) {
+                status = error.response.status;
+            }
+
+            if (status === 401) {
+                on401(error);
+
+                if (render401 != null) {
+                    setStatusRender(401);
+                }
+            }
+
+            if (status === 404) {
+                on404(error);
+
+                if (render404 != null) {
+                    setStatusRender(404);
+                }
+            }
+
+            if (status === 500) {
+                on500(error);
+
+                if (render500 != null) {
+                    setStatusRender(500);
+                }
+            }
+
+            setError(error);
+        });
         return clearAction;
-    }, [readAllAction, clearAction]);
+        // Ignoring the different on* and render* since they would mean that
+        // readAllAction would continuously be refreshed.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [readAllAction, clearAction, error]);
 
     if (loading || all == null) {
         return (
@@ -95,6 +139,18 @@ const DigitCRUDReadAll = ({
                 <DigitLoading loading />
             </Center>
         );
+    }
+
+    if (statusRender === 401) {
+        return render401(error, reset);
+    }
+
+    if (statusRender === 404) {
+        return render404(error, reset);
+    }
+
+    if (statusRender === 500) {
+        return render500(error, reset);
     }
 
     if (timeProps.length + dateProps.length + dateAndTimeProps.length > 0) {

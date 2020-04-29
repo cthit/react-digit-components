@@ -167,7 +167,7 @@ const DigitCRUDReadOne = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [readOneAction, id, setStatusRender, setError, error, setRead, read]);
 
-    if (loading) {
+    if (read || loading) {
         return (
             <Center>
                 <DigitLoading loading />

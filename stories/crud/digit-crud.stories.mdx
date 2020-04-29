@@ -157,7 +157,7 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
     </Story>
 </Preview>
 
-## DigitCRUD with readAll and readOne
+## DigitCRUD with readAll and readOne (2 seconds delay)
 
 <Preview>
     <Story name="readAll and readOne">
@@ -180,9 +180,11 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
             };
             const readAllRequestPromise = () =>
                 new Promise(resolve => {
-                    resolve({
-                        data: getData()
-                    });
+                    setTimeout(() => {
+                        resolve({
+                            data: getData()
+                        });
+                    }, 2000);
                 });
             const readOneRequestPromise = id =>
                 new Promise((resolve, reject) => {
@@ -190,11 +192,13 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                     if (result == null) {
                         reject();
                     } else {
-                        resolve({
-                            data: {
-                                ...result
-                            }
-                        });
+                        setTimeout(() => {
+                            resolve({
+                                data: {
+                                    ...result
+                                }
+                            });
+                        }, 2000);
                     }
                 });
             const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);

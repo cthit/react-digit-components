@@ -10,7 +10,6 @@ const DigitCRUDUpdate = ({
     readOneAction,
     updateAction,
     deleteAction,
-    clearAction,
     id,
     history,
     path,
@@ -47,53 +46,60 @@ const DigitCRUDUpdate = ({
     const [{ one, loading }] = useContext(DigitCRUDContext);
     const [statusRender, setStatusRender] = useState(-1);
     const [error, setError] = useState(null);
+    const [read, setRead] = useState(true);
 
     const { on401, on404, on500, render401, render404, render500 } = errorCodes;
 
     const reset = useCallback(() => {
-        setStatusRender(-1);
-        setError(null);
-    }, [setStatusRender, setError]);
+        setRead(true);
+    }, [setRead]);
 
     const [queueToast] = useDigitToast();
     useEffect(() => {
-        readOneAction(id).catch(error => {
-            var status = -1;
-            if (error.response != null) {
-                status = error.response.status;
-            }
+        if (read) {
+            readOneAction(id)
+                .then(() => {
+                    setStatusRender(-1);
+                    setError(null);
+                })
+                .catch(error => {
+                    var status = -1;
+                    if (error.response != null) {
+                        status = error.response.status;
+                    }
 
-            if (status === 401) {
-                on401(error);
+                    if (status === 401) {
+                        on401(error);
 
-                if (render401 != null) {
-                    setStatusRender(401);
-                }
-            }
+                        if (render401 != null) {
+                            setStatusRender(401);
+                        }
+                    }
 
-            if (status === 404) {
-                on404(error);
+                    if (status === 404) {
+                        on404(error);
 
-                if (render404 != null) {
-                    setStatusRender(404);
-                }
-            }
+                        if (render404 != null) {
+                            setStatusRender(404);
+                        }
+                    }
 
-            if (status === 500) {
-                on500(error);
+                    if (status === 500) {
+                        on500(error);
 
-                if (render500 != null) {
-                    setStatusRender(500);
-                }
-            }
+                        if (render500 != null) {
+                            setStatusRender(500);
+                        }
+                    }
 
-            setError(error);
-        });
-        return clearAction;
+                    setError(error);
+                });
+        }
+        setRead(false);
         // Ignoring the different on* and render* since they would mean that
-        // readAllAction would continuously be refreshed.
+        // readOneAction would continuously be refreshed.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [readOneAction, clearAction, id, error]);
+    }, [readOneAction, id, setStatusRender, setError, error, setRead, read]);
 
     if (loading) {
         return (

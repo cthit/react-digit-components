@@ -1106,6 +1106,76 @@ They all basically just works the same, but this just shows how 401 are handled.
     </Story>
 </Preview>
 
+## DigitCRUD with readAll, readOne and render500
+
+<Preview>
+    <Story name="readAll, readOne, render500">
+        {() => {
+            const data = useRef([
+                {
+                    id: "asdf-fdsafasd",
+                    name: "Theodor",
+                    age: 55,
+                },
+                {
+                    id: "fdas-fdsafasd",
+                    name: "Sven",
+                    age: 99,
+                }
+            ]);
+            const getData = () => data.current;
+            const setData = newData => {
+                data.current = newData;
+            };
+            const readAllRequestPromise = () =>
+                new Promise(resolve => {
+                    resolve({
+                        data: getData()
+                    });
+                });
+            const readOneRequestPromise = id =>
+                new Promise((resolve, reject) => {
+                    const result = _.find(getData(), { id });
+                    if (result == null) {
+                        reject();
+                    } else {
+                        reject({
+                            response: {
+                                status: 500
+                            }
+                        })
+                    }
+                });
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
+            return (
+                <DigitCRUD  path=""
+                            readAllRequest={readAllRequestCallback}       
+                            readOneRequest={readOneRequestCallback}
+                            keysOrder={["id", "name", "age"]}
+                            keysText={{
+                                id: "Id",
+                                name: "Namn",
+                                age: "Ålder",
+                            }}
+                            idProp="id"
+                            tableProps={{
+                                titleText: "Användare",
+                                emptyTableText: "Det finns inga användare",
+                                search: true,
+                                startOrderBy: "name"
+                            }}
+                            backButtonText={"Tillbaka"}
+                            detailsButtonText={"Details"}
+                            detailsTitle={(data) => data.name} 
+                            render500={(error, reset) => <div style={{height: "200px"}}>{error != null && error.response.status} - <DigitButton text="reset" onClick={reset}/></div>}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+
 ## DigitCRUD with readAll, readOne and deleteOne, and render500
 
 <Preview>

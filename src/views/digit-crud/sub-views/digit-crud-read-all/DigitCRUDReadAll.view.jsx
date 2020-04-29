@@ -63,7 +63,6 @@ function formatDate(date, text, type) {
 
 const DigitCRUDReadAll = ({
     readAllAction,
-    clearAction,
     keysText,
     keysOrder,
     tableProps,
@@ -96,7 +95,6 @@ const DigitCRUDReadAll = ({
 
     useEffect(() => {
         if (read) {
-            setRead(false);
             readAllAction()
                 .then(() => {
                     setStatusRender(-1);
@@ -134,13 +132,12 @@ const DigitCRUDReadAll = ({
 
                     setError(error);
                 });
-            return clearAction;
         }
         setRead(false);
         // Ignoring the different on* and render* since they would mean that
         // readAllAction would continuously be refreshed.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [readAllAction, clearAction, setStatusRender, setError, read]);
+    }, [readAllAction, setStatusRender, setError, error, setRead, read]);
 
     if (loading || all == null) {
         return (

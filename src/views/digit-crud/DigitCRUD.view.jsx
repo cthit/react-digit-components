@@ -1,7 +1,7 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import DigitCRUDReadAll from "./sub-views/digit-crud-read-all";
 import DigitCRUDCreate from "./sub-views/digit-crud-create";
 import DigitCRUDUpdate from "./sub-views/digit-crud-update";
@@ -115,6 +115,7 @@ const DigitCRUDInner = ({
     render404,
     render500
 }) => {
+    const location = useLocation();
     const [, dispatch] = useContext(DigitCRUDContext);
 
     const hasCreate = createRequest != null;
@@ -165,6 +166,12 @@ const DigitCRUDInner = ({
 
     const errorCodes = { on401, on404, on500, render401, render404, render500 };
 
+    const pathname = location.pathname;
+
+    useEffect(() => {
+        clearAction();
+    }, [pathname, clearAction]);
+
     return (
         <Switch>
             {hasCreate && (
@@ -212,7 +219,6 @@ const DigitCRUDInner = ({
                             readOneAction={readOneAction}
                             updateAction={updateAction}
                             deleteAction={deleteAction}
-                            clearAction={clearAction}
                             updateTitle={updateTitle}
                             updateSubtitle={updateSubtitle}
                             id={
@@ -276,7 +282,6 @@ const DigitCRUDInner = ({
                         <DigitCRUDReadOne
                             errorCodes={errorCodes}
                             readOneAction={readOneAction}
-                            clearAction={clearAction}
                             keysText={keysText}
                             keysOrder={
                                 readOneKeysOrder != null
@@ -345,7 +350,6 @@ const DigitCRUDInner = ({
                         <DigitCRUDReadAll
                             errorCodes={errorCodes}
                             readAllAction={readAllAction}
-                            clearAction={clearAction}
                             keysText={keysText}
                             keysOrder={
                                 readAllKeysOrder != null

@@ -141,7 +141,7 @@ const DigitCRUDReadAll = ({
 
     if (read || loading || all == null) {
         return (
-            <Center>
+            <Center size={{ height: "200px" }}>
                 <DigitLoading loading />
             </Center>
         );

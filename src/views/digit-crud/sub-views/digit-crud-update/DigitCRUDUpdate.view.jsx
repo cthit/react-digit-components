@@ -103,7 +103,7 @@ const DigitCRUDUpdate = ({
 
     if (read || loading) {
         return (
-            <Center>
+            <Center size={{ height: "200px" }}>
                 <DigitLoading loading />
             </Center>
         );

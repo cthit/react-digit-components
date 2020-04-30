@@ -107,7 +107,8 @@ const DigitCRUDReadOne = ({
     detailsSubtitle,
     canDelete,
     canUpdate,
-    errorCodes
+    errorCodes,
+    readOneProps
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
@@ -275,6 +276,7 @@ const DigitCRUDReadOne = ({
                     minHeight: "280px"
                 }}
                 margin={hasDeleteFAB ? { bottom: "calc(56px + 16px)" } : {}}
+                {...readOneProps}
             >
                 <CardHeader
                     hasSubtitle={

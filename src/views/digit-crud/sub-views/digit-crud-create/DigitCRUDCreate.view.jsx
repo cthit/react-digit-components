@@ -21,7 +21,8 @@ const DigitCRUDCreate = ({
     onCreate,
     useHistoryGoBackOnBack,
     createSubtitle,
-    errorCodes
+    errorCodes,
+    createProps
 }) => {
     const [queueToast] = useDigitToast();
     const [statusRender, setStatusRender] = useState(-1);
@@ -124,6 +125,7 @@ const DigitCRUDCreate = ({
                 submitText={createButtonText}
                 titleText={createTitle}
                 subtitleText={createSubtitle}
+                {...createProps}
             />
         </Center>
     );

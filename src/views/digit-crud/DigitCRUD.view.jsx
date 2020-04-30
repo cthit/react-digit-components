@@ -113,7 +113,10 @@ const DigitCRUDInner = ({
     on500,
     render401,
     render404,
-    render500
+    render500,
+    readOneProps,
+    updateProps,
+    createProps
 }) => {
     const location = useLocation();
     const [, dispatch] = useContext(DigitCRUDContext);
@@ -205,6 +208,7 @@ const DigitCRUDInner = ({
                             backFromCreatePath={backFromCreatePath}
                             onCreate={onCreate}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
+                            createProps={createProps}
                         />
                     )}
                 />
@@ -270,6 +274,7 @@ const DigitCRUDInner = ({
                             onDelete={onDelete}
                             canDelete={canDelete}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
+                            updateProps={updateProps}
                         />
                     )}
                 />
@@ -338,6 +343,7 @@ const DigitCRUDInner = ({
                             canUpdate={canUpdate}
                             canDelete={canDelete}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
+                            readOneProps={readOneProps}
                         />
                     )}
                 />
@@ -558,7 +564,13 @@ DigitCRUD.propTypes = {
     /** Full screen render on 404. If null then a error will be showed as toast */
     render404: PropTypes.func,
     /** Full screen render on 500. If null then a error will be showed as toast */
-    render500: PropTypes.func
+    render500: PropTypes.func,
+    /** Used to customize read one <DigitDesign.Card> */
+    readOneProps: PropTypes.object,
+    /** Used to customize update <DigitEditDataCard>*/
+    updateProps: PropTypes.object,
+    /** Used to customize create <DigitEditDataCard>*/
+    createProps: PropTypes.object
 };
 
 DigitCRUD.defaultProps = {
@@ -622,7 +634,10 @@ DigitCRUD.defaultProps = {
     canReadOne: () => true,
     on401: () => {},
     on404: () => {},
-    on500: () => {}
+    on500: () => {},
+    readOneProps: {},
+    updateProps: {},
+    createProps: {}
 };
 
 export default DigitCRUD;

@@ -41,7 +41,8 @@ const DigitCRUDUpdate = ({
     useHistoryGoBackOnBack,
     updateSubtitle,
     canDelete,
-    errorCodes
+    errorCodes,
+    updateProps
 }) => {
     const [{ one, loading }] = useContext(DigitCRUDContext);
     const [statusRender, setStatusRender] = useState(-1);
@@ -217,6 +218,7 @@ const DigitCRUDUpdate = ({
                             ? { bottom: "calc(56px + 16px)" }
                             : {}
                     }
+                    {...updateProps}
                 />
             </Center>
             {deleteAction != null && canDelete(one) && (

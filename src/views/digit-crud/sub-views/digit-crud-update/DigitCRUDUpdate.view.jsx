@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import DigitEditData from "../../../../elements/digit-edit-data-card";
+import DigitEditDataCard from "../../../../elements/digit-edit-data-card";
 import DigitLoading from "../../../../elements/digit-loading";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DeleteFAB from "../../elements/delete-fab";
@@ -128,7 +128,7 @@ const DigitCRUDUpdate = ({
     return (
         <>
             <Center>
-                <DigitEditData
+                <DigitEditDataCard
                     centerFields
                     onSubmit={(values, actions) => {
                         const _old = one;
@@ -211,6 +211,11 @@ const DigitCRUDUpdate = ({
                     titleText={updateTitle(one)}
                     updateSubtitle={
                         updateSubtitle == null ? null : updateSubtitle(one)
+                    }
+                    margin={
+                        deleteAction != null && canDelete(one)
+                            ? { bottom: "calc(56px + 16px)" }
+                            : {}
                     }
                 />
             </Center>

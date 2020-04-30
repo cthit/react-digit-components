@@ -49,7 +49,6 @@ const crudReducer = (extractActiveLanguage, activeLanguage) => (
     state,
     action
 ) => {
-    console.log(action.type);
     switch (action.type) {
         case CREATE_LOADING:
         case DELETE_LOADING:

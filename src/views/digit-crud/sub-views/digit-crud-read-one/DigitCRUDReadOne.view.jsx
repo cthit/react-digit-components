@@ -210,6 +210,8 @@ const DigitCRUDReadOne = ({
             ))
     );
 
+    const hasDeleteFAB = !hasUpdate && deleteAction != null && canDelete(one);
+
     const deleteFAB = (
         <DeleteFAB
             dialogDeleteCancel={dialogDeleteCancel}
@@ -272,6 +274,7 @@ const DigitCRUDReadOne = ({
                     minWidth: "280px",
                     minHeight: "280px"
                 }}
+                margin={hasDeleteFAB ? { bottom: "calc(56px + 16px)" } : {}}
             >
                 <CardHeader
                     hasSubtitle={
@@ -315,7 +318,7 @@ const DigitCRUDReadOne = ({
                 </CardButtons>
             </Card>
             {detailsRenderEnd(one)}
-            {!hasUpdate && deleteAction != null && canDelete(one) && deleteFAB}
+            {hasDeleteFAB && deleteFAB}
         </Center>
     );
 };

@@ -214,6 +214,7 @@ const DigitCRUDReadAll = ({
                         : { ...keysText }
                 }
                 idProp={idProp}
+                margin={hasCreate ? { bottom: "calc(56px + 16px)" } : {}}
                 {...tableProps}
             />
             {hasCreate && (
@@ -226,11 +227,6 @@ const DigitCRUDReadAll = ({
                             onClick={() => history.push(path + createPath)}
                         />
                     </DownRightPosition>
-                    <div //To let the user scroll all the way down, so that the FAB isn't in the way
-                        style={{
-                            height: "80px"
-                        }}
-                    />
                 </>
             )}
         </>

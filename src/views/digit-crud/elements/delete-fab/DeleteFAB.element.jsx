@@ -241,11 +241,6 @@ const DeleteFAB = ({
                     }}
                 />
             </DownRightPosition>
-            <div //To let the user scroll all the way down, so that the FAB isn't in the way
-                style={{
-                    height: "80px"
-                }}
-            />
         </>
     );
 };

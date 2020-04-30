@@ -10,6 +10,13 @@ import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitT
 import { DigitToastContextSingletonProvider } from "../../contexts/DigitToastContext";
 import { DigitDialogContextSingletonProvider } from "../../contexts/DigitDialogContext";
 import { DigitGammaContextSingletonProvider } from "../../contexts/DigitGammaContext";
+import svLocale from "date-fns/locale/sv";
+import enLocale from "date-fns/locale/en-US";
+
+const locales = {
+    sv: svLocale,
+    en: enLocale
+};
 
 const DigitProviders = ({
     children,
@@ -53,23 +60,30 @@ const DigitProviders = ({
                 <DigitTranslationsContextSingletonProvider
                     defaultLanguage={defaultLanguage}
                 >
-                    <DigitToastContextSingletonProvider>
-                        <DigitDialogContextSingletonProvider>
-                            <DigitGammaContextSingletonProvider>
-                                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                    {hashRouter ? (
-                                        <HashRouter>{children}</HashRouter>
-                                    ) : memoryRouter ? (
-                                        <MemoryRouter>{children}</MemoryRouter>
-                                    ) : (
-                                        <BrowserRouter>
-                                            {children}
-                                        </BrowserRouter>
-                                    )}
-                                </MuiPickersUtilsProvider>
-                            </DigitGammaContextSingletonProvider>
-                        </DigitDialogContextSingletonProvider>
-                    </DigitToastContextSingletonProvider>
+                    {activeLanguage => (
+                        <DigitToastContextSingletonProvider>
+                            <DigitDialogContextSingletonProvider>
+                                <DigitGammaContextSingletonProvider>
+                                    <MuiPickersUtilsProvider
+                                        utils={DateFnsUtils}
+                                        locale={locales[activeLanguage]}
+                                    >
+                                        {hashRouter ? (
+                                            <HashRouter>{children}</HashRouter>
+                                        ) : memoryRouter ? (
+                                            <MemoryRouter>
+                                                {children}
+                                            </MemoryRouter>
+                                        ) : (
+                                            <BrowserRouter>
+                                                {children}
+                                            </BrowserRouter>
+                                        )}
+                                    </MuiPickersUtilsProvider>
+                                </DigitGammaContextSingletonProvider>
+                            </DigitDialogContextSingletonProvider>
+                        </DigitToastContextSingletonProvider>
+                    )}
                 </DigitTranslationsContextSingletonProvider>
             </ThemeProvider>
         </StylesProvider>

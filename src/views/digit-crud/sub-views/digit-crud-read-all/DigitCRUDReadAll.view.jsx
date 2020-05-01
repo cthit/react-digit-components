@@ -10,6 +10,7 @@ import Add from "@material-ui/icons/Add";
 import translations from "./DigitCRUDReadAll.view.translations";
 import useDigitTranslations from "../../../../hooks/use-digit-translations";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
+import { useHistory } from "react-router-dom";
 
 //plz format this. I just want 1.0.0 released...
 function formatDate(date, text, type) {
@@ -72,7 +73,6 @@ const DigitCRUDReadAll = ({
     detailsButtonText,
     hasCreate,
     createButtonText,
-    history,
     readOnePath,
     createPath,
     timeProps,
@@ -86,6 +86,7 @@ const DigitCRUDReadAll = ({
     const [error, setError] = useState(null);
     const [{ all, loading }] = useContext(DigitCRUDContext);
     const [read, setRead] = useState(true);
+    const history = useHistory();
 
     const { on401, on404, on500, render401, render404, render500 } = errorCodes;
 

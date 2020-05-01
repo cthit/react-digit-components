@@ -55,6 +55,7 @@ const DigitCRUDInner = ({
     formInitialValues,
     toastCreateSuccessful,
     toastCreateFailed,
+    toastCreateSuccessfulGoToButton,
     backButtonText,
     createButtonText,
     toastUpdateSuccessful,
@@ -202,6 +203,9 @@ const DigitCRUDInner = ({
                             createSubtitle={createSubtitle}
                             toastCreateFailed={toastCreateFailed}
                             toastCreateSuccessful={toastCreateSuccessful}
+                            toastCreateSuccessfulGoToButton={
+                                toastCreateSuccessfulGoToButton
+                            }
                             createButtonText={createButtonText}
                             backButtonText={backButtonText}
                             readAllPath={readAllPath}
@@ -209,6 +213,9 @@ const DigitCRUDInner = ({
                             onCreate={onCreate}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                             createProps={createProps}
+                            hasReadOne={hasReadOne}
+                            readOnePath={readOnePath}
+                            idProp={idProp}
                         />
                     )}
                 />
@@ -352,7 +359,7 @@ const DigitCRUDInner = ({
                 <Route
                     exact
                     path={path + readAllPath}
-                    render={({ history }) => (
+                    render={() => (
                         <DigitCRUDReadAll
                             errorCodes={errorCodes}
                             readAllAction={readAllAction}
@@ -369,7 +376,6 @@ const DigitCRUDInner = ({
                             detailsButtonText={detailsButtonText}
                             createButtonText={createButtonText}
                             hasCreate={hasCreate}
-                            history={history}
                             readOnePath={readOnePath}
                             createPath={createPath}
                             timeProps={timeProps}
@@ -380,6 +386,8 @@ const DigitCRUDInner = ({
                     )}
                 />
             )}
+
+            {render404 != null && <Route render={render404} />}
         </Switch>
     );
 };
@@ -457,6 +465,8 @@ DigitCRUD.propTypes = {
     toastCreateSuccessful: PropTypes.func,
     /** Function to create toast text when creation failed, Args: (data, error)*/
     toastCreateFailed: PropTypes.func,
+    /** Function to create toast button text when creation is successful. This button will redirect to a readOne detail view if it exists. Args: (data, response) */
+    toastCreateSuccessfulGoToButton: PropTypes.func,
     /** Back button text */
     backButtonText: PropTypes.string,
     /** Create button text */
@@ -637,7 +647,8 @@ DigitCRUD.defaultProps = {
     on500: () => {},
     readOneProps: {},
     updateProps: {},
-    createProps: {}
+    createProps: {},
+    toastCreateSuccessfulGoToButton: null
 };
 
 export default DigitCRUD;

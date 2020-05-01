@@ -14,6 +14,7 @@ const DigitCRUDCreate = ({
     createTitle,
     toastCreateSuccessful,
     toastCreateFailed,
+    toastCreateSuccessfulGoToButton,
     backButtonText,
     createButtonText,
     readAllPath,
@@ -22,7 +23,10 @@ const DigitCRUDCreate = ({
     useHistoryGoBackOnBack,
     createSubtitle,
     errorCodes,
-    createProps
+    createProps,
+    hasReadOne,
+    readOnePath,
+    idProp
 }) => {
     const [queueToast] = useDigitToast();
     const [statusRender, setStatusRender] = useState(-1);
@@ -61,9 +65,31 @@ const DigitCRUDCreate = ({
                     createAction(_new)
                         .then(response => {
                             actions.resetForm();
-                            queueToast({
-                                text: toastCreateSuccessful(_new, response)
-                            });
+
+                            if (
+                                toastCreateSuccessfulGoToButton != null &&
+                                hasReadOne
+                            ) {
+                                queueToast({
+                                    text: toastCreateSuccessful(_new, response),
+                                    actionHandler: () =>
+                                        history.push(
+                                            path +
+                                                readOnePath.replace(
+                                                    ":id",
+                                                    response.data[idProp]
+                                                )
+                                        ),
+                                    actionText: toastCreateSuccessfulGoToButton(
+                                        _new,
+                                        response
+                                    )
+                                });
+                            } else {
+                                queueToast({
+                                    text: toastCreateSuccessful(_new, response)
+                                });
+                            }
                             onCreate(response);
                         })
                         .catch(error => {

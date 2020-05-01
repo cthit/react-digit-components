@@ -5,13 +5,13 @@ import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DeleteFAB from "../../elements/delete-fab";
 import useDigitToast from "../../../../hooks/use-digit-toast";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
+import { useHistory } from "react-router-dom";
 
 const DigitCRUDUpdate = ({
     readOneAction,
     updateAction,
     deleteAction,
     id,
-    history,
     path,
     formComponentData,
     formValidationSchema,
@@ -48,6 +48,7 @@ const DigitCRUDUpdate = ({
     const [statusRender, setStatusRender] = useState(-1);
     const [error, setError] = useState(null);
     const [read, setRead] = useState(true);
+    const history = useHistory();
 
     const { on401, on404, on500, render401, render404, render500 } = errorCodes;
 
@@ -136,7 +137,6 @@ const DigitCRUDUpdate = ({
                         const _updated = values;
                         updateAction(id, _updated)
                             .then(response => {
-                                readOneAction(id);
                                 actions.setSubmitting(false);
                                 queueToast({
                                     text: toastUpdateSuccessful(
@@ -146,6 +146,11 @@ const DigitCRUDUpdate = ({
                                     )
                                 });
                                 onUpdate(response);
+                                history.push(
+                                    backFromUpdatePath(one) == null
+                                        ? path + readOnePath.replace(":id", id)
+                                        : backFromUpdatePath(one)
+                                );
                             })
                             .catch(error => {
                                 var status = -1;

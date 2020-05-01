@@ -530,9 +530,9 @@ DigitCRUD.propTypes = {
     /** Overrides keysOrder for create screen */
     createKeysOrder: PropTypes.arrayOf(PropTypes.string),
     /** Overrides formValidationSchema for update screen */
-    updateFormValidationSchema: PropTypes.object,
+    updateFormValidationSchema: PropTypes.func,
     /** Overrides formValidationSchema for create screen */
-    createFormValidationSchema: PropTypes.func,
+    createFormValidationSchema: PropTypes.object,
     /** Be able to specify props to formatted as a time */
     timeProps: PropTypes.arrayOf(PropTypes.string),
     /** Be able to specify props to formatted as a date */

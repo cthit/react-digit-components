@@ -390,9 +390,7 @@ const DigitSelectMultipleTable = ({
                                                     />
                                                 </TableCell>
                                                 {columnsOrder.map(column => (
-                                                    <TableCell
-                                                        key={row[column]}
-                                                    >
+                                                    <TableCell key={column}>
                                                         {row[column]}
                                                     </TableCell>
                                                 ))}

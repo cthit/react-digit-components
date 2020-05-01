@@ -285,7 +285,7 @@ const DigitTable = ({
                                             key={row[idProp]}
                                         >
                                             {columnsOrder.map(column => (
-                                                <TableCell key={row[column]}>
+                                                <TableCell key={column}>
                                                     {row[column]}
                                                 </TableCell>
                                             ))}

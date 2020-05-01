@@ -30,16 +30,23 @@ const DigitForm = ({
         (value, fieldName) =>
             setTouched(_touched => {
                 const newTouched = { ..._touched };
+
                 newTouched[fieldName] = value;
                 return newTouched;
             }),
         []
     );
     const handleChange = useCallback(
-        (value, fieldName) =>
+        (value, fieldName, index = -1, inputName) =>
             setValues(_values => {
                 const newValues = { ..._values };
-                newValues[fieldName] = value;
+
+                if (index !== -1) {
+                    newValues[fieldName][index][inputName] = value;
+                } else {
+                    newValues[fieldName] = value;
+                }
+
                 return newValues;
             }),
         []

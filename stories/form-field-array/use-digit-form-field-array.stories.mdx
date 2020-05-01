@@ -22,17 +22,18 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 Used to be hooked up with a `DigitForm`. Utils for managing a list of values, often objects, inside a form. The hook returns an object full with helper method used to modify the array. Here are all the props that is returned:
 
-| **Name**    	| **Type** 	| **Parameters**             	| **Returns**   	| **Description**                                              	|
-|-------------	|----------	|----------------------------	|---------------	|--------------------------------------------------------------	|
-| **value**   	| *array*  	|                            	|               	| The array of values                                          	|
-| **push**    	| *func*   	| (val: any)                 	|               	| Adds an item to the end of value                             	|
-| **swap**    	| *func*   	| (index1: int, index2: int) 	|               	| Swaps the value of index1 and index2                         	|
-| **move**    	| *func*   	| (from: int, to: int)       	|               	| move value from given index to the given index               	|
-| **insert**  	| *func*   	| (index: int, val: any)     	| new value     	| inserts item at the given index of the new value array       	|
-| **unshift** 	| *func*   	| (val: any)                 	|               	| Adds an item to the start of the value                       	|
-| **remove**  	| *func*   	| (index: int)               	| removed value 	| Removes and returns the item at the given index              	|
-| **pop**     	| *func*   	| ()                         	| popped value  	| Pops value                                                   	|
-| **replace** 	| *func*   	| (index: int, val: any)     	| new value     	| Replaces the item at the given index with the given new item 	|
+| **Name**    	| **Type** 	| **Parameters**             	| **Returns**   	| **Description**                                              	            |
+|-------------	|----------	|----------------------------	|---------------	|-------------------------------------------------------------------------- |
+| **value**   	| *array*  	|                            	|               	| The array of values                                          	            |
+| **push**    	| *func*   	| (val: any)                 	|               	| Adds an item to the end of value                             	            |
+| **swap**    	| *func*   	| (index1: int, index2: int) 	|               	| Swaps the value of index1 and index2                                  	|
+| **move**    	| *func*   	| (from: int, to: int)       	|               	| move value from given index to the given index               	            |
+| **insert**  	| *func*   	| (index: int, val: any)     	| new value     	| inserts item at the given index of the new value array       	            |
+| **unshift** 	| *func*   	| (val: any)                 	|               	| Adds an item to the start of the value                       	            |
+| **remove**  	| *func*   	| (index: int)               	| removed value 	| Removes and returns the item at the given index              	            |
+| **pop**     	| *func*   	| ()                         	| popped value  	| Pops value                                                   	            |
+| **replace** 	| *func*   	| (index: int, val: any)     	| new value     	| Replaces the item at the given index with the given new item 	            |
+| **errors** 	| *array*   |                            	|                	| Errors is an array of objects, {error: Boolean, errorMessage: String} 	|
 
 ## Full example of useDigitFormFieldArray
 
@@ -97,6 +98,50 @@ Used to be hooked up with a `DigitForm`. Utils for managing a list of values, of
                            )}
                            validationSchema={yup.object().shape({
                                cars: yup.array()
+                           })}
+                           >
+                </DigitForm>
+            );
+        }}
+    </Story>
+</Preview>
+
+## Input handling within useDigitFormFieldArray 
+
+Try to use this method with memoization. 
+
+<Preview>
+    <Story name="input handling">
+        {() => {
+            const Field = () => {
+                const { push, innerInputs, replace, errors } = useDigitFormFieldArray("cars", {inputs: ["name"]});
+                return (
+                    <React.Fragment>
+                        <DigitButton raised primary text={"Add car"} onClick={() => {
+                            push({name: ""});
+                        }}/>
+                    <hr/>
+                    {innerInputs.map((input, i) => (
+                        <DigitTextField key={i} outlined upperLabel="Car name" {...input.name}/>           
+                    ))}
+                </React.Fragment>);
+            }
+            return (
+                <DigitForm initialValues={{cars: [{name: "Ferrari"}, {name: "Ford"}, {name: "Volvo"}]}} 
+                           onSubmit={(values) => {
+                               console.log(values);
+                           }}
+                           render={({isValid, errors}) => (
+                               <DigitLayout.Column justifyContent="flex-start">
+                                    <Field />
+                                    <hr/>
+                                    <DigitButton primary raised disabled={!isValid} submit onSubmit={(values) => console.log(values)} text="Submit" />
+                               </DigitLayout.Column>
+                           )}
+                           validationSchema={yup.object().shape({
+                               cars: yup.array().of(yup.object().shape({
+                                   name: yup.string().required("Car must have a name")
+                               }))
                            })}
                            >
                 </DigitForm>

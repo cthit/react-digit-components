@@ -101,7 +101,9 @@ DigitEditDataCard.propTypes = {
                 .isRequired,
             componentProps: PropTypes.object,
             formatEvent: PropTypes.func,
-            render: PropTypes.func
+            render: PropTypes.func,
+            array: PropTypes.bool,
+            formFieldArrayOptions: PropTypes.object
         })
     ).isRequired,
     titleText: PropTypes.string,

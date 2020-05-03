@@ -14,7 +14,8 @@ const DigitIconButton = ({
     alignSelf,
     size,
     padding,
-    margin
+    margin,
+    small
 }) => {
     const classes = useLayoutMaterialUi({
         flex,
@@ -31,6 +32,7 @@ const DigitIconButton = ({
             onClick={onClick}
             onBlur={onBlur}
             color={primary ? "primary" : secondary ? "secondary" : "inherit"}
+            size={small ? "small" : "medium"}
         >
             {React.createElement(icon, null)}
         </IconButton>
@@ -99,7 +101,9 @@ DigitIconButton.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** Makes the icon button smaller */
+    small: PropTypes.bool
 };
 
 DigitIconButton.defaultProps = {

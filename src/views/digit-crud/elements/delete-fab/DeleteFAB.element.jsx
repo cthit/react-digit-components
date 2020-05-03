@@ -87,9 +87,7 @@ const DeleteFAB = ({
     deleteDialogFormKeysOrder,
     onDelete,
     useHistoryGoBackOnBack,
-    errorCodes,
-    setStatusRender,
-    setError
+    statusHandler
 }) => {
     const [formValid, setFormValid] = useState(false);
     const [queueToast] = useDigitToast();
@@ -99,8 +97,6 @@ const DeleteFAB = ({
         closeCustomDialog,
         updateCustomDialog
     ] = useDigitCustomDialog();
-
-    const { on401, on404, on500, render401, render404, render500 } = errorCodes;
 
     const onDeleteInternal = form =>
         deleteAction(id, form)
@@ -117,39 +113,11 @@ const DeleteFAB = ({
                 onDelete(response);
             })
             .catch(error => {
-                var status = -1;
-                if (error.response != null) {
-                    status = error.response.status;
-                }
-
-                if (status === 401) {
-                    on401(error);
-
-                    if (render401 != null) {
-                        setStatusRender(401);
-                        closeCustomDialog();
-                    }
-                }
-
-                if (status === 404) {
-                    on404(error);
-
-                    if (render404 != null) {
-                        setStatusRender(404);
-                        closeCustomDialog();
-                    }
-                }
-
-                if (status === 500) {
-                    on500(error);
-
-                    if (render500 != null) {
-                        setStatusRender(500);
-                        closeCustomDialog();
-                    }
-                }
-
-                setError(error);
+                statusHandler(
+                    error.response != null ? error.response.status : -1,
+                    error
+                );
+                closeCustomDialog();
                 queueToast({
                     text: toastDeleteFailed(one, error)
                 });

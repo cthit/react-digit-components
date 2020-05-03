@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitEditData from "../../../../elements/digit-edit-data-card";
 import useDigitToast from "../../../../hooks/use-digit-toast";
 import { useHistory } from "react-router-dom";
+import useDigitCRUDStatus from "../../hooks/use-digit-crud-status";
 
 const DigitCRUDCreate = ({
     createAction,
@@ -22,34 +23,22 @@ const DigitCRUDCreate = ({
     onCreate,
     useHistoryGoBackOnBack,
     createSubtitle,
-    errorCodes,
     createProps,
     hasReadOne,
     readOnePath,
-    idProp
+    idProp,
+    statusHandlers,
+    statusRenders
 }) => {
     const [queueToast] = useDigitToast();
-    const [statusRender, setStatusRender] = useState(-1);
-    const [error, setError] = useState(null);
+    const [statusHandler, statusRender] = useDigitCRUDStatus(
+        statusHandlers,
+        statusRenders
+    );
     const history = useHistory();
 
-    const reset = useCallback(() => {
-        setStatusRender(-1);
-        setError(null);
-    }, [setStatusRender, setError]);
-
-    const { on401, on404, on500, render401, render404, render500 } = errorCodes;
-
-    if (statusRender === 401) {
-        return render401(error, reset);
-    }
-
-    if (statusRender === 404) {
-        return render404(error, reset);
-    }
-
-    if (statusRender === 500) {
-        return render500(error, reset);
+    if (statusRender != null) {
+        return statusRender();
     }
 
     return (
@@ -93,36 +82,13 @@ const DigitCRUDCreate = ({
                             onCreate(response);
                         })
                         .catch(error => {
-                            var status = -1;
-                            if (error.response != null) {
-                                status = error.response.status;
-                            }
+                            statusHandler(
+                                error.response != null
+                                    ? error.response.status
+                                    : -1,
+                                error
+                            );
 
-                            if (status === 401) {
-                                on401(error);
-
-                                if (render401 != null) {
-                                    setStatusRender(401);
-                                }
-                            }
-
-                            if (status === 404) {
-                                on404(error);
-
-                                if (render404 != null) {
-                                    setStatusRender(404);
-                                }
-                            }
-
-                            if (status === 500) {
-                                on500(error);
-
-                                if (render500 != null) {
-                                    setStatusRender(500);
-                                }
-                            }
-
-                            setError(error);
                             actions.setSubmitting(false);
                             queueToast({
                                 text: toastCreateFailed(_new, error)

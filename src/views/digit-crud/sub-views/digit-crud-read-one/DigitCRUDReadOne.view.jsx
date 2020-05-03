@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import DigitDisplayData from "../../../../elements/digit-display-data";
 import {
     Card,
@@ -15,6 +15,7 @@ import DeleteFAB from "../../elements/delete-fab";
 import translations from "./DigitCRUDReadOne.view.translations";
 import useDigitTranslations from "../../../../hooks/use-digit-translations";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
+import useDigitCRUDStatus from "../../hooks/use-digit-crud-status";
 
 //plz format this. I just want 1.0.0 released...
 function formatDate(date, text, type) {
@@ -107,66 +108,38 @@ const DigitCRUDReadOne = ({
     detailsSubtitle,
     canDelete,
     canUpdate,
-    errorCodes,
-    readOneProps
+    readOneProps,
+    statusHandlers,
+    statusRenders
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
-    const [statusRender, setStatusRender] = useState(-1);
-    const [error, setError] = useState(null);
-    const [read, setRead] = useState(true);
-
-    const { on401, on404, on500, render401, render404, render500 } = errorCodes;
-
-    const reset = useCallback(() => {
-        setRead(true);
-    }, [setRead]);
+    const [
+        statusHandler,
+        statusRender,
+        reset,
+        read,
+        setRead
+    ] = useDigitCRUDStatus(statusHandlers, statusRenders);
 
     useEffect(() => {
         if (read) {
             readOneAction(id)
                 .then(() => {
-                    setStatusRender(-1);
-                    setError(null);
+                    reset();
                 })
                 .catch(error => {
-                    var status = -1;
-                    if (error.response != null) {
-                        status = error.response.status;
-                    }
-
-                    if (status === 401) {
-                        on401(error);
-
-                        if (render401 != null) {
-                            setStatusRender(401);
-                        }
-                    }
-
-                    if (status === 404) {
-                        on404(error);
-
-                        if (render404 != null) {
-                            setStatusRender(404);
-                        }
-                    }
-
-                    if (status === 500) {
-                        on500(error);
-
-                        if (render500 != null) {
-                            setStatusRender(500);
-                        }
-                    }
-
-                    setError(error);
+                    statusHandler(
+                        error.response != null ? error.response.status : -1,
+                        error
+                    );
                 });
         }
         setRead(false);
         // Ignoring the different on* and render* since they would mean that
         // readOneAction would continuously be refreshed.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [readOneAction, id, setStatusRender, setError, error, setRead, read]);
+    }, [readOneAction, id, read]);
 
     if (read || loading) {
         return (
@@ -176,16 +149,8 @@ const DigitCRUDReadOne = ({
         );
     }
 
-    if (statusRender === 401) {
-        return render401(error, reset);
-    }
-
-    if (statusRender === 404) {
-        return render404(error, reset);
-    }
-
-    if (statusRender === 500) {
-        return render500(error, reset);
+    if (statusRender != null) {
+        return statusRender();
     }
 
     const displayData = {};
@@ -237,9 +202,7 @@ const DigitCRUDReadOne = ({
             deleteDialogFormValidationSchema={deleteDialogFormValidationSchema}
             deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
             onDelete={onDelete}
-            errorCodes={errorCodes}
-            setError={setError}
-            setStatusRender={setStatusRender}
+            statusHandler={statusHandler}
         />
     );
 

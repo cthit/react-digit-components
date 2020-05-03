@@ -109,15 +109,11 @@ const DigitCRUDInner = ({
     createSubtitle,
     updateSubtitle,
     detailsSubtitle,
-    on401,
-    on404,
-    on500,
-    render401,
-    render404,
-    render500,
     readOneProps,
     updateProps,
-    createProps
+    createProps,
+    statusHandlers,
+    statusRenders
 }) => {
     const location = useLocation();
     const [, dispatch] = useContext(DigitCRUDContext);
@@ -168,8 +164,6 @@ const DigitCRUDInner = ({
         useKeyTextsInUpperLabel
     );
 
-    const errorCodes = { on401, on404, on500, render401, render404, render500 };
-
     const pathname = location.pathname;
 
     useEffect(() => {
@@ -184,7 +178,6 @@ const DigitCRUDInner = ({
                     path={path + createPath}
                     render={() => (
                         <DigitCRUDCreate
-                            errorCodes={errorCodes}
                             createAction={createAction}
                             path={path}
                             formComponentData={modifiedFormComponentData}
@@ -216,6 +209,8 @@ const DigitCRUDInner = ({
                             hasReadOne={hasReadOne}
                             readOnePath={readOnePath}
                             idProp={idProp}
+                            statusHandlers={statusHandlers}
+                            statusRenders={statusRenders}
                         />
                     )}
                 />
@@ -226,7 +221,6 @@ const DigitCRUDInner = ({
                     path={path + updatePath}
                     render={props => (
                         <DigitCRUDUpdate
-                            errorCodes={errorCodes}
                             readOneAction={readOneAction}
                             updateAction={updateAction}
                             deleteAction={deleteAction}
@@ -282,6 +276,8 @@ const DigitCRUDInner = ({
                             canDelete={canDelete}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                             updateProps={updateProps}
+                            statusHandlers={statusHandlers}
+                            statusRenders={statusRenders}
                         />
                     )}
                 />
@@ -292,7 +288,6 @@ const DigitCRUDInner = ({
                     path={path + readOnePath}
                     render={props => (
                         <DigitCRUDReadOne
-                            errorCodes={errorCodes}
                             readOneAction={readOneAction}
                             keysText={keysText}
                             keysOrder={
@@ -351,6 +346,8 @@ const DigitCRUDInner = ({
                             canDelete={canDelete}
                             useHistoryGoBackOnBack={useHistoryGoBackOnBack}
                             readOneProps={readOneProps}
+                            statusHandlers={statusHandlers}
+                            statusRenders={statusRenders}
                         />
                     )}
                 />
@@ -361,7 +358,6 @@ const DigitCRUDInner = ({
                     path={path + readAllPath}
                     render={() => (
                         <DigitCRUDReadAll
-                            errorCodes={errorCodes}
                             readAllAction={readAllAction}
                             keysText={keysText}
                             keysOrder={
@@ -382,12 +378,20 @@ const DigitCRUDInner = ({
                             dateProps={dateProps}
                             dateAndTimeProps={dateAndTimeProps}
                             canReadOne={canReadOne}
+                            statusHandlers={statusHandlers}
+                            statusRenders={statusRenders}
                         />
                     )}
                 />
             )}
 
-            {render404 != null && <Route render={render404} />}
+            {statusRenders[404] != null && (
+                <Route
+                    render={({ history }) =>
+                        statusRenders[404](null, () => history.push(path))
+                    }
+                />
+            )}
         </Switch>
     );
 };
@@ -563,18 +567,10 @@ DigitCRUD.propTypes = {
     canReadOne: PropTypes.func,
     /** If a specific row can be deleted. (one) => bool */
     canDelete: PropTypes.func,
-    /** Callback when a request returns a 401 */
-    on401: PropTypes.func,
-    /** Callback when a request returns a 404 */
-    on404: PropTypes.func,
-    /** Callback when a request returns a 500 */
-    on500: PropTypes.func,
-    /** Full screen render on 401. If null then a error will be showed as toast */
-    render401: PropTypes.func,
-    /** Full screen render on 404. If null then a error will be showed as toast */
-    render404: PropTypes.func,
-    /** Full screen render on 500. If null then a error will be showed as toast */
-    render500: PropTypes.func,
+    /** Object with render functions. e.g. {500: (error, reset) => <div></div>}
+    statusRenders: PropTypes.object,
+    /** Object with function callbacks. e.g. {500: (error, reset) => {} */
+    statusHandlers: PropTypes.object,
     /** Used to customize read one <DigitDesign.Card> */
     readOneProps: PropTypes.object,
     /** Used to customize update <DigitEditDataCard>*/
@@ -642,9 +638,8 @@ DigitCRUD.defaultProps = {
     canUpdate: () => true,
     canDelete: () => true,
     canReadOne: () => true,
-    on401: () => {},
-    on404: () => {},
-    on500: () => {},
+    statusHandlers: {},
+    statusRenders: {},
     readOneProps: {},
     updateProps: {},
     createProps: {},

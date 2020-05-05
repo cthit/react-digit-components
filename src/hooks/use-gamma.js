@@ -6,7 +6,7 @@ import DigitGammaContext, {
 import useDigitToast from "./use-digit-toast";
 import useDigitTranslations from "./use-digit-translations";
 import trimEnd from "lodash/trimEnd";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 
 const translations = {
     SomethingWentWrong: [

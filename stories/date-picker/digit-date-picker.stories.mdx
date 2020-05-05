@@ -28,6 +28,34 @@ A input field with a dialog popup where you can select the date.
             );
         }}
     </Story>
+    <Story name="Outlined">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Filled">
+        {() => {
+            const [date, setDate] = useState(null);
+            return (
+                <DigitDatePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                    filled
+                />
+            );
+        }}
+    </Story>
 </Preview>
 
 ## Custom labels

@@ -44,6 +44,7 @@ const DigitSelect = ({
 
     return (
         <FormControl
+            error={error}
             classes={{ root: formClasses.root + " " + classes.root }}
             disabled={disabled}
             variant={filled ? "filled" : outlined ? "outlined" : "standard"}
@@ -183,7 +184,11 @@ DigitSelect.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** If true, then errorMessage will be shown instead of lowerLabel */
+    error: PropTypes.bool,
+    /** If error is true, then this errorMessage will be shown instead of lowerLabel */
+    errorMessage: PropTypes.string
 };
 
 DigitSelect.defaultProps = {

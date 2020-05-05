@@ -32,7 +32,7 @@ const DigitTranslationsContextSingletonProvider = ({
 
     return (
         <DigitTranslationsContext.Provider value={[state, dispatch]}>
-            {children}
+            {children(state.activeLanguage)}
         </DigitTranslationsContext.Provider>
     );
 };

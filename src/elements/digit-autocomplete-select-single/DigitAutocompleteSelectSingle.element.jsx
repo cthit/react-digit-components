@@ -25,7 +25,8 @@ const DigitAutocompleteSelectSingle = ({
     alignSelf,
     size,
     padding,
-    margin
+    margin,
+    disableClearable
 }) => {
     const classes = useLayoutMaterialUi({
         flex,
@@ -38,6 +39,7 @@ const DigitAutocompleteSelectSingle = ({
 
     return (
         <Autocomplete
+            disableClearable={disableClearable}
             autoHighlight
             value={value}
             onChange={(e, value) => {
@@ -189,7 +191,9 @@ DigitAutocompleteSelectSingle.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** If true, then there's no clearable button */
+    disableClearable: PropTypes.bool
 };
 
 export default DigitAutocompleteSelectSingle;

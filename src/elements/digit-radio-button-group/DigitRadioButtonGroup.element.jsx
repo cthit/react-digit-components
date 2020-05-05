@@ -169,7 +169,8 @@ DigitRadioButtonGroup.defaultProps = {
     lowerLabel: "",
     error: false,
     errorMessage: null,
-    radioButtons: []
+    radioButtons: [],
+    size: { width: "224px" }
 };
 
 export default DigitRadioButtonGroup;

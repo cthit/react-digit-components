@@ -61,10 +61,10 @@ const useStyles = makeStyles(theme => ({
         padding: ({ mainPadding }) => mainPadding,
         flexGrow: "1",
         display: "flex",
-        minHeight: ({ headerHeight, hasToolbar, toolbarHeight }) =>
+        minHeight: ({ headerHeight, hasToolbar, toolbarHeight, mainPadding }) =>
             `calc(100vh - ${headerHeight} - ${
                 hasToolbar ? toolbarHeight : "0px"
-            })`
+            } - ${mainPadding} - ${mainPadding})`
     },
     title: {
         color: props => props.titleColor,

@@ -10,6 +10,8 @@ import Add from "@material-ui/icons/Add";
 import translations from "./DigitCRUDReadAll.view.translations";
 import useDigitTranslations from "../../../../hooks/use-digit-translations";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
+import { useHistory } from "react-router-dom";
+import useDigitCRUDStatus from "../../hooks/use-digit-crud-status";
 
 //plz format this. I just want 1.0.0 released...
 function formatDate(date, text, type) {
@@ -63,7 +65,6 @@ function formatDate(date, text, type) {
 
 const DigitCRUDReadAll = ({
     readAllAction,
-    clearAction,
     keysText,
     keysOrder,
     tableProps,
@@ -73,28 +74,55 @@ const DigitCRUDReadAll = ({
     detailsButtonText,
     hasCreate,
     createButtonText,
-    history,
     readOnePath,
     createPath,
     timeProps,
     dateProps,
     dateAndTimeProps,
-    canReadOne
+    canReadOne,
+    statusHandlers,
+    statusRenders
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ all, loading }] = useContext(DigitCRUDContext);
+    const history = useHistory();
+    const [
+        statusHandler,
+        statusRender,
+        reset,
+        read,
+        setRead
+    ] = useDigitCRUDStatus(statusHandlers, statusRenders);
 
     useEffect(() => {
-        readAllAction();
-        return clearAction;
-    }, [readAllAction, clearAction]);
+        if (read) {
+            readAllAction()
+                .then(() => {
+                    reset();
+                })
+                .catch(error => {
+                    statusHandler(
+                        error.response != null ? error.response.status : -1,
+                        error
+                    );
+                });
+        }
+        setRead(false);
+        // Ignoring the different on* and render* since they would mean that
+        // readAllAction would continuously be refreshed.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [readAllAction, read, setRead, statusHandler]);
 
-    if (loading || all == null) {
+    if (read || loading || all == null) {
         return (
-            <Center>
+            <Center size={{ height: "200px" }}>
                 <DigitLoading loading />
             </Center>
         );
+    }
+
+    if (statusRender != null) {
+        return statusRender();
     }
 
     if (timeProps.length + dateProps.length + dateAndTimeProps.length > 0) {
@@ -124,7 +152,7 @@ const DigitCRUDReadAll = ({
     }
 
     return (
-        <Center>
+        <>
             <DigitTable
                 alignSelf={"flex-start"}
                 padding={"8px"}
@@ -152,6 +180,7 @@ const DigitCRUDReadAll = ({
                         : { ...keysText }
                 }
                 idProp={idProp}
+                margin={hasCreate ? { bottom: "calc(56px + 16px)" } : {}}
                 {...tableProps}
             />
             {hasCreate && (
@@ -164,14 +193,9 @@ const DigitCRUDReadAll = ({
                             onClick={() => history.push(path + createPath)}
                         />
                     </DownRightPosition>
-                    <div //To let the user scroll all the way down, so that the FAB isn't in the way
-                        style={{
-                            height: "80px"
-                        }}
-                    />
                 </>
             )}
-        </Center>
+        </>
     );
 };
 

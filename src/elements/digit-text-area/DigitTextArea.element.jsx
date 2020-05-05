@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
+import makeStyles from "@material-ui/styles/makeStyles";
 
 const DigitTextArea = ({
     value,
@@ -34,6 +35,12 @@ const DigitTextArea = ({
         margin
     });
 
+    const inputFlex = makeStyles({
+        root: {
+            flex: "1"
+        }
+    })();
+
     const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
         if (maxLength === -1 || newValue.length <= maxLength) {
@@ -63,9 +70,10 @@ const DigitTextArea = ({
             disabled={disabled}
             rows={rows}
             variant={outlined ? "outlined" : filled ? "filled" : "standard"}
-            rowsMax={rowsMax}
+            rowsMax={rowsMax < rows ? rows : rowsMax}
             multiline
             onKeyPress={onKeyPress}
+            InputProps={{ classes: inputFlex }}
         />
     );
 };
@@ -181,7 +189,8 @@ DigitTextArea.defaultProps = {
     rowsMax: 6,
     maxLength: -1,
     onKeyPress: () => {},
-    autoFocus: false
+    autoFocus: false,
+    size: { width: "224px" }
 };
 
 export default DigitTextArea;

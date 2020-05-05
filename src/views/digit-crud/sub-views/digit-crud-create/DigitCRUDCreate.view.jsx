@@ -2,7 +2,8 @@ import React from "react";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DigitEditData from "../../../../elements/digit-edit-data-card";
 import useDigitToast from "../../../../hooks/use-digit-toast";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
+import useDigitCRUDStatus from "../../hooks/use-digit-crud-status";
 
 const DigitCRUDCreate = ({
     createAction,
@@ -14,20 +15,36 @@ const DigitCRUDCreate = ({
     createTitle,
     toastCreateSuccessful,
     toastCreateFailed,
+    toastCreateSuccessfulGoToButton,
     backButtonText,
     createButtonText,
     readAllPath,
     backFromCreatePath,
     onCreate,
     useHistoryGoBackOnBack,
-    createSubtitle
+    createSubtitle,
+    createProps,
+    hasReadOne,
+    readOnePath,
+    idProp,
+    statusHandlers,
+    statusRenders
 }) => {
     const [queueToast] = useDigitToast();
+    const [statusHandler, statusRender] = useDigitCRUDStatus(
+        statusHandlers,
+        statusRenders
+    );
     const history = useHistory();
+
+    if (statusRender != null) {
+        return statusRender();
+    }
 
     return (
         <Center>
             <DigitEditData
+                centerFields
                 size={{
                     minWidth: "280px",
                     minHeight: "280px"
@@ -37,12 +54,41 @@ const DigitCRUDCreate = ({
                     createAction(_new)
                         .then(response => {
                             actions.resetForm();
-                            queueToast({
-                                text: toastCreateSuccessful(_new, response)
-                            });
+
+                            if (
+                                toastCreateSuccessfulGoToButton != null &&
+                                hasReadOne
+                            ) {
+                                queueToast({
+                                    text: toastCreateSuccessful(_new, response),
+                                    actionHandler: () =>
+                                        history.push(
+                                            path +
+                                                readOnePath.replace(
+                                                    ":id",
+                                                    response.data[idProp]
+                                                )
+                                        ),
+                                    actionText: toastCreateSuccessfulGoToButton(
+                                        _new,
+                                        response
+                                    )
+                                });
+                            } else {
+                                queueToast({
+                                    text: toastCreateSuccessful(_new, response)
+                                });
+                            }
                             onCreate(response);
                         })
                         .catch(error => {
+                            statusHandler(
+                                error.response != null
+                                    ? error.response.status
+                                    : -1,
+                                error
+                            );
+
                             actions.setSubmitting(false);
                             queueToast({
                                 text: toastCreateFailed(_new, error)
@@ -71,6 +117,7 @@ const DigitCRUDCreate = ({
                 submitText={createButtonText}
                 titleText={createTitle}
                 subtitleText={createSubtitle}
+                {...createProps}
             />
         </Center>
     );

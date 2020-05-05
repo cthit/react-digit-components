@@ -15,6 +15,7 @@ import DeleteFAB from "../../elements/delete-fab";
 import translations from "./DigitCRUDReadOne.view.translations";
 import useDigitTranslations from "../../../../hooks/use-digit-translations";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
+import useDigitCRUDStatus from "../../hooks/use-digit-crud-status";
 
 //plz format this. I just want 1.0.0 released...
 function formatDate(date, text, type) {
@@ -68,7 +69,6 @@ function formatDate(date, text, type) {
 
 const DigitCRUDReadOne = ({
     readOneAction,
-    clearAction,
     keysText,
     keysOrder,
     path,
@@ -107,22 +107,51 @@ const DigitCRUDReadOne = ({
     useHistoryGoBackOnBack,
     detailsSubtitle,
     canDelete,
-    canUpdate
+    canUpdate,
+    readOneProps,
+    statusHandlers,
+    statusRenders,
+    hasReadAll
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
+    const [
+        statusHandler,
+        statusRender,
+        reset,
+        read,
+        setRead
+    ] = useDigitCRUDStatus(statusHandlers, statusRenders);
 
     useEffect(() => {
-        readOneAction(id);
-        return clearAction;
-    }, [readOneAction, clearAction, id]);
+        if (read) {
+            readOneAction(id)
+                .then(() => {
+                    reset();
+                })
+                .catch(error => {
+                    statusHandler(
+                        error.response != null ? error.response.status : -1,
+                        error
+                    );
+                });
+        }
+        setRead(false);
+        // Ignoring the different on* and render* since they would mean that
+        // readOneAction would continuously be refreshed.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [readOneAction, id, read]);
 
-    if (loading) {
+    if (read || loading) {
         return (
-            <Center>
+            <Center size={{ height: "200px" }}>
                 <DigitLoading loading />
             </Center>
         );
+    }
+
+    if (statusRender != null) {
+        return statusRender();
     }
 
     const displayData = {};
@@ -148,6 +177,8 @@ const DigitCRUDReadOne = ({
             ))
     );
 
+    const hasDeleteFAB = !hasUpdate && deleteAction != null && canDelete(one);
+
     const deleteFAB = (
         <DeleteFAB
             dialogDeleteCancel={dialogDeleteCancel}
@@ -172,6 +203,7 @@ const DigitCRUDReadOne = ({
             deleteDialogFormValidationSchema={deleteDialogFormValidationSchema}
             deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
             onDelete={onDelete}
+            statusHandler={statusHandler}
         />
     );
 
@@ -207,6 +239,8 @@ const DigitCRUDReadOne = ({
                     minWidth: "280px",
                     minHeight: "280px"
                 }}
+                margin={hasDeleteFAB ? { bottom: "calc(56px + 16px)" } : {}}
+                {...readOneProps}
             >
                 <CardHeader
                     hasSubtitle={
@@ -231,12 +265,14 @@ const DigitCRUDReadOne = ({
                         .map(key => customDetailsRenders[key](one))}
                     {detailsRenderCardEnd(one)}
                 </CardBody>
-                <CardButtons leftRight>
-                    <DigitButton
-                        text={backButtonText}
-                        outlined
-                        onClick={goBack}
-                    />
+                <CardButtons leftRight reverseDirection={!hasReadAll}>
+                    {hasReadAll && (
+                        <DigitButton
+                            text={backButtonText}
+                            outlined
+                            onClick={goBack}
+                        />
+                    )}
                     {hasUpdate && canUpdate(one) && (
                         <>
                             <DigitButton
@@ -250,7 +286,7 @@ const DigitCRUDReadOne = ({
                 </CardButtons>
             </Card>
             {detailsRenderEnd(one)}
-            {!hasUpdate && deleteAction != null && canDelete(one) && deleteFAB}
+            {hasDeleteFAB && deleteFAB}
         </Center>
     );
 };

@@ -28,6 +28,34 @@ A input field with a dialog popup where you can select the date and the time.
             );
         }}
     </Story>
+    <Story name="Outlined">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    outlined
+                />
+            );
+        }}
+    </Story>
+    <Story name="Filled">
+        {() => {
+            const [state, setState] = useState(null);
+            return (
+                <DigitDateAndTimePicker
+                    upperLabel="Upper label"
+                    lowerLabel="Lower label"
+                    value={state}
+                    onChange={e => setState(e.target.value)}
+                    filled
+                />
+            );
+        }}
+    </Story>
 </Preview>
 
 ## Custom labels

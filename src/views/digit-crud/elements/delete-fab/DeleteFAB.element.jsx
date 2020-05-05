@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import DigitFAB from "../../../../elements/digit-fab";
 import Delete from "@material-ui/icons/Delete";
@@ -86,7 +86,8 @@ const DeleteFAB = ({
     deleteDialogFormInitialValues,
     deleteDialogFormKeysOrder,
     onDelete,
-    useHistoryGoBackOnBack
+    useHistoryGoBackOnBack,
+    statusHandler
 }) => {
     const [formValid, setFormValid] = useState(false);
     const [queueToast] = useDigitToast();
@@ -96,6 +97,7 @@ const DeleteFAB = ({
         closeCustomDialog,
         updateCustomDialog
     ] = useDigitCustomDialog();
+
     const onDeleteInternal = form =>
         deleteAction(id, form)
             .then(response => {
@@ -111,6 +113,11 @@ const DeleteFAB = ({
                 onDelete(response);
             })
             .catch(error => {
+                statusHandler(
+                    error.response != null ? error.response.status : -1,
+                    error
+                );
+                closeCustomDialog();
                 queueToast({
                     text: toastDeleteFailed(one, error)
                 });
@@ -127,7 +134,7 @@ const DeleteFAB = ({
         onConfirm: onDeleteInternal
     });
 
-    const renderButtons = useMemo(
+    const renderButtons = useCallback(
         (confirm, cancel) => (
             <DeleteDialogButtons
                 dialogDeleteConfirm={dialogDeleteConfirm}
@@ -202,11 +209,6 @@ const DeleteFAB = ({
                     }}
                 />
             </DownRightPosition>
-            <div //To let the user scroll all the way down, so that the FAB isn't in the way
-                style={{
-                    height: "80px"
-                }}
-            />
         </>
     );
 };

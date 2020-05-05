@@ -1,4 +1,4 @@
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
 import {
     useDigitTranslations,
@@ -30,12 +30,12 @@ Using `setCommonTranslations` should really only be done once in for example you
                 setCommonTranslations(commonTranslations);
             }, [JSON.stringify(commonTranslations)]);
             return (
-                <>
+                <React.Fragment>
                     <DigitSelect value={activeLanguage} onChange={e => setActiveLanguage(e.target.value)} filled valueToTextMap={{sv: "Swedish", en: "English"}} upperLabel="Language"/>
                     <DigitText.Text text={text.Bread}/>
                     <DigitText.Text text={text.Yes}/>
                     <DigitText.Text text={text.No}/>
-                </>
+                </React.Fragment>
             );
         }}
     </Story>

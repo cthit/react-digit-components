@@ -88,7 +88,8 @@ export default {
                     "isValidElementType",
                     "ForwardRef",
                     "isContextConsumer",
-                    "isFragment"
+                    "isFragment",
+                    "Memo"
                 ],
                 scheduler: ["unstable_runWithPriority", "LowPriority"]
             }

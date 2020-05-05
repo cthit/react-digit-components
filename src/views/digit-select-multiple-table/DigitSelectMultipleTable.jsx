@@ -68,7 +68,8 @@ const DigitSelectMultipleTableHead = ({
     rowCount,
     onRequestSort,
     headerTexts,
-    columnsOrder
+    columnsOrder,
+    disableSelectAll
 }) => {
     const createSortHandler = property => event => {
         onRequestSort(event, property);
@@ -78,14 +79,15 @@ const DigitSelectMultipleTableHead = ({
         <TableHead>
             <TableRow>
                 <TableCell padding="checkbox">
-                    <Checkbox
-                        indeterminate={
-                            numSelected > 0 && numSelected < rowCount
-                        }
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{ "aria-label": "select all desserts" }}
-                    />
+                    {!disableSelectAll && (
+                        <Checkbox
+                            indeterminate={
+                                numSelected > 0 && numSelected < rowCount
+                            }
+                            checked={rowCount > 0 && numSelected === rowCount}
+                            onChange={onSelectAllClick}
+                        />
+                    )}
                 </TableCell>
                 {columnsOrder.map(column => (
                     <TableCell
@@ -216,7 +218,8 @@ const DigitSelectMultipleTable = ({
     margin,
     flex,
     value,
-    onChange
+    onChange,
+    disableSelectAll
 }) => {
     const classes = useStyles();
     const [order, setOrder] = useState(startOrderByDirection);
@@ -290,7 +293,11 @@ const DigitSelectMultipleTable = ({
                 ? data
                 : data.filter(row => {
                       for (var column of columnsOrder) {
-                          if ((row[column] + "").toLowerCase().includes(s)) {
+                          if (
+                              (row[column] + "")
+                                  .toLowerCase()
+                                  .includes(s.toLowerCase())
+                          ) {
                               return true;
                           }
                       }
@@ -302,18 +309,8 @@ const DigitSelectMultipleTable = ({
             getComparator(order, orderBy),
             value,
             idProp
-        ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-    }, [
-        data,
-        searchValue,
-        page,
-        rowsPerPage,
-        order,
-        orderBy,
-        columnsOrder,
-        idProp,
-        value
-    ]);
+        );
+    }, [data, searchValue, order, orderBy, columnsOrder, idProp, value]);
 
     return (
         <Paper classes={layoutClasses}>
@@ -324,7 +321,10 @@ const DigitSelectMultipleTable = ({
                 searchText={searchText}
                 text={text}
                 searchValue={searchValue}
-                onSearchUpdated={setSearchValue}
+                onSearchUpdated={val => {
+                    setSearchValue(val);
+                    setPage(0);
+                }}
             />
             <TableContainer>
                 <Table
@@ -339,9 +339,10 @@ const DigitSelectMultipleTable = ({
                         order={order}
                         orderBy={orderBy}
                         onRequestSort={handleRequestSort}
-                        rowCount={data.length}
+                        rowCount={sortedData.length}
                         headerTexts={headerTexts}
                         columnsOrder={columnsOrder}
+                        disableSelectAll={disableSelectAll}
                     />
                     <TableBody>
                         {sortedData.length === 0 && (
@@ -355,59 +356,71 @@ const DigitSelectMultipleTable = ({
                         )}
                         {sortedData.length > 0 && (
                             <>
-                                {sortedData.map((row, index) => {
-                                    const isItemSelected = isSelected(
-                                        row[idProp]
-                                    );
-                                    const labelId = `enhanced-table-checkbox-${index}`;
+                                {sortedData
+                                    .slice(
+                                        page * rowsPerPage,
+                                        page * rowsPerPage + rowsPerPage
+                                    )
+                                    .map((row, index) => {
+                                        const isItemSelected = isSelected(
+                                            row[idProp]
+                                        );
+                                        const labelId = `enhanced-table-checkbox-${index}`;
 
-                                    return (
-                                        <TableRow
-                                            hover
-                                            tabIndex={-1}
-                                            key={row[idProp]}
-                                            onClick={event =>
-                                                handleClick(event, row[idProp])
-                                            }
-                                            selected={isItemSelected}
-                                            role="checkbox"
-                                        >
-                                            <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    checked={isItemSelected}
-                                                    inputProps={{
-                                                        "aria-labelledby": labelId
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            {columnsOrder.map(column => (
-                                                <TableCell key={row[column]}>
-                                                    {row[column]}
+                                        return (
+                                            <TableRow
+                                                hover
+                                                tabIndex={-1}
+                                                key={row[idProp]}
+                                                onClick={event =>
+                                                    handleClick(
+                                                        event,
+                                                        row[idProp]
+                                                    )
+                                                }
+                                                selected={isItemSelected}
+                                                role="checkbox"
+                                            >
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        checked={isItemSelected}
+                                                        inputProps={{
+                                                            "aria-labelledby": labelId
+                                                        }}
+                                                    />
                                                 </TableCell>
-                                            ))}
-                                            {row.__link != null && (
-                                                <TableCell align={"right"}>
-                                                    <Link to={row.__link}>
-                                                        <DigitButton
-                                                            text={
-                                                                headerTexts.__link
-                                                            }
-                                                            outlined
-                                                        />
-                                                    </Link>
-                                                </TableCell>
-                                            )}
-                                            {row.__link == null && (
-                                                <TableCell />
-                                            )}
-                                        </TableRow>
-                                    );
-                                })}
+                                                {columnsOrder.map(column => (
+                                                    <TableCell key={column}>
+                                                        {row[column]}
+                                                    </TableCell>
+                                                ))}
+                                                {row.__link != null && (
+                                                    <TableCell
+                                                        align={"right"}
+                                                        padding={"none"}
+                                                    >
+                                                        <Link to={row.__link}>
+                                                            <DigitButton
+                                                                text={
+                                                                    headerTexts.__link
+                                                                }
+                                                                outlined
+                                                            />
+                                                        </Link>
+                                                    </TableCell>
+                                                )}
+                                                {row.__link == null && (
+                                                    <TableCell />
+                                                )}
+                                            </TableRow>
+                                        );
+                                    })}
                                 {emptyRows > 0 && (
                                     <TableRow
                                         style={{
                                             height:
-                                                (dense ? 33 : 53) * emptyRows
+                                                (dense ? 34.55 : 54.55) *
+                                                emptyRows
                                         }}
                                     >
                                         <TableCell
@@ -423,7 +436,7 @@ const DigitSelectMultipleTable = ({
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={data.length}
+                count={sortedData.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
@@ -518,7 +531,9 @@ DigitSelectMultipleTable.propTypes = {
         })
     ]),
     /** Controls the flex property for the most outer element in this component.*/
-    flex: PropTypes.string
+    flex: PropTypes.string,
+    /** Disable select all checkbox */
+    disableSelectAll: PropTypes.bool
 };
 
 DigitSelectMultipleTable.defaultProps = {
@@ -528,7 +543,6 @@ DigitSelectMultipleTable.defaultProps = {
     titleText: "",
     emptyTableText: "The table is empty",
     size: {
-        width: "100%",
         minWidth: "300px"
     },
     startOrderByDirection: "desc",

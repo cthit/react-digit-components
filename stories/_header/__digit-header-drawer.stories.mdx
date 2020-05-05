@@ -31,7 +31,7 @@ This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you 
                 <DigitHeaderDrawer 
                     title="BookIT" 
                     renderDrawer={() => (
-                        <>
+                        <React.Fragment>
                             <DigitGammaActionsDummy 
                                 alignSelf="center"
                                 nick="Portals" 
@@ -52,7 +52,7 @@ This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you 
                             <DigitNavLink text="Home"/>
                             <DigitNavLink text="My Account"/>
                             <DigitNavLink text="Icecream"/>
-                        </>
+                        </React.Fragment>
                     )} 
                     renderMain={() => (
                         <DigitLayout.Column>

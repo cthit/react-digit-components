@@ -58,7 +58,10 @@ const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
 };
 
 const DigitEditDataFieldArray = ({ name, componentData, alignSelfCenter }) => {
-    const field = useDigitFormFieldArray(name);
+    const field = useDigitFormFieldArray(
+        name,
+        componentData.formFieldArrayOptions
+    );
     const { component, componentProps } = componentData;
 
     const check = JSON.stringify(field) + JSON.stringify(componentData);
@@ -126,14 +129,17 @@ DigitEditData.propTypes = {
                 .isRequired,
             componentProps: PropTypes.object,
             formatEvent: PropTypes.func,
-            render: PropTypes.func
+            render: PropTypes.func,
+            array: PropTypes.bool,
+            formFieldArrayOptions: PropTypes.object
         })
     ).isRequired,
     titleText: PropTypes.string,
     submitText: PropTypes.string,
     marginVertical: PropTypes.string,
     /** If new data should be force */
-    isInitialValid: PropTypes.bool
+    isInitialValid: PropTypes.bool,
+    centerFields: PropTypes.bool
 };
 
 DigitEditData.defaultProps = {

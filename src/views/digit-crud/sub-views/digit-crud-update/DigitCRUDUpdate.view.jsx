@@ -1,18 +1,18 @@
 import React, { useContext, useEffect } from "react";
-import DigitEditData from "../../../../elements/digit-edit-data-card";
+import DigitEditDataCard from "../../../../elements/digit-edit-data-card";
 import DigitLoading from "../../../../elements/digit-loading";
 import { Center } from "../../../../styles/digit-layout/DigitLayout.styles";
 import DeleteFAB from "../../elements/delete-fab";
 import useDigitToast from "../../../../hooks/use-digit-toast";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
+import { useHistory } from "react-router-dom";
+import useDigitCRUDStatus from "../../hooks/use-digit-crud-status";
 
 const DigitCRUDUpdate = ({
     readOneAction,
     updateAction,
     deleteAction,
-    clearAction,
     id,
-    history,
     path,
     formComponentData,
     formValidationSchema,
@@ -41,38 +41,67 @@ const DigitCRUDUpdate = ({
     onDelete,
     useHistoryGoBackOnBack,
     updateSubtitle,
-    canDelete
+    canDelete,
+    updateProps,
+    statusHandlers,
+    statusRenders
 }) => {
     const [{ one, loading }] = useContext(DigitCRUDContext);
+    const history = useHistory();
+    const [
+        statusHandler,
+        statusRender,
+        reset,
+        read,
+        setRead
+    ] = useDigitCRUDStatus(statusHandlers, statusRenders);
 
     const [queueToast] = useDigitToast();
     useEffect(() => {
-        readOneAction(id);
-        return clearAction;
-    }, [readOneAction, clearAction, id]);
+        if (read) {
+            readOneAction(id)
+                .then(() => {
+                    reset();
+                })
+                .catch(error => {
+                    statusHandler(
+                        error.response != null ? error.response.status : -1,
+                        error
+                    );
+                });
+        }
+        setRead(false);
+        // Ignoring the different on* and render* since they would mean that
+        // readOneAction would continuously be refreshed.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [readOneAction, id, read]);
 
-    if (Object.keys(one).length === 0) {
-        return null;
-    }
-
-    if (loading) {
+    if (read || loading) {
         return (
-            <Center>
+            <Center size={{ height: "200px" }}>
                 <DigitLoading loading />
             </Center>
         );
     }
 
+    if (statusRender != null) {
+        return statusRender();
+    }
+
+    if (Object.keys(one).length === 0) {
+        return null;
+    }
+
     return (
         <>
             <Center>
-                <DigitEditData
+                <DigitEditDataCard
+                    centerFields
                     onSubmit={(values, actions) => {
                         const _old = one;
                         const _updated = values;
                         updateAction(id, _updated)
                             .then(response => {
-                                readOneAction(id);
                                 actions.setSubmitting(false);
                                 queueToast({
                                     text: toastUpdateSuccessful(
@@ -82,8 +111,25 @@ const DigitCRUDUpdate = ({
                                     )
                                 });
                                 onUpdate(response);
+                                useHistoryGoBackOnBack
+                                    ? history.goBack()
+                                    : history.push(
+                                          backFromUpdatePath(one) == null
+                                              ? path +
+                                                    readOnePath.replace(
+                                                        ":id",
+                                                        id
+                                                    )
+                                              : backFromUpdatePath(one)
+                                      );
                             })
                             .catch(error => {
+                                statusHandler(
+                                    error.response != null
+                                        ? error.response.status
+                                        : -1,
+                                    error
+                                );
                                 actions.setSubmitting(false);
                                 queueToast({
                                     text: toastUpdateFailed(
@@ -119,6 +165,12 @@ const DigitCRUDUpdate = ({
                     updateSubtitle={
                         updateSubtitle == null ? null : updateSubtitle(one)
                     }
+                    margin={
+                        deleteAction != null && canDelete(one)
+                            ? { bottom: "calc(56px + 16px)" }
+                            : {}
+                    }
+                    {...updateProps}
                 />
             </Center>
             {deleteAction != null && canDelete(one) && (
@@ -151,6 +203,7 @@ const DigitCRUDUpdate = ({
                     }
                     deleteDialogFormKeysOrder={deleteDialogFormKeysOrder}
                     onDelete={onDelete}
+                    statusHandler={statusHandler}
                 />
             )}
         </>

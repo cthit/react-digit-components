@@ -58,7 +58,8 @@ const crudReducer = (extractActiveLanguage, activeLanguage) => (
             return {
                 one: {},
                 all: [],
-                loading: true
+                loading: true,
+                error: false
             };
         case CREATE_FAILED:
         case DELETE_FAILED:
@@ -68,6 +69,7 @@ const crudReducer = (extractActiveLanguage, activeLanguage) => (
             return {
                 one: {},
                 all: [],
+                loading: false,
                 error: true
             };
         case READ_ALL_SUCCESSFULLY:
@@ -76,7 +78,8 @@ const crudReducer = (extractActiveLanguage, activeLanguage) => (
                 all: action.payload.data.map(one =>
                     format(one, extractActiveLanguage, activeLanguage)
                 ),
-                loading: false
+                loading: false,
+                error: false
             };
         case READ_ONE_SUCCESSFULLY:
             //Promise array
@@ -88,7 +91,9 @@ const crudReducer = (extractActiveLanguage, activeLanguage) => (
                         extractActiveLanguage,
                         activeLanguage
                     ),
-                    all: []
+                    all: [],
+                    loading: false,
+                    error: false
                 };
             } else {
                 return {
@@ -97,16 +102,26 @@ const crudReducer = (extractActiveLanguage, activeLanguage) => (
                         extractActiveLanguage,
                         activeLanguage
                     ),
-                    all: []
+                    all: [],
+                    loading: false,
+                    error: false
                 };
             }
         case UPDATE_SUCCESSFULLY:
         case DELETE_SUCCESSFULLY:
         case CREATE_SUCCESSFULLY:
+            return {
+                one: {},
+                all: [],
+                error: false,
+                loading: false
+            };
         case CLEAR:
             return {
                 one: {},
-                all: []
+                all: [],
+                error: false,
+                loading: true
             };
         default:
             return state;

@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { StyledSnackbar, ToastButton } from "./DigitToast.element.styles";
+import CloseIcon from "@material-ui/icons/Close";
+import DigitIconButton from "../digit-icon-button";
 
 const DigitToast = ({
     open,
@@ -9,7 +11,8 @@ const DigitToast = ({
     duration,
     text,
     actionText,
-    actionHandler
+    actionHandler,
+    disableCloseable
 }) => {
     return (
         <StyledSnackbar
@@ -37,6 +40,13 @@ const DigitToast = ({
                             {actionText}
                         </ToastButton>
                     )}
+                    {!disableCloseable && (
+                        <DigitIconButton
+                            icon={CloseIcon}
+                            onClick={onClose}
+                            small
+                        />
+                    )}
                 </>
             }
         />
@@ -52,7 +62,9 @@ DigitToast.propTypes = {
     /** Callback function when you press the button on a toast */
     actionHandler: PropTypes.func,
     /** Button text */
-    actionText: PropTypes.string
+    actionText: PropTypes.string,
+    /** If true, then there's no close button */
+    disableCloseable: PropTypes.bool
 };
 
 export default DigitToast;

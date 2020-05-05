@@ -244,6 +244,7 @@ export const Text = styled(
         alignCenter,
         alignRight,
         inline,
+        wordBreak,
         ...rest
     }) => (
         <Typography {...rest} variant="body1">
@@ -258,6 +259,7 @@ export const Text = styled(
     font-style: ${props => (props.italic ? "italic" : "normal")};
     text-align: ${props =>
         props.alignCenter ? "center" : props.alignRight ? "right" : "left"};
+    word-break: ${props => (props.wordBreak ? props.wordBreak : "break-word")};
 `;
 
 Text.displayName = "Text";

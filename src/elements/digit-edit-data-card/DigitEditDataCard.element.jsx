@@ -101,7 +101,9 @@ DigitEditDataCard.propTypes = {
                 .isRequired,
             componentProps: PropTypes.object,
             formatEvent: PropTypes.func,
-            render: PropTypes.func
+            render: PropTypes.func,
+            array: PropTypes.bool,
+            formFieldArrayOptions: PropTypes.object
         })
     ).isRequired,
     titleText: PropTypes.string,
@@ -158,7 +160,8 @@ DigitEditDataCard.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    centerFields: PropTypes.bool
 };
 
 DigitEditDataCard.defaultProps = {
@@ -168,7 +171,8 @@ DigitEditDataCard.defaultProps = {
     submitText: "",
     marginVertical: "4px",
     keysOrder: [],
-    isInitialValid: false
+    isInitialValid: false,
+    centerFields: true
 };
 
 export default DigitEditDataCard;

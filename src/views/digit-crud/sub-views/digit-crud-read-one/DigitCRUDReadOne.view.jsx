@@ -110,7 +110,8 @@ const DigitCRUDReadOne = ({
     canUpdate,
     readOneProps,
     statusHandlers,
-    statusRenders
+    statusRenders,
+    hasReadAll
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ one, loading }] = useContext(DigitCRUDContext);
@@ -264,12 +265,14 @@ const DigitCRUDReadOne = ({
                         .map(key => customDetailsRenders[key](one))}
                     {detailsRenderCardEnd(one)}
                 </CardBody>
-                <CardButtons leftRight>
-                    <DigitButton
-                        text={backButtonText}
-                        outlined
-                        onClick={goBack}
-                    />
+                <CardButtons leftRight reverseDirection={!hasReadAll}>
+                    {hasReadAll && (
+                        <DigitButton
+                            text={backButtonText}
+                            outlined
+                            onClick={goBack}
+                        />
+                    )}
                     {hasUpdate && canUpdate(one) && (
                         <>
                             <DigitButton

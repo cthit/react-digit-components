@@ -348,6 +348,7 @@ const DigitCRUDInner = ({
                             readOneProps={readOneProps}
                             statusHandlers={statusHandlers}
                             statusRenders={statusRenders}
+                            hasReadAll={hasReadAll}
                         />
                     )}
                 />

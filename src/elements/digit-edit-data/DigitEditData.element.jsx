@@ -138,7 +138,8 @@ DigitEditData.propTypes = {
     submitText: PropTypes.string,
     marginVertical: PropTypes.string,
     /** If new data should be force */
-    isInitialValid: PropTypes.bool
+    isInitialValid: PropTypes.bool,
+    centerFields: PropTypes.bool
 };
 
 DigitEditData.defaultProps = {

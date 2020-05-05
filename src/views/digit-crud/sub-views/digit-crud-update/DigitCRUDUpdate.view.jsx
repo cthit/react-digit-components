@@ -111,11 +111,17 @@ const DigitCRUDUpdate = ({
                                     )
                                 });
                                 onUpdate(response);
-                                history.push(
-                                    backFromUpdatePath(one) == null
-                                        ? path + readOnePath.replace(":id", id)
-                                        : backFromUpdatePath(one)
-                                );
+                                useHistoryGoBackOnBack
+                                    ? history.goBack()
+                                    : history.push(
+                                          backFromUpdatePath(one) == null
+                                              ? path +
+                                                    readOnePath.replace(
+                                                        ":id",
+                                                        id
+                                                    )
+                                              : backFromUpdatePath(one)
+                                      );
                             })
                             .catch(error => {
                                 statusHandler(

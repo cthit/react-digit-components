@@ -15,7 +15,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import DigitTextField from "../../elements/digit-text-field";
-import { Heading5, Text } from "../../styles/digit-text/DigitText.styles";
+import { Heading5 } from "../../styles/digit-text/DigitText.styles";
 import { Center } from "../../styles/digit-layout/DigitLayout.styles";
 import DigitButton from "../../elements/digit-button";
 import { Link } from "../../styles/digit-design/DigitDesign.styles";
@@ -86,7 +86,7 @@ const DigitTableHead = ({
                 ))}
                 <TableCell>
                     {headerTexts.__link != null && (
-                        <Text alignRight text={headerTexts.__link} />
+                        <TableSortLabel>{headerTexts.__link}</TableSortLabel>
                     )}
                 </TableCell>
             </TableRow>

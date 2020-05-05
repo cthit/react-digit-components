@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { StyledSnackbar, ToastButton } from "./DigitToast.element.styles";
 import CloseIcon from "@material-ui/icons/Close";
-import IconButton from "@material-ui/core/IconButton";
 import DigitIconButton from "../digit-icon-button";
 
 const DigitToast = ({

@@ -66,7 +66,7 @@ export const CardHeader = styled(({ hasSubtitle, hasIcon, ...rest }) => (
         props.hasIcon ? "40px auto 32px" : "0px auto 32px"};
 
     grid-template-rows: ${props =>
-        props.hasSubtitle ? "33px auto auto" : "33px 0px auto"};
+        props.hasSubtitle ? "auto auto auto" : "auto 0px auto"};
 `;
 
 CardHeader.displayName = "CardHeader";

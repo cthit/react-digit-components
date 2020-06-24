@@ -3,8 +3,22 @@ import PropTypes from "prop-types";
 import React from "react";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
-const DigitLoading = ({ loading, size, flex, alignSelf, padding, margin }) => {
-    const classes = useLayoutMaterialUi({ flex, alignSelf, padding, margin });
+const DigitLoading = ({
+    loading,
+    size,
+    flex,
+    alignSelf,
+    justifySelf,
+    padding,
+    margin
+}) => {
+    const classes = useLayoutMaterialUi({
+        flex,
+        alignSelf,
+        justifySelf,
+        padding,
+        margin
+    });
 
     if (!loading) {
         return null;
@@ -31,6 +45,21 @@ DigitLoading.propTypes = {
         "baseline",
         "initial",
         "inherit"
+    ]),
+    /** Controls the justifySelf property for the most outer element in this component. */
+    justifySelf: PropTypes.oneOf([
+        "enter",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "left",
+        "right",
+        "baseline",
+        "inherit",
+        "initial"
     ]),
     /** Padding property for the most outer element in this component.
      * It can either be a string, using the padding shorthand, or it can be an

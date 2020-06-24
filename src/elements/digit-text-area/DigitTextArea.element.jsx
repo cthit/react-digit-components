@@ -4,6 +4,12 @@ import TextField from "@material-ui/core/TextField";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 import makeStyles from "@material-ui/styles/makeStyles";
 
+const useFullFlex = makeStyles({
+    root: {
+        flex: "1"
+    }
+});
+
 const DigitTextArea = ({
     value,
     onChange,
@@ -22,6 +28,7 @@ const DigitTextArea = ({
     onKeyPress,
     flex,
     alignSelf,
+    justifySelf,
     size,
     autoFocus,
     padding,
@@ -30,16 +37,13 @@ const DigitTextArea = ({
     const classes = useLayoutMaterialUi({
         flex,
         alignSelf,
+        justifySelf,
         size,
         padding,
         margin
     });
 
-    const inputFlex = makeStyles({
-        root: {
-            flex: "1"
-        }
-    })();
+    const inputFlex = useFullFlex();
 
     const handleOnChange = (e, maxLength, onChange) => {
         const newValue = e.target.value;
@@ -135,6 +139,21 @@ DigitTextArea.propTypes = {
         "baseline",
         "initial",
         "inherit"
+    ]),
+    /** Controls the justifySelf property for the most outer element in this component. */
+    justifySelf: PropTypes.oneOf([
+        "enter",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "left",
+        "right",
+        "baseline",
+        "inherit",
+        "initial"
     ]),
     /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
      * and width/height via an object

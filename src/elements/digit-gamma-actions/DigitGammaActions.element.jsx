@@ -14,6 +14,7 @@ const DigitGammaActionsLayout = ({
     backendUrl = "http://localhost:8081/api",
     flex,
     alignSelf,
+    justifySelf,
     size = {},
     padding,
     margin
@@ -31,6 +32,7 @@ const DigitGammaActionsLayout = ({
             }}
             flex={flex}
             alignSelf={alignSelf}
+            justifySelf={justifySelf}
             padding={padding}
             margin={margin}
         >

@@ -11,6 +11,7 @@ export const Card = styled(({ alignSelf, ...rest }) => <Paper {...rest} />)`
     flex-direction: column;
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
+    justify-self: ${props => props.justifySelf || "auto"};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};

@@ -1,4 +1,4 @@
-import { useMemo, useContext, useEffect } from "react";
+import { useMemo, useContext, useEffect, useCallback } from "react";
 import axios from "axios";
 import DigitGammaContext, {
     GET_ME_SUCCESSFUL
@@ -35,11 +35,25 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
         return paramsResponse.get("code");
     }, []);
 
+    const getMe = useCallback(() => {
+        getRequest(getMeUrl)
+            .then(response => {
+                dispatch({ type: GET_ME_SUCCESSFUL, me: response.data });
+            })
+            .catch(err => {
+                //If failed to login, then redirect to the url provided.
+                if (err.response.status === 401) {
+                    window.location.href = err.response.data;
+                }
+            });
+    }, [getMeUrl, dispatch]);
+
     useEffect(() => {
         if (code) {
             postRequest(postCodeUrl, { code })
                 .then(() => {
                     history.push("/");
+                    getMe();
                 })
                 .catch(error => {
                     history.push("/");
@@ -48,20 +62,20 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
                     console.log(error);
                 });
         }
-    }, [code, history, postCodeUrl, queueToast, text.SomethingWhenWrong]);
+    }, [
+        code,
+        history,
+        postCodeUrl,
+        queueToast,
+        text.SomethingWhenWrong,
+        getMe
+    ]);
 
     useEffect(() => {
         if (loading && me == null && code == null) {
-            getRequest(getMeUrl)
-                .then(response => {
-                    dispatch({ type: GET_ME_SUCCESSFUL, me: response.data });
-                })
-                .catch(err => {
-                    //If failed to login, then redirect to the url provided.
-                    window.location.href = err.response.data;
-                });
+            getMe();
         }
-    }, [loading, me, code, dispatch, getMeUrl]);
+    }, [loading, me, code, getMe]);
 
     return [loading, error];
 }

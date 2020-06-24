@@ -568,7 +568,7 @@ DigitCRUD.propTypes = {
     canReadOne: PropTypes.func,
     /** If a specific row can be deleted. (one) => bool */
     canDelete: PropTypes.func,
-    /** Object with render functions. e.g. {500: (error, reset) => <div></div>}
+    /** Object with render functions. e.g. {500: (error, reset) => <div></div>} */
     statusRenders: PropTypes.object,
     /** Object with function callbacks. e.g. {500: (error, reset) => {} */
     statusHandlers: PropTypes.object,

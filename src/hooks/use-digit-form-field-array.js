@@ -1,6 +1,18 @@
 import DigitFormContext from "../contexts/DigitFormContext";
 import { useCallback, useContext, useMemo } from "react";
 
+const getValue = e => {
+    if (e.target != null) {
+        const type = e.target.type;
+        if (type === "checkbox" || type === "radio") {
+            return e.target.checked;
+        } else if (e.target.value != null) {
+            return e.target.value;
+        }
+    }
+    return e;
+};
+
 const _swap = (value, x, y) => {
     const out = [...value];
     const b = out[y];
@@ -88,7 +100,7 @@ function useDigitFormFieldArray(name, options = { inputs: [] }) {
 
     const onInputChange = useCallback(
         (index, inputName) => e =>
-            handleChange(e.target.value, name, index, inputName),
+            handleChange(getValue(e), name, index, inputName),
         [handleChange, name]
     );
     const onInputBlur = useCallback(

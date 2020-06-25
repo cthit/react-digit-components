@@ -1,4 +1,4 @@
-import { useMemo, useContext, useEffect } from "react";
+import { useMemo, useContext, useEffect, useCallback, useState } from "react";
 import axios from "axios";
 import DigitGammaContext, {
     GET_ME_SUCCESSFUL
@@ -24,46 +24,80 @@ function removeLastSlash(path) {
     return trimEnd(path, "/");
 }
 
-function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
+function useGamma(
+    getMeUrl = "/api/me",
+    postCodeUrl = "/api/auth",
+    redirectAutomatically = true
+) {
     const [text] = useDigitTranslations(translations);
     const [{ loading, error, me }, dispatch] = useContext(DigitGammaContext);
     const [queueToast] = useDigitToast();
     const history = useHistory();
+    const [forceRedirect, setForceRedirect] = useState(false);
 
     const code = useMemo(() => {
         const paramsResponse = new URLSearchParams(window.location.search);
         return paramsResponse.get("code");
     }, []);
 
+    const getMe = useCallback(() => {
+        getRequest(getMeUrl)
+            .then(response => {
+                dispatch({ type: GET_ME_SUCCESSFUL, me: response.data });
+            })
+            .catch(err => {
+                //If failed to login, then redirect to the url provided.
+                if (
+                    err.response.status === 401 &&
+                    (redirectAutomatically || forceRedirect)
+                ) {
+                    window.location.href = err.response.data;
+                    setForceRedirect(false);
+                }
+            });
+    }, [
+        getMeUrl,
+        dispatch,
+        forceRedirect,
+        setForceRedirect,
+        redirectAutomatically
+    ]);
+
+    const signIn = useCallback(() => {
+        setForceRedirect(true);
+        getMe();
+    }, [setForceRedirect, getMe]);
+
     useEffect(() => {
         if (code) {
             postRequest(postCodeUrl, { code })
                 .then(() => {
                     history.push("/");
+                    getMe();
                 })
                 .catch(error => {
                     history.push("/");
-                    queueToast({ text: text.SomethingWhenWrong });
+                    queueToast({ text: text.SomethingWentWrong });
                     console.log("Something went wrong...");
                     console.log(error);
                 });
         }
-    }, [code, history, postCodeUrl, queueToast, text.SomethingWhenWrong]);
+    }, [
+        code,
+        history,
+        postCodeUrl,
+        queueToast,
+        getMe,
+        text.SomethingWentWrong
+    ]);
 
     useEffect(() => {
         if (loading && me == null && code == null) {
-            getRequest(getMeUrl)
-                .then(response => {
-                    dispatch({ type: GET_ME_SUCCESSFUL, me: response.data });
-                })
-                .catch(err => {
-                    //If failed to login, then redirect to the url provided.
-                    window.location.href = err.response.data;
-                });
+            getMe();
         }
-    }, [loading, me, code, dispatch, getMeUrl]);
+    }, [loading, me, code, getMe]);
 
-    return [loading, error];
+    return [loading, error, signIn];
 }
 
 export default useGamma;

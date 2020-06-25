@@ -21,5 +21,16 @@ Please note that `nick` and `avatarUrl` can't be controlled with `DigitGammaActi
     </Story>
 </Preview>
 
+## Custom options
+
+With `customOptions`, `customOrder` and `customOptionsOnClick` you can add your own actions to `DigitGammaActions`. If possible, try to keep `"viewAccount"` and `"signOut"` at the bottom.
+
+
+<Preview>
+    <Story name="gamma actions custom actions">
+        <DigitGammaActionsDummy nick="Sven" customOptions={{admin: "Admin"}} customOrder={["admin", "viewAccount", "signOut"]} customOptionsOnClick={(item) => item === "admin" ? console.log("Admin!") : console.log("Something else..")}/>
+    </Story>
+</Preview>
+
 
 <Props of={DigitGammaActions} />

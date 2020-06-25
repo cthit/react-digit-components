@@ -213,6 +213,7 @@ const DigitSelectMultipleTable = ({
     search,
     startRowsPerPage,
     alignSelf,
+    justifySelf,
     size,
     padding,
     margin,
@@ -231,6 +232,7 @@ const DigitSelectMultipleTable = ({
     const layoutClasses = useLayoutMaterialUi({
         flex,
         alignSelf,
+        justifySelf,
         size,
         padding,
         margin
@@ -286,22 +288,34 @@ const DigitSelectMultipleTable = ({
         rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     //sort on selected always being selected on top
+    const joinedData = useMemo(() => {
+        if (!search) {
+            return null;
+        }
+
+        const output = {};
+        for (var row of data) {
+            output[row[idProp]] = Object.values(row)
+                .join("")
+                .toLowerCase();
+        }
+        return output;
+    }, [data, search, idProp]);
+
     const sortedData = useMemo(() => {
-        const s = searchValue.trim();
+        const searchTerms = searchValue.split(" ").map(a => a.toLowerCase());
         const filteredData =
-            s === ""
+            searchTerms.length === 0 ||
+            (searchTerms.length === 1 && searchTerms[0] === "")
                 ? data
                 : data.filter(row => {
-                      for (var column of columnsOrder) {
-                          if (
-                              (row[column] + "")
-                                  .toLowerCase()
-                                  .includes(s.toLowerCase())
-                          ) {
-                              return true;
+                      const joinedRow = joinedData[row[idProp]];
+                      for (var searchTerm of searchTerms) {
+                          if (!joinedRow.includes(searchTerm)) {
+                              return false;
                           }
                       }
-                      return false;
+                      return true;
                   });
 
         return stableSort(
@@ -310,7 +324,7 @@ const DigitSelectMultipleTable = ({
             value,
             idProp
         );
-    }, [data, searchValue, order, orderBy, columnsOrder, idProp, value]);
+    }, [data, searchValue, order, orderBy, idProp, joinedData, value]);
 
     return (
         <Paper classes={layoutClasses}>
@@ -492,6 +506,21 @@ DigitSelectMultipleTable.propTypes = {
         "baseline",
         "initial",
         "inherit"
+    ]),
+    /** Controls the justifySelf property for the most outer element in this component. */
+    justifySelf: PropTypes.oneOf([
+        "enter",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "left",
+        "right",
+        "baseline",
+        "inherit",
+        "initial"
     ]),
     /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
      * and width/height via an object

@@ -17,6 +17,7 @@ const StyledReactMarkdown = styled(ReactMarkdown)`
 
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
+    justify-self: ${props => props.justifySelf || "auto"};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};
@@ -54,6 +55,7 @@ const DigitMarkdown = ({
     markdownSource,
     flex,
     alignSelf,
+    justifySelf,
     size,
     margin,
     padding
@@ -63,6 +65,7 @@ const DigitMarkdown = ({
         padding={padding}
         flex={flex}
         alignSelf={alignSelf}
+        justifySelf={justifySelf}
         size={size}
         source={markdownSource}
         renderers={{
@@ -152,6 +155,21 @@ DigitMarkdown.propTypes = {
         "baseline",
         "initial",
         "inherit"
+    ]),
+    /** Controls the justifySelf property for the most outer element in this component. */
+    justifySelf: PropTypes.oneOf([
+        "enter",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "left",
+        "right",
+        "baseline",
+        "inherit",
+        "initial"
     ]),
     /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
      * and width/height via an object

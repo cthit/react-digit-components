@@ -14,6 +14,7 @@ const DigitNavLink = ({
     icon,
     flex,
     alignSelf,
+    justifySelf,
     size,
     padding,
     margin
@@ -21,6 +22,7 @@ const DigitNavLink = ({
     const classes = useLayoutMaterialUi({
         flex,
         alignSelf,
+        justifySelf,
         size,
         padding,
         margin
@@ -70,6 +72,21 @@ DigitNavLink.propTypes = {
         "baseline",
         "initial",
         "inherit"
+    ]),
+    /** Controls the justifySelf property for the most outer element in this component. */
+    justifySelf: PropTypes.oneOf([
+        "enter",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "left",
+        "right",
+        "baseline",
+        "inherit",
+        "initial"
     ]),
     /** Controls the size for the most outer element in this component. You can set minWidth/Height, maxWidth/Height
      * and width/height via an object

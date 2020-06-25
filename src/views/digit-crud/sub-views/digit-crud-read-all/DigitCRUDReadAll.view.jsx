@@ -81,7 +81,8 @@ const DigitCRUDReadAll = ({
     dateAndTimeProps,
     canReadOne,
     statusHandlers,
-    statusRenders
+    statusRenders,
+    readAllBackButton
 }) => {
     const [text] = useDigitTranslations(translations);
     const [{ all, loading }] = useContext(DigitCRUDContext);
@@ -181,6 +182,7 @@ const DigitCRUDReadAll = ({
                 }
                 idProp={idProp}
                 margin={hasCreate ? { bottom: "calc(56px + 16px)" } : {}}
+                backButton={readAllBackButton}
                 {...tableProps}
             />
             {hasCreate && (

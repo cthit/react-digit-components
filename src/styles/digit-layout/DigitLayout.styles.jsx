@@ -20,6 +20,7 @@ export const Flex = styled.div`
 
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
+    justify-self: ${props => props.justifySelf || "auto"};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};
@@ -144,6 +145,7 @@ export const Grid = styled.div`
 
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
+    justify-self: ${props => props.justifySelf || ""};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};
@@ -224,6 +226,21 @@ Grid.propTypes = {
         "space-between",
         "space-evenly"
     ]),
+    /** Controls the justifySelf property for the most outer element in this component. */
+    justifySelf: PropTypes.oneOf([
+        "enter",
+        "start",
+        "end",
+        "flex-start",
+        "flex-end",
+        "self-start",
+        "self-end",
+        "left",
+        "right",
+        "baseline",
+        "inherit",
+        "initial"
+    ]),
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
     autoColumns: PropTypes.string,
     /** https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-24 */
@@ -240,9 +257,9 @@ export const GridItem = styled.div`
   grid-column-end: ${props => props.columnEnd || ""}
   grid-row-start: ${props => props.rowStart || ""}
   grid-row-end: ${props => props.rowEnd || ""}
-  justify-self: ${props => props.justifySelf || ""};
   flex: ${props => props.flex || "0 1 auto"};
   align-self: ${props => props.alignSelf || "auto"};
+  justify-self: ${props => props.justifySelf || ""};
 
   width: ${props => props.width || "auto"};
   height: ${props => props.height || "auto"};
@@ -450,6 +467,7 @@ export const Column = styled(
 
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
+    justify-self: ${props => props.justifySelf || "auto"};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};
@@ -625,6 +643,7 @@ export const Row = styled(
         padding,
         flex,
         alignSelf,
+        justifySelf,
         ...rest
     }) => (
         <Flex
@@ -648,6 +667,7 @@ export const Row = styled(
 
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
+    justify-self: ${props => props.justifySelf || "auto"};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};
@@ -831,6 +851,7 @@ export const Center = styled.div`
 
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
+    justify-self: ${props => props.justifySelf || "auto"};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};

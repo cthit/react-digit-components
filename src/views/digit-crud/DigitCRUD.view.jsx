@@ -113,7 +113,8 @@ const DigitCRUDInner = ({
     updateProps,
     createProps,
     statusHandlers,
-    statusRenders
+    statusRenders,
+    readAllBackButton
 }) => {
     const location = useLocation();
     const [, dispatch] = useContext(DigitCRUDContext);
@@ -381,6 +382,7 @@ const DigitCRUDInner = ({
                             canReadOne={canReadOne}
                             statusHandlers={statusHandlers}
                             statusRenders={statusRenders}
+                            readAllBackButton={readAllBackButton}
                         />
                     )}
                 />
@@ -577,7 +579,9 @@ DigitCRUD.propTypes = {
     /** Used to customize update <DigitEditDataCard>*/
     updateProps: PropTypes.object,
     /** Used to customize create <DigitEditDataCard>*/
-    createProps: PropTypes.object
+    createProps: PropTypes.object,
+    /** Adds back button to readAll DigitTable. Uses history.goBack() */
+    readAllBackButton: PropTypes.bool
 };
 
 DigitCRUD.defaultProps = {
@@ -644,7 +648,8 @@ DigitCRUD.defaultProps = {
     readOneProps: {},
     updateProps: {},
     createProps: {},
-    toastCreateSuccessfulGoToButton: null
+    toastCreateSuccessfulGoToButton: null,
+    readAllBackButton: false
 };
 
 export default DigitCRUD;

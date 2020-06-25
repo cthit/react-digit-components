@@ -15,11 +15,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import DigitTextField from "../../elements/digit-text-field";
-import { Heading5 } from "../../styles/digit-text/DigitText.styles";
-import { Center } from "../../styles/digit-layout/DigitLayout.styles";
+import { Heading5, Text } from "../../styles/digit-text/DigitText.styles";
+import { Center, Row } from "../../styles/digit-layout/DigitLayout.styles";
 import DigitButton from "../../elements/digit-button";
 import { Link } from "../../styles/digit-design/DigitDesign.styles";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
+import Back from "@material-ui/icons/ArrowBack";
+import DigitIconButton from "../../elements/digit-icon-button";
+import { useHistory } from "react-router-dom";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -86,7 +89,7 @@ const DigitTableHead = ({
                 ))}
                 <TableCell>
                     {headerTexts.__link != null && (
-                        <TableSortLabel>{headerTexts.__link}</TableSortLabel>
+                        <Text alignRight text={headerTexts.__link} />
                     )}
                 </TableCell>
             </TableRow>
@@ -95,9 +98,10 @@ const DigitTableHead = ({
 };
 
 const useToolbarStyles = makeStyles(() => ({
-    root: {
+    root: ({ backButton }) => ({
+        paddingLeft: backButton ? "4px" : null,
         justifyContent: "space-between"
-    }
+    })
 }));
 
 const DigitTableToolbar = ({
@@ -106,20 +110,31 @@ const DigitTableToolbar = ({
     searchText,
     text,
     searchValue,
-    onSearchUpdated
+    onSearchUpdated,
+    backButton
 }) => {
-    const classes = useToolbarStyles();
+    const classes = useToolbarStyles({ backButton });
+    const history = useHistory();
 
     return (
         <Toolbar className={classes.root}>
-            <Typography
-                className={classes.title}
-                variant="h6"
-                id="tableTitle"
-                component="div"
-            >
-                {titleText}
-            </Typography>
+            <Row alignItems={"center"}>
+                {backButton && (
+                    <DigitIconButton
+                        icon={Back}
+                        outlined
+                        onClick={() => history.goBack()}
+                    />
+                )}
+                <Typography
+                    className={classes.title}
+                    variant="h6"
+                    id="tableTitle"
+                    component="div"
+                >
+                    {titleText}
+                </Typography>
+            </Row>
             {search && (
                 <DigitTextField
                     margin={{
@@ -173,7 +188,8 @@ const DigitTable = ({
     size,
     padding,
     margin,
-    flex
+    flex,
+    backButton
 }) => {
     const classes = useStyles();
     const [order, setOrder] = useState(startOrderByDirection);
@@ -208,26 +224,38 @@ const DigitTable = ({
         setPage(0);
     };
 
+    const joinedData = useMemo(() => {
+        if (!search) {
+            return null;
+        }
+
+        const output = {};
+        for (var row of data) {
+            output[row[idProp]] = Object.values(row)
+                .join("")
+                .toLowerCase();
+        }
+        return output;
+    }, [data, search, idProp]);
+
     const sortedData = useMemo(() => {
-        const s = searchValue.trim();
+        const searchTerms = searchValue.split(" ").map(a => a.toLowerCase());
         const filteredData =
-            s === ""
+            searchTerms.length === 0 ||
+            (searchTerms.length === 1 && searchTerms[0] === "")
                 ? data
                 : data.filter(row => {
-                      for (var column of columnsOrder) {
-                          if (
-                              (row[column] + "")
-                                  .toLowerCase()
-                                  .includes(s.toLowerCase())
-                          ) {
-                              return true;
+                      const joinedRow = joinedData[row[idProp]];
+                      for (var searchTerm of searchTerms) {
+                          if (!joinedRow.includes(searchTerm)) {
+                              return false;
                           }
                       }
-                      return false;
+                      return true;
                   });
 
         return stableSort(filteredData, getComparator(order, orderBy));
-    }, [data, searchValue, order, orderBy, columnsOrder]);
+    }, [data, searchValue, order, orderBy, idProp, joinedData]);
 
     const emptyRows =
         rowsPerPage -
@@ -246,6 +274,7 @@ const DigitTable = ({
                         setSearchValue(val);
                         setPage(0);
                     }}
+                    backButton={backButton}
                 />
             )}
             <TableContainer>
@@ -438,7 +467,11 @@ DigitTable.propTypes = {
     /**
      * If the padding should be less between the rows and columns
      */
-    dense: PropTypes.bool
+    dense: PropTypes.bool,
+    /**
+     * If true, then a backButton is added to the left of the title
+     */
+    backButton: PropTypes.bool
 };
 
 DigitTable.defaultProps = {

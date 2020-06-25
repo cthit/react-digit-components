@@ -1,4 +1,4 @@
-import { useMemo, useContext, useEffect, useCallback } from "react";
+import { useMemo, useContext, useEffect, useCallback, useState } from "react";
 import axios from "axios";
 import DigitGammaContext, {
     GET_ME_SUCCESSFUL
@@ -24,11 +24,16 @@ function removeLastSlash(path) {
     return trimEnd(path, "/");
 }
 
-function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
+function useGamma(
+    getMeUrl = "/api/me",
+    postCodeUrl = "/api/auth",
+    redirectAutomatically = true
+) {
     const [text] = useDigitTranslations(translations);
     const [{ loading, error, me }, dispatch] = useContext(DigitGammaContext);
     const [queueToast] = useDigitToast();
     const history = useHistory();
+    const [forceRedirect, setForceRedirect] = useState(false);
 
     const code = useMemo(() => {
         const paramsResponse = new URLSearchParams(window.location.search);
@@ -42,11 +47,26 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
             })
             .catch(err => {
                 //If failed to login, then redirect to the url provided.
-                if (err.response.status === 401) {
+                if (
+                    err.response.status === 401 &&
+                    (redirectAutomatically || forceRedirect)
+                ) {
                     window.location.href = err.response.data;
+                    setForceRedirect(false);
                 }
             });
-    }, [getMeUrl, dispatch]);
+    }, [
+        getMeUrl,
+        dispatch,
+        forceRedirect,
+        setForceRedirect,
+        redirectAutomatically
+    ]);
+
+    const signIn = useCallback(() => {
+        setForceRedirect(true);
+        getMe();
+    }, [setForceRedirect, getMe]);
 
     useEffect(() => {
         if (code) {
@@ -57,7 +77,7 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
                 })
                 .catch(error => {
                     history.push("/");
-                    queueToast({ text: text.SomethingWhenWrong });
+                    queueToast({ text: text.SomethingWentWrong });
                     console.log("Something went wrong...");
                     console.log(error);
                 });
@@ -67,8 +87,8 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
         history,
         postCodeUrl,
         queueToast,
-        text.SomethingWhenWrong,
-        getMe
+        getMe,
+        text.SomethingWentWrong
     ]);
 
     useEffect(() => {
@@ -77,7 +97,7 @@ function useGamma(getMeUrl = "/api/me", postCodeUrl = "/api/auth") {
         }
     }, [loading, me, code, getMe]);
 
-    return [loading, error];
+    return [loading, error, signIn];
 }
 
 export default useGamma;

@@ -1,0 +1,35 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Gamma integration"/>
+
+react-digit-components provides some hooks and components to make the integration with Gamma easier for you.
+
+# `useGamma`
+
+This hook automatically syncs with your backend to load the currently signed-in user. Your backend has to implement two post requests to be able to integrate with Gamma. 
+
+* `GET` for the currently signed-in user, default: `/api/me`. Should return either `200`, along with the signed-in user, or `401` along with an URL for the client to redirect to Gamma.
+
+* `POST` to send the code from Gamma, default: `/api/auth`. Your backend will receive the code in an object like this: `{code: "ABCABC"}`. Your backend will have to send this to Gamma to be able to receive an access token. 
+
+Note that you'll need to have cookie-based authentication with your backend. Worth mentioning is that you'll need to fix a proxy so that your frontend and backend are on the same port to make sure that your cookie is set properly. 
+
+By default, `useGamma` will try to redirect the client to Gamma if the user is not signed in. 
+
+Parameters for the hook: 
+
+`useGamma(getMeUrl = "/api/me" : string, postCodeUrl = "/api/auth" : string, redirectAutomatically = true : bool)`
+
+It returns:
+
+`[loading : bool, error : bool, signIn : func]`
+
+The `signIn` function will try to call `GET` and follow that flow. 
+
+# `useGammaMe`
+
+With `useGammaMe`, you can get the signed in user as an object. If the user is not signed in, then `null` is returned.
+
+# `DigitGammaActions`
+
+An easy way to display that a user is signed in. You can read more about it [here](/?path=/docs/others-digitgammaactions--gamma-actions-no-avatar)

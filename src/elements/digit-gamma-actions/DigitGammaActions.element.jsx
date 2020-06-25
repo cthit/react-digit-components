@@ -108,7 +108,14 @@ const DigitGammaActions = ({
     if (me == null) {
         return null;
     }
-    return <DigitGammaActionsLayout me={me} />;
+    return (
+        <DigitGammaActionsLayout
+            me={me}
+            customOrder={customOrder}
+            customOptions={customOptions}
+            customOptionsOnClick={customOptionsOnClick}
+        />
+    );
 };
 
 DigitGammaActions.propTypes = {

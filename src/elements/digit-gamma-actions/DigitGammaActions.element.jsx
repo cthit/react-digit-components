@@ -7,6 +7,7 @@ import translations from "./DigitGammaActions.translations";
 import { Row } from "../../styles/digit-layout/DigitLayout.styles";
 import useGammaMe from "../../hooks/use-gamma-me";
 import DigitAvatar from "../digit-avatar";
+import PropTypes from "prop-types";
 
 const DigitGammaActionsLayout = ({
     me = {},
@@ -17,7 +18,10 @@ const DigitGammaActionsLayout = ({
     justifySelf,
     size = {},
     padding,
-    margin
+    margin,
+    customOptions = {},
+    customOrder = ["viewAccount", "signOut"],
+    customOptionsOnClick = () => {}
 }) => {
     const [text] = useDigitTranslations(translations);
 
@@ -53,14 +57,16 @@ const DigitGammaActionsLayout = ({
                             window.location.href = backendUrl + "/logout"; //i.e. gamma.chalmers.it/api/logout
                             break;
                         default:
+                            customOptionsOnClick(item);
                             break;
                     }
                 }}
                 valueToTextMap={{
+                    ...customOptions,
                     viewAccount: text.ViewAccount,
                     signOut: text.SignOut
                 }}
-                order={["viewAccount", "signOut"]}
+                order={customOrder}
             />
         </Row>
     );
@@ -73,7 +79,10 @@ const DigitGammaActionsDummy = ({
     alignSelf,
     size,
     padding,
-    margin
+    margin,
+    customOptions,
+    customOrder,
+    customOptionsOnClick
 }) => {
     return (
         <DigitGammaActionsLayout
@@ -83,17 +92,32 @@ const DigitGammaActionsDummy = ({
             size={size}
             padding={padding}
             margin={margin}
+            customOptions={customOptions}
+            customOrder={customOrder}
+            customOptionsOnClick={customOptionsOnClick}
         />
     );
 };
 
-const DigitGammaActions = () => {
+const DigitGammaActions = ({
+    customOptions,
+    customOrder,
+    customOptionsOnClick
+}) => {
     const me = useGammaMe();
     if (me == null) {
-        console.log("Not logged in, not rendering any DigitGammaActions...");
         return null;
     }
     return <DigitGammaActionsLayout me={me} />;
+};
+
+DigitGammaActions.propTypes = {
+    /** Custom order for the menu */
+    customOrder: PropTypes.arrayOf(PropTypes.string),
+    /** Custom options for the menu other than viewAccount and signOut */
+    customOptions: PropTypes.objectOf(PropTypes.string),
+    /** (item) => {} when an item that is not viewAccount and signOut is clicked. */
+    customOptionsOnClick: PropTypes.func
 };
 
 export { DigitGammaActionsDummy };

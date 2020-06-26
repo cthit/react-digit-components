@@ -21,7 +21,8 @@ const DigitGammaActionsLayout = ({
     margin,
     customOptions = {},
     customOrder = ["viewAccount", "signOut"],
-    customOptionsOnClick = () => {}
+    customOptionsOnClick = () => {},
+    signOut = new Promise(resolve => resolve())
 }) => {
     const [text] = useDigitTranslations(translations);
 
@@ -54,7 +55,9 @@ const DigitGammaActionsLayout = ({
                             window.location.href = frontendUrl + "/me"; //i.e. gamma.chalmers.it/me
                             break;
                         case "signOut":
-                            window.location.href = backendUrl + "/logout"; //i.e. gamma.chalmers.it/api/logout
+                            signOut().then(() => {
+                                window.location.href = backendUrl + "/logout"; //i.e. gamma.chalmers.it/api/logout
+                            });
                             break;
                         default:
                             customOptionsOnClick(item);
@@ -82,7 +85,8 @@ const DigitGammaActionsDummy = ({
     margin,
     customOptions,
     customOrder,
-    customOptionsOnClick
+    customOptionsOnClick,
+    signOut
 }) => {
     return (
         <DigitGammaActionsLayout
@@ -95,6 +99,7 @@ const DigitGammaActionsDummy = ({
             customOptions={customOptions}
             customOrder={customOrder}
             customOptionsOnClick={customOptionsOnClick}
+            signOut={signOut}
         />
     );
 };
@@ -102,7 +107,8 @@ const DigitGammaActionsDummy = ({
 const DigitGammaActions = ({
     customOptions,
     customOrder,
-    customOptionsOnClick
+    customOptionsOnClick,
+    signOut
 }) => {
     const me = useGammaMe();
     if (me == null) {
@@ -114,6 +120,7 @@ const DigitGammaActions = ({
             customOrder={customOrder}
             customOptions={customOptions}
             customOptionsOnClick={customOptionsOnClick}
+            signOut={signOut}
         />
     );
 };
@@ -124,7 +131,9 @@ DigitGammaActions.propTypes = {
     /** Custom options for the menu other than viewAccount and signOut */
     customOptions: PropTypes.objectOf(PropTypes.string),
     /** (item) => {} when an item that is not viewAccount and signOut is clicked. */
-    customOptionsOnClick: PropTypes.func
+    customOptionsOnClick: PropTypes.func,
+    /** returns a Promise that handles the destruction of the session on the backend */
+    signOut: PropTypes.func
 };
 
 export { DigitGammaActionsDummy };

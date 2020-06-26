@@ -1,6 +1,7 @@
 import { useMemo, useContext, useEffect, useCallback, useState } from "react";
 import axios from "axios";
 import DigitGammaContext, {
+    GET_ME_FAILED,
     GET_ME_SUCCESSFUL
 } from "../contexts/DigitGammaContext";
 import useDigitToast from "./use-digit-toast";
@@ -46,6 +47,7 @@ function useGamma(
                 dispatch({ type: GET_ME_SUCCESSFUL, me: response.data });
             })
             .catch(err => {
+                dispatch({ type: GET_ME_FAILED });
                 //If failed to login, then redirect to the url provided.
                 if (
                     err.response.status === 401 &&

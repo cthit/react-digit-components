@@ -35,7 +35,7 @@
         "@material-ui/pickers": "3.2.10",
         "@material-ui/styles": "4.10.0",
         "date-fns": "2.14.0",
-        "lodash": "4.17.15",
+        "lodash": "4.17.19",
         "prop-types": "15.7.2",
         "react-is": "16.13.1",
         "react-markdown": "4.3.1",

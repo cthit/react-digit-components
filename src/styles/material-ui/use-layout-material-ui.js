@@ -7,7 +7,9 @@ const useLayoutMaterialUi = makeStyles({
         justifySelf,
         size = {},
         padding = "",
-        margin = "4px"
+        margin = "4px",
+        gridColumn = {},
+        gridRow = {}
     }) => ({
         flex: flex || "0 1 auto",
         alignSelf: alignSelf || "auto",
@@ -37,7 +39,11 @@ const useLayoutMaterialUi = makeStyles({
                   " " +
                   (margin.bottom || "0px") +
                   " " +
-                  (margin.left || "0px")) + " !important"
+                  (margin.left || "0px")) + " !important",
+        gridColumnStart: gridColumn.start,
+        gridColumnEnd: gridColumn.end,
+        gridRowStart: gridRow.start,
+        gridRowEnd: gridRow.end
     })
 });
 

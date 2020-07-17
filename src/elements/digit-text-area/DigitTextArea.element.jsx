@@ -32,7 +32,9 @@ const DigitTextArea = ({
     size,
     autoFocus,
     padding,
-    margin
+    margin,
+    gridColumn,
+    gridRow
 }) => {
     const classes = useLayoutMaterialUi({
         flex,
@@ -40,7 +42,9 @@ const DigitTextArea = ({
         justifySelf,
         size,
         padding,
-        margin
+        margin,
+        gridColumn,
+        gridRow
     });
 
     const inputFlex = useFullFlex();

@@ -12,7 +12,9 @@ const DigitDisplayData = ({
     justifySelf,
     size,
     padding,
-    margin
+    margin,
+    gridColumn,
+    gridRow
 }) => (
     <Grid
         columns={`auto 1fr`}
@@ -22,6 +24,8 @@ const DigitDisplayData = ({
         size={size}
         padding={padding}
         margin={margin}
+        gridColumn={gridColumn}
+        gridRow={gridRow}
     >
         {keysOrder
             .filter(keyOrder => Object.keys(data).includes(keyOrder))
@@ -106,7 +110,17 @@ DigitDisplayData.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitDisplayData.defaultProps = {

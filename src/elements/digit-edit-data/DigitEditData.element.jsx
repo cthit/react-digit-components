@@ -11,7 +11,7 @@ const DigitEditDataInner = ({
     keysOrder,
     keysComponentData,
     centerFields,
-    marginVertical = 8
+    marginVertical = "8px"
 }) => {
     return keysOrder.map(key => (
         <React.Fragment key={key}>
@@ -93,7 +93,12 @@ const DigitEditData = ({
     renderButtons,
     formName,
     onValidSubmitChange,
-    centerFields
+    centerFields,
+    size,
+    justifySelf,
+    alignSelf,
+    gridColumn,
+    gridRow
 }) => {
     return (
         <DigitForm
@@ -103,7 +108,13 @@ const DigitEditData = ({
             onSubmit={onSubmit}
             onValidSubmitChange={onValidSubmitChange}
             render={form => (
-                <Column>
+                <Column
+                    alignSelf={alignSelf}
+                    justifySelf={justifySelf}
+                    size={size}
+                    gridRow={gridRow}
+                    gridColumn={gridColumn}
+                >
                     <DigitEditDataInner
                         marginVertical={marginVertical}
                         keysOrder={keysOrder}
@@ -139,7 +150,17 @@ DigitEditData.propTypes = {
     marginVertical: PropTypes.string,
     /** If new data should be force */
     isInitialValid: PropTypes.bool,
-    centerFields: PropTypes.bool
+    centerFields: PropTypes.bool,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitEditData.defaultProps = {

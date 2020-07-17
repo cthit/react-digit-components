@@ -28,6 +28,11 @@ const StyledReactMarkdown = styled(ReactMarkdown)`
     min-width: ${props => props.size.minWidth || 0};
     min-height: ${props => props.size.minHeight || 0};
 
+    grid-column-start: ${props => props.gridColumn.start};
+    grid-column-end: ${props => props.gridColumn.end};
+    grid-row-start: ${props => props.gridRow.start};
+    grid-row-end: ${props => props.gridRow.end};
+
     padding: ${({ padding = "0px" }) =>
         (typeof padding === "string"
             ? padding
@@ -58,7 +63,9 @@ const DigitMarkdown = ({
     justifySelf,
     size,
     margin,
-    padding
+    padding,
+    gridColumn = {},
+    gridRow = {}
 }) => (
     <StyledReactMarkdown
         margin={margin}
@@ -68,6 +75,8 @@ const DigitMarkdown = ({
         justifySelf={justifySelf}
         size={size}
         source={markdownSource}
+        gridColumn={gridColumn}
+        gridRow={gridRow}
         renderers={{
             table: data => {
                 const headerTextsArray = data.children[0].props.children[0].props.children.map(
@@ -207,7 +216,17 @@ DigitMarkdown.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitMarkdown.defaultProps = {

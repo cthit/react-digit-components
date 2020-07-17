@@ -1,0 +1,88 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Component layout"/>
+
+There's a few properties that almost every component has to make it easier to layout and size react-digit-components components. 
+
+## `size`
+
+With the size prop, you can control `width`, `height`, `maxWidth`, `maxHeight`, `minWidth` and `minHeight`. Each prop accepts a string, that can for example be `500px` or `20%`. 
+
+Using the `size` prop can look like this:
+
+```jsx
+<DigitButton 
+    size={{
+        maxWidth: "200px",
+        height: "100px"
+    }}
+/>
+```
+
+## `padding` / `margin`
+
+`padding` and `margin` can either take in an object, with the props `left`, `top`, `right` and `bottom`, or it can take in a string to apply the `margin` or `padding` to all sides. 
+
+With that said, using the props can look like this: 
+
+```jsx
+<DigitTextField
+    padding={{
+        left: "50px",
+        right: "75px"
+    }}
+    margin="50px"
+/>
+```
+
+```jsx
+<DigitAutoCompleteSelectSingle 
+    padding="50px"
+    margin={{
+        top: "20%",
+        bottom: "15wh"
+    }}
+/>
+```
+
+## `alignSelf` / `justifySelf`
+
+Both `alignSelf` and `justifySelf` can be very powerful in scenarios where flex or grid is used. To read more about the props, google them with either flex or grid, depending on what you're using.
+
+Both props are just string values such as:
+
+```jsx
+<DigitSelect 
+    alignSelf="center"
+    justifySelf="flex-end"
+/>
+```
+
+## `flex`
+
+`flex` props can be read more about [here](https://css-tricks.com/snippets/css/a-guide-to-flexbox). It's very powerful when using `display: flex;`.
+
+`flex` is also just a string value:
+
+```jsx
+<DigitTable 
+    flex="1"
+/>
+```
+
+## `gridColumn` / `gridRow`
+
+`display: grid` is awesome! `gridColumn` and `gridRow` are props used to control the position of a given component inside a grid. Both `gridColumn` and `gridRow` takes in an object that has two props: `start` and `end`. You can read more about grids [here](https://css-tricks.com/snippets/css/complete-guide-grid/).
+
+```jsx
+<DigitSwitch 
+    gridColumn={{
+        start: "1",
+        end: "3"
+    }}
+    gridRow={{
+        start: "3",
+        end: "span 1"
+    }}
+/>
+```

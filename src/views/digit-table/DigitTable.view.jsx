@@ -189,7 +189,9 @@ const DigitTable = ({
     padding,
     margin,
     flex,
-    backButton
+    backButton,
+    gridColumn,
+    gridRow
 }) => {
     const classes = useStyles();
     const [order, setOrder] = useState(startOrderByDirection);
@@ -204,7 +206,9 @@ const DigitTable = ({
         justifySelf,
         size,
         padding,
-        margin
+        margin,
+        gridColumn,
+        gridRow
     });
 
     const header = titleText != null || search;
@@ -471,7 +475,17 @@ DigitTable.propTypes = {
     /**
      * If true, then a backButton is added to the left of the title
      */
-    backButton: PropTypes.bool
+    backButton: PropTypes.bool,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitTable.defaultProps = {

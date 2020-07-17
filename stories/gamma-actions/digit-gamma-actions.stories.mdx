@@ -21,6 +21,10 @@ Please note that `nick` and `avatarUrl` can't be controlled with `DigitGammaActi
     </Story>
 </Preview>
 
+## `signOut` 
+
+`DigitGammaActions` has a prop called `signOut` that is a good thing to implement. It should be a promise that tries to destroy the cookie session in the backend so that when the user presses sign out, the user signs out from your website along with gamma.
+
 ## Custom options
 
 With `customOptions`, `customOrder` and `customOptionsOnClick` you can add your own actions to `DigitGammaActions`. If possible, try to keep `"viewAccount"` and `"signOut"` at the bottom.

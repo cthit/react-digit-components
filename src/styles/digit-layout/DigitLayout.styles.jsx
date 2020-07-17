@@ -129,6 +129,11 @@ function flexCenterVertical(centerVertical) {
 }
 
 export const Grid = styled.div`
+    grid-column-start: ${props => props.gridColumn.start};
+    grid-column-end: ${props => props.gridColumn.end};
+    grid-row-start: ${props => props.gridRow.start};
+    grid-row-end: ${props => props.gridRow.end};
+
     display: ${props => (props.inline ? "inline-grid" : "grid")};
     grid-template-columns: ${props => props.columns || ""};
     grid-template-rows: ${props => props.rows || ""};
@@ -249,7 +254,9 @@ Grid.propTypes = {
     autoFlow: PropTypes.string
 };
 Grid.defaultProps = {
-    size: {}
+    size: {},
+    gridColumn: {},
+    gridRow: {}
 };
 
 export const GridItem = styled.div`

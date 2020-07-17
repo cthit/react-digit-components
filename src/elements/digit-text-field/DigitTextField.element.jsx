@@ -25,7 +25,9 @@ const DigitTextField = ({
     size,
     autoFocus,
     padding,
-    margin
+    margin,
+    gridColumn,
+    gridRow
 }) => {
     const classes = useLayoutMaterialUi({
         flex,
@@ -33,7 +35,9 @@ const DigitTextField = ({
         justifySelf,
         size,
         padding,
-        margin
+        margin,
+        gridColumn,
+        gridRow
     });
 
     const handleOnChange = (e, maxLength, onChange) => {
@@ -182,7 +186,17 @@ DigitTextField.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitTextField.defaultProps = {

@@ -16,7 +16,9 @@ const DigitIconButton = ({
     size,
     padding,
     margin,
-    small
+    small,
+    gridColumn,
+    gridRow
 }) => {
     const classes = useLayoutMaterialUi({
         flex,
@@ -24,7 +26,9 @@ const DigitIconButton = ({
         justifySelf,
         size,
         padding,
-        margin
+        margin,
+        gridColumn,
+        gridRow
     });
 
     return (
@@ -120,7 +124,17 @@ DigitIconButton.propTypes = {
         })
     ]),
     /** Makes the icon button smaller */
-    small: PropTypes.bool
+    small: PropTypes.bool,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitIconButton.defaultProps = {

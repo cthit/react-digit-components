@@ -15,7 +15,9 @@ const DigitMenu = ({
     padding,
     margin,
     icon,
-    order
+    order,
+    gridColumn,
+    gridRow
 }) => {
     const [open, setOpen] = useState(false);
     const [anchorElement, setAnchorElement] = useState(null);
@@ -37,6 +39,8 @@ const DigitMenu = ({
                 padding={padding}
                 margin={margin}
                 onClick={handleClick}
+                gridColumn={gridColumn}
+                gridRow={gridRow}
                 icon={icon}
             />
             <Menu open={open} anchorEl={anchorElement} onClose={handleClose}>
@@ -138,7 +142,17 @@ DigitMenu.propTypes = {
     /** Use @material-ui/icons. */
     icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     /** Decides the order of valueToTextMap */
-    order: PropTypes.array.isRequired
+    order: PropTypes.array.isRequired,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitMenu.defaultProps = {

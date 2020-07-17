@@ -6,7 +6,6 @@ import React from "react";
 import { Lowerlabel, UpperLabel } from "./DigitRadioButtonGroup.element.styles";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 import FormControl from "@material-ui/core/FormControl";
-import useFormControlStyles from "../../styles/material-ui/use-form-control-styles";
 
 const DigitRadioButtonGroup = ({
     value,
@@ -23,18 +22,25 @@ const DigitRadioButtonGroup = ({
     justifySelf,
     size,
     padding,
-    margin
+    margin,
+    gridColumn,
+    gridRow
 }) => {
     const classes = useLayoutMaterialUi({
+        size
+    });
+    const outerClasses = useLayoutMaterialUi({
         flex,
         alignSelf,
         justifySelf,
-        size
+        padding,
+        margin,
+        gridColumn,
+        gridRow
     });
-    const formClasses = useFormControlStyles({ padding, margin });
 
     return (
-        <FormControl classes={formClasses} component="fieldset">
+        <FormControl classes={outerClasses} component="fieldset">
             <UpperLabel component="legend">{upperLabel}</UpperLabel>
             <RadioGroup
                 classes={classes}
@@ -176,7 +182,17 @@ DigitRadioButtonGroup.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitRadioButtonGroup.defaultProps = {

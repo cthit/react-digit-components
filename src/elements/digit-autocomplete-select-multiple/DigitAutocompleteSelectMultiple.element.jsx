@@ -33,23 +33,30 @@ const DigitAutocompleteSelectMultiple = ({
     flex,
     alignSelf,
     justifySelf,
+    gridColumn,
+    gridRow,
     size,
     padding,
     margin,
     disableClearable
 }) => {
-    const classes = useLayoutMaterialUi({
-        flex,
+    const outerClasses = useLayoutMaterialUi({
+        gridColumn,
+        gridRow,
+        padding,
+        margin,
         alignSelf,
         justifySelf,
-        size,
-        padding,
-        margin
+        flex
+    });
+    const classes = useLayoutMaterialUi({
+        size
     });
     const [text] = useDigitTranslations(translations);
 
     return (
         <Autocomplete
+            classes={outerClasses}
             disableClearable={disableClearable}
             autoHighlight
             //To keep consistency throughout rdc, only the value is used to
@@ -265,7 +272,17 @@ DigitAutocompleteSelectMultiple.propTypes = {
         })
     ]),
     /** If true, then there's no clearable button */
-    disableClearable: PropTypes.bool
+    disableClearable: PropTypes.bool,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 export default DigitAutocompleteSelectMultiple;

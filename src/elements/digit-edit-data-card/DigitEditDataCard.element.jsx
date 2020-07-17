@@ -31,7 +31,9 @@ const DigitEditDataCard = ({
     justifySelf,
     size,
     padding,
-    margin
+    margin,
+    gridColumn,
+    gridRow
 }) => {
     const formName = JSON.stringify(keysComponentData);
     const [submitValid, setSubmitValid] = useState(false);
@@ -44,6 +46,8 @@ const DigitEditDataCard = ({
             size={size}
             padding={padding}
             margin={margin}
+            gridColumn={gridColumn}
+            gridRow={gridRow}
         >
             <CardHeader hasSubtitle={subtitleText != null}>
                 <CardTitle text={titleText} />
@@ -178,7 +182,17 @@ DigitEditDataCard.propTypes = {
             left: PropTypes.string
         })
     ]),
-    centerFields: PropTypes.bool
+    centerFields: PropTypes.bool,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitEditDataCard.defaultProps = {

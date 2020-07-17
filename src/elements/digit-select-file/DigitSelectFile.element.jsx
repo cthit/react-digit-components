@@ -18,6 +18,8 @@ const DigitSelectFile = ({
     size,
     padding,
     margin,
+    gridColumn,
+    gridRow,
     buttonProps
 }) => {
     const [text] = useDigitTranslations(translations);
@@ -32,6 +34,8 @@ const DigitSelectFile = ({
             size={size}
             padding={padding}
             margin={margin}
+            gridColumn={gridColumn}
+            gridRow={gridRow}
             inline
         >
             <input
@@ -131,7 +135,17 @@ DigitSelectFile.propTypes = {
             bottom: PropTypes.string,
             left: PropTypes.string
         })
-    ])
+    ]),
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 export default DigitSelectFile;

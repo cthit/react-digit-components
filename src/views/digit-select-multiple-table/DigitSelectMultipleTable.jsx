@@ -220,7 +220,9 @@ const DigitSelectMultipleTable = ({
     flex,
     value,
     onChange,
-    disableSelectAll
+    disableSelectAll,
+    gridColumn,
+    gridRow
 }) => {
     const classes = useStyles();
     const [order, setOrder] = useState(startOrderByDirection);
@@ -235,7 +237,9 @@ const DigitSelectMultipleTable = ({
         justifySelf,
         size,
         padding,
-        margin
+        margin,
+        gridColumn,
+        gridRow
     });
 
     const handleRequestSort = (event, property) => {
@@ -460,7 +464,7 @@ const DigitSelectMultipleTable = ({
     );
 };
 
-DigitSelectMultipleTable.displayName = "DigitTable";
+DigitSelectMultipleTable.displayName = "DigitSelectMultipleTable";
 DigitSelectMultipleTable.propTypes = {
     /** The starting column to order rows by */
     startOrderBy: PropTypes.string.isRequired,
@@ -562,7 +566,17 @@ DigitSelectMultipleTable.propTypes = {
     /** Controls the flex property for the most outer element in this component.*/
     flex: PropTypes.string,
     /** Disable select all checkbox */
-    disableSelectAll: PropTypes.bool
+    disableSelectAll: PropTypes.bool,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitSelectMultipleTable.defaultProps = {

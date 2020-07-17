@@ -6,12 +6,21 @@ import styled from "styled-components";
 import { Subtitle, Title } from "../digit-text/DigitText.styles";
 import { Flex } from "../digit-layout/DigitLayout.styles";
 
-export const Card = styled(({ alignSelf, ...rest }) => <Paper {...rest} />)`
+export const Card = styled(
+    ({ alignSelf, justifySelf, gridRow, gridColumn, ...rest }) => (
+        <Paper {...rest} />
+    )
+)`
     display: flex;
     flex-direction: column;
     flex: ${props => props.flex || "0 1 auto"};
     align-self: ${props => props.alignSelf || "auto"};
     justify-self: ${props => props.justifySelf || "auto"};
+
+    grid-column-start: ${props => props.gridColumn.start};
+    grid-column-end: ${props => props.gridColumn.end};
+    grid-row-start: ${props => props.gridRow.start};
+    grid-row-end: ${props => props.gridRow.end};
 
     width: ${props => props.size.width || "auto"};
     height: ${props => props.size.height || "auto"};
@@ -49,7 +58,9 @@ export const Card = styled(({ alignSelf, ...rest }) => <Paper {...rest} />)`
 
 Card.displayName = "Card";
 Card.defaultProps = {
-    size: {}
+    size: {},
+    gridColumn: {},
+    gridRow: {}
 };
 
 /**

@@ -6,7 +6,6 @@ import Select from "@material-ui/core/Select";
 import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
-import useFormControlStyles from "../../styles/material-ui/use-form-control-styles";
 
 const DigitSelect = ({
     value,
@@ -29,15 +28,22 @@ const DigitSelect = ({
     justifySelf,
     size,
     padding,
-    margin
+    margin,
+    gridColumn,
+    gridRow
 }) => {
     const classes = useLayoutMaterialUi({
+        size
+    });
+    const outerClasses = useLayoutMaterialUi({
+        padding,
+        margin,
         flex,
         alignSelf,
         justifySelf,
-        size
+        gridColumn,
+        gridRow
     });
-    const formClasses = useFormControlStyles({ padding, margin });
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
     useEffect(() => {
@@ -47,7 +53,7 @@ const DigitSelect = ({
     return (
         <FormControl
             error={error}
-            classes={{ root: formClasses.root + " " + classes.root }}
+            classes={outerClasses}
             disabled={disabled}
             variant={filled ? "filled" : outlined ? "outlined" : "standard"}
         >
@@ -205,7 +211,17 @@ DigitSelect.propTypes = {
     /** If true, then errorMessage will be shown instead of lowerLabel */
     error: PropTypes.bool,
     /** If error is true, then this errorMessage will be shown instead of lowerLabel */
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    /** Controls grid-column-start and grid-column-end */
+    gridColumn: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    }),
+    /** Controls grid-row-start and grid-row-end */
+    gridRow: PropTypes.shape({
+        start: PropTypes.string,
+        end: PropTypes.string
+    })
 };
 
 DigitSelect.defaultProps = {

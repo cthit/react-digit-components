@@ -53,6 +53,8 @@ export const Card = styled(
               " " +
               (margin.left || "0px")) + " !important"};
 
+    overflow: ${({ overflow }) => (overflow ? overflow : "visible")};
+
     background-color: white;
 `;
 

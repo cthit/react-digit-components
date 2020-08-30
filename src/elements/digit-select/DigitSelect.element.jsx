@@ -33,16 +33,14 @@ const DigitSelect = ({
     gridRow
 }) => {
     const classes = useLayoutMaterialUi({
-        size
-    });
-    const outerClasses = useLayoutMaterialUi({
         padding,
         margin,
         flex,
         alignSelf,
         justifySelf,
         gridColumn,
-        gridRow
+        gridRow,
+        size
     });
     const inputLabel = React.useRef(null);
     const [labelWidth, setLabelWidth] = React.useState(0);
@@ -53,13 +51,12 @@ const DigitSelect = ({
     return (
         <FormControl
             error={error}
-            classes={outerClasses}
+            classes={classes}
             disabled={disabled}
             variant={filled ? "filled" : outlined ? "outlined" : "standard"}
         >
             <InputLabel ref={inputLabel}>{upperLabel}</InputLabel>
             <Select
-                classes={classes}
                 name={name}
                 onBlur={onBlur}
                 onChange={onChange}

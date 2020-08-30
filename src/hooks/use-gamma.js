@@ -1,4 +1,5 @@
-import { useMemo, useContext, useEffect, useCallback } from "react";
+
+import { useMemo, useContext, useEffect, useCallback, useState } from "react";
 import axios from "axios";
 import DigitGammaContext, {
     GET_ME_FAILED,
@@ -39,16 +40,10 @@ function useGamma(
     const [queueToast] = useDigitToast();
     const history = useHistory();
 
-    console.log("HEJ HALLÅ");
-    console.log(codePosted);
-    console.log(me);
-
     const code = useMemo(() => {
         const paramsResponse = new URLSearchParams(window.location.search);
         return paramsResponse.get("code");
-    }, [window.location.search]);
-
-    consoole.log(code);
+    }, []);
 
     const getMe = useCallback(
         (forceRedirect = false) => {
@@ -75,10 +70,6 @@ function useGamma(
     }, [getMe]);
 
     useEffect(() => {
-        console.log(
-            code + "; " + (error !== null) &&
-                "; " + codePosted + "; " + (me == null)
-        );
         if (code && !error && !codePosted && me == null) {
             history.push("/");
             setCodePosted(true);

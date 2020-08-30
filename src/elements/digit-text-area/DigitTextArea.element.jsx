@@ -50,7 +50,7 @@ const DigitTextArea = ({
     const inputFlex = useFullFlex();
 
     const handleOnChange = (e, maxLength, onChange) => {
-        const newValue = e.target.value;
+        const newValue = e.target.value || "";
         if (maxLength === -1 || newValue.length <= maxLength) {
             onChange(e);
         }
@@ -68,7 +68,7 @@ const DigitTextArea = ({
                 error && errorMessage != null
                     ? errorMessage
                     : maxLength !== -1
-                    ? value.length + "/" + maxLength
+                    ? (value || "").length + "/" + maxLength
                     : lowerLabel != null
                     ? lowerLabel
                     : ""

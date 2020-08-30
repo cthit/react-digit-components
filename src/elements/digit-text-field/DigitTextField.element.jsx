@@ -41,7 +41,7 @@ const DigitTextField = ({
     });
 
     const handleOnChange = (e, maxLength, onChange) => {
-        var newValue = e.target.value;
+        var newValue = e.target.value || "";
         if (maxLength === -1 || newValue.length <= maxLength) {
             if (numbersOnly) {
                 newValue = newValue.replace(/[^0-9]/g, "");
@@ -65,7 +65,7 @@ const DigitTextField = ({
                 error && errorMessage != null
                     ? errorMessage
                     : maxLength !== -1
-                    ? value.length + "/" + maxLength
+                    ? (value || "").length + "/" + maxLength
                     : lowerLabel != null
                     ? lowerLabel
                     : ""

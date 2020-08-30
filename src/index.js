@@ -53,6 +53,7 @@ import useDigitFormFieldArray from "./hooks/use-digit-form-field-array";
 import useDigitToast from "./hooks/use-digit-toast";
 import useGamma from "./hooks/use-gamma";
 import useGammaMe from "./hooks/use-gamma-me";
+import useGammaStatus from "./hooks/use-gamma-status";
 
 import {
     Center,
@@ -196,5 +197,6 @@ export {
     useDigitFormFieldArray,
     useDigitToast,
     useGamma,
-    useGammaMe
+    useGammaMe,
+    useGammaStatus
 };

@@ -36,7 +36,7 @@ const DigitEditDataInner = ({
 };
 
 const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
-    const field = useDigitFormField(name);
+    const field = useDigitFormField(name, "value", componentData.formatEvent);
     const { component, componentProps = {} } = componentData;
 
     const check = JSON.stringify(field) + JSON.stringify(componentProps);

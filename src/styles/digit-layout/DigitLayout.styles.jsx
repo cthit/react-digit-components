@@ -52,6 +52,8 @@ export const Flex = styled.div`
               (margin.bottom || "0px") +
               " " +
               (margin.left || "0px")) + " !important"};
+
+    overflow: ${({ overflow }) => (overflow ? overflow : "visible")};
 `;
 
 Flex.displayName = "Flex";

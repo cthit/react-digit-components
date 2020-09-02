@@ -4,7 +4,7 @@ import DigitFormContext from "../contexts/DigitFormContext";
 const getValue = e => {
     if (e.target != null) {
         const type = e.target.type;
-        if (type === "checkbox" || type === "radio") {
+        if (type === "checkbox") {
             return e.target.checked;
         } else if (e.target.value != null) {
             return e.target.value;
@@ -18,7 +18,8 @@ function useDigitFormField(
     valueFieldName = "value",
     getValueFromEvent = getValue
 ) {
-    var _getValueFromEvent = getValueFromEvent == null ? getValue : getValueFromEvent;
+    var _getValueFromEvent =
+        getValueFromEvent == null ? getValue : getValueFromEvent;
 
     const form = useContext(DigitFormContext);
     const onChange = useCallback(

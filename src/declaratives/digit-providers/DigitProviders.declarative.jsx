@@ -62,12 +62,12 @@ const DigitProviders = ({
                 >
                     {activeLanguage => (
                         <DigitToastContextSingletonProvider>
-                            <DigitDialogContextSingletonProvider>
-                                <DigitGammaContextSingletonProvider>
-                                    <MuiPickersUtilsProvider
-                                        utils={DateFnsUtils}
-                                        locale={locales[activeLanguage]}
-                                    >
+                            <MuiPickersUtilsProvider
+                                utils={DateFnsUtils}
+                                locale={locales[activeLanguage]}
+                            >
+                                <DigitDialogContextSingletonProvider>
+                                    <DigitGammaContextSingletonProvider>
                                         {hashRouter ? (
                                             <HashRouter>{children}</HashRouter>
                                         ) : memoryRouter ? (
@@ -79,9 +79,9 @@ const DigitProviders = ({
                                                 {children}
                                             </BrowserRouter>
                                         )}
-                                    </MuiPickersUtilsProvider>
-                                </DigitGammaContextSingletonProvider>
-                            </DigitDialogContextSingletonProvider>
+                                    </DigitGammaContextSingletonProvider>
+                                </DigitDialogContextSingletonProvider>
+                            </MuiPickersUtilsProvider>
                         </DigitToastContextSingletonProvider>
                     )}
                 </DigitTranslationsContextSingletonProvider>

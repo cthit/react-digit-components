@@ -6,7 +6,8 @@ import {
     DigitTextField,
     DigitLayout,
     DigitButton,
-    DigitSelect
+    DigitSelect,
+    DigitRadioButtonGroup
 } from "../../src";
 import * as yup from "yup";
 
@@ -41,6 +42,14 @@ It's often easier, as seen with the example, to just spread the values directly 
                     <DigitSelect {...fieldValues} filled valueToTextMap={{sv: "Swedish", en: "English"}} upperLabel="Language"/>
                 );
             }
+            const RadioButtonGroup = () => {
+                const radioValues = useDigitFormField("radio")
+                return (
+                    <DigitRadioButtonGroup {...radioValues} upperLabel="Do you want cake?" 
+                        radioButtons={[{id: "yes", label: "Yes"}, {id: "no", label: "No"}]}
+                    />
+                )
+            }
             return (
                 <DigitForm initialValues={{name: "Theodor", language: "sv"}} 
                            onSubmit={(values) => {
@@ -50,6 +59,7 @@ It's often easier, as seen with the example, to just spread the values directly 
                                <DigitLayout.Column size={{width: "320px"}}>
                                     <TextField />
                                     <SelectField />
+                                    <RadioButtonGroup />
                                     <DigitButton raised submit onSubmit={(values) => console.log(values)} text="Submit" />
                                </DigitLayout.Column>
                            )}

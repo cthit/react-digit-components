@@ -70,7 +70,7 @@ const DigitAutocompleteSelectMultiple = ({
             getOptionDisabled={value => {
                 return value.disabled;
             }}
-            options={options}
+            options={options.map(option => option.value)}
             getOptionLabel={value => {
                 const obj = find(options, { value });
                 if (obj == null) {

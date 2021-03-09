@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitAutocompleteSelectMultiple, DigitProviders } from "../../src";
 
 <Meta
@@ -11,10 +11,9 @@ import { DigitAutocompleteSelectMultiple, DigitProviders } from "../../src";
 
 Input to select multiple values via autocomplete when searching for options.
 
-
 ## AutocompleteMultiple
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteMultiple normal">
         {() => {
             const options = [
@@ -90,9 +89,9 @@ Input to select multiple values via autocomplete when searching for options.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteMultiple disabled">
         {() => {
             const options = [
@@ -107,7 +106,7 @@ Input to select multiple values via autocomplete when searching for options.
             const [value, setValue] = useState(["aliens"]);
             return (
                 <DigitAutocompleteSelectMultiple
-                    size={{width: "224px"}}
+                    size={{ width: "224px" }}
                     disabled
                     upperLabel="Disabled"
                     options={options}
@@ -145,11 +144,11 @@ Input to select multiple values via autocomplete when searching for options.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## noOptionText
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteMultiple noOption">
         {() => {
             const options = [];
@@ -181,11 +180,11 @@ Input to select multiple values via autocomplete when searching for options.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## `disableClearable`
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteMultiple disableClearable">
         {() => {
             const options = [
@@ -212,6 +211,6 @@ Input to select multiple values via autocomplete when searching for options.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitAutocompleteSelectMultiple} />
+<ArgsTable of={DigitAutocompleteSelectMultiple} />

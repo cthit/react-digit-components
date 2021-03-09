@@ -1,11 +1,8 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { DigitDesign, DigitText} from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { DigitDesign, DigitText } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Styles/DigitDivider"
-    component={DigitDesign}
-/>
+<Meta title="Styles/DigitDivider" component={DigitDesign} />
 
 # DigitDivider
 
@@ -13,16 +10,16 @@ A divider to split up parts of the page.
 
 ## Divider
 
-<Preview>
+<Canvas>
     <Story name="Divider">
         <DigitDesign.Card width="400px" height="150px">
             <DigitDesign.CardBody>
-                <DigitText.Text text={"Above divider"}/>
-                <DigitDesign.Divider/>
-                <DigitText.Text text={"Below divider"}/>
+                <DigitText.Text text={"Above divider"} />
+                <DigitDesign.Divider />
+                <DigitText.Text text={"Below divider"} />
             </DigitDesign.CardBody>
         </DigitDesign.Card>
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitDesign.Divider} />
+<ArgsTable of={DigitDesign.Divider} />

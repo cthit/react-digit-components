@@ -1,9 +1,6 @@
 import * as yup from "yup";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import {
-    DigitListSelectMultiple,
-    DigitEditData
-} from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { DigitListSelectMultiple, DigitEditData } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import Mail from "@material-ui/icons/Mail";
 import Delete from "@material-ui/icons/Delete";
@@ -15,7 +12,7 @@ import Delete from "@material-ui/icons/Delete";
 
 # DigitList
 
-<Preview>
+<Canvas>
     <Story name="3">
         <DigitEditData
             hasButtons
@@ -23,9 +20,7 @@ import Delete from "@material-ui/icons/Delete";
                 console.log(values);
             }}
             submitText={"Submit"}
-            validationSchema={yup
-                .object()
-                .shape({ list: yup.array() })}
+            validationSchema={yup.object().shape({ list: yup.array() })}
             titleText={"Select"}
             keysOrder={["list"]}
             initialValues={{
@@ -41,8 +36,7 @@ import Delete from "@material-ui/icons/Delete";
                         items: [
                             {
                                 text: "Hej",
-                                secondaryText:
-                                    "This is the secondary text",
+                                secondaryText: "This is the secondary text",
                                 icon: Mail,
                                 items: [
                                     {
@@ -77,8 +71,8 @@ import Delete from "@material-ui/icons/Delete";
                     }
                 }
             }}
-        />        
+        />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitListSelectMultiple} />
+<ArgsTable of={DigitListSelectMultiple} />

@@ -1,18 +1,15 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import {
-    useDigitCustomDialog,
-    DigitButton
-} from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { useDigitCustomDialog, DigitButton } from "../../src";
 import * as yup from "yup";
 
 # useDigitCustomDialog
 
-Used when you need more customization then `useDigitDialog`. You're able to provide different kinds of renders for your dialog. 
+Used when you need more customization then `useDigitDialog`. You're able to provide different kinds of renders for your dialog.
 
-<Meta title="Dialog/useDigitCustomDialog"/>
+<Meta title="Dialog/useDigitCustomDialog" />
 
-<Preview>
+<Canvas>
     <Story name="dialog">
         {() => {
             const [openDialog] = useDigitCustomDialog({
@@ -20,23 +17,42 @@ Used when you need more customization then `useDigitDialog`. You're able to prov
             });
             return (
                 <React.Fragment>
-                    <DigitButton raised primary onClick={() => openDialog({renderMain: () => <div style={{backgroundColor: "red", width: "50px", height: "50px"}}>what</div>})} text="Open dialog"/>
+                    <DigitButton
+                        raised
+                        primary
+                        onClick={() =>
+                            openDialog({
+                                renderMain: () => (
+                                    <div
+                                        style={{
+                                            backgroundColor: "red",
+                                            width: "50px",
+                                            height: "50px"
+                                        }}
+                                    >
+                                        what
+                                    </div>
+                                )
+                            })
+                        }
+                        text="Open dialog"
+                    />
                 </React.Fragment>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 These are the props for the object given as the first and only argument in the hook `useDigitCustomDialog`. `useDigitCustomDialog` returns an array with one function called `openDialog`. It takes in the same object as the hook does, but overrides if there's any conflicts between the two objects.
 
-| **Name**          	| **Type** 	| **Description**                                                                                                                                                        	|
-|-------------------	|----------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| **onClose**       	| *func*   	| Called either when confirm or cancel function from renderButtons has been called. Is called after onConfirm.                                                           	|
-| **onCancel**      	| *func*   	| When cancel button has been pressed, onCancel is called                                                                                                                	|
-| **onConfirm**     	| *func*   	| When ok button has been pressed, onConfirm is called                                                                                                                   	|
-| **title**         	| *string* 	| Title of the dialog                                                                                                                                                    	|
-| **renderMain**    	| *func*   	| Render for the main area of the dialog.                                                                                                                                	|
-| **renderButtons** 	| *func*   	| Render for the bottom area of the dialog. Has two arguments, (confirm, cancel). Both functions that should be called when a confirm or cancel button has been clicked. 	|
-| **size**          	| *object* 	| Standard size object                                                                                                                                                   	|
+| **Name**          | **Type** | **Description**                                                                                                                                                        |
+| ----------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **onClose**       | _func_   | Called either when confirm or cancel function from renderButtons has been called. Is called after onConfirm.                                                           |
+| **onCancel**      | _func_   | When cancel button has been pressed, onCancel is called                                                                                                                |
+| **onConfirm**     | _func_   | When ok button has been pressed, onConfirm is called                                                                                                                   |
+| **title**         | _string_ | Title of the dialog                                                                                                                                                    |
+| **renderMain**    | _func_   | Render for the main area of the dialog.                                                                                                                                |
+| **renderButtons** | _func_   | Render for the bottom area of the dialog. Has two arguments, (confirm, cancel). Both functions that should be called when a confirm or cancel button has been clicked. |
+| **size**          | _object_ | Standard size object                                                                                                                                                   |

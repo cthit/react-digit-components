@@ -1,100 +1,168 @@
 import { Fragment } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitButtonGroup, DigitProviders } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Buttons/DigitButtonGroup"
-    component={DigitButtonGroup}
-/>
+<Meta title="Buttons/DigitButtonGroup" component={DigitButtonGroup} />
 
 # DigitButtonGroup
 
-When you have multiple buttons that are somehow connected, e.g. simliar actions, `DigitButtonGroup` can be useful over multiple `DigitButton`. Please advise to the priority that using `outlined` and `raised` gives. 
+When you have multiple buttons that are somehow connected, e.g. simliar actions, `DigitButtonGroup` can be useful over multiple `DigitButton`. Please advise to the priority that using `outlined` and `raised` gives.
 
 ## Flat buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary flat button">
-        <DigitButtonGroup primary buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            primary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Secondary flat button">
-        <DigitButtonGroup secondary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            secondary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Normal flat button">
-        <DigitButtonGroup  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Disabled flat button">
-        <DigitButtonGroup disabled  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            disabled
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
-</Preview>
+</Canvas>
 
 ## Outlined buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary outlined button">
-        <DigitButtonGroup outlined primary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            outlined
+            primary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Secondary outlined button">
-        <DigitButtonGroup outlined secondary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            outlined
+            secondary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Normal outlined button">
-        <DigitButtonGroup outlined  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            outlined
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Disabled outlined button">
-        <DigitButtonGroup outlined disabled  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            outlined
+            disabled
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
-</Preview>
+</Canvas>
 
 ## Raised buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary raised button">
-        <DigitButtonGroup raised primary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            raised
+            primary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Secondary raised button">
-        <DigitButtonGroup raised secondary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            raised
+            secondary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Normal raised button">
-        <DigitButtonGroup raised  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            raised
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Disabled raised button">
-        <DigitButtonGroup raised disabled  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            raised
+            disabled
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
-</Preview>
+</Canvas>
 
 # Small buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary small button">
-        <DigitButtonGroup small primary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            small
+            primary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Secondary small button">
-        <DigitButtonGroup small secondary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            small
+            secondary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Normal small button">
-        <DigitButtonGroup small  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            small
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Disabled small button">
-        <DigitButtonGroup small disabled  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            small
+            disabled
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
-</Preview>
+</Canvas>
 
 # Large buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary large button">
-        <DigitButtonGroup large primary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            large
+            primary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Secondary large button">
-        <DigitButtonGroup large secondary  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            large
+            secondary
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Normal large button">
-        <DigitButtonGroup large  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            large
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
     <Story name="Disabled large button">
-        <DigitButtonGroup large disabled  buttons={[{text: "One"}, {text: "Two"}, {text: "Three"}]}/>
+        <DigitButtonGroup
+            large
+            disabled
+            buttons={[{ text: "One" }, { text: "Two" }, { text: "Three" }]}
+        />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitButtonGroup} />
+<ArgsTable of={DigitButtonGroup} />

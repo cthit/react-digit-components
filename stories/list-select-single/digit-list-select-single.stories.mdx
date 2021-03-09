@@ -1,32 +1,24 @@
 import * as yup from "yup";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import {
-    DigitListSelectSingle,
-    DigitEditData
-} from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { DigitListSelectSingle, DigitEditData } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import Mail from "@material-ui/icons/Mail";
 import Delete from "@material-ui/icons/Delete";
 
-<Meta
-    title="Inputs/DigitListSelectSingle"
-    component={DigitListSelectSingle}
-/>
+<Meta title="Inputs/DigitListSelectSingle" component={DigitListSelectSingle} />
 
 # DigitListSelectSingle
 
 A way to select a single item from a `DigitList` via radio buttons.
 
-<Preview>
+<Canvas>
     <Story name="list">
         <DigitEditData
             onSubmit={values => {
                 console.log(values);
             }}
             submitText={"Submit"}
-            validationSchema={yup
-                .object()
-                .shape({ list: yup.string() })}
+            validationSchema={yup.object().shape({ list: yup.string() })}
             titleText={"Select"}
             keysOrder={["list"]}
             keysComponentData={{
@@ -37,8 +29,7 @@ A way to select a single item from a `DigitList` via radio buttons.
                         items: [
                             {
                                 text: "Hej",
-                                secondaryText:
-                                    "This is the secondary text",
+                                secondaryText: "This is the secondary text",
                                 icon: Mail,
                                 items: [
                                     {
@@ -73,20 +64,18 @@ A way to select a single item from a `DigitList` via radio buttons.
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Multiple expanded with the same list
 
-<Preview>
+<Canvas>
     <Story name="multiple expanded">
         <DigitEditData
             onSubmit={values => {
                 console.log(values);
             }}
             submitText={"Submit"}
-            validationSchema={yup
-                .object()
-                .shape({ list: yup.string() })}
+            validationSchema={yup.object().shape({ list: yup.string() })}
             titleText={"Select"}
             keysOrder={["list"]}
             keysComponentData={{
@@ -98,8 +87,7 @@ A way to select a single item from a `DigitList` via radio buttons.
                         items: [
                             {
                                 text: "Hej",
-                                secondaryText:
-                                    "This is the secondary text",
+                                secondaryText: "This is the secondary text",
                                 icon: Mail,
                                 items: [
                                     {
@@ -134,6 +122,6 @@ A way to select a single item from a `DigitList` via radio buttons.
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitListSelectSingle} />
+<ArgsTable of={DigitListSelectSingle} />

@@ -1,9 +1,6 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview } from "@storybook/addon-docs/blocks";
-import {
-    useDigitDialog,
-    DigitButton
-} from "../../src";
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import { useDigitDialog, DigitButton } from "../../src";
 import * as yup from "yup";
 
 # useDigitDialog
@@ -12,7 +9,7 @@ A hook that can be used to open a dialog window, `DigitDialog`, that blocks furt
 
 <Meta title="Dialog/useDigitDialog" />
 
-<Preview>
+<Canvas>
     <Story name="dialog">
         {() => {
             const [openDialog] = useDigitDialog({
@@ -24,22 +21,27 @@ A hook that can be used to open a dialog window, `DigitDialog`, that blocks furt
             });
             return (
                 <React.Fragment>
-                    <DigitButton raised primary onClick={() => openDialog({description: "Look!"})} text="Open dialog"/>
+                    <DigitButton
+                        raised
+                        primary
+                        onClick={() => openDialog({ description: "Look!" })}
+                        text="Open dialog"
+                    />
                 </React.Fragment>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 These are the props for the object given as the first and only argument in the hook `useDigitDialog`. `useDigitDialog` returns an array with one function called `openDialog`. It takes in the same object as the hook does, but overrides if there's any conflicts between the two objects.
 
-| **Name**              	| **Type**   	| **Description**                             	|
-|-----------------------	|------------	|---------------------------------------------	|
-| **title**             	| *string*   	| The title text in bold of the dialog        	|
-| **description**       	| *string*   	| The description text of the dialog          	|
-| **confirmButtonText** 	| *string*   	| The text for the confirm button             	|
-| **cancelButtonText**  	| *string*   	| The text for the cancel button              	|
-| **onConfirm**         	| *function* 	| Called when confirm button has been clicked 	|
-| **onCancel**          	| *function* 	| Called when cancel button has been clicked  	|
+| **Name**              | **Type**   | **Description**                             |
+| --------------------- | ---------- | ------------------------------------------- |
+| **title**             | _string_   | The title text in bold of the dialog        |
+| **description**       | _string_   | The description text of the dialog          |
+| **confirmButtonText** | _string_   | The text for the confirm button             |
+| **cancelButtonText**  | _string_   | The text for the cancel button              |
+| **onConfirm**         | _function_ | Called when confirm button has been clicked |
+| **onCancel**          | _function_ | Called when cancel button has been clicked  |

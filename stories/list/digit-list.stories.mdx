@@ -1,17 +1,11 @@
 import * as yup from "yup";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import {
-    DigitList,
-    DigitEditData
-} from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { DigitList, DigitEditData } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import Mail from "@material-ui/icons/Mail";
 import Delete from "@material-ui/icons/Delete";
 
-<Meta
-    title="Display data/DigitList"
-    component={DigitList}
-/>
+<Meta title="Display data/DigitList" component={DigitList} />
 
 # DigitList
 
@@ -19,7 +13,7 @@ List of items.
 
 ## List
 
-<Preview>
+<Canvas>
     <Story name="List">
         <DigitList
             onClick={item => {
@@ -58,11 +52,11 @@ List of items.
             ]}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Dense
 
-<Preview>
+<Canvas>
     <Story name="Dense">
         <DigitList
             dense
@@ -102,11 +96,11 @@ List of items.
             ]}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Multiple expanded
 
-<Preview>
+<Canvas>
     <Story name="Multiple expanded">
         <DigitList
             multipleExpanded
@@ -146,6 +140,6 @@ List of items.
             ]}
         />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitList} />
+<ArgsTable of={DigitList} />

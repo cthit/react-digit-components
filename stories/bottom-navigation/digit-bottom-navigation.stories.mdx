@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitBottomNavigation } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
@@ -11,7 +11,9 @@ import Info from "@material-ui/icons/Info";
     title="Navigation/DigitBottomNavigation"
     component={DigitBottomNavigation}
     decorators={[
-        storyFn => <div style={{ height: "50px", maxWidth: "500px" }}>{storyFn()}</div>
+        storyFn => (
+            <div style={{ height: "50px", maxWidth: "500px" }}>{storyFn()}</div>
+        )
     ]}
 />
 
@@ -21,16 +23,16 @@ Mobile navigation, with tabs that has icons and labels. This should only be used
 
 ## DigitBottomNavigation without labels
 
-<Preview>
+<Canvas>
     <Story name="DigitBottomNavigation without labels">
         {() => {
             const [selected, setSelected] = useState(0);
             return (
                 <DigitBottomNavigation
                     tabs={[
-                        {label: "Home", icon: <Home/>},
-                        {label: "Calendar", icon: <Date/>},
-                        {label: "Information", icon: <Info/>},
+                        { label: "Home", icon: <Home /> },
+                        { label: "Calendar", icon: <Date /> },
+                        { label: "Information", icon: <Info /> }
                     ]}
                     onChange={n => setSelected(n)}
                     selected={selected}
@@ -39,20 +41,20 @@ Mobile navigation, with tabs that has icons and labels. This should only be used
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitBottomNavigation with labels
 
-<Preview>
+<Canvas>
     <Story name="DigitBottomNavigation with labels">
         {() => {
             const [selected, setSelected] = useState(0);
             return (
                 <DigitBottomNavigation
                     tabs={[
-                        {label: "Home", icon: <Home/>},
-                        {label: "Calendar", icon: <Date/>},
-                        {label: "Information", icon: <Info/>},
+                        { label: "Home", icon: <Home /> },
+                        { label: "Calendar", icon: <Date /> },
+                        { label: "Information", icon: <Info /> }
                     ]}
                     onChange={n => setSelected(n)}
                     selected={selected}
@@ -60,6 +62,6 @@ Mobile navigation, with tabs that has icons and labels. This should only be used
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitBottomNavigation} />
+<ArgsTable of={DigitBottomNavigation} />

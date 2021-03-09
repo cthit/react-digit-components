@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import {
     DigitTextArea,
     DigitEditData,
@@ -16,7 +16,7 @@ Like `DigitTextField`, but has the possibility of multiple rows.
 
 ## Flat text area
 
-<Preview>
+<Canvas>
     <Story name="Flat text area">
         {() => {
             const [text, setText] = useState("");
@@ -57,9 +57,9 @@ Like `DigitTextField`, but has the possibility of multiple rows.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="Password flat text area">
         {() => {
             const [text, setText] = useState("");
@@ -88,11 +88,11 @@ Like `DigitTextField`, but has the possibility of multiple rows.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Outlined text area
 
-<Preview>
+<Canvas>
     <Story name="Outlined text area">
         {() => {
             const [text, setText] = useState("");
@@ -136,9 +136,9 @@ Like `DigitTextField`, but has the possibility of multiple rows.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="Password outlined text area">
         {() => {
             const [text, setText] = useState("");
@@ -169,11 +169,11 @@ Like `DigitTextField`, but has the possibility of multiple rows.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Filled text area
 
-<Preview>
+<Canvas>
     <Story name="Filled text area">
         {() => {
             const [text, setText] = useState("");
@@ -217,9 +217,9 @@ Like `DigitTextField`, but has the possibility of multiple rows.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="Password filled text field">
         {() => {
             const [text, setText] = useState("");
@@ -250,11 +250,11 @@ Like `DigitTextField`, but has the possibility of multiple rows.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Rows
 
-<Preview>
+<Canvas>
     <Story name="One row text area">
         {() => {
             const [text, setText] = useState("");
@@ -265,7 +265,7 @@ Like `DigitTextField`, but has the possibility of multiple rows.
                     upperLabel="One row"
                     lowerLabel="Must be capitalized"
                     rows={1}
-                /> 
+                />
             );
         }}
     </Story>
@@ -300,11 +300,11 @@ Like `DigitTextField`, but has the possibility of multiple rows.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## How to use with DigitEditData
 
-<Preview>
+<Canvas>
     <Story name="Text field with EditData">
         <DigitEditData
             hasButtons
@@ -346,11 +346,11 @@ Like `DigitTextField`, but has the possibility of multiple rows.
                     }
                 }
             }}
-            submitButton={{    
-                text: "Skicka",
+            submitButton={{
+                text: "Skicka"
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitTextArea} />
+<ArgsTable of={DigitTextArea} />

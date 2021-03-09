@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitSwitch } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Inputs/DigitSwitch"
-    component={DigitSwitch}
-/>
+<Meta title="Inputs/DigitSwitch" component={DigitSwitch} />
 
 # DigitSwitch
 
@@ -14,7 +11,7 @@ Switches should be used to give the user the feeling like they are toggling some
 
 ## Switch
 
-<Preview>
+<Canvas>
     <Story name="Primary">
         {() => {
             const [state, setState] = useState(true);
@@ -66,11 +63,11 @@ Switches should be used to give the user the feeling like they are toggling some
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Errors
 
-<Preview>
+<Canvas>
     <Story name="Error switches">
         {() => {
             const [state, setState] = useState(true);
@@ -104,6 +101,6 @@ Switches should be used to give the user the feeling like they are toggling some
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitSwitch} />

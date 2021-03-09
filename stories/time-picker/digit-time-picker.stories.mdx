@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitTimePicker } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Inputs/DigitTimePicker"
-    component={DigitTimePicker}
-/>
+<Meta title="Inputs/DigitTimePicker" component={DigitTimePicker} />
 
 # DigitTimePicker
 
-A input field with a dialog popup where you can select the time. 
+A input field with a dialog popup where you can select the time.
 
 ## TimePicker
 
-<Preview>
+<Canvas>
     <Story name="Normal">
         {() => {
             const [date, setState] = useState(null);
@@ -56,11 +53,11 @@ A input field with a dialog popup where you can select the time.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Custom labels
 
-<Preview>
+<Canvas>
     <Story name="Custom label">
         {() => {
             const [date, setState] = useState(null);
@@ -76,11 +73,11 @@ A input field with a dialog popup where you can select the time.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Error
 
-<Preview>
+<Canvas>
     <Story name="Normal error">
         {() => {
             const [date, setState] = useState(null);
@@ -96,6 +93,6 @@ A input field with a dialog popup where you can select the time.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitTimePicker} />
+<ArgsTable of={DigitTimePicker} />

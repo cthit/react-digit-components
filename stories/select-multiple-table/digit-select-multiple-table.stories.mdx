@@ -1,5 +1,5 @@
 import { Fragment, useState, useMemo } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitSelectMultipleTable, DigitProviders } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
@@ -14,10 +14,10 @@ A way to select multiple rows from a table. Has the standard value/onChange.
 
 ## Select
 
-<Preview>
+<Canvas>
     <Story name="table with checkboxes">
         {() => {
-            const [selected, setSelected] = useState(["1337"])
+            const [selected, setSelected] = useState(["1337"]);
             return (
                 <DigitSelectMultipleTable
                     value={selected}
@@ -32,65 +32,64 @@ A way to select multiple rows from a table. Has the standard value/onChange.
                         id: "Id",
                         firstName: "First name",
                         lastName: "Last name",
-                        age: "Age",
+                        age: "Age"
                     }}
                     data={[
-                            {
-                                id: "1337",
-                                firstName: "Asdf",
-                                lastName: "Asdfsson",
-                                age: 33
-                            },
-                            {
-                                id: "4444",
-                                firstName: "Glass",
-                                lastName: "Glasssson",
-                                age: 50
-                            },
-                            {
-                                id: "4324",
-                                firstName: "Jeremy",
-                                lastName: "Clarkson",
-                                age: 50
-                            },
-                            {
-                                id: "1234",
-                                firstName: "James",
-                                lastName: "May",
-                                age: 99
-                            },
-                            {
-                                id: "4321",
-                                firstName: "Richard",
-                                lastName: "Hammond",
-                                age: 18
-                            },
-                            {
-                                id: "9999",
-                                firstName: "The",
-                                lastName: "Stig",
-                                age: 55
-                            },
-                            {
-                                id: "2244",
-                                firstName: "Henrik",
-                                lastName: "Lundqvist",
-                                age: 30
-                            }
+                        {
+                            id: "1337",
+                            firstName: "Asdf",
+                            lastName: "Asdfsson",
+                            age: 33
+                        },
+                        {
+                            id: "4444",
+                            firstName: "Glass",
+                            lastName: "Glasssson",
+                            age: 50
+                        },
+                        {
+                            id: "4324",
+                            firstName: "Jeremy",
+                            lastName: "Clarkson",
+                            age: 50
+                        },
+                        {
+                            id: "1234",
+                            firstName: "James",
+                            lastName: "May",
+                            age: 99
+                        },
+                        {
+                            id: "4321",
+                            firstName: "Richard",
+                            lastName: "Hammond",
+                            age: 18
+                        },
+                        {
+                            id: "9999",
+                            firstName: "The",
+                            lastName: "Stig",
+                            age: 55
+                        },
+                        {
+                            id: "2244",
+                            firstName: "Henrik",
+                            lastName: "Lundqvist",
+                            age: 30
+                        }
                     ]}
                 />
             );
         }}
     </Story>
-</Preview>
-
+</Canvas>
 
 ## Dense select
 
-<Preview>
+<Canvas>
     <Story name="dense table with checkboxes">
         {() => {
-            const [selected, setSelected] = useState(["1337"])
+            const [selected, setSelected] = useState(["1337"]);
             return (
                 <DigitSelectMultipleTable
                     dense
@@ -106,66 +105,66 @@ A way to select multiple rows from a table. Has the standard value/onChange.
                         id: "Id",
                         firstName: "First name",
                         lastName: "Last name",
-                        age: "Age",
+                        age: "Age"
                     }}
                     data={[
-                            {
-                                id: "1337",
-                                firstName: "Asdf",
-                                lastName: "Asdfsson",
-                                age: 33
-                            },
-                            {
-                                id: "4444",
-                                firstName: "Glass",
-                                lastName: "Glasssson",
-                                age: 50
-                            },
-                            {
-                                id: "4324",
-                                firstName: "Jeremy",
-                                lastName: "Clarkson",
-                                age: 50
-                            },
-                            {
-                                id: "1234",
-                                firstName: "James",
-                                lastName: "May",
-                                age: 99
-                            },
-                            {
-                                id: "4321",
-                                firstName: "Richard",
-                                lastName: "Hammond",
-                                age: 18
-                            },
-                            {
-                                id: "9999",
-                                firstName: "The",
-                                lastName: "Stig",
-                                age: 55
-                            },
-                            {
-                                id: "2244",
-                                firstName: "Henrik",
-                                lastName: "Lundqvist",
-                                age: 30
-                            }
+                        {
+                            id: "1337",
+                            firstName: "Asdf",
+                            lastName: "Asdfsson",
+                            age: 33
+                        },
+                        {
+                            id: "4444",
+                            firstName: "Glass",
+                            lastName: "Glasssson",
+                            age: 50
+                        },
+                        {
+                            id: "4324",
+                            firstName: "Jeremy",
+                            lastName: "Clarkson",
+                            age: 50
+                        },
+                        {
+                            id: "1234",
+                            firstName: "James",
+                            lastName: "May",
+                            age: 99
+                        },
+                        {
+                            id: "4321",
+                            firstName: "Richard",
+                            lastName: "Hammond",
+                            age: 18
+                        },
+                        {
+                            id: "9999",
+                            firstName: "The",
+                            lastName: "Stig",
+                            age: 55
+                        },
+                        {
+                            id: "2244",
+                            firstName: "Henrik",
+                            lastName: "Lundqvist",
+                            age: 30
+                        }
                     ]}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Select and link
 
 A way to select multiple rows from a table. Has the standard value/onChange.
 
-<Preview>
+<Canvas>
     <Story name="table with checkboxes and link">
         {() => {
-            const [selected, setSelected] = useState(["1337"])
+            const [selected, setSelected] = useState(["1337"]);
             return (
                 <DigitSelectMultipleTable
                     value={selected}
@@ -184,63 +183,63 @@ A way to select multiple rows from a table. Has the standard value/onChange.
                         __link: "Details"
                     }}
                     data={[
-                            {
-                                id: "1337",
-                                firstName: "Asdf",
-                                lastName: "Asdfsson",
-                                age: 33,
-                                __link: "/"
-                            },
-                            {
-                                id: "4444",
-                                firstName: "Glass",
-                                lastName: "Glasssson",
-                                age: 50,
-                                __link: "/"
-                            },
-                            {
-                                id: "4324",
-                                firstName: "Jeremy",
-                                lastName: "Clarkson",
-                                age: 50
-                            },
-                            {
-                                id: "1234",
-                                firstName: "James",
-                                lastName: "May",
-                                age: 99
-                            },
-                            {
-                                id: "4321",
-                                firstName: "Richard",
-                                lastName: "Hammond",
-                                age: 18
-                            },
-                            {
-                                id: "9999",
-                                firstName: "The",
-                                lastName: "Stig",
-                                age: 55
-                            },
-                            {
-                                id: "2244",
-                                firstName: "Henrik",
-                                lastName: "Lundqvist",
-                                age: 30
-                            }
+                        {
+                            id: "1337",
+                            firstName: "Asdf",
+                            lastName: "Asdfsson",
+                            age: 33,
+                            __link: "/"
+                        },
+                        {
+                            id: "4444",
+                            firstName: "Glass",
+                            lastName: "Glasssson",
+                            age: 50,
+                            __link: "/"
+                        },
+                        {
+                            id: "4324",
+                            firstName: "Jeremy",
+                            lastName: "Clarkson",
+                            age: 50
+                        },
+                        {
+                            id: "1234",
+                            firstName: "James",
+                            lastName: "May",
+                            age: 99
+                        },
+                        {
+                            id: "4321",
+                            firstName: "Richard",
+                            lastName: "Hammond",
+                            age: 18
+                        },
+                        {
+                            id: "9999",
+                            firstName: "The",
+                            lastName: "Stig",
+                            age: 55
+                        },
+                        {
+                            id: "2244",
+                            firstName: "Henrik",
+                            lastName: "Lundqvist",
+                            age: 30
+                        }
                     ]}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Disable select all
 
-<Preview>
+<Canvas>
     <Story name="table with checkboxes disable select all">
         {() => {
-            const [selected, setSelected] = useState(["1337"])
+            const [selected, setSelected] = useState(["1337"]);
             return (
                 <DigitSelectMultipleTable
                     disableSelectAll
@@ -256,57 +255,56 @@ A way to select multiple rows from a table. Has the standard value/onChange.
                         id: "Id",
                         firstName: "First name",
                         lastName: "Last name",
-                        age: "Age",
+                        age: "Age"
                     }}
                     data={[
-                            {
-                                id: "1337",
-                                firstName: "Asdf",
-                                lastName: "Asdfsson",
-                                age: 33
-                            },
-                            {
-                                id: "4444",
-                                firstName: "Glass",
-                                lastName: "Glasssson",
-                                age: 50
-                            },
-                            {
-                                id: "4324",
-                                firstName: "Jeremy",
-                                lastName: "Clarkson",
-                                age: 50
-                            },
-                            {
-                                id: "1234",
-                                firstName: "James",
-                                lastName: "May",
-                                age: 99
-                            },
-                            {
-                                id: "4321",
-                                firstName: "Richard",
-                                lastName: "Hammond",
-                                age: 18
-                            },
-                            {
-                                id: "9999",
-                                firstName: "The",
-                                lastName: "Stig",
-                                age: 55
-                            },
-                            {
-                                id: "2244",
-                                firstName: "Henrik",
-                                lastName: "Lundqvist",
-                                age: 30
-                            }
+                        {
+                            id: "1337",
+                            firstName: "Asdf",
+                            lastName: "Asdfsson",
+                            age: 33
+                        },
+                        {
+                            id: "4444",
+                            firstName: "Glass",
+                            lastName: "Glasssson",
+                            age: 50
+                        },
+                        {
+                            id: "4324",
+                            firstName: "Jeremy",
+                            lastName: "Clarkson",
+                            age: 50
+                        },
+                        {
+                            id: "1234",
+                            firstName: "James",
+                            lastName: "May",
+                            age: 99
+                        },
+                        {
+                            id: "4321",
+                            firstName: "Richard",
+                            lastName: "Hammond",
+                            age: 18
+                        },
+                        {
+                            id: "9999",
+                            firstName: "The",
+                            lastName: "Stig",
+                            age: 55
+                        },
+                        {
+                            id: "2244",
+                            firstName: "Henrik",
+                            lastName: "Lundqvist",
+                            age: 30
+                        }
                     ]}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-
-<Props of={DigitSelectMultipleTable} />
+<ArgsTable of={DigitSelectMultipleTable} />

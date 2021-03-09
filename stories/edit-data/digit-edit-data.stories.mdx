@@ -1,5 +1,5 @@
 import * as yup from "yup";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import {
     DigitEditData,
     DigitTextField,
@@ -9,16 +9,13 @@ import {
 } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Forms/DigitEditData"
-    component={DigitEditData}
-/>
+<Meta title="Forms/DigitEditData" component={DigitEditData} />
 
 # DigitEditData
 
-The easier and optimized way to handle forms. This is a single component where you create everything via objects. `DigitForm`, along with `useDigitFormField` and `useDigitFormFieldArray` gives more control, but this gets you up and running faster. 
+The easier and optimized way to handle forms. This is a single component where you create everything via objects. `DigitForm`, along with `useDigitFormField` and `useDigitFormFieldArray` gives more control, but this gets you up and running faster.
 
-<Preview>
+<Canvas>
     <Story name="Normal">
         <DigitEditData
             hasButtons
@@ -36,7 +33,10 @@ The easier and optimized way to handle forms. This is a single component where y
                 firstname: yup.string().required(),
                 surname: yup.string().required(),
                 email: yup.string().required(),
-                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+                agreement: yup
+                    .boolean()
+                    .oneOf([true], "Field must be checked")
+                    .required()
             })}
             titleText={"Title"}
             submitText={"Submit"}
@@ -68,8 +68,8 @@ The easier and optimized way to handle forms. This is a single component where y
                     }
                 }
             }}
-            submitButton={{    
-                text: "Skicka",
+            submitButton={{
+                text: "Skicka"
             }}
         />
     </Story>
@@ -89,7 +89,10 @@ The easier and optimized way to handle forms. This is a single component where y
             validationSchema={yup.object().shape({
                 firstname: yup.string().required(),
                 email: yup.string().required(),
-                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+                agreement: yup
+                    .boolean()
+                    .oneOf([true], "Field must be checked")
+                    .required()
             })}
             titleText={"Other title"}
             submitText={"Submit"}
@@ -123,11 +126,11 @@ The easier and optimized way to handle forms. This is a single component where y
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Initial values
 
-<Preview>
+<Canvas>
     <Story name="Normal initial">
         <DigitEditData
             hasButtons
@@ -145,7 +148,10 @@ The easier and optimized way to handle forms. This is a single component where y
                 firstname: yup.string().required(),
                 surname: yup.string().required(),
                 email: yup.string().required(),
-                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+                agreement: yup
+                    .boolean()
+                    .oneOf([true], "Field must be checked")
+                    .required()
             })}
             titleText={"Title"}
             submitText={"Submit"}
@@ -180,7 +186,7 @@ The easier and optimized way to handle forms. This is a single component where y
         />
     </Story>
     <Story name="Other values initial">
-        <DigitEditData 
+        <DigitEditData
             hasButtons
             initialValues={{
                 name: "digIT 'Smurf' Hackerman",
@@ -194,7 +200,10 @@ The easier and optimized way to handle forms. This is a single component where y
             validationSchema={yup.object().shape({
                 name: yup.string().required(),
                 email: yup.string().required(),
-                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+                agreement: yup
+                    .boolean()
+                    .oneOf([true], "Field must be checked")
+                    .required()
             })}
             titleText={"Title"}
             submitText={"Send"}
@@ -222,11 +231,11 @@ The easier and optimized way to handle forms. This is a single component where y
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Other components
 
-<Preview>
+<Canvas>
     <Story name="Normal components">
         <DigitEditData
             hasButtons
@@ -305,11 +314,11 @@ The easier and optimized way to handle forms. This is a single component where y
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## `centerFields`
 
-<Preview>
+<Canvas>
     <Story name="Normal centerFields">
         <DigitEditData
             centerFields
@@ -328,7 +337,10 @@ The easier and optimized way to handle forms. This is a single component where y
                 firstname: yup.string().required(),
                 surname: yup.string().required(),
                 email: yup.string().required(),
-                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+                agreement: yup
+                    .boolean()
+                    .oneOf([true], "Field must be checked")
+                    .required()
             })}
             titleText={"Title"}
             submitText={"Submit"}
@@ -360,8 +372,8 @@ The easier and optimized way to handle forms. This is a single component where y
                     }
                 }
             }}
-            submitButton={{    
-                text: "Skicka",
+            submitButton={{
+                text: "Skicka"
             }}
         />
     </Story>
@@ -382,7 +394,10 @@ The easier and optimized way to handle forms. This is a single component where y
             validationSchema={yup.object().shape({
                 firstname: yup.string().required(),
                 email: yup.string().required(),
-                agreement: yup.boolean().oneOf([true], 'Field must be checked').required()
+                agreement: yup
+                    .boolean()
+                    .oneOf([true], "Field must be checked")
+                    .required()
             })}
             titleText={"Other title"}
             submitText={"Submit"}
@@ -416,6 +431,6 @@ The easier and optimized way to handle forms. This is a single component where y
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitEditData} />

@@ -1,45 +1,52 @@
 import { useState, useEffect } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import {
-    useDigitTranslations,
-    DigitSelect,
-    DigitText
-} from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { useDigitTranslations, DigitSelect, DigitText } from "../../src";
 import * as yup from "yup";
 
 # useDigitTranslations
 
-<Meta title="Others/useDigitTranslations"/>
+<Meta title="Others/useDigitTranslations" />
 
-A really easy way of presenting english and swedish strings throughout your application. Powered by a context that you don't have to worry about (it's given via `DigitProviders`). 
+A really easy way of presenting english and swedish strings throughout your application. Powered by a context that you don't have to worry about (it's given via `DigitProviders`).
 
 Using `setCommonTranslations` should really only be done once in for example your `App.jsx`.
 
-<Preview>
+<Canvas>
     <Story name="Standard">
         {() => {
             const commonTranslations = {
                 Yes: ["Yes", "Ja"],
                 No: ["No", "Nej"]
             };
-            const translations = {
+            const translations = {
                 Bread: ["Bread", "Bröd"]
             };
-            const [text, activeLanguage, setActiveLanguage, setCommonTranslations] = useDigitTranslations(translations);
+            const [
+                text,
+                activeLanguage,
+                setActiveLanguage,
+                setCommonTranslations
+            ] = useDigitTranslations(translations);
             useEffect(() => {
                 setCommonTranslations(commonTranslations);
             }, [JSON.stringify(commonTranslations)]);
             return (
                 <React.Fragment>
-                    <DigitSelect value={activeLanguage} onChange={e => setActiveLanguage(e.target.value)} filled valueToTextMap={{sv: "Swedish", en: "English"}} upperLabel="Language"/>
-                    <DigitText.Text text={text.Bread}/>
-                    <DigitText.Text text={text.Yes}/>
-                    <DigitText.Text text={text.No}/>
+                    <DigitSelect
+                        value={activeLanguage}
+                        onChange={e => setActiveLanguage(e.target.value)}
+                        filled
+                        valueToTextMap={{ sv: "Swedish", en: "English" }}
+                        upperLabel="Language"
+                    />
+                    <DigitText.Text text={text.Bread} />
+                    <DigitText.Text text={text.Yes} />
+                    <DigitText.Text text={text.No} />
                 </React.Fragment>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Translations structure
 
@@ -57,9 +64,9 @@ It only has one property and that's `translations`. Look above on how it's suppo
 
 The hook returns an array of four properties. They are in order:
 
-| **Name**                  	| **Type** 	| **Description**                                                                              	|
-|---------------------------	|----------	|----------------------------------------------------------------------------------------------	|
-| **text**                  	| *object* 	| Object of your available strings in the current activeLanguage                               	|
-| **activeLanguage**        	| *string* 	| The active language. Either "sv" or "en".                                                    	|
-| **setActiveLanguage**     	| *func*   	| Sets the active language. Automatically updates all text objects throughout your application 	|
-| **setCommonTranslations** 	| *func*   	| Sets the common translations.                                                                	|
+| **Name**                  | **Type** | **Description**                                                                              |
+| ------------------------- | -------- | -------------------------------------------------------------------------------------------- |
+| **text**                  | _object_ | Object of your available strings in the current activeLanguage                               |
+| **activeLanguage**        | _string_ | The active language. Either "sv" or "en".                                                    |
+| **setActiveLanguage**     | _func_   | Sets the active language. Automatically updates all text objects throughout your application |
+| **setCommonTranslations** | _func_   | Sets the common translations.                                                                |

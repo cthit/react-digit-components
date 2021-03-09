@@ -1,33 +1,30 @@
 import { useState, useCallback, useRef } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitCRUD, DigitTextField, DigitButton } from "../../src";
 import * as yup from "yup";
 import * as _ from "lodash";
 
-<Meta
-    title="Others/DigitCRUD"
-    component={DigitCRUD}
-/>
+<Meta title="Others/DigitCRUD" component={DigitCRUD} />
 
 # DigitCRUD
 
-DigitCRUD is a great way to reduce the amount of boilerplate code needed to create simple CRUD operations. 
+DigitCRUD is a great way to reduce the amount of boilerplate code needed to create simple CRUD operations.
 
 ## DigitCRUD only readAll
 
-<Preview>
+<Canvas>
     <Story name="readAll">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -40,44 +37,47 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                         data: getData()
                     });
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}                         
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn keys",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn keys",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll and create
 
-<Preview>
+<Canvas>
     <Story name="readAll and create">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -92,86 +92,92 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                 });
             const createRequestPromise = newUser =>
                 new Promise(resolve => {
-                    setData([...getData(), { ...newUser, id: "id-" + newUser.name }]);
+                    setData([
+                        ...getData(),
+                        { ...newUser, id: "id-" + newUser.name }
+                    ]);
                     resolve({});
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const createRequestCallback = useCallback(createRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const createRequestCallback = useCallback(createRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            createRequest={createRequestCallback}                  
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            formComponentData={{
-                                name: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        outlined: true
-                                    }
-                                },
-                                age: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        numbersOnly: true,
-                                        outlined: true,
-                                    }
-                                }
-                            }}
-                            formValidationSchema={
-                                yup.object().shape({
-                                    name: yup.string().required(),
-                                    age: yup.number().required()
-                                })
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    createRequest={createRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    formComponentData={{
+                        name: {
+                            component: DigitTextField,
+                            componentProps: {
+                                outlined: true
                             }
-                            formInitialValues={{
-                                name: "",
-                                age: 18
-                            }}
-                            createTitle={"Skapa användare"}
-                            createSubtitle={"Here you can create your user!!"}
-                            createButtonText={"Skapa"}
-                            toastCreateSuccessful={(data, response) =>
-                                "Användaren " + data.name + " skapad"
+                        },
+                        age: {
+                            component: DigitTextField,
+                            componentProps: {
+                                numbersOnly: true,
+                                outlined: true
                             }
-                            toastCreateFailed={(data, error) =>
-                                "Användaren " + data.name + " raderad"
-                            }
-                            backButtonText={"Tillbaka"}
-                            useKeyTextsInUpperLabel
-                            onCreate={response => console.log("CREATED")}
+                        }
+                    }}
+                    formValidationSchema={yup.object().shape({
+                        name: yup.string().required(),
+                        age: yup.number().required()
+                    })}
+                    formInitialValues={{
+                        name: "",
+                        age: 18
+                    }}
+                    createTitle={"Skapa användare"}
+                    createSubtitle={"Here you can create your user!!"}
+                    createButtonText={"Skapa"}
+                    toastCreateSuccessful={(data, response) =>
+                        "Användaren " + data.name + " skapad"
+                    }
+                    toastCreateFailed={(data, error) =>
+                        "Användaren " + data.name + " raderad"
+                    }
+                    backButtonText={"Tillbaka"}
+                    useKeyTextsInUpperLabel
+                    onCreate={response => console.log("CREATED")}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll and readOne (2 seconds delay)
 
-<Preview>
+<Canvas>
     <Story name="readAll and readOne">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -201,49 +207,54 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                         }, 2000);
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne and deleteOne
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne and deleteOne">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -260,7 +271,9 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -276,91 +289,96 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                         console.log(form.nameConfirm);
                         console.log(form);
                         console.log(one);
-                        reject({error: "Name confirm not correct"});
-                    }else{
+                        reject({ error: "Name confirm not correct" });
+                    } else {
                         setData(_.xor(getData(), [one]));
                         resolve({});
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const deleteRequestCallback = useCallback(deleteRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            deleteRequest={deleteRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            toastDeleteSuccessful={(data, response) =>
-                                "Användare " + data.name + " har raderats"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    deleteRequest={deleteRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    toastDeleteSuccessful={(data, response) =>
+                        "Användare " + data.name + " har raderats"
+                    }
+                    toastDeleteFailed={(data, error) =>
+                        "Radering av användare " + data.name + " misslyckades"
+                    }
+                    deleteDialogFormComponentData={{
+                        nameConfirm: {
+                            component: DigitTextField,
+                            componentProps: {
+                                upperLabel: "Bekräfta namnet",
+                                outlined: true
                             }
-                            toastDeleteFailed={(data, error) =>
-                                "Radering av användare " +
-                                data.name +
-                                " misslyckades"
-                            }
-                            deleteDialogFormComponentData={{
-                                nameConfirm: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        upperLabel: "Bekräfta namnet",
-                                        outlined: true
-                                    }
-                                }
-                            }}
-                            deleteDialogFormInitialValues={{
-                                nameConfirm: ""
-                            }}
-                            deleteDialogFormValidationSchema={data =>
-                                yup.object().shape({
-                                    nameConfirm: yup
-                                        .mixed()
-                                        .oneOf(
-                                            [data.name],
-                                            "Måste vara lika med namnet på användaren"
-                                        )
-                                        .required("du bekräfta namn")
-                                })
-                            }
-                            deleteDialogFormKeysOrder={["nameConfirm"]}
-                            useKeyTextsInUpperLabel
-                            onDelete={response => console.log("DELETED")}
+                        }
+                    }}
+                    deleteDialogFormInitialValues={{
+                        nameConfirm: ""
+                    }}
+                    deleteDialogFormValidationSchema={data =>
+                        yup.object().shape({
+                            nameConfirm: yup
+                                .mixed()
+                                .oneOf(
+                                    [data.name],
+                                    "Måste vara lika med namnet på användaren"
+                                )
+                                .required("du bekräfta namn")
+                        })
+                    }
+                    deleteDialogFormKeysOrder={["nameConfirm"]}
+                    useKeyTextsInUpperLabel
+                    onDelete={response => console.log("DELETED")}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne and update
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne and update">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -377,7 +395,9 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -398,87 +418,94 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                         resolve({});
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const updateRequestCallback = useCallback(updateRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const updateRequestCallback = useCallback(updateRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            updateRequest={updateRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            useKeyTextsInUpperLabel
-                            formComponentData={{
-                                name: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        outlined: true
-                                        // upperLabel: "Namn"
-                                    }
-                                },
-                                age: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        numbersOnly: true,
-                                        outlined: true,
-                                        upperLabel: "Ålder"
-                                    }
-                                }
-                            }}
-                            formValidationSchema={yup.object().shape({
-                                name: yup.string().required(),
-                                age: yup.number().required()
-                            })}
-                            formInitialValues={{
-                                name: "",
-                                age: 18
-                            }}
-                            updateTitle={data =>
-                                "Uppdatera " + data.name + " användare"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    updateRequest={updateRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    useKeyTextsInUpperLabel
+                    formComponentData={{
+                        name: {
+                            component: DigitTextField,
+                            componentProps: {
+                                outlined: true
+                                // upperLabel: "Namn"
                             }
-                            toastUpdateSuccessful={(updated, old, response) =>
-                                "Användare " + updated.name + " har uppdateras"
+                        },
+                        age: {
+                            component: DigitTextField,
+                            componentProps: {
+                                numbersOnly: true,
+                                outlined: true,
+                                upperLabel: "Ålder"
                             }
-                            toastUpdateFailed={(updated, old, error) =>
-                                "Användare " + updated.name + " har inte uppdateras"
-                            }
-                            onUpdate={response => console.log("UPDATED")}
+                        }
+                    }}
+                    formValidationSchema={yup.object().shape({
+                        name: yup.string().required(),
+                        age: yup.number().required()
+                    })}
+                    formInitialValues={{
+                        name: "",
+                        age: 18
+                    }}
+                    updateTitle={data =>
+                        "Uppdatera " + data.name + " användare"
+                    }
+                    toastUpdateSuccessful={(updated, old, response) =>
+                        "Användare " + updated.name + " har uppdateras"
+                    }
+                    toastUpdateFailed={(updated, old, error) =>
+                        "Användare " + updated.name + " har inte uppdateras"
+                    }
+                    onUpdate={response => console.log("UPDATED")}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne, update and delete
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne, update and delete">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -495,7 +522,9 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -522,98 +551,105 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                     setData(_.xor(getData(), [one]));
                     resolve({});
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const updateRequestCallback = useCallback(updateRequestPromise, [data]);
-            const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const updateRequestCallback = useCallback(updateRequestPromise, [
+                data
+            ]);
+            const deleteRequestCallback = useCallback(deleteRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            updateRequest={updateRequestCallback}
-                            deleteRequest={deleteRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            useKeyTextsInUpperLabel
-                            formComponentData={{
-                                name: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        outlined: true
-                                        // upperLabel: "Namn"
-                                    }
-                                },
-                                age: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        numbersOnly: true,
-                                        outlined: true,
-                                        upperLabel: "Ålder"
-                                    }
-                                }
-                            }}
-                            formValidationSchema={yup.object().shape({
-                                name: yup.string().required(),
-                                age: yup.number().required()
-                            })}
-                            formInitialValues={{
-                                name: "",
-                                age: 18
-                            }}
-                            updateTitle={data =>
-                                "Uppdatera " + data.name + " användare"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    updateRequest={updateRequestCallback}
+                    deleteRequest={deleteRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    useKeyTextsInUpperLabel
+                    formComponentData={{
+                        name: {
+                            component: DigitTextField,
+                            componentProps: {
+                                outlined: true
+                                // upperLabel: "Namn"
                             }
-                            toastUpdateSuccessful={(updated, old, response) =>
-                                "Användare " + updated.name + " har uppdateras"
+                        },
+                        age: {
+                            component: DigitTextField,
+                            componentProps: {
+                                numbersOnly: true,
+                                outlined: true,
+                                upperLabel: "Ålder"
                             }
-                            toastUpdateFailed={(updated, old, error) =>
-                                "Användare " + updated.name + " har inte uppdateras"
-                            }
-                            toastDeleteSuccessful={(data, response) =>
-                                "Användare " + data.name + " har raderats"
-                            }
-                            toastDeleteFailed={(data, error) =>
-                                "Radering av användare " +
-                                data.name +
-                                " misslyckades"
-                            }
-                            onUpdate={response => console.log("UPDATE")}
-                            onDelete={response => console.log("DELETED")}
+                        }
+                    }}
+                    formValidationSchema={yup.object().shape({
+                        name: yup.string().required(),
+                        age: yup.number().required()
+                    })}
+                    formInitialValues={{
+                        name: "",
+                        age: 18
+                    }}
+                    updateTitle={data =>
+                        "Uppdatera " + data.name + " användare"
+                    }
+                    toastUpdateSuccessful={(updated, old, response) =>
+                        "Användare " + updated.name + " har uppdateras"
+                    }
+                    toastUpdateFailed={(updated, old, error) =>
+                        "Användare " + updated.name + " har inte uppdateras"
+                    }
+                    toastDeleteSuccessful={(data, response) =>
+                        "Användare " + data.name + " har raderats"
+                    }
+                    toastDeleteFailed={(data, error) =>
+                        "Radering av användare " + data.name + " misslyckades"
+                    }
+                    onUpdate={response => console.log("UPDATE")}
+                    onDelete={response => console.log("DELETED")}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne, update, delete and create (All of them)
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne, update, delete and create">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -630,7 +666,9 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -659,111 +697,124 @@ DigitCRUD is a great way to reduce the amount of boilerplate code needed to crea
                 });
             const createRequestPromise = newUser =>
                 new Promise(resolve => {
-                    setData([...getData(), { ...newUser, id: "id-" + newUser.name }]);
+                    setData([
+                        ...getData(),
+                        { ...newUser, id: "id-" + newUser.name }
+                    ]);
                     resolve({});
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const updateRequestCallback = useCallback(updateRequestPromise, [data]);
-            const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
-            const createRequestCallback = useCallback(createRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const updateRequestCallback = useCallback(updateRequestPromise, [
+                data
+            ]);
+            const deleteRequestCallback = useCallback(deleteRequestPromise, [
+                data
+            ]);
+            const createRequestCallback = useCallback(createRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            updateRequest={updateRequestCallback}
-                            deleteRequest={deleteRequestCallback}
-                            createRequest={createRequestCallback}                  
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            useKeyTextsInUpperLabel
-                            formComponentData={{
-                                name: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        outlined: true
-                                        // upperLabel: "Namn"
-                                    }
-                                },
-                                age: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        numbersOnly: true,
-                                        outlined: true,
-                                        upperLabel: "Ålder"
-                                    }
-                                }
-                            }}
-                            formValidationSchema={yup.object().shape({
-                                name: yup.string().required(),
-                                age: yup.number().required()
-                            })}
-                            formInitialValues={{
-                                name: "",
-                                age: 18
-                            }}
-                            updateTitle={data =>
-                                "Uppdatera " + data.name + " användare"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    updateRequest={updateRequestCallback}
+                    deleteRequest={deleteRequestCallback}
+                    createRequest={createRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    useKeyTextsInUpperLabel
+                    formComponentData={{
+                        name: {
+                            component: DigitTextField,
+                            componentProps: {
+                                outlined: true
+                                // upperLabel: "Namn"
                             }
-                            toastUpdateSuccessful={(updated, old, response) =>
-                                "Användare " + updated.name + " har uppdateras"
+                        },
+                        age: {
+                            component: DigitTextField,
+                            componentProps: {
+                                numbersOnly: true,
+                                outlined: true,
+                                upperLabel: "Ålder"
                             }
-                            toastUpdateFailed={(updated, old, error) =>
-                                "Användare " + updated.name + " har inte uppdateras"
-                            }
-                            toastDeleteSuccessful={(data, response) =>
-                                "Användare " + data.name + " har raderats"
-                            }
-                            toastDeleteFailed={(data, error) =>
-                                "Radering av användare " +
-                                data.name +
-                                " misslyckades"
-                            }
-                            toastCreateSuccessful={(data, response) =>
-                                "Användaren " + data.name + " skapad"
-                            }
-                            toastCreateFailed={(data, error) =>
-                                "Användaren " + data.name + " raderad"
-                            }
-                            onUpdate={response => console.log("UPDATE")}
-                            onDelete={response => console.log("DELETED")}
-                            onCreate={response => console.log("CREATE")}
+                        }
+                    }}
+                    formValidationSchema={yup.object().shape({
+                        name: yup.string().required(),
+                        age: yup.number().required()
+                    })}
+                    formInitialValues={{
+                        name: "",
+                        age: 18
+                    }}
+                    updateTitle={data =>
+                        "Uppdatera " + data.name + " användare"
+                    }
+                    toastUpdateSuccessful={(updated, old, response) =>
+                        "Användare " + updated.name + " har uppdateras"
+                    }
+                    toastUpdateFailed={(updated, old, error) =>
+                        "Användare " + updated.name + " har inte uppdateras"
+                    }
+                    toastDeleteSuccessful={(data, response) =>
+                        "Användare " + data.name + " har raderats"
+                    }
+                    toastDeleteFailed={(data, error) =>
+                        "Radering av användare " + data.name + " misslyckades"
+                    }
+                    toastCreateSuccessful={(data, response) =>
+                        "Användaren " + data.name + " skapad"
+                    }
+                    toastCreateFailed={(data, error) =>
+                        "Användaren " + data.name + " raderad"
+                    }
+                    onUpdate={response => console.log("UPDATE")}
+                    onDelete={response => console.log("DELETED")}
+                    onCreate={response => console.log("CREATE")}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne and canReadOne specific
+
 You can only read details of the user with the id `fdas-fdsafasd`.
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne and canReadOne specific">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -780,7 +831,9 @@ You can only read details of the user with the id `fdas-fdsafasd`.
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -789,52 +842,58 @@ You can only read details of the user with the id `fdas-fdsafasd`.
                         });
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            detailsSubtitle={data => "This is a subtitle"}
-                            canReadOne={user => user.id === "asdf-fdsafasd"}
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    detailsSubtitle={data => "This is a subtitle"}
+                    canReadOne={user => user.id === "asdf-fdsafasd"}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne and canUpdate specific
+
 You can only update the user with the id `fdas-fdsafasd`.
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne and canUpdate specific">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -851,7 +910,9 @@ You can only update the user with the id `fdas-fdsafasd`.
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -872,89 +933,97 @@ You can only update the user with the id `fdas-fdsafasd`.
                         resolve({});
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const updateRequestCallback = useCallback(updateRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const updateRequestCallback = useCallback(updateRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            updateRequest={updateRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            useKeyTextsInUpperLabel
-                            formComponentData={{
-                                name: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        outlined: true
-                                        // upperLabel: "Namn"
-                                    }
-                                },
-                                age: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        numbersOnly: true,
-                                        outlined: true,
-                                        upperLabel: "Ålder"
-                                    }
-                                }
-                            }}
-                            formValidationSchema={yup.object().shape({
-                                name: yup.string().required(),
-                                age: yup.number().required()
-                            })}
-                            formInitialValues={{
-                                name: "",
-                                age: 18
-                            }}
-                            updateTitle={data =>
-                                "Uppdatera " + data.name + " användare"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    updateRequest={updateRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    useKeyTextsInUpperLabel
+                    formComponentData={{
+                        name: {
+                            component: DigitTextField,
+                            componentProps: {
+                                outlined: true
+                                // upperLabel: "Namn"
                             }
-                            toastUpdateSuccessful={(updated, old, response) =>
-                                "Användare " + updated.name + " har uppdateras"
+                        },
+                        age: {
+                            component: DigitTextField,
+                            componentProps: {
+                                numbersOnly: true,
+                                outlined: true,
+                                upperLabel: "Ålder"
                             }
-                            toastUpdateFailed={(updated, old, error) =>
-                                "Användare " + updated.name + " har inte uppdateras"
-                            }
-                            onUpdate={response => console.log("UPDATED")}
-                            canUpdate={user => user.id === "asdf-fdsafasd"}
+                        }
+                    }}
+                    formValidationSchema={yup.object().shape({
+                        name: yup.string().required(),
+                        age: yup.number().required()
+                    })}
+                    formInitialValues={{
+                        name: "",
+                        age: 18
+                    }}
+                    updateTitle={data =>
+                        "Uppdatera " + data.name + " användare"
+                    }
+                    toastUpdateSuccessful={(updated, old, response) =>
+                        "Användare " + updated.name + " har uppdateras"
+                    }
+                    toastUpdateFailed={(updated, old, error) =>
+                        "Användare " + updated.name + " har inte uppdateras"
+                    }
+                    onUpdate={response => console.log("UPDATED")}
+                    canUpdate={user => user.id === "asdf-fdsafasd"}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne, deleteOne and canDelete specific
+
 You can only delete the user with the id `fdas-fdsafasd`.
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne, deleteOne and canDelete">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -971,7 +1040,9 @@ You can only delete the user with the id `fdas-fdsafasd`.
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -987,94 +1058,99 @@ You can only delete the user with the id `fdas-fdsafasd`.
                         console.log(form.nameConfirm);
                         console.log(form);
                         console.log(one);
-                        reject({error: "Name confirm not correct"});
-                    }else{
+                        reject({ error: "Name confirm not correct" });
+                    } else {
                         setData(_.xor(getData(), [one]));
                         resolve({});
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const deleteRequestCallback = useCallback(deleteRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            deleteRequest={deleteRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            toastDeleteSuccessful={(data, response) =>
-                                "Användare " + data.name + " har raderats"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    deleteRequest={deleteRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    toastDeleteSuccessful={(data, response) =>
+                        "Användare " + data.name + " har raderats"
+                    }
+                    toastDeleteFailed={(data, error) =>
+                        "Radering av användare " + data.name + " misslyckades"
+                    }
+                    deleteDialogFormComponentData={{
+                        nameConfirm: {
+                            component: DigitTextField,
+                            componentProps: {
+                                upperLabel: "Bekräfta namnet",
+                                outlined: true
                             }
-                            toastDeleteFailed={(data, error) =>
-                                "Radering av användare " +
-                                data.name +
-                                " misslyckades"
-                            }
-                            deleteDialogFormComponentData={{
-                                nameConfirm: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        upperLabel: "Bekräfta namnet",
-                                        outlined: true
-                                    }
-                                }
-                            }}
-                            deleteDialogFormInitialValues={{
-                                nameConfirm: ""
-                            }}
-                            deleteDialogFormValidationSchema={data =>
-                                yup.object().shape({
-                                    nameConfirm: yup
-                                        .mixed()
-                                        .oneOf(
-                                            [data.name],
-                                            "Måste vara lika med namnet på användaren"
-                                        )
-                                        .required("du bekräfta namn")
-                                })
-                            }
-                            deleteDialogFormKeysOrder={["nameConfirm"]}
-                            useKeyTextsInUpperLabel
-                            onDelete={response => console.log("DELETED")}
-                            canDelete={user => user.id === "asdf-fdsafasd"}
+                        }
+                    }}
+                    deleteDialogFormInitialValues={{
+                        nameConfirm: ""
+                    }}
+                    deleteDialogFormValidationSchema={data =>
+                        yup.object().shape({
+                            nameConfirm: yup
+                                .mixed()
+                                .oneOf(
+                                    [data.name],
+                                    "Måste vara lika med namnet på användaren"
+                                )
+                                .required("du bekräfta namn")
+                        })
+                    }
+                    deleteDialogFormKeysOrder={["nameConfirm"]}
+                    useKeyTextsInUpperLabel
+                    onDelete={response => console.log("DELETED")}
+                    canDelete={user => user.id === "asdf-fdsafasd"}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-## DigitCRUD only readAll on401/403/404/500 and render401/403/404/500 
+## DigitCRUD only readAll on401/403/404/500 and render401/403/404/500
 
 They all basically just works the same, but this just shows how 401 are handled.
 
-<Preview>
+<Canvas>
     <Story name="readAllError">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -1083,48 +1159,58 @@ They all basically just works the same, but this just shows how 401 are handled.
             };
             const readAllRequestPromise = () =>
                 new Promise((resolve, error) => {
-                    error({response:{status: 401}})
+                    error({ response: { status: 401 } });
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}                         
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn keys",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            statusHandlers={{401:() => console.log("401 nope")}}
-                            statusRenders={{401: (error, reset) => <div style={{height: "200px"}}>{error != null && error.response.status} - <DigitButton text="reset" onClick={reset}/></div>}}
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn keys",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    statusHandlers={{ 401: () => console.log("401 nope") }}
+                    statusRenders={{
+                        401: (error, reset) => (
+                            <div style={{ height: "200px" }}>
+                                {error != null && error.response.status} -{" "}
+                                <DigitButton text="reset" onClick={reset} />
+                            </div>
+                        )
+                    }}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitCRUD with readAll, readOne and render500
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne, render500">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -1147,55 +1233,66 @@ They all basically just works the same, but this just shows how 401 are handled.
                             response: {
                                 status: 500
                             }
-                        })
+                        });
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name} 
-                            statusHandlers={{500:() => console.log("500 nope")}}
-                            statusRenders={{500: (error, reset) => <div style={{height: "200px"}}>{error != null && error.response.status} - <DigitButton text="reset" onClick={reset}/></div>}}
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    statusHandlers={{ 500: () => console.log("500 nope") }}
+                    statusRenders={{
+                        500: (error, reset) => (
+                            <div style={{ height: "200px" }}>
+                                {error != null && error.response.status} -{" "}
+                                <DigitButton text="reset" onClick={reset} />
+                            </div>
+                        )
+                    }}
                 />
             );
         }}
     </Story>
-</Preview>
-
+</Canvas>
 
 ## DigitCRUD with readAll, readOne and deleteOne, and render500
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne and deleteOne, render 500">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -1212,7 +1309,9 @@ They all basically just works the same, but this just shows how 401 are handled.
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -1228,95 +1327,106 @@ They all basically just works the same, but this just shows how 401 are handled.
                         console.log(form.nameConfirm);
                         console.log(form);
                         console.log(one);
-                        reject({error: "Name confirm not correct"});
-                    }else{
-                        reject({response: {status: 500}})
+                        reject({ error: "Name confirm not correct" });
+                    } else {
+                        reject({ response: { status: 500 } });
                         //setData(_.xor(getData(), [one]));
                         //resolve({});
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const deleteRequestCallback = useCallback(deleteRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const deleteRequestCallback = useCallback(deleteRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            deleteRequest={deleteRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            toastDeleteSuccessful={(data, response) =>
-                                "Användare " + data.name + " har raderats"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    deleteRequest={deleteRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    toastDeleteSuccessful={(data, response) =>
+                        "Användare " + data.name + " har raderats"
+                    }
+                    toastDeleteFailed={(data, error) =>
+                        "Radering av användare " + data.name + " misslyckades"
+                    }
+                    deleteDialogFormComponentData={{
+                        nameConfirm: {
+                            component: DigitTextField,
+                            componentProps: {
+                                upperLabel: "Bekräfta namnet",
+                                outlined: true
                             }
-                            toastDeleteFailed={(data, error) =>
-                                "Radering av användare " +
-                                data.name +
-                                " misslyckades"
-                            }
-                            deleteDialogFormComponentData={{
-                                nameConfirm: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        upperLabel: "Bekräfta namnet",
-                                        outlined: true
-                                    }
-                                }
-                            }}
-                            deleteDialogFormInitialValues={{
-                                nameConfirm: ""
-                            }}
-                            deleteDialogFormValidationSchema={data =>
-                                yup.object().shape({
-                                    nameConfirm: yup
-                                        .mixed()
-                                        .oneOf(
-                                            [data.name],
-                                            "Måste vara lika med namnet på användaren"
-                                        )
-                                        .required("du bekräfta namn")
-                                })
-                            }
-                            deleteDialogFormKeysOrder={["nameConfirm"]}
-                            useKeyTextsInUpperLabel
-                            onDelete={response => console.log("DELETED")}
-                            statusHandlers={{500:() => console.log("500 nope")}}
-                            statusRenders={{500: (error, reset) => <div style={{height: "200px"}}>{error != null && error.response.status} - <DigitButton text="reset" onClick={reset}/></div>}}
+                        }
+                    }}
+                    deleteDialogFormInitialValues={{
+                        nameConfirm: ""
+                    }}
+                    deleteDialogFormValidationSchema={data =>
+                        yup.object().shape({
+                            nameConfirm: yup
+                                .mixed()
+                                .oneOf(
+                                    [data.name],
+                                    "Måste vara lika med namnet på användaren"
+                                )
+                                .required("du bekräfta namn")
+                        })
+                    }
+                    deleteDialogFormKeysOrder={["nameConfirm"]}
+                    useKeyTextsInUpperLabel
+                    onDelete={response => console.log("DELETED")}
+                    statusHandlers={{ 500: () => console.log("500 nope") }}
+                    statusRenders={{
+                        500: (error, reset) => (
+                            <div style={{ height: "200px" }}>
+                                {error != null && error.response.status} -{" "}
+                                <DigitButton text="reset" onClick={reset} />
+                            </div>
+                        )
+                    }}
                 />
             );
         }}
     </Story>
-</Preview>
-
+</Canvas>
 
 ## DigitCRUD with readAll, readOne, update and render401
 
-<Preview>
+<Canvas>
     <Story name="readAll, readOne, update and render401">
         {() => {
             const data = useRef([
                 {
                     id: "asdf-fdsafasd",
                     name: "Theodor",
-                    age: 55,
+                    age: 55
                 },
                 {
                     id: "fdas-fdsafasd",
                     name: "Sven",
-                    age: 99,
+                    age: 99
                 }
             ]);
             const getData = () => data.current;
@@ -1333,7 +1443,9 @@ They all basically just works the same, but this just shows how 401 are handled.
                 new Promise((resolve, reject) => {
                     const result = _.find(getData(), { id });
                     if (result == null) {
-                        reject({error: "Can't find anything with the id: " + id});
+                        reject({
+                            error: "Can't find anything with the id: " + id
+                        });
                     } else {
                         resolve({
                             data: {
@@ -1348,80 +1460,95 @@ They all basically just works the same, but this just shows how 401 are handled.
                     if (index === -1) {
                         reject();
                     } else {
-                        reject({response: {status: 401}})
-                        {/* const newData = [...getData()];
+                        reject({ response: { status: 401 } });
+                        {
+                            /* const newData = [...getData()];
                         newData[index] = { id, ...newUser };
                         setData(newData);
-                        resolve({}); */}
+                        resolve({}); */
+                        }
                     }
                 });
-            const readAllRequestCallback = useCallback(readAllRequestPromise, [data]);
-            const readOneRequestCallback = useCallback(readOneRequestPromise, [data]);
-            const updateRequestCallback = useCallback(updateRequestPromise, [data]);
+            const readAllRequestCallback = useCallback(readAllRequestPromise, [
+                data
+            ]);
+            const readOneRequestCallback = useCallback(readOneRequestPromise, [
+                data
+            ]);
+            const updateRequestCallback = useCallback(updateRequestPromise, [
+                data
+            ]);
             return (
-                <DigitCRUD  path=""
-                            readAllRequest={readAllRequestCallback}       
-                            readOneRequest={readOneRequestCallback}
-                            updateRequest={updateRequestCallback}
-                            keysOrder={["id", "name", "age"]}
-                            keysText={{
-                                id: "Id",
-                                name: "Namn",
-                                age: "Ålder",
-                            }}
-                            idProp="id"
-                            tableProps={{
-                                titleText: "Användare",
-                                emptyTableText: "Det finns inga användare",
-                                search: true,
-                                startOrderBy: "name"
-                            }}
-                            backButtonText={"Tillbaka"}
-                            detailsButtonText={"Details"}
-                            detailsTitle={(data) => data.name}
-                            useKeyTextsInUpperLabel
-                            formComponentData={{
-                                name: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        outlined: true
-                                        // upperLabel: "Namn"
-                                    }
-                                },
-                                age: {
-                                    component: DigitTextField,
-                                    componentProps: {
-                                        numbersOnly: true,
-                                        outlined: true,
-                                        upperLabel: "Ålder"
-                                    }
-                                }
-                            }}
-                            formValidationSchema={yup.object().shape({
-                                name: yup.string().required(),
-                                age: yup.number().required()
-                            })}
-                            formInitialValues={{
-                                name: "",
-                                age: 18
-                            }}
-                            updateTitle={data =>
-                                "Uppdatera " + data.name + " användare"
+                <DigitCRUD
+                    path=""
+                    readAllRequest={readAllRequestCallback}
+                    readOneRequest={readOneRequestCallback}
+                    updateRequest={updateRequestCallback}
+                    keysOrder={["id", "name", "age"]}
+                    keysText={{
+                        id: "Id",
+                        name: "Namn",
+                        age: "Ålder"
+                    }}
+                    idProp="id"
+                    tableProps={{
+                        titleText: "Användare",
+                        emptyTableText: "Det finns inga användare",
+                        search: true,
+                        startOrderBy: "name"
+                    }}
+                    backButtonText={"Tillbaka"}
+                    detailsButtonText={"Details"}
+                    detailsTitle={data => data.name}
+                    useKeyTextsInUpperLabel
+                    formComponentData={{
+                        name: {
+                            component: DigitTextField,
+                            componentProps: {
+                                outlined: true
+                                // upperLabel: "Namn"
                             }
-                            toastUpdateSuccessful={(updated, old, response) =>
-                                "Användare " + updated.name + " har uppdateras"
+                        },
+                        age: {
+                            component: DigitTextField,
+                            componentProps: {
+                                numbersOnly: true,
+                                outlined: true,
+                                upperLabel: "Ålder"
                             }
-                            toastUpdateFailed={(updated, old, error) =>
-                                "Användare " + updated.name + " har inte uppdateras"
-                            }
-                            onUpdate={response => console.log("UPDATED")}
-                            statusHandlers={{401:() => console.log("401 nope")}}                            
-                            statusRenders={{401: (error, reset) => <div style={{height: "300px"}}>No access :( <DigitButton text="reset" onClick={reset}/></div>}}
+                        }
+                    }}
+                    formValidationSchema={yup.object().shape({
+                        name: yup.string().required(),
+                        age: yup.number().required()
+                    })}
+                    formInitialValues={{
+                        name: "",
+                        age: 18
+                    }}
+                    updateTitle={data =>
+                        "Uppdatera " + data.name + " användare"
+                    }
+                    toastUpdateSuccessful={(updated, old, response) =>
+                        "Användare " + updated.name + " har uppdateras"
+                    }
+                    toastUpdateFailed={(updated, old, error) =>
+                        "Användare " + updated.name + " har inte uppdateras"
+                    }
+                    onUpdate={response => console.log("UPDATED")}
+                    statusHandlers={{ 401: () => console.log("401 nope") }}
+                    statusRenders={{
+                        401: (error, reset) => (
+                            <div style={{ height: "300px" }}>
+                                No access :({" "}
+                                <DigitButton text="reset" onClick={reset} />
+                            </div>
+                        )
+                    }}
                 />
             );
         }}
     </Story>
-</Preview>
-
+</Canvas>
 
 <Props of={DigitCRUD} />

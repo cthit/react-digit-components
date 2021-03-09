@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import {
     DigitTextField,
     DigitEditData,
@@ -16,7 +16,7 @@ A input field for entering text.
 
 ## Flat text field
 
-<Preview>
+<Canvas>
     <Story name="Flat text field">
         {() => {
             const [text, setText] = useState("");
@@ -57,9 +57,9 @@ A input field for entering text.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="Password flat text field">
         {() => {
             const [text, setText] = useState("");
@@ -101,11 +101,11 @@ A input field for entering text.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Outlined text field
 
-<Preview>
+<Canvas>
     <Story name="Outlined text field">
         {() => {
             const [text, setText] = useState("");
@@ -149,9 +149,9 @@ A input field for entering text.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="Password outlined text field">
         {() => {
             const [text, setText] = useState("");
@@ -196,11 +196,11 @@ A input field for entering text.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Filled text field
 
-<Preview>
+<Canvas>
     <Story name="Filled text field">
         {() => {
             const [text, setText] = useState("");
@@ -244,9 +244,9 @@ A input field for entering text.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="Password filled text field">
         {() => {
             const [text, setText] = useState("");
@@ -291,11 +291,11 @@ A input field for entering text.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## How to use with DigitEditData
 
-<Preview>
+<Canvas>
     <Story name="Text field with EditData">
         <DigitEditData
             hasButtons
@@ -336,11 +336,11 @@ A input field for entering text.
                     }
                 }
             }}
-            submitButton={{    
-                text: "Skicka",
+            submitButton={{
+                text: "Skicka"
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitTextField} />
+<ArgsTable of={DigitTextField} />

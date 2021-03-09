@@ -1,4 +1,4 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitFAB } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import AddIcon from "@material-ui/icons/Add";
@@ -6,10 +6,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import CheckIcon from "@material-ui/icons/Check";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-<Meta
-    title="Buttons/DigitFAB"
-    component={DigitFAB}
-/>
+<Meta title="Buttons/DigitFAB" component={DigitFAB} />
 
 # DigitFAB
 
@@ -17,7 +14,7 @@ DigitFAB, also known as Digit Floating Action Button, is a circular button. Ther
 
 ## FAB
 
-<Preview>
+<Canvas>
     <Story name="Primary">
         <DigitFAB primary />
     </Story>
@@ -30,11 +27,11 @@ DigitFAB, also known as Digit Floating Action Button, is a circular button. Ther
     <Story name="Disabled">
         <DigitFAB disabled />
     </Story>
-</Preview>
+</Canvas>
 
 ## FAB text
 
-<Preview>
+<Canvas>
     <Story name="Primary with text">
         <DigitFAB primary text="Text" />
     </Story>
@@ -47,11 +44,11 @@ DigitFAB, also known as Digit Floating Action Button, is a circular button. Ther
     <Story name="Disabled with text">
         <DigitFAB disabled text="Text" />
     </Story>
-</Preview>
+</Canvas>
 
 ## FAB icon
 
-<Preview>
+<Canvas>
     <Story name="Primary with icon">
         <DigitFAB primary icon={AddIcon} />
     </Story>
@@ -64,6 +61,6 @@ DigitFAB, also known as Digit Floating Action Button, is a circular button. Ther
     <Story name="Disabled with icon">
         <DigitFAB disabled icon={FavoriteIcon} />
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitFAB} />

@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitSelect } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Inputs/DigitSelect"
-    component={DigitSelect}
-/>
+<Meta title="Inputs/DigitSelect" component={DigitSelect} />
 
 # DigitSelect
 
@@ -14,7 +11,7 @@ Used to select one of multiple values.
 
 ## Select
 
-<Preview>
+<Canvas>
     <Story name="Normal">
         {() => {
             const [state, setState] = useState("chocolate");
@@ -84,11 +81,11 @@ Used to select one of multiple values.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Select filled
 
-<Preview>
+<Canvas>
     <Story name="Normal filled">
         {() => {
             const [state, setState] = useState("chocolate");
@@ -162,11 +159,11 @@ Used to select one of multiple values.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Select outlined
 
-<Preview>
+<Canvas>
     <Story name="Normal outlined">
         {() => {
             const [state, setState] = useState("chocolate");
@@ -240,11 +237,11 @@ Used to select one of multiple values.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Select none
 
-<Preview>
+<Canvas>
     <Story name="Normal none">
         {() => {
             const [state, setState] = useState("chocolate");
@@ -318,6 +315,6 @@ Used to select one of multiple values.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitSelect} />

@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitCheckbox } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Inputs/DigitCheckbox"
-    component={DigitCheckbox}
-/>
+<Meta title="Inputs/DigitCheckbox" component={DigitCheckbox} />
 
 # DigitCheckbox
 
@@ -14,7 +11,7 @@ DigitCheckbox should be used when multiple alternatives can be selected. If only
 
 ## Checkboxes
 
-<Preview>
+<Canvas>
     <Story name="Primary checkbox">
         {() => {
             const [state, setState] = useState(true);
@@ -66,11 +63,11 @@ DigitCheckbox should be used when multiple alternatives can be selected. If only
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Errors
 
-<Preview>
+<Canvas>
     <Story name="Error checkbox">
         {() => {
             const [state, setState] = useState(true);
@@ -78,32 +75,32 @@ DigitCheckbox should be used when multiple alternatives can be selected. If only
             const [error, setError] = useState(true);
             return (
                 <div>
-                      <DigitCheckbox
-                          label="Set error on the checkboxes"
-                          primary
-                          value={error}
-                          onChange={e => setError(e.target.checked)}
-                      />
-                      <DigitCheckbox
-                          label="Seconday"
-                          error={error}
-                          errorMessage="Error message"
-                          secondary
-                          value={state}
-                          onChange={e => setState(e.target.checked)}
-                      />
-                      <DigitCheckbox
-                          label="Seconday"
-                          error={error}
-                          errorMessage="Error message again"
-                          disabled
-                          value={state2}
-                          onChange={e => setState(e.target.checked)}
-                      />
-                  </div>
+                    <DigitCheckbox
+                        label="Set error on the checkboxes"
+                        primary
+                        value={error}
+                        onChange={e => setError(e.target.checked)}
+                    />
+                    <DigitCheckbox
+                        label="Seconday"
+                        error={error}
+                        errorMessage="Error message"
+                        secondary
+                        value={state}
+                        onChange={e => setState(e.target.checked)}
+                    />
+                    <DigitCheckbox
+                        label="Seconday"
+                        error={error}
+                        errorMessage="Error message again"
+                        disabled
+                        value={state2}
+                        onChange={e => setState(e.target.checked)}
+                    />
+                </div>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitCheckbox} />
+<ArgsTable of={DigitCheckbox} />

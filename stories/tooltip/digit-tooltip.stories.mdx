@@ -1,11 +1,8 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitTooltip, DigitButton } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Others/DigitTooltip"
-    component={DigitTooltip}
-/>
+<Meta title="Others/DigitTooltip" component={DigitTooltip} />
 
 # DigitTooltip
 
@@ -13,17 +10,19 @@ Used to give more context to an action or some type of information.
 
 ## Tool tip
 
-<Preview>
+<Canvas>
     <Story name="Tooltip">
-        <DigitTooltip text="This is a tooltip" render={() => (
-            <DigitButton text="Hover me" />
-        )}/>
+        <DigitTooltip
+            text="This is a tooltip"
+            render={() => <DigitButton text="Hover me" />}
+        />
     </Story>
     <Story name="Tooltip text">
-        <DigitTooltip text="You can change the text" render={() => (
-            <DigitButton text="Hover me too" />
-        )}/>
+        <DigitTooltip
+            text="You can change the text"
+            render={() => <DigitButton text="Hover me too" />}
+        />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitTooltip} />
+<ArgsTable of={DigitTooltip} />

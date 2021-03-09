@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
-import DigitDialog from "../elements/digit-dialog";
-import DigitCustomDialog from "../elements/digit-custom-dialog";
+import DigitDialog from "../components/digit-dialog";
+import DigitCustomDialog from "../components/digit-custom-dialog";
 const DigitDialogContext = createContext({});
 
 const OPEN_CUSTOM_DIALOG = "open-custom-dialog";

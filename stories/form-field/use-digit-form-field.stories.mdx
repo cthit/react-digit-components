@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import {
     useDigitFormField,
     DigitForm,
@@ -11,72 +11,91 @@ import {
 } from "../../src";
 import * as yup from "yup";
 
-<Meta title="Forms/useDigitFormField"/>
+<Meta title="Forms/useDigitFormField" />
 
 # useDigitFormField
 
 Used to be hooked up with a `DigitForm`. It handles `value`/`onChange` behavior for you. The hook returns the following object:
 
-| **Name**         	| **Type** 	| **Description**                                                          	|
-|------------------	|----------	|--------------------------------------------------------------------------	|
-| **value**        	| *any*    	| The value of the form field                                              	|
-| **onChange**     	| *func*   	| The function that is needed to update value in the form field            	|
-| **onBlur**       	| *func*   	| Called when then input loses focus                                       	|
-| **error**        	| *bool*   	| True if something is incorrect in the form field                         	|
-| **errorMessage** 	| *string* 	| The error message. Specified in the yup validation schema in `DigitForm` 	|
+| **Name**         | **Type** | **Description**                                                          |
+| ---------------- | -------- | ------------------------------------------------------------------------ |
+| **value**        | _any_    | The value of the form field                                              |
+| **onChange**     | _func_   | The function that is needed to update value in the form field            |
+| **onBlur**       | _func_   | Called when then input loses focus                                       |
+| **error**        | _bool_   | True if something is incorrect in the form field                         |
+| **errorMessage** | _string_ | The error message. Specified in the yup validation schema in `DigitForm` |
 
 It's often easier, as seen with the example, to just spread the values directly into your input.
 
-<Preview>
+<Canvas>
     <Story name="example">
         {() => {
             const TextField = () => {
                 const fieldValues = useDigitFormField("name");
                 return (
-                    <DigitTextField {...fieldValues} upperLabel="Your name" filled/>
+                    <DigitTextField
+                        {...fieldValues}
+                        upperLabel="Your name"
+                        filled
+                    />
                 );
             };
             const SelectField = () => {
                 const fieldValues = useDigitFormField("language");
                 return (
-                    <DigitSelect {...fieldValues} filled valueToTextMap={{sv: "Swedish", en: "English"}} upperLabel="Language"/>
-                );
-            }
-            const RadioButtonGroup = () => {
-                const radioValues = useDigitFormField("radio")
-                return (
-                    <DigitRadioButtonGroup {...radioValues} upperLabel="Do you want cake?" 
-                        radioButtons={[{id: "yes", label: "Yes"}, {id: "no", label: "No"}]}
+                    <DigitSelect
+                        {...fieldValues}
+                        filled
+                        valueToTextMap={{ sv: "Swedish", en: "English" }}
+                        upperLabel="Language"
                     />
-                )
-            }
+                );
+            };
+            const RadioButtonGroup = () => {
+                const radioValues = useDigitFormField("radio");
+                return (
+                    <DigitRadioButtonGroup
+                        {...radioValues}
+                        upperLabel="Do you want cake?"
+                        radioButtons={[
+                            { id: "yes", label: "Yes" },
+                            { id: "no", label: "No" }
+                        ]}
+                    />
+                );
+            };
             return (
-                <DigitForm initialValues={{name: "Theodor", language: "sv"}} 
-                           onSubmit={(values) => {
-                               console.log(values);
-                           }}
-                           render={() => (
-                               <DigitLayout.Column size={{width: "320px"}}>
-                                    <TextField />
-                                    <SelectField />
-                                    <RadioButtonGroup />
-                                    <DigitButton raised submit onSubmit={(values) => console.log(values)} text="Submit" />
-                               </DigitLayout.Column>
-                           )}
-                           validationSchema={yup.object().shape({
-                               name: yup.string()
-                           })}
-                           >
-                </DigitForm>
+                <DigitForm
+                    initialValues={{ name: "Theodor", language: "sv" }}
+                    onSubmit={values => {
+                        console.log(values);
+                    }}
+                    render={() => (
+                        <DigitLayout.Column size={{ width: "320px" }}>
+                            <TextField />
+                            <SelectField />
+                            <RadioButtonGroup />
+                            <DigitButton
+                                raised
+                                submit
+                                onSubmit={values => console.log(values)}
+                                text="Submit"
+                            />
+                        </DigitLayout.Column>
+                    )}
+                    validationSchema={yup.object().shape({
+                        name: yup.string()
+                    })}
+                ></DigitForm>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
-| **Name**              	| **Type** 	| **Default value**                                     	| **Description**                                                               	|
-|-----------------------	|----------	|-------------------------------------------------------	|-------------------------------------------------------------------------------	|
-| **name**              	| *string* 	|                                                       	| The name for the field                                                        	|
-| **valueFieldName**    	| *string* 	| "value"                                               	| The prop name for value (e.g. value, checked)                                 	|
-| **getValueFromEvent** 	| *func*   	| func that gets value or checked value from e.target.* 	| A function to extract a value from a onChange function to the actually value. 	|
+| **Name**              | **Type** | **Default value**                                      | **Description**                                                               |
+| --------------------- | -------- | ------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| **name**              | _string_ |                                                        | The name for the field                                                        |
+| **valueFieldName**    | _string_ | "value"                                                | The prop name for value (e.g. value, checked)                                 |
+| **getValueFromEvent** | _func_   | func that gets value or checked value from e.target.\* | A function to extract a value from a onChange function to the actually value. |

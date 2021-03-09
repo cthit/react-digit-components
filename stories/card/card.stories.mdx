@@ -1,11 +1,8 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitDesign, DigitText, DigitButton } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Styles/DigitCard"
-    component={DigitDesign}
-/>
+<Meta title="Styles/DigitCard" component={DigitDesign} />
 
 # DigitCard
 
@@ -13,47 +10,47 @@ DigitCard is used differencing data points, e.g. different restaurants or maybe 
 
 ## Size variation
 
-<Preview>
+<Canvas>
     <Story name="Size one">
-        <DigitDesign.Card size={{width: "200px", height: "200px"}}>
+        <DigitDesign.Card size={{ width: "200px", height: "200px" }}>
             <DigitDesign.CardBody>
-                <DigitText.Text text={"200px wide and 200px high"}/>
+                <DigitText.Text text={"200px wide and 200px high"} />
             </DigitDesign.CardBody>
         </DigitDesign.Card>
     </Story>
     <Story name="Size two">
-        <DigitDesign.Card size={{width: "300px", height: "100px"}}>
+        <DigitDesign.Card size={{ width: "300px", height: "100px" }}>
             <DigitDesign.CardBody>
-                <DigitText.Text text={"300px wide and 100px high"}/>
+                <DigitText.Text text={"300px wide and 100px high"} />
             </DigitDesign.CardBody>
         </DigitDesign.Card>
     </Story>
-</Preview>
+</Canvas>
 
 ## Card header and title
 
-<Preview>
+<Canvas>
     <Story name="Header one">
-        <DigitDesign.Card size={{width: "290px", height: "150px"}}>
+        <DigitDesign.Card size={{ width: "290px", height: "150px" }}>
             <DigitDesign.CardHeader>
-                <DigitDesign.CardTitle text={"I'm Title"}/>
+                <DigitDesign.CardTitle text={"I'm Title"} />
             </DigitDesign.CardHeader>
             <DigitDesign.CardBody>
-                <DigitText.Text text={"Card Body"}/>
+                <DigitText.Text text={"Card Body"} />
             </DigitDesign.CardBody>
         </DigitDesign.Card>
     </Story>
     <Story name="Header two">
-        <DigitDesign.Card size={{width: "290px", height: "150px"}}>
+        <DigitDesign.Card size={{ width: "290px", height: "150px" }}>
             <DigitDesign.CardHeader hasSubtitle>
-                <DigitDesign.CardTitle text={"Hi Title"}/>
-                <DigitDesign.CardSubtitle text={"This is a subtitle"}/>
+                <DigitDesign.CardTitle text={"Hi Title"} />
+                <DigitDesign.CardSubtitle text={"This is a subtitle"} />
             </DigitDesign.CardHeader>
             <DigitDesign.CardBody>
-                <DigitText.Text text={"Card body"}/>
+                <DigitText.Text text={"Card body"} />
             </DigitDesign.CardBody>
         </DigitDesign.Card>
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitDesign} />

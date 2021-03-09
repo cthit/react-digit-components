@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitIconButton } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,10 +7,7 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import CheckIcon from "@material-ui/icons/Check";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 
-<Meta
-    title="Buttons/DigitIconButton"
-    component={DigitIconButton}
-/>
+<Meta title="Buttons/DigitIconButton" component={DigitIconButton} />
 
 # DigitIconButton
 
@@ -18,7 +15,7 @@ A small circular button with only a icon. Only use IconButton when the icon can 
 
 ## IconButton
 
-<Preview>
+<Canvas>
     <Story name="Primary">
         {() => {
             const [date, setDate] = useState(null);
@@ -74,11 +71,11 @@ A small circular button with only a icon. Only use IconButton when the icon can 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Icon
 
-<Preview>
+<Canvas>
     <Story name="Primary icon">
         {() => {
             const [date, setDate] = useState(null);
@@ -134,6 +131,6 @@ A small circular button with only a icon. Only use IconButton when the icon can 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitIconButton} />
+<ArgsTable of={DigitIconButton} />

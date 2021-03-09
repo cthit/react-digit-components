@@ -1,17 +1,14 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitTabs, DigitProviders } from "../../src";
-import { DigitTabs as DigitTabsProps } from "../../src/elements/digit-tabs/DigitTabs.element.jsx";
+import { DigitTabs as DigitTabsProps } from "../../src/components/digit-tabs/DigitTabs.element.jsx";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
 import Home from "@material-ui/icons/Add";
 import Date from "@material-ui/icons/DateRange";
 import Info from "@material-ui/icons/Info";
 
-<Meta
-    title="Navigation/DigitTabs"
-    component={DigitTabsProps}
-/>
+<Meta title="Navigation/DigitTabs" component={DigitTabsProps} />
 
 # DigitTabs
 
@@ -19,7 +16,7 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
 
 ## DigitTabs with fullWidth
 
-<Preview>
+<Canvas>
     <Story name="DigitTabs with fullWidth">
         {() => {
             const [selected, setSelected] = useState("feed");
@@ -37,11 +34,11 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitTabs centered
 
-<Preview>
+<Canvas>
     <Story name="DigitTabs centered">
         {() => {
             const [selected, setSelected] = useState("feed");
@@ -59,11 +56,11 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitTabs scrollable with only icons
 
-<Preview>
+<Canvas>
     <Story name="DigitTabs scrolalble with only icons">
         {() => {
             const [selected, setSelected] = useState("feed");
@@ -80,12 +77,11 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
             );
         }}
     </Story>
-</Preview>
-
+</Canvas>
 
 ## DigitTabs centered with icons and text
 
-<Preview>
+<Canvas>
     <Story name="DigitTabs centered with icons">
         {() => {
             const [selected, setSelected] = useState("feed");
@@ -103,11 +99,11 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitTabs that scrolls
 
-<Preview>
+<Canvas>
     <Story name="DigitTabs that scrolls">
         {() => {
             const [selected, setSelected] = useState("settings");
@@ -127,11 +123,11 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitTabs width titleFont
 
-<Preview>
+<Canvas>
     <Story name="DigitTabs with fullWidth and titleFont">
         {() => {
             const [selected, setSelected] = useState("feed");
@@ -150,6 +146,6 @@ A mobile, tablet and desktop friendly way of navigating between multiple panes. 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitTabsProps} />

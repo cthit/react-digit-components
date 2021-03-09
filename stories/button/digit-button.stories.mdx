@@ -1,12 +1,9 @@
 import { Fragment } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitButton, DigitProviders } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Buttons/DigitButton"
-    component={DigitButton}
-/>
+<Meta title="Buttons/DigitButton" component={DigitButton} />
 
 # DigitButton
 
@@ -14,7 +11,7 @@ A simple button. Use color and style with care, reflect on what button is the mo
 
 ## Flat buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary flat button">
         <DigitButton primary text="Send" />
     </Story>
@@ -27,11 +24,11 @@ A simple button. Use color and style with care, reflect on what button is the mo
     <Story name="Flat disabled button">
         <DigitButton disabled text="Info" />
     </Story>
-</Preview>
+</Canvas>
 
 ## Outlined buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary outlined button">
         <DigitButton outlined primary text="Send" />
     </Story>
@@ -44,11 +41,11 @@ A simple button. Use color and style with care, reflect on what button is the mo
     <Story name="Outlined disabled button">
         <DigitButton outlined disabled text="Info" />
     </Story>
-</Preview>
+</Canvas>
 
 ## Raised buttons
 
-<Preview>
+<Canvas>
     <Story name="Primary raised button">
         <DigitButton raised primary text="Send" />
     </Story>
@@ -61,6 +58,6 @@ A simple button. Use color and style with care, reflect on what button is the mo
     <Story name="Raised disabled button">
         <DigitButton raised disabled text="Info" />
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitButton} />

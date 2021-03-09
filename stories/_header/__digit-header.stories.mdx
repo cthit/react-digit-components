@@ -1,53 +1,62 @@
 import { useState, useRef } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { DigitHeader, DigitDesign, DigitLayout, DigitText, DigitTabs, DigitGammaActionsDummy, DigitButton } from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import {
+    DigitHeader,
+    DigitDesign,
+    DigitLayout,
+    DigitText,
+    DigitTabs,
+    DigitGammaActionsDummy,
+    DigitButton
+} from "../../src";
 
 <Meta
     title="DigitHeader"
     component={DigitHeader}
     decorators={[
-        storyFn => <div style={{ height: "600px", maxHeight: "600px" }}>{storyFn()}</div>
+        storyFn => (
+            <div style={{ height: "600px", maxHeight: "600px" }}>
+                {storyFn()}
+            </div>
+        )
     ]}
 />
 
 # DigitHeader
 
-The base of your website. If you need a drawer, use `DigitHeaderDrawer`. But you should really only use that if you have a lot of naviation needed to be accessed easily at all time. Something like `DigitTabs` or `DigitBottomNavigaiton` can be a health substitue. Examples of this can be found down below. 
+The base of your website. If you need a drawer, use `DigitHeaderDrawer`. But you should really only use that if you have a lot of naviation needed to be accessed easily at all time. Something like `DigitTabs` or `DigitBottomNavigaiton` can be a health substitue. Examples of this can be found down below.
 
 ## Simple DigitHeader
 
-<Preview>
+<Canvas>
     <Story name="simple-header">
         {() => {
             const MyCard = () => (
                 <DigitLayout.Center>
-                    <DigitDesign.Card size={{width: "200px", height: "200px"}}>  
+                    <DigitDesign.Card
+                        size={{ width: "200px", height: "200px" }}
+                    >
                         <DigitLayout.Center>
                             <DigitText.Text bold text={"This is a card"} />
                         </DigitLayout.Center>
                     </DigitDesign.Card>
                 </DigitLayout.Center>
             );
-            return (
-                <DigitHeader 
-                    title="BookIT" 
-                    renderMain={() => (
-                        <MyCard />
-                    )}
-                />
-            );
+            return <DigitHeader title="BookIT" renderMain={() => <MyCard />} />;
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitHeader with a different height and background
 
-<Preview>
+<Canvas>
     <Story name="header background">
         {() => {
             const MyCard = () => (
                 <DigitLayout.Center>
-                    <DigitDesign.Card size={{width: "200px", height: "200px"}}>  
+                    <DigitDesign.Card
+                        size={{ width: "200px", height: "200px" }}
+                    >
                         <DigitLayout.Center>
                             <DigitText.Text bold text={"This is a card"} />
                         </DigitLayout.Center>
@@ -55,32 +64,33 @@ The base of your website. If you need a drawer, use `DigitHeaderDrawer`. But you
                 </DigitLayout.Center>
             );
             return (
-                <DigitHeader 
-                    title="BookIT" 
-                    renderMain={() => (
-                        <MyCard />
-                    )}
+                <DigitHeader
+                    title="BookIT"
+                    renderMain={() => <MyCard />}
                     headerHeight="150px"
-                    backgroundImage={"url(https://images.unsplash.com/photo-1576502200272-341a4b8d5ebb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)"}
+                    backgroundImage={
+                        "url(https://images.unsplash.com/photo-1576502200272-341a4b8d5ebb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80)"
+                    }
                     titleColor="black"
                 />
             );
         }}
     </Story>
-</Preview>
-
+</Canvas>
 
 ## DigitHeader with `DigitTabs` and `DigitGammaActions`
 
 This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you should use `DigitGammaActions` instead.
 
-<Preview>
+<Canvas>
     <Story name="header tabs gamma actions">
         {() => {
             const [selected, setSelected] = useState("home");
             const MyCard = () => (
                 <DigitLayout.Center>
-                    <DigitDesign.Card size={{width: "200px", height: "200px"}}>  
+                    <DigitDesign.Card
+                        size={{ width: "200px", height: "200px" }}
+                    >
                         <DigitLayout.Center>
                             <DigitText.Text bold text={"This is a card"} />
                         </DigitLayout.Center>
@@ -88,59 +98,58 @@ This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you 
                 </DigitLayout.Center>
             );
             return (
-                <DigitHeader 
-                    title="HubbIT" 
+                <DigitHeader
+                    title="HubbIT"
                     headerRowProps={{
                         flex: "1",
                         justifyContent: "space-between"
                     }}
                     renderHeader={() => (
-                        <DigitGammaActionsDummy 
-                            nick="Portals" 
+                        <DigitGammaActionsDummy
+                            nick="Portals"
                             avatarUrl="https://i.imgur.com/RWTnpiq.gif"
                         />
                     )}
                     toolbarHeight="48px"
-                    renderToolbar={() => 
-                        <DigitTabs 
-                            onChange={value => setSelected(value)} 
-                            selected={selected} 
+                    renderToolbar={() => (
+                        <DigitTabs
+                            onChange={value => setSelected(value)}
+                            selected={selected}
                             tabs={[
                                 {
                                     text: "Home",
                                     value: "home"
-                                }, 
+                                },
                                 {
                                     text: "Feed",
                                     value: "feed"
-                                }, 
+                                },
                                 {
                                     text: "Settings",
                                     value: "settings"
                                 }
-                            ]
-                            } 
+                            ]}
                             fullWidth
                         />
-                    }
-                    renderMain={() => (
-                        <MyCard />
                     )}
+                    renderMain={() => <MyCard />}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitHeader with `renderCustomHeader`
 
-<Preview>
+<Canvas>
     <Story name="header custom header">
         {() => {
             const [selected, setSelected] = useState("home");
             const MyCard = () => (
                 <DigitLayout.Center>
-                    <DigitDesign.Card size={{width: "200px", height: "200px"}}>  
+                    <DigitDesign.Card
+                        size={{ width: "200px", height: "200px" }}
+                    >
                         <DigitLayout.Center>
                             <DigitText.Text bold text={"This is a card"} />
                         </DigitLayout.Center>
@@ -148,26 +157,25 @@ This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you 
                 </DigitLayout.Center>
             );
             return (
-                <DigitHeader 
-                    title="HubbIT" 
+                <DigitHeader
+                    title="HubbIT"
                     renderCustomHeader={() => (
                         <DigitLayout.Row flex="1" justifyContent="center">
-                            <DigitButton 
-                                raised 
-                                secondary 
+                            <DigitButton
+                                raised
+                                secondary
                                 text="Why not a button???"
-                                onClick={() => console.log("Think with Portals")}
+                                onClick={() =>
+                                    console.log("Think with Portals")
+                                }
                             />
                         </DigitLayout.Row>
                     )}
-                    renderMain={() => (
-                        <MyCard />
-                    )}
+                    renderMain={() => <MyCard />}
                 />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-
-<Props of={DigitHeader} />
+<ArgsTable of={DigitHeader} />

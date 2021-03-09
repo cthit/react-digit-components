@@ -1,11 +1,8 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitLoading } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Others/DigitLoading"
-    component={DigitLoading}
-/>
+<Meta title="Others/DigitLoading" component={DigitLoading} />
 
 # DigitLoading
 
@@ -13,7 +10,7 @@ A circular spinning animation that is nice to symbolize loading. The color is yo
 
 ## Size variation
 
-<Preview>
+<Canvas>
     <Story name="Size 20 loading">
         <DigitLoading size={20} />
     </Story>
@@ -29,6 +26,6 @@ A circular spinning animation that is nice to symbolize loading. The color is yo
     <Story name="Size 100 loading">
         <DigitLoading size={100} />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitLoading} />
+<ArgsTable of={DigitLoading} />

@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitRadioButtonGroup } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Inputs/DigitRadioButtonGroup"
-    component={DigitRadioButtonGroup}
-/>
+<Meta title="Inputs/DigitRadioButtonGroup" component={DigitRadioButtonGroup} />
 
 # DigitRadioButtonGroup
 
-Should be used when only one of multiple options can be made. You create the actual radio buttons by using the radioButtons prop. It needs an array of objects, where the object are the information for each radio button, e.g. label and id. 
+Should be used when only one of multiple options can be made. You create the actual radio buttons by using the radioButtons prop. It needs an array of objects, where the object are the information for each radio button, e.g. label and id.
 
 ## Radio button group
 
-<Preview>
+<Canvas>
     <Story name="Radio buttons">
         {() => {
             const [state, setState] = useState("5000");
@@ -104,11 +101,11 @@ Should be used when only one of multiple options can be made. You create the act
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Errors
 
-<Preview>
+<Canvas>
     <Story name="Radio buttons error">
         {() => {
             const [state, setState] = useState("5000");
@@ -204,6 +201,6 @@ Should be used when only one of multiple options can be made. You create the act
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitRadioButtonGroup} />
+<ArgsTable of={DigitRadioButtonGroup} />

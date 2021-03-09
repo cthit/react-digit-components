@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitAutocompleteSelectSingle, DigitProviders } from "../../src";
 
 <Meta
@@ -13,7 +13,7 @@ Input to select a single value via autocomplete when searching for the option.
 
 ## AutocompleteSingle
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteSingle normal">
         {() => {
             const options = [
@@ -89,9 +89,9 @@ Input to select a single value via autocomplete when searching for the option.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteSingle disabled">
         {() => {
             const options = [
@@ -106,7 +106,7 @@ Input to select a single value via autocomplete when searching for the option.
             const [value, setValue] = useState("aliens");
             return (
                 <DigitAutocompleteSelectSingle
-                    size={{width: "224px"}}
+                    size={{ width: "224px" }}
                     disabled
                     upperLabel="Disabled"
                     options={options}
@@ -144,18 +144,18 @@ Input to select a single value via autocomplete when searching for the option.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## noOptionText
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteSingle noOption">
         {() => {
             const options = [];
             const [value, setValue] = useState();
             return (
                 <DigitAutocompleteSelectSingle
-                    size={{width: "224px"}}
+                    size={{ width: "224px" }}
                     upperLabel="No option upperlabel"
                     value={value}
                     onChange={e => {
@@ -171,7 +171,7 @@ Input to select a single value via autocomplete when searching for the option.
             const [value, setValue] = useState();
             return (
                 <DigitAutocompleteSelectSingle
-                    size={{width: "224px"}}
+                    size={{ width: "224px" }}
                     upperLabel="No options custom"
                     noOptionsText="No options :("
                     value={value}
@@ -182,11 +182,11 @@ Input to select a single value via autocomplete when searching for the option.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## `disableClearable`
 
-<Preview>
+<Canvas>
     <Story name="AutocompleteSingle disableClearable">
         {() => {
             const options = [
@@ -213,6 +213,6 @@ Input to select a single value via autocomplete when searching for the option.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitAutocompleteSelectSingle} />
+<ArgsTable of={DigitAutocompleteSelectSingle} />

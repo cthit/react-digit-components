@@ -1,7 +1,7 @@
-import StylesProvider from "@material-ui/styles/StylesProvider";
-import ThemeProvider from "@material-ui/styles/ThemeProvider";
-import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import StyledEngineProvider from "@material-ui/core/StyledEngineProvider";
+import ThemeProvider from "@material-ui/core/styles/ThemeProvider";
+import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
 import PropTypes from "prop-types";
 import React, { useMemo } from "react";
 import { BrowserRouter, HashRouter, MemoryRouter } from "react-router-dom";
@@ -10,13 +10,6 @@ import { DigitTranslationsContextSingletonProvider } from "../../contexts/DigitT
 import { DigitToastContextSingletonProvider } from "../../contexts/DigitToastContext";
 import { DigitDialogContextSingletonProvider } from "../../contexts/DigitDialogContext";
 import { DigitGammaContextSingletonProvider } from "../../contexts/DigitGammaContext";
-import svLocale from "date-fns/locale/sv";
-import enLocale from "date-fns/locale/en-US";
-
-const locales = {
-    sv: svLocale,
-    en: enLocale
-};
 
 const DigitProviders = ({
     children,
@@ -31,10 +24,19 @@ const DigitProviders = ({
                 useNextVariants: true,
                 fontSize: 16
             },
-            overrides: {
+            components: {
                 MuiTooltip: {
-                    tooltip: {
-                        fontSize: 14
+                    styleOverrides: {
+                        tooltip: {
+                            fontSize: 14
+                        }
+                    }
+                },
+                //TODO Remove this, used since it crashes otherwise.
+                MuiButtonBase: {
+                    defaultProps: {
+                        // The props to apply
+                        disableRipple: true // No more ripple, on the whole application 💣!
                     }
                 }
             },
@@ -48,24 +50,22 @@ const DigitProviders = ({
                     main: "#ff9100",
                     dark: "#b26500",
                     light: "#ffa733"
-                }
+                },
+                mode: "light"
             },
             ...props.theme
         });
-    }, [props]);
+    }, []);
 
     return (
-        <StylesProvider injectFirst>
+        <StyledEngineProvider injectFirst>
             <ThemeProvider theme={theme}>
                 <DigitTranslationsContextSingletonProvider
                     defaultLanguage={defaultLanguage}
                 >
                     {activeLanguage => (
                         <DigitToastContextSingletonProvider>
-                            <MuiPickersUtilsProvider
-                                utils={DateFnsUtils}
-                                locale={locales[activeLanguage]}
-                            >
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
                                 <DigitDialogContextSingletonProvider>
                                     <DigitGammaContextSingletonProvider>
                                         {hashRouter ? (
@@ -81,12 +81,12 @@ const DigitProviders = ({
                                         )}
                                     </DigitGammaContextSingletonProvider>
                                 </DigitDialogContextSingletonProvider>
-                            </MuiPickersUtilsProvider>
+                            </LocalizationProvider>
                         </DigitToastContextSingletonProvider>
                     )}
                 </DigitTranslationsContextSingletonProvider>
             </ThemeProvider>
-        </StylesProvider>
+        </StyledEngineProvider>
     );
 };
 

@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitDatePicker } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Inputs/DigitDatePicker"
-    component={DigitDatePicker}
-/>
+<Meta title="Inputs/DigitDatePicker" component={DigitDatePicker} />
 
 # DigitDatePicker
 
-A input field with a dialog popup where you can select the date. 
+A input field with a dialog popup where you can select the date.
 
 ## DatePicker
 
-<Preview>
+<Canvas>
     <Story name="Normal">
         {() => {
             const [date, setDate] = useState(null);
@@ -56,11 +53,11 @@ A input field with a dialog popup where you can select the date.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Custom labels
 
-<Preview>
+<Canvas>
     <Story name="Custom label cancel">
         {() => {
             const [date, setDate] = useState(null);
@@ -90,9 +87,9 @@ A input field with a dialog popup where you can select the date.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
     <Story name="Today button">
         {() => {
             const [date, setDate] = useState(null);
@@ -122,11 +119,11 @@ A input field with a dialog popup where you can select the date.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Error
 
-<Preview>
+<Canvas>
     <Story name="Normal error">
         {() => {
             const [date, setDate] = useState(null);
@@ -142,6 +139,6 @@ A input field with a dialog popup where you can select the date.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitDatePicker} />
+<ArgsTable of={DigitDatePicker} />

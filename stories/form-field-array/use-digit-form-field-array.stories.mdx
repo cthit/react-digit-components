@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import {
     useDigitTranslations,
     useDigitFormFieldArray,
@@ -13,145 +13,262 @@ import {
     DigitCheckbox
 } from "../../src";
 import * as yup from "yup";
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
-<Meta title="Forms/useDigitFormFieldArray"/>
+<Meta title="Forms/useDigitFormFieldArray" />
 
 # useDigitFormFieldArray
 
 Used to be hooked up with a `DigitForm`. Utils for managing a list of values, often objects, inside a form. The hook returns an object full with helper method used to modify the array. Here are all the props that is returned:
 
-| **Name**    	| **Type** 	| **Parameters**             	| **Returns**   	| **Description**                                              	            |
-|-------------	|----------	|----------------------------	|---------------	|-------------------------------------------------------------------------- |
-| **value**   	| *array*  	|                            	|               	| The array of values                                          	            |
-| **push**    	| *func*   	| (val: any)                 	|               	| Adds an item to the end of value                             	            |
-| **swap**    	| *func*   	| (index1: int, index2: int) 	|               	| Swaps the value of index1 and index2                                  	|
-| **move**    	| *func*   	| (from: int, to: int)       	|               	| move value from given index to the given index               	            |
-| **insert**  	| *func*   	| (index: int, val: any)     	| new value     	| inserts item at the given index of the new value array       	            |
-| **unshift** 	| *func*   	| (val: any)                 	|               	| Adds an item to the start of the value                       	            |
-| **remove**  	| *func*   	| (index: int)               	| removed value 	| Removes and returns the item at the given index              	            |
-| **pop**     	| *func*   	| ()                         	| popped value  	| Pops value                                                   	            |
-| **replace** 	| *func*   	| (index: int, val: any)     	| new value     	| Replaces the item at the given index with the given new item 	            |
-| **errors** 	| *array*   |                            	|                	| Errors is an array of objects, {error: Boolean, errorMessage: String} 	|
+| **Name**    | **Type** | **Parameters**             | **Returns**   | **Description**                                                       |
+| ----------- | -------- | -------------------------- | ------------- | --------------------------------------------------------------------- |
+| **value**   | _array_  |                            |               | The array of values                                                   |
+| **push**    | _func_   | (val: any)                 |               | Adds an item to the end of value                                      |
+| **swap**    | _func_   | (index1: int, index2: int) |               | Swaps the value of index1 and index2                                  |
+| **move**    | _func_   | (from: int, to: int)       |               | move value from given index to the given index                        |
+| **insert**  | _func_   | (index: int, val: any)     | new value     | inserts item at the given index of the new value array                |
+| **unshift** | _func_   | (val: any)                 |               | Adds an item to the start of the value                                |
+| **remove**  | _func_   | (index: int)               | removed value | Removes and returns the item at the given index                       |
+| **pop**     | _func_   | ()                         | popped value  | Pops value                                                            |
+| **replace** | _func_   | (index: int, val: any)     | new value     | Replaces the item at the given index with the given new item          |
+| **errors**  | _array_  |                            |               | Errors is an array of objects, {error: Boolean, errorMessage: String} |
 
 ## Full example of useDigitFormFieldArray
 
-<Preview>
+<Canvas>
     <Story name="full example">
         {() => {
             const Field = () => {
-                const { value, push, swap, move, insert, unshift, remove, pop, replace } = useDigitFormFieldArray("cars");
+                const {
+                    value,
+                    push,
+                    swap,
+                    move,
+                    insert,
+                    unshift,
+                    remove,
+                    pop,
+                    replace
+                } = useDigitFormFieldArray("cars");
                 const [carName, setCarName] = useState("");
-                return (<React.Fragment>
-                    <DigitLayout.Row justifyContent="flex-start">
-                        <DigitTextField outlined upperLabel="Car name" value={carName} onChange={e => setCarName(e.target.value)}/>
-                        <DigitButton raised primary disabled={carName.length === 0} text={"Push"} onClick={() => {
-                            push({name: carName});
-                            setCarName("");
-                        }}/>
-                        <DigitButton raised primary disabled={carName.length === 0} text={"Unshift"} onClick={() => {
-                            unshift({name: carName});
-                            setCarName("");
-                        }}/>
-                    </DigitLayout.Row>
-                    <hr/>
-                    {value.map((car, i) => (
-                        <DigitLayout.Row key={car.name} justifyContent="flex-start">
-                            <div style={{width: "150px"}}><DigitChip key={car.name} label={car.name} onDelete={() => remove(i)}/></div>
-                            <DigitIconButton icon={ArrowDownwardIcon} onClick={() => swap(i, (i + 1) % value.length)}/>
-                            <DigitIconButton icon={ArrowUpwardIcon} onClick={() => swap(i == 0 ? value.length - 1 : i - 1, i)}/>
-                            <DigitButton disabled={carName === ""} text="Replace here" onClick={() => {
-                                replace(i, {name: carName});
-                                setCarName("");
-                            }}/>
-                            <DigitButton disabled={carName === ""} text="Insert before this" onClick={() => {
-                                insert(i, {name: carName});
-                                setCarName("");
-                            }}/>
-                            <DigitButton disabled={value.length <= 1} text="Move to random" onClick={() => {
-                                const possibleIndices = [];
-                                for(var j = 0; j < value.length; j++){
-                                    if(i !== j){
-                                        possibleIndices.push(j);
-                                    }
-                                }
-                                move(i, Math.floor(Math.random() * value.length));
-                                setCarName("");
-                            }}/>
+                return (
+                    <React.Fragment>
+                        <DigitLayout.Row justifyContent="flex-start">
+                            <DigitTextField
+                                outlined
+                                upperLabel="Car name"
+                                value={carName}
+                                onChange={e => setCarName(e.target.value)}
+                            />
+                            <DigitButton
+                                raised
+                                primary
+                                disabled={carName.length === 0}
+                                text={"Push"}
+                                onClick={() => {
+                                    push({ name: carName });
+                                    setCarName("");
+                                }}
+                            />
+                            <DigitButton
+                                raised
+                                primary
+                                disabled={carName.length === 0}
+                                text={"Unshift"}
+                                onClick={() => {
+                                    unshift({ name: carName });
+                                    setCarName("");
+                                }}
+                            />
                         </DigitLayout.Row>
-                    ))}
-                    <DigitButton raised secondary disabled={value.length === 0} text="Pop" onClick={() => alert(pop().name)}/>
-                </React.Fragment>);
-            }
+                        <hr />
+                        {value.map((car, i) => (
+                            <DigitLayout.Row
+                                key={car.name}
+                                justifyContent="flex-start"
+                            >
+                                <div style={{ width: "150px" }}>
+                                    <DigitChip
+                                        key={car.name}
+                                        label={car.name}
+                                        onDelete={() => remove(i)}
+                                    />
+                                </div>
+                                <DigitIconButton
+                                    icon={ArrowDownwardIcon}
+                                    onClick={() =>
+                                        swap(i, (i + 1) % value.length)
+                                    }
+                                />
+                                <DigitIconButton
+                                    icon={ArrowUpwardIcon}
+                                    onClick={() =>
+                                        swap(
+                                            i == 0 ? value.length - 1 : i - 1,
+                                            i
+                                        )
+                                    }
+                                />
+                                <DigitButton
+                                    disabled={carName === ""}
+                                    text="Replace here"
+                                    onClick={() => {
+                                        replace(i, { name: carName });
+                                        setCarName("");
+                                    }}
+                                />
+                                <DigitButton
+                                    disabled={carName === ""}
+                                    text="Insert before this"
+                                    onClick={() => {
+                                        insert(i, { name: carName });
+                                        setCarName("");
+                                    }}
+                                />
+                                <DigitButton
+                                    disabled={value.length <= 1}
+                                    text="Move to random"
+                                    onClick={() => {
+                                        const possibleIndices = [];
+                                        for (var j = 0; j < value.length; j++) {
+                                            if (i !== j) {
+                                                possibleIndices.push(j);
+                                            }
+                                        }
+                                        move(
+                                            i,
+                                            Math.floor(
+                                                Math.random() * value.length
+                                            )
+                                        );
+                                        setCarName("");
+                                    }}
+                                />
+                            </DigitLayout.Row>
+                        ))}
+                        <DigitButton
+                            raised
+                            secondary
+                            disabled={value.length === 0}
+                            text="Pop"
+                            onClick={() => alert(pop().name)}
+                        />
+                    </React.Fragment>
+                );
+            };
             return (
-                <DigitForm initialValues={{cars: [{name: "Ferrari"}, {name: "Ford"}, {name: "Volvo"}]}} 
-                           onSubmit={(values) => {
-                               console.log(values);
-                           }}
-                           render={() => (
-                               <DigitLayout.Column justifyContent="flex-start">
-                                    <Field />
-                                    <hr/>
-                                    <DigitButton submit onSubmit={(values) => console.log(values)} text="Submit" />
-                               </DigitLayout.Column>
-                           )}
-                           validationSchema={yup.object().shape({
-                               cars: yup.array()
-                           })}
-                           >
-                </DigitForm>
+                <DigitForm
+                    initialValues={{
+                        cars: [
+                            { name: "Ferrari" },
+                            { name: "Ford" },
+                            { name: "Volvo" }
+                        ]
+                    }}
+                    onSubmit={values => {
+                        console.log(values);
+                    }}
+                    render={() => (
+                        <DigitLayout.Column justifyContent="flex-start">
+                            <Field />
+                            <hr />
+                            <DigitButton
+                                submit
+                                onSubmit={values => console.log(values)}
+                                text="Submit"
+                            />
+                        </DigitLayout.Column>
+                    )}
+                    validationSchema={yup.object().shape({
+                        cars: yup.array()
+                    })}
+                ></DigitForm>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-## Input handling within useDigitFormFieldArray 
+## Input handling within useDigitFormFieldArray
 
-Try to use this method with memoization. 
+Try to use this method with memoization.
 
-<Preview>
+<Canvas>
     <Story name="input handling">
         {() => {
             const Field = () => {
-                const { push, innerInputs, replace, errors } = useDigitFormFieldArray("cars", {inputs: ["name"]});
+                const {
+                    push,
+                    innerInputs,
+                    replace,
+                    errors
+                } = useDigitFormFieldArray("cars", { inputs: ["name"] });
                 return (
                     <React.Fragment>
-                        <DigitButton raised primary text={"Add car"} onClick={() => {
-                            push({name: ""});
-                        }}/>
-                    <hr/>
-                    {innerInputs.map((input, i) => (
-                        <DigitTextField key={i} outlined upperLabel="Car name" {...input.name}/>           
-                    ))}
-                </React.Fragment>);
-            }
+                        <DigitButton
+                            raised
+                            primary
+                            text={"Add car"}
+                            onClick={() => {
+                                push({ name: "" });
+                            }}
+                        />
+                        <hr />
+                        {innerInputs.map((input, i) => (
+                            <DigitTextField
+                                key={i}
+                                outlined
+                                upperLabel="Car name"
+                                {...input.name}
+                            />
+                        ))}
+                    </React.Fragment>
+                );
+            };
             return (
-                <DigitForm initialValues={{cars: [{name: "Ferrari"}, {name: "Ford"}, {name: "Volvo"}]}} 
-                           onSubmit={(values) => {
-                               console.log(values);
-                           }}
-                           render={({isValid, errors}) => (
-                               <DigitLayout.Column justifyContent="flex-start">
-                                    <Field />
-                                    <hr/>
-                                    <DigitButton primary raised disabled={!isValid} submit onSubmit={(values) => console.log(values)} text="Submit" />
-                               </DigitLayout.Column>
-                           )}
-                           validationSchema={yup.object().shape({
-                               cars: yup.array().of(yup.object().shape({
-                                   name: yup.string().required("Car must have a name")
-                               }))
-                           })}
-                           >
-                </DigitForm>
+                <DigitForm
+                    initialValues={{
+                        cars: [
+                            { name: "Ferrari" },
+                            { name: "Ford" },
+                            { name: "Volvo" }
+                        ]
+                    }}
+                    onSubmit={values => {
+                        console.log(values);
+                    }}
+                    render={({ isValid, errors }) => (
+                        <DigitLayout.Column justifyContent="flex-start">
+                            <Field />
+                            <hr />
+                            <DigitButton
+                                primary
+                                raised
+                                disabled={!isValid}
+                                submit
+                                onSubmit={values => console.log(values)}
+                                text="Submit"
+                            />
+                        </DigitLayout.Column>
+                    )}
+                    validationSchema={yup.object().shape({
+                        cars: yup.array().of(
+                            yup.object().shape({
+                                name: yup
+                                    .string()
+                                    .required("Car must have a name")
+                            })
+                        )
+                    })}
+                ></DigitForm>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
-| **Name** 	| **Type** 	| **Description**        	|
-|----------	|----------	|------------------------	|
-| **name** 	| *string* 	| The name for the field 	|
+| **Name** | **Type** | **Description**        |
+| -------- | -------- | ---------------------- |
+| **name** | _string_ | The name for the field |

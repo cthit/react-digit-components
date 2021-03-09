@@ -1,42 +1,38 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitMenu } from "../../src";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Buttons/DigitMenu"
-    component={DigitMenu}
-/>
+<Meta title="Buttons/DigitMenu" component={DigitMenu} />
 
 # DigitMenu
 
 A menu.
 
-<Preview>
+<Canvas>
     <Story name="Menu">
-        <DigitMenu 
+        <DigitMenu
             valueToTextMap={{
                 icecream: "Icecream",
                 candy: "Candy",
                 soda: "Soda"
-            }} 
+            }}
             order={["icecream", "candy", "soda"]}
-            onClick={(r) => console.log(r)}
+            onClick={r => console.log(r)}
         />
     </Story>
     <Story name="Menu ExpandMore icon">
-        <DigitMenu 
+        <DigitMenu
             icon={ExpandMore}
             valueToTextMap={{
                 icecream: "Icecream",
                 candy: "Candy",
                 soda: "Soda"
-            }} 
+            }}
             order={["icecream", "candy", "soda"]}
-            onClick={(r) => console.log(r)}
+            onClick={r => console.log(r)}
         />
     </Story>
-</Preview>
-
+</Canvas>
 
 <Props of={DigitMenu} />

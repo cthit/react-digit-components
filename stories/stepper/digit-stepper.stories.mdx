@@ -1,19 +1,16 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitStepper, DigitButton } from "../../src";
 import { Center } from "../../src/styles/digit-layout/DigitLayout.styles";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Navigation/DigitStepper"
-    component={DigitStepper}
-/>
+<Meta title="Navigation/DigitStepper" component={DigitStepper} />
 
 # DigitStepper
 
-A useful way to tell a user where they are during a multistep process. Be aware of using to many steps because of mobile users.  
+A useful way to tell a user where they are during a multistep process. Be aware of using to many steps because of mobile users.
 
-<Preview>
+<Canvas>
     <Story name="Normal">
         {() => {
             const [activeStep, setStep] = useState(0);
@@ -23,20 +20,20 @@ A useful way to tell a user where they are during a multistep process. Be aware 
                         activeStep={activeStep}
                         steps={[
                             {
-                                text: "First step of this stepper",
+                                text: "First step of this stepper"
                             },
                             {
-                                text: "The second of the cool cooler stepper",
+                                text: "The second of the cool cooler stepper"
                             },
                             {
-                                text: "Whaaaaaaat",
+                                text: "Whaaaaaaat"
                             },
                             {
-                                text: "Almost finished",
+                                text: "Almost finished"
                             },
                             {
-                                text: "Finished",
-                            },
+                                text: "Finished"
+                            }
                         ]}
                     />
                     <Center>
@@ -53,11 +50,11 @@ A useful way to tell a user where they are during a multistep process. Be aware 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Other starting step
 
-<Preview>
+<Canvas>
     <Story name="Other start">
         {() => {
             const [activeStep, setStep] = useState(2);
@@ -67,20 +64,20 @@ A useful way to tell a user where they are during a multistep process. Be aware 
                         activeStep={activeStep}
                         steps={[
                             {
-                                text: "First step of this stepper",
+                                text: "First step of this stepper"
                             },
                             {
-                                text: "The second of the stepper",
+                                text: "The second of the stepper"
                             },
                             {
-                                text: "WhaaaaOnly a few steps to go",
+                                text: "WhaaaaOnly a few steps to go"
                             },
                             {
-                                text: "So close",
+                                text: "So close"
                             },
                             {
-                                text: "You did it!",
-                            },
+                                text: "You did it!"
+                            }
                         ]}
                     />
                     <Center>
@@ -97,6 +94,6 @@ A useful way to tell a user where they are during a multistep process. Be aware 
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitStepper} />
+<ArgsTable of={DigitStepper} />

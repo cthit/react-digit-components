@@ -1,27 +1,28 @@
 import { useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitGammaActionsDummy, DigitGammaActions } from "../../src";
 
-<Meta
-    title="Others/DigitGammaActions"
-    component={DigitGammaActions}
-/>
+<Meta title="Others/DigitGammaActions" component={DigitGammaActions} />
 
 # DigitGammaActions
+
 An easy way of displaying the signed in user aswell as actions to view the users profile in gamma as well as signing out. This should be placed in `DigitHeader` on the right for consistency.
 
 Please note that `nick` and `avatarUrl` can't be controlled with `DigitGammaActions`, but can instead be used with `DigitGammaActionsDummy` if you haven't integrated with gamma but still want the look and feel. When you're actually using `DigitGammaActions`, you don't need to give any props. Note that though it assumes that `useGamma` is used and has been set up.
 
-<Preview>
+<Canvas>
     <Story name="gamma actions no avatar">
-        <DigitGammaActionsDummy nick="Sven"/>
+        <DigitGammaActionsDummy nick="Sven" />
     </Story>
     <Story name="gamma actions avatar">
-        <DigitGammaActionsDummy nick="Portals" avatarUrl="https://i.imgur.com/RWTnpiq.gif"/>
+        <DigitGammaActionsDummy
+            nick="Portals"
+            avatarUrl="https://i.imgur.com/RWTnpiq.gif"
+        />
     </Story>
-</Preview>
+</Canvas>
 
-## `signOut` 
+## `signOut`
 
 `DigitGammaActions` has a prop called `signOut` that is a good thing to implement. It should be a promise that tries to destroy the cookie session in the backend so that when the user presses sign out, the user signs out from your website along with gamma.
 
@@ -29,12 +30,19 @@ Please note that `nick` and `avatarUrl` can't be controlled with `DigitGammaActi
 
 With `customOptions`, `customOrder` and `customOptionsOnClick` you can add your own actions to `DigitGammaActions`. If possible, try to keep `"viewAccount"` and `"signOut"` at the bottom.
 
-
-<Preview>
+<Canvas>
     <Story name="gamma actions custom actions">
-        <DigitGammaActionsDummy nick="Sven" customOptions={{admin: "Admin"}} customOrder={["admin", "viewAccount", "signOut"]} customOptionsOnClick={(item) => item === "admin" ? console.log("Admin!") : console.log("Something else..")}/>
+        <DigitGammaActionsDummy
+            nick="Sven"
+            customOptions={{ admin: "Admin" }}
+            customOrder={["admin", "viewAccount", "signOut"]}
+            customOptionsOnClick={item =>
+                item === "admin"
+                    ? console.log("Admin!")
+                    : console.log("Something else..")
+            }
+        />
     </Story>
-</Preview>
+</Canvas>
 
-
-<Props of={DigitGammaActions} />
+<ArgsTable of={DigitGammaActions} />

@@ -1,18 +1,15 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import {
-    useDigitToast,
-    DigitButton
-} from "../../src";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
+import { useDigitToast, DigitButton } from "../../src";
 import * as yup from "yup";
 
-<Meta title="Others/useDigitToast"/>
+<Meta title="Others/useDigitToast" />
 
 # useDigitToast
 
 A easy way of showing a small text of information after a user action, such as a deletion or creation. It also provides a way to add a button to this toast such as a undo button. `useDigitToast` has a built in queue, meaning you can spam away the toast messages.
 
-<Preview>
+<Canvas>
     <Story name="Standard">
         {() => {
             const [queueToast] = useDigitToast({
@@ -21,19 +18,28 @@ A easy way of showing a small text of information after a user action, such as a
                 actionHandler: () => {}
             });
             return (
-                <DigitButton text="Queue toast" raised primary onClick={() => queueToast({text: "Hej: " + (new Date().getTime()/24)})}/>
+                <DigitButton
+                    text="Queue toast"
+                    raised
+                    primary
+                    onClick={() =>
+                        queueToast({
+                            text: "Hej: " + new Date().getTime() / 24
+                        })
+                    }
+                />
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 These are the props for the object given as the first and only argument in the hook `useDigitToast`. `useDigitToast` returns an array with one function called `queueToast`. It takes in the same object as the hook does, but overrides if there's any conflicts between the two objects.
 
-| **Name**          	| **Type** 	| **Description**                                        	|
-|-------------------	|----------	|--------------------------------------------------------	|
-| **duration**      	| *number* 	| The duration in milliseconds of the toast              	|
-| **text**          	| *string* 	| The text inside the toast                              	|
-| **actionHandler** 	| *func*   	| Callback function when you press the button on a toast 	|
-| **actionText**    	| *string* 	| Button text                                            	|
+| **Name**          | **Type** | **Description**                                        |
+| ----------------- | -------- | ------------------------------------------------------ |
+| **duration**      | _number_ | The duration in milliseconds of the toast              |
+| **text**          | _string_ | The text inside the toast                              |
+| **actionHandler** | _func_   | Callback function when you press the button on a toast |
+| **actionText**    | _string_ | Button text                                            |

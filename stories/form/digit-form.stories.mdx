@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import {
     useDigitFormField,
     DigitForm,
@@ -10,47 +10,61 @@ import {
 } from "../../src";
 import * as yup from "yup";
 
-<Meta title="Forms/DigitForm" component={DigitForm}/>
+<Meta title="Forms/DigitForm" component={DigitForm} />
 
 # DigitForm
 
-`DigitForm` is used in cognation with `useDigitFormField` and `useDigitFormFieldArray`. With this setup you can create a very customizable form. But if you just need a column with fields, then consider using the much easier `DigitEditData` and `DigitEditDataCard`. 
+`DigitForm` is used in cognation with `useDigitFormField` and `useDigitFormFieldArray`. With this setup you can create a very customizable form. But if you just need a column with fields, then consider using the much easier `DigitEditData` and `DigitEditDataCard`.
 
-<Preview>
+<Canvas>
     <Story name="simple">
         {() => {
             const TextField = () => {
                 const fieldValues = useDigitFormField("name");
                 return (
-                    <DigitTextField {...fieldValues} upperLabel="Your name" filled/>
+                    <DigitTextField
+                        {...fieldValues}
+                        upperLabel="Your name"
+                        filled
+                    />
                 );
             };
             const SelectField = () => {
                 const fieldValues = useDigitFormField("language");
                 return (
-                    <DigitSelect {...fieldValues} filled valueToTextMap={{sv: "Swedish", en: "English"}} upperLabel="Language"/>
+                    <DigitSelect
+                        {...fieldValues}
+                        filled
+                        valueToTextMap={{ sv: "Swedish", en: "English" }}
+                        upperLabel="Language"
+                    />
                 );
-            }
+            };
             return (
-                <DigitForm initialValues={{name: "Theodor", language: "sv"}} 
-                           onSubmit={(values) => {
-                               console.log(values);
-                           }}
-                           render={() => (
-                               <DigitLayout.Column size={{width: "320px"}}>
-                                    <TextField />
-                                    <SelectField />
-                                    <DigitButton raised submit onSubmit={(values) => console.log(values)} text="Submit" />
-                               </DigitLayout.Column>
-                           )}
-                           validationSchema={yup.object().shape({
-                               name: yup.string()
-                           })}
-                           >
-                </DigitForm>
+                <DigitForm
+                    initialValues={{ name: "Theodor", language: "sv" }}
+                    onSubmit={values => {
+                        console.log(values);
+                    }}
+                    render={() => (
+                        <DigitLayout.Column size={{ width: "320px" }}>
+                            <TextField />
+                            <SelectField />
+                            <DigitButton
+                                raised
+                                submit
+                                onSubmit={values => console.log(values)}
+                                text="Submit"
+                            />
+                        </DigitLayout.Column>
+                    )}
+                    validationSchema={yup.object().shape({
+                        name: yup.string()
+                    })}
+                ></DigitForm>
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitForm} />
+<ArgsTable of={DigitForm} />

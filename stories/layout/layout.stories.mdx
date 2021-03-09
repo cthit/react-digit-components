@@ -1,11 +1,8 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
-import { DigitLayout, DigitText} from "../../src";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
+import { DigitLayout, DigitText } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Styles/DigitLayout"
-    component={DigitLayout}
-/>
+<Meta title="Styles/DigitLayout" component={DigitLayout} />
 
 # DigitLayout
 
@@ -13,7 +10,7 @@ Different ways of structuring content.
 
 ## Column
 
-<Preview>
+<Canvas>
     <Story name="Column">
         <DigitLayout.Column>
             <div>1</div>
@@ -23,11 +20,11 @@ Different ways of structuring content.
             <div>5</div>
         </DigitLayout.Column>
     </Story>
-</Preview>
+</Canvas>
 
 ## Row
 
-<Preview>
+<Canvas>
     <Story name="Row">
         <DigitLayout.Row>
             <div>1</div>
@@ -37,11 +34,11 @@ Different ways of structuring content.
             <div>5</div>
         </DigitLayout.Row>
     </Story>
-</Preview>
+</Canvas>
 
 ## Grid
 
-<Preview>
+<Canvas>
     <Story name="Grid">
         <DigitLayout.Grid columns={`repeat(${3}, 1fr)`}>
             <div>1</div>
@@ -51,11 +48,11 @@ Different ways of structuring content.
             <div>5</div>
         </DigitLayout.Grid>
     </Story>
-</Preview>
+</Canvas>
 
 ## UniformGrid
 
-<Preview>
+<Canvas>
     <Story name="UniformGrid">
         <DigitLayout.UniformGrid margin="30px" minItemWidth="150px">
             <div>1</div>
@@ -65,11 +62,11 @@ Different ways of structuring content.
             <div>5</div>
         </DigitLayout.UniformGrid>
     </Story>
-</Preview>
+</Canvas>
 
 ## Order
 
-<Preview>
+<Canvas>
     <Story name="Order">
         {() => {
             const orderBlue = 4;
@@ -94,6 +91,6 @@ Different ways of structuring content.
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitLayout} />

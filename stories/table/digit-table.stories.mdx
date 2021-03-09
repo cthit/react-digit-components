@@ -1,20 +1,17 @@
 import { Fragment, useState, useMemo } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitTable, DigitProviders } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Display data/DigitTable"
-    component={DigitTable}
-/>
+<Meta title="Display data/DigitTable" component={DigitTable} />
 
 # DigitTable
 
-Table is a great way of displaying and filtering large amount of data. It's however not so kind for the phone user. `DigitList` could in some cases maybe be better for those scenarios. 
+Table is a great way of displaying and filtering large amount of data. It's however not so kind for the phone user. `DigitList` could in some cases maybe be better for those scenarios.
 
 ## Simple table
 
-<Preview>
+<Canvas>
     <Story name="simple table">
         <DigitTable
             titleText="Humans"
@@ -28,56 +25,56 @@ Table is a great way of displaying and filtering large amount of data. It's howe
                 age: "Age"
             }}
             data={[
-                    {
-                        id: "1337",
-                        firstName: "Asdf",
-                        lastName: "Asdfsson",
-                        age: 33
-                    },
-                    {
-                        id: "4444",
-                        firstName: "Glass",
-                        lastName: "Glasssson",
-                        age: 50
-                    },
-                    {
-                        id: "4324",
-                        firstName: "Jeremy",
-                        lastName: "Clarkson",
-                        age: 50
-                    },
-                    {
-                        id: "1234",
-                        firstName: "James",
-                        lastName: "May",
-                        age: 99
-                    },
-                    {
-                        id: "4321",
-                        firstName: "Richard",
-                        lastName: "Hammond",
-                        age: 18
-                    },
-                    {
-                        id: "9999",
-                        firstName: "The",
-                        lastName: "Stig",
-                        age: 55
-                    },
-                    {
-                        id: "2244",
-                        firstName: "Henrik",
-                        lastName: "Lundqvist",
-                        age: 30
-                    }
+                {
+                    id: "1337",
+                    firstName: "Asdf",
+                    lastName: "Asdfsson",
+                    age: 33
+                },
+                {
+                    id: "4444",
+                    firstName: "Glass",
+                    lastName: "Glasssson",
+                    age: 50
+                },
+                {
+                    id: "4324",
+                    firstName: "Jeremy",
+                    lastName: "Clarkson",
+                    age: 50
+                },
+                {
+                    id: "1234",
+                    firstName: "James",
+                    lastName: "May",
+                    age: 99
+                },
+                {
+                    id: "4321",
+                    firstName: "Richard",
+                    lastName: "Hammond",
+                    age: 18
+                },
+                {
+                    id: "9999",
+                    firstName: "The",
+                    lastName: "Stig",
+                    age: 55
+                },
+                {
+                    id: "2244",
+                    firstName: "Henrik",
+                    lastName: "Lundqvist",
+                    age: 30
+                }
             ]}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Table with search
 
-<Preview>
+<Canvas>
     <Story name="table with search">
         <DigitTable
             titleText="Humans"
@@ -93,56 +90,56 @@ Table is a great way of displaying and filtering large amount of data. It's howe
                 age: "Age"
             }}
             data={[
-                    {
-                        id: "1337",
-                        firstName: "Asdf",
-                        lastName: "Asdfsson",
-                        age: 33
-                    },
-                    {
-                        id: "4444",
-                        firstName: "Glass",
-                        lastName: "Glasssson",
-                        age: 50
-                    },
-                    {
-                        id: "4324",
-                        firstName: "Jeremy",
-                        lastName: "Clarkson",
-                        age: 50
-                    },
-                    {
-                        id: "1234",
-                        firstName: "James",
-                        lastName: "May",
-                        age: 99
-                    },
-                    {
-                        id: "4321",
-                        firstName: "Richard",
-                        lastName: "Hammond",
-                        age: 18
-                    },
-                    {
-                        id: "9999",
-                        firstName: "The",
-                        lastName: "Stig",
-                        age: 55
-                    },
-                    {
-                        id: "2244",
-                        firstName: "Henrik",
-                        lastName: "Lundqvist",
-                        age: 30
-                    }
+                {
+                    id: "1337",
+                    firstName: "Asdf",
+                    lastName: "Asdfsson",
+                    age: 33
+                },
+                {
+                    id: "4444",
+                    firstName: "Glass",
+                    lastName: "Glasssson",
+                    age: 50
+                },
+                {
+                    id: "4324",
+                    firstName: "Jeremy",
+                    lastName: "Clarkson",
+                    age: 50
+                },
+                {
+                    id: "1234",
+                    firstName: "James",
+                    lastName: "May",
+                    age: 99
+                },
+                {
+                    id: "4321",
+                    firstName: "Richard",
+                    lastName: "Hammond",
+                    age: 18
+                },
+                {
+                    id: "9999",
+                    firstName: "The",
+                    lastName: "Stig",
+                    age: 55
+                },
+                {
+                    id: "2244",
+                    firstName: "Henrik",
+                    lastName: "Lundqvist",
+                    age: 30
+                }
             ]}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Table with details buttons
 
-<Preview>
+<Canvas>
     <Story name="table with details buttons">
         <DigitTable
             titleText="Humans"
@@ -159,59 +156,59 @@ Table is a great way of displaying and filtering large amount of data. It's howe
                 __link: "Details"
             }}
             data={[
-                    {
-                        id: "1337",
-                        firstName: "Asdf",
-                        lastName: "Asdfsson",
-                        age: 33,
-                        __link: "/1337"
-                    },
-                    {
-                        id: "4444",
-                        firstName: "Glass",
-                        lastName: "Glasssson",
-                        age: 50,
-                        __link: "/4444"
-                    },
-                    {
-                        id: "4324",
-                        firstName: "Jeremy",
-                        lastName: "Clarkson",
-                        age: 50
-                    },
-                    {
-                        id: "1234",
-                        firstName: "James",
-                        lastName: "May",
-                        age: 99
-                    },
-                    {
-                        id: "4321",
-                        firstName: "Richard",
-                        lastName: "Hammond",
-                        age: 18
-                    },
-                    {
-                        id: "9999",
-                        firstName: "The",
-                        lastName: "Stig",
-                        age: 55,
-                        __link: "/9999"
-                    },
-                    {
-                        id: "2244",
-                        firstName: "Henrik",
-                        lastName: "Lundqvist",
-                        age: 30
-                    }
+                {
+                    id: "1337",
+                    firstName: "Asdf",
+                    lastName: "Asdfsson",
+                    age: 33,
+                    __link: "/1337"
+                },
+                {
+                    id: "4444",
+                    firstName: "Glass",
+                    lastName: "Glasssson",
+                    age: 50,
+                    __link: "/4444"
+                },
+                {
+                    id: "4324",
+                    firstName: "Jeremy",
+                    lastName: "Clarkson",
+                    age: 50
+                },
+                {
+                    id: "1234",
+                    firstName: "James",
+                    lastName: "May",
+                    age: 99
+                },
+                {
+                    id: "4321",
+                    firstName: "Richard",
+                    lastName: "Hammond",
+                    age: 18
+                },
+                {
+                    id: "9999",
+                    firstName: "The",
+                    lastName: "Stig",
+                    age: 55,
+                    __link: "/9999"
+                },
+                {
+                    id: "2244",
+                    firstName: "Henrik",
+                    lastName: "Lundqvist",
+                    age: 30
+                }
             ]}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Dense table
 
-<Preview>
+<Canvas>
     <Story name="dense table">
         <DigitTable
             titleText="Humans"
@@ -224,76 +221,82 @@ Table is a great way of displaying and filtering large amount of data. It's howe
                 id: "Id",
                 firstName: "First name",
                 lastName: "Last name",
-                age: "Age",
+                age: "Age"
             }}
             dense
             data={[
-                    {
-                        id: "1337",
-                        firstName: "Asdf",
-                        lastName: "Asdfsson",
-                        age: 33,
-                    },
-                    {
-                        id: "4444",
-                        firstName: "Glass",
-                        lastName: "Glasssson",
-                        age: 50,
-                    },
-                    {
-                        id: "4324",
-                        firstName: "Jeremy",
-                        lastName: "Clarkson",
-                        age: 50
-                    },
-                    {
-                        id: "1234",
-                        firstName: "James",
-                        lastName: "May",
-                        age: 99
-                    },
-                    {
-                        id: "4321",
-                        firstName: "Richard",
-                        lastName: "Hammond",
-                        age: 18
-                    },
-                    {
-                        id: "9999",
-                        firstName: "The",
-                        lastName: "Stig",
-                        age: 55,
-                    },
-                    {
-                        id: "2244",
-                        firstName: "Henrik",
-                        lastName: "Lundqvist",
-                        age: 30
-                    }
+                {
+                    id: "1337",
+                    firstName: "Asdf",
+                    lastName: "Asdfsson",
+                    age: 33
+                },
+                {
+                    id: "4444",
+                    firstName: "Glass",
+                    lastName: "Glasssson",
+                    age: 50
+                },
+                {
+                    id: "4324",
+                    firstName: "Jeremy",
+                    lastName: "Clarkson",
+                    age: 50
+                },
+                {
+                    id: "1234",
+                    firstName: "James",
+                    lastName: "May",
+                    age: 99
+                },
+                {
+                    id: "4321",
+                    firstName: "Richard",
+                    lastName: "Hammond",
+                    age: 18
+                },
+                {
+                    id: "9999",
+                    firstName: "The",
+                    lastName: "Stig",
+                    age: 55
+                },
+                {
+                    id: "2244",
+                    firstName: "Henrik",
+                    lastName: "Lundqvist",
+                    age: 30
+                }
             ]}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Large table
 
-<Preview>
+<Canvas>
     <Story name="large table">
         {() => {
             const data = useMemo(() => {
                 const firstNames = ["Adam", "Anders", "Alf", "Amanda", "Anna"];
-                const lastNames = ["Adamsson", "Andersson", "Alfsson", "Amandadotter", "Annadotter"]
+                const lastNames = [
+                    "Adamsson",
+                    "Andersson",
+                    "Alfsson",
+                    "Amandadotter",
+                    "Annadotter"
+                ];
                 const output = [];
-                for(let i = 0; i < 500; i++){
+                for (let i = 0; i < 500; i++) {
                     output.push({
                         id: Math.random() + "",
                         firstName: firstNames[Math.floor(Math.random() * 4)],
                         lastName: lastNames[Math.floor(Math.random() * 4)],
                         age: Math.random() * 90
-                    })
+                    });
                 }
                 return output;
-            })
+            });
             return (
                 <DigitTable
                     titleText="Humans"
@@ -312,11 +315,11 @@ Table is a great way of displaying and filtering large amount of data. It's howe
             );
         }}
     </Story>
-</Preview>
+</Canvas>
 
 ## Empty table
 
-<Preview>
+<Canvas>
     <Story name="empty table">
         <DigitTable
             titleText="Humans"
@@ -334,13 +337,13 @@ Table is a great way of displaying and filtering large amount of data. It's howe
             emptyTableText="Empty table :("
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## Table with back button
 
 Sometimes it's nice to have a back button.
 
-<Preview>
+<Canvas>
     <Story name="table with back button">
         <DigitTable
             backButton
@@ -357,52 +360,51 @@ Sometimes it's nice to have a back button.
                 age: "Age"
             }}
             data={[
-                    {
-                        id: "1337",
-                        firstName: "Asdf",
-                        lastName: "Asdfsson",
-                        age: 33
-                    },
-                    {
-                        id: "4444",
-                        firstName: "Glass",
-                        lastName: "Glasssson",
-                        age: 50
-                    },
-                    {
-                        id: "4324",
-                        firstName: "Jeremy",
-                        lastName: "Clarkson",
-                        age: 50
-                    },
-                    {
-                        id: "1234",
-                        firstName: "James",
-                        lastName: "May",
-                        age: 99
-                    },
-                    {
-                        id: "4321",
-                        firstName: "Richard",
-                        lastName: "Hammond",
-                        age: 18
-                    },
-                    {
-                        id: "9999",
-                        firstName: "The",
-                        lastName: "Stig",
-                        age: 55
-                    },
-                    {
-                        id: "2244",
-                        firstName: "Henrik",
-                        lastName: "Lundqvist",
-                        age: 30
-                    }
+                {
+                    id: "1337",
+                    firstName: "Asdf",
+                    lastName: "Asdfsson",
+                    age: 33
+                },
+                {
+                    id: "4444",
+                    firstName: "Glass",
+                    lastName: "Glasssson",
+                    age: 50
+                },
+                {
+                    id: "4324",
+                    firstName: "Jeremy",
+                    lastName: "Clarkson",
+                    age: 50
+                },
+                {
+                    id: "1234",
+                    firstName: "James",
+                    lastName: "May",
+                    age: 99
+                },
+                {
+                    id: "4321",
+                    firstName: "Richard",
+                    lastName: "Hammond",
+                    age: 18
+                },
+                {
+                    id: "9999",
+                    firstName: "The",
+                    lastName: "Stig",
+                    age: 55
+                },
+                {
+                    id: "2244",
+                    firstName: "Henrik",
+                    lastName: "Lundqvist",
+                    age: 30
+                }
             ]}
         />
     </Story>
-</Preview>
-
+</Canvas>
 
 <Props of={DigitTable} />

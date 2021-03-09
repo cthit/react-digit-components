@@ -1,11 +1,8 @@
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitMarkdown } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Others/DigitMarkdown"
-    component={DigitMarkdown}
-/>
+<Meta title="Others/DigitMarkdown" component={DigitMarkdown} />
 
 # DigitMarkdown
 
@@ -13,10 +10,10 @@ Renders markdown with react-digit-components tags, e.g. heading comes from `Digi
 
 ## Markdown
 
-<Preview>
+<Canvas>
     <Story name="Size 20 loading">
         <DigitMarkdown markdownSource="Hello, **this** is *markdown*." />
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitMarkdown} />

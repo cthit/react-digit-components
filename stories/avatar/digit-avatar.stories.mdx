@@ -1,35 +1,32 @@
 import { Fragment } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs/blocks";
 import { DigitAvatar } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 import HomeIcon from "@material-ui/icons/Home";
 
-<Meta
-    title="Others/DigitAvatar"
-    component={DigitAvatar}
-/>
+<Meta title="Others/DigitAvatar" component={DigitAvatar} />
 
 # DigitAvatar
 
-A standardized size for images.   
+A standardized size for images.
 
 ## DigitAvatar with icon
 
-<Preview>
+<Canvas>
     <Story name="DigitAvatar with icon">
         <DigitAvatar icon={HomeIcon} />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitAvatar with imageSrc
 
-<Preview>
+<Canvas>
     <Story name="DigitAvatar with imageSrc">
         <DigitAvatar
             imageSrc="https://i.imgur.com/G8lFDH1.jpg"
             imageAlt="Wheatly"
         />
     </Story>
-</Preview>
+</Canvas>
 
-<Props of={DigitAvatar} />
+<ArgsTable of={DigitAvatar} />

@@ -1,20 +1,17 @@
 import { Fragment } from "react";
-import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Canvas, Props } from "@storybook/addon-docs/blocks";
 import { DigitChip, DigitAvatar } from "../../src";
 import DigitProvidersDecorator from "../../.storybook/DigitProvidersDecorator";
 
-<Meta
-    title="Others/DigitChip"
-    component={DigitChip}
-/>
+<Meta title="Others/DigitChip" component={DigitChip} />
 
 # DigitChip
 
-Small elements that has labels. With the possibility of icon and delete icon. Can be used when listing a list of elements. For example pizza toppings. 
+Small elements that has labels. With the possibility of icon and delete icon. Can be used when listing a list of elements. For example pizza toppings.
 
 ## DigitChip with label
 
-<Preview>
+<Canvas>
     <Story name="DigitChip with label">
         <DigitChip primary label="Hej" />
     </Story>
@@ -24,11 +21,11 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
     <Story name="DigitChip default with label">
         <DigitChip label="Hej" />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitChip outlined with label
 
-<Preview>
+<Canvas>
     <Story name="DigitChip primary outlined with label">
         <DigitChip primary outlined label="Hej" />
     </Story>
@@ -38,11 +35,11 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
     <Story name="DigitChip default outlined with label">
         <DigitChip outlined label="Hej" />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitChip with label and delete
 
-<Preview>
+<Canvas>
     <Story name="DigitChip primary with label and delete">
         <DigitChip
             primary
@@ -69,11 +66,11 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitChip outlined with label and delete
 
-<Preview>
+<Canvas>
     <Story name="DigitChip primary outlined with label and delete">
         <DigitChip
             primary
@@ -103,11 +100,11 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitChip filled with avatar and delete
 
-<Preview>
+<Canvas>
     <Story name="DigitChip primary with avatar and delete">
         <DigitChip
             primary
@@ -149,11 +146,11 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitChip outlined with avatar and delete
 
-<Preview>
+<Canvas>
     <Story name="DigitChip outlined primary with avatar and delete">
         <DigitChip
             outlined
@@ -198,11 +195,11 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitChip filled with label, avatar and delete
 
-<Preview>
+<Canvas>
     <Story name="DigitChip primary with label, avatar and delete">
         <DigitChip
             primary
@@ -247,11 +244,11 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 ## DigitChip outlined with label, avatar and delete
 
-<Preview>
+<Canvas>
     <Story name="DigitChip outlined primary with label, avatar and delete">
         <DigitChip
             outlined
@@ -299,6 +296,6 @@ Small elements that has labels. With the possibility of icon and delete icon. Ca
             }}
         />
     </Story>
-</Preview>
+</Canvas>
 
 <Props of={DigitChip} />

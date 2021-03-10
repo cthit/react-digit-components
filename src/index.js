@@ -33,6 +33,8 @@ import DigitDialog from "./elements/digit-dialog";
 import DigitSelectFile from "./elements/digit-select-file";
 import DigitGammaActions from "./elements/digit-gamma-actions";
 import DigitHeader from "./elements/digit-header";
+import DigitSwipeableDrawer from "./elements/digit-swipeable-drawer";
+import DigitRating from "./elements/digit-rating";
 import { DigitGammaActionsDummy } from "./elements/digit-gamma-actions/DigitGammaActions.element";
 
 import DigitProviders from "./declaratives/digit-providers";
@@ -173,7 +175,9 @@ export {
     DigitButtonGroup,
     DigitSelectFile,
     DigitGammaActions,
+    DigitSwipeableDrawer,
     DigitGammaActionsDummy,
+    DigitRating,
     /* Views */
     DigitToast,
     DigitDialog,

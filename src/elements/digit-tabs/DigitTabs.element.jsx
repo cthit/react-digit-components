@@ -1,13 +1,13 @@
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import withStyles from "@material-ui/styles/withStyles";
+import makeStyles from "@material-ui/styles/makeStyles";
 import PropTypes from "prop-types";
 import React from "react";
 import { Text, Title } from "../../styles/digit-text/DigitText.styles";
 import findIndex from "lodash/findIndex";
 import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui";
 
-const styles = ({ inheritBackground, ...theme }) => ({
+const useStyles = makeStyles(theme => ({
     backgroundPrimary: {
         backgroundColor: theme.palette.primary.main
     },
@@ -23,7 +23,7 @@ const styles = ({ inheritBackground, ...theme }) => ({
     indicator: {
         height: "3px"
     }
-});
+}));
 
 const DigitTabs = ({
     selected,
@@ -32,7 +32,6 @@ const DigitTabs = ({
     onChange,
     titleFont,
     fullWidth,
-    classes,
     primaryIndicator,
     inheritBackground,
     size,
@@ -54,6 +53,8 @@ const DigitTabs = ({
         gridColumn,
         gridRow
     });
+
+    const classes = useStyles();
 
     return (
         <Tabs
@@ -230,4 +231,4 @@ DigitTabs.defaultProps = {
 
 export { DigitTabs };
 
-export default withStyles(styles)(DigitTabs);
+export default DigitTabs;

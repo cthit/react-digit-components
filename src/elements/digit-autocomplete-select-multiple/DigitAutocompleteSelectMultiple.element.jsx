@@ -13,6 +13,16 @@ import useLayoutMaterialUi from "../../styles/material-ui/use-layout-material-ui
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
+const findText = (tagValue, options) => {
+    const option = find(options, { value: tagValue });
+
+    if (option == null) {
+        return "";
+    } else {
+        return option.text;
+    }
+};
+
 const DigitAutocompleteSelectMultiple = ({
     options,
     value,
@@ -59,35 +69,33 @@ const DigitAutocompleteSelectMultiple = ({
             classes={outerClasses}
             disableClearable={disableClearable}
             autoHighlight
-            //To keep consistency throughout rdc, only the value is used to
-            //control what becomes selected. this might become really slow.
-            //but right now it has the same api as DigitTable when using selected.
-            value={value.map(val => find(options, { value: val }))}
-            onChange={(e, value) => {
-                onChange({ target: { value: value.map(v => v.value) } });
+            value={value}
+            onChange={(e, newValue) => {
+                onChange({
+                    target: {
+                        value: newValue.map(option =>
+                            Object.prototype.toString.call(option) ===
+                            "[object String]"
+                                ? option
+                                : option.value
+                        )
+                    }
+                });
             }}
             disableCloseOnSelect
-            getOptionDisabled={value => {
-                return value.disabled;
-            }}
-            options={options.map(option => option.value)}
-            getOptionLabel={value => {
-                const obj = find(options, { value });
-                if (obj == null) {
-                    return "";
-                } else {
-                    return obj.text;
-                }
-            }}
+            getOptionDisabled={option => option.disabled}
+            getOptionLabel={option => option.text}
+            getOptionSelected={(option, value) => option.value === value}
+            options={options}
             noOptionsText={
                 noOptionsText == null ? text.NoOptions : noOptionsText
             }
             onBlur={onBlur}
             multiple
             disabled={disabled}
-            renderOption={(obj, { selected }) => {
+            renderOption={(option, { selected }) => {
                 return (
-                    <React.Fragment>
+                    <>
                         <Checkbox
                             icon={icon}
                             checkedIcon={checkedIcon}
@@ -101,15 +109,15 @@ const DigitAutocompleteSelectMultiple = ({
                                     : "default"
                             }
                         />
-                        {obj.text}
-                    </React.Fragment>
+                        {option.text}
+                    </>
                 );
             }}
-            renderTags={(value, getTagProps) =>
-                value.map((option, index) => (
+            renderTags={(tags, getTagProps) =>
+                tags.map((option, index) => (
                     <Chip
                         variant={chipOutlined ? "outlined" : "default"}
-                        label={option.text}
+                        label={findText(option, options)}
                         {...getTagProps({ index })}
                     />
                 ))

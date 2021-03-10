@@ -299,9 +299,7 @@ const DigitSelectMultipleTable = ({
 
         const output = {};
         for (var row of data) {
-            output[row[idProp]] = Object.values(row)
-                .join("")
-                .toLowerCase();
+            output[row[idProp]] = Object.values(row).join("").toLowerCase();
         }
         return output;
     }, [data, search, idProp]);
@@ -423,6 +421,9 @@ const DigitSelectMultipleTable = ({
                                                                     headerTexts.__link
                                                                 }
                                                                 outlined
+                                                                onClick={e => {
+                                                                    e.stopPropagation();
+                                                                }}
                                                             />
                                                         </Link>
                                                     </TableCell>

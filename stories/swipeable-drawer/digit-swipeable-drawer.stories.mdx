@@ -1,0 +1,44 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitButton, DigitSwipeableDrawer } from "../../src";
+
+<Meta
+    title="Navigation/DigitSwipeableDrawer"
+    component={DigitSwipeableDrawer}
+    decorators={[
+        storyFn => (
+            <div style={{ height: "50px", maxWidth: "500px" }}>{storyFn()}</div>
+        )
+    ]}
+/>
+
+# DigitSwipeableDrawer
+
+Sometimes you want a drawer, but don't want to use `DigitHeaderDrawer` since it doesn't make sense to use it for every page. `DigitSwipeableDrawer` can be useful for this. For example, in https://mat.chalmers.it, the drawer is used on mobile when viewing all the restaurant.
+
+<Preview>
+    <Story name="basic">
+        {() => {
+            const [open, setOpen] = useState(false);
+            return (
+                <div>
+                    <DigitButton
+                        primary
+                        raised
+                        text={"Open manually instead of swipe"}
+                        onClick={() => setOpen(true)}
+                    />
+                    <DigitSwipeableDrawer
+                        onSwipe={s => setOpen(s)}
+                        open={open}
+                        render={() => (
+                            <div style={{ width: "300px" }}>hello</div>
+                        )}
+                    />
+                </div>
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitSwipeableDrawer} />

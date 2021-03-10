@@ -199,7 +199,11 @@ DigitEditDataCard.propTypes = {
     /** Options to update <DigitDesign.Card /> */
     cardProps: PropTypes.object,
     /** Options to update <DigitDesign.CardBody /> */
-    cardBodyProps: PropTypes.object
+    cardBodyProps: PropTypes.object,
+    /** An extra button that has the same props as DigitButton */
+    extraButton: PropTypes.object,
+    /** If set, then the extra button will be used as a link */
+    extraButtonTo: PropTypes.string
 };
 
 DigitEditDataCard.defaultProps = {

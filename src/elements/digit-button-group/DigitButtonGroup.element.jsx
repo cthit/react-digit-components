@@ -58,8 +58,16 @@ const DigitButtonGroup = ({
 
 DigitButtonGroup.displayName = "DigitButtonGroup";
 DigitButtonGroup.propTypes = {
-    /** Array of buttons to be in the ButtonGroup. */
-    buttons: PropTypes.array,
+    /** Array of buttons to be in the ButtonGroup. Read more about the prop types in DigitButton.*/
+    buttons: PropTypes.arrayOf(
+        PropTypes.shape({
+            text: PropTypes.string,
+            disabled: PropTypes.bool,
+            startIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+            endIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+            onClick: PropTypes.func
+        })
+    ),
     /** Sets the color to the primary one. This has predence precedence over secondary. */
     primary: PropTypes.bool,
     /** Sets the color to the secondary one. This has precedence over the normal button. */

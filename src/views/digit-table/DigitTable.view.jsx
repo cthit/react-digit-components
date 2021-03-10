@@ -235,9 +235,7 @@ const DigitTable = ({
 
         const output = {};
         for (var row of data) {
-            output[row[idProp]] = Object.values(row)
-                .join("")
-                .toLowerCase();
+            output[row[idProp]] = Object.values(row).join("").toLowerCase();
         }
         return output;
     }, [data, search, idProp]);

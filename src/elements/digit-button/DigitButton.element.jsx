@@ -154,7 +154,11 @@ DigitButton.propTypes = {
     gridRow: PropTypes.shape({
         start: PropTypes.string,
         end: PropTypes.string
-    })
+    }),
+    /** Icon at the start of the button. Use @material-ui/icons.  */
+    startIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    /** Icon at the start of the button. Use @material-ui/icons.  */
+    endIcon: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
 };
 
 DigitButton.defaultProps = {

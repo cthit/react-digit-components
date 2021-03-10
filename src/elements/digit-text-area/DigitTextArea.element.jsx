@@ -11,7 +11,7 @@ const useFullFlex = makeStyles({
 });
 
 const DigitTextArea = ({
-    value,
+    value = "",
     onChange,
     onBlur,
     upperLabel,

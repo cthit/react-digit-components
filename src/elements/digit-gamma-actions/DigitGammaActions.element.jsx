@@ -227,8 +227,8 @@ DigitGammaActions.propTypes = {
             left: PropTypes.string
         })
     ]),
-    /** returns a Promise that handles the destruction of the session on the backend */
-    signOut: PropTypes.func,
+    /** Must return a Promise that handles the destruction of the session on the backend. Should be a postRequest to the backend.  */
+    signOut: PropTypes.func.isRequired,
     /** Controls grid-column-start and grid-column-end */
     gridColumn: PropTypes.shape({
         start: PropTypes.string,

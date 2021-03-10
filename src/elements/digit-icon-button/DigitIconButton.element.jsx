@@ -56,7 +56,7 @@ DigitIconButton.propTypes = {
      * The styling of the button also changes to reflect.
      */
     disabled: PropTypes.bool,
-    /** The icon of the FAB. Use @material-ui/icons.  */
+    /** The icon of the icon button. Use @material-ui/icons.  */
     icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]).isRequired,
     /** Controls the flex property for the most outer element in this component.*/
     flex: PropTypes.string,

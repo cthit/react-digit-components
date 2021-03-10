@@ -1,0 +1,39 @@
+import { useState } from "react";
+import { Meta, Story, Preview, Props } from "@storybook/addon-docs/blocks";
+import { DigitRating } from "../../src";
+
+<Meta title="Inputs/DigitRating" component={DigitRating} />
+
+# DigitRating
+
+An easy way to rate or to represent a rating. Can be used as an input if `readOnly` is false.
+
+## DigitRating with readOnly
+
+<Preview>
+    <Story name="DigitRating readOnly">
+        <div>
+            <DigitRating value={3} />
+            <DigitRating value={4.5} />
+        </div>
+    </Story>
+</Preview>
+
+## DigitRating used as an input
+
+<Preview>
+    <Story name="DigitRating in a form">
+        {() => {
+            const [state, setState] = useState(2.5);
+            return (
+                <DigitRating
+                    upperLabel={"Set the rating for pizza"}
+                    value={state}
+                    onChange={e => setState(e)}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
+<Props of={DigitRating} />

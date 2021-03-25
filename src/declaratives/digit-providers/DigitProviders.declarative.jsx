@@ -54,7 +54,13 @@ const DigitProviders = ({
         });
     }, [props]);
 
-    return (
+    const router = hashRouter
+        ? children => <HashRouter>{children}</HashRouter>
+        : memoryRouter
+        ? children => <MemoryRouter>{children}</MemoryRouter>
+        : children => <BrowserRouter>{children}</BrowserRouter>;
+
+    return router(
         <StylesProvider injectFirst>
             <ThemeProvider theme={theme}>
                 <DigitTranslationsContextSingletonProvider
@@ -68,17 +74,7 @@ const DigitProviders = ({
                             >
                                 <DigitDialogContextSingletonProvider>
                                     <DigitGammaContextSingletonProvider>
-                                        {hashRouter ? (
-                                            <HashRouter>{children}</HashRouter>
-                                        ) : memoryRouter ? (
-                                            <MemoryRouter>
-                                                {children}
-                                            </MemoryRouter>
-                                        ) : (
-                                            <BrowserRouter>
-                                                {children}
-                                            </BrowserRouter>
-                                        )}
+                                        {children}
                                     </DigitGammaContextSingletonProvider>
                                 </DigitDialogContextSingletonProvider>
                             </MuiPickersUtilsProvider>

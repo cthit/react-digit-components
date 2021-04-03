@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Drawer from "@material-ui/core/Drawer";
@@ -102,9 +102,10 @@ const DigitHeaderDrawer = ({
         drawerType === "responsive"
     );
     const matches = useMediaQuery(theme.breakpoints.up(breakpoint));
-    useEffect(() => setResponsive(matches && drawerType === "responsive"), [
-        matches
-    ]);
+    React.useEffect(
+        () => setResponsive(matches && drawerType === "responsive"),
+        [matches, drawerType]
+    );
 
     const classes = useStyles({
         headerHeight,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Drawer from "@material-ui/core/Drawer";
@@ -19,13 +19,15 @@ const useStyles = makeStyles(theme => ({
         position: "absolute",
         left: "0",
         top: "0",
-        height: "auto",
+        height: "auto"
+    },
+    drawerMedia: {
         [theme.breakpoints.up(breakpoint)]: {
             width: ({ drawerWidth }) => drawerWidth,
             flexShrink: 0
         }
     },
-    menuButton: {
+    menuButtonMedia: {
         marginRight: theme.spacing(2),
         [theme.breakpoints.up(breakpoint)]: {
             display: "none"
@@ -34,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     drawerPaper: {
         width: ({ drawerWidth }) => drawerWidth
     },
-    appBar: {
+    appBarMedia: {
         [theme.breakpoints.up(breakpoint)]: {
             width: ({ drawerWidth }) => `calc(100% - ${drawerWidth})`,
             maxWidth: ({ drawerWidth }) => `calc(100% - ${drawerWidth})`,
@@ -55,9 +57,6 @@ const useStyles = makeStyles(theme => ({
         minHeight: props => props.toolbarHeight + " !important"
     },
     content: {
-        [theme.breakpoints.up(breakpoint)]: {
-            marginLeft: ({ drawerWidth }) => drawerWidth
-        },
         padding: ({ mainPadding }) => mainPadding,
         flexGrow: "1",
         display: "flex",
@@ -65,6 +64,11 @@ const useStyles = makeStyles(theme => ({
             `calc(100vh - ${headerHeight} - ${
                 hasToolbar ? toolbarHeight : "0px"
             } - ${mainPadding} - ${mainPadding})`
+    },
+    contentMedia: {
+        [theme.breakpoints.up(breakpoint)]: {
+            marginLeft: ({ drawerWidth }) => drawerWidth
+        }
     },
     title: {
         color: props => props.titleColor,
@@ -87,12 +91,20 @@ const DigitHeaderDrawer = ({
     backgroundSize,
     titleColor,
     headerRowProps,
-    drawerWidth
+    drawerWidth,
+    drawerType
 }) => {
     const hasCustomHeader = renderCustomHeader != null;
     const hasToolbar = renderToolbar != null;
     const theme = useTheme();
+
+    const [responsive, setResponsive] = React.useState(
+        drawerType === "responsive"
+    );
     const matches = useMediaQuery(theme.breakpoints.up(breakpoint));
+    useEffect(() => setResponsive(matches && drawerType === "responsive"), [
+        matches
+    ]);
 
     const classes = useStyles({
         headerHeight,
@@ -105,20 +117,20 @@ const DigitHeaderDrawer = ({
         hasToolbar,
         drawerWidth
     });
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
     function handleDrawerToggle() {
-        setMobileOpen(!mobileOpen);
+        setOpen(!open);
     }
 
-    const drawer = renderDrawer(() => setMobileOpen(false));
+    const drawer = renderDrawer(() => setOpen(false));
 
     return (
         <>
             <AppBar
                 position={"relative"}
                 className={
-                    classes.appBar +
+                    (responsive ? classes.appBarMedia : "") +
                     " " +
                     (backgroundImage != null ? classes.appBarBackground : "")
                 }
@@ -129,7 +141,7 @@ const DigitHeaderDrawer = ({
                         aria-label="open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
-                        className={classes.menuButton}
+                        className={responsive ? classes.menuButtonMedia : ""}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -153,12 +165,18 @@ const DigitHeaderDrawer = ({
                     </Toolbar>
                 )}
             </AppBar>
-            <nav className={classes.drawer}>
-                {!matches && (
+            <nav
+                className={
+                    classes.drawer +
+                    " " +
+                    (responsive ? classes.drawerMedia : "")
+                }
+            >
+                {!responsive && (
                     <Drawer
                         variant="temporary"
                         anchor={"left"}
-                        open={mobileOpen}
+                        open={open}
                         onClose={handleDrawerToggle}
                         classes={{
                             paper: classes.drawerPaper
@@ -170,7 +188,7 @@ const DigitHeaderDrawer = ({
                         {drawer}
                     </Drawer>
                 )}
-                {matches && (
+                {responsive && (
                     <Drawer
                         classes={{
                             paper: classes.drawerPaper
@@ -182,7 +200,15 @@ const DigitHeaderDrawer = ({
                     </Drawer>
                 )}
             </nav>
-            <main className={classes.content}>{renderMain()}</main>
+            <main
+                className={
+                    classes.content +
+                    " " +
+                    (responsive ? classes.contentMedia : "")
+                }
+            >
+                {renderMain()}
+            </main>
         </>
     );
 };
@@ -205,7 +231,8 @@ DigitHeaderDrawer.propTypes = {
     /** A render prop to render in the toolbar, under the header. */
     renderToolbar: PropTypes.func,
     renderTitle: PropTypes.func,
-    renderFooter: PropTypes.func
+    renderFooter: PropTypes.func,
+    drawerType: PropTypes.oneOf(["persistent", "responsive"])
 };
 
 DigitHeaderDrawer.defaultProps = {
@@ -227,7 +254,8 @@ DigitHeaderDrawer.defaultProps = {
     headerRowProps: {
         flex: "1"
     },
-    drawerWidth: "240px"
+    drawerWidth: "240px",
+    drawerType: "responsive"
 };
 
 export default DigitHeaderDrawer;

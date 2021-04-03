@@ -16,8 +16,15 @@ DigitHeaderDrawer is just the same as `DigitHeader`, but it has support for a dr
 
 This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you should use `DigitGammaActions` instead.
 
+## DigitHeaderDrawer with responsive drawer
+
+The standard behaviour for the drawer is to remain persistent when the screen has a width exceeding `md` i.e. `960px`.
+There is a parameter `drawerType`, which can turn off this functionality ensuring that the drawer can always be closed or opened.
+
+To test this behaviour you can resize the window or open Responsive Design Mode in Dev tools and compare the behaviour of the two examples.
+
 <Preview>
-    <Story name="simple-header">
+    <Story name="simple-header-responsive">
         {() => {
             const containerRef = useRef(null);
             const MyCard = () => (
@@ -82,5 +89,77 @@ This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you 
         }}
     </Story>
 </Preview>
+
+
+## DigitHeaderDrawer with persistent layout
+
+<Preview>
+    <Story name="simple-header-persistent">
+        {() => {
+            const containerRef = useRef(null);
+            const MyCard = () => (
+                <DigitDesign.Card size={{width: "200px", height: "200px"}}>
+                    <DigitLayout.Center>
+                        <DigitText.Text bold text={"This is a card"} />
+                    </DigitLayout.Center>
+                </DigitDesign.Card>
+            );
+            return (
+                <DigitHeaderDrawer
+                    drawerType="persistent"
+                    title="BookIT"
+                    renderDrawer={() => (
+                        <React.Fragment>
+                            <DigitGammaActionsDummy
+                                alignSelf="center"
+                                nick="Portals"
+                                avatarUrl="https://i.imgur.com/RWTnpiq.gif"
+                            />
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                            <DigitNavLink text="Home"/>
+                            <DigitNavLink text="My Account"/>
+                            <DigitNavLink text="Icecream"/>
+                        </React.Fragment>
+                    )}
+                    renderMain={() => (
+                        <DigitLayout.Column>
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                            <MyCard />
+                        </DigitLayout.Column>
+                    )}
+                />
+            );
+        }}
+    </Story>
+</Preview>
+
 
 <Props of={DigitHeaderDrawer} />

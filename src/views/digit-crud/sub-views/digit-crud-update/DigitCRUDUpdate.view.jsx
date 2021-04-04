@@ -73,7 +73,7 @@ const DigitCRUDUpdate = ({
         setRead(false);
         // Ignoring the different on* and render* since they would mean that
         // readOneAction would continuously be refreshed.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
     }, [readOneAction, id, read]);
 
     if (read || loading) {

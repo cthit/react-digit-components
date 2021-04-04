@@ -12,56 +12,7 @@ import useDigitTranslations from "../../../../hooks/use-digit-translations";
 import DigitCRUDContext from "../../../../contexts/DigitCRUDContext";
 import { useHistory } from "react-router-dom";
 import useDigitCRUDStatus from "../../hooks/use-digit-crud-status";
-
-//plz format this. I just want 1.0.0 released...
-function formatDate(date, text, type) {
-    if (date == null) {
-        return "";
-    }
-
-    var monthNames = [
-        text.January,
-        text.February,
-        text.March,
-        text.April,
-        text.May,
-        text.June,
-        text.July,
-        text.August,
-        text.September,
-        text.October,
-        text.November,
-        text.December
-    ];
-
-    date = new Date(date);
-
-    const day = date.getDate();
-    const monthIndex = date.getMonth();
-    const year = date.getFullYear();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-
-    if (type === "date") {
-        return year + " " + monthNames[monthIndex] + " " + day;
-    } else if (type === "date-time") {
-        return (
-            year +
-            " " +
-            monthNames[monthIndex] +
-            " " +
-            day +
-            ", " +
-            hours +
-            ":" +
-            minutes
-        );
-    } else if (type === "time") {
-        return hours + ":" + minutes;
-    } else {
-        return date;
-    }
-}
+import formatDate from "../../utils/date-time.format";
 
 const DigitCRUDReadAll = ({
     readAllAction,
@@ -109,9 +60,6 @@ const DigitCRUDReadAll = ({
                 });
         }
         setRead(false);
-        // Ignoring the different on* and render* since they would mean that
-        // readAllAction would continuously be refreshed.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [readAllAction, read, setRead, statusHandler]);
 
     if (read || loading || all == null) {

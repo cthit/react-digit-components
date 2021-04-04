@@ -51,8 +51,6 @@ const DigitEditDataField = ({ name, componentData, alignSelfCenter }) => {
                 ...field,
                 name
             }),
-        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         [check, component, name, alignSelfCenter]
     );
 };
@@ -77,7 +75,7 @@ const DigitEditDataFieldArray = ({ name, componentData, alignSelfCenter }) => {
                 name
             }),
         // Ignoring warning since JSON.stringify is used instead of comparing the reference.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
         [check, component, name, alignSelfCenter]
     );
 };

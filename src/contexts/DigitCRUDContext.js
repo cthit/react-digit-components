@@ -1,4 +1,9 @@
-import React, { createContext, useCallback, useReducer } from "react";
+import React, {
+    createContext,
+    useCallback,
+    useEffect,
+    useReducer
+} from "react";
 import useDigitTranslations from "../hooks/use-digit-translations";
 
 const DigitCRUDContext = createContext({});
@@ -24,6 +29,8 @@ const READ_ALL_SUCCESSFULLY = "read-all-successfully";
 const READ_ALL_FAILED = "read-all-failed";
 
 const CLEAR = "clear";
+
+const SETTINGS = "settings";
 
 function format(input, extractActiveLanguage, activeLanguage) {
     if (!extractActiveLanguage) {
@@ -130,6 +137,7 @@ const crudReducer = (extractActiveLanguage, activeLanguage) => (
 
 const DigitCRUDContextProvider = ({
     children,
+    crudProps,
     extractActiveLanguage = false
 }) => {
     const [, activeLanguage] = useDigitTranslations();
@@ -146,6 +154,14 @@ const DigitCRUDContextProvider = ({
 
         return dispatch(action);
     }, []);
+
+    useEffect(() => {
+        console.log("UPDATE SETTINGS");
+        dispatch({
+            type: SETTINGS,
+            crudProps
+        });
+    }, [crudProps]);
 
     return (
         <DigitCRUDContext.Provider

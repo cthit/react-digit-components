@@ -403,6 +403,7 @@ const DigitCRUDInner = ({
 const DigitCRUD = props => {
     return (
         <DigitCRUDContextProvider
+            crudProps={props}
             extractActiveLanguage={props.extractActiveLanguage}
         >
             <DigitCRUDInner {...props} />

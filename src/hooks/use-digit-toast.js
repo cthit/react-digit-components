@@ -23,8 +23,6 @@ function useDigitToast(
                 toast: { ...defaultToastProps, ...toast }
             });
         },
-        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         [JSON.stringify(defaultToastProps), dispatch]
     );
 

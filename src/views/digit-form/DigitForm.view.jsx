@@ -86,27 +86,19 @@ const DigitForm = ({
         [validationSchema]
     );
 
-    useEffect(
-        () => {
-            runValidationSchema(values)
-                .then(res => {
-                    setErrors(yupToFormErrors(res));
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        },
-        // Ignoring warning since JSON.stringify is used instead of comparing the reference.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [validationSchema, runValidationSchema, JSON.stringify(values)]
-    );
+    useEffect(() => {
+        runValidationSchema(values)
+            .then(res => {
+                setErrors(yupToFormErrors(res));
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }, [validationSchema, runValidationSchema, JSON.stringify(values)]);
 
-    const isValid = useMemo(
-        () => Object.keys(errors).length === 0,
-        // Ignoring since the amount of keys are the only thing relevant for errors
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [Object.keys(errors).length]
-    );
+    const isValid = useMemo(() => Object.keys(errors).length === 0, [
+        Object.keys(errors).length
+    ]);
 
     const form = {
         values,

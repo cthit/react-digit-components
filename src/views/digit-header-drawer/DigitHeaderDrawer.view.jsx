@@ -92,19 +92,17 @@ const DigitHeaderDrawer = ({
     titleColor,
     headerRowProps,
     drawerWidth,
-    drawerType
+    disableResponsive
 }) => {
     const hasCustomHeader = renderCustomHeader != null;
     const hasToolbar = renderToolbar != null;
     const theme = useTheme();
 
-    const [responsive, setResponsive] = React.useState(
-        drawerType === "responsive"
-    );
-    const matches = useMediaQuery(theme.breakpoints.up(breakpoint));
+    const [responsive, setResponsive] = React.useState(disableResponsive);
+    const matchesMediaQuery = useMediaQuery(theme.breakpoints.up(breakpoint));
     React.useEffect(
-        () => setResponsive(matches && drawerType === "responsive"),
-        [matches, drawerType]
+        () => setResponsive(matchesMediaQuery && !disableResponsive),
+        [matchesMediaQuery, disableResponsive]
     );
 
     const classes = useStyles({
@@ -233,7 +231,7 @@ DigitHeaderDrawer.propTypes = {
     renderToolbar: PropTypes.func,
     renderTitle: PropTypes.func,
     renderFooter: PropTypes.func,
-    drawerType: PropTypes.oneOf(["persistent", "responsive"])
+    disableResponsive: PropTypes.bool
 };
 
 DigitHeaderDrawer.defaultProps = {
@@ -256,7 +254,7 @@ DigitHeaderDrawer.defaultProps = {
         flex: "1"
     },
     drawerWidth: "240px",
-    drawerType: "responsive"
+    disableResponsive: false
 };
 
 export default DigitHeaderDrawer;

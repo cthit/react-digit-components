@@ -12,14 +12,16 @@ import { DigitHeaderDrawer, DigitDesign, DigitLayout, DigitText, DigitNavLink, D
 
 # DigitHeaderDrawer
 
-DigitHeaderDrawer is just the same as `DigitHeader`, but it has support for a drawer. This should really only be used if you have a lot of navigation. Try to instead use `DigitTabs` if there's minimal navigation. 
+DigitHeaderDrawer is just the same as `DigitHeader`, but it has support for a drawer.
+This should really only be used if you have a lot of navigation.
+Try to instead use `DigitTabs` if there's minimal navigation.
 
 This demo uses `DigitGammaActionsDummy`, but in your application with Gamma you should use `DigitGammaActions` instead.
 
 ## DigitHeaderDrawer with responsive drawer
 
 The standard behaviour for the drawer is to remain persistent when the screen has a width exceeding `md` i.e. `960px`.
-There is a parameter `drawerType`, which can turn off this functionality ensuring that the drawer can always be closed or opened.
+There is a parameter `disableResponsive`, which can turn off this functionality ensuring that the drawer can always be closed or opened.
 
 To test this behaviour you can resize the window or open Responsive Design Mode in Dev tools and compare the behaviour of the two examples.
 
@@ -36,7 +38,6 @@ To test this behaviour you can resize the window or open Responsive Design Mode 
             );
             return (
                 <DigitHeaderDrawer
-                    drawerType="responsive"
                     title="BookIT" 
                     renderDrawer={() => (
                         <React.Fragment>
@@ -92,7 +93,7 @@ To test this behaviour you can resize the window or open Responsive Design Mode 
 </Preview>
 
 
-## DigitHeaderDrawer with persistent layout
+## DigitHeaderDrawer with responsive design disabled
 
 <Preview>
     <Story name="simple-header-persistent">
@@ -107,7 +108,7 @@ To test this behaviour you can resize the window or open Responsive Design Mode 
             );
             return (
                 <DigitHeaderDrawer
-                    drawerType="persistent"
+                    disableResponsive
                     title="BookIT"
                     renderDrawer={() => (
                         <React.Fragment>

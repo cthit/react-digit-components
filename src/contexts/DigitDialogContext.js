@@ -69,6 +69,7 @@ const DigitDialogContextSingletonProvider = ({ children }) => {
                         onClose={
                             state.preventDefaultClose ? () => {} : handleClose
                         }
+                        size={state.size}
                     />
                 )}
                 {(state.open || state.closing) && !state.custom && (

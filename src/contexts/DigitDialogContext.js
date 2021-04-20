@@ -63,11 +63,13 @@ const DigitDialogContextSingletonProvider = ({ children }) => {
                         title={state.title}
                         onConfirm={state.onConfirm}
                         onCancel={state.onCancel}
+                        renderTitle={state.renderTitle}
                         renderMain={state.renderMain}
                         renderButtons={state.renderButtons}
                         onClose={
                             state.preventDefaultClose ? () => {} : handleClose
                         }
+                        size={state.size}
                     />
                 )}
                 {(state.open || state.closing) && !state.custom && (

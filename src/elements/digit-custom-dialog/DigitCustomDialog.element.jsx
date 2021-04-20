@@ -12,6 +12,7 @@ const DigitCustomDialog = ({
     onCancel,
     onConfirm,
     title,
+    renderTitle,
     renderMain,
     renderButtons,
     onExited,
@@ -37,8 +38,12 @@ const DigitCustomDialog = ({
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-            <DialogContent>{renderMain()}</DialogContent>
+            <DialogTitle id="alert-dialog-title">
+                {title}
+                {renderTitle != null && renderTitle(confirm, cancel)}
+            </DialogTitle>
+
+            <DialogContent>{renderMain(confirm, cancel)}</DialogContent>
             <DialogActions>{renderButtons(confirm, cancel)}</DialogActions>
         </Dialog>
     );
@@ -47,6 +52,8 @@ const DigitCustomDialog = ({
 DigitCustomDialog.propTypes = {
     /** Called either when confirm or cancel function from renderButtons has been called. Is called after onConfirm/onCancel. */
     onClose: PropTypes.func,
+    /** Supplemental Render for the title dialog. */
+    renderTitle: PropTypes.func,
     /** Render for the main area of the dialog. */
     renderMain: PropTypes.func,
     /** Render for the bottom area of the dialog. Has two arguments, (confirm, cancel). Both functions that should be called when a confirm or cancel button has been clicked. */

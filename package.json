@@ -38,7 +38,7 @@
         "lodash": "4.17.21",
         "prop-types": "15.7.2",
         "react-is": "17.0.1",
-        "react-markdown": "7.0.1",
+        "react-markdown": "5.0.3",
         "yup": "0.32.9"
     },
     "devDependencies": {
